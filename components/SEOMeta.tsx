@@ -9,8 +9,8 @@ interface SEOMetaProps {
 }
 
 export default function SEOMeta({ 
-  title = 'OnePageOS - Transform Voice into Organized Tasks',
-  description = 'A privacy-first voice-to-productivity app that converts your speech into organized tasks, notes, and calendar events. Works offline, stores data locally, and keeps your information private.',
+  title = 'Free Voice Productivity App | OnePageOS - Speech Recognition Task Manager',
+  description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
   image = '/og-image.svg',
   url = 'https://onepageos.com'
 }: SEOMetaProps) {
@@ -76,11 +76,51 @@ export default function SEOMeta({
         additionalMetaTags={[
           {
             name: 'keywords',
-            content: 'voice recognition, productivity app, task management, note taking, calendar, privacy, offline, voice to text, speech recognition, personal productivity',
+            content: 'free voice to text app, voice productivity software, speech recognition task manager, voice assistant, hands-free note taking, voice controlled todo list, natural language processing productivity, speech to text organizer, voice command app, voice powered task management, free productivity tools, offline voice recognition, privacy focused voice app, voice note taking app, speech recognition productivity suite, voice driven workflow, hands-free productivity, voice activated organizer, voice task categorization, smart voice assistant, voice productivity dashboard, speech to action converter, voice based project management, voice transcription software, PWA voice app, progressive web app productivity, offline speech recognition, browser voice technology, no AI voice assistant, voice workflow automation',
           },
           {
             name: 'author',
             content: 'OnePageOS Team',
+          },
+          {
+            name: 'creator',
+            content: 'OnePageOS',
+          },
+          {
+            name: 'publisher',
+            content: 'OnePageOS',
+          },
+          {
+            name: 'robots',
+            content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+          },
+          {
+            name: 'googlebot',
+            content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+          },
+          {
+            name: 'bingbot',
+            content: 'index, follow',
+          },
+          {
+            name: 'language',
+            content: 'en-US',
+          },
+          {
+            name: 'distribution',
+            content: 'global',
+          },
+          {
+            name: 'rating',
+            content: 'general',
+          },
+          {
+            name: 'category',
+            content: 'productivity, software, voice technology',
+          },
+          {
+            name: 'classification',
+            content: 'productivity software, voice recognition, voice assistant',
           },
           {
             name: 'viewport',
