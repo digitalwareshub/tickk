@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import Footer from '@/components/Footer'
+import Layout from '@/components/Layout'
 
 export default function Home() {
-  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [demoText, setDemoText] = useState('')
   const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
@@ -241,50 +239,12 @@ export default function Home() {
         />
       </Head>
 
-      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="text-xl font-bold text-gray-900 dark:text-white">OnePageOS</div>
-                <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
-              </div>
-              
-              <div className="hidden md:flex items-center space-x-8">
-                <a href="#how-it-works" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">How It Works</a>
-                <a href="#demo" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Demo</a>
-              </div>
-              
-              {/* Mobile menu button - could be expanded later */}
-              <div className="md:hidden">
-                <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-                  Try App →
-                </Link>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="rounded-full p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                  aria-label="Toggle theme"
-                  title={`Current: ${theme === 'dark' ? 'Dark' : 'Light'} mode • Click to switch`}
-                >
-                  {theme === 'dark' ? '💡' : '🔅'}
-                </button>
-                <Link href="/app" className="bg-gray-900 hover:bg-black text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 pt-20 pb-32">
+        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 pt-20 pb-32">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]"></div>
           
@@ -361,7 +321,7 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-slate-800">
           {/* Diagonal pattern background */}
           <div className="absolute inset-0 pattern-diagonal opacity-20"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -376,9 +336,9 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
               {/* Step 1: Speak Naturally */}
-              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
+              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     1
                   </div>
                 </div>
@@ -390,7 +350,7 @@ export default function Home() {
                   Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
+                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
                   <div className="flex items-start space-x-2">
                     <div className="text-lg">🎤</div>
                     <div className="text-sm text-gray-700 dark:text-gray-300 italic">
@@ -401,9 +361,9 @@ export default function Home() {
               </div>
 
               {/* Step 2: Smart Processing */}
-              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
+              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     2
                   </div>
                 </div>
@@ -415,12 +375,12 @@ export default function Home() {
                   Natural language processing analyzes your speech and automatically determines if it&apos;s a task, note, or calendar event.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
+                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-gray-600 dark:text-gray-300">Processing speech...</span>
                     <div className="text-lg">🧠</div>
                   </div>
-                  <div className="p-2 bg-white dark:bg-gray-700 rounded border">
+                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">📅 Calendar Event</span>
                       <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
@@ -433,9 +393,9 @@ export default function Home() {
               </div>
 
               {/* Step 3: Auto-Organized */}
-              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
+              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     3
                   </div>
                 </div>
@@ -447,13 +407,13 @@ export default function Home() {
                   Your voice is instantly organized into the right category, ready for action.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
+                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Successfully Organized</span>
                     <div className="text-lg">✨</div>
                   </div>
                   
-                  <div className="p-2 bg-white dark:bg-gray-700 rounded border">
+                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="text-green-600">✓</div>
@@ -472,7 +432,7 @@ export default function Home() {
         </section>
 
         {/* Interactive Demo Section */}
-        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-slate-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -487,9 +447,9 @@ export default function Home() {
 
             {/* Demo Interface */}
             <div className="max-w-4xl mx-auto">
-              <div className="bg-gray-50 dark:bg-gray-700 rounded-2xl border border-gray-200 dark:border-gray-600 overflow-hidden shadow-xl">
+              <div className="bg-gray-50 dark:bg-slate-700 rounded-2xl border border-gray-200 dark:border-slate-600 overflow-hidden shadow-xl">
                 {/* Demo Header */}
-                <div className="bg-white dark:bg-gray-600 px-6 py-4 border-b border-gray-200 dark:border-gray-600">
+                <div className="bg-white dark:bg-slate-600 px-6 py-4 border-b border-gray-200 dark:border-slate-600">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Live Classification Demo</h3>
                     <button 
@@ -512,7 +472,7 @@ export default function Home() {
                     {/* Input Side */}
                     <div>
                       <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Voice Input</h4>
-                      <div className="bg-white dark:bg-gray-600 rounded-lg border border-gray-200 dark:border-gray-500 p-4 min-h-[120px] flex items-center">
+                      <div className="bg-white dark:bg-slate-600 rounded-lg border border-gray-200 dark:border-slate-500 p-4 min-h-[120px] flex items-center">
                         <div className="text-gray-900 dark:text-white font-mono text-lg w-full">
                           {demoText ? (
                             <span>&quot;{demoText}&quot;</span>
@@ -604,7 +564,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gray-50 dark:bg-gray-800">
+        <section className="relative py-20 bg-gray-50 dark:bg-slate-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
@@ -654,8 +614,7 @@ export default function Home() {
         </section>
 
 
-        <Footer />
-      </div>
+      </Layout>
     </>
   )
 }

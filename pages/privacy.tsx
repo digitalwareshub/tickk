@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 
 export default function Privacy() {
@@ -10,451 +12,160 @@ export default function Privacy() {
         <meta name="keywords" content="privacy policy, voice app privacy, speech recognition privacy, data protection, GDPR compliance, CCPA compliance, zero data collection, browser-based privacy, voice data security" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://onepageos.com/privacy" />
-        
-        {/* Open Graph */}
-        <meta property="og:title" content="Privacy Policy | OnePageOS - Complete Privacy Protection" />
-        <meta property="og:description" content="Zero data collection policy for our voice productivity app. All processing happens locally in your browser for maximum privacy." />
-        <meta property="og:url" content="https://onepageos.com/privacy" />
-        <meta property="og:type" content="website" />
-        
-        {/* Schema.org structured data for Privacy Policy */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebPage",
-              "name": "Privacy Policy",
-              "description": "OnePageOS Privacy Policy outlining our commitment to user privacy and data protection",
-              "url": "https://onepageos.com/privacy",
-              "isPartOf": {
-                "@type": "WebSite",
-                "name": "OnePageOS",
-                "url": "https://onepageos.com"
-              },
-              "about": {
-                "@type": "PrivacyPolicy",
-                "name": "OnePageOS Privacy Policy",
-                "description": "Comprehensive privacy policy covering voice data processing, browser-based privacy, and user rights",
-                "datePublished": "2024-01-01",
-                "dateModified": "2024-09-19"
-              }
-            })
-          }}
-        />
       </Head>
+
+      {/* Hero Section */}
+      <div className="bg-white dark:bg-slate-900 py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Privacy Policy
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Your privacy is our priority. Learn how we protect your data.
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+            Last updated: January 15, 2024
+          </p>
+        </div>
+      </div>
 
       {/* Main Content */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 p-8 lg:p-12">
-            {/* Header */}
-            <div className="mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                Privacy Policy
-              </h1>
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-lg text-gray-600 dark:text-gray-300">
-                  How OnePageOS protects your privacy and handles your data
-                </p>
-                <div className="mt-4 sm:mt-0 text-sm text-gray-500 dark:text-gray-400">
-                  Last updated: September 19, 2024
-                </div>
-              </div>
-            </div>
+        <div className="prose prose-gray dark:prose-invert max-w-none">
 
-            {/* Trust Badge */}
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-8">
-              <div className="flex items-center mb-4">
-                <div className="text-2xl mr-3">🔒</div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Zero Data Collection Guarantee
-                </h2>
-              </div>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                OnePageOS is designed with privacy-first principles. We do not collect, store, transmit, or have access to any of your voice data, personal information, or usage patterns. All processing happens entirely within your browser.
-              </p>
-            </div>
-
-            {/* Content */}
-            <div className="prose prose-gray dark:prose-invert max-w-none">
-              
-              {/* Information We Collect */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">📊</span>
-                  Information We Collect
-                </h2>
-                
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    The Short Answer: None
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300">
-                    OnePageOS does not collect any personal information, voice data, or usage analytics. We have no servers, no databases, and no tracking mechanisms.
-                  </p>
-                </div>
-
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">What We Don&apos;t Collect:</h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Voice recordings or audio data</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Transcribed text or speech content</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Personal information (name, email, phone number)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Device information or browser fingerprinting</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Usage analytics or behavioral tracking</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>IP addresses or location data</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">❌</span>
-                    <span>Cookies for tracking or analytics</span>
-                  </li>
-                </ul>
-
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Local Storage Only:</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Your tasks, notes, and calendar items are stored exclusively in your browser&apos;s local storage on your device. This data never leaves your device and is not accessible to OnePageOS or any third parties.
-                </p>
-              </section>
-
-              {/* How We Process Data */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">⚙️</span>
-                  How Voice Processing Works
-                </h2>
-                
-                <div className="grid md:grid-cols-3 gap-6 mb-6">
-                  <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">1. Voice Input</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Your browser&apos;s Web Speech API captures and processes your voice entirely within your device.
-                    </p>
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">2. Local Processing</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Natural language processing happens in your browser using compromise.js library.
-                    </p>
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">3. Local Storage</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Results are saved only to your device&apos;s local storage, never transmitted anywhere.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    Third-Party Speech Recognition
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-                    While OnePageOS itself doesn&apos;t collect any data, your browser&apos;s speech recognition feature may be provided by your operating system or browser vendor (Google, Apple, Microsoft). Please review their privacy policies for information about how they handle voice data during speech recognition.
-                  </p>
-                </div>
-              </section>
-
-              {/* Third-Party Services */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">🔗</span>
-                  Third-Party Services
-                </h2>
-                
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Content Delivery Network (CDN):</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We use CDN services to deliver static assets (CSS, JavaScript libraries) for performance optimization. These services may log basic technical information like IP addresses for security and performance monitoring, but they do not have access to your voice data or personal information.
-                </p>
-
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">JavaScript Libraries:</h3>
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2">✅</span>
-                    <span><strong>compromise.js:</strong> Client-side natural language processing (no data transmission)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2">✅</span>
-                    <span><strong>Tailwind CSS:</strong> Styling framework (no data collection)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 mr-2">✅</span>
-                    <span><strong>Font Awesome:</strong> Icon library (no data collection)</span>
-                  </li>
-                </ul>
-              </section>
-
-              {/* User Rights */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">🛡️</span>
-                  Your Rights and Control
-                </h2>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Complete Control</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li>• Clear all data anytime with one click</li>
-                      <li>• No account deletion needed (no accounts exist)</li>
-                      <li>• All data stays on your device</li>
-                      <li>• Use offline without any data transmission</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Privacy Protection</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li>• No data requests needed (we have no data)</li>
-                      <li>• No marketing emails or communications</li>
-                      <li>• No behavioral tracking or profiling</li>
-                      <li>• Complete anonymity guaranteed</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* GDPR Compliance */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">🇪🇺</span>
-                  GDPR Compliance (European Users)
-                </h2>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  OnePageOS fully complies with the General Data Protection Regulation (GDPR) through our privacy-by-design approach:
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">GDPR Principles Met:</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Data Minimization:</strong> We collect zero data</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Purpose Limitation:</strong> No data collection = no secondary use</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Storage Limitation:</strong> All data stays on your device</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Transparency:</strong> Complete openness about our practices</span>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your GDPR Rights:</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Right to Access:</strong> N/A (no data collected)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Right to Erasure:</strong> Clear local data anytime</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Right to Portability:</strong> Export your local data</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">✅</span>
-                        <span><strong>Right to Object:</strong> Simply stop using the app</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* CCPA Compliance */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">🇺🇸</span>
-                  CCPA Compliance (California Users)
-                </h2>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  Under the California Consumer Privacy Act (CCPA), OnePageOS provides complete transparency:
-                </p>
-
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    CCPA Disclosure Statement
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-6 text-sm">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Categories of Personal Information:</h4>
-                      <p className="text-gray-700 dark:text-gray-300 mb-4">None collected in the past 12 months</p>
-                      
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Sources of Information:</h4>
-                      <p className="text-gray-700 dark:text-gray-300 mb-4">No sources (no data collection)</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Business Purpose:</h4>
-                      <p className="text-gray-700 dark:text-gray-300 mb-4">N/A (no personal information processed)</p>
-                      
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Third-Party Sharing:</h4>
-                      <p className="text-gray-700 dark:text-gray-300">None (no data to share)</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Children's Privacy */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">👶</span>
-                  Children&apos;s Privacy (COPPA Compliance)
-                </h2>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  OnePageOS is safe for users of all ages, including children under 13, because we do not collect any personal information from any users. Our zero-data collection approach means we are inherently compliant with the Children&apos;s Online Privacy Protection Act (COPPA).
-                </p>
-                
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    Safe for All Ages
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">
-                    Parents can feel confident letting their children use OnePageOS for educational or personal productivity purposes, as no personal information is ever collected, stored, or transmitted.
-                  </p>
-                </div>
-              </section>
-
-              {/* Security */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">🔐</span>
-                  Security Measures
-                </h2>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technical Security:</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🔒</span>
-                        <span>HTTPS encryption for all communications</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🔒</span>
-                        <span>Content Security Policy (CSP) headers</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🔒</span>
-                        <span>No server-side data storage</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🔒</span>
-                        <span>Client-side only processing</span>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Privacy Security:</h3>
-                    <ul className="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🛡️</span>
-                        <span>No tracking scripts or analytics</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🛡️</span>
-                        <span>No third-party data sharing</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🛡️</span>
-                        <span>Local storage only architecture</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-green-500 mr-2">🛡️</span>
-                        <span>Open source transparency</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              {/* Changes to Privacy Policy */}
-              <section className="mb-12">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">📝</span>
-                  Changes to This Privacy Policy
-                </h2>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We may update this Privacy Policy from time to time to reflect changes in our practices or for legal reasons. Any changes will be posted on this page with an updated &quot;Last modified&quot; date.
-                </p>
-                
-                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    Our Commitment
-                  </h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-sm">
-                    We commit to never implementing any form of data collection without making it extremely clear to users and providing easy opt-out mechanisms. Our privacy-first approach is a core principle, not a marketing feature.
-                  </p>
-                </div>
-              </section>
-
-              {/* Contact Information */}
-              <section className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <span className="text-2xl mr-3">📧</span>
-                  Contact Us
-                </h2>
-                
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  If you have any questions about this Privacy Policy or our privacy practices, please contact us:
-                </p>
-                
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">General Inquiries:</h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
-                        Email: <a href="mailto:write@digiwares.xyz" className="text-orange-600 dark:text-orange-400 hover:underline">write@digiwares.xyz</a>
-                      </p>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        Response time: Within 48 hours
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Legal Requests:</h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
-                        Email: <a href="mailto:write@digiwares.xyz" className="text-orange-600 dark:text-orange-400 hover:underline">write@digiwares.xyz</a>
-                      </p>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        For GDPR, CCPA, or other privacy law inquiries
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-            </div>
+          {/* Summary */}
+          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 mb-12 border-l-4 border-green-500">
+            <h2 className="text-lg font-semibold text-green-900 dark:text-green-100 mt-0 mb-3">
+              🔒 Privacy Summary
+            </h2>
+            <ul className="text-green-800 dark:text-green-200 space-y-2 mb-0">
+              <li><strong>Zero data collection:</strong> We don't collect, store, or transmit your personal data</li>
+              <li><strong>Local processing:</strong> All voice recognition happens in your browser</li>
+              <li><strong>No accounts required:</strong> Use the app without creating an account</li>
+              <li><strong>No tracking:</strong> We don't use analytics or tracking scripts</li>
+            </ul>
           </div>
+
+          <section className="mb-12">
+            <h2>1. Information We Collect</h2>
+            <p>
+              OnePageOS is designed with privacy as a core principle. We operate on a "zero data collection" model:
+            </p>
+            <ul>
+              <li><strong>Voice Data:</strong> Your voice recordings are processed locally in your browser using the Web Speech API. They are never transmitted to our servers.</li>
+              <li><strong>Personal Information:</strong> We do not collect names, email addresses, phone numbers, or any other personal identifiers.</li>
+              <li><strong>Usage Analytics:</strong> We do not track how you use the application or collect usage statistics.</li>
+              <li><strong>Device Information:</strong> We do not collect information about your device, browser, or operating system.</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>2. How We Use Information</h2>
+            <p>
+              Since we don't collect personal information, there's no personal data for us to use. The application functions entirely within your browser:
+            </p>
+            <ul>
+              <li><strong>Voice Processing:</strong> Your speech is converted to text using your browser's built-in speech recognition</li>
+              <li><strong>Text Classification:</strong> The converted text is analyzed locally using natural language processing libraries</li>
+              <li><strong>Data Storage:</strong> All your tasks, notes, and calendar items are stored locally in your browser's storage</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>3. Data Storage and Security</h2>
+            <p>
+              Your data remains under your complete control:
+            </p>
+            <ul>
+              <li><strong>Local Storage:</strong> All data is stored in your browser's local storage on your device</li>
+              <li><strong>No Cloud Storage:</strong> We do not store any of your data on external servers or in the cloud</li>
+              <li><strong>Data Persistence:</strong> Your data persists across browser sessions but remains on your device</li>
+              <li><strong>Data Control:</strong> You can clear all data at any time through your browser settings</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>4. Third-Party Services</h2>
+            <p>
+              OnePageOS uses minimal third-party services:
+            </p>
+            <ul>
+              <li><strong>Web Speech API:</strong> We use your browser's built-in speech recognition, which may send audio to the browser vendor's servers (Google, Mozilla, etc.)</li>
+              <li><strong>CDN Services:</strong> We may use content delivery networks to serve static assets like fonts and libraries</li>
+              <li><strong>No Analytics:</strong> We do not use Google Analytics, Facebook Pixel, or similar tracking services</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>5. Cookies and Tracking</h2>
+            <ul>
+              <li><strong>Essential Cookies:</strong> We only use essential cookies required for the application to function (theme preferences, etc.)</li>
+              <li><strong>No Tracking Cookies:</strong> We do not use cookies for tracking, advertising, or analytics</li>
+              <li><strong>Third-Party Cookies:</strong> We do not allow third-party cookies on our domain</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>6. Children's Privacy</h2>
+            <p>
+              OnePageOS does not knowingly collect personal information from children under 13. Since we don't collect personal information from anyone, this protection extends to all users regardless of age.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2>7. International Users</h2>
+            <p>
+              OnePageOS is accessible globally and complies with major privacy regulations:
+            </p>
+            <ul>
+              <li><strong>GDPR Compliance:</strong> We comply with European Union General Data Protection Regulation</li>
+              <li><strong>CCPA Compliance:</strong> We comply with California Consumer Privacy Act</li>
+              <li><strong>Data Residency:</strong> Since all processing is local, your data never leaves your jurisdiction</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>8. Changes to Privacy Policy</h2>
+            <p>
+              We may update this privacy policy from time to time. Any changes will be posted on this page with an updated "Last modified" date. We encourage you to review this policy periodically.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2>9. Contact Information</h2>
+            <p>
+              If you have any questions about this privacy policy or our privacy practices, please contact us at:
+            </p>
+            <ul>
+              <li><strong>Email:</strong> <a href="mailto:write@digiwares.xyz" className="text-orange-600 dark:text-orange-400 hover:underline">write@digiwares.xyz</a></li>
+              <li><strong>Subject Line:</strong> "Privacy Policy Question"</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2>10. Data Subject Rights</h2>
+            <p>
+              While we don't collect personal data, you have complete control over any data stored locally:
+            </p>
+            <ul>
+              <li><strong>Right to Access:</strong> All your data is accessible within the application</li>
+              <li><strong>Right to Delete:</strong> You can clear all data through the app or browser settings</li>
+              <li><strong>Right to Portability:</strong> You can export your data using browser developer tools</li>
+              <li><strong>Right to Rectification:</strong> You can edit or modify your data directly in the app</li>
+            </ul>
+          </section>
+
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border-l-4 border-blue-500">
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mt-0 mb-3">
+              📞 Questions?
+            </h3>
+            <p className="text-blue-800 dark:text-blue-200 mb-0">
+              If you have any questions about our privacy practices, please don't hesitate to <Link href="/contact" className="text-blue-600 dark:text-blue-400 hover:underline">contact us</Link>.
+            </p>
+          </div>
+
         </div>
+      </div>
     </Layout>
   )
 }

@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import { useTheme } from 'next-themes'
 import { useEffect, useState, useCallback } from 'react'
-import { useRouter } from 'next/router'
-import Footer from '@/components/Footer'
+import Layout from '@/components/Layout'
 import { trackVoiceEvent, trackPageInteraction } from '@/lib/analytics'
 
 // Type for Speech Recognition
@@ -32,14 +30,12 @@ interface VoiceData {
 }
 
 export default function App() {
-  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [transcription, setTranscription] = useState('')
   const [status, setStatus] = useState('Click the microphone to start')
   const [data, setData] = useState<VoiceData>({ tasks: [], notes: [], calendar: [] })
   const [recognition, setRecognition] = useState<SpeechRecognitionType | null>(null)
-  const router = useRouter()
 
   useEffect(() => {
     setMounted(true)
@@ -358,40 +354,12 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-gray-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button onClick={() => router.push('/')} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-                  <div className="text-xl font-bold text-gray-900 dark:text-white">OnePageOS</div>
-                </button>
-                <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="rounded-full p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                  aria-label="Toggle theme"
-                  title={`Current: ${theme === 'dark' ? 'Dark' : 'Light'} mode • Click to switch`}
-                >
-                  {theme === 'dark' ? '💡' : '🔅'}
-                </button>
-                <button onClick={() => router.push('/')} className="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                  ← Back to Home
-                </button>
-              </div>
-            </div>
-          </div>
-        </nav>
-
         {/* Main Content */}
-        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-8 pb-16">
+        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 pt-8 pb-16">
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             {/* Header */}
             <div className="text-center mb-8">
@@ -407,7 +375,7 @@ export default function App() {
             </div>
 
             {/* Voice Input Section */}
-            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 mb-8 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 mb-8 border border-gray-200/50 dark:border-slate-700/50">
               {/* Voice Interface */}
               <div className="text-center mb-6">
                 <button 
@@ -426,7 +394,7 @@ export default function App() {
                   {status}
                 </div>
                 
-                <div className="text-gray-600 dark:text-gray-400 text-sm bg-gray-50/80 dark:bg-gray-700/80 rounded-lg p-4 min-h-[60px] border border-gray-200 dark:border-gray-600 backdrop-blur-sm max-w-2xl mx-auto">
+                <div className="text-gray-600 dark:text-gray-400 text-sm bg-gray-50/80 dark:bg-slate-700/80 rounded-lg p-4 min-h-[60px] border border-gray-200 dark:border-slate-600 backdrop-blur-sm max-w-2xl mx-auto">
                   {transcription || 'Your speech will appear here...'}
                 </div>
               </div>
@@ -435,7 +403,7 @@ export default function App() {
               <div className="flex flex-wrap justify-center gap-3 text-sm">
                 <button 
                   onClick={clearAll}
-                  className="px-3 py-2 sm:px-4 sm:py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition-colors font-medium"
+                  className="px-3 py-2 sm:px-4 sm:py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/40 transition-colors font-medium"
                 >
                   🗑️ Clear All
                 </button>
@@ -451,21 +419,21 @@ export default function App() {
               <div className="grid sm:grid-cols-3 gap-3 text-sm">
                 <button 
                   onClick={() => quickAddExample('tasks', 'I need to buy groceries tomorrow')}
-                  className="bg-white dark:bg-gray-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
+                  className="bg-white dark:bg-slate-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
                 >
                   <div className="font-medium text-blue-600 dark:text-blue-400">📋 Task:</div>
                   <div className="text-gray-600 dark:text-gray-300">&quot;I need to buy groceries tomorrow&quot;</div>
                 </button>
                 <button 
                   onClick={() => quickAddExample('notes', 'Great idea for the new project design')}
-                  className="bg-white dark:bg-gray-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
+                  className="bg-white dark:bg-slate-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
                 >
                   <div className="font-medium text-green-600 dark:text-green-400">📝 Note:</div>
                   <div className="text-gray-600 dark:text-gray-300">&quot;Great idea for the new project design&quot;</div>
                 </button>
                 <button 
                   onClick={() => quickAddExample('calendar', 'Meeting with John tomorrow at 3pm')}
-                  className="bg-white dark:bg-gray-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
+                  className="bg-white dark:bg-slate-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
                 >
                   <div className="font-medium text-purple-600 dark:text-purple-400">📅 Calendar:</div>
                   <div className="text-gray-600 dark:text-gray-300">&quot;Meeting with John tomorrow at 3pm&quot;</div>
@@ -592,8 +560,7 @@ export default function App() {
           </div>
         </section>
 
-        <Footer showHomeLink={true} />
-      </div>
+      </Layout>
     </>
   )
 }
