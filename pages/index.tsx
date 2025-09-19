@@ -241,12 +241,12 @@ export default function Home() {
         />
       </Head>
 
-      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-gray-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
         {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center space-x-4">

@@ -1,13 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Footer from '@/components/Footer'
+import Layout from '@/components/Layout'
 import { useState } from 'react'
-import { useTheme } from 'next-themes'
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const { theme, setTheme } = useTheme()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -40,69 +38,48 @@ export default function Contact() {
 
   if (isSubmitted) {
     return (
-      <>
+      <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
         <Head>
           <title>Thank You | OnePageOS - Message Sent Successfully</title>
           <meta name="description" content="Thank you for contacting OnePageOS. We've received your message and will get back to you soon." />
           <meta name="robots" content="noindex, follow" />
         </Head>
 
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-          {/* Navigation */}
-          <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <div className="flex h-16 items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity">
-                    OnePageOS
-                  </Link>
-                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
-                </div>
-                <Link href="/" className="inline-flex items-center px-3 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors text-sm font-medium">
-                  ← Back to Home
-                </Link>
+        {/* Success Message */}
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 p-8 lg:p-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-500 dark:bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
               </div>
-            </div>
-          </nav>
-
-          {/* Success Message */}
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 lg:p-12">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-green-500 dark:bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                  Message Sent Successfully! 🎉
-                </h1>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
-                  Thank you for reaching out! We've received your message and will get back to you within 24 hours.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/" className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium">
-                    Return to Homepage
-                  </Link>
-                  <button 
-                    onClick={() => setIsSubmitted(false)}
-                    className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
-                  >
-                    Send Another Message
-                  </button>
-                </div>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Message Sent Successfully! 🎉
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Thank you for reaching out! We've received your message and will get back to you within 24 hours.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/" className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium">
+                  Return to Homepage
+                </Link>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
+                >
+                  Send Another Message
+                </button>
               </div>
             </div>
           </div>
-
-          <Footer />
         </div>
-      </>
+      </Layout>
     )
   }
 
   return (
-    <>
+    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Head>
         <title>Contact Us | OnePageOS - Get in Touch with Our Team</title>
         <meta name="description" content="Contact OnePageOS team for partnerships, business inquiries, feedback, or general questions. We'd love to hear from you!" />
@@ -111,44 +88,9 @@ export default function Contact() {
         <link rel="canonical" href="https://onepageos.com/contact" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity">
-                  OnePageOS
-                </Link>
-                <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                  className="p-2 bg-white/20 dark:bg-gray-800/20 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 rounded-full hover:bg-white/30 dark:hover:bg-gray-700/30 transition-all duration-300"
-                  aria-label="Toggle theme"
-                >
-                  {theme === 'light' ? (
-                    <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  )}
-                </button>
-                <Link href="/" className="inline-flex items-center px-3 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors text-sm font-medium">
-                  ← Back to Home
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 lg:p-12">
+      {/* Main Content */}
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 p-8 lg:p-12">
             
             {/* Header */}
             <div className="text-center mb-12">
@@ -349,9 +291,6 @@ export default function Contact() {
             </div>
           </div>
         </div>
-
-        <Footer />
-      </div>
-    </>
+    </Layout>
   )
 }

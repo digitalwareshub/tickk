@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Footer from '@/components/Footer'
-import { useTheme } from 'next-themes'
+import Layout from '@/components/Layout'
 
 export default function Privacy() {
-  const { theme, setTheme } = useTheme()
   return (
-    <>
+    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Head>
         <title>Privacy Policy | OnePageOS - Complete Privacy Protection for Voice Productivity App</title>
         <meta name="description" content="OnePageOS Privacy Policy: Learn how we protect your privacy with zero data collection. All voice processing happens locally in your browser. GDPR, CCPA compliant voice productivity app." />
@@ -47,42 +45,9 @@ export default function Privacy() {
         />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="text-xl font-bold text-gray-900 dark:text-white">OnePageOS</div>
-                <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
-              </Link>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                  className="p-2 bg-white/20 dark:bg-gray-800/20 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 rounded-full hover:bg-white/30 dark:hover:bg-gray-700/30 transition-all duration-300"
-                  aria-label="Toggle theme"
-                >
-                  {theme === 'light' ? (
-                    <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  )}
-                </button>
-                <Link href="/" className="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                  ← Back to Home
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 lg:p-12">
+      {/* Main Content */}
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700 p-8 lg:p-12">
             {/* Header */}
             <div className="mb-12">
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -491,9 +456,6 @@ export default function Privacy() {
             </div>
           </div>
         </div>
-
-        <Footer />
-      </div>
-    </>
+    </Layout>
   )
 }
