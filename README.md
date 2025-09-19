@@ -116,68 +116,33 @@ OnePageOS is built as a PWA, offering:
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to get started:
+**⚠️ This repository is NOT accepting contributions.**
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+This is a personal project. If you want to use or improve the code:
+- ✅ Fork it freely (MIT License)
+- ✅ Create your own version
+- ❌ Don't submit pull requests here
 
-### Development Guidelines
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-- Follow TypeScript best practices
-- Maintain 100% test coverage for new features
-- Use semantic commit messages
-- Ensure accessibility compliance (WCAG 2.1)
+## 🔒 Code Protection
 
-## 📊 Analytics
+Your code is automatically backed up daily. Manual backup available:
 
-The app supports analytics tracking for:
+```bash
+./scripts/backup-repo.sh
+```
 
-- Voice recording events
-- Classification accuracy
-- User interactions
-- Performance metrics
+## 🐛 Issues
 
-Analytics help improve the user experience while maintaining privacy.
-
-## 🐛 Bug Reports
-
-Found a bug? Please report it on our [Issues page](https://github.com/digitalwareshub/opos-voice/issues) with:
-
-- Detailed description
-- Steps to reproduce
-- Browser and OS information
+Found a bug? Fork the repository and fix it in your own version. This repository is not accepting bug reports or feature requests.
 - Expected vs actual behavior
 
 ## � Repository Security & Protection
 
 This repository is protected against unauthorized changes and data loss:
 
-### 🛡️ Security Measures
-- **Branch Protection**: Main branch requires pull request reviews
-- **Code Ownership**: Critical files require maintainer approval (see [CODEOWNERS](.github/CODEOWNERS))
-- **Security Policy**: Report vulnerabilities via [SECURITY.md](SECURITY.md)
-- **Automated Backups**: Daily automated backups via GitHub Actions
-
-### 💾 Backup Strategy
-- **Local Backups**: Run `./scripts/backup-repo.sh` for manual backups
-- **Automated Backups**: GitHub Actions create daily archives
-- **Multiple Mirrors**: Repository mirrored to additional platforms
-- **Version Control**: Full git history preserved in all backups
-
-### 🔐 Contributing Safely
-1. Fork the repository
-2. Create feature branch from `main`
-3. Make changes with descriptive commits
-4. Submit pull request for review
-5. All changes require maintainer approval
-
-**Repository Backup Locations:**
-- Primary: GitHub (digitalwareshub/opos-voice)
-- Automated: GitHub Actions Artifacts (90-day retention)
-- Local: `~/Backups/opos-voice/` (when using backup script)
+## � License
 
 ## �📄 License
 
