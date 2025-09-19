@@ -1,35 +1,35 @@
 const defaultSEOConfig = {
-  titleTemplate: '%s | OnePageOS - Free Voice Productivity App',
-  defaultTitle: 'OnePageOS - Free Voice Productivity App with Speech Recognition',
+  titleTemplate: '%s | tickk - Free Voice Productivity App',
+  defaultTitle: 'tickk - Free Voice Productivity App with Speech Recognition',
   description: 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing. No login required, complete privacy, works offline.',
-  canonical: 'https://onepageos.com',
+  canonical: 'https://tickk.app',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://onepageos.com',
-    site_name: 'OnePageOS',
-    title: 'OnePageOS - Free Voice Productivity App with Speech Recognition',
+    url: 'https://tickk.app',
+    site_name: 'tickk',
+    title: 'tickk - Free Voice Productivity App with Speech Recognition',
     description: 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing.',
     images: [
       {
-        url: 'https://onepageos.com/og-image.png',
+        url: 'https://tickk.app/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'OnePageOS Voice Productivity App',
+        alt: 'tickk Voice Productivity App',
         type: 'image/png',
       },
       {
-        url: 'https://onepageos.com/og-image-square.png',
+        url: 'https://tickk.app/og-image-square.png',
         width: 1080,
         height: 1080,
-        alt: 'OnePageOS Voice App Logo',
+        alt: 'tickk Voice App Logo',
         type: 'image/png',
       },
     ],
   },
   twitter: {
-    handle: '@onepageos',
-    site: '@onepageos',
+    handle: '@tickkapp',
+    site: '@tickkapp',
     cardType: 'summary_large_image',
   },
   additionalMetaTags: [
@@ -47,11 +47,11 @@ const defaultSEOConfig = {
     },
     {
       name: 'apple-mobile-web-app-title',
-      content: 'OnePageOS',
+      content: 'tickk',
     },
     {
       name: 'application-name',
-      content: 'OnePageOS',
+      content: 'tickk',
     },
     {
       name: 'msapplication-TileColor',
@@ -76,15 +76,15 @@ const defaultSEOConfig = {
     },
     {
       name: 'author',
-      content: 'OnePageOS Team',
+      content: 'tickk Team',
     },
     {
       name: 'creator',
-      content: 'OnePageOS',
+      content: 'tickk',
     },
     {
       name: 'publisher',
-      content: 'OnePageOS',
+      content: 'tickk',
     },
     {
       name: 'robots',
@@ -204,19 +204,19 @@ const defaultSEOConfig = {
     // Canonical and alternate links
     {
       rel: 'canonical',
-      href: 'https://onepageos.com',
+      href: 'https://tickk.app',
     },
     {
       rel: 'alternate',
       type: 'application/rss+xml',
-      title: 'OnePageOS Updates',
-      href: 'https://onepageos.com/feed.xml',
+      title: 'tickk Updates',
+      href: 'https://tickk.app/feed.xml',
     },
     // Search engines
     {
       rel: 'search',
       type: 'application/opensearchdescription+xml',
-      title: 'OnePageOS',
+      title: 'tickk',
       href: '/opensearch.xml',
     },
   ],

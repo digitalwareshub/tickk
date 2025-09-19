@@ -21,6 +21,7 @@ interface VoiceItem {
   text: string
   timestamp: string
   category: 'tasks' | 'notes'
+  completed?: boolean
 }
 
 interface VoiceData {
@@ -319,6 +320,16 @@ export default function Home() {
     saveData(newData)
   }, [data, saveData])
 
+  const toggleCompleted = useCallback((category: keyof VoiceData, id: number) => {
+    const newData = {
+      ...data,
+      [category]: data[category].map(item => 
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    }
+    saveData(newData)
+  }, [data, saveData])
+
   const clearAll = useCallback(() => {
     if (confirm('Are you sure you want to clear all items?')) {
       const newData = { tasks: [], notes: [] }
@@ -435,14 +446,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Voice-to-Productivity Dashboard | OnePageOS</title>
+        <title>Voice-to-Productivity Dashboard | tickk</title>
         <meta name="description" content="Transform your voice into organized tasks and notes with mobile-first design" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <Layout 
         className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300"
-        seoTitle="Free Voice Productivity App | OnePageOS - Speech Recognition Dashboard"
+        seoTitle="Free Voice Productivity App | tickk - Speech Recognition Dashboard"
         seoDescription="Transform your voice into organized tasks and notes instantly. Advanced speech recognition with natural language processing. No login required, works offline, complete privacy."
       >
         {/* Grid background */}
@@ -644,18 +655,34 @@ export default function Home() {
                     ) : (
                       <>
                         {data.tasks.map((item) => (
-                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('tasks')}`}>
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('tasks')} ${item.completed ? 'opacity-60' : ''}`}>
                             <div className="flex justify-between items-start">
                               <div className="flex-1 pr-2">
-                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className={`text-xs sm:text-sm font-medium break-words ${item.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                  {item.text}
+                                </p>
                                 <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
                               </div>
-                              <button 
-                                onClick={() => removeItem('tasks', item.id)}
-                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                              >
-                                🗑️
-                              </button>
+                              <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => toggleCompleted('tasks', item.id)}
+                                  className={`text-sm flex-shrink-0 transition-colors ${
+                                    item.completed 
+                                      ? 'text-green-600 hover:text-green-700' 
+                                      : 'text-gray-400 hover:text-green-600'
+                                  }`}
+                                  title={item.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                >
+                                  {item.completed ? '✅' : '☐'}
+                                </button>
+                                <button 
+                                  onClick={() => removeItem('tasks', item.id)}
+                                  className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                  title="Delete task"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -689,18 +716,34 @@ export default function Home() {
                     ) : (
                       <>
                         {data.notes.map((item) => (
-                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('notes')}`}>
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('notes')} ${item.completed ? 'opacity-60' : ''}`}>
                             <div className="flex justify-between items-start">
                               <div className="flex-1 pr-2">
-                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className={`text-xs sm:text-sm font-medium break-words ${item.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                  {item.text}
+                                </p>
                                 <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
                               </div>
-                              <button 
-                                onClick={() => removeItem('notes', item.id)}
-                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                              >
-                                🗑️
-                              </button>
+                              <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => toggleCompleted('notes', item.id)}
+                                  className={`text-sm flex-shrink-0 transition-colors ${
+                                    item.completed 
+                                      ? 'text-green-600 hover:text-green-700' 
+                                      : 'text-gray-400 hover:text-green-600'
+                                  }`}
+                                  title={item.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                >
+                                  {item.completed ? '✅' : '☐'}
+                                </button>
+                                <button 
+                                  onClick={() => removeItem('notes', item.id)}
+                                  className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                  title="Delete note"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -746,7 +789,7 @@ export default function Home() {
                               
                               <div className="grid gap-3 sm:gap-4">
                                 {entries.map((entry) => (
-                                  <div key={`${entry.type}-${entry.id}`} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor(entry.type)}`}>
+                                  <div key={`${entry.type}-${entry.id}`} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor(entry.type)} ${entry.completed ? 'opacity-60' : ''}`}>
                                     <div className="flex justify-between items-start">
                                       <div className="flex-1 pr-2">
                                         <div className="flex items-center gap-2 mb-2">
@@ -762,14 +805,30 @@ export default function Home() {
                                             })}
                                           </span>
                                         </div>
-                                        <p className="text-sm font-medium break-words">{entry.text}</p>
+                                        <p className={`text-sm font-medium break-words ${entry.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                          {entry.text}
+                                        </p>
                                       </div>
-                                      <button 
-                                        onClick={() => removeItem(entry.type, entry.id)}
-                                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                                      >
-                                        🗑️
-                                      </button>
+                                      <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button 
+                                          onClick={() => toggleCompleted(entry.type, entry.id)}
+                                          className={`text-sm flex-shrink-0 transition-colors ${
+                                            entry.completed 
+                                              ? 'text-green-600 hover:text-green-700' 
+                                              : 'text-gray-400 hover:text-green-600'
+                                          }`}
+                                          title={entry.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                        >
+                                          {entry.completed ? '✅' : '☐'}
+                                        </button>
+                                        <button 
+                                          onClick={() => removeItem(entry.type, entry.id)}
+                                          className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                          title={`Delete ${entry.type.slice(0, -1)}`}
+                                        >
+                                          🗑️
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
                                 ))}
@@ -832,7 +891,7 @@ export default function Home() {
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Free Voice Productivity Software</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  OnePageOS is a revolutionary free voice-to-text productivity application that uses advanced natural language processing to automatically organize your speech into tasks and notes. No account required, complete privacy protection.
+                  tickk is a revolutionary free voice-to-text productivity application that uses advanced natural language processing to automatically organize your speech into tasks and notes. No account required, complete privacy protection.
                 </p>
               </div>
               <div>

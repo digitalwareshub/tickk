@@ -7,11 +7,11 @@ export default function Terms() {
   return (
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
-        <title>Terms of Service | OnePageOS - Free Voice Productivity App Terms and Conditions</title>
-        <meta name="description" content="OnePageOS Terms of Service: Free voice productivity app terms, conditions, and usage guidelines. Open source software with privacy-first approach." />
+        <title>Terms of Service | tickk - Free Voice Productivity App Terms and Conditions</title>
+        <meta name="description" content="tickk Terms of Service: Free voice productivity app terms, conditions, and usage guidelines. Open source software with privacy-first approach." />
         <meta name="keywords" content="terms of service, voice app terms, speech recognition terms, free software terms, open source license, user agreement, privacy-first terms" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/terms" />
+        <link rel="canonical" href="https://tickk.app/terms" />
       </Head>
 
       {/* Hero Section */}
@@ -26,7 +26,7 @@ export default function Terms() {
             Terms of Service
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Simple, fair terms for using OnePageOS voice productivity app.
+            Simple, fair terms for using tickk voice productivity app.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
             Last updated: January 15, 2024
@@ -126,7 +126,7 @@ export default function Terms() {
               <span className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                 <span className="text-blue-600 dark:text-blue-400">🎯</span>
               </span>
-              What OnePageOS Does
+              What tickk Does
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-l-4 border-blue-500">
@@ -220,7 +220,7 @@ export default function Terms() {
                   <span>🤝</span> Community Driven
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  Contributions welcome! Help improve OnePageOS for everyone.
+                  Contributions welcome! Help improve tickk for everyone.
                 </p>
               </div>
             </div>

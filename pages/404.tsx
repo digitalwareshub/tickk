@@ -24,8 +24,8 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>404 - Page Not Found | OnePageOS</title>
-        <meta name="description" content="Sorry, the page you're looking for doesn't exist. Redirecting you back to OnePageOS voice productivity app." />
+        <title>404 - Page Not Found | tickk</title>
+        <meta name="description" content="Sorry, the page you're looking for doesn't exist. Redirecting you back to tickk voice productivity app." />
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 

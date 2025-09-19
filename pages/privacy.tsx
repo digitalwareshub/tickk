@@ -7,11 +7,11 @@ export default function Privacy() {
   return (
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
-        <title>Privacy Policy | OnePageOS - Complete Privacy Protection for Voice Productivity App</title>
-        <meta name="description" content="OnePageOS Privacy Policy: Learn how we protect your privacy with zero data collection. All voice processing happens locally in your browser. GDPR, CCPA compliant voice productivity app." />
+        <title>Privacy Policy | tickk - Complete Privacy Protection for Voice Productivity App</title>
+        <meta name="description" content="tickk Privacy Policy: Learn how we protect your privacy with zero data collection. All voice processing happens locally in your browser. GDPR, CCPA compliant voice productivity app." />
         <meta name="keywords" content="privacy policy, voice app privacy, speech recognition privacy, data protection, GDPR compliance, CCPA compliance, zero data collection, browser-based privacy, voice data security" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/privacy" />
+        <link rel="canonical" href="https://tickk.app/privacy" />
       </Head>
 
       {/* Hero Section */}
@@ -128,7 +128,7 @@ export default function Privacy() {
               1. Information We Collect
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              OnePageOS is designed with privacy as a core principle. We operate on a "zero data collection" model:
+              tickk is designed with privacy as a core principle. We operate on a "zero data collection" model:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-l-4 border-green-500">

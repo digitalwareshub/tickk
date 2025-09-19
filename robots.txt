@@ -1,4 +1,4 @@
-# OnePageOS - Free Voice Productivity App - SEO Optimized robots.txt
+# tickk - Free Voice Productivity App - SEO Optimized robots.txt
 # https://www.robotstxt.org/robotstxt.html
 
 # Allow all search engines to crawl all content
@@ -65,10 +65,10 @@ User-agent: *
 Crawl-delay: 1
 
 # Sitemap location for search engines
-Sitemap: https://onepageos.com/sitemap.xml
+Sitemap: https://tickk.app/sitemap.xml
 
 # Additional SEO information
-# Site: OnePageOS - Free Voice Productivity App
+# Site: tickk - Free Voice Productivity App
 # Description: Revolutionary voice-to-text productivity application with speech recognition and natural language processing
 # Keywords: voice productivity, speech recognition, voice to text, task management, voice assistant, productivity app
 # Contact: write@digiwares.xyz

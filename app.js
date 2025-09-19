@@ -1,4 +1,4 @@
-class OnePageOS {
+class tickk {
     constructor() {
         this.recognition = null;
         this.isRecording = false;
@@ -360,10 +360,10 @@ let app;
 // Wait for DOM content to load
 document.addEventListener('DOMContentLoaded', function() {
     try {
-        app = new OnePageOS();
-        console.log('OnePageOS initialized successfully');
+        app = new tickk();
+        console.log('tickk initialized successfully');
     } catch (error) {
-        console.error('Error initializing OnePageOS:', error);
+        console.error('Error initializing tickk:', error);
     }
 });
 

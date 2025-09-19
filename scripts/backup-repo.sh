@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# OnePageOS Repository Backup Script
+# tickk Repository Backup Script
 # Creates local backups of the repository
 
 set -e
@@ -43,7 +43,7 @@ tar -czf "$BACKUP_DIR/${ARCHIVE_NAME}-source.tar.gz" \
 # Create metadata file
 echo -e "${YELLOW}📝 Creating backup metadata...${NC}"
 cat > "$BACKUP_DIR/${ARCHIVE_NAME}-info.txt" << EOF
-OnePageOS Repository Backup
+tickk Repository Backup
 ===========================
 Date: $(date)
 Commit: $(git rev-parse HEAD)

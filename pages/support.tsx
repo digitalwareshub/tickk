@@ -7,11 +7,11 @@ export default function Support() {
   return (
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
-        <title>Support & Help | OnePageOS - How to Use Voice Productivity App</title>
-        <meta name="description" content="Complete guide on how to use OnePageOS voice productivity app. Learn voice commands, features, troubleshooting, and tips for maximum productivity." />
-        <meta name="keywords" content="OnePageOS help, voice app tutorial, speech recognition guide, productivity app instructions, voice commands" />
+        <title>Support & Help | tickk - How to Use Voice Productivity App</title>
+        <meta name="description" content="Complete guide on how to use tickk voice productivity app. Learn voice commands, features, troubleshooting, and tips for maximum productivity." />
+        <meta name="keywords" content="tickk help, voice app tutorial, speech recognition guide, productivity app instructions, voice commands" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/support" />
+        <link rel="canonical" href="https://tickk.app/support" />
       </Head>
 
       {/* Hero Section */}
@@ -26,7 +26,7 @@ export default function Support() {
             Support & Help Center
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Everything you need to know about using OnePageOS effectively
+            Everything you need to know about using tickk effectively
           </p>
         </div>
       </div>

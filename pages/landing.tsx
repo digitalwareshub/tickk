@@ -176,7 +176,7 @@ export default function Home() {
     return (
           <Layout 
       className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
-      seoTitle="OnePageOS - Transform Voice into Organized Tasks"
+      seoTitle="tickk - Transform Voice into Organized Tasks"
       seoDescription="Privacy-first voice productivity app that converts speech into organized tasks, notes, and calendar events. Works offline and keeps your data secure."
       seoImage="/og-image.svg"
     >
@@ -191,14 +191,14 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Free PWA Voice Productivity App | OnePageOS - Offline Speech Recognition with No AI Dependencies | Progressive Web App for Task Management</title>
-        <meta name="description" content="OnePageOS is a free Progressive Web App (PWA) that transforms speech into organized tasks using pure browser technology - no AI dependencies, works completely offline. Advanced speech recognition automatically categorizes voice commands into tasks, notes, and reminders using natural language processing. No account required, complete privacy, installs like a native app on any device. Perfect for professionals who want hands-free productivity without AI or internet dependence." />
+        <title>Free PWA Voice Productivity App | tickk - Offline Speech Recognition with No AI Dependencies | Progressive Web App for Task Management</title>
+        <meta name="description" content="tickk is a free Progressive Web App (PWA) that transforms speech into organized tasks using pure browser technology - no AI dependencies, works completely offline. Advanced speech recognition automatically categorizes voice commands into tasks, notes, and reminders using natural language processing. No account required, complete privacy, installs like a native app on any device. Perfect for professionals who want hands-free productivity without AI or internet dependence." />
         <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools" />
-        <meta name="author" content="OnePageOS" />
+        <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/" />
+        <link rel="canonical" href="https://tickk.app/" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="language" content="en-US" />
@@ -215,26 +215,26 @@ export default function Home() {
         
         {/* Long-tail keyword variations */}
         <meta name="subject" content="Free voice to text productivity software with browser-based speech recognition for automatic task organization" />
-        <meta name="abstract" content="OnePageOS is a revolutionary free voice productivity application that uses advanced natural language processing to convert speech into organized tasks, notes, and reminders. Perfect for professionals, students, and entrepreneurs seeking hands-free productivity solutions." />
+        <meta name="abstract" content="tickk is a revolutionary free voice productivity application that uses advanced natural language processing to convert speech into organized tasks, notes, and reminders. Perfect for professionals, students, and entrepreneurs seeking hands-free productivity solutions." />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://onepageos.com/" />
-        <meta property="og:title" content="Free Voice to Text Productivity App | OnePageOS - Speech Recognition" />
+        <meta property="og:url" content="https://tickk.app/" />
+        <meta property="og:title" content="Free Voice to Text Productivity App | tickk - Speech Recognition" />
         <meta property="og:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
-        <meta property="og:site_name" content="OnePageOS" />
+        <meta property="og:site_name" content="tickk" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://onepageos.com/" />
-        <meta property="twitter:title" content="Free Voice to Text Productivity App | OnePageOS - Speech Recognition" />
+        <meta property="twitter:url" content="https://tickk.app/" />
+        <meta property="twitter:title" content="Free Voice to Text Productivity App | tickk - Speech Recognition" />
         <meta property="twitter:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
         
         {/* iOS Safari */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="OnePageOS" />
+        <meta name="apple-mobile-web-app-title" content="tickk" />
         
         {/* Enhanced Schema.org structured data for maximum SEO */}
         <script
@@ -243,28 +243,28 @@ export default function Home() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "OnePageOS",
+              "name": "tickk",
               "alternateName": ["Voice Productivity App", "Speech Recognition Software", "Voice to Text Organizer"],
               "description": "Revolutionary free voice productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
               "applicationCategory": ["ProductivityApplication", "UtilitiesApplication", "BusinessApplication"],
               "applicationSubCategory": "Task Management",
               "operatingSystem": ["Web Browser", "Chrome", "Firefox", "Safari", "Edge"],
-              "url": "https://onepageos.com",
-              "downloadUrl": "https://onepageos.com",
-              "installUrl": "https://onepageos.com",
-              "screenshot": "https://onepageos.com/preview-image.png",
+              "url": "https://tickk.app",
+              "downloadUrl": "https://tickk.app",
+              "installUrl": "https://tickk.app",
+              "screenshot": "https://tickk.app/preview-image.png",
               "softwareVersion": "1.0",
               "datePublished": "2024-01-01",
               "dateModified": "2024-09-17",
               "author": {
                 "@type": "Organization",
-                "name": "OnePageOS",
-                "url": "https://onepageos.com"
+                "name": "tickk",
+                "url": "https://tickk.app"
               },
               "publisher": {
                 "@type": "Organization",
-                "name": "OnePageOS",
-                "url": "https://onepageos.com"
+                "name": "tickk",
+                "url": "https://tickk.app"
               },
               "offers": {
                 "@type": "Offer",
@@ -311,7 +311,7 @@ export default function Home() {
               },
               "potentialAction": {
                 "@type": "UseAction",
-                "target": "https://onepageos.com"
+                "target": "https://tickk.app"
               }
             })
           }}
@@ -330,7 +330,7 @@ export default function Home() {
                   "name": "What is the best free voice to text productivity app?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "OnePageOS is a revolutionary free voice productivity app that uses natural language processing with compromise.js to convert speech into organized tasks, notes, and reminders. It requires no login, works offline, and maintains complete privacy while offering 99% accurate speech recognition using your browser's Web Speech API."
+                    "text": "tickk is a revolutionary free voice productivity app that uses natural language processing with compromise.js to convert speech into organized tasks, notes, and reminders. It requires no login, works offline, and maintains complete privacy while offering 99% accurate speech recognition using your browser's Web Speech API."
                   }
                 },
                 {
@@ -338,7 +338,7 @@ export default function Home() {
                   "name": "How does smart speech recognition work for task management?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "OnePageOS uses advanced natural language processing with compromise.js to analyze your speech patterns, identify action words, time references, and context clues to automatically categorize your voice input into tasks, notes, or reminders without any manual sorting required."
+                    "text": "tickk uses advanced natural language processing with compromise.js to analyze your speech patterns, identify action words, time references, and context clues to automatically categorize your voice input into tasks, notes, or reminders without any manual sorting required."
                   }
                 },
                 {
@@ -346,7 +346,7 @@ export default function Home() {
                   "name": "Can I use voice commands for productivity without creating an account?",
                   "acceptedAnswer": {
                     "@type": "Answer", 
-                    "text": "Yes! OnePageOS works completely without any account creation, login, or personal data collection. Simply visit the website and start speaking - your voice commands are processed locally in your browser for maximum privacy."
+                    "text": "Yes! tickk works completely without any account creation, login, or personal data collection. Simply visit the website and start speaking - your voice commands are processed locally in your browser for maximum privacy."
                   }
                 }
               ]
@@ -443,7 +443,7 @@ export default function Home() {
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                How OnePageOS Works
+                How tickk Works
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 Three simple steps to transform your voice into organized productivity
@@ -688,12 +688,12 @@ export default function Home() {
               Ready to Transform Your Voice into Productivity?
             </h2>
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals using OnePageOS to boost productivity. No downloads, no accounts, no limits.
+              Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
               <Link href="/app" className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg">
-                Start Using OnePageOS Free
+                Start Using tickk Free
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                 </svg>

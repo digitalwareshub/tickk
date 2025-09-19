@@ -7,7 +7,7 @@ import { useState } from 'react'
 export default function BugReport() {
   const [copied, setCopied] = useState(false)
 
-  const bugReportTemplate = `OnePageOS Bug Report
+  const bugReportTemplate = `tickk Bug Report
 
 **What happened?**
 [Describe the issue you encountered]
@@ -37,11 +37,11 @@ export default function BugReport() {
   return (
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
-        <title>Bug Report | OnePageOS - Report Issues and Get Help</title>
-        <meta name="description" content="Report bugs and issues with OnePageOS Voice Productivity App. Get help with speech recognition problems, app functionality, and technical issues." />
-        <meta name="keywords" content="bug report, technical support, voice app issues, speech recognition problems, OnePageOS help" />
+        <title>Bug Report | tickk - Report Issues and Get Help</title>
+        <meta name="description" content="Report bugs and issues with tickk Voice Productivity App. Get help with speech recognition problems, app functionality, and technical issues." />
+        <meta name="keywords" content="bug report, technical support, voice app issues, speech recognition problems, tickk help" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/bug-report" />
+        <link rel="canonical" href="https://tickk.app/bug-report" />
       </Head>
 
       {/* Hero Section */}
@@ -54,7 +54,7 @@ export default function BugReport() {
             Report a Bug
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Found an issue? Help us improve OnePageOS by reporting bugs and problems.
+            Found an issue? Help us improve tickk by reporting bugs and problems.
           </p>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default function BugReport() {
                 Send us a detailed email with your bug report. We'll respond within 24 hours.
               </p>
               <a
-                href="mailto:write@digiwares.xyz?subject=OnePageOS Bug Report&body=Please describe the issue you're experiencing with OnePageOS..."
+                href="mailto:write@digiwares.xyz?subject=tickk Bug Report&body=Please describe the issue you're experiencing with tickk..."
                 className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium"
               >
                 Send Email Report

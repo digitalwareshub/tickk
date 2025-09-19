@@ -29,8 +29,8 @@ export default function Contact() {
     return (
       <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
         <Head>
-          <title>Thank You | OnePageOS - Message Sent Successfully</title>
-          <meta name="description" content="Thank you for contacting OnePageOS. We've received your message and will get back to you soon." />
+          <title>Thank You | tickk - Message Sent Successfully</title>
+          <meta name="description" content="Thank you for contacting tickk. We've received your message and will get back to you soon." />
         </Head>
 
         <div className="flex items-center justify-center min-h-[60vh]">
@@ -59,11 +59,11 @@ export default function Contact() {
   return (
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
-        <title>Contact Us | OnePageOS - Get in Touch with Our Team</title>
-        <meta name="description" content="Get in touch with the OnePageOS team. We're here to help with questions, feedback, or support for our voice productivity app." />
-        <meta name="keywords" content="contact OnePageOS, voice app support, customer service, feedback, questions" />
+        <title>Contact Us | tickk - Get in Touch with Our Team</title>
+        <meta name="description" content="Get in touch with the tickk team. We're here to help with questions, feedback, or support for our voice productivity app." />
+        <meta name="keywords" content="contact tickk, voice app support, customer service, feedback, questions" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/contact" />
+        <link rel="canonical" href="https://tickk.app/contact" />
       </Head>
 
       {/* Hero Section */}

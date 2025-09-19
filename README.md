@@ -1,8 +1,8 @@
-# OnePageOS Voice Productivity App
+# tickk Voice Productivity App
 
 🎤 **The world's most advanced free voice-to-text productivity application** - Transform your voice into organized tasks, notes, and calendar events with cutting-edge browser-based speech recognition.
 
-![OnePageOS Voice App](https://img.shields.io/badge/PWA-Ready-blue) ![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black) ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Backup](https://img.shields.io/badge/Protected-Repository-green) ![Security](https://img.shields.io/badge/Security-Policy-orange)
+![tickk Voice App](https://img.shields.io/badge/PWA-Ready-blue) ![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black) ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Backup](https://img.shields.io/badge/Protected-Repository-green) ![Security](https://img.shields.io/badge/Security-Policy-orange)
 
 ## ✨ Features
 
@@ -100,7 +100,7 @@ The app is preconfigured as a Progressive Web App. Users can install it directly
 
 ## 📱 Progressive Web App
 
-OnePageOS is built as a PWA, offering:
+tickk is built as a PWA, offering:
 
 - **Installation**: Add to home screen on mobile/desktop
 - **Offline Support**: Continue working without internet
@@ -166,5 +166,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for productivity enthusiasts**
 
-*OnePageOS - Transforming voice into organized productivity since 2025*
+*tickk - Transforming voice into organized productivity since 2025*
 

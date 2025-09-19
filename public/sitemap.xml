@@ -8,7 +8,7 @@
 
     <!-- Homepage - High Priority -->
     <url>
-        <loc>https://onepageos.com/</loc>
+        <loc>https://tickk.app/</loc>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -17,7 +17,7 @@
 
     <!-- Voice App Dashboard - High Priority -->
     <url>
-        <loc>https://onepageos.com/app</loc>
+        <loc>https://tickk.app/app</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -26,7 +26,7 @@
 
     <!-- Privacy Policy - Important for Trust/SEO -->
     <url>
-        <loc>https://onepageos.com/privacy</loc>
+        <loc>https://tickk.app/privacy</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -35,7 +35,7 @@
 
     <!-- Terms of Service - Important for Trust/SEO -->
     <url>
-        <loc>https://onepageos.com/terms</loc>
+        <loc>https://tickk.app/terms</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -44,7 +44,7 @@
 
     <!-- Deep Link to Features Section -->
     <url>
-        <loc>https://onepageos.com/#features</loc>
+        <loc>https://tickk.app/#features</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -53,7 +53,7 @@
 
     <!-- Deep Link to How It Works Section -->
     <url>
-        <loc>https://onepageos.com/#how-it-works</loc>
+        <loc>https://tickk.app/#how-it-works</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -62,7 +62,7 @@
 
     <!-- Deep Link to Demo Section -->
     <url>
-        <loc>https://onepageos.com/#demo</loc>
+        <loc>https://tickk.app/#demo</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -71,7 +71,7 @@
 
     <!-- Alternative URLs for SEO (if using different domains/subdomains) -->
     <url>
-        <loc>https://www.onepageos.com/</loc>
+        <loc>https://www.tickk.app/</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -80,7 +80,7 @@
 
     <!-- PWA Manifest for App Store Discovery -->
     <url>
-        <loc>https://onepageos.com/manifest.json</loc>
+        <loc>https://tickk.app/manifest.json</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
@@ -88,7 +88,7 @@
 
     <!-- Robots.txt for SEO Transparency -->
     <url>
-        <loc>https://onepageos.com/robots.txt</loc>
+        <loc>https://tickk.app/robots.txt</loc>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>

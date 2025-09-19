@@ -1,6 +1,6 @@
 # Analytics Setup Guide
 
-This guide explains how to set up Google Analytics and Vercel Analytics for OnePageOS.
+This guide explains how to set up Google Analytics and Vercel Analytics for tickk.
 
 ## 📊 Analytics Overview
 

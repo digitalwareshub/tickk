@@ -9,12 +9,12 @@ interface SEOMetaProps {
 }
 
 export default function SEOMeta({ 
-  title = 'Free Voice Productivity App | OnePageOS - Speech Recognition Task Manager',
+  title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
   description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
   image = '/og-image.svg',
-  url = 'https://onepageos.com'
+  url = 'https://tickk.app'
 }: SEOMetaProps) {
-  const fullTitle = title.includes('OnePageOS') ? title : `${title} | OnePageOS`
+  const fullTitle = title.includes('tickk') ? title : `${title} | tickk`
   
   return (
     <>
@@ -55,7 +55,7 @@ export default function SEOMeta({
           type: 'website',
           locale: 'en_US',
           url: url,
-          site_name: 'OnePageOS',
+          site_name: 'tickk',
           title: fullTitle,
           description: description,
           images: [
@@ -63,14 +63,14 @@ export default function SEOMeta({
               url: `${url}${image}`,
               width: 1200,
               height: 630,
-              alt: 'OnePageOS - Voice to Productivity App',
+              alt: 'tickk - Voice to Productivity App',
               type: 'image/svg+xml',
             },
           ],
         }}
         twitter={{
-          handle: '@onepageos',
-          site: '@onepageos',
+          handle: '@tickkapp',
+          site: '@tickkapp',
           cardType: 'summary_large_image',
         }}
         additionalMetaTags={[
@@ -80,15 +80,15 @@ export default function SEOMeta({
           },
           {
             name: 'author',
-            content: 'OnePageOS Team',
+            content: 'tickk Team',
           },
           {
             name: 'creator',
-            content: 'OnePageOS',
+            content: 'tickk',
           },
           {
             name: 'publisher',
-            content: 'OnePageOS',
+            content: 'tickk',
           },
           {
             name: 'robots',
@@ -128,11 +128,11 @@ export default function SEOMeta({
           },
           {
             name: 'application-name',
-            content: 'OnePageOS',
+            content: 'tickk',
           },
           {
             name: 'apple-mobile-web-app-title',
-            content: 'OnePageOS',
+            content: 'tickk',
           },
           {
             name: 'apple-mobile-web-app-capable',

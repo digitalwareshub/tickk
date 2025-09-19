@@ -185,9 +185,9 @@ const nextConfig = {
 
   // Environment variables for build-time optimization
   env: {
-    NEXT_PUBLIC_APP_NAME: 'OnePageOS',
+    NEXT_PUBLIC_APP_NAME: 'tickk',
     NEXT_PUBLIC_APP_DESCRIPTION: 'Free Voice Productivity App',
-    NEXT_PUBLIC_APP_URL: 'https://onepageos.com',
+    NEXT_PUBLIC_APP_URL: 'https://tickk.app',
   },
 };
 

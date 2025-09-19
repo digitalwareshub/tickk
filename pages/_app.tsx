@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#ea580c" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="OnePageOS" />
+        <meta name="apple-mobile-web-app-title" content="tickk" />
         
         {/* Prevent flash of incorrect theme */}
         <script
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
             __html: `
               (function() {
                 function getInitialColorMode() {
-                  const persistedColorPreference = window.localStorage.getItem('onepageos-theme');
+                  const persistedColorPreference = window.localStorage.getItem('tickk-theme');
                   const hasPersistedPreference = typeof persistedColorPreference === 'string';
                   
                   if (hasPersistedPreference) {
@@ -113,7 +113,7 @@ export default function App({ Component, pageProps }: AppProps) {
         attribute="class"
         defaultTheme="system"
         enableSystem={true}
-        storageKey="onepageos-theme"
+        storageKey="tickk-theme"
         disableTransitionOnChange={true}
       >
         <Component {...pageProps} />

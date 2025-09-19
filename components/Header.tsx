@@ -13,8 +13,8 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Left: Logo and Badge - Optimized Width */}
           <div className="flex items-center space-x-4 min-w-[240px]">
-            <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity">
-              OnePageOS
+            <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity">
+              tickk
             </Link>
             <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">
               FREE

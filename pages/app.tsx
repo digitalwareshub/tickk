@@ -429,14 +429,14 @@ export default function App() {
   return (
     <>
       <Head>
-        <title>Voice-to-Productivity Dashboard | OnePageOS</title>
+        <title>Voice-to-Productivity Dashboard | tickk</title>
         <meta name="description" content="Transform your voice into organized tasks, notes, and calendar events with mobile-first design" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <Layout 
         className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300"
-        seoTitle="Voice App - OnePageOS"
+        seoTitle="Voice App - tickk"
         seoDescription="Record and organize your thoughts with our privacy-first voice recognition app. Convert speech to tasks, notes, and calendar entries instantly."
       >
         {/* Grid background */}

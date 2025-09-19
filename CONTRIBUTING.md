@@ -1,6 +1,6 @@
 # CONTRIBUTING.md
 
-# Contributing to OnePageOS
+# Contributing to tickk
 
 ## ⚠️ IMPORTANT NOTICE
 

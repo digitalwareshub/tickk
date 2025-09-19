@@ -1,6 +1,6 @@
 {
-  "name": "OnePageOS - Free Voice Productivity App",
-  "short_name": "OnePageOS",
+  "name": "tickk - Free Voice Productivity App",
+  "short_name": "tickk",
   "description": "Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing. No login required, complete privacy, works offline.",
   "start_url": "/",
   "scope": "/",
@@ -80,14 +80,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "OnePageOS Voice Dashboard on Desktop"
+      "label": "tickk Voice Dashboard on Desktop"
     },
     {
       "src": "/screenshot-narrow.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "OnePageOS Voice App on Mobile"
+      "label": "tickk Voice App on Mobile"
     }
   ],
   
@@ -159,7 +159,7 @@
   
   "protocol_handlers": [
     {
-      "protocol": "web+onepageos",
+      "protocol": "web+tickk",
       "url": "/app?action=%s"
     }
   ],
@@ -181,7 +181,7 @@
     "browser"
   ],
   
-  "id": "onepageos-voice-app",
+  "id": "tickk-voice-app",
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
 }
 
