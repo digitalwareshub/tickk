@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 export default function Header() {
   const { theme, setTheme } = useTheme()
   const router = useRouter()
   const isHomePage = router.pathname === '/'
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
@@ -26,20 +28,20 @@ export default function Header() {
             <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
               Home
             </Link>
-            <a href={isHomePage ? "#demo" : "/#demo"} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-              Demo
-            </a>
             <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
               Contact
             </Link>
+            <Link href="/support" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+              Support
+            </Link>
           </div>
 
-          {/* Right: Theme Toggle and Action Buttons - Optimized Width Container */}
-          <div className="flex items-center space-x-4 min-w-[240px] justify-end">
+          {/* Right: Theme Toggle and Mobile Menu */}
+          <div className="flex items-center space-x-2 justify-end">
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="p-2 bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm border border-white/30 dark:border-slate-700/30 rounded-full hover:bg-white/30 dark:hover:bg-slate-700/30 transition-all duration-300 flex-shrink-0"
+              className="p-2 bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm border border-white/30 dark:border-slate-700/30 rounded-full hover:bg-white/30 dark:hover:bg-slate-700/30 transition-all duration-300"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -53,29 +55,64 @@ export default function Header() {
               )}
             </button>
 
-            {/* Primary Action Button - Fixed Dimensions */}
-            <div className="flex-shrink-0">
-              {isHomePage ? (
-                <Link href="/app" className="inline-flex items-center justify-center w-[120px] h-[40px] bg-gray-900 hover:bg-black text-white rounded-lg font-medium transition-colors text-sm">
-                  Get Started
-                </Link>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               ) : (
-                <Link href="/" className="inline-flex items-center justify-center w-[120px] h-[40px] bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium text-sm">
-                  ← Home
-                </Link>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               )}
-            </div>
+            </button>
 
-            {/* Mobile Secondary Button - Reserved Space */}
-            <div className="md:hidden min-w-[80px] flex-shrink-0">
-              {!isHomePage && (
-                <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm whitespace-nowrap block text-right">
-                  Try App →
+            {/* Mobile Home Button - only show on small screens when not on home page */}
+            {!isHomePage && (
+              <div className="md:hidden">
+                <Link href="/" className="p-2 text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors" aria-label="Go to Home">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                  </svg>
                 </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 dark:border-slate-700 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md">
+            <div className="px-4 py-2 space-y-1">
+              <Link 
+                href="/" 
+                className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link 
+                href="/support" 
+                className="block px-3 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-700 rounded-md transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Support
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   )

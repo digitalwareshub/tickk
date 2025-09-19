@@ -792,9 +792,43 @@ export default function Home() {
         </section>
 
         {/* SEO Content Footer */}
-        <section className="relative bg-gray-50 dark:bg-slate-900 py-12 border-t border-gray-200 dark:border-slate-700">
+        <section className="relative bg-gray-50 dark:bg-slate-900 py-6 md:py-12 border-t border-gray-200 dark:border-slate-700">
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-8 md:grid-cols-3">
+            {/* Mobile Compact Layout */}
+            <div className="block md:hidden">
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Free Voice Productivity App</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  Transform speech into organized tasks and notes with 99% accuracy. No login, complete privacy.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Key Features</h4>
+                  <ul className="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <li>• 99% speech accuracy</li>
+                    <li>• Auto task sorting</li>
+                    <li>• Works offline</li>
+                    <li>• Complete privacy</li>
+                    <li>• All devices</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">How to Use</h4>
+                  <ol className="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <li>1. Click microphone</li>
+                    <li>2. Speak naturally</li>
+                    <li>3. Auto categorized</li>
+                    <li>4. Access dashboard</li>
+                    <li>5. Export data</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Full Layout */}
+            <div className="hidden md:grid gap-8 md:grid-cols-3">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Free Voice Productivity Software</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
@@ -827,7 +861,8 @@ export default function Home() {
                 </ol>
               </div>
             </div>
-            <div className="mt-8 pt-8 border-t border-gray-200 dark:border-slate-600 text-center">
+            
+            <div className="mt-4 md:mt-8 pt-4 md:pt-8 border-t border-gray-200 dark:border-slate-600 text-center">
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Free voice productivity app for hands-free task management and note-taking. Advanced speech recognition technology for instant organization.
               </p>

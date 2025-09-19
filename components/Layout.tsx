@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { useRouter } from 'next/router'
 import Header from './Header'
 import Footer from './Footer'
 import SEOMeta from './SEOMeta'
@@ -15,13 +16,19 @@ interface LayoutProps {
 
 export default function Layout({ 
   children, 
-  showHomeLink = false, 
+  showHomeLink, 
   title,
   className = "min-h-screen bg-gray-50 dark:bg-slate-800",
   seoTitle,
   seoDescription,
   seoImage
 }: LayoutProps) {
+  const router = useRouter()
+  
+  // Auto-determine if we should show home link based on current page
+  const isHomePage = router.pathname === '/'
+  const shouldShowHomeLink = showHomeLink !== undefined ? showHomeLink : !isHomePage
+
   return (
     <>
       <SEOMeta 
@@ -46,7 +53,7 @@ export default function Layout({
         </main>
 
         {/* Footer */}
-        <Footer showHomeLink={showHomeLink} />
+        <Footer showHomeLink={shouldShowHomeLink} />
       </div>
     </>
   )
