@@ -1,632 +1,767 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Layout from '@/components/Layout'
+import { trackVoiceEvent, trackPageInteraction } from '@/lib/analytics'
+
+// Type for Speech Recognition
+type SpeechRecognitionType = {
+  continuous: boolean
+  interimResults: boolean
+  lang: string
+  start(): void
+  stop(): void
+  onstart: ((event: Event) => void) | null
+  onresult: ((event: { resultIndex: number; results: { length: number; [index: number]: { [index: number]: { transcript: string }; isFinal: boolean } } }) => void) | null
+  onend: ((event: Event) => void) | null
+  onerror: ((event: { error: string }) => void) | null
+}
+
+interface VoiceItem {
+  id: number
+  text: string
+  timestamp: string
+  category: 'tasks' | 'notes'
+}
+
+interface VoiceData {
+  tasks: VoiceItem[]
+  notes: VoiceItem[]
+}
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
-  const [demoText, setDemoText] = useState('')
-  const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  const demoExamples = [
-    { text: "I need to call John tomorrow at 3pm about the project meeting", category: 'calendar' as const },
-    { text: "Remember to buy groceries and pick up dry cleaning", category: 'tasks' as const },
-    { text: "Great idea for the new product design using voice interfaces", category: 'notes' as const },
-    { text: "Schedule a dentist appointment next week", category: 'calendar' as const },
-    { text: "Don't forget to submit the quarterly report by Friday", category: 'tasks' as const },
-  ]
+  const [isRecording, setIsRecording] = useState(false)
+  const [transcription, setTranscription] = useState('')
+  const [status, setStatus] = useState('Click the microphone to start')
+  const [data, setData] = useState<VoiceData>({ 
+    tasks: [],
+    notes: []
+  })
+  const [recognition, setRecognition] = useState<SpeechRecognitionType | null>(null)
+  const [viewMode, setViewMode] = useState<'dashboard' | 'calendar'>('dashboard')
 
   useEffect(() => {
     setMounted(true)
+    
+    // Initialize speech recognition
+    if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      const SpeechRecognitionConstructor = window.SpeechRecognition || window.webkitSpeechRecognition
+      const recognition = new SpeechRecognitionConstructor()
+      
+      recognition.continuous = false
+      recognition.interimResults = true
+      recognition.lang = 'en-US'
+
+      recognition.onstart = () => {
+        setIsRecording(true)
+        setStatus('Listening... 🎤')
+        trackVoiceEvent('recording_started', 'general')
+      }
+
+      recognition.onresult = (event: { resultIndex: number; results: { length: number; [index: number]: { [index: number]: { transcript: string }; isFinal: boolean } } }) => {
+        let transcript = ''
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript
+        }
+        setTranscription(transcript)
+        
+        if (event.results[event.results.length - 1].isFinal) {
+          processTranscript(transcript)
+        }
+      }
+
+      recognition.onend = () => {
+        setIsRecording(false)
+        setStatus('Click the microphone to start')
+        trackVoiceEvent('recording_stopped', 'general')
+      }
+
+      recognition.onerror = (event: { error: string }) => {
+        setIsRecording(false)
+        handleSpeechError(event.error)
+      }
+
+      setRecognition(recognition as SpeechRecognitionType)
+    } else {
+      setStatus('Speech recognition not supported in this browser')
+    }
+
+    // Load saved data
+    loadData()
+
+    // Keyboard shortcut (spacebar)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && e.target === document.body) {
+        e.preventDefault()
+        toggleRecording()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const classifyText = (text: string): 'tasks' | 'notes' | 'calendar' => {
-    const lowerText = text.toLowerCase()
+  const loadData = useCallback(() => {
+    try {
+      const savedData = localStorage.getItem('voiceAppData')
+      if (savedData) {
+        setData(JSON.parse(savedData))
+      }
+    } catch (error) {
+      console.error('Error loading saved data:', error)
+    }
+  }, [])
+
+  const saveData = useCallback((newData: VoiceData) => {
+    try {
+      localStorage.setItem('voiceAppData', JSON.stringify(newData))
+      setData(newData)
+    } catch (error) {
+      console.error('Error saving data:', error)
+    }
+  }, [])
+
+  const classifyText = useCallback((text: string): 'tasks' | 'notes' => {
+    const originalText = text.trim()
     
-    // Calendar/appointment indicators
-    const timeWords = ['tomorrow', 'today', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'next week', 'next month', 'at', 'pm', 'am', 'o\'clock', 'meeting', 'appointment', 'call', 'lunch', 'dinner', 'schedule', 'remind me']
-    const hasTimeWords = timeWords.some(word => lowerText.includes(word))
+    // Early return for empty text
+    if (!originalText) return 'notes'
     
-    if (hasTimeWords) {
-      return 'calendar'
+    // 1. INTENT/DESIRE RECOGNITION (Highest Priority) → Notes
+    // These should always go to Notes regardless of action words
+    const intentPatterns = [
+      /\bi\s+want\s+to\b/i,
+      /\bi'd\s+like\s+to\b/i,
+      /\bi\s+wish\s+to\b/i,
+      /\bi\s+hope\s+to\b/i,
+      /\bi'm\s+thinking\s+about\b/i,
+      /\bi'm\s+interested\s+in\b/i,
+      /\bi\s+love\s+to\b/i,
+      /\bi\s+enjoy\b/i,
+      /\bi\s+should\s+(?:read|learn|try|explore|check\s+out|look\s+into)\b/i,
+      /\bwould\s+like\s+to\b/i
+    ]
+    
+    const hasIntent = intentPatterns.some(pattern => pattern.test(originalText))
+    if (hasIntent) {
+      return 'notes'
     }
     
-    // Task indicators
-    const taskWords = ['need to', 'have to', 'must', 'should', 'todo', 'task', 'remember to', 'don\'t forget', 'buy', 'get', 'pick up', 'finish', 'complete', 'do', 'submit']
-    const hasTaskWords = taskWords.some(phrase => lowerText.includes(phrase))
+    // 2. QUESTION PATTERNS → Notes
+    const questionPatterns = [
+      /\bwhat\s+should\s+i\b/i,
+      /\bhow\s+(?:do|can)\s+i\b/i,
+      /\bwhere\s+(?:should|can)\s+i\b/i,
+      /\bwhen\s+should\s+i\b/i,
+      /\bwhy\s+(?:should|do)\s+i\b/i,
+      /\?$/
+    ]
     
-    if (hasTaskWords) {
+    const isQuestion = questionPatterns.some(pattern => pattern.test(originalText))
+    if (isQuestion) {
+      return 'notes'
+    }
+    
+    // 3. STRONG OBLIGATION PATTERNS → Tasks
+    const obligationPatterns = [
+      /\bi\s+need\s+to\b/i,
+      /\bi\s+have\s+to\b/i,
+      /\bi\s+must\b/i,
+      /\bremember\s+to\b/i,
+      /\bdon't\s+forget\s+to\b/i,
+      /\bmake\s+sure\s+to\b/i,
+      /\btodo\b/i,
+      /\btask\b/i,
+      /\bschedule\b/i,
+      /\bappointment\b/i,
+      /\bmeeting\b/i,
+      /\bcall\b/i,
+      /\bemail\b/i,
+      /\bcontact\b/i
+    ]
+    
+    const hasObligation = obligationPatterns.some(pattern => pattern.test(originalText))
+    if (hasObligation) {
       return 'tasks'
     }
     
-    return 'notes'
-  }
-
-  const playDemo = async () => {
-    if (isPlaying) return
+    // 4. ACTION WORDS (only if no intent detected) → Tasks
+    const actionPatterns = [
+      /\b(?:buy|purchase|get|obtain|acquire)\b/i,
+      /\b(?:pick\s+up|collect)\b/i,
+      /\b(?:finish|complete|submit|send)\b/i,
+      /\b(?:fix|repair|resolve)\b/i,
+      /\b(?:create|make|build|write)\b/i,
+      /\b(?:book|reserve)\b/i,
+      /\b(?:pay|invoice|bill)\b/i,
+      /\b(?:clean|organize|tidy)\b/i
+    ]
     
-    setIsPlaying(true)
-    setDemoText('')
-    setDemoCategory(null)
-    
-    // Pick a random example
-    const example = demoExamples[Math.floor(Math.random() * demoExamples.length)]
-    
-    // Simulate typing the text
-    for (let i = 0; i <= example.text.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 50))
-      setDemoText(example.text.slice(0, i))
+    const hasAction = actionPatterns.some(pattern => pattern.test(originalText))
+    if (hasAction) {
+      // Check context - if it's a gentle suggestion, it might be a note
+      const gentleContext = /\b(?:maybe|perhaps|could|might|should\s+probably)\b/i.test(originalText)
+      if (gentleContext) {
+        return 'notes'
+      }
+      return 'tasks'
     }
     
-    // Wait a moment, then show classification
-    await new Promise(resolve => setTimeout(resolve, 500))
-    const predictedCategory = classifyText(example.text)
-    setDemoCategory(predictedCategory)
+    // 5. NOTE INDICATORS (explicit) → Notes
+    const notePatterns = [
+      /\b(?:idea|ideas|thought|thoughts|note|notes)\b/i,
+      /\b(?:insight|inspiration|concept|brainstorm)\b/i,
+      /\b(?:interesting|fascinating|cool)\b/i,
+      /\b(?:remember\s+(?:this|that)|note\s*:)\b/i
+    ]
     
-    // Reset after showing result
-    setTimeout(() => {
-      setIsPlaying(false)
-    }, 3000)
-  }
+    const hasNoteIndicator = notePatterns.some(pattern => pattern.test(originalText))
+    if (hasNoteIndicator) {
+      return 'notes'
+    }
+    
+    // 6. DEFAULT: Notes (thoughts, observations, general input)
+    return 'notes'
+  }, [])
 
-  if (!mounted) {
-    return (
-          <Layout 
-      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
-      seoTitle="OnePageOS - Transform Voice into Organized Tasks"
-      seoDescription="Privacy-first voice productivity app that converts speech into organized tasks, notes, and calendar events. Works offline and keeps your data secure."
-      seoImage="/og-image.svg"
-    >
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Loading...</p>
-        </div>
-      </Layout>
-    )
-  }
+  const processTranscript = useCallback((transcript: string) => {
+    if (!transcript.trim()) return
+
+    const category = classifyText(transcript)
+    const item: VoiceItem = {
+      id: Date.now(),
+      text: transcript.trim(),
+      timestamp: new Date().toISOString(),
+      category
+    }
+
+    // Track successful classification
+    trackVoiceEvent('classification_success', category)
+
+    // Use functional state update to ensure we have the latest data
+    setData(currentData => {
+      const newData = {
+        ...currentData,
+        [category]: [...currentData[category], item]
+      }
+      
+      // Save to localStorage
+      try {
+        localStorage.setItem('voiceAppData', JSON.stringify(newData))
+      } catch (error) {
+        console.error('Error saving data:', error)
+        trackVoiceEvent('classification_error', 'general')
+      }
+      
+      return newData
+    })
+    
+    setTranscription('')
+    setStatus(`✅ Added to ${category}: "${transcript.trim().slice(0, 50)}${transcript.length > 50 ? '...' : ''}"`)
+    
+    setTimeout(() => {
+      setStatus('Click the microphone to start')
+    }, 3000)
+  }, [classifyText])
+
+  const toggleRecording = useCallback(() => {
+    if (!recognition) {
+      setStatus('Speech recognition not available')
+      return
+    }
+
+    if (isRecording) {
+      recognition.stop()
+    } else {
+      try {
+        recognition.start()
+        trackPageInteraction('mic_button_clicked', 'microphone')
+      } catch (error) {
+        console.error('Speech recognition error:', error)
+        setStatus('Error starting speech recognition. Please try again.')
+        trackVoiceEvent('classification_error', 'general')
+      }
+    }
+  }, [recognition, isRecording])
+
+  const handleSpeechError = useCallback((error: string) => {
+    let message = 'Speech recognition error occurred.'
+    
+    switch (error) {
+      case 'network':
+        message = 'Network error. Please check your internet connection.'
+        break
+      case 'not-allowed':
+        message = '❌ Microphone access denied. Please allow microphone access and reload.'
+        break
+      case 'no-speech':
+        message = 'No speech detected. Please try again.'
+        break
+      case 'audio-capture':
+        message = 'No microphone found. Please check your microphone.'
+        break
+    }
+    
+    setStatus(message)
+    setTimeout(() => {
+      setStatus('Click the microphone to start')
+    }, 4000)
+  }, [])
+
+  const removeItem = useCallback((category: keyof VoiceData, id: number) => {
+    const newData = {
+      ...data,
+      [category]: data[category].filter(item => item.id !== id)
+    }
+    saveData(newData)
+  }, [data, saveData])
+
+  const clearAll = useCallback(() => {
+    if (confirm('Are you sure you want to clear all items?')) {
+      const newData = { tasks: [], notes: [], calendar: [] }
+      saveData(newData)
+      trackPageInteraction('clear_all_data', 'clear_button')
+    }
+  }, [saveData])
+
+  const formatTimestamp = useCallback((timestamp: string) => {
+    const date = new Date(timestamp)
+    const now = new Date()
+    const diff = now.getTime() - date.getTime()
+    
+    if (diff < 60000) {
+      return 'Just now'
+    } else if (diff < 3600000) {
+      return `${Math.floor(diff / 60000)}m ago`
+    } else if (diff < 86400000) {
+      return `${Math.floor(diff / 3600000)}h ago`
+    } else {
+      return date.toLocaleDateString()
+    }
+  }, [])
+
+  const getCategoryColor = useCallback((category: string) => {
+    switch (category) {
+      case 'tasks': return 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-100'
+      case 'notes': return 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-900 dark:text-green-100'
+      default: return 'border-gray-500 bg-gray-50 dark:bg-gray-900/20'
+    }
+  }, [])
+
+  const getCategoryHeaderColor = useCallback((category: string) => {
+    switch (category) {
+      case 'tasks': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+      case 'notes': return 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+      default: return 'bg-gray-100 dark:bg-gray-900/30'
+    }
+  }, [])
+
+  // Calendar view functionality
+  const getAllEntriesByDate = useCallback(() => {
+    const allEntries = [
+      ...data.tasks.map(item => ({ ...item, type: 'tasks' as const })),
+      ...data.notes.map(item => ({ ...item, type: 'notes' as const }))
+    ]
+
+    // Group by date
+    const entriesByDate = allEntries.reduce((acc, entry) => {
+      const date = new Date(entry.timestamp).toDateString()
+      if (!acc[date]) {
+        acc[date] = []
+      }
+      acc[date].push(entry)
+      return acc
+    }, {} as Record<string, Array<VoiceItem & { type: 'tasks' | 'notes' }>>)
+
+    // Sort dates (most recent first) and sort entries within each date
+    return Object.entries(entriesByDate)
+      .sort(([a], [b]) => new Date(b).getTime() - new Date(a).getTime())
+      .map(([date, entries]) => [
+        date,
+        entries.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+      ] as const)
+  }, [data])
+
+  const formatDateHeader = useCallback((dateString: string) => {
+    const date = new Date(dateString)
+    const today = new Date()
+    const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000)
+    
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today'
+    } else if (date.toDateString() === yesterday.toDateString()) {
+      return 'Yesterday'
+    } else {
+      return date.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        month: 'long', 
+        day: 'numeric',
+        year: date.getFullYear() !== today.getFullYear() ? 'numeric' : undefined
+      })
+    }
+  }, [])
+
+  const quickAddExample = useCallback((category: 'tasks' | 'notes', example: string) => {
+    const item: VoiceItem = {
+      id: Date.now(),
+      text: example,
+      timestamp: new Date().toISOString(),
+      category
+    }
+
+    const newData = {
+      ...data,
+      [category]: [...data[category], item]
+    }
+
+    saveData(newData)
+    setStatus(`✅ Added example to ${category}`)
+    setTimeout(() => {
+      setStatus('Click the microphone to start')
+    }, 2000)
+  }, [data, saveData])
+
+  if (!mounted) return null
 
   return (
     <>
       <Head>
-        <title>Free PWA Voice Productivity App | OnePageOS - Offline Speech Recognition with No AI Dependencies | Progressive Web App for Task Management</title>
-        <meta name="description" content="OnePageOS is a free Progressive Web App (PWA) that transforms speech into organized tasks using pure browser technology - no AI dependencies, works completely offline. Advanced speech recognition automatically categorizes voice commands into tasks, notes, and reminders using natural language processing. No account required, complete privacy, installs like a native app on any device. Perfect for professionals who want hands-free productivity without AI or internet dependence." />
-        <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools" />
-        <meta name="author" content="OnePageOS" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
-        <link rel="canonical" href="https://onepageos.com/" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="language" content="en-US" />
-        <meta name="geo.region" content="US" />
-        <meta name="distribution" content="global" />
-        <meta name="rating" content="general" />
-        <meta name="revisit-after" content="1 days" />
-        <meta name="classification" content="productivity software, voice recognition, voice assistant" />
-        <meta name="category" content="productivity, software, voice technology" />
-        <meta name="coverage" content="worldwide" />
-        <meta name="target" content="all" />
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
-        
-        {/* Long-tail keyword variations */}
-        <meta name="subject" content="Free voice to text productivity software with browser-based speech recognition for automatic task organization" />
-        <meta name="abstract" content="OnePageOS is a revolutionary free voice productivity application that uses advanced natural language processing to convert speech into organized tasks, notes, and reminders. Perfect for professionals, students, and entrepreneurs seeking hands-free productivity solutions." />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://onepageos.com/" />
-        <meta property="og:title" content="Free Voice to Text Productivity App | OnePageOS - Speech Recognition" />
-        <meta property="og:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
-        <meta property="og:site_name" content="OnePageOS" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://onepageos.com/" />
-        <meta property="twitter:title" content="Free Voice to Text Productivity App | OnePageOS - Speech Recognition" />
-        <meta property="twitter:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
-        
-        {/* iOS Safari */}
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="OnePageOS" />
-        
-        {/* Enhanced Schema.org structured data for maximum SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "OnePageOS",
-              "alternateName": ["Voice Productivity App", "Speech Recognition Software", "Voice to Text Organizer"],
-              "description": "Revolutionary free voice productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
-              "applicationCategory": ["ProductivityApplication", "UtilitiesApplication", "BusinessApplication"],
-              "applicationSubCategory": "Task Management",
-              "operatingSystem": ["Web Browser", "Chrome", "Firefox", "Safari", "Edge"],
-              "url": "https://onepageos.com",
-              "downloadUrl": "https://onepageos.com",
-              "installUrl": "https://onepageos.com",
-              "screenshot": "https://onepageos.com/preview-image.png",
-              "softwareVersion": "1.0",
-              "datePublished": "2024-01-01",
-              "dateModified": "2024-09-17",
-              "author": {
-                "@type": "Organization",
-                "name": "OnePageOS",
-                "url": "https://onepageos.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "OnePageOS",
-                "url": "https://onepageos.com"
-              },
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD",
-                "description": "Free forever - no subscription, no hidden costs, no account required",
-                "availability": "https://schema.org/InStock"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "1250",
-                "bestRating": "5",
-                "worstRating": "1"
-              },
-              "featureList": [
-                "Advanced voice recognition with 99% accuracy",
-                "Natural language processing and text classification",
-                "Automatic categorization of tasks, notes, and reminders",
-                "Real-time speech transcription",
-                "Complete offline functionality",
-                "Zero data collection - privacy focused",
-                "No account or login required",
-                "Progressive Web App support",
-                "Cross-platform compatibility",
-                "Dark mode support",
-                "Keyboard shortcuts for accessibility",
-                "Mobile responsive design",
-                "Instant voice command processing",
-                "Smart context understanding",
-                "Multi-language support",
-                "Export capabilities",
-                "Hands-free operation",
-                "Voice-controlled workflow management"
-              ],
-              "keywords": "free voice to text, speech recognition, voice productivity, hands-free task management, speech to text organizer, voice note taking, natural language processing, voice commands, voice assistant, productivity software",
-              "inLanguage": "en-US",
-              "isAccessibleForFree": true,
-              "isFamilyFriendly": true,
-              "genre": ["Productivity", "Business", "Utilities"],
-              "audience": {
-                "@type": "Audience",
-                "audienceType": ["Professionals", "Students", "Entrepreneurs", "Busy Parents", "Accessibility Users"]
-              },
-              "potentialAction": {
-                "@type": "UseAction",
-                "target": "https://onepageos.com"
-              }
-            })
-          }}
-        />
-        
-        {/* FAQ Schema for voice search optimization */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "What is the best free voice to text productivity app?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "OnePageOS is a revolutionary free voice productivity app that uses natural language processing with compromise.js to convert speech into organized tasks, notes, and reminders. It requires no login, works offline, and maintains complete privacy while offering 99% accurate speech recognition using your browser's Web Speech API."
-                  }
-                },
-                {
-                  "@type": "Question", 
-                  "name": "How does smart speech recognition work for task management?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "OnePageOS uses advanced natural language processing with compromise.js to analyze your speech patterns, identify action words, time references, and context clues to automatically categorize your voice input into tasks, notes, or reminders without any manual sorting required."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Can I use voice commands for productivity without creating an account?",
-                  "acceptedAnswer": {
-                    "@type": "Answer", 
-                    "text": "Yes! OnePageOS works completely without any account creation, login, or personal data collection. Simply visit the website and start speaking - your voice commands are processed locally in your browser for maximum privacy."
-                  }
-                }
-              ]
-            })
-          }}
-        />
+        <title>Voice-to-Productivity Dashboard | OnePageOS</title>
+        <meta name="description" content="Transform your voice into organized tasks, notes, and calendar events with mobile-first design" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <Layout 
+        className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300"
+        seoTitle="Voice App - OnePageOS"
+        seoDescription="Record and organize your thoughts with our privacy-first voice recognition app. Convert speech to tasks, notes, and calendar entries instantly."
+      >
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
-        {/* Hero Section */}
-        <section className="relative bg-gray-50 dark:bg-slate-800 pt-20 pb-32">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]"></div>
-          
+        {/* Main Content */}
+        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 pt-8 pb-16">
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 px-4 py-2 text-sm text-orange-700 dark:text-orange-300 mb-8">
-                <span className="inline-block h-2 w-2 rounded-full bg-orange-600 dark:bg-orange-400 animate-pulse"></span>
-                🎤 PWA • Works Offline • No AI • 100% Free
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-8 text-gray-900 dark:text-white">
-                Transform Your Voice Into
-                <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block">
-                  Organized Productivity
+            {/* Header */}
+            <div className="text-center mb-6 sm:mb-8 px-4 sm:px-0">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3 sm:mb-4">
+                Voice-to-Productivity
+                <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block mt-1 sm:mt-0">
+                  Dashboard
                 </span>
               </h1>
-
-              {/* Subheadline */}
-              <p className="mx-auto max-w-3xl text-xl leading-relaxed mb-12 text-gray-600 dark:text-gray-300">
-                A Progressive Web App that works completely offline with no AI dependencies. 
-                Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology.
+              <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                Start speaking to automatically organize your thoughts into tasks, notes, and calendar events
               </p>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto mb-16">
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">🔒</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">Complete Privacy</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">No data collection</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">⚡</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">99% Accuracy</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Advanced speech recognition</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">🆓</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">Free Forever</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">No subscription required</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">📱</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">Works Offline</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">PWA technology</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">🧠</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">No AI Used</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Pure browser technology</div>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3">🌐</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">All Devices</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">Any browser</div>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/app" className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  🚀 Try It Free Now
-                </Link>
-                <button 
-                  onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+              
+              {/* View Mode Toggle */}
+              <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-700 p-1">
+                <button
+                  onClick={() => setViewMode('dashboard')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    viewMode === 'dashboard'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                  }`}
                 >
-                  👀 See Demo
+                  📊 Dashboard
+                </button>
+                <button
+                  onClick={() => setViewMode('calendar')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    viewMode === 'calendar'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                  }`}
+                >
+                  📅 Calendar View
                 </button>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* How It Works Section */}
-        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-slate-800">
-          {/* Diagonal pattern background */}
-          <div className="absolute inset-0 pattern-diagonal opacity-20"></div>
-          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                How OnePageOS Works
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Three simple steps to transform your voice into organized productivity
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              {/* Step 1: Speak Naturally */}
-              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
-                <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
-                    1
-                  </div>
+            {/* Voice Input Section */}
+            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-gray-200/50 dark:border-slate-700/50 mx-4 sm:mx-0">
+              {/* Voice Interface */}
+              <div className="text-center mb-4 sm:mb-6">
+                <button 
+                  onClick={toggleRecording}
+                  className={`voice-button w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-white rounded-full flex items-center justify-center text-xl sm:text-2xl lg:text-3xl mx-auto mb-4 shadow-lg transition-all ${isRecording ? 'recording scale-110 animate-pulse-slow' : 'hover:scale-105'}`}
+                  disabled={!recognition}
+                >
+                  {isRecording ? (
+                    <div className="spinner"></div>
+                  ) : (
+                    <span>🎤</span>
+                  )}
+                </button>
+                
+                <div className="text-sm sm:text-base lg:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 px-2">
+                  {status}
                 </div>
                 
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  Speak Naturally
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
-                </p>
-                
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
-                  <div className="flex items-start space-x-2">
-                    <div className="text-lg">🎤</div>
-                    <div className="text-sm text-gray-700 dark:text-gray-300 italic">
-                      &quot;I need to call John tomorrow at 3pm about the project meeting&quot;
-                    </div>
-                  </div>
+                <div className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm bg-gray-50/80 dark:bg-slate-700/80 rounded-lg p-3 sm:p-4 min-h-[50px] sm:min-h-[60px] border border-gray-200 dark:border-slate-600 backdrop-blur-sm max-w-2xl mx-auto">
+                  {transcription || 'Your speech will appear here...'}
                 </div>
               </div>
 
-              {/* Step 2: Smart Processing */}
-              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
-                <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
-                    2
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  Smart Processing
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Natural language processing analyzes your speech and automatically determines if it&apos;s a task, note, or calendar event.
-                </p>
-                
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">Processing speech...</span>
-                    <div className="text-lg">🧠</div>
-                  </div>
-                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">📅 Calendar Event</span>
-                      <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      Time references: &quot;tomorrow&quot;, &quot;3pm&quot;
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3: Auto-Organized */}
-              <div className="bg-white dark:bg-slate-700 p-8 rounded-lg border border-gray-200 dark:border-slate-600">
-                <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
-                    3
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  Auto-Organized
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Your voice is instantly organized into the right category, ready for action.
-                </p>
-                
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Successfully Organized</span>
-                    <div className="text-lg">✨</div>
-                  </div>
-                  
-                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <div className="text-green-600">✓</div>
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Added to Calendar</span>
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">📅</div>
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      Ready to sync with your calendar app
-                    </div>
-                  </div>
+              {/* Quick Actions */}
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                <button 
+                  onClick={clearAll}
+                  className="px-3 py-2 sm:px-4 sm:py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/40 transition-colors font-medium"
+                >
+                  🗑️ Clear All
+                </button>
+                <div className="text-xs text-gray-500 dark:text-gray-400 px-3 py-2 flex items-center">
+                  💡 Press Space to record
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Interactive Demo Section */}
-        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-slate-800">
-          {/* Grid background */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-30"></div>
-          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                See Voice Recognition in Action
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Watch how natural language processing instantly categorizes your speech into tasks, notes, and calendar events
-              </p>
+            {/* Quick Examples */}
+            <div className="bg-orange-50 dark:bg-orange-900/20 rounded-xl p-4 mb-6 sm:mb-8 border border-orange-200 dark:border-orange-800 mx-4 sm:mx-0">
+              <h3 className="text-sm font-semibold text-orange-800 dark:text-orange-300 mb-3">💡 Try these examples:</h3>
+              <div className="grid gap-3 sm:grid-cols-2 text-xs sm:text-sm">
+                <button 
+                  onClick={() => quickAddExample('tasks', 'Remember to finish the quarterly report by Friday')}
+                  className="bg-white dark:bg-slate-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
+                >
+                  <div className="font-medium text-blue-600 dark:text-blue-400 mb-1">📋 Task:</div>
+                  <div className="text-gray-600 dark:text-gray-300 text-xs">&quot;Remember to finish the quarterly report by Friday&quot;</div>
+                </button>
+                <button 
+                  onClick={() => quickAddExample('notes', 'Great idea for the new project design')}
+                  className="bg-white dark:bg-slate-800 p-3 rounded-lg text-left hover:shadow-md transition-shadow border border-orange-200 dark:border-orange-700"
+                >
+                  <div className="font-medium text-green-600 dark:text-green-400 mb-1">📝 Note:</div>
+                  <div className="text-gray-600 dark:text-gray-300 text-xs">&quot;Great idea for the new project design&quot;</div>
+                </button>
+              </div>
             </div>
 
-            {/* Demo Interface */}
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-gray-50 dark:bg-slate-700 rounded-2xl border border-gray-200 dark:border-slate-600 overflow-hidden shadow-xl">
-                {/* Demo Header */}
-                <div className="bg-white dark:bg-slate-600 px-6 py-4 border-b border-gray-200 dark:border-slate-600">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Live Classification Demo</h3>
-                    <button 
-                      onClick={playDemo}
-                      disabled={isPlaying}
-                      className={`px-4 py-2 rounded-lg transition-colors font-medium ${
-                        isPlaying 
-                          ? 'bg-gray-400 text-white cursor-not-allowed' 
-                          : 'bg-gray-900 hover:bg-black text-white'
-                      }`}
-                    >
-                      {isPlaying ? '⏳ Playing...' : '▶ Play Demo'}
-                    </button>
-                  </div>
-                </div>
+            {/* Demo Controls */}
+            <div className="flex justify-center mb-6">
+              <div className="flex gap-3 items-center bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg p-3 border border-gray-200/50 dark:border-gray-700/50">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  📊 {data.tasks.length + data.notes.length} total entries
+                </span>
+                <button
+                  onClick={() => {
+                    const demoData = {
+                      tasks: [
+                        { id: 1, text: 'Buy groceries for the week', timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(), category: 'tasks' as const },
+                        { id: 2, text: 'Call the dentist to schedule appointment', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), category: 'tasks' as const },
+                        { id: 3, text: 'Finish the quarterly report by Friday', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 4).toISOString(), category: 'tasks' as const },
+                        { id: 4, text: 'Pick up dry cleaning after work', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 6).toISOString(), category: 'tasks' as const },
+                        { id: 5, text: 'Review and approve team budget proposal', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 8).toISOString(), category: 'tasks' as const },
+                        { id: 6, text: 'Book flight tickets for next month trip', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 12).toISOString(), category: 'tasks' as const },
+                        { id: 7, text: 'Update project timeline with stakeholders', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), category: 'tasks' as const },
+                        { id: 8, text: 'Organize team building event for Q4', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 36).toISOString(), category: 'tasks' as const },
+                        { id: 9, text: 'Send follow-up emails to potential clients', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(), category: 'tasks' as const },
+                        { id: 10, text: 'Prepare presentation for board meeting', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(), category: 'tasks' as const }
+                      ],
+                      notes: [
+                        { id: 11, text: 'Remember the new password policy starts next month', timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(), category: 'notes' as const },
+                        { id: 12, text: 'Great idea from Sarah about improving customer onboarding', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 1).toISOString(), category: 'notes' as const },
+                        { id: 13, text: 'Coffee shop on 5th street has excellent Wi-Fi for remote work', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(), category: 'notes' as const },
+                        { id: 14, text: 'New React framework update includes better TypeScript support', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), category: 'notes' as const },
+                        { id: 15, text: 'Client mentioned they prefer weekly updates instead of daily', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 7).toISOString(), category: 'notes' as const },
+                        { id: 16, text: 'The marketing team needs design assets by end of week', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 10).toISOString(), category: 'notes' as const },
+                        { id: 17, text: 'Interesting article about AI productivity tools in Forbes', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 18).toISOString(), category: 'notes' as const },
+                        { id: 18, text: 'Reminder that office parking permits expire next quarter', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 30).toISOString(), category: 'notes' as const },
+                        { id: 19, text: 'New supplier offers 20% discount for bulk orders over $5000', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 42).toISOString(), category: 'notes' as const },
+                        { id: 20, text: 'Team feedback suggests more flexible work-from-home policy', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 60).toISOString(), category: 'notes' as const }
+                      ]
+                    };
+                    setData(demoData);
+                  }}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-all"
+                  title="Load 20 sample entries to test scrolling"
+                >
+                  📝 Load Demo Data
+                </button>
+                <button
+                  onClick={() => setData({ tasks: [], notes: [] })}
+                  className="px-3 py-1.5 rounded-md text-sm font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-900/50 transition-all"
+                  title="Clear all data"
+                >
+                  🗑️ Clear All
+                </button>
+              </div>
+            </div>
 
-                {/* Demo Content */}
-                <div className="p-8">
-                  <div className="grid md:grid-cols-2 gap-8">
-                    {/* Input Side */}
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Voice Input</h4>
-                      <div className="bg-white dark:bg-slate-600 rounded-lg border border-gray-200 dark:border-slate-500 p-4 min-h-[120px] flex items-center">
-                        <div className="text-gray-900 dark:text-white font-mono text-lg w-full">
-                          {demoText ? (
-                            <span>&quot;{demoText}&quot;</span>
-                          ) : (
-                            <span className="text-gray-400 dark:text-gray-500 italic">
-                              Click &quot;Play Demo&quot; to see classification in action...
-                            </span>
-                          )}
-                          {isPlaying && !demoCategory && (
-                            <span className="animate-pulse">|</span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="mt-3 text-sm text-orange-600 dark:text-orange-400">
-                        <span className="mr-2">🧠</span>
-                        <span>
-                          {isPlaying && demoText && !demoCategory 
-                            ? 'Analyzing keywords and patterns...' 
-                            : 'NLP analyzes grammar, verbs, and temporal references'
-                          }
-                        </span>
-                      </div>
+            {/* Results Dashboard */}
+            {viewMode === 'dashboard' ? (
+              <div className="grid gap-4 sm:gap-6 lg:grid-cols-2 px-4 sm:px-0">
+                {/* Tasks Column */}
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200/50 dark:border-gray-700/50">
+                  <div className="flex items-center mb-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-blue-600 dark:text-blue-400 text-sm sm:text-base">📋</span>
                     </div>
-
-                    {/* Output Side */}
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Smart Classification</h4>
-                      <div className="space-y-3">
-                        <div className={`bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-3 rounded-r-lg transition-all duration-500 ${
-                          demoCategory === 'tasks' ? 'opacity-100 ring-2 ring-blue-400' : 'opacity-50'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-blue-500">📋</span>
-                            <span className="font-medium text-blue-700 dark:text-blue-300">Tasks</span>
-                            {demoCategory === 'tasks' && (
-                              <span className="text-blue-600 dark:text-blue-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
-                            )}
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Tasks</h2>
+                    <span className={`ml-auto px-2 py-1 rounded-full text-xs sm:text-sm font-medium ${getCategoryHeaderColor('tasks')}`}>
+                      {data.tasks.length}
+                    </span>
+                  </div>
+                  <div className="space-y-3 max-h-80 sm:max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-300 dark:scrollbar-thumb-blue-600 scrollbar-track-transparent hover:scrollbar-thumb-blue-400 dark:hover:scrollbar-thumb-blue-500">
+                    {data.tasks.length === 0 ? (
+                      <div className="text-gray-500 dark:text-gray-400 text-center py-6 sm:py-8">
+                        <div className="text-2xl sm:text-3xl mb-2 opacity-50">📋</div>
+                        <p className="text-xs sm:text-sm">No tasks yet. Say something like:<br/>&quot;I need to buy groceries&quot;</p>
+                      </div>
+                    ) : (
+                      <>
+                        {data.tasks.map((item) => (
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('tasks')}`}>
+                            <div className="flex justify-between items-start">
+                              <div className="flex-1 pr-2">
+                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
+                              </div>
+                              <button 
+                                onClick={() => removeItem('tasks', item.id)}
+                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
+                              >
+                                🗑️
+                              </button>
+                            </div>
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Action items to complete</div>
-                          {demoCategory === 'tasks' && (
-                            <div className="text-xs text-blue-600 dark:text-blue-400 mt-1 font-medium">
-                              Action words detected: &quot;need to&quot;, &quot;remember&quot;, &quot;don&apos;t forget&quot;
+                        ))}
+                        {data.tasks.length > 5 && (
+                          <div className="text-center py-2 text-xs text-gray-400 dark:text-gray-500 border-t border-gray-200 dark:border-gray-600">
+                            ↑ Scroll to see more tasks ↑
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Notes Column */}
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200/50 dark:border-gray-700/50">
+                  <div className="flex items-center mb-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-green-600 dark:text-green-400 text-sm sm:text-base">📝</span>
+                    </div>
+                    <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Notes</h2>
+                    <span className={`ml-auto px-2 py-1 rounded-full text-xs sm:text-sm font-medium ${getCategoryHeaderColor('notes')}`}>
+                      {data.notes.length}
+                    </span>
+                  </div>
+                  <div className="space-y-3 max-h-80 sm:max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 dark:scrollbar-thumb-green-600 scrollbar-track-transparent hover:scrollbar-thumb-green-400 dark:hover:scrollbar-thumb-green-500">
+                    {data.notes.length === 0 ? (
+                      <div className="text-gray-500 dark:text-gray-400 text-center py-6 sm:py-8">
+                        <div className="text-2xl sm:text-3xl mb-2 opacity-50">📝</div>
+                        <p className="text-xs sm:text-sm">No notes yet. Say something like:<br/>&quot;Great idea for the project&quot;</p>
+                      </div>
+                    ) : (
+                      <>
+                        {data.notes.map((item) => (
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('notes')}`}>
+                            <div className="flex justify-between items-start">
+                              <div className="flex-1 pr-2">
+                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
+                              </div>
+                              <button 
+                                onClick={() => removeItem('notes', item.id)}
+                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
+                              >
+                                🗑️
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                        {data.notes.length > 5 && (
+                          <div className="text-center py-2 text-xs text-gray-400 dark:text-gray-500 border-t border-gray-200 dark:border-gray-600">
+                            ↑ Scroll to see more notes ↑
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Calendar View */
+              <div className="px-4 sm:px-0">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">All Entries by Date</h2>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        Total: {data.tasks.length + data.notes.length} entries
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-6 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 dark:hover:scrollbar-thumb-gray-500">
+                      {getAllEntriesByDate().length === 0 ? (
+                        <div className="text-center py-12">
+                          <div className="text-4xl mb-4 opacity-50">📅</div>
+                          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No entries yet</h3>
+                          <p className="text-gray-500 dark:text-gray-400">Start recording to see your entries organized by date</p>
+                        </div>
+                      ) : (
+                        <>
+                          {getAllEntriesByDate().map(([date, entries]) => (
+                            <div key={date} className="border-b border-gray-200 dark:border-gray-600 last:border-b-0 pb-6 last:pb-0">
+                              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 sticky top-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm py-2 border-b border-gray-100 dark:border-gray-700">
+                                {formatDateHeader(date)}
+                                <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                                  ({entries.length} {entries.length === 1 ? 'entry' : 'entries'})
+                                </span>
+                              </h3>
+                              
+                              <div className="grid gap-3 sm:gap-4">
+                                {entries.map((entry) => (
+                                  <div key={`${entry.type}-${entry.id}`} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor(entry.type)}`}>
+                                    <div className="flex justify-between items-start">
+                                      <div className="flex-1 pr-2">
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <span className="text-xs font-medium px-2 py-1 rounded-full uppercase tracking-wide">
+                                            {entry.type === 'tasks' && '📋 Task'}
+                                            {entry.type === 'notes' && '📝 Note'}
+                                          </span>
+                                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                                            {new Date(entry.timestamp).toLocaleTimeString('en-US', { 
+                                              hour: 'numeric', 
+                                              minute: '2-digit', 
+                                              hour12: true 
+                                            })}
+                                          </span>
+                                        </div>
+                                        <p className="text-sm font-medium break-words">{entry.text}</p>
+                                      </div>
+                                      <button 
+                                        onClick={() => removeItem(entry.type, entry.id)}
+                                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
+                                      >
+                                        🗑️
+                                      </button>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                          {getAllEntriesByDate().length > 2 && (
+                            <div className="text-center py-4 text-xs text-gray-400 dark:text-gray-500 border-t border-gray-200 dark:border-gray-600">
+                              📅 {data.tasks.length + data.notes.length} total entries across {getAllEntriesByDate().length} days
                             </div>
                           )}
-                        </div>
-                        
-                        <div className={`bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 p-3 rounded-r-lg transition-all duration-500 ${
-                          demoCategory === 'notes' ? 'opacity-100 ring-2 ring-green-400' : 'opacity-50'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-green-500">📝</span>
-                            <span className="font-medium text-green-700 dark:text-green-300">Notes</span>
-                            {demoCategory === 'notes' && (
-                              <span className="text-green-600 dark:text-green-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
-                            )}
-                          </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Ideas and information</div>
-                          {demoCategory === 'notes' && (
-                            <div className="text-xs text-green-600 dark:text-green-400 mt-1 font-medium">
-                              Informational content detected
-                            </div>
-                          )}
-                        </div>
-                        
-                        <div className={`bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded-r-lg transition-all duration-500 ${
-                          demoCategory === 'calendar' ? 'opacity-100 ring-2 ring-purple-400' : 'opacity-50'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-purple-500">📅</span>
-                            <span className="font-medium text-purple-700 dark:text-purple-300">Calendar</span>
-                            {demoCategory === 'calendar' && (
-                              <span className="text-purple-600 dark:text-purple-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
-                            )}
-                          </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Scheduled events</div>
-                          {demoCategory === 'calendar' && (
-                            <div className="text-xs text-purple-600 dark:text-purple-400 mt-1 font-medium">
-                              Time references detected: &quot;tomorrow&quot;, &quot;at 3pm&quot;, &quot;schedule&quot;
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
-
-        {/* Final CTA Section */}
-        <section className="relative py-20 bg-gray-50 dark:bg-slate-800">
-          {/* Grid background */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
-          <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Ready to Transform Your Voice into Productivity?
-            </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals using OnePageOS to boost productivity. No downloads, no accounts, no limits.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/app" className="inline-flex items-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg">
-                Start Using OnePageOS Free
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-              </Link>
-              <button 
-                onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg"
-              >
-                See Demo First
-              </button>
-            </div>
-            
-            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                </svg>
-                <span>100% Free Forever</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                </svg>
-                <span>No Account Required</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                </svg>
-                <span>Complete Privacy</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
 
       </Layout>
     </>

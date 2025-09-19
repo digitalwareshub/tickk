@@ -132,14 +132,14 @@ body {
 @media (max-width: 640px) {
   /* Larger touch targets on mobile */
   .voice-button {
-    min-width: 80px;
-    min-height: 80px;
+    min-width: 64px;
+    min-height: 64px;
   }
   
   /* Better spacing on mobile */
   .hero-section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
   
   /* Improved mobile navigation */
@@ -149,8 +149,8 @@ body {
   
   /* Better mobile text sizing */
   h1 {
-    font-size: 2rem !important;
-    line-height: 2.5rem !important;
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
   }
   
   /* Mobile-friendly cards */
@@ -160,36 +160,32 @@ body {
   .card-hover:hover {
     transform: none;
   }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-  /* Remove hover effects on touch devices */
-  .card-hover:hover {
-    transform: none;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Better mobile button spacing */
+  .mobile-button-spacing {
+    margin: 0.5rem 0;
   }
   
-  /* Larger touch targets */
-  button, a {
-    min-height: 44px;
-    min-width: 44px;
+  /* Improved mobile grid */
+  .mobile-grid {
+    gap: 1rem;
   }
 }
 
-/* Prevent zoom on input focus (iOS) */
-input, textarea, select {
-  font-size: 16px;
-}
-
-/* Improve mobile scrolling */
-html {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Better mobile menu */
+/* Medium screen optimizations */
 @media (max-width: 768px) {
-  .hidden.md\\:flex {
+  /* Stack cards vertically on medium screens */
+  .desktop-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Better mobile menu */
+  .hidden\\.md\\:flex {
     display: none !important;
+  }
+  
+  /* Improved spacing for tablets */
+  .tablet-spacing {
+    padding: 1rem;
   }
 }
