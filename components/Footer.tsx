@@ -10,7 +10,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -143,30 +143,19 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="mailto:write@digiwares.xyz" 
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                >
-                  Support
-                </a>
+                <Link href="/support" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  Support & Help
+                </Link>
               </li>
               <li>
-                <a 
-                  href="mailto:write@digiwares.xyz" 
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                >
+                <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="https://github.com/digitalwareshub/opos-voice/issues" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                >
+                <Link href="/bug-report" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Bug Reports
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

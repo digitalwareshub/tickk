@@ -241,12 +241,12 @@ export default function Home() {
         />
       </Head>
 
-      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-gray-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="relative isolate min-h-screen bg-gray-50 dark:bg-gray-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
         {/* Navigation */}
-        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <nav className="sticky top-0 z-50 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -284,7 +284,7 @@ export default function Home() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-32">
+        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 pt-20 pb-32">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]"></div>
           
@@ -310,21 +310,8 @@ export default function Home() {
                 Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology.
               </p>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                <Link href="/app" className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  🚀 Try It Free Now
-                </Link>
-                <button 
-                  onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  👀 See Demo
-                </button>
-              </div>
-
               {/* Trust Indicators */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto mb-16">
                 <div className="flex flex-col items-center text-center">
                   <div className="text-3xl mb-3">🔒</div>
                   <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">Complete Privacy</div>
@@ -347,7 +334,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col items-center text-center">
                   <div className="text-3xl mb-3">🧠</div>
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">No AI Required</div>
+                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">No AI Used</div>
                   <div className="text-xs text-gray-500 dark:text-gray-400">Pure browser technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center">
@@ -356,12 +343,25 @@ export default function Home() {
                   <div className="text-xs text-gray-500 dark:text-gray-400">Any browser</div>
                 </div>
               </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href="/app" className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
+                  🚀 Try It Free Now
+                </Link>
+                <button 
+                  onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  👀 See Demo
+                </button>
+              </div>
             </div>
           </div>
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-gray-800">
           {/* Diagonal pattern background */}
           <div className="absolute inset-0 pattern-diagonal opacity-20"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -376,9 +376,9 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
               {/* Step 1: Speak Naturally */}
-              <div className="bg-white dark:bg-gray-800 p-8 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     1
                   </div>
                 </div>
@@ -390,7 +390,7 @@ export default function Home() {
                   Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
                   <div className="flex items-start space-x-2">
                     <div className="text-lg">🎤</div>
                     <div className="text-sm text-gray-700 dark:text-gray-300 italic">
@@ -401,9 +401,9 @@ export default function Home() {
               </div>
 
               {/* Step 2: Smart Processing */}
-              <div className="bg-white dark:bg-gray-800 p-8 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     2
                   </div>
                 </div>
@@ -415,12 +415,12 @@ export default function Home() {
                   Natural language processing analyzes your speech and automatically determines if it&apos;s a task, note, or calendar event.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-gray-600 dark:text-gray-300">Processing speech...</span>
                     <div className="text-lg">🧠</div>
                   </div>
-                  <div className="p-2 bg-white dark:bg-gray-800 rounded border">
+                  <div className="p-2 bg-white dark:bg-gray-700 rounded border">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">📅 Calendar Event</span>
                       <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
@@ -433,9 +433,9 @@ export default function Home() {
               </div>
 
               {/* Step 3: Auto-Organized */}
-              <div className="bg-white dark:bg-gray-800 p-8 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-700 p-8 rounded-lg border border-gray-200 dark:border-gray-600">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
                     3
                   </div>
                 </div>
@@ -447,13 +447,13 @@ export default function Home() {
                   Your voice is instantly organized into the right category, ready for action.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                <div className="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg border border-gray-200 dark:border-gray-500">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Successfully Organized</span>
                     <div className="text-lg">✨</div>
                   </div>
                   
-                  <div className="p-2 bg-white dark:bg-gray-800 rounded border">
+                  <div className="p-2 bg-white dark:bg-gray-700 rounded border">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="text-green-600">✓</div>
@@ -472,7 +472,7 @@ export default function Home() {
         </section>
 
         {/* Interactive Demo Section */}
-        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-gray-900">
+        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-gray-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -604,7 +604,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gray-50 dark:bg-gray-900">
+        <section className="relative py-20 bg-gray-50 dark:bg-gray-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">

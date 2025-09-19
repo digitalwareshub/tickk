@@ -38,6 +38,42 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="OnePageOS" />
         
+        {/* Prevent flash of incorrect theme */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function getInitialColorMode() {
+                  const persistedColorPreference = window.localStorage.getItem('onepageos-theme');
+                  const hasPersistedPreference = typeof persistedColorPreference === 'string';
+                  
+                  if (hasPersistedPreference) {
+                    return persistedColorPreference;
+                  }
+                  
+                  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+                  const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+                  
+                  if (hasMediaQueryPreference) {
+                    return mql.matches ? 'dark' : 'light';
+                  }
+                  
+                  return 'light';
+                }
+                
+                const colorMode = getInitialColorMode();
+                const root = document.documentElement;
+                
+                if (colorMode === 'dark') {
+                  root.classList.add('dark');
+                } else {
+                  root.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
+        
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -78,7 +114,7 @@ export default function App({ Component, pageProps }: AppProps) {
         defaultTheme="system"
         enableSystem={true}
         storageKey="onepageos-theme"
-        disableTransitionOnChange={false}
+        disableTransitionOnChange={true}
       >
         <Component {...pageProps} />
       </ThemeProvider>
