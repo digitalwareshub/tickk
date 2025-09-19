@@ -5,7 +5,7 @@ import Layout from '@/components/Layout'
 
 export default function Terms() {
   return (
-    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
         <title>Terms of Service | OnePageOS - Free Voice Productivity App Terms and Conditions</title>
         <meta name="description" content="OnePageOS Terms of Service: Free voice productivity app terms, conditions, and usage guidelines. Open source software with privacy-first approach." />
@@ -15,8 +15,13 @@ export default function Terms() {
       </Head>
 
       {/* Hero Section */}
-      <div className="bg-white dark:bg-slate-900 py-16">
+      <div className="bg-gradient-to-r from-gray-50 to-white dark:from-slate-800 dark:to-slate-700 py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Terms of Service
           </h1>
@@ -30,189 +35,257 @@ export default function Terms() {
       </div>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="prose prose-gray dark:prose-invert max-w-none">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+        
+        {/* Terms Summary Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🆓</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Completely Free</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">No hidden costs, subscriptions, or fees</p>
+          </div>
+          
+          <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">📖</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Open Source</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">MIT license - view and modify the code</p>
+          </div>
+          
+          <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">⚖️</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Fair Terms</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Simple, transparent, and user-friendly</p>
+          </div>
+          
+          <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🔐</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Privacy First</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Your data stays on your device</p>
+          </div>
+        </div>
 
-          {/* Summary */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-12 border-l-4 border-blue-500">
-            <h2 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mt-0 mb-3">
-              📋 Terms Summary
+        {/* User Rights Diagram */}
+        <div className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8 mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Your Rights as a User</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">✨</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Use Freely</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-2">
+                <li>• Access all features</li>
+                <li>• No time limits</li>
+                <li>• No account required</li>
+                <li>• No data charges</li>
+              </ul>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🛠️</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Modify & Share</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-2">
+                <li>• View source code</li>
+                <li>• Make modifications</li>
+                <li>• Share improvements</li>
+                <li>• Commercial use OK</li>
+              </ul>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🔒</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Control Data</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-2">
+                <li>• Own your content</li>
+                <li>• Export anytime</li>
+                <li>• Delete instantly</li>
+                <li>• Privacy guaranteed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Sections */}
+        <div className="space-y-12">
+          
+          {/* Service Description */}
+          <section className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                <span className="text-blue-600 dark:text-blue-400">🎯</span>
+              </span>
+              What OnePageOS Does
             </h2>
-            <ul className="text-blue-800 dark:text-blue-200 space-y-2 mb-0">
-              <li><strong>Free to use:</strong> OnePageOS is completely free with no hidden costs</li>
-              <li><strong>Open source:</strong> The code is available under MIT license</li>
-              <li><strong>No warranties:</strong> Provided "as is" without guarantees</li>
-              <li><strong>Privacy focused:</strong> We don't collect or store your personal data</li>
-            </ul>
-          </div>
-
-          <section className="mb-12">
-            <h2>1. Acceptance of Terms</h2>
-            <p>
-              By accessing and using OnePageOS ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use the Service.
-            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-l-4 border-blue-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">✅ Core Features</h4>
+                <ul className="text-gray-700 dark:text-gray-300 space-y-1 text-sm">
+                  <li>• Voice-to-text conversion</li>
+                  <li>• Task organization</li>
+                  <li>• Calendar integration</li>
+                  <li>• Note taking</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border-l-4 border-green-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🛡️ How It Works</h4>
+                <ul className="text-gray-700 dark:text-gray-300 space-y-1 text-sm">
+                  <li>• Browser-based processing</li>
+                  <li>• Local data storage</li>
+                  <li>• No server uploads</li>
+                  <li>• Privacy by design</li>
+                </ul>
+              </div>
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2>2. Description of Service</h2>
-            <p>
-              OnePageOS is a free, open-source voice productivity application that helps users convert speech into organized tasks, notes, and calendar events. The Service:
-            </p>
-            <ul>
-              <li>Processes voice input locally in your browser</li>
-              <li>Uses natural language processing to categorize content</li>
-              <li>Stores data locally on your device</li>
-              <li>Operates without requiring user accounts or personal information</li>
-            </ul>
+          {/* User Responsibilities */}
+          <section className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                <span className="text-orange-600 dark:text-orange-400">🤝</span>
+              </span>
+              Your Responsibilities
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚖️</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Lawful Use</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">Use for legal purposes only</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">📝</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Appropriate Content</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">Keep content suitable and safe</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">💻</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">System Requirements</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">Modern browser with speech API</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🎤</span>
+                </div>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Permissions</h4>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">Grant microphone access</p>
+              </div>
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2>3. User Responsibilities</h2>
-            <p>
-              When using OnePageOS, you agree to:
-            </p>
-            <ul>
-              <li><strong>Lawful Use:</strong> Use the Service only for lawful purposes and in accordance with these Terms</li>
-              <li><strong>Appropriate Content:</strong> Not input harmful, illegal, or inappropriate content</li>
-              <li><strong>System Requirements:</strong> Ensure your browser and device meet the technical requirements</li>
-              <li><strong>Microphone Access:</strong> Grant necessary permissions for voice recognition features</li>
-            </ul>
+          {/* Open Source License */}
+          <section className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                <span className="text-green-600 dark:text-green-400">📖</span>
+              </span>
+              Open Source Benefits
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border-l-4 border-green-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <span>🔓</span> MIT License
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                  Free to use, modify, and distribute. No restrictions on commercial use.
+                </p>
+                <Link 
+                  href="https://github.com/digitalwareshub/opos-voice" 
+                  className="text-green-600 dark:text-green-400 hover:underline text-sm font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on GitHub →
+                </Link>
+              </div>
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border-l-4 border-blue-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <span>🤝</span> Community Driven
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  Contributions welcome! Help improve OnePageOS for everyone.
+                </p>
+              </div>
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2>4. Privacy and Data</h2>
-            <p>
-              OnePageOS is designed with privacy as a core principle:
-            </p>
-            <ul>
-              <li><strong>Local Processing:</strong> All voice processing occurs on your device</li>
-              <li><strong>No Data Collection:</strong> We do not collect, store, or transmit personal data</li>
-              <li><strong>User Control:</strong> You maintain complete control over your data</li>
-              <li><strong>Privacy Policy:</strong> See our <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:underline">Privacy Policy</Link> for detailed information</li>
-            </ul>
+          {/* Disclaimers */}
+          <section className="bg-white dark:bg-slate-700 rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                <span className="text-red-600 dark:text-red-400">⚠️</span>
+              </span>
+              Important Disclaimers
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border-l-4 border-red-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">⚠️ "As Is" Service</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  Provided without warranties or guarantees of any kind.
+                </p>
+              </div>
+              <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border-l-4 border-orange-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">🎯 Accuracy</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  Speech recognition may not always be 100% accurate.
+                </p>
+              </div>
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4 border-l-4 border-yellow-500">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">💾 Data Backup</h4>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  We recommend backing up important data regularly.
+                </p>
+              </div>
+            </div>
           </section>
-
-          <section className="mb-12">
-            <h2>5. Intellectual Property</h2>
-            <ul>
-              <li><strong>Open Source License:</strong> OnePageOS is released under the MIT License</li>
-              <li><strong>User Content:</strong> You retain all rights to content you create using the Service</li>
-              <li><strong>Third-Party Libraries:</strong> The Service uses various open-source libraries, each with their respective licenses</li>
-              <li><strong>Trademarks:</strong> "OnePageOS" and related marks are trademarks of the project maintainers</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>6. Service Availability</h2>
-            <p>
-              OnePageOS is provided as a free service:
-            </p>
-            <ul>
-              <li><strong>No Guarantees:</strong> We do not guarantee continuous, uninterrupted access to the Service</li>
-              <li><strong>Maintenance:</strong> The Service may be temporarily unavailable for maintenance or updates</li>
-              <li><strong>Browser Compatibility:</strong> The Service requires a modern web browser with speech recognition support</li>
-              <li><strong>Internet Connection:</strong> Some features may require an internet connection</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>7. Disclaimers and Limitations</h2>
-            <p>
-              OnePageOS is provided "as is" without warranties:
-            </p>
-            <ul>
-              <li><strong>No Warranties:</strong> We make no warranties, express or implied, about the Service</li>
-              <li><strong>Accuracy:</strong> Speech recognition and text classification may not always be accurate</li>
-              <li><strong>Data Loss:</strong> We are not responsible for any data loss or corruption</li>
-              <li><strong>Third-Party Services:</strong> We are not responsible for third-party services (browser speech recognition, etc.)</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>8. Limitation of Liability</h2>
-            <p>
-              To the maximum extent permitted by law:
-            </p>
-            <ul>
-              <li>We shall not be liable for any indirect, incidental, special, or consequential damages</li>
-              <li>Our total liability shall not exceed the amount you paid for the Service (which is zero for the free version)</li>
-              <li>We are not responsible for any damages resulting from use or inability to use the Service</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>9. Open Source License</h2>
-            <p>
-              OnePageOS is open source software:
-            </p>
-            <ul>
-              <li><strong>MIT License:</strong> The source code is available under the MIT License</li>
-              <li><strong>GitHub Repository:</strong> View the code at <a href="https://github.com/digitalwareshub/opos-voice" className="text-orange-600 dark:text-orange-400 hover:underline">github.com/digitalwareshub/opos-voice</a></li>
-              <li><strong>Contributions:</strong> Community contributions are welcome following our contribution guidelines</li>
-              <li><strong>Modifications:</strong> You may modify and distribute the software under the terms of the MIT License</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>10. Termination</h2>
-            <p>
-              These terms remain in effect while you use the Service:
-            </p>
-            <ul>
-              <li><strong>User Termination:</strong> You may stop using the Service at any time</li>
-              <li><strong>Data Removal:</strong> Clear your browser data to remove all locally stored information</li>
-              <li><strong>Service Discontinuation:</strong> We may discontinue the Service with reasonable notice</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>11. Changes to Terms</h2>
-            <p>
-              We may update these Terms of Service from time to time:
-            </p>
-            <ul>
-              <li>Changes will be posted on this page with an updated date</li>
-              <li>Continued use of the Service after changes constitutes acceptance</li>
-              <li>We will make reasonable efforts to notify users of significant changes</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>12. Governing Law</h2>
-            <p>
-              These terms are governed by and construed in accordance with applicable laws. Any disputes shall be resolved through appropriate legal channels.
-            </p>
-          </section>
-
-          <section className="mb-12">
-            <h2>13. Contact Information</h2>
-            <p>
-              If you have questions about these Terms of Service, please contact us:
-            </p>
-            <ul>
-              <li><strong>Email:</strong> <a href="mailto:write@digiwares.xyz" className="text-orange-600 dark:text-orange-400 hover:underline">write@digiwares.xyz</a></li>
-              <li><strong>Subject:</strong> "Terms of Service Question"</li>
-              <li><strong>Support:</strong> Visit our <Link href="/support" className="text-orange-600 dark:text-orange-400 hover:underline">Support Center</Link> for help</li>
-            </ul>
-          </section>
-
-          <section className="mb-12">
-            <h2>14. Severability</h2>
-            <p>
-              If any provision of these terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that the remaining terms will remain in full force and effect.
-            </p>
-          </section>
-
-          <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border-l-4 border-green-500">
-            <h3 className="text-lg font-semibold text-green-900 dark:text-green-100 mt-0 mb-3">
-              🤝 Fair and Simple
-            </h3>
-            <p className="text-green-800 dark:text-green-200 mb-0">
-              These terms are designed to be fair and straightforward. We believe in transparency and user rights. If you have any questions, please <Link href="/contact" className="text-green-600 dark:text-green-400 hover:underline">contact us</Link>.
-            </p>
-          </div>
 
         </div>
+
+        {/* Contact Section */}
+        <div className="mt-16 text-center bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Questions About Terms?</h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            Our terms are designed to be fair and transparent. If you need clarification on anything, we're here to help.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Contact Us
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-4.126-.98L3 21l1.98-5.874A8.955 8.955 0 013 12a8 8 0 018-8c4.418 0 8 3.582 8 8z" />
+              </svg>
+            </Link>
+            <Link 
+              href="/support" 
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-500 hover:from-gray-700 hover:to-gray-600 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Visit Support Center
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-6.364 15.364 9.75 9.75 0 016.364-15.364z" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+
       </div>
     </Layout>
   )

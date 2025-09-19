@@ -66,8 +66,8 @@ body {
 }
 
 .dark .grid-bg {
-  background-image: linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255,255,255,.12) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(255,255,255,.12) 1px, transparent 1px);
 }
 
 /* Background grid utilities */
@@ -78,8 +78,8 @@ body {
 }
 
 .bg-grid-gray-800 {
-  background-image: linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(255,255,255,.10) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(255,255,255,.10) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

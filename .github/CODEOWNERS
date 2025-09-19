@@ -1,0 +1,25 @@
+# CODEOWNERS - Defines who owns what in the repository
+
+# Global owners - require review for all changes
+* @digitalwareshub
+
+# Critical files require multiple reviewers
+package.json @digitalwareshub
+package-lock.json @digitalwareshub
+.github/ @digitalwareshub
+SECURITY.md @digitalwareshub
+LICENSE @digitalwareshub
+
+# Component files
+components/ @digitalwareshub
+pages/ @digitalwareshub
+
+# Configuration files
+*.config.js @digitalwareshub
+*.config.ts @digitalwareshub
+tsconfig.json @digitalwareshub
+tailwind.config.js @digitalwareshub
+
+# Documentation
+README.md @digitalwareshub
+*.md @digitalwareshub

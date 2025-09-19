@@ -2,7 +2,7 @@
 
 🎤 **The world's most advanced free voice-to-text productivity application** - Transform your voice into organized tasks, notes, and calendar events with cutting-edge browser-based speech recognition.
 
-![OnePageOS Voice App](https://img.shields.io/badge/PWA-Ready-blue) ![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black) ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue) ![License](https://img.shields.io/badge/License-MIT-green)
+![OnePageOS Voice App](https://img.shields.io/badge/PWA-Ready-blue) ![Next.js](https://img.shields.io/badge/Next.js-15.5.3-black) ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Backup](https://img.shields.io/badge/Protected-Repository-green) ![Security](https://img.shields.io/badge/Security-Policy-orange)
 
 ## ✨ Features
 
@@ -151,7 +151,35 @@ Found a bug? Please report it on our [Issues page](https://github.com/digitalwar
 - Browser and OS information
 - Expected vs actual behavior
 
-## 📄 License
+## � Repository Security & Protection
+
+This repository is protected against unauthorized changes and data loss:
+
+### 🛡️ Security Measures
+- **Branch Protection**: Main branch requires pull request reviews
+- **Code Ownership**: Critical files require maintainer approval (see [CODEOWNERS](.github/CODEOWNERS))
+- **Security Policy**: Report vulnerabilities via [SECURITY.md](SECURITY.md)
+- **Automated Backups**: Daily automated backups via GitHub Actions
+
+### 💾 Backup Strategy
+- **Local Backups**: Run `./scripts/backup-repo.sh` for manual backups
+- **Automated Backups**: GitHub Actions create daily archives
+- **Multiple Mirrors**: Repository mirrored to additional platforms
+- **Version Control**: Full git history preserved in all backups
+
+### 🔐 Contributing Safely
+1. Fork the repository
+2. Create feature branch from `main`
+3. Make changes with descriptive commits
+4. Submit pull request for review
+5. All changes require maintainer approval
+
+**Repository Backup Locations:**
+- Primary: GitHub (digitalwareshub/opos-voice)
+- Automated: GitHub Actions Artifacts (90-day retention)
+- Local: `~/Backups/opos-voice/` (when using backup script)
+
+## �📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -165,6 +193,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **Email**: write@digiwares.xyz
+- **Security**: security@digiwares.xyz
 - **Website**: [Your Website]
 - **GitHub**: [@digitalwareshub](https://github.com/digitalwareshub)
 

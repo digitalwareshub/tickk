@@ -35,7 +35,7 @@ export default function BugReport() {
   }
 
   return (
-    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <Layout className="min-h-screen bg-gray-50 dark:bg-slate-800">
       <Head>
         <title>Bug Report | OnePageOS - Report Issues and Get Help</title>
         <meta name="description" content="Report bugs and issues with OnePageOS Voice Productivity App. Get help with speech recognition problems, app functionality, and technical issues." />
@@ -45,7 +45,7 @@ export default function BugReport() {
       </Head>
 
       {/* Hero Section */}
-      <div className="bg-white dark:bg-slate-900 py-16">
+      <div className="bg-white dark:bg-slate-800 py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-2xl">🐛</span>
@@ -172,7 +172,7 @@ export default function BugReport() {
                 )}
               </button>
             </div>
-            <pre className="bg-gray-50 dark:bg-slate-900 p-4 rounded-lg text-sm text-gray-700 dark:text-gray-300 overflow-x-auto whitespace-pre-wrap">
+            <pre className="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg text-sm text-gray-700 dark:text-gray-300 overflow-x-auto whitespace-pre-wrap">
 {bugReportTemplate}
             </pre>
           </div>

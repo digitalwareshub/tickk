@@ -13,7 +13,7 @@ export default function Layout({
   children, 
   showHomeLink = false, 
   title,
-  className = "min-h-screen bg-gray-50 dark:bg-slate-900"
+  className = "min-h-screen bg-gray-50 dark:bg-slate-800"
 }: LayoutProps) {
   return (
     <div className={className}>

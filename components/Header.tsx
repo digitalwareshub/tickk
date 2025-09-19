@@ -8,11 +8,11 @@ export default function Header() {
   const isHomePage = router.pathname === '/'
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
+    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Left: Logo and Badge */}
-          <div className="flex items-center space-x-4">
+          {/* Left: Logo and Badge - Optimized Width */}
+          <div className="flex items-center space-x-4 min-w-[240px]">
             <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity">
               OnePageOS
             </Link>
@@ -21,8 +21,8 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Center: Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Center: Navigation Links - Centered */}
+          <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
             <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
               Home
             </Link>
@@ -34,12 +34,12 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Right: Theme Toggle and Action Button */}
-          <div className="flex items-center space-x-4">
+          {/* Right: Theme Toggle and Action Buttons - Optimized Width Container */}
+          <div className="flex items-center space-x-4 min-w-[240px] justify-end">
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              className="p-2 bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm border border-white/30 dark:border-slate-700/30 rounded-full hover:bg-white/30 dark:hover:bg-slate-700/30 transition-all duration-300"
+              className="p-2 bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm border border-white/30 dark:border-slate-700/30 rounded-full hover:bg-white/30 dark:hover:bg-slate-700/30 transition-all duration-300 flex-shrink-0"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
@@ -53,25 +53,27 @@ export default function Header() {
               )}
             </button>
 
-            {/* Action Button */}
-            {isHomePage ? (
-              <Link href="/app" className="bg-gray-900 hover:bg-black text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                Get Started
-              </Link>
-            ) : (
-              <Link href="/" className="inline-flex items-center px-3 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors text-sm font-medium">
-                ← Home
-              </Link>
-            )}
+            {/* Primary Action Button - Fixed Dimensions */}
+            <div className="flex-shrink-0">
+              {isHomePage ? (
+                <Link href="/app" className="inline-flex items-center justify-center w-[120px] h-[40px] bg-gray-900 hover:bg-black text-white rounded-lg font-medium transition-colors text-sm">
+                  Get Started
+                </Link>
+              ) : (
+                <Link href="/" className="inline-flex items-center justify-center w-[120px] h-[40px] bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium text-sm">
+                  ← Home
+                </Link>
+              )}
+            </div>
 
-            {/* Mobile Try App Button (only on non-home pages) */}
-            {!isHomePage && (
-              <div className="md:hidden">
-                <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm">
+            {/* Mobile Secondary Button - Reserved Space */}
+            <div className="md:hidden min-w-[80px] flex-shrink-0">
+              {!isHomePage && (
+                <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm whitespace-nowrap block text-right">
                   Try App →
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

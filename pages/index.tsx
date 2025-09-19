@@ -239,12 +239,12 @@ export default function Home() {
         />
       </Head>
 
-      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 pt-20 pb-32">
+        <section className="relative bg-gray-50 dark:bg-slate-800 pt-20 pb-32">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]"></div>
           

@@ -354,7 +354,7 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-900 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
+      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
 
