@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 
 export default function Home() {
@@ -9,10 +8,6 @@ export default function Home() {
   const [demoText, setDemoText] = useState('')
   const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [checkingForData, setCheckingForData] = useState(true)
-  const [hasExistingData, setHasExistingData] = useState(false)
-  const [showWelcomeBack, setShowWelcomeBack] = useState(false)
-  const router = useRouter()
 
   const demoExamples = [
     { text: "I need to call John tomorrow at 3pm about the project meeting", category: 'calendar' as const },
@@ -24,37 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
-    
-    // Check if user has existing data and redirect to app
-    const checkForExistingData = () => {
-      try {
-        // Allow bypassing auto-redirect with ?landing=true
-        const urlParams = new URLSearchParams(window.location.search)
-        if (urlParams.get('landing') === 'true') {
-          setCheckingForData(false)
-          return
-        }
-
-        const savedData = localStorage.getItem('voiceAppData')
-        if (savedData) {
-          const data = JSON.parse(savedData)
-          // Check if user has any tasks, notes, or calendar items
-          if (data.tasks?.length > 0 || data.notes?.length > 0 || data.calendar?.length > 0) {
-            // User has existing data, show welcome back option instead of redirecting
-            setHasExistingData(true)
-            setShowWelcomeBack(true)
-          }
-        }
-      } catch {
-        // No existing data found or parsing error
-        console.log('No existing data found')
-      }
-      setCheckingForData(false)
-    }
-
-    // Small delay to prevent flash
-    setTimeout(checkForExistingData, 100)
-  }, [router])
+  }, [])
 
   const classifyText = (text: string): 'tasks' | 'notes' | 'calendar' => {
     const lowerText = text.toLowerCase()
@@ -105,7 +70,7 @@ export default function Home() {
     }, 3000)
   }
 
-  if (!mounted || checkingForData) {
+  if (!mounted) {
     return (
           <Layout 
       className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
@@ -368,48 +333,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Welcome Back Banner for Returning Users */}
-        {showWelcomeBack && hasExistingData && (
-          <section className="relative bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-b border-orange-200 dark:border-orange-800">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/40">
-                      <span className="text-lg">👋</span>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100">
-                      Welcome back!
-                    </h3>
-                    <p className="text-sm text-orange-700 dark:text-orange-300">
-                      You have saved tasks, notes, and calendar items waiting for you.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setShowWelcomeBack(false)}
-                    className="text-orange-600 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-200 text-sm font-medium"
-                  >
-                    Stay here
-                  </button>
-                  <Link
-                    href="/app"
-                    className="inline-flex items-center gap-2 rounded-lg bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 transition-colors"
-                  >
-                    Continue where I left off
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* How It Works Section */}
         <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-slate-800">
