@@ -464,11 +464,24 @@ export default function Home() {
               </p>
               
               {/* SEO-friendly feature list */}
-              <div className="hidden md:block max-w-4xl mx-auto mb-4">
-                <div className="grid grid-cols-3 gap-4 text-xs text-gray-500 dark:text-gray-400">
+              <div className="max-w-4xl mx-auto mb-4">
+                {/* Desktop: Single row */}
+                <div className="hidden md:grid grid-cols-6 gap-4 text-xs text-gray-500 dark:text-gray-400">
                   <div>🔒 Complete Privacy</div>
                   <div>⚡ 99% Speech Accuracy</div>
+                  <div>🆓 Free Forever</div>
                   <div>📱 Works Offline</div>
+                  <div>🧠 No AI Used</div>
+                  <div>🌐 All Devices</div>
+                </div>
+                {/* Mobile: Two rows */}
+                <div className="md:hidden grid grid-cols-3 gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <div>🔒 Privacy</div>
+                  <div>⚡ 99% Accuracy</div>
+                  <div>🆓 Free</div>
+                  <div>📱 Offline</div>
+                  <div>🧠 No AI</div>
+                  <div>🌐 Universal</div>
                 </div>
               </div>
               
@@ -793,10 +806,14 @@ export default function Home() {
                 <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
                   <li>• 99% accurate speech recognition</li>
                   <li>• Automatic task classification</li>
+                  <li>• Real-time speech transcription</li>
                   <li>• Works completely offline</li>
                   <li>• No AI dependencies</li>
                   <li>• Complete privacy protection</li>
-                  <li>• Mobile-first Progressive Web App</li>
+                  <li>• Progressive Web App (PWA)</li>
+                  <li>• Cross-platform compatibility</li>
+                  <li>• Keyboard shortcuts for accessibility</li>
+                  <li>• Dark mode support</li>
                 </ul>
               </div>
               <div>
