@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="#ea580c" stroke="#c2410c" stroke-width="8"/>
+  
+  <!-- Microphone Icon -->
+  <g transform="translate(256, 256)">
+    <!-- Microphone Body -->
+    <rect x="-24" y="-80" width="48" height="80" rx="24" ry="24" fill="white"/>
+    
+    <!-- Microphone Stand -->
+    <rect x="-2" y="0" width="4" height="40" fill="white"/>
+    
+    <!-- Microphone Base -->
+    <rect x="-30" y="36" width="60" height="8" rx="4" fill="white"/>
+    
+    <!-- Sound Waves -->
+    <g stroke="white" stroke-width="6" fill="none" stroke-linecap="round">
+      <!-- Wave 1 -->
+      <path d="M -60 -30 Q -70 -40 -70 -40" opacity="0.8"/>
+      <path d="M -60 -10 Q -75 -20 -75 -20" opacity="0.8"/>
+      <path d="M -60 10 Q -75 20 -75 20" opacity="0.8"/>
+      <path d="M -60 30 Q -70 40 -70 40" opacity="0.8"/>
+      
+      <!-- Wave 2 -->
+      <path d="M 60 -30 Q 70 -40 70 -40" opacity="0.8"/>
+      <path d="M 60 -10 Q 75 -20 75 -20" opacity="0.8"/>
+      <path d="M 60 10 Q 75 20 75 20" opacity="0.8"/>
+      <path d="M 60 30 Q 70 40 70 40" opacity="0.8"/>
+    </g>
+    
+    <!-- Voice Recognition Indicator -->
+    <circle cx="0" cy="-100" r="8" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Text indicator -->
+  <text x="256" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">OnePageOS</text>
+</svg>
