@@ -18,7 +18,7 @@
 
 ## 🚀 Live Demo
 
-Try the app live at: [Your Deployment URL]
+Try the app live at: **https://tickk.vercel.app**
 
 ## 🛠️ Tech Stack
 
@@ -42,10 +42,10 @@ Try the app live at: [Your Deployment URL]
 
 ```bash
 # Clone the repository
-git clone https://github.com/digitalwareshub/opos-voice.git
+git clone https://github.com/digitalwareshub/tickk.git
 
 # Navigate to project directory
-cd opos-voice
+cd tickk
 
 # Install dependencies
 npm install
@@ -77,7 +77,7 @@ Create a `.env.local` file in the root directory:
 NEXT_PUBLIC_GA_ID=your_google_analytics_id
 
 # Additional environment variables
-NEXT_PUBLIC_APP_URL=https://your-domain.com
+NEXT_PUBLIC_APP_URL=https://tickk.app
 ```
 
 ### PWA Configuration
@@ -159,7 +159,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Email**: write@digiwares.xyz
 - **Security**: security@digiwares.xyz
-- **Website**: [Your Website]
+- **Website**: https://tickk.app
 - **GitHub**: [@digitalwareshub](https://github.com/digitalwareshub)
 
 ---
