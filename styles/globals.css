@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Voice button animations */
+.voice-button {
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ea580c, #f59e0b);
+}
+
+.voice-button:hover {
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  transform: scale(1.05);
+}
+
+.voice-button.recording {
+  animation: pulse 2s infinite;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image: linear-gradient(to right, rgba(0,0,0,.06) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.dark .grid-bg {
+  background-image: linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+}
+
+/* Background grid utilities */
+.bg-grid-gray-100 {
+  background-image: linear-gradient(to right, rgba(0,0,0,.02) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(0,0,0,.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-grid-gray-800 {
+  background-image: linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px), 
+                    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle geometric patterns */
+.pattern-dots {
+  background-image: radial-gradient(circle, rgba(0,0,0,.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,.02) 10px,
+    rgba(0,0,0,.02) 11px
+  );
+}
+
+.dark .pattern-dots {
+  background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+}
+
+.dark .pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,.06) 10px,
+    rgba(255,255,255,.06) 11px
+  );
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile-first optimizations */
+@media (max-width: 640px) {
+  /* Larger touch targets on mobile */
+  .voice-button {
+    min-width: 80px;
+    min-height: 80px;
+  }
+  
+  /* Better spacing on mobile */
+  .hero-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  /* Improved mobile navigation */
+  nav {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Better mobile text sizing */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 2.5rem !important;
+  }
+  
+  /* Mobile-friendly cards */
+  .card-hover {
+    transform: none;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .card-hover:hover {
+    transform: none;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Larger touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent zoom on input focus (iOS) */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* Improve mobile scrolling */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better mobile menu */
+@media (max-width: 768px) {
+  .hidden.md\\:flex {
+    display: none !important;
+  }
+}

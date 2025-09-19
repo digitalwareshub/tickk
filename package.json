@@ -1,0 +1,46 @@
+{
+  "name": "opos-voice",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:prod": "NODE_ENV=production next build",
+    "start": "next start",
+    "start:prod": "NODE_ENV=production next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true npm run build",
+    "export": "npm run build && next export",
+    "clean": "rm -rf .next out",
+    "test:lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
+    "sitemap": "next-sitemap",
+    "prebuild": "npm run lint && npm run type-check"
+  },
+  "dependencies": {
+    "@next/bundle-analyzer": "^15.5.3",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "compromise": "^14.14.0",
+    "critters": "^0.0.23",
+    "gtag": "^1.0.1",
+    "next": "15.5.3",
+    "next-pwa": "^5.6.0",
+    "next-seo": "^6.8.0",
+    "next-themes": "^0.4.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.5.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

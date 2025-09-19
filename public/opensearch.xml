@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>OnePageOS</ShortName>
+  <Description>Search OnePageOS Voice Productivity App</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://onepageos.com/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://onepageos.com/?q={searchTerms}"/>
+  <Url type="application/x-suggestions+json" method="get" template="https://onepageos.com/api/suggestions?q={searchTerms}"/>
+  <moz:SearchForm>https://onepageos.com</moz:SearchForm>
+  <Developer>OnePageOS Team</Developer>
+  <Contact>write@digiwares.xyz</Contact>
+  <Attribution>OnePageOS - Free Voice Productivity App</Attribution>
+  <SyndicationRight>open</SyndicationRight>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+</OpenSearchDescription>

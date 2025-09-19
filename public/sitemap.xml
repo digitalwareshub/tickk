@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+    <!-- Homepage - High Priority -->
+    <url>
+        <loc>https://onepageos.com/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Voice App Dashboard - High Priority -->
+    <url>
+        <loc>https://onepageos.com/app</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Privacy Policy - Important for Trust/SEO -->
+    <url>
+        <loc>https://onepageos.com/privacy</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Terms of Service - Important for Trust/SEO -->
+    <url>
+        <loc>https://onepageos.com/terms</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Deep Link to Features Section -->
+    <url>
+        <loc>https://onepageos.com/#features</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Deep Link to How It Works Section -->
+    <url>
+        <loc>https://onepageos.com/#how-it-works</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Deep Link to Demo Section -->
+    <url>
+        <loc>https://onepageos.com/#demo</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Alternative URLs for SEO (if using different domains/subdomains) -->
+    <url>
+        <loc>https://www.onepageos.com/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- PWA Manifest for App Store Discovery -->
+    <url>
+        <loc>https://onepageos.com/manifest.json</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+    </url>
+
+    <!-- Robots.txt for SEO Transparency -->
+    <url>
+        <loc>https://onepageos.com/robots.txt</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+    </url>
+
+</urlset>

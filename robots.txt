@@ -1,0 +1,74 @@
+# OnePageOS - Free Voice Productivity App - SEO Optimized robots.txt
+# https://www.robotstxt.org/robotstxt.html
+
+# Allow all search engines to crawl all content
+User-agent: *
+Allow: /
+
+# Specifically allow important crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow known bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Allow access to important files
+Allow: /sitemap.xml
+Allow: /manifest.json
+Allow: /robots.txt
+Allow: /_next/static/
+Allow: /favicon.ico
+
+# Disallow Next.js internal paths that shouldn't be crawled
+Disallow: /_next/
+Disallow: /api/
+
+# Set crawl delay for aggressive bots
+User-agent: *
+Crawl-delay: 1
+
+# Sitemap location for search engines
+Sitemap: https://onepageos.com/sitemap.xml
+
+# Additional SEO information
+# Site: OnePageOS - Free Voice Productivity App
+# Description: Revolutionary voice-to-text productivity application with speech recognition and natural language processing
+# Keywords: voice productivity, speech recognition, voice to text, task management, voice assistant, productivity app
+# Contact: write@digiwares.xyz
