@@ -29,7 +29,7 @@ export default function Contact() {
       } else {
         throw new Error('Form submission failed')
       }
-    } catch (error) {
+    } catch {
       alert('There was an error sending your message. Please try again or contact us directly at write@digiwares.xyz')
     } finally {
       setIsSubmitting(false)
@@ -41,7 +41,7 @@ export default function Contact() {
       <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
         <Head>
           <title>Thank You | OnePageOS - Message Sent Successfully</title>
-          <meta name="description" content="Thank you for contacting OnePageOS. We've received your message and will get back to you soon." />
+          <meta name="description" content="Thank you for contacting OnePageOS. We&apos;ve received your message and will get back to you soon." />
           <meta name="robots" content="noindex, follow" />
         </Head>
 
@@ -58,7 +58,7 @@ export default function Contact() {
                 Message Sent Successfully! 🎉
               </h1>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Thank you for reaching out! We've received your message and will get back to you within 24 hours.
+                Thank you for reaching out! We&apos;ve received your message and will get back to you within 24 hours.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/" className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium">
@@ -82,7 +82,7 @@ export default function Contact() {
     <Layout className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Head>
         <title>Contact Us | OnePageOS - Get in Touch with Our Team</title>
-        <meta name="description" content="Contact OnePageOS team for partnerships, business inquiries, feedback, or general questions. We'd love to hear from you!" />
+        <meta name="description" content="Contact OnePageOS team for partnerships, business inquiries, feedback, or general questions. We&apos;d love to hear from you!" />
         <meta name="keywords" content="OnePageOS contact, support, business inquiries, partnerships, feedback, get in touch" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://onepageos.com/contact" />
@@ -98,7 +98,7 @@ export default function Contact() {
                 Get in Touch
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                We'd love to hear from you! Whether you have questions, feedback, or business inquiries, drop us a message and we'll get back to you soon.
+                We&apos;d love to hear from you! Whether you have questions, feedback, or business inquiries, drop us a message and we&apos;ll get back to you soon.
               </p>
             </div>
 
@@ -263,7 +263,7 @@ export default function Contact() {
 
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-8">
                 <h2 className="mt-0">❓ Need Help?</h2>
-                <p>Before contacting us, you might find what you're looking for in our help resources:</p>
+                <p>Before contacting us, you might find what you&apos;re looking for in our help resources:</p>
                 
                 <div className="grid md:grid-cols-2 gap-4 mt-6 not-prose">
                   <Link href="/support" className="block p-6 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">

@@ -35,22 +35,41 @@ export default function Layout({
               <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
             </div>
             
-            {/* Navigation Links for Homepage */}
-            {isHomePage && (
-              <div className="hidden md:flex items-center space-x-8">
-                <a href="#how-it-works" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">How It Works</a>
-                <a href="#demo" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Demo</a>
-              </div>
-            )}
+            {/* Navigation Links - Unified for all pages */}
+            <div className="hidden md:flex items-center space-x-6">
+              {isHomePage ? (
+                // Homepage anchor links
+                <>
+                  <a href="#how-it-works" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
+                    How It Works
+                  </a>
+                  <a href="#demo" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
+                    Demo
+                  </a>
+                </>
+              ) : null}
+              
+              {/* Page navigation links for all pages */}
+              <Link href="/support" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
+                Support
+              </Link>
+              <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
+                Contact
+              </Link>
+              <Link href="/bug-report" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors text-sm">
+                Bug Report
+              </Link>
+              <Link href="/app" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors text-sm font-medium">
+                Try App →
+              </Link>
+            </div>
             
-            {/* Mobile menu button for homepage */}
-            {isHomePage && (
-              <div className="md:hidden">
-                <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm">
-                  Try App →
-                </Link>
-              </div>
-            )}
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <Link href="/app" className="text-orange-600 dark:text-orange-400 font-medium text-sm">
+                Try App
+              </Link>
+            </div>
             
             <div className="flex items-center space-x-4">
               {/* Theme Toggle */}
@@ -79,7 +98,7 @@ export default function Layout({
                 </div>
               ) : (
                 <Link href="/" className="inline-flex items-center px-3 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors text-sm font-medium">
-                  ← Back to Home
+                  ← Home
                 </Link>
               )}
             </div>

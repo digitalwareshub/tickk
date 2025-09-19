@@ -33,8 +33,8 @@ export default function Support() {
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-8 mb-8">
                 <h2 className="mt-0 text-gray-900 dark:text-white">🚀 Quick Start Guide</h2>
                 <ol className="text-gray-700 dark:text-gray-300">
-                  <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Open the Voice Dashboard:</strong> Click "Try Voice Dashboard" on the homepage or go to <Link href="/app" className="text-blue-600 dark:text-blue-400 hover:underline">/app</Link></li>
-                  <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Allow Microphone Access:</strong> When prompted, click "Allow" to enable voice recognition</li>
+                  <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Open the Voice Dashboard:</strong> Click &quot;Try Voice Dashboard&quot; on the homepage or go to <Link href="/app" className="text-blue-600 dark:text-blue-400 hover:underline">/app</Link></li>
+                  <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Allow Microphone Access:</strong> When prompted, click &quot;Allow&quot; to enable voice recognition</li>
                   <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Start Speaking:</strong> Click the microphone button and speak naturally</li>
                   <li className="text-gray-700 dark:text-gray-300"><strong className="text-gray-900 dark:text-white">Review Results:</strong> Your speech will be automatically categorized into tasks, notes, or calendar events</li>
                 </ol>
@@ -50,11 +50,11 @@ export default function Support() {
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Use action-oriented language to create tasks:</p>
                     <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
-                      <li>• "I need to call the client tomorrow"</li>
-                      <li>• "Remember to buy groceries"</li>
-                      <li>• "Complete the project proposal"</li>
-                      <li>• "Schedule dentist appointment"</li>
-                      <li>• "Review quarterly reports"</li>
+                      <li>• &quot;I need to call the client tomorrow&quot;</li>
+                      <li>• &quot;Remember to buy groceries&quot;</li>
+                      <li>• &quot;Complete the project proposal&quot;</li>
+                      <li>• &quot;Schedule dentist appointment&quot;</li>
+                      <li>• &quot;Review quarterly reports&quot;</li>
                     </ul>
                   </div>
 
@@ -64,11 +64,11 @@ export default function Support() {
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Capture information and ideas:</p>
                     <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
-                      <li>• "Key insights from today's meeting"</li>
-                      <li>• "Important points to remember"</li>
-                      <li>• "Project requirements and specs"</li>
-                      <li>• "Ideas for the new campaign"</li>
-                      <li>• "Client feedback summary"</li>
+                      <li>• &quot;Key insights from today&apos;s meeting&quot;</li>
+                      <li>• &quot;Important points to remember&quot;</li>
+                      <li>• &quot;Project requirements and specs&quot;</li>
+                      <li>• &quot;Ideas for the new campaign&quot;</li>
+                      <li>• &quot;Client feedback summary&quot;</li>
                     </ul>
                   </div>
 
@@ -78,11 +78,11 @@ export default function Support() {
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Include dates, times, and meeting details:</p>
                     <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
-                      <li>• "Meeting with John on Friday at 3 PM"</li>
-                      <li>• "Lunch appointment next Tuesday"</li>
-                      <li>• "Conference call tomorrow morning"</li>
-                      <li>• "Doctor's visit on the 15th"</li>
-                      <li>• "Team standup every Monday"</li>
+                      <li>• &quot;Meeting with John on Friday at 3 PM&quot;</li>
+                      <li>• &quot;Lunch appointment next Tuesday&quot;</li>
+                      <li>• &quot;Conference call tomorrow morning&quot;</li>
+                      <li>• &quot;Doctor&apos;s visit on the 15th&quot;</li>
+                      <li>• &quot;Team standup every Monday&quot;</li>
                     </ul>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export default function Support() {
                   <div className="border-l-4 border-blue-500 pl-6">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">🎤 Voice Recognition</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-2">
-                      OnePageOS uses your browser's built-in speech recognition for maximum privacy and accuracy.
+                      OnePageOS uses your browser&apos;s built-in speech recognition for maximum privacy and accuracy.
                     </p>
                     <ul className="text-sm text-gray-500 dark:text-gray-400 space-y-1">
                       <li>• Works in Chrome, Edge, Safari, and other modern browsers</li>
@@ -143,7 +143,7 @@ export default function Support() {
                         <li>• Check if your browser has microphone permissions</li>
                         <li>• Ensure your microphone is not muted or blocked by other apps</li>
                         <li>• Try refreshing the page and allowing microphone access again</li>
-                        <li>• Test your microphone in other applications to ensure it's working</li>
+                        <li>• Test your microphone in other applications to ensure it&apos;s working</li>
                         <li>• For best results, use Chrome or Edge browsers</li>
                       </ul>
                     </div>
@@ -158,7 +158,7 @@ export default function Support() {
                         <li>• Speak clearly and at a moderate pace</li>
                         <li>• Minimize background noise</li>
                         <li>• Use a quality microphone or headset if possible</li>
-                        <li>• Check your browser's language settings</li>
+                        <li>• Check your browser&apos;s language settings</li>
                         <li>• Try speaking closer to your microphone</li>
                       </ul>
                     </div>
@@ -185,9 +185,9 @@ export default function Support() {
                     <div className="p-4 pt-0 text-gray-600 dark:text-gray-300">
                       <ul className="space-y-2 text-sm">
                         <li>• Check if your browser is in incognito/private mode</li>
-                        <li>• Ensure you haven't disabled local storage in browser settings</li>
+                        <li>• Ensure you haven&apos;t disabled local storage in browser settings</li>
                         <li>• Try clearing browser cache and cookies, then reload</li>
-                        <li>• Make sure you're using the same browser and device</li>
+                        <li>• Make sure you&apos;re using the same browser and device</li>
                         <li>• Export your data regularly as backup</li>
                       </ul>
                     </div>
@@ -222,7 +222,7 @@ export default function Support() {
 
               <div className="text-center border border-gray-200 dark:border-gray-700 rounded-lg p-8">
                 <h2 className="mt-0 text-gray-900 dark:text-white">❓ Still Need Help?</h2>
-                <p className="text-gray-700 dark:text-gray-300">Can't find what you're looking for? We're here to help!</p>
+                <p className="text-gray-700 dark:text-gray-300">Can&apos;t find what you&apos;re looking for? We&apos;re here to help!</p>
                 <div className="not-prose flex flex-col sm:flex-row gap-4 mt-6 justify-center">
                   <Link href="/bug-report" className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-medium">
                     Report a Bug

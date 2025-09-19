@@ -1,0 +1,13 @@
+# Auto-generated files
+next-env.d.ts
+.next/
+out/
+public/sw.js
+public/workbox-*.js
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
