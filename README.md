@@ -10,7 +10,7 @@
 - 🧠 **Smart Text Classification** - Automatically categorizes speech into tasks, notes, and calendar events
 - 🔒 **Complete Privacy** - Zero data collection, all processing happens locally
 - 📱 **Progressive Web App** - Install on any device for native app experience
-- 🌙 **Dark Mode Support** - Comfortable viewing in any lighting condition
+- 📝 **Blog & Resources** - Educational content about voice productivity
 - ⚡ **Offline Functionality** - Continue working without internet connection
 - 🎨 **Modern UI/UX** - Clean, intuitive interface built with Tailwind CSS
 - 📊 **Analytics Ready** - Integrated with Google Analytics and Vercel Analytics
@@ -18,7 +18,7 @@
 
 ## 🚀 Live Demo
 
-Try the app live at: **https://tickk.vercel.app**
+Try the app live at: **https://tickk.app**
 
 ## 🛠️ Tech Stack
 
@@ -98,6 +98,14 @@ The app is preconfigured as a Progressive Web App. Users can install it directly
 - **Notes**: "Great idea for the project design" → Notes  
 - **Calendar**: "Meeting with John at 3pm" → Calendar
 
+## 📝 Blog & Learning
+
+Visit our blog at [tickk.app/blog](https://tickk.app/blog) for:
+- Voice productivity tips and techniques
+- The science behind "braindump-first" methodology  
+- Best practices for thought capture and organization
+- Updates on new features and improvements
+
 ## 📱 Progressive Web App
 
 tickk is built as a PWA, offering:
@@ -138,13 +146,7 @@ Your code is automatically backed up daily. Manual backup available:
 Found a bug? Fork the repository and fix it in your own version. This repository is not accepting bug reports or feature requests.
 - Expected vs actual behavior
 
-## � Repository Security & Protection
-
-This repository is protected against unauthorized changes and data loss:
-
-## � License
-
-## �📄 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

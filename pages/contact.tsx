@@ -25,47 +25,18 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact Options */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-4">💬</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">General Support</h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Questions about using tickk or need help getting started?
+        {/* Contact Information */}
+        <div className="text-center mb-8">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Get in Touch</h3>
+            <p className="text-gray-600 mb-4">
+              For questions, support, or feedback about tickk:
             </p>
             <a 
-              href="mailto:support@tickk.app" 
-              className="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors"
+              href="mailto:write@digiwares.xyz" 
+              className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
             >
-              support@tickk.app
-            </a>
-          </div>
-          
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-4">🐛</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Bug Reports</h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Found a bug or experiencing technical issues?
-            </p>
-            <Link 
-              href="/bug-report" 
-              className="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors"
-            >
-              Report a Bug →
-            </Link>
-          </div>
-          
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-4">💡</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Feature Ideas</h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Have suggestions for improving tickk?
-            </p>
-            <a 
-              href="mailto:feedback@tickk.app" 
-              className="text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors"
-            >
-              feedback@tickk.app
+              write@digiwares.xyz
             </a>
           </div>
         </div>
@@ -76,37 +47,37 @@ export default function Contact() {
           <section>
             <h2 className="heading-secondary text-gray-900 mb-6">Frequently Asked Questions</h2>
             <div className="space-y-4">
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="border-l-4 border-gray-200 pl-4 mb-4">
                 <h3 className="font-semibold text-gray-900 mb-2">How does voice recognition work?</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   tickk uses your browser's built-in Web Speech API to convert speech to text. All processing happens locally in your browser - no audio data is sent to external servers.
                 </p>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="border-l-4 border-gray-200 pl-4 mb-4">
                 <h3 className="font-semibold text-gray-900 mb-2">Is my data secure?</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   Yes! Your voice recordings and organized content are stored locally in your browser. We don't collect, store, or transmit any personal data. See our <Link href="/privacy" className="text-orange-600 hover:text-orange-700">Privacy Policy</Link> for details.
                 </p>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="border-l-4 border-gray-200 pl-4 mb-4">
                 <h3 className="font-semibold text-gray-900 mb-2">Which browsers are supported?</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   tickk works best in modern browsers with Web Speech API support: Chrome, Firefox, Safari, and Edge. Chrome provides the most reliable experience.
                 </p>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="border-l-4 border-gray-200 pl-4 mb-4">
                 <h3 className="font-semibold text-gray-900 mb-2">Can I use tickk offline?</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   Voice recognition requires an internet connection, but once your content is transcribed, you can view and organize it offline. Your data remains accessible even without internet.
                 </p>
               </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+              <div className="border-l-4 border-gray-200 pl-4 mb-4">
                 <h3 className="font-semibold text-gray-900 mb-2">How accurate is the speech recognition?</h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   Accuracy depends on factors like speech clarity, background noise, and internet connection. For best results, speak clearly in a quiet environment.
                 </p>
               </div>
@@ -116,36 +87,22 @@ export default function Contact() {
           {/* Response Times */}
           <section>
             <h2 className="heading-secondary text-gray-900 mb-4">Response Times</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">🚀 Priority Support</h3>
-                <ul className="text-gray-600 text-sm space-y-1">
-                  <li>• Critical bugs: Within 24 hours</li>
-                  <li>• Security issues: Within 12 hours</li>
-                  <li>• Data loss reports: Within 6 hours</li>
-                </ul>
-              </div>
-              
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">📝 General Inquiries</h3>
-                <ul className="text-gray-600 text-sm space-y-1">
-                  <li>• General questions: 1-3 business days</li>
-                  <li>• Feature requests: 3-5 business days</li>
-                  <li>• Documentation: 2-4 business days</li>
-                </ul>
-              </div>
+            <div className="border-l-4 border-gray-200 pl-4">
+              <p className="text-gray-600 mb-4">
+                We aim to respond to all inquiries within 1-3 business days. Critical issues and security concerns receive priority attention.
+              </p>
             </div>
           </section>
 
           {/* Before You Contact Us */}
           <section>
             <h2 className="heading-secondary text-gray-900 mb-4">Before You Contact Us</h2>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-              <h3 className="font-semibold text-gray-900 mb-3">📋 Help Us Help You</h3>
-              <p className="text-gray-600 text-sm mb-3">
+            <div className="border-l-4 border-gray-200 pl-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Help Us Help You</h3>
+              <p className="text-gray-600 mb-3">
                 To provide the best support, please include:
               </p>
-              <ul className="text-gray-600 text-sm space-y-1">
+              <ul className="text-gray-600 space-y-1 ml-4">
                 <li>• Your browser name and version</li>
                 <li>• Operating system (Windows, macOS, etc.)</li>
                 <li>• Steps to reproduce the issue</li>
@@ -164,7 +121,7 @@ export default function Contact() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="mailto:support@tickk.app?subject=tickk Support Request"
+              href="mailto:write@digiwares.xyz?subject=tickk Support Request"
               className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors"
             >
               Email Support

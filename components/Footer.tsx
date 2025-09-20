@@ -50,7 +50,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 Bug Report
               </Link>
               <a 
-                href="https://github.com/digitalwareshub/opos-voice" 
+                href="https://github.com/digitalwareshub/tickk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block text-sm text-gray-600  hover:text-orange-600  transition-colors"
@@ -74,7 +74,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               </svg>
             </a>
             <a 
-              href="https://github.com/digitalwareshub/opos-voice" 
+              href="https://github.com/digitalwareshub/tickk" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600  transition-colors"
@@ -122,7 +122,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </svg>
               </a>
               <a 
-                href="https://github.com/digitalwareshub/tickk-voice" 
+                href="https://github.com/digitalwareshub/tickk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-600  transition-colors"
@@ -169,7 +169,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               </li>
               <li>
                 <a 
-                  href="https://github.com/digitalwareshub/tickk-voice" 
+                  href="https://github.com/digitalwareshub/tickk" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-600  hover:text-orange-600  transition-colors"
