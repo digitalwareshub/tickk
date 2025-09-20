@@ -64,6 +64,9 @@ export default function Header({ mode, onModeChange }: HeaderProps) {
                 <Link href="/" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
                   Home
                 </Link>
+                <Link href="/landing" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                  Product
+                </Link>
                 <Link href="/contact" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
                   Contact
                 </Link>

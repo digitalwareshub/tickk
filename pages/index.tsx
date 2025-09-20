@@ -31,7 +31,7 @@ export default function App() {
   // Loading and migration states
   const [isLoading, setIsLoading] = useState(true)
   const [needsMigration, setNeedsMigration] = useState(false)
-  const [showOnboarding, setShowOnboarding] = useState(true) // Enable by default
+  const [showOnboarding, setShowOnboarding] = useState(false) // Show only for new users
   
   // Smart context state
   const [hasEverRecorded, setHasEverRecorded] = useState(false)
@@ -86,10 +86,14 @@ export default function App() {
           const savedMode = data.preferences?.defaultMode || 'braindump'
           setMode(savedMode)
           
-          // Skip onboarding for direct access
-          // if (data.preferences?.showOnboarding !== false && !migrationNeeded) {
-          //   setShowOnboarding(true)
-          // }
+          // Only show onboarding for truly new users with no data and no previous visits
+          const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
+          const hasAnyData = totalItems > 0
+          const onboardingPref = data.preferences?.showOnboarding !== false
+          
+          if (!hasUsedBefore && !hasAnyData && onboardingPref && !migrationNeeded) {
+            setShowOnboarding(true)
+          }
         } else {
           const freshData: AppData = {
             tasks: [],
@@ -115,7 +119,12 @@ export default function App() {
           setAppData(freshData)
           setPreferences(freshData.preferences!)
           setMode('braindump')
-          // setShowOnboarding(true) // Disabled for direct access
+          
+          // Show onboarding for truly new users only
+          const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
+          if (!hasUsedBefore) {
+            setShowOnboarding(true)
+          }
         }
         
       } catch (error) {
@@ -142,6 +151,9 @@ export default function App() {
    */
   const handleOnboardingComplete = useCallback(async () => {
     setShowOnboarding(false)
+    
+    // Mark user as having used the app
+    localStorage.setItem('tickk_has_used', 'true')
     
     if (preferences) {
       const updatedPreferences = { ...preferences, showOnboarding: false }

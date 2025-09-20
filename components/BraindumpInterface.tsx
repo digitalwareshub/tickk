@@ -394,15 +394,6 @@ export default function BraindumpInterface({
         </div>
       )}
 
-      {/* Simple Examples */}
-      <div className="text-center mb-6">
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">💡 Try these examples:</p>
-        <div className="space-y-2 text-sm">
-          <p className="text-green-600 dark:text-green-400">&quot;I need to buy groceries tomorrow&quot;</p>
-          <p className="text-blue-600 dark:text-blue-400">&quot;Great idea for improving the user interface&quot;</p>
-        </div>
-      </div>
-      
       {/* Development: Clear Data Button */}
       {process.env.NODE_ENV === 'development' && (
         <div className="text-center mb-4">
