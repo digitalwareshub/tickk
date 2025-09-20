@@ -70,5 +70,6 @@ Sitemap: https://tickk.app/sitemap.xml
 # Additional SEO information
 # Site: tickk - Free Voice Productivity App
 # Description: Revolutionary voice-to-text productivity application with speech recognition and natural language processing
-# Keywords: voice productivity, speech recognition, voice to text, task management, voice assistant, productivity app
+# Keywords: voice productivity, speech recognition, voice to text, task management, voice assistant, productivity app, braindump method, voice notes
+# Blog: https://tickk.app/blog - Voice productivity insights and tips
 # Contact: write@digiwares.xyz

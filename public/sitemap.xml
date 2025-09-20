@@ -15,12 +15,30 @@
         <mobile:mobile/>
     </url>
 
-    <!-- Voice App Dashboard - High Priority -->
+    <!-- Landing Page - About tickk -->
     <url>
-        <loc>https://tickk.app/app</loc>
+        <loc>https://tickk.app/landing</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Blog Index - SEO Content -->
+    <url>
+        <loc>https://tickk.app/blog</loc>
         <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <priority>0.8</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Blog Post - Braindump First Method -->
+    <url>
+        <loc>https://tickk.app/blog/braindump-first-organize-later-productivity</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
         <mobile:mobile/>
     </url>
 
@@ -42,30 +60,57 @@
         <mobile:mobile/>
     </url>
 
-    <!-- Deep Link to Features Section -->
+    <!-- Contact Page -->
     <url>
-        <loc>https://tickk.app/#features</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <loc>https://tickk.app/contact</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Support & Help -->
+    <url>
+        <loc>https://tickk.app/support</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Bug Report -->
+    <url>
+        <loc>https://tickk.app/bug-report</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Deep Link to Landing Page Features -->
+    <url>
+        <loc>https://tickk.app/landing#features</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
         <mobile:mobile/>
     </url>
 
     <!-- Deep Link to How It Works Section -->
     <url>
-        <loc>https://tickk.app/#how-it-works</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <loc>https://tickk.app/landing#how-it-works</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
         <mobile:mobile/>
     </url>
 
     <!-- Deep Link to Demo Section -->
     <url>
-        <loc>https://tickk.app/#demo</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <loc>https://tickk.app/landing#demo</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
         <mobile:mobile/>
     </url>
 

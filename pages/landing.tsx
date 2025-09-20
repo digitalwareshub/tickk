@@ -193,7 +193,7 @@ export default function Home() {
       <Head>
         <title>Free PWA Voice Productivity App | tickk - Offline Speech Recognition with No AI Dependencies | Progressive Web App for Task Management</title>
         <meta name="description" content="tickk is a free Progressive Web App (PWA) that transforms speech into organized tasks using pure browser technology - no AI dependencies, works completely offline. Advanced speech recognition automatically categorizes voice commands into tasks, notes, and reminders using natural language processing. No account required, complete privacy, installs like a native app on any device. Perfect for professionals who want hands-free productivity without AI or internet dependence." />
-        <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools" />
+        <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools, voice memo organization app, dictation software for tasks, speech to text for productivity, voice recording productivity tool, voice note taking for meetings, mobile voice productivity app, voice notes on mobile browser, voice controlled task management, speech recognition for project management, hands-free note taking app, voice dictation task organizer, browser speech recognition app, offline voice memo app, privacy voice productivity tool, no login voice app, voice braindump organizer, speech to organized tasks, voice thought capture app, hands-free brainstorming tool" />
         <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
@@ -287,6 +287,12 @@ export default function Home() {
                 "Real-time speech transcription",
                 "Complete offline functionality",
                 "Zero data collection - privacy focused",
+                "Progressive Web App (PWA) installation",
+                "Cross-platform browser compatibility",
+                "Voice-controlled task management",
+                "Speech-to-text productivity tools",
+                "Hands-free note taking",
+                "Voice braindump organization",
                 "No account or login required",
                 "Progressive Web App support",
                 "Cross-platform compatibility",
@@ -378,7 +384,7 @@ export default function Home() {
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 mb-8 text-center">
                 A Progressive Web App that works completely offline with no AI dependencies. 
-                Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology.
+                Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology. <Link href="/privacy" className="text-orange-600 hover:text-orange-700 underline">Complete privacy protection</Link> with zero data collection.
               </p>
 
               {/* Trust Indicators */}
@@ -543,7 +549,7 @@ export default function Home() {
         {/* Interactive Demo Section */}
         <section id="demo" className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-30"></div>
+          <div className="absolute inset-0 bg-grid-gray-100 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-gray-900  mb-4">
@@ -672,20 +678,47 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Blog Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Learn More About Voice Productivity
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Discover the science behind braindump-first productivity and why your best ideas die in traditional apps.
+            </p>
+            
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-8 max-w-2xl mx-auto">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Latest Article: Why Your Best Ideas Die in Your Productivity App
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Learn the braindump-first method that separates capture from organization, and why voice changes everything.
+              </p>
+              <Link href="/blog/braindump-first-organize-later-productivity" className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                Read the Article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA Section */}
         <section className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
+          <div className="absolute inset-0 bg-grid-gray-100 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-gray-900  mb-4">
               Ready to Transform Your Voice into Productivity?
             </h2>
             <p className="text-xl text-gray-700  mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits.
+              Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits. Need help getting started? Check our <Link href="/support" className="text-orange-600 hover:text-orange-700 underline">support center</Link>.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
-              <Link href="/app" className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg">
+              <Link href="/" className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg">
                 Start Using tickk Free
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -701,19 +734,19 @@ export default function Home() {
             
             <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 ">
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>100% Free Forever</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>No Account Required</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>Complete Privacy</span>

@@ -348,7 +348,7 @@ export default function App() {
       >
         <div className="min-h-screen bg-white">
           {/* Smart interface for braindump mode */}
-          {mode === 'braindump' && (
+          {mode === 'braindump' && !isLoading && (
             <>
               {/* Show MicroLanding for new users, ReturningUserInterface for users with data */}
               {totalItemCount === 0 ? (

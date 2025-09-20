@@ -3,6 +3,8 @@
  * Provides a professional, polished experience for returning users
  */
 
+import Link from 'next/link'
+
 interface ReturningUserInterfaceProps {
   totalItems: number
   onModeChange?: (mode: 'braindump' | 'organized') => void
@@ -59,7 +61,7 @@ export default function ReturningUserInterface({ totalItems, onModeChange }: Ret
           <p className="text-gray-600 text-sm mb-6">
             Continue where you left off:
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div 
               onClick={handleRecordNew}
               className="bg-white border border-gray-200 rounded-lg p-4 hover:border-orange-300 hover:shadow-md transition-all cursor-pointer"
@@ -84,6 +86,11 @@ export default function ReturningUserInterface({ totalItems, onModeChange }: Ret
               <h3 className="font-medium text-gray-900 mb-1">View Progress</h3>
               <p className="text-xs text-gray-600">See your productivity</p>
             </div>
+            <Link href="/blog" className="bg-white border border-gray-200 rounded-lg p-4 hover:border-orange-300 hover:shadow-md transition-all block">
+              <div className="text-orange-500 text-xl mb-2">📖</div>
+              <h3 className="font-medium text-gray-900 mb-1">Learn More</h3>
+              <p className="text-xs text-gray-600">Voice productivity tips</p>
+            </Link>
           </div>
         </div>
       </div>
