@@ -483,12 +483,12 @@ export default function BraindumpInterface({
               </p>
             )}
             {isProcessing && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600">
                 Processing...
               </p>
             )}
             {!isRecording && !isProcessing && isSupported && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-500">
                 Click to record
                 {preferences?.enableKeyboardShortcuts && (
                   <span className="block text-xs mt-1">Spacebar shortcut</span>
@@ -500,13 +500,13 @@ export default function BraindumpInterface({
           {/* Live Transcript */}
           {currentTranscript && (
             <div 
-              className="bg-gray-50 dark:bg-gray-800 rounded-md p-3 mb-4 text-left"
+              className="bg-gray-50 rounded-md p-3 mb-4 text-left"
               role="region"
               aria-label="Live transcript"
               aria-live="polite"
             >
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Transcript:</p>
-              <p className="text-sm text-gray-900 dark:text-white">
+              <p className="text-xs text-gray-500 mb-1">Transcript:</p>
+              <p className="text-sm text-gray-900">
                 {currentTranscript}
               </p>
             </div>
@@ -535,17 +535,17 @@ export default function BraindumpInterface({
       {/* Recent Items & Process Button */}
       {recentItems.length > 0 && (
         <div 
-          className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900"
+          className="border border-gray-200 rounded-lg p-4 bg-white"
           role="region"
           aria-label="Recent captured thoughts"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+            <h3 className="text-sm font-medium text-gray-900">
               Recent ({recentItems.length})
             </h3>
             <div className="flex items-center gap-2">
               {recentItems.length > 0 && (
-                <span className="text-xs text-gray-500 dark:text-gray-400 animate-pulse">
+                <span className="text-xs text-gray-500 animate-pulse">
                   Click Organize →
                 </span>
               )}
@@ -574,18 +574,18 @@ export default function BraindumpInterface({
             {recentItems.map((item) => (
               <li 
                 key={item.id} 
-                className="bg-gray-50 dark:bg-gray-800 rounded-md p-3 border border-gray-200 dark:border-gray-700"
+                className="bg-gray-50 rounded-md p-3 border border-gray-200"
                 role="listitem"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <p 
-                      className="text-gray-900 dark:text-white font-medium mb-1"
+                      className="text-gray-900 font-medium mb-1"
                       id={`item-text-${item.id}`}
                     >
                       &quot;{item.text}&quot;
                     </p>
-                    <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-3 text-xs text-gray-500">
                       <span aria-label={`Recorded at ${new Date(item.timestamp).toLocaleString()}`}>
                         ⏰ {new Date(item.timestamp).toLocaleTimeString()}
                       </span>
@@ -617,7 +617,7 @@ export default function BraindumpInterface({
           </ul>
           
           {preferences?.enableKeyboardShortcuts && (
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-3 text-center">
+            <p className="text-xs text-gray-400 mt-3 text-center">
               Ctrl+Enter to organize
             </p>
           )}
@@ -626,7 +626,7 @@ export default function BraindumpInterface({
       
       {/* Simple Stats */}
       <div className="mt-8 text-center">
-        <div className="text-xs text-gray-400 dark:text-gray-500 space-x-4">
+        <div className="text-xs text-gray-400 space-x-4">
           <span>{appData.braindump.length} braindumps</span>
           <span>{appData.tasks.length} tasks</span>
           <span>{appData.notes.length} notes</span>

@@ -26,17 +26,17 @@ export default function MicroLanding({ itemCount, onExampleClick }: MicroLanding
   return (
     <div className="micro-landing">
       {/* Smart Context Bar - Only for first-time users */}
-      <div className="context-bar bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="context-bar bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto text-center py-6 px-6">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Finally, an app that shuts up and listens.
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+          <p className="text-gray-600 text-sm mb-4">
             Just tap the mic and start talking. We&apos;ll organize everything into tasks and notes.
           </p>
           <button 
             onClick={() => setShowContext(false)}
-            className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
           >
             Got it ×
           </button>
@@ -46,7 +46,7 @@ export default function MicroLanding({ itemCount, onExampleClick }: MicroLanding
       {/* Example Prompts - Only for truly new users */}
       <div className="example-prompts py-8">
         <div className="max-w-2xl mx-auto text-center px-4">
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+          <p className="text-gray-600 text-sm mb-4">
             Try saying:
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -79,8 +79,8 @@ export default function MicroLanding({ itemCount, onExampleClick }: MicroLanding
       </div>
 
       {/* Trust Signals - Subtle */}
-      <div className="trust-signals text-center py-4 border-t border-gray-100 dark:border-gray-800">
-        <div className="flex justify-center items-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+      <div className="trust-signals text-center py-4 border-t border-gray-100">
+        <div className="flex justify-center items-center gap-6 text-xs text-gray-500">
           <span className="flex items-center gap-1">
             <span>🔒</span>
             <span>Private</span>
@@ -114,8 +114,8 @@ function ExampleChip({ text, emoji, type, onClick }: ExampleChipProps) {
         inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm
         border transition-all hover:scale-105 hover:shadow-md
         ${type === 'task' 
-          ? 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-900/20 dark:text-blue-300' 
-          : 'border-green-200 bg-green-50 text-green-700 hover:bg-green-100 dark:border-green-700 dark:bg-green-900/20 dark:text-green-300'
+          ? 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100' 
+          : 'border-green-200 bg-green-50 text-green-700 hover:bg-green-100'
         }
       `}
     >

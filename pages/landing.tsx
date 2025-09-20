@@ -175,14 +175,14 @@ export default function Home() {
   if (!mounted) {
     return (
           <Layout 
-      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"
+      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50   "
       seoTitle="tickk - Transform Voice into Organized Tasks"
       seoDescription="Privacy-first voice productivity app that converts speech into organized tasks, notes, and calendar events. Works offline and keeps your data secure."
       seoImage="/og-image.svg"
     >
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+          <p className="text-gray-600 ">Loading...</p>
         </div>
       </Layout>
     )
@@ -355,79 +355,74 @@ export default function Home() {
         />
       </Head>
 
-      <Layout className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300">
-        {/* Grid background */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
-
+      <Layout className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="relative bg-gray-50 dark:bg-slate-800 pt-20 pb-32">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),rgba(0,0,0,0.6))]"></div>
+        <section className="bg-white py-16">
           
-          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="text-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 px-4 py-2 text-sm text-orange-700 dark:text-orange-300 mb-8">
-                <span className="inline-block h-2 w-2 rounded-full bg-orange-600 dark:bg-orange-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-700 mb-6">
+                <span className="inline-block h-2 w-2 rounded-full bg-gray-600 animate-pulse"></span>
                 🎤 PWA • Works Offline • No AI • 100% Free
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-6 sm:mb-8 text-gray-900 dark:text-white px-4 sm:px-0 text-center">
+              <h1 className="heading-primary text-gray-900 mb-6">
                 Transform Your Voice Into
-                <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block mt-2 sm:mt-0">
+                <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block">
                   Organized Productivity
                 </span>
               </h1>
 
               {/* Subheadline */}
-              <p className="mx-auto max-w-3xl text-lg sm:text-xl leading-relaxed mb-8 sm:mb-12 text-gray-600 dark:text-gray-300 px-4 sm:px-0 text-center">
+              <p className="mx-auto max-w-2xl text-responsive text-gray-600 mb-8 text-center">
                 A Progressive Web App that works completely offline with no AI dependencies. 
                 Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology.
               </p>
 
               {/* Trust Indicators */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 max-w-6xl mx-auto mb-12 sm:mb-16 px-4 sm:px-0">
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🔒</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Complete Privacy</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">No data collection</div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">🔒</div>
+                  <div className="text-sm font-medium text-gray-700">Complete Privacy</div>
+                  <div className="text-xs text-gray-500">No data collection</div>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">⚡</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">99% Accuracy</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">Advanced speech recognition</div>
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">⚡</div>
+                  <div className="text-sm font-medium text-gray-700">99% Accuracy</div>
+                  <div className="text-xs text-gray-500">Advanced speech recognition</div>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🆓</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Free Forever</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">No subscription required</div>
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">🆓</div>
+                  <div className="text-sm font-medium text-gray-700">Free Forever</div>
+                  <div className="text-xs text-gray-500">No subscription required</div>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📱</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Works Offline</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">PWA technology</div>
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">📱</div>
+                  <div className="text-sm font-medium text-gray-700">Works Offline</div>
+                  <div className="text-xs text-gray-500">PWA technology</div>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🧠</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">No AI Used</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">Pure browser technology</div>
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">🧠</div>
+                  <div className="text-sm font-medium text-gray-700">No AI Used</div>
+                  <div className="text-xs text-gray-500">Pure browser technology</div>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 sm:p-0">
-                  <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🌐</div>
-                  <div className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">All Devices</div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 hidden sm:block">Any browser</div>
+                <div className="flex flex-col items-center text-center p-3">
+                  <div className="text-2xl mb-2">🌐</div>
+                  <div className="text-sm font-medium text-gray-700">All Devices</div>
+                  <div className="text-xs text-gray-500">Any browser</div>
                 </div>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
-                <Link href="/app" className="w-full sm:w-auto text-center bg-gray-900 hover:bg-black text-white px-6 sm:px-8 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href="/" className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors">
                   🚀 Try It Free Now
                 </Link>
                 <button 
                   onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full sm:w-auto text-center bg-gray-900 hover:bg-black text-white px-6 sm:px-8 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="btn-responsive bg-gray-200 hover:bg-gray-300 text-gray-900 transition-colors"
                 >
                   👀 See Demo
                 </button>
@@ -437,39 +432,37 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="relative py-20 bg-gray-50 dark:bg-slate-800">
-          {/* Diagonal pattern background */}
-          <div className="absolute inset-0 pattern-diagonal opacity-20"></div>
-          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <section id="how-it-works" className="bg-gray-50 py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="heading-secondary text-gray-900 mb-4">
                 How tickk Works
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
                 Three simple steps to transform your voice into organized productivity
               </p>
             </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
               {/* Step 1: Speak Naturally */}
-              <div className="bg-white dark:bg-slate-700 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-600">
+              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
                     1
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
                   Speak Naturally
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600  mb-6 text-sm sm:text-base">
                   Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
+                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
                   <div className="flex items-start space-x-2">
                     <div className="text-base sm:text-lg">🎤</div>
-                    <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 italic flex-1">
+                    <div className="text-xs sm:text-sm text-gray-700  italic flex-1">
                       &quot;I need to call John tomorrow at 3pm about the project meeting&quot;
                     </div>
                   </div>
@@ -477,31 +470,31 @@ export default function Home() {
               </div>
 
               {/* Step 2: Smart Processing */}
-              <div className="bg-white dark:bg-slate-700 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-600">
+              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
                     2
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
                   Smart Processing
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600  mb-6 text-sm sm:text-base">
                   Natural language processing analyzes your speech and automatically determines if it&apos;s a task, note, or calendar event.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
+                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Processing speech...</span>
+                    <span className="text-xs sm:text-sm text-gray-600 ">Processing speech...</span>
                     <div className="text-base sm:text-lg">🧠</div>
                   </div>
-                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
+                  <div className="p-2 bg-white  rounded border">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">📅 Calendar Event</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700 ">📅 Calendar Event</span>
                       <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <div className="text-xs text-gray-500  mt-1">
                       Time references: &quot;tomorrow&quot;, &quot;3pm&quot;
                     </div>
                   </div>
@@ -509,35 +502,35 @@ export default function Home() {
               </div>
 
               {/* Step 3: Auto-Organized */}
-              <div className="bg-white dark:bg-slate-700 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-600">
+              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-600 text-gray-900 dark:text-white rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
                     3
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
                   Auto-Organized
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600  mb-6 text-sm sm:text-base">
                   Your voice is instantly organized into the right category, ready for action.
                 </p>
                 
-                <div className="bg-gray-50 dark:bg-slate-600 p-4 rounded-lg border border-gray-200 dark:border-slate-500">
+                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">Successfully Organized</span>
+                    <span className="text-xs sm:text-sm font-medium text-gray-700 ">Successfully Organized</span>
                     <div className="text-base sm:text-lg">✨</div>
                   </div>
                   
-                  <div className="p-2 bg-white dark:bg-slate-700 rounded border">
+                  <div className="p-2 bg-white  rounded border">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="text-green-600">✓</div>
-                        <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">Added to Calendar</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-700 ">Added to Calendar</span>
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">📅</div>
+                      <div className="text-xs sm:text-sm text-gray-500 ">📅</div>
                     </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <div className="text-xs text-gray-500  mt-1">
                       Ready to sync with your calendar app
                     </div>
                   </div>
@@ -548,26 +541,26 @@ export default function Home() {
         </section>
 
         {/* Interactive Demo Section */}
-        <section id="demo" className="relative py-20 bg-gray-50 dark:bg-slate-800">
+        <section id="demo" className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-3xl font-bold text-gray-900  mb-4">
                 See Voice Recognition in Action
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600  max-w-3xl mx-auto">
                 Watch how natural language processing instantly categorizes your speech into tasks, notes, and calendar events
               </p>
             </div>
 
             {/* Demo Interface */}
             <div className="max-w-4xl mx-auto px-4 sm:px-0">
-              <div className="bg-gray-50 dark:bg-slate-700 rounded-2xl border border-gray-200 dark:border-slate-600 overflow-hidden shadow-xl">
+              <div className="bg-gray-50  rounded-2xl border border-gray-200  overflow-hidden shadow-xl">
                 {/* Demo Header */}
-                <div className="bg-white dark:bg-slate-600 px-4 sm:px-6 py-4 border-b border-gray-200 dark:border-slate-600">
+                <div className="bg-white  px-4 sm:px-6 py-4 border-b border-gray-200 ">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">Live Classification Demo</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 ">Live Classification Demo</h3>
                     <button 
                       onClick={playDemo}
                       disabled={isPlaying}
@@ -587,9 +580,9 @@ export default function Home() {
                   <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
                     {/* Input Side */}
                     <div className="order-2 lg:order-1">
-                      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Voice Input</h4>
-                      <div className="bg-white dark:bg-slate-600 rounded-lg border border-gray-200 dark:border-slate-500 p-4 min-h-[100px] sm:min-h-[120px] flex items-center">
-                        <div className="text-gray-900 dark:text-white font-mono text-sm sm:text-lg w-full">
+                      <h4 className="text-sm font-medium text-gray-700  mb-3">Voice Input</h4>
+                      <div className="bg-white  rounded-lg border border-gray-200  p-4 min-h-[100px] sm:min-h-[120px] flex items-center">
+                        <div className="text-gray-900  font-mono text-sm sm:text-lg w-full">
                           {demoText ? (
                             <span>&quot;{demoText}&quot;</span>
                           ) : (
@@ -615,7 +608,7 @@ export default function Home() {
 
                     {/* Output Side */}
                     <div className="order-1 lg:order-2">
-                      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Smart Classification</h4>
+                      <h4 className="text-sm font-medium text-gray-700  mb-3">Smart Classification</h4>
                       <div className="space-y-3">
                         <div className={`bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-3 rounded-r-lg transition-all duration-500 ${
                           demoCategory === 'tasks' ? 'opacity-100 ring-2 ring-blue-400' : 'opacity-50'
@@ -627,7 +620,7 @@ export default function Home() {
                               <span className="text-blue-600 dark:text-blue-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
                             )}
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Action items to complete</div>
+                          <div className="text-sm text-gray-600 ">Action items to complete</div>
                           {demoCategory === 'tasks' && (
                             <div className="text-xs text-blue-600 dark:text-blue-400 mt-1 font-medium">
                               Action words detected: &quot;need to&quot;, &quot;remember&quot;, &quot;don&apos;t forget&quot;
@@ -645,7 +638,7 @@ export default function Home() {
                               <span className="text-green-600 dark:text-green-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
                             )}
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Ideas and information</div>
+                          <div className="text-sm text-gray-600 ">Ideas and information</div>
                           {demoCategory === 'notes' && (
                             <div className="text-xs text-green-600 dark:text-green-400 mt-1 font-medium">
                               Informational content detected
@@ -663,7 +656,7 @@ export default function Home() {
                               <span className="text-purple-600 dark:text-purple-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
                             )}
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Scheduled events</div>
+                          <div className="text-sm text-gray-600 ">Scheduled events</div>
                           {demoCategory === 'calendar' && (
                             <div className="text-xs text-purple-600 dark:text-purple-400 mt-1 font-medium">
                               Time references detected: &quot;tomorrow&quot;, &quot;at 3pm&quot;, &quot;schedule&quot;
@@ -680,14 +673,14 @@ export default function Home() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gray-50 dark:bg-slate-800">
+        <section className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl font-bold text-gray-900  mb-4">
               Ready to Transform Your Voice into Productivity?
             </h2>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700  mb-8 max-w-2xl mx-auto">
               Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits.
             </p>
             
@@ -706,7 +699,7 @@ export default function Home() {
               </button>
             </div>
             
-            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 ">
               <div className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>

@@ -300,10 +300,10 @@ export default function App() {
   if (!mounted || isLoading) {
     return (
       <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+        <div className="min-h-screen flex items-center justify-center bg-white">
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
+            <p className="text-gray-600 text-sm">
               {needsMigration ? 'Upgrading data...' : 'Loading...'}
             </p>
           </div>
@@ -341,9 +341,9 @@ export default function App() {
       <Layout 
         mode={mode} 
         onModeChange={handleModeSwitch}
-        className="min-h-screen bg-white dark:bg-gray-900"
+        className="min-h-screen bg-white"
       >
-        <div className="min-h-screen bg-white dark:bg-gray-900">
+        <div className="min-h-screen bg-white">
           {/* Smart micro-landing for first-time users */}
           {mode === 'braindump' && (
             <MicroLanding
@@ -401,23 +401,23 @@ export default function App() {
           aria-describedby="onboarding-description"
           tabIndex={-1}
         >
-          <div className="bg-white dark:bg-gray-900 rounded-lg p-8 max-w-md w-full">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full">
             <div className="text-center">
               <h1 
                 id="onboarding-title"
-                className="text-2xl font-semibold text-gray-900 dark:text-white mb-2"
+                className="text-2xl font-semibold text-gray-900 mb-2"
               >
                 Welcome to tickk
               </h1>
               <p 
                 id="onboarding-description"
-                className="text-gray-600 dark:text-gray-400 mb-8 text-sm leading-relaxed"
+                className="text-gray-600 mb-8 text-sm leading-relaxed"
               >
                 Speak your thoughts. We&apos;ll organize them later.
               </p>
               <button
                 onClick={handleOnboardingComplete}
-                className="w-full py-2 px-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+                className="w-full py-2 px-4 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
                 aria-label="Start using tickk application"
               >
                 Start using tickk

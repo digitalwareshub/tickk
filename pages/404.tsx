@@ -29,21 +29,21 @@ export default function Custom404() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gray-50  flex items-center justify-center px-4">
         <div className="text-center max-w-lg mx-auto">
           {/* Large 404 Display */}
           <div className="relative mb-8">
-            <h1 className="text-9xl font-bold text-gray-200 dark:text-gray-700 select-none">404</h1>
+            <h1 className="text-9xl font-bold text-gray-200  select-none">404</h1>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-6xl animate-bounce">🎤</div>
             </div>
           </div>
 
           {/* Error Message */}
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl font-bold text-gray-900  mb-4">
             Oops! Page Not Found
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-lg text-gray-600  mb-8">
             Looks like this page took a wrong turn. Don&apos;t worry, our voice productivity app is still here to help you stay organized!
           </p>
 

@@ -59,21 +59,13 @@ export default function Header({ mode, onModeChange }: HeaderProps) {
                 </button>
               </div>
             ) : (
-              /* Regular navigation for other pages */
-              <>
-                <Link href="/" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  Home
-                </Link>
-                <Link href="/landing" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  Product
-                </Link>
-                <Link href="/contact" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  Contact
-                </Link>
-                <Link href="/support" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                  Support
-                </Link>
-              </>
+              /* Minimal navigation for other pages */
+              <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to App
+              </Link>
             )}
           </div>
 

@@ -6,7 +6,7 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'selector', // Disabled dark mode
+  // Dark mode completely disabled
   theme: {
     extend: {
       colors: {

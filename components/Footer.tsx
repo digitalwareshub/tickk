@@ -10,7 +10,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+    <footer className="bg-gray-100  border-t border-gray-200 ">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Mobile Compact Layout */}
@@ -18,10 +18,10 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Brand Section */}
           <div className="text-center mb-6">
             <div className="flex items-center justify-center space-x-2 mb-3">
-              <span className="text-lg font-bold text-gray-900 dark:text-white">tickk</span>
-              <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
+              <span className="text-lg font-bold text-gray-900 ">tickk</span>
+              <span className="text-xs bg-orange-100  text-orange-700  px-2 py-1 rounded-full">FREE</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed px-4">
+            <p className="text-gray-600  text-sm mb-4 leading-relaxed px-4">
               Finally, an app that shuts up and listens.
             </p>
           </div>
@@ -29,28 +29,28 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Quick Links Grid */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="space-y-2">
-              <Link href="/contact" className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+              <Link href="/contact" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Contact
               </Link>
-              <Link href="/support" className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+              <Link href="/support" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Support
               </Link>
-              <Link href="/privacy" className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+              <Link href="/privacy" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Privacy
               </Link>
             </div>
             <div className="space-y-2">
-              <Link href="/terms" className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+              <Link href="/terms" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Terms
               </Link>
-              <Link href="/bug-report" className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+              <Link href="/bug-report" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Bug Report
               </Link>
               <a 
                 href="https://github.com/digitalwareshub/opos-voice" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block text-sm text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                className="block text-sm text-gray-600  hover:text-orange-600  transition-colors"
               >
                 GitHub
               </a>
@@ -63,7 +63,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               href="https://twitter.com/tickkapp" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+              className="text-gray-400 hover:text-blue-500  transition-colors"
               aria-label="Follow tickk on Twitter"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               href="https://github.com/digitalwareshub/opos-voice" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-400 hover:text-gray-600  transition-colors"
               aria-label="View tickk Voice App on GitHub"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -85,7 +85,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               href="https://www.linkedin.com/company/tickkapp" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-700 dark:hover:text-blue-500 transition-colors"
+              className="text-gray-400 hover:text-blue-700  transition-colors"
               aria-label="Connect with tickk on LinkedIn"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -100,10 +100,10 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Brand Column */}
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <span className="text-xl font-bold text-gray-900 dark:text-white">tickk</span>
-              <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
+              <span className="text-xl font-bold text-gray-900 ">tickk</span>
+              <span className="text-xs bg-orange-100  text-orange-700  px-2 py-1 rounded-full">FREE</span>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+            <p className="text-gray-600  text-sm mb-4 leading-relaxed">
               Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders.
             </p>
             <div className="flex space-x-4">
@@ -111,7 +111,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 href="https://twitter.com/tickkapp" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                className="text-gray-400 hover:text-blue-500  transition-colors"
                 aria-label="Follow tickk on Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 href="https://github.com/digitalwareshub/tickk-voice" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-gray-600  transition-colors"
                 aria-label="View tickk Voice App on GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -133,7 +133,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 href="https://www.linkedin.com/company/tickkapp" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-700 dark:hover:text-blue-500 transition-colors"
+                className="text-gray-400 hover:text-blue-700  transition-colors"
                 aria-label="Connect with tickk on LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -145,18 +145,18 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
           {/* Product Column */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-900  uppercase tracking-wider mb-4">
               Product
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Voice Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/landing" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Features & Demo
+                <Link href="/landing" className="text-gray-600  hover:text-orange-600  transition-colors">
+                  About tickk
                 </Link>
               </li>
               <li>
@@ -164,7 +164,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   href="https://github.com/digitalwareshub/tickk-voice" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                  className="text-gray-600  hover:text-orange-600  transition-colors"
                 >
                   Open Source
                 </a>
@@ -174,59 +174,59 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
           {/* Use Cases Column */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-900  uppercase tracking-wider mb-4">
               Use Cases
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Meeting Notes</span>
+                <span className="text-gray-600 ">Meeting Notes</span>
               </li>
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Task Management</span>
+                <span className="text-gray-600 ">Task Management</span>
               </li>
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Voice Reminders</span>
+                <span className="text-gray-600 ">Voice Reminders</span>
               </li>
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Brainstorming</span>
+                <span className="text-gray-600 ">Brainstorming</span>
               </li>
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Project Planning</span>
+                <span className="text-gray-600 ">Project Planning</span>
               </li>
               <li>
-                <span className="text-gray-600 dark:text-gray-300">Accessibility</span>
+                <span className="text-gray-600 ">Accessibility</span>
               </li>
             </ul>
           </div>
 
           {/* Legal & Support Column */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-gray-900  uppercase tracking-wider mb-4">
               Legal & Support
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/privacy" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/terms" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/support" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Support & Help
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/contact" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/bug-report" className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                <Link href="/bug-report" className="text-gray-600  hover:text-orange-600  transition-colors">
                   Bug Reports
                 </Link>
               </li>
@@ -235,16 +235,16 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-6 md:mt-12 pt-4 md:pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-6 md:mt-12 pt-4 md:pt-8 border-t border-gray-200 ">
           {/* Mobile Bottom */}
           <div className="block md:hidden text-center">
-            <div className="text-xs text-gray-600 dark:text-gray-300 mb-2">
+            <div className="text-xs text-gray-600  mb-2">
               © {currentYear} tickk. Built with ❤️ for productivity.
             </div>
             {showHomeLink && (
               <button 
                 onClick={() => router.push('/')}
-                className="text-xs text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors flex items-center justify-center gap-1 mx-auto mb-2"
+                className="text-xs text-orange-600  hover:text-orange-700  transition-colors flex items-center justify-center gap-1 mx-auto mb-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -252,21 +252,21 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 Back to Homepage
               </button>
             )}
-            <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className="text-xs text-gray-500 ">
               Next.js • Web Speech API • compromise.js
             </div>
           </div>
 
           {/* Desktop Bottom */}
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-600 dark:text-gray-300 mb-4 md:mb-0">
+            <div className="text-sm text-gray-600  mb-4 md:mb-0">
               © {currentYear} tickk. Built with ❤️ for productivity enthusiasts.
             </div>
             
             {showHomeLink && (
               <button 
                 onClick={() => router.push('/')}
-                className="text-sm text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors flex items-center gap-2"
+                className="text-sm text-orange-600  hover:text-orange-700  transition-colors flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -275,7 +275,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               </button>
             )}
 
-            <div className="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+            <div className="flex items-center space-x-4 text-xs text-gray-500 ">
               <span>Made with Next.js</span>
               <span>•</span>
               <span>Powered by Web Speech API</span>

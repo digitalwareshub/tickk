@@ -60,16 +60,16 @@ export default function KeyboardHelpModal({ isOpen, onClose }: KeyboardHelpModal
       onClick={onClose}
     >
       <div 
-        className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl"
+        className="bg-white  rounded-lg p-6 max-w-md w-full mx-4 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-semibold text-gray-900 ">
             Keyboard Shortcuts
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            className="text-gray-500 hover:text-gray-700  "
             aria-label="Close help"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,16 +81,16 @@ export default function KeyboardHelpModal({ isOpen, onClose }: KeyboardHelpModal
         <div className="space-y-6">
           {Object.entries(groupedShortcuts).map(([category, categoryShortcuts]) => (
             <div key={category}>
-              <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <h3 className="text-sm font-medium text-gray-700  mb-3">
                 {category}
               </h3>
               <div className="space-y-2">
                 {categoryShortcuts.map((shortcut, index) => (
                   <div key={index} className="flex items-center justify-between py-1">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <span className="text-sm text-gray-600 ">
                       {shortcut.description}
                     </span>
-                    <kbd className="px-2 py-1 text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded border">
+                    <kbd className="px-2 py-1 text-xs font-mono bg-gray-100  text-gray-800  rounded border">
                       {shortcut.key}
                     </kbd>
                   </div>
@@ -100,9 +100,9 @@ export default function KeyboardHelpModal({ isOpen, onClose }: KeyboardHelpModal
           ))}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-            Press <kbd className="px-1 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-800 rounded">?</kbd> to show this help anytime
+        <div className="mt-6 pt-4 border-t border-gray-200 ">
+          <p className="text-xs text-gray-500  text-center">
+            Press <kbd className="px-1 py-0.5 text-xs font-mono bg-gray-100  rounded">?</kbd> to show this help anytime
           </p>
         </div>
       </div>

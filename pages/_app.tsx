@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
 import defaultSEOConfig from '@/lib/seo.config'
 import Head from 'next/head'
@@ -38,41 +37,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="tickk" />
         
-        {/* Prevent flash of incorrect theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                function getInitialColorMode() {
-                  const persistedColorPreference = window.localStorage.getItem('tickk-theme');
-                  const hasPersistedPreference = typeof persistedColorPreference === 'string';
-                  
-                  if (hasPersistedPreference) {
-                    return persistedColorPreference;
-                  }
-                  
-                  const mql = window.matchMedia('(prefers-color-scheme: dark)');
-                  const hasMediaQueryPreference = typeof mql.matches === 'boolean';
-                  
-                  if (hasMediaQueryPreference) {
-                    return mql.matches ? 'dark' : 'light';
-                  }
-                  
-                  return 'light';
-                }
-                
-                const colorMode = getInitialColorMode();
-                const root = document.documentElement;
-                
-                if (colorMode === 'dark') {
-                  root.classList.add('dark');
-                } else {
-                  root.classList.remove('dark');
-                }
-              })();
-            `,
-          }}
-        />
         
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -109,15 +73,7 @@ export default function App({ Component, pageProps }: AppProps) {
         )}
       </Head>
       
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem={true}
-        storageKey="tickk-theme"
-        disableTransitionOnChange={true}
-      >
         <Component {...pageProps} />
-      </ThemeProvider>
 
       {/* Vercel Analytics */}
       <Analytics />

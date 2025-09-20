@@ -299,10 +299,10 @@ export default function ProcessBraindumpModal({
           {stage === 'complete' && (
             <div className="text-center py-8">
               <div className="text-6xl mb-6">🎉</div>
-              <h3 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h3 className="text-3xl font-bold mb-4 text-gray-900 ">
                 Perfect! All Organized
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-lg text-gray-600  mb-6">
                 Your {items.length} thoughts have been organized into {taskCount} tasks and {noteCount} notes.
               </p>
               
@@ -383,7 +383,7 @@ function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
             <div className="text-xs text-gray-500 mb-1">
               Confidence: {Math.round(item.confidence * 100)}%
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+            <div className="w-full bg-gray-200  rounded-full h-1">
               <div 
                 className="bg-gradient-to-r from-purple-600 to-blue-600 h-1 rounded-full transition-all"
                 style={{ width: `${item.confidence * 100}%` }}
@@ -408,7 +408,7 @@ function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
           )}
           
           {/* Classification Reasoning */}
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-500 ">
             {item.classification.reasoning}
           </div>
         </div>

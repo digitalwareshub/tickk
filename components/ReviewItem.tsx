@@ -143,9 +143,9 @@ export default function ReviewItem({
    * Get confidence color for UI
    */
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'text-green-600 dark:text-green-400'
-    if (confidence >= 0.6) return 'text-yellow-600 dark:text-yellow-400'
-    return 'text-red-600 dark:text-red-400'
+    if (confidence >= 0.8) return 'text-green-600 '
+    if (confidence >= 0.6) return 'text-yellow-600 '
+    return 'text-red-600 '
   }
   
   /**
@@ -153,10 +153,10 @@ export default function ReviewItem({
    */
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
-      case 'medium': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300'
-      case 'low': return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+      case 'high': return 'bg-red-100  text-red-700 '
+      case 'medium': return 'bg-yellow-100  text-yellow-700 '
+      case 'low': return 'bg-green-100  text-green-700 '
+      default: return 'bg-gray-100  text-gray-700 '
     }
   }
   
@@ -164,8 +164,8 @@ export default function ReviewItem({
     <div className={`
       rounded-lg border-2 transition-all duration-200
       ${category === 'tasks' 
-        ? 'border-blue-300 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-700' 
-        : 'border-green-300 bg-green-50 dark:bg-green-900/20 dark:border-green-700'}
+        ? 'border-blue-300 bg-blue-50  ' 
+        : 'border-green-300 bg-green-50  '}
       ${isExpanded ? 'shadow-lg' : 'hover:shadow-md'}
     `}>
       {/* Main Content Area */}
@@ -180,7 +180,7 @@ export default function ReviewItem({
                   <textarea
                     value={editedText}
                     onChange={(e) => setEditedText(e.target.value)}
-                    className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+                    className="w-full p-2 border border-gray-300  rounded-md bg-white  text-gray-900  resize-none"
                     rows={3}
                     autoFocus
                   />
@@ -201,7 +201,7 @@ export default function ReviewItem({
                 </div>
               ) : (
                 <p 
-                  className="text-gray-800 dark:text-gray-200 font-medium cursor-pointer hover:bg-white/50 dark:hover:bg-gray-800/50 p-2 rounded transition-colors"
+                  className="text-gray-800  font-medium cursor-pointer hover:bg-white/50  p-2 rounded transition-colors"
                   onClick={() => setIsEditingText(true)}
                   title="Click to edit"
                 >
@@ -212,13 +212,13 @@ export default function ReviewItem({
             
             {/* Confidence Indicator */}
             <div className="mb-3">
-              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <div className="flex items-center gap-2 text-xs text-gray-500  mb-1">
                 <span>AI Confidence:</span>
                 <span className={getConfidenceColor(item.confidence)}>
                   {Math.round(item.confidence * 100)}%
                 </span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
+              <div className="w-full bg-gray-200  rounded-full h-1">
                 <div 
                   className="bg-gradient-to-r from-purple-600 to-blue-600 h-1 rounded-full transition-all"
                   style={{ width: `${item.confidence * 100}%` }}
@@ -236,7 +236,7 @@ export default function ReviewItem({
                     px-3 py-1 rounded-full transition-all text-xs font-medium
                     ${category === 'tasks' 
                       ? 'bg-blue-500 text-white shadow-md' 
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}
+                      : 'bg-gray-200  text-gray-600  hover:bg-gray-300 '}
                   `}
                 >
                   📋 Task
@@ -248,7 +248,7 @@ export default function ReviewItem({
                     px-3 py-1 rounded-full transition-all text-xs font-medium
                     ${category === 'notes' 
                       ? 'bg-green-500 text-white shadow-md' 
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}
+                      : 'bg-gray-200  text-gray-600  hover:bg-gray-300 '}
                   `}
                 >
                   📝 Note
@@ -258,7 +258,7 @@ export default function ReviewItem({
               {/* Expand/Collapse Toggle */}
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="px-2 py-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                className="px-2 py-1 text-gray-500 hover:text-gray-700  transition-colors"
                 title={isExpanded ? 'Show less' : 'Show more options'}
               >
                 {isExpanded ? '▼' : '▶'}
@@ -266,7 +266,7 @@ export default function ReviewItem({
             </div>
             
             {/* Classification Reasoning */}
-            <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            <div className="text-xs text-gray-500  mb-2">
               {item.classification.reasoning}
             </div>
           </div>
@@ -274,11 +274,11 @@ export default function ReviewItem({
         
         {/* Expanded Options */}
         {isExpanded && (
-          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-4">
+          <div className="mt-4 pt-4 border-t border-gray-200  space-y-4">
             {/* Priority (for tasks only) */}
             {category === 'tasks' && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium mb-2 text-gray-700 ">
                   Priority
                 </label>
                 <div className="flex gap-2">
@@ -290,7 +290,7 @@ export default function ReviewItem({
                         px-3 py-1 rounded-full text-xs font-medium transition-all
                         ${priority === p 
                           ? getPriorityColor(p) + ' shadow-md' 
-                          : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'}
+                          : 'bg-gray-200  text-gray-600  hover:bg-gray-300 '}
                       `}
                     >
                       {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -303,33 +303,33 @@ export default function ReviewItem({
             {/* Due Date (for tasks only) */}
             {category === 'tasks' && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium mb-2 text-gray-700 ">
                   Due Date
                 </label>
                 <input
                   type="datetime-local"
                   value={dueDate}
                   onChange={(e) => handleDueDateChange(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+                  className="px-3 py-2 border border-gray-300  rounded-md bg-white  text-gray-900  text-sm"
                 />
               </div>
             )}
             
             {/* Tags */}
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <label className="block text-sm font-medium mb-2 text-gray-700 ">
                 Tags
               </label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-purple-100  text-purple-700  rounded-full text-xs"
                   >
                     {tag}
                     <button
                       onClick={() => removeTag(tag)}
-                      className="text-purple-500 hover:text-purple-700 dark:hover:text-purple-200 ml-1"
+                      className="text-purple-500 hover:text-purple-700  ml-1"
                     >
                       ×
                     </button>
@@ -343,7 +343,7 @@ export default function ReviewItem({
                   onChange={(e) => setNewTag(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addTag()}
                   placeholder="Add a tag..."
-                  className="flex-1 px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+                  className="flex-1 px-3 py-1 border border-gray-300  rounded-md bg-white  text-gray-900  text-sm"
                 />
                 <button
                   onClick={addTag}
@@ -357,22 +357,22 @@ export default function ReviewItem({
             {/* Metadata from Classification */}
             {item.classification.metadata && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block text-sm font-medium mb-2 text-gray-700 ">
                   AI Detected
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {item.classification.metadata.hasDate && (
-                    <span className="px-2 py-1 bg-blue-100 dark:bg-blue-800/30 text-blue-700 dark:text-blue-300 rounded-full text-xs">
+                    <span className="px-2 py-1 bg-blue-100  text-blue-700  rounded-full text-xs">
                       📅 {item.classification.metadata.dateInfo}
                     </span>
                   )}
                   {item.classification.metadata.urgency && item.classification.metadata.urgency !== 'none' && (
-                    <span className="px-2 py-1 bg-orange-100 dark:bg-orange-800/30 text-orange-700 dark:text-orange-300 rounded-full text-xs">
+                    <span className="px-2 py-1 bg-orange-100  text-orange-700  rounded-full text-xs">
                       ⚡ {item.classification.metadata.urgency}
                     </span>
                   )}
                   {item.classification.metadata.patterns && item.classification.metadata.patterns.length > 0 && (
-                    <span className="px-2 py-1 bg-green-100 dark:bg-green-800/30 text-green-700 dark:text-green-300 rounded-full text-xs">
+                    <span className="px-2 py-1 bg-green-100  text-green-700  rounded-full text-xs">
                       🎯 {item.classification.metadata.patterns.join(', ')}
                     </span>
                   )}
