@@ -14,6 +14,7 @@ import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
 import MicroLanding from '@/components/MicroLanding'
+import ReturningUserInterface from '@/components/ReturningUserInterface'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
@@ -86,7 +87,8 @@ export default function App() {
           const savedMode = data.preferences?.defaultMode || 'braindump'
           setMode(savedMode)
           
-          // Only show onboarding for truly new users with no data and no previous visits
+          // Only show onboarding MODAL for truly new users with no data and no previous visits
+          // The rich interface should always show regardless of user status
           const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
           const hasAnyData = totalItems > 0
           const onboardingPref = data.preferences?.showOnboarding !== false
@@ -120,7 +122,8 @@ export default function App() {
           setPreferences(freshData.preferences!)
           setMode('braindump')
           
-          // Show onboarding for truly new users only
+          // Show onboarding MODAL for truly new users only
+          // The rich interface will always show via MicroLanding component
           const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
           if (!hasUsedBefore) {
             setShowOnboarding(true)
@@ -344,12 +347,22 @@ export default function App() {
         className="min-h-screen bg-white"
       >
         <div className="min-h-screen bg-white">
-          {/* Smart micro-landing for first-time users */}
+          {/* Smart interface for braindump mode */}
           {mode === 'braindump' && (
-            <MicroLanding
-              itemCount={totalItemCount}
-              onExampleClick={handleExampleClick}
-            />
+            <>
+              {/* Show MicroLanding for new users, ReturningUserInterface for users with data */}
+              {totalItemCount === 0 ? (
+                <MicroLanding
+                  itemCount={totalItemCount}
+                  onExampleClick={handleExampleClick}
+                />
+              ) : (
+                <ReturningUserInterface 
+                  totalItems={totalItemCount} 
+                  onModeChange={handleModeSwitch}
+                />
+              )}
+            </>
           )}
           
           {/* Main content area */}

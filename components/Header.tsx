@@ -15,7 +15,7 @@ export default function Header({ mode, onModeChange }: HeaderProps) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Left: Logo and Badge */}
-          <div className="flex items-center space-x-3 min-w-[200px] sm:min-w-[240px]">
+          <div className="flex items-center space-x-3 w-1/3">
             <Link href="/" className="group flex items-center space-x-2">
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
                 tickk
@@ -33,29 +33,36 @@ export default function Header({ mode, onModeChange }: HeaderProps) {
           </div>
 
           {/* Center: Navigation Links or Mode Toggle */}
-          <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
+          <div className="hidden md:flex items-center justify-center w-1/3">
             {isHomePage && mode && onModeChange ? (
-              /* Mode toggle for home page */
-              <div className="flex bg-gray-50 border border-gray-200 rounded-lg p-1 shadow-sm">
+              /* Clean text navigation for home page */
+              <div className="flex items-center space-x-8">
                 <button
                   onClick={() => onModeChange('braindump')}
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  className={`text-sm font-medium transition-colors duration-200 relative ${
                     mode === 'braindump'
-                      ? 'bg-white text-gray-900 shadow-sm border border-gray-200'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      ? 'text-gray-900'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  🧠 Braindump
+                  Braindump
+                  {mode === 'braindump' && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+                  )}
                 </button>
+                <span className="text-gray-300">|</span>
                 <button
                   onClick={() => onModeChange('organized')}
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  className={`text-sm font-medium transition-colors duration-200 relative ${
                     mode === 'organized'
-                      ? 'bg-white text-gray-900 shadow-sm border border-gray-200'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      ? 'text-gray-900'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  📊 Organized
+                  Organized
+                  {mode === 'organized' && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+                  )}
                 </button>
               </div>
             ) : (
@@ -70,29 +77,36 @@ export default function Header({ mode, onModeChange }: HeaderProps) {
           </div>
 
           {/* Right: Mode Toggle for Mobile */}
-          <div className="flex items-center space-x-3 justify-end min-w-[80px]">
+          <div className="flex items-center space-x-3 justify-end w-1/3">
             {/* Mobile Mode Toggle - only on home page */}
             {isHomePage && mode && onModeChange && (
-              <div className="md:hidden flex bg-gray-50 border border-gray-200 rounded-lg p-0.5">
+              <div className="md:hidden flex items-center space-x-4">
                 <button
                   onClick={() => onModeChange('braindump')}
-                  className={`px-2.5 py-1.5 text-xs font-medium rounded-md transition-all ${
+                  className={`text-xs font-medium transition-colors relative ${
                     mode === 'braindump'
-                      ? 'bg-white text-gray-900 shadow-sm'
+                      ? 'text-gray-900'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  🧠
+                  Braindump
+                  {mode === 'braindump' && (
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+                  )}
                 </button>
+                <span className="text-gray-300 text-xs">|</span>
                 <button
                   onClick={() => onModeChange('organized')}
-                  className={`px-2.5 py-1.5 text-xs font-medium rounded-md transition-all ${
+                  className={`text-xs font-medium transition-colors relative ${
                     mode === 'organized'
-                      ? 'bg-white text-gray-900 shadow-sm'
+                      ? 'text-gray-900'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  📊
+                  Organized
+                  {mode === 'organized' && (
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+                  )}
                 </button>
               </div>
             )}

@@ -3,7 +3,7 @@
  * Disappears as users engage with the app
  */
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface MicroLandingProps {
   itemCount: number
@@ -12,20 +12,14 @@ interface MicroLandingProps {
 
 export default function MicroLanding({ itemCount, onExampleClick }: MicroLandingProps) {
   const [showContext, setShowContext] = useState(true)
-  const [hasUsedBefore, setHasUsedBefore] = useState(false)
 
-  useEffect(() => {
-    // Check if user has used the app before
-    const used = localStorage.getItem('tickk_has_used') === 'true'
-    setHasUsedBefore(used)
-  }, [])
-
-  // Hide micro-landing completely if user has engaged OR has used the app before
-  if (itemCount > 0 || hasUsedBefore || !showContext) return null
+  // Only hide micro-landing if user has actual data/content
+  // Show the rich interface for all users, regardless of previous usage
+  if (itemCount > 0 || !showContext) return null
 
   return (
     <div className="micro-landing">
-      {/* Smart Context Bar - Only for first-time users */}
+      {/* Smart Context Bar - For all users */}
       <div className="context-bar bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto text-center py-6 px-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -43,7 +37,7 @@ export default function MicroLanding({ itemCount, onExampleClick }: MicroLanding
         </div>
       </div>
 
-      {/* Example Prompts - Only for truly new users */}
+      {/* Example Prompts - For all users */}
       <div className="example-prompts py-8">
         <div className="max-w-2xl mx-auto text-center px-4">
           <p className="text-gray-600 text-sm mb-4">
