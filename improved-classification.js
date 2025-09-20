@@ -3,7 +3,6 @@
 
 function improvedClassifyText(text) {
   const originalText = text.trim()
-  const lowerText = originalText.toLowerCase()
   
   // Early return for empty text
   if (!originalText) return 'notes'

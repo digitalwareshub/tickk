@@ -2,115 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import accessibility styles */
+@import './accessibility.css';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    color-scheme: dark;
-  }
-}
-
-.dark {
-  color-scheme: dark;
-}
-
-.light {
-  color-scheme: light;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  
+  /* Consistent typography */
+  .heading-primary {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  
+  .heading-secondary {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  
+  .text-responsive {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.6;
+  }
+  
+  /* Mobile-first button sizing */
+  .btn-responsive {
+    padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 4vw, 1.5rem);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    border-radius: 0.5rem;
+    min-height: 44px;
+  }
+  
+  /* Responsive spacing */
+  .spacing-responsive {
+    padding: clamp(1rem, 4vw, 2rem);
+  }
+  
+  .gap-responsive {
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
 }
 
-/* Voice button animations */
+/* Simple button styling */
 .voice-button {
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #ea580c, #f59e0b);
+  transition: all 0.2s ease;
+  background: #000000;
+  border: 1px solid #e5e5e5;
 }
 
 .voice-button:hover {
-  background: linear-gradient(135deg, #dc2626, #ea580c);
-  transform: scale(1.05);
+  background: #333333;
 }
 
 .voice-button.recording {
-  animation: pulse 2s infinite;
-  background: linear-gradient(135deg, #dc2626, #ea580c);
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-/* Grid background pattern */
-.grid-bg {
-  background-image: linear-gradient(to right, rgba(0,0,0,.06) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-.dark .grid-bg {
-  background-image: linear-gradient(to right, rgba(255,255,255,.12) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(255,255,255,.12) 1px, transparent 1px);
-}
-
-/* Background grid utilities */
-.bg-grid-gray-100 {
-  background-image: linear-gradient(to right, rgba(0,0,0,.02) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(0,0,0,.02) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.bg-grid-gray-800 {
-  background-image: linear-gradient(to right, rgba(255,255,255,.10) 1px, transparent 1px), 
-                    linear-gradient(to bottom, rgba(255,255,255,.10) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Subtle geometric patterns */
-.pattern-dots {
-  background-image: radial-gradient(circle, rgba(0,0,0,.05) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.pattern-diagonal {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(0,0,0,.02) 10px,
-    rgba(0,0,0,.02) 11px
-  );
-}
-
-.dark .pattern-dots {
-  background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
-}
-
-.dark .pattern-diagonal {
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255,255,255,.06) 10px,
-    rgba(255,255,255,.06) 11px
-  );
+  background: #666666;
 }
 
 /* Loading spinner */
@@ -130,16 +93,21 @@ body {
 
 /* Mobile-first optimizations */
 @media (max-width: 640px) {
+  /* Consistent font sizing on mobile */
+  html {
+    font-size: 14px;
+  }
+  
   /* Larger touch targets on mobile */
-  .voice-button {
-    min-width: 64px;
-    min-height: 64px;
+  .voice-button, button {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 14px;
   }
   
   /* Better spacing on mobile */
   .hero-section {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding: 1rem;
   }
   
   /* Improved mobile navigation */
@@ -149,8 +117,18 @@ body {
   
   /* Better mobile text sizing */
   h1 {
-    font-size: 1.875rem !important;
-    line-height: 2.25rem !important;
+    font-size: 1.75rem !important;
+    line-height: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.5rem !important;
   }
   
   /* Mobile-friendly cards */
@@ -168,7 +146,17 @@ body {
   
   /* Improved mobile grid */
   .mobile-grid {
-    gap: 1rem;
+    gap: 0.75rem;
+  }
+  
+  /* Mobile padding improvements */
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  /* Better mobile form elements */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }
 
@@ -177,10 +165,11 @@ body {
   /* Stack cards vertically on medium screens */
   .desktop-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   /* Better mobile menu */
-  .hidden\\.md\\:flex {
+  .hidden\.md\:flex {
     display: none !important;
   }
   
@@ -188,4 +177,36 @@ body {
   .tablet-spacing {
     padding: 1rem;
   }
+  
+  /* Better typography for tablets */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 2.25rem !important;
+  }
+  
+  /* Adjust grid gaps */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Better card spacing */
+  .lg\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
 }

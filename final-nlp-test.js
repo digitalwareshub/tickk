@@ -4,7 +4,6 @@
 // Simulate the new classifyText function from index.tsx
 function testClassifyText(text) {
   const originalText = text.trim()
-  const lowerText = originalText.toLowerCase()
   
   if (!originalText) return 'notes'
   

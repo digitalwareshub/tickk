@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { useEffect, useState, useCallback } from 'react'
 import Layout from '@/components/Layout'
 import { trackVoiceEvent, trackPageInteraction } from '@/lib/analytics'
@@ -21,6 +22,7 @@ interface VoiceItem {
   text: string
   timestamp: string
   category: 'tasks' | 'notes'
+  completed?: boolean
 }
 
 interface VoiceData {
@@ -28,7 +30,7 @@ interface VoiceData {
   notes: VoiceItem[]
 }
 
-export default function App() {
+export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [transcription, setTranscription] = useState('')
@@ -319,10 +321,26 @@ export default function App() {
     saveData(newData)
   }, [data, saveData])
 
+  const toggleCompleted = useCallback((category: keyof VoiceData, id: number) => {
+    const newData = {
+      ...data,
+      [category]: data[category].map(item => 
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    }
+    saveData(newData)
+  }, [data, saveData])
+
   const clearAll = useCallback(() => {
     if (confirm('Are you sure you want to clear all items?')) {
-      const newData = { tasks: [], notes: [], calendar: [] }
+      const newData = { tasks: [], notes: [] }
       saveData(newData)
+      // Also manually clear localStorage to ensure it's gone
+      try {
+        localStorage.removeItem('voiceAppData')
+      } catch (error) {
+        console.error('Error clearing localStorage:', error)
+      }
       trackPageInteraction('clear_all_data', 'clear_button')
     }
   }, [saveData])
@@ -430,14 +448,14 @@ export default function App() {
     <>
       <Head>
         <title>Voice-to-Productivity Dashboard | tickk</title>
-        <meta name="description" content="Transform your voice into organized tasks, notes, and calendar events with mobile-first design" />
+        <meta name="description" content="Transform your voice into organized tasks and notes with mobile-first design" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <Layout 
         className="relative isolate min-h-screen bg-gray-50 dark:bg-slate-800 text-zinc-900 dark:text-gray-100 transition-colors duration-300"
-        seoTitle="Voice App - tickk"
-        seoDescription="Record and organize your thoughts with our privacy-first voice recognition app. Convert speech to tasks, notes, and calendar entries instantly."
+        seoTitle="Free Voice Productivity App | tickk - Speech Recognition Dashboard"
+        seoDescription="Transform your voice into organized tasks and notes instantly. Advanced speech recognition with natural language processing. No login required, works offline, complete privacy."
       >
         {/* Grid background */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-20 grid-bg"></div>
@@ -453,9 +471,63 @@ export default function App() {
                   Dashboard
                 </span>
               </h1>
-              <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                Start speaking to automatically organize your thoughts into tasks, notes, and calendar events
+              
+              {/* Catchy tagline */}
+              <p className="text-lg sm:text-xl font-medium text-gray-700 dark:text-gray-300 mb-4 italic">
+                Finally, an app that shuts up and listens.
               </p>
+              
+              {/* NEW BRAINDUMP EXPERIENCE BANNER */}
+              <div className="max-w-4xl mx-auto mb-6">
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl shadow-2xl overflow-hidden">
+                  <div className="px-6 py-8 text-center text-white">
+                    <div className="text-5xl mb-4">✨</div>
+                    <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                      Revolutionary Braindump Experience
+                    </h2>
+                    <p className="text-lg mb-6 text-purple-100">
+                      Talk freely, think wildly. We&apos;ll organize your thoughts like magic.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                      <Link 
+                        href="/app"
+                        className="inline-flex items-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-purple-50 transition-all transform hover:scale-105 shadow-lg"
+                      >
+                        🧠 Try Braindump Mode
+                      </Link>
+                      <span className="text-purple-200 text-sm">
+                        ↓ Or continue with classic interface below
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                Start speaking to automatically organize your thoughts into tasks and notes
+              </p>
+              
+              {/* SEO-friendly feature list */}
+              <div className="max-w-4xl mx-auto mb-4">
+                {/* Desktop: Single row */}
+                <div className="hidden md:grid grid-cols-6 gap-4 text-xs text-gray-500 dark:text-gray-400">
+                  <div>🔒 Complete Privacy</div>
+                  <div>⚡ 99% Speech Accuracy</div>
+                  <div>🆓 Free Forever</div>
+                  <div>📱 Works Offline</div>
+                  <div>🧠 No AI Used</div>
+                  <div>🌐 All Devices</div>
+                </div>
+                {/* Mobile: Two rows */}
+                <div className="md:hidden grid grid-cols-3 gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <div>🔒 Privacy</div>
+                  <div>⚡ 99% Accuracy</div>
+                  <div>🆓 Free</div>
+                  <div>📱 Offline</div>
+                  <div>🧠 No AI</div>
+                  <div>🌐 Universal</div>
+                </div>
+              </div>
               
               {/* View Mode Toggle */}
               <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-700 p-1">
@@ -616,18 +688,34 @@ export default function App() {
                     ) : (
                       <>
                         {data.tasks.map((item) => (
-                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('tasks')}`}>
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('tasks')} ${item.completed ? 'opacity-60' : ''}`}>
                             <div className="flex justify-between items-start">
                               <div className="flex-1 pr-2">
-                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className={`text-xs sm:text-sm font-medium break-words ${item.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                  {item.text}
+                                </p>
                                 <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
                               </div>
-                              <button 
-                                onClick={() => removeItem('tasks', item.id)}
-                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                              >
-                                🗑️
-                              </button>
+                              <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => toggleCompleted('tasks', item.id)}
+                                  className={`text-sm flex-shrink-0 transition-colors ${
+                                    item.completed 
+                                      ? 'text-green-600 hover:text-green-700' 
+                                      : 'text-gray-400 hover:text-green-600'
+                                  }`}
+                                  title={item.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                >
+                                  {item.completed ? '✅' : '☐'}
+                                </button>
+                                <button 
+                                  onClick={() => removeItem('tasks', item.id)}
+                                  className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                  title="Delete task"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -661,18 +749,34 @@ export default function App() {
                     ) : (
                       <>
                         {data.notes.map((item) => (
-                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('notes')}`}>
+                          <div key={item.id} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor('notes')} ${item.completed ? 'opacity-60' : ''}`}>
                             <div className="flex justify-between items-start">
                               <div className="flex-1 pr-2">
-                                <p className="text-xs sm:text-sm font-medium break-words">{item.text}</p>
+                                <p className={`text-xs sm:text-sm font-medium break-words ${item.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                  {item.text}
+                                </p>
                                 <p className="text-xs opacity-70 mt-1">{formatTimestamp(item.timestamp)}</p>
                               </div>
-                              <button 
-                                onClick={() => removeItem('notes', item.id)}
-                                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                              >
-                                🗑️
-                              </button>
+                              <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => toggleCompleted('notes', item.id)}
+                                  className={`text-sm flex-shrink-0 transition-colors ${
+                                    item.completed 
+                                      ? 'text-green-600 hover:text-green-700' 
+                                      : 'text-gray-400 hover:text-green-600'
+                                  }`}
+                                  title={item.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                >
+                                  {item.completed ? '✅' : '☐'}
+                                </button>
+                                <button 
+                                  onClick={() => removeItem('notes', item.id)}
+                                  className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                  title="Delete note"
+                                >
+                                  🗑️
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ))}
@@ -718,7 +822,7 @@ export default function App() {
                               
                               <div className="grid gap-3 sm:gap-4">
                                 {entries.map((entry) => (
-                                  <div key={`${entry.type}-${entry.id}`} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor(entry.type)}`}>
+                                  <div key={`${entry.type}-${entry.id}`} className={`p-3 sm:p-4 rounded-lg border-l-4 group ${getCategoryColor(entry.type)} ${entry.completed ? 'opacity-60' : ''}`}>
                                     <div className="flex justify-between items-start">
                                       <div className="flex-1 pr-2">
                                         <div className="flex items-center gap-2 mb-2">
@@ -734,14 +838,30 @@ export default function App() {
                                             })}
                                           </span>
                                         </div>
-                                        <p className="text-sm font-medium break-words">{entry.text}</p>
+                                        <p className={`text-sm font-medium break-words ${entry.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''}`}>
+                                          {entry.text}
+                                        </p>
                                       </div>
-                                      <button 
-                                        onClick={() => removeItem(entry.type, entry.id)}
-                                        className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition-opacity text-sm flex-shrink-0"
-                                      >
-                                        🗑️
-                                      </button>
+                                      <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <button 
+                                          onClick={() => toggleCompleted(entry.type, entry.id)}
+                                          className={`text-sm flex-shrink-0 transition-colors ${
+                                            entry.completed 
+                                              ? 'text-green-600 hover:text-green-700' 
+                                              : 'text-gray-400 hover:text-green-600'
+                                          }`}
+                                          title={entry.completed ? 'Mark as incomplete' : 'Mark as completed'}
+                                        >
+                                          {entry.completed ? '✅' : '☐'}
+                                        </button>
+                                        <button 
+                                          onClick={() => removeItem(entry.type, entry.id)}
+                                          className="text-red-500 hover:text-red-700 transition-colors text-sm flex-shrink-0"
+                                          title={`Delete ${entry.type.slice(0, -1)}`}
+                                        >
+                                          🗑️
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
                                 ))}
@@ -760,6 +880,85 @@ export default function App() {
                 </div>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* SEO Content Footer */}
+        <section className="relative bg-gray-50 dark:bg-slate-900 py-6 md:py-12 border-t border-gray-200 dark:border-slate-700">
+          <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            {/* Mobile Compact Layout */}
+            <div className="block md:hidden">
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Free Voice Productivity App</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  Transform speech into organized tasks and notes with 99% accuracy. No login, complete privacy.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Key Features</h4>
+                  <ul className="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <li>• 99% speech accuracy</li>
+                    <li>• Auto task sorting</li>
+                    <li>• Works offline</li>
+                    <li>• Complete privacy</li>
+                    <li>• All devices</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">How to Use</h4>
+                  <ol className="text-xs text-gray-600 dark:text-gray-300 space-y-1">
+                    <li>1. Click microphone</li>
+                    <li>2. Speak naturally</li>
+                    <li>3. Auto categorized</li>
+                    <li>4. Access dashboard</li>
+                    <li>5. Export data</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Full Layout */}
+            <div className="hidden md:grid gap-8 md:grid-cols-3">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Free Voice Productivity Software</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  tickk is a revolutionary free voice-to-text productivity application that uses advanced natural language processing to automatically organize your speech into tasks and notes. No account required, complete privacy protection.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Key Features</h3>
+                <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                  <li>• 99% accurate speech recognition</li>
+                  <li>• Automatic task classification</li>
+                  <li>• Real-time speech transcription</li>
+                  <li>• Works completely offline</li>
+                  <li>• No AI dependencies</li>
+                  <li>• Complete privacy protection</li>
+                  <li>• Progressive Web App (PWA)</li>
+                  <li>• Cross-platform compatibility</li>
+                  <li>• Keyboard shortcuts for accessibility</li>
+                  <li>• Dark mode support</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">How to Use</h3>
+                <ol className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                  <li>1. Click the microphone button</li>
+                  <li>2. Speak naturally about tasks or ideas</li>
+                  <li>3. Watch automatic categorization</li>
+                  <li>4. Access organized productivity dashboard</li>
+                  <li>5. Export or sync with other tools</li>
+                </ol>
+              </div>
+            </div>
+            
+            <div className="mt-4 md:mt-8 pt-4 md:pt-8 border-t border-gray-200 dark:border-slate-600 text-center">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Free voice productivity app for hands-free task management and note-taking. Advanced speech recognition technology for instant organization.
+              </p>
+            </div>
           </div>
         </section>
 

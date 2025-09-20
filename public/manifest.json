@@ -1,7 +1,7 @@
 {
-  "name": "tickk - Voice Productivity",
+  "name": "tickk - Finally, an app that shuts up and listens",
   "short_name": "tickk",
-  "description": "Transform your voice into organized tasks, notes, and reminders",
+  "description": "Speak your thoughts. We organize them. No AI chatbots, no suggestions, just a microphone that works.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -64,6 +64,22 @@
     }
   ],
   "categories": ["productivity", "utilities"],
-  "lang": "en-US"
+  "lang": "en-US",
+  "shortcuts": [
+    {
+      "name": "Start Braindump",
+      "short_name": "Braindump",
+      "description": "Start a new braindump session",
+      "url": "/?action=braindump",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "View Organized",
+      "short_name": "Organized",
+      "description": "View organized tasks and notes",
+      "url": "/?mode=organized",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ]
 }
 

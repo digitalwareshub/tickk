@@ -1,0 +1,118 @@
+/**
+ * Accessibility Styles
+ * Screen reader, focus management, and accessibility utilities
+ */
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Make visible when focused */
+.sr-only:focus,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Focus indicators */
+*:focus {
+  outline: 3px solid #ea580c;
+  outline-offset: 2px;
+}
+
+/* Skip links */
+.skip-links {
+  position: relative;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .recording-button {
+    border: 3px solid currentColor;
+  }
+  
+  .category-option {
+    border: 2px solid currentColor;
+  }
+  
+  .micro-landing .example-chip {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .recording-button {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Color contrast improvements */
+.text-low-contrast {
+  color: #4a5568; /* Minimum WCAG AA contrast */
+}
+
+.dark .text-low-contrast {
+  color: #cbd5e0;
+}
+
+/* Focus management for modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.modal-content {
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Keyboard navigation hints */
+.keyboard-hint {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.dark .keyboard-hint {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.8);
+}

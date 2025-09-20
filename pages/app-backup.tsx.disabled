@@ -1,0 +1,328 @@
+/**
+ * New App Shell with Braindump/Organized Mode Switching
+ * This is the new braindump-first architecture for tickk
+ */
+
+import { useState, useEffect } from 'react'
+import Head from 'next/head'
+import Layout from '@/components/Layout'
+import { DataMigrator } from '@/lib/migration/migrator'
+import { StorageService } from '@/lib/storage/storage-service'
+import { trackPageInteraction } from '@/lib/analytics'
+import type { AppData, UserPreferences } from '@/types/braindump'
+
+// Import mode-specific components (will create these)
+import BraindumpInterface from '@/components/BraindumpInterface'
+import OrganizedView from '@/components/OrganizedView'
+
+type AppMode = 'braindump' | 'organized'
+
+export default function App() {
+  // Core state
+  const [mounted, setMounted] = useState(false)
+  const [mode, setMode] = useState<AppMode>('braindump')
+  const [appData, setAppData] = useState<AppData | null>(null)
+  const [preferences, setPreferences] = useState<UserPreferences | null>(null)
+  
+  // Loading and migration states
+  const [isLoading, setIsLoading] = useState(true)
+  const [needsMigration, setNeedsMigration] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+  
+  // Services
+  const [storageService] = useState(() => StorageService.getInstance())
+  const [migrator] = useState(() => DataMigrator.getInstance())
+  
+  /**
+   * Initialize app on mount
+   */
+  useEffect(() => {
+    const initializeApp = async () => {
+      setMounted(true)
+      
+      try {
+        // Initialize storage service
+        await storageService.init()
+        
+        // Check if migration is needed
+        const migrationNeeded = await migrator.needsMigration()
+        setNeedsMigration(migrationNeeded)
+        
+        if (migrationNeeded) {
+          // Handle migration
+          const migrationResult = await migrator.migrate()
+          if (!migrationResult.success) {
+            console.error('Migration failed:', migrationResult.errors)
+            // Fall back to creating fresh data
+          }
+        }
+        
+        // Load app data
+        const data = await storageService.getAllData()
+        if (data) {
+          setAppData(data)
+          setPreferences(data.preferences || null)
+          
+          // Set initial mode based on user preference or user type
+          const initialMode = data.preferences?.defaultMode || 
+            (migrationNeeded ? 'organized' : 'braindump') // Existing users → organized, new users → braindump
+          setMode(initialMode)
+          
+          // Show onboarding for new users
+          if (data.preferences?.showOnboarding !== false && !migrationNeeded) {
+            setShowOnboarding(true)
+          }
+        } else {
+          // Create fresh data for new users
+          const freshData: AppData = {
+            tasks: [],
+            notes: [],
+            braindump: [],
+            sessions: [],
+            version: '2.0.0',
+            preferences: {
+              defaultMode: 'braindump',
+              showOnboarding: true,
+              enableKeyboardShortcuts: true,
+              recordingTimeout: 30000,
+              enableContinuousRecording: false,
+              confidenceThreshold: 0.7,
+              enableManualReview: true,
+              enableScreenReader: false,
+              highContrast: false,
+              reducedMotion: false
+            }
+          }
+          
+          await storageService.saveAllData(freshData)
+          setAppData(freshData)
+          setPreferences(freshData.preferences!)
+          setMode('braindump')
+          setShowOnboarding(true)
+        }
+        
+      } catch (error) {
+        console.error('App initialization failed:', error)
+        // Create minimal fallback state
+        const fallbackData: AppData = {
+          tasks: [],
+          notes: [],
+          braindump: [],
+          sessions: [],
+          version: '2.0.0'
+        }
+        setAppData(fallbackData)
+        setMode('braindump')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    initializeApp()
+  }, [storageService, migrator])
+  
+  /**
+   * Handle mode switching
+   */
+  const handleModeSwitch = async (newMode: AppMode) => {
+    setMode(newMode)
+    
+    // Update user preference
+    if (preferences) {
+      const updatedPreferences = { ...preferences, defaultMode: newMode }
+      setPreferences(updatedPreferences)
+      await storageService.savePreferences(updatedPreferences)
+    }
+    
+    // Track mode switch
+    trackPageInteraction('mode_switch', newMode)
+  }
+  
+  /**
+   * Handle data updates from child components
+   */
+  const handleDataUpdate = async (updatedData: AppData) => {
+    setAppData(updatedData)
+    await storageService.saveAllData(updatedData)
+  }
+  
+  /**
+   * Handle onboarding completion
+   */
+  const handleOnboardingComplete = async () => {
+    setShowOnboarding(false)
+    
+    if (preferences) {
+      const updatedPreferences = { ...preferences, showOnboarding: false }
+      setPreferences(updatedPreferences)
+      await storageService.savePreferences(updatedPreferences)
+    }
+    
+    trackPageInteraction('onboarding_completed', 'success')
+  }
+  
+  /**
+   * Show loading state
+   */
+  if (!mounted || isLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-6xl mb-4 animate-bounce">🧠</div>
+            <h2 className="text-2xl font-bold mb-2">Loading tickk...</h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              {needsMigration ? 'Upgrading your data...' : 'Preparing your braindump space...'}
+            </p>
+          </div>
+        </div>
+      </Layout>
+    )
+  }
+  
+  /**
+   * Show onboarding for new users
+   */
+  if (showOnboarding && appData) {
+    // Show as modal overlay instead of full screen
+  }
+  
+  /**
+   * Main app interface with mode-specific components
+   */
+  return (
+    <>
+      <Head>
+        <title>
+          {mode === 'braindump' 
+            ? 'Braindump | tickk - Speak first, organize later'
+            : 'Dashboard | tickk - Your organized thoughts'
+          }
+        </title>
+        <meta 
+          name="description" 
+          content="Finally, an app that shuts up and listens. Transform your voice into organized tasks and notes with tickk's braindump-first approach." 
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+
+      <Layout 
+        className="min-h-screen bg-white dark:bg-gray-900"
+        seoTitle={`${mode === 'braindump' ? 'Braindump Mode' : 'Organized Dashboard'} | tickk`}
+        seoDescription="Transform your voice into organized tasks and notes instantly. Advanced speech recognition with natural language processing. No login required, works offline, complete privacy."
+      >
+        {/* Main App Header */}
+        <section className="relative bg-white dark:bg-gray-900 pt-8 pb-6">
+          <div className="relative mx-auto max-w-4xl px-4 sm:px-6">
+            <div className="text-center mb-6">
+              <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mb-2">
+                {mode === 'braindump' ? (
+                  <>
+                    <span className="text-xl mr-2">🧠</span>
+                    Braindump Mode
+                  </>
+                ) : (
+                  <>
+                    <span className="text-xl mr-2">📊</span>
+                    Organized Mode
+                  </>
+                )}
+              </h1>
+              
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 italic">
+                Finally, an app that shuts up and listens.
+              </p>
+              
+              <p className="mx-auto max-w-xl text-sm text-gray-500 dark:text-gray-400 mb-6">
+                {mode === 'braindump' 
+                  ? 'Just speak. We\'ll organize later.' 
+                  : 'Your thoughts, organized and ready for action.'}
+              </p>
+              
+              {/* Mode Toggle */}
+              <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-slate-700 p-1">
+                <button
+                  onClick={() => handleModeSwitch('braindump')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    mode === 'braindump'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                  }`}
+                  aria-pressed={mode === 'braindump'}
+                >
+                  🧠 Braindump
+                </button>
+                <button
+                  onClick={() => handleModeSwitch('organized')}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    mode === 'organized'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                  }`}
+                  aria-pressed={mode === 'organized'}
+                >
+                  📊 Organized
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mode-Specific Content */}
+        {appData && (
+          <main className="relative">
+            {mode === 'braindump' ? (
+              <BraindumpInterface 
+                appData={appData}
+                preferences={preferences}
+                onDataUpdate={handleDataUpdate}
+              />
+            ) : (
+              <OrganizedView 
+                appData={appData}
+                preferences={preferences}
+                onDataUpdate={handleDataUpdate}
+              />
+            )}
+          </main>
+        )}
+
+        {/* Footer Trust Signals */}
+        <footer className="relative bg-gray-50 dark:bg-slate-900 py-6 border-t border-gray-200 dark:border-slate-700">
+          <div className="max-w-6xl mx-auto px-4 text-center">
+            <div className="flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <span>🔒 Complete Privacy</span>
+              <span>🌐 Works Offline</span>
+              <span>🧠 No AI Used</span>
+              <span>✨ Free Forever</span>
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500">
+              tickk - Finally, an app that shuts up and listens.
+            </p>
+          </div>
+        </footer>
+
+        {/* Onboarding Modal */}
+        {showOnboarding && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md mx-4 text-center shadow-xl">
+              <div className="text-4xl mb-4">🧠</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                Welcome to tickk!
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 leading-relaxed">
+                The only app that captures first, organizes later. Just tap and talk!
+              </p>
+              <button
+                onClick={handleOnboardingComplete}
+                className="w-full py-2 px-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-medium rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        )}
+      </Layout>
+    </>
+  )
+}
