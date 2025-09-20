@@ -20,32 +20,30 @@ export default function MicroLanding({ itemCount, onExampleClick }: MicroLanding
     setHasUsedBefore(used)
   }, [])
 
-  // Hide micro-landing if user is engaged or has used before
-  if (itemCount > 0 || !showContext) return null
+  // Hide micro-landing completely if user has engaged OR has used the app before
+  if (itemCount > 0 || hasUsedBefore || !showContext) return null
 
   return (
     <div className="micro-landing">
       {/* Smart Context Bar - Only for first-time users */}
-      {!hasUsedBefore && (
-        <div className="context-bar bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-          <div className="max-w-4xl mx-auto text-center py-6 px-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Finally, an app that shuts up and listens.
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-              Just tap the mic and start talking. We&apos;ll organize everything into tasks and notes.
-            </p>
-            <button 
-              onClick={() => setShowContext(false)}
-              className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            >
-              Got it ×
-            </button>
-          </div>
+      <div className="context-bar bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-4xl mx-auto text-center py-6 px-6">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            Finally, an app that shuts up and listens.
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+            Just tap the mic and start talking. We&apos;ll organize everything into tasks and notes.
+          </p>
+          <button 
+            onClick={() => setShowContext(false)}
+            className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          >
+            Got it ×
+          </button>
         </div>
-      )}
+      </div>
 
-      {/* Example Prompts - Always show if no items */}
+      {/* Example Prompts - Only for truly new users */}
       <div className="example-prompts py-8">
         <div className="max-w-2xl mx-auto text-center px-4">
           <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
