@@ -72,10 +72,10 @@ class tickk {
             });
         }
 
-        // Theme toggle (handled by app.html inline script now)
+        // Theme toggle functionality removed (handled by Next.js pages)
         // Removed to prevent conflicts with new theme system
 
-        // Initialize dark mode (handled by app.html inline script now)
+        // Initialize dark mode (handled by Next.js pages)
         // Removed to prevent conflicts with new theme system
 
         // Keyboard shortcut (spacebar)
@@ -305,7 +305,7 @@ class tickk {
         }
     }
 
-    // Theme management removed - now handled by app.html inline script
+    // Theme management removed - now handled by Next.js app
 
     handleSpeechError(error) {
         let message = 'Speech recognition error occurred.';

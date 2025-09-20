@@ -1,7 +1,6 @@
-const CACHE_NAME = 'opos-voice-v9'; // Force new cache with timestamp
+const CACHE_NAME = 'tickk-voice-v10'; // Updated cache name for tickk
 const urlsToCache = [
     '/',
-    '/index.html',
     '/app.js',
     '/manifest.json',
     'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css',

@@ -470,7 +470,13 @@ export default function Home() {
                   Dashboard
                 </span>
               </h1>
-                            <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+              
+              {/* Catchy tagline */}
+              <p className="text-lg sm:text-xl font-medium text-gray-700 dark:text-gray-300 mb-4 italic">
+                Finally, an app that shuts up and listens.
+              </p>
+              
+              <p className="mx-auto max-w-2xl text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                 Start speaking to automatically organize your thoughts into tasks and notes
               </p>
               

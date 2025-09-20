@@ -1,7 +1,7 @@
 const defaultSEOConfig = {
   titleTemplate: '%s | tickk - Free Voice Productivity App',
   defaultTitle: 'tickk - Free Voice Productivity App with Speech Recognition',
-  description: 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing. No login required, complete privacy, works offline.',
+  description: 'Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing. No login required, complete privacy, works offline.',
   canonical: 'https://tickk.app',
   openGraph: {
     type: 'website',
@@ -9,7 +9,7 @@ const defaultSEOConfig = {
     url: 'https://tickk.app',
     site_name: 'tickk',
     title: 'tickk - Free Voice Productivity App with Speech Recognition',
-    description: 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing.',
+    description: 'Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing.',
     images: [
       {
         url: 'https://tickk.app/og-image.png',

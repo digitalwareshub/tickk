@@ -22,7 +22,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed px-4">
-              Free voice productivity app for tasks and notes
+              Finally, an app that shuts up and listens.
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 px-2 py-1 rounded-full">FREE</span>
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
-              Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders using advanced natural language processing.
+              Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders.
             </p>
             <div className="flex space-x-4">
               <a 
