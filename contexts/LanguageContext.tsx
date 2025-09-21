@@ -18,6 +18,8 @@ const translations = {
     // Navigation
     'nav.braindump': 'Braindump',
     'nav.organized': 'Organized',
+    'nav.braindump_description': 'Record your thoughts',
+    'nav.organized_description': 'View tasks & notes',
     'nav.back_to_app': 'Back to App',
     'nav.language': 'Language',
     
@@ -94,6 +96,8 @@ const translations = {
     // Navigation
     'nav.braindump': 'Lluvia de Ideas',
     'nav.organized': 'Organizado',
+    'nav.braindump_description': 'Graba tus pensamientos',
+    'nav.organized_description': 'Ver tareas y notas',
     'nav.back_to_app': 'Volver a la App',
     'nav.language': 'Idioma',
     
@@ -127,10 +131,10 @@ const translations = {
     'microlanding.subheadline': 'Simplemente toca el micrófono y comienza a hablar. Organizaremos todo en tareas y notas.',
     'microlanding.got_it': 'Entendido',
     'microlanding.try_saying': 'Prueba diciendo',
-    'microlanding.example1': 'Comprar comestibles',
+    'microlanding.example1': 'Comprar comestibles mañana',
     'microlanding.example2': 'Buena idea para el proyecto',
-    'microlanding.example3': 'Llamar al dentista',
-    'microlanding.example4': 'Probar enfoque diferente',
+    'microlanding.example3': 'Llamar al dentista para cita',
+    'microlanding.example4': 'Probar un enfoque diferente',
     'microlanding.private': 'Privado',
     'microlanding.works_offline': 'Funciona Sin Internet',
     'microlanding.no_account': 'Sin Cuenta Necesaria',

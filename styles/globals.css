@@ -19,6 +19,23 @@ body {
   font-weight: 400;
 }
 
+/* Emoji font support for better flag rendering */
+.emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+
+/* Language flag specific styling */
+[role="img"][aria-label*="Flag"] {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Android Emoji', sans-serif;
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1;
+  vertical-align: middle;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
