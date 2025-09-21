@@ -191,10 +191,43 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Free PWA Voice Productivity App | tickk - Offline Speech Recognition with No AI Dependencies | Progressive Web App for Task Management</title>
-        <meta name="description" content="tickk is a free Progressive Web App (PWA) that transforms speech into organized tasks using pure browser technology - no AI dependencies, works completely offline. Advanced speech recognition automatically categorizes voice commands into tasks, notes, and reminders using natural language processing. No account required, complete privacy, installs like a native app on any device. Perfect for professionals who want hands-free productivity without AI or internet dependence." />
+        <title>Best Free Productivity App for ADHD & Brain Dump | tickk - Voice-First Task Manager 2025</title>
+        <meta name="description" content="Free productivity app for ADHD & neurodivergent minds. Brain dump first, organize later with voice-to-text technology. Simple alternative to complex task managers - no overwhelming setup, capture racing thoughts instantly. Perfect for students, professionals & anyone overwhelmed by productivity apps. Works offline, no subscription required." />
         <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools, voice memo organization app, dictation software for tasks, speech to text for productivity, voice recording productivity tool, voice note taking for meetings, mobile voice productivity app, voice notes on mobile browser, voice controlled task management, speech recognition for project management, hands-free note taking app, voice dictation task organizer, browser speech recognition app, offline voice memo app, privacy voice productivity tool, no login voice app, voice braindump organizer, speech to organized tasks, voice thought capture app, hands-free brainstorming tool" />
         <meta name="author" content="tickk" />
+        
+        {/* ChatGPT-recommended Core ADHD / Neurodivergent Keywords */}
+        <meta name="keywords-adhd-core" content="best free productivity apps for ADHD, voice note app for ADHD brain, ADHD friendly task management tools, brain dump apps for ADHD and neurodivergent people, simple productivity apps for ADHD students, capture thoughts app for ADHD adults, ADHD focus tool free online, free productivity app for ADHD adults, best productivity apps for ADHD and neurodivergent thinkers, brain dump app for ADHD racing thoughts, voice note app for ADHD hyperfocus, ADHD friendly task management app free, capture thoughts instantly ADHD tool, organize later productivity app for ADHD" />
+        
+        {/* ChatGPT-recommended Voice-First & Brain Dump Keywords */}
+        <meta name="keywords-voice-braindump" content="brain dump app online free, voice to notes productivity app, capture ideas with voice app, free brain dump organizer app, instant voice transcription productivity tool, note taking app that organizes later, quick voice capture app for ideas" />
+        
+        {/* ChatGPT-recommended Free vs Paid / Affordability Keywords */}
+        <meta name="keywords-affordability" content="free alternative to ADHD productivity apps, free alternative to TickTick Notion for ADHD, free ADHD organization apps 2025, free task manager app for busy minds, productivity tools for ADHD without subscription, free alternative to expensive ADHD productivity apps, free productivity app with no subscription" />
+        
+        {/* ChatGPT-recommended Student & Maker Niches */}
+        <meta name="keywords-students-makers" content="productivity apps for college students ADHD, note taking app for exams ADHD friendly, best productivity app for makers 2025, quick capture tools for creators and entrepreneurs, free idea capture app for startups, best free brain dump app for students 2025, productivity app for researchers and PhD students, note taking app for ADHD students free, lecture capture voice note app for students, study session brain dump app, assignment idea capture tool free" />
+        
+        {/* ChatGPT-recommended Pain Point Keywords */}
+        <meta name="keywords-pain-points" content="overwhelmed by productivity apps ADHD, simple alternative to complex task managers, stop forgetting ideas ADHD tool, best app to avoid context switching ADHD, minimal productivity app for busy people, brain dump productivity tool 2025 free, minimal productivity app for overwhelmed people, quick capture and organize later app, one tap voice productivity tool" />
+        
+        {/* ChatGPT-recommended Professional Keywords */}
+        <meta name="keywords-professionals" content="productivity app for busy professionals free, best voice note app for meetings and action items, one tap brain dump app for professionals, capture ideas during commutes productivity app, productivity tool for executives on the go, free productivity app for entrepreneurs and founders" />
+        
+        {/* ChatGPT-recommended Accessibility Keywords */}
+        <meta name="keywords-accessibility" content="accessible productivity app for mobility challenges, voice-first productivity app for accessibility, best productivity apps for people with typing difficulties, hands-free productivity app free, inclusive productivity apps 2025, productivity tools compatible with assistive technologies" />
+        
+        {/* ChatGPT-recommended Creative Professional Keywords */}
+        <meta name="keywords-creatives" content="brain dump app for creative professionals, idea capture app for artists and designers, best productivity apps for writers free, voice brainstorming app for creatives, project idea collection tool free, productivity app for creative flow states" />
+        
+        {/* ChatGPT-recommended Parents & Multitaskers Keywords */}
+        <meta name="keywords-parents" content="hands-free productivity app for parents, free productivity app for moms and dads, best app for multitaskers to capture thoughts, productivity app while cooking or parenting, quick reminder voice app for families, organize household tasks with voice app" />
+        
+        {/* ChatGPT-recommended Brand Positioning Keywords */}
+        <meta name="keywords-branding" content="tickk app ADHD productivity, digiwares productivity apps family, new productivity tool 2025 ADHD friendly, one tap voice brain dump app, productivity without overwhelm free app, tickk app ADHD productivity tool" />
+        
+        {/* Use case specific keywords */}
+        <meta name="keywords-usecases" content="voice productivity for students, voice notes for professionals, voice memo for parents, voice app for creatives, voice productivity for accessibility, voice notes for busy professionals, voice memo for multitaskers, voice app for researchers, voice productivity for entrepreneurs, voice notes for consultants, voice memo for writers, voice app for designers, voice productivity for coaches, voice notes for therapists, voice memo for project managers, voice app for executives, voice productivity for freelancers, voice notes for remote workers, voice memo for content creators, voice app for podcasters, voice productivity for journalists, voice notes for bloggers, voice memo for marketers, voice app for sales professionals, voice productivity for customer service, voice notes for HR professionals, voice memo for trainers, voice app for educators, voice productivity for librarians, voice notes for researchers, voice memo for analysts, voice app for consultants, voice productivity for advisors, voice notes for mentors, voice memo for coaches, voice app for facilitators, voice productivity for workshop leaders, voice notes for meeting facilitators, voice memo for team leaders, voice app for managers, voice productivity for supervisors, voice notes for directors, voice memo for executives, voice app for CEOs, voice productivity for founders, voice notes for entrepreneurs, voice memo for startup teams, voice app for small business owners, voice productivity for solopreneurs, voice notes for independent contractors, voice memo for gig workers, voice app for freelance professionals" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
@@ -220,16 +253,16 @@ export default function Home() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tickk.app/" />
-        <meta property="og:title" content="Free Voice to Text Productivity App | tickk - Speech Recognition" />
-        <meta property="og:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
+        <meta property="og:title" content="Best Free Productivity App for ADHD & Brain Dump | tickk" />
+        <meta property="og:description" content="Free productivity app for ADHD & neurodivergent minds. Brain dump first, organize later with voice-to-text technology. Simple alternative to complex task managers - capture racing thoughts instantly." />
         <meta property="og:site_name" content="tickk" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://tickk.app/" />
-        <meta property="twitter:title" content="Free Voice to Text Productivity App | tickk - Speech Recognition" />
-        <meta property="twitter:description" content="Revolutionary free voice productivity app that transforms speech into organized tasks, notes & reminders instantly. Advanced NLP categorization, no login required, works offline." />
+        <meta property="twitter:title" content="Best Free Productivity App for ADHD & Brain Dump | tickk" />
+        <meta property="twitter:description" content="Free productivity app for ADHD & neurodivergent minds. Brain dump first, organize later with voice-to-text technology. Simple alternative to complex task managers - capture racing thoughts instantly." />
         
         {/* iOS Safari */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -546,6 +579,143 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Use Cases Section */}
+        <section className="py-16 bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="heading-secondary text-gray-900 mb-4">
+                Best Free Productivity App for ADHD, Students & Professionals
+              </h2>
+              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+                Whether you think differently, work on-the-go, or just prefer speaking over typing
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+              {/* ADHD/Neurodivergent - Featured */}
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 border-2 border-orange-200 relative flex flex-col h-full">
+                <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+                  Most Popular
+                </div>
+                <div className="text-2xl mb-4">🧠</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  ADHD & Neurodivergent Minds
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  Finally, a productivity app that works with your brain, not against it. Capture racing thoughts instantly without getting stuck in organization paralysis.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• No overwhelming setup or categories</li>
+                  <li>• Capture hyperfocus insights instantly</li>
+                  <li>• Process later when you&apos;re in &quot;organize mode&quot;</li>
+                  <li>• <strong>Free forever</strong> - no expensive subscriptions</li>
+                </ul>
+              </div>
+
+              {/* Busy Professionals */}
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+                <div className="text-2xl mb-4">💼</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Busy Professionals
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  Capture meeting insights, action items, and brilliant shower thoughts without missing a beat.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• Record while walking between meetings</li>
+                  <li>• Voice notes during commutes</li>
+                  <li>• Quick braindumps during breaks</li>
+                  <li>• No typing on mobile keyboards</li>
+                </ul>
+              </div>
+
+              {/* Students */}
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+                <div className="text-2xl mb-4">🎓</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Students & Researchers
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  From lecture insights to research ideas, capture knowledge without breaking your flow.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• Quick voice notes during lectures</li>
+                  <li>• Capture research insights instantly</li>
+                  <li>• Study session braindumps</li>
+                  <li>• Assignment idea collection</li>
+                </ul>
+              </div>
+
+              {/* Accessibility */}
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+                <div className="text-2xl mb-4">♿</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Accessibility Champions
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  Hands-free productivity for users with mobility challenges or typing difficulties.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• Voice-first interface design</li>
+                  <li>• No complex navigation required</li>
+                  <li>• Works with assistive technologies</li>
+                  <li>• Inclusive by design</li>
+                </ul>
+              </div>
+
+              {/* Creative Professionals */}
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+                <div className="text-2xl mb-4">🎨</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Creative Professionals
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  Don&apos;t let brilliant ideas slip away. Capture inspiration the moment it strikes.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• Preserve creative flow states</li>
+                  <li>• Voice brainstorming sessions</li>
+                  <li>• Client meeting insights</li>
+                  <li>• Project idea collection</li>
+                </ul>
+              </div>
+
+              {/* Parents & Multitaskers */}
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+                <div className="text-2xl mb-4">👨‍👩‍👧‍👦</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Parents & Multitaskers
+                </h3>
+                <p className="text-gray-700 text-sm mb-4">
+                  Capture important thoughts while your hands are full with life&apos;s beautiful chaos.
+                </p>
+                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                  <li>• Voice notes while cooking</li>
+                  <li>• Parenting insight capture</li>
+                  <li>• Household task management</li>
+                  <li>• Quick reminders on-the-go</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom CTA for this section */}
+            <div className="text-center mt-12">
+              <p className="text-gray-600 mb-6">
+                <strong>Overwhelmed by productivity apps?</strong> Most task managers are too complex and force you to organize while capturing ideas. tickk is a simple alternative - just brain dump first, organize later. Perfect for ADHD minds and anyone who wants to stop forgetting ideas.
+              </p>
+              <Link 
+                href="/" 
+                className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              >
+                Try tickk Now - It&apos;s Free
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Interactive Demo Section */}
         <section id="demo" className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
@@ -697,6 +867,98 @@ export default function Home() {
               </p>
               <Link href="/blog/braindump-first-organize-later-productivity" className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
                 Read the Article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section - ChatGPT Recommended SEO Magnet */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="heading-secondary text-gray-900 mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+                Everything you need to know about tickk&apos;s voice-first productivity approach
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              {/* FAQ 1 - ADHD Focus */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Is tickk a free productivity app for ADHD?
+                </h3>
+                <p className="text-gray-700">
+                  Yes! tickk is completely free forever and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps that cost $10-20/month, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
+                </p>
+              </div>
+
+              {/* FAQ 2 - Hyperfocus & Racing Thoughts */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  How does tickk help with hyperfocus and racing thoughts?
+                </h3>
+                <p className="text-gray-700">
+                  tickk captures your thoughts instantly without breaking your flow state. During hyperfocus sessions, just hit record and keep working - no need to stop and categorize. For racing thoughts, our voice-first approach lets you dump everything out of your head in seconds, then our smart categorization organizes it automatically. Perfect for ADHD brains that think faster than they can type.
+                </p>
+              </div>
+
+              {/* FAQ 3 - vs Notion/TickTick */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  What makes tickk different from task managers like Notion or TickTick?
+                </h3>
+                <p className="text-gray-700">
+                  Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no subscription fees. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
+                </p>
+              </div>
+
+              {/* FAQ 4 - Students */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Can students use tickk for lectures and assignments?
+                </h3>
+                <p className="text-gray-700">
+                  Absolutely! tickk is perfect for college students, especially those with ADHD. Capture lecture insights instantly without missing what the professor says next. Voice-record study session thoughts, assignment ideas, and research notes. Later, organize everything into actionable tasks and reference notes. It&apos;s the best free brain dump app for students who need to capture ideas quickly during fast-paced academic environments.
+                </p>
+              </div>
+
+              {/* FAQ 5 - Accessibility */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  Is tickk accessible for mobility or typing challenges?
+                </h3>
+                <p className="text-gray-700">
+                  Yes! tickk is a hands-free productivity app designed with accessibility in mind. Our voice-first interface works perfectly for users with mobility challenges, typing difficulties, or conditions like arthritis. No complex navigation required - just speak your thoughts and let our accessible voice technology handle the rest. It&apos;s inclusive productivity that works for everyone.
+                </p>
+              </div>
+
+              {/* FAQ 6 - Additional FAQ for more keywords */}
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  What&apos;s the best way to use tickk for busy professionals and parents?
+                </h3>
+                <p className="text-gray-700">
+                  tickk excels for multitaskers who need hands-free productivity. Capture meeting action items while walking between offices, record ideas during commutes, or voice-note reminders while cooking dinner. Parents love using tickk to organize household tasks and capture parenting insights when their hands are full. It&apos;s the perfect productivity app for busy people who can&apos;t always stop to type.
+                </p>
+              </div>
+            </div>
+
+            {/* FAQ CTA */}
+            <div className="text-center mt-12">
+              <p className="text-gray-600 mb-6">
+                Ready to try the brain dump approach that works with your mind, not against it?
+              </p>
+              <Link 
+                href="/" 
+                className="inline-flex items-center bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              >
+                Start Using tickk - Free Forever
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                 </svg>
