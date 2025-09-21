@@ -189,13 +189,13 @@ export default function ProcessBraindumpModal({
       <div 
         ref={dialogRef}
         tabIndex={-1}
-        className="bg-white border border-gray-200 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-white border border-gray-200 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         {/* Header */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="flex-shrink-0 p-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
               {stage === 'processing' && 'Organizing...'}
@@ -216,7 +216,7 @@ export default function ProcessBraindumpModal({
         </div>
         
         {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+        <div className="flex-1 p-4 sm:p-6 overflow-y-auto min-h-0">
           {stage === 'processing' && (
             <div className="text-center py-8">
               {/* Processing Animation */}
@@ -318,25 +318,25 @@ export default function ProcessBraindumpModal({
         
         {/* Footer Actions */}
         {stage === 'review' && (
-          <div className="p-6 border-t border-gray-200 bg-gray-50">
-            <div className="flex gap-4">
+          <div className="flex-shrink-0 p-4 sm:p-6 border-t border-gray-200 bg-gray-50">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button
                 onClick={applyOrganization}
-                className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all"
+                className="flex-1 px-4 sm:px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all text-sm sm:text-base"
               >
                 ✅ Apply Organization
               </button>
               
               <button
                 onClick={reProcess}
-                className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-4 sm:px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
               >
                 🔄 Re-process
               </button>
               
               <button
                 onClick={handleClose}
-                className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-4 sm:px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
               >
                 Cancel
               </button>
