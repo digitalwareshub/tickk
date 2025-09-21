@@ -8,7 +8,7 @@ import Head from 'next/head'
 import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
-import { trackPageInteraction } from '@/lib/analytics'
+import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
 import type { AppData, UserPreferences } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
@@ -54,6 +54,8 @@ export default function SpanishApp() {
   // Mount effect
   useEffect(() => {
     setMounted(true)
+    // Track page view for Spanish app
+    trackPageView('main_app_es')
   }, [])
 
   // Initialize app data
@@ -186,14 +188,32 @@ export default function SpanishApp() {
   // Handle mode switching
   const handleModeSwitch = useCallback((newMode: AppMode) => {
     setMode(newMode)
-    trackPageInteraction('mode_switched', newMode)
-  }, [])
+    // Track mode switch
+    enhancedAnalytics.trackEvent({
+      action: 'mode_switched',
+      category: 'navigation',
+      label: newMode,
+      custom_parameters: {
+        language: 'es',
+        previous_mode: mode
+      }
+    })
+  }, [mode])
 
 
   // Handle migration completion
   const handleMigrationComplete = useCallback(() => {
     setNeedsMigration(false)
-    trackPageInteraction('migration_completed', 'spanish')
+    // Track migration completion
+    enhancedAnalytics.trackEvent({
+      action: 'migration_completed',
+      category: 'system',
+      label: 'spanish',
+      custom_parameters: {
+        language: 'es',
+        migration_version: '1.0'
+      }
+    })
   }, [])
 
   // Don't render until mounted (prevents hydration mismatch)

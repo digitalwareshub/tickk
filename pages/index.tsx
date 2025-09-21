@@ -8,7 +8,7 @@ import Head from 'next/head'
 import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
-import { trackPageInteraction } from '@/lib/analytics'
+import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
@@ -61,6 +61,9 @@ export default function App() {
   useEffect(() => {
     const initializeApp = async () => {
       setMounted(true)
+      
+      // Track page view
+      trackPageView('main_app')
       
       try {
         await storageService.init()
@@ -166,8 +169,16 @@ export default function App() {
       await storageService.savePreferences(updatedPreferences)
     }
     
-    trackPageInteraction('onboarding_completed', 'success')
-  }, [preferences, storageService])
+    // Track successful onboarding completion
+    enhancedAnalytics.trackEvent({
+      action: 'onboarding_completed',
+      category: 'user_journey',
+      label: 'success',
+      custom_parameters: {
+        items_count: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
+      }
+    })
+  }, [preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
 
   /**
    * Handle modal keyboard accessibility (ESC to close)
@@ -205,7 +216,16 @@ export default function App() {
       await storageService.savePreferences(updatedPreferences)
     }
     
-    trackPageInteraction('mode_switch', newMode)
+    // Track mode switch
+    enhancedAnalytics.trackEvent({
+      action: 'mode_switch',
+      category: 'navigation',
+      label: newMode,
+      custom_parameters: {
+        previous_mode: mode,
+        switch_trigger: 'user_action'
+      }
+    })
   }
   
   /**
@@ -276,7 +296,16 @@ export default function App() {
     }
     
     await handleDataUpdate(updatedData)
-    trackPageInteraction('example_clicked', text)
+    // Track example click
+    enhancedAnalytics.trackEvent({
+      action: 'example_clicked',
+      category: 'engagement',
+      label: text,
+      custom_parameters: {
+        example_text: text,
+        source: 'main_app'
+      }
+    })
   }
   
   /**
@@ -303,7 +332,16 @@ export default function App() {
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
     
-    trackPageInteraction('data_exported', 'keyboard_shortcut')
+    // Track data export
+    enhancedAnalytics.trackEvent({
+      action: 'data_exported',
+      category: 'feature_usage',
+      label: 'keyboard_shortcut',
+      custom_parameters: {
+        export_trigger: 'keyboard_shortcut',
+        items_exported: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
+      }
+    })
   }
   
   // Set up keyboard shortcuts

@@ -3,6 +3,18 @@
  * Comprehensive user behavior tracking and conversion analysis
  */
 
+// Declare gtag function for TypeScript
+declare global {
+  interface Window {
+    gtag: (
+      command: 'config' | 'event' | 'js' | 'set',
+      targetId: string | Date | object,
+      config?: object
+    ) => void
+    dataLayer: Record<string, unknown>[]
+  }
+}
+
 // Analytics event types for type safety
 export interface AnalyticsEvent {
   action: string;

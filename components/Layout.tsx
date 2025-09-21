@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Header from './Header'
 import Footer from './Footer'
 import SEOMeta from './SEOMeta'
+import ModeNavigationTabs from './ModeNavigationTabs'
 
 interface LayoutProps {
   children: ReactNode
@@ -30,8 +31,9 @@ export default function Layout({
   const router = useRouter()
   
   // Auto-determine if we should show home link based on current page
-  const isHomePage = router.pathname === '/'
+  const isHomePage = router.pathname === '/' || router.pathname === '/es'
   const shouldShowHomeLink = showHomeLink !== undefined ? showHomeLink : !isHomePage
+  const shouldShowModeNavigation = isHomePage && mode && onModeChange
 
   return (
     <>
@@ -43,6 +45,11 @@ export default function Layout({
       <div className={className}>
         {/* Header */}
         <Header mode={mode} onModeChange={onModeChange} />
+
+        {/* Mode Navigation Tabs - only on home pages */}
+        {shouldShowModeNavigation && (
+          <ModeNavigationTabs mode={mode} onModeChange={onModeChange} />
+        )}
 
         {/* Page Title for non-home pages */}
         {title && (
