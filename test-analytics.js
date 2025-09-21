@@ -32,4 +32,4 @@ if (typeof window.gtag === 'function') {
 // Check for environment variables
 console.log('Environment check:');
 console.log('- NODE_ENV:', process?.env?.NODE_ENV || 'undefined');
-console.log('- Expected GA ID: G-CJNM0FTPW5');
+console.log('- Expected GA ID: G-RN1110F4V9');
