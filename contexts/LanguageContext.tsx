@@ -49,7 +49,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'All Devices',
     
     // MicroLanding
-    'microlanding.headline': 'Finally, an app that shuts up and listens.',
+    'microlanding.headline': 'An app that shuts up and listens.',
     'microlanding.subheadline': 'Just tap the mic and start talking. We\'ll organize everything into tasks and notes.',
     'microlanding.got_it': 'Got it',
     'microlanding.try_saying': 'Try saying',

@@ -390,13 +390,13 @@ export default function App() {
       <Head>
         <title>
           {mode === 'braindump' 
-            ? 'tickk - Finally, an app that shuts up and listens'
+            ? 'tickk - An app that shuts up and listens'
             : 'Organized | tickk'
           }
         </title>
         <meta 
           name="description" 
-          content="Finally, an app that shuts up and listens. Speak your thoughts, organize later. No AI, just privacy." 
+          content="An app that shuts up and listens. Speak your thoughts, organize later. No AI, just privacy." 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
