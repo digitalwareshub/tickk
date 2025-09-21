@@ -73,26 +73,10 @@ class EnhancedAnalytics {
       nodeEnv: process.env.NODE_ENV
     });
 
+    // GA4 script is now loaded via next/script in _app.tsx
+    // We just need to wait for it to be available
     if (process.env.NEXT_PUBLIC_GA_ID) {
-      // Load Google Analytics script
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
-      document.head.appendChild(script);
-
-      // Initialize gtag
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function() {
-        window.dataLayer.push(Array.from(arguments) as unknown as Record<string, unknown>);
-      };
-      
-      window.gtag('js', new Date());
-      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
-        anonymize_ip: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
-      
-      console.log('✅ GA4 initialized with ID:', process.env.NEXT_PUBLIC_GA_ID);
+      console.log('✅ GA4 will be initialized via next/script with ID:', process.env.NEXT_PUBLIC_GA_ID);
     } else {
       console.warn('⚠️ GA_TRACKING_ID not found in environment variables');
     }
