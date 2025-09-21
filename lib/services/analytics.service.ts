@@ -1,9 +1,11 @@
 /**
  * Analytics Service for Braindump Insights
  * Provides statistical analysis and pattern recognition for user braindump data
+ * Integrated with Enhanced Analytics for user behavior tracking
  */
 
 import type { VoiceItem, BraindumpSession, AppData } from '@/types/braindump'
+import { enhancedAnalytics } from '@/lib/analytics/enhanced-analytics'
 
 export interface BraindumpStats {
   totalSessions: number
@@ -46,6 +48,98 @@ export interface ProductivityTrend {
 }
 
 export class AnalyticsService {
+  /**
+   * Track user braindump behavior and patterns
+   */
+  static trackBraindumpUsage(appData: AppData) {
+    const stats = this.calculateStats(appData);
+    
+    // Track user segment based on usage patterns
+    const userSegment = this.identifyUserSegment(stats);
+    enhancedAnalytics.identifyUserSegment(userSegment, 0.8);
+    
+    // Track productivity patterns
+    enhancedAnalytics.trackEvent({
+      action: 'productivity_analysis',
+      category: 'user_behavior',
+      label: 'braindump_patterns',
+      custom_parameters: {
+        most_productive_time: stats.mostProductiveTime,
+        avg_items_per_session: stats.avgItemsPerSession,
+        organization_accuracy: stats.organizationAccuracy,
+        top_theme: stats.topPatterns[0]?.theme || 'none'
+      }
+    });
+  }
+
+  /**
+   * Identify user segment based on braindump patterns
+   */
+  static identifyUserSegment(stats: BraindumpStats): string {
+    // High frequency, short sessions = ADHD-like patterns
+    if (stats.avgItemsPerSession > 8 && stats.avgSessionDuration < 3) {
+      return 'adhd_focused';
+    }
+    
+    // Work-related patterns during business hours
+    if (stats.topPatterns.some(p => p.theme === 'Work') && stats.mostProductiveTime === 'Afternoon') {
+      return 'professional';
+    }
+    
+    // Learning patterns
+    if (stats.topPatterns.some(p => p.theme === 'Learning')) {
+      return 'student';
+    }
+    
+    // Creative patterns
+    if (stats.topPatterns.some(p => p.theme === 'Creative')) {
+      return 'creative';
+    }
+    
+    // Family/Home patterns
+    if (stats.topPatterns.some(p => ['Family', 'Home', 'Social'].includes(p.theme))) {
+      return 'parent';
+    }
+    
+    return 'general';
+  }
+
+  /**
+   * Track voice recording events
+   */
+  static trackVoiceRecording(duration: number, wordCount: number, classification: string) {
+    enhancedAnalytics.trackEvent({
+      action: 'voice_recording',
+      category: 'core_feature',
+      label: classification,
+      value: Math.round(duration),
+      custom_parameters: {
+        recording_duration: duration,
+        word_count: wordCount,
+        words_per_second: wordCount / duration,
+        classification_result: classification
+      }
+    });
+  }
+
+  /**
+   * Track organization events
+   */
+  static trackOrganization(itemCount: number, accuracy: number, timeSpent: number) {
+    enhancedAnalytics.trackEvent({
+      action: 'organization_session',
+      category: 'core_feature',
+      label: 'braindump_to_organized',
+      value: itemCount,
+      custom_parameters: {
+        items_organized: itemCount,
+        organization_accuracy: accuracy,
+        time_spent_organizing: timeSpent,
+        items_per_minute: itemCount / (timeSpent / 60000)
+      }
+    });
+  }
+
   /**
    * Calculate comprehensive analytics from app data
    */

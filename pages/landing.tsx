@@ -2,12 +2,60 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/Layout'
+import { 
+  useSectionTracking, 
+  useCTATracking, 
+  useFAQTracking, 
+  useUseCaseTracking,
+  usePerformanceTracking,
+  useUserSegmentation,
+  useLinkTracking 
+} from '@/hooks/useAnalytics'
+import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analytics'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [demoText, setDemoText] = useState('')
   const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+
+  // Analytics hooks
+  const heroSectionRef = useSectionTracking('hero');
+  const howItWorksSectionRef = useSectionTracking('how_it_works');
+  const useCasesSectionRef = useSectionTracking('use_cases');
+  const demoSectionRef = useSectionTracking('interactive_demo');
+  const blogSectionRef = useSectionTracking('blog');
+  const faqSectionRef = useSectionTracking('faq');
+  const finalCtaSectionRef = useSectionTracking('final_cta');
+
+  // CTA tracking
+  const { trackClick: trackHeroCTA } = useCTATracking('hero_cta', 'hero');
+  const { trackClick: trackUseCaseCTA } = useCTATracking('use_case_cta', 'use_cases');
+  const { trackClick: trackFaqCTA } = useCTATracking('faq_cta', 'faq');
+  const { trackClick: trackFinalCTA } = useCTATracking('final_cta', 'final_cta');
+
+  // User segmentation
+  const { identifySegment } = useUserSegmentation();
+  const { trackLinkClick } = useLinkTracking();
+
+  // Performance tracking
+  usePerformanceTracking('landing_page');
+
+  // Use case tracking hooks
+  const adhdUseCase = useUseCaseTracking('adhd-neurodivergent');
+  const professionalUseCase = useUseCaseTracking('busy-professionals');
+  const studentUseCase = useUseCaseTracking('students-researchers');
+  const accessibilityUseCase = useUseCaseTracking('accessibility-champions');
+  const creativeUseCase = useUseCaseTracking('creative-professionals');
+  const parentUseCase = useUseCaseTracking('parents-multitaskers');
+
+  // FAQ tracking hooks
+  const adhdFAQ = useFAQTracking('adhd-free-app');
+  const hyperfocusFAQ = useFAQTracking('hyperfocus-racing-thoughts');
+  const comparisonFAQ = useFAQTracking('notion-ticktick-comparison');
+  const studentsFAQ = useFAQTracking('students-lectures');
+  const accessibilityFAQ = useFAQTracking('accessibility-mobility');
+  const professionalsFAQ = useFAQTracking('professionals-parents');
 
   const demoExamples = [
     { text: "I need to call John tomorrow at 3pm about the project meeting", category: 'calendar' as const },
@@ -19,7 +67,99 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+    
+    // Track page view
+    trackPageView('landing_page');
+    
+    // Mark as visited for returning user detection
+    localStorage.setItem('tickk_has_visited', 'true');
+
+    // Set up intersection observers for use case cards
+    const observeUseCaseCards = () => {
+      const cards = document.querySelectorAll('[data-use-case]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const useCaseId = entry.target.getAttribute('data-use-case');
+              if (useCaseId) {
+                // Track view based on use case ID
+                switch (useCaseId) {
+                  case 'adhd-neurodivergent':
+                    adhdUseCase.trackView();
+                    break;
+                  case 'busy-professionals':
+                    professionalUseCase.trackView();
+                    break;
+                  case 'students-researchers':
+                    studentUseCase.trackView();
+                    break;
+                  case 'accessibility-champions':
+                    accessibilityUseCase.trackView();
+                    break;
+                  case 'creative-professionals':
+                    creativeUseCase.trackView();
+                    break;
+                  case 'parents-multitaskers':
+                    parentUseCase.trackView();
+                    break;
+                }
+              }
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      cards.forEach((card) => observer.observe(card));
+    };
+
+    // Set up intersection observers for FAQ items
+    const observeFAQItems = () => {
+      const faqItems = document.querySelectorAll('[data-faq]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const faqId = entry.target.getAttribute('data-faq');
+              if (faqId) {
+                // Track FAQ view based on ID
+                switch (faqId) {
+                  case 'adhd-free-app':
+                    adhdFAQ.trackView();
+                    break;
+                  case 'hyperfocus-racing-thoughts':
+                    hyperfocusFAQ.trackView();
+                    break;
+                  case 'notion-ticktick-comparison':
+                    comparisonFAQ.trackView();
+                    break;
+                  case 'students-lectures':
+                    studentsFAQ.trackView();
+                    break;
+                  case 'accessibility-mobility':
+                    accessibilityFAQ.trackView();
+                    break;
+                  case 'professionals-parents':
+                    professionalsFAQ.trackView();
+                    break;
+                }
+              }
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      faqItems.forEach((item) => observer.observe(item));
+    };
+
+    // Initialize observers after mount
+    setTimeout(() => {
+      observeUseCaseCards();
+      observeFAQItems();
+    }, 100);
+  }, [adhdUseCase, professionalUseCase, studentUseCase, accessibilityUseCase, creativeUseCase, parentUseCase, adhdFAQ, hyperfocusFAQ, comparisonFAQ, studentsFAQ, accessibilityFAQ, professionalsFAQ])
 
   const classifyText = (text: string): 'tasks' | 'notes' | 'calendar' => {
     const originalText = text.trim()
@@ -396,7 +536,7 @@ export default function Home() {
 
       <Layout className="min-h-screen bg-white">
         {/* Hero Section */}
-        <section className="bg-white py-16">
+        <section ref={heroSectionRef} className="bg-white py-16">
           
           <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="text-center">
@@ -456,11 +596,23 @@ export default function Home() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/" className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors">
+                <Link 
+                  href="/" 
+                  className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors"
+                  onClick={() => trackHeroCTA('🚀 Try It Free Now')}
+                >
                   🚀 Try It Free Now
                 </Link>
                 <button 
-                  onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => {
+                    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+                    enhancedAnalytics.trackEvent({
+                      action: 'demo_scroll_click',
+                      category: 'engagement',
+                      label: 'hero_demo_button',
+                      custom_parameters: { button_text: '👀 See Demo', context: 'hero' }
+                    });
+                  }}
                   className="btn-responsive bg-gray-200 hover:bg-gray-300 text-gray-900 transition-colors"
                 >
                   👀 See Demo
@@ -471,7 +623,7 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="bg-gray-50 py-16">
+        <section ref={howItWorksSectionRef} id="how-it-works" className="bg-gray-50 py-16">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="heading-secondary text-gray-900 mb-4">
@@ -580,7 +732,7 @@ export default function Home() {
         </section>
 
         {/* Use Cases Section */}
-        <section className="py-16 bg-white">
+        <section ref={useCasesSectionRef} className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="heading-secondary text-gray-900 mb-4">
@@ -593,7 +745,16 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
               {/* ADHD/Neurodivergent - Featured */}
-              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 border-2 border-orange-200 relative flex flex-col h-full">
+              <div 
+                data-use-case="adhd-neurodivergent"
+                className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 border-2 border-orange-200 relative flex flex-col h-full cursor-pointer transition-transform hover:scale-105"
+                onClick={() => {
+                  adhdUseCase.trackClick();
+                  identifySegment('adhd_focused', 0.9, 'clicked_adhd_use_case');
+                  trackLinkClick('/', 'Try tickk Now', 'adhd_use_case');
+                }}
+                onMouseEnter={() => adhdUseCase.trackHover()}
+              >
                 <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
                   Most Popular
                 </div>
@@ -613,7 +774,7 @@ export default function Home() {
               </div>
 
               {/* Busy Professionals */}
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="busy-professionals" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
                 <div className="text-2xl mb-4">💼</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Busy Professionals
@@ -630,7 +791,7 @@ export default function Home() {
               </div>
 
               {/* Students */}
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="students-researchers" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
                 <div className="text-2xl mb-4">🎓</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Students & Researchers
@@ -647,7 +808,7 @@ export default function Home() {
               </div>
 
               {/* Accessibility */}
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="accessibility-champions" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
                 <div className="text-2xl mb-4">♿</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Accessibility Champions
@@ -664,7 +825,7 @@ export default function Home() {
               </div>
 
               {/* Creative Professionals */}
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="creative-professionals" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
                 <div className="text-2xl mb-4">🎨</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Creative Professionals
@@ -681,7 +842,7 @@ export default function Home() {
               </div>
 
               {/* Parents & Multitaskers */}
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="parents-multitaskers" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
                 <div className="text-2xl mb-4">👨‍👩‍👧‍👦</div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Parents & Multitaskers
@@ -706,6 +867,7 @@ export default function Home() {
               <Link 
                 href="/" 
                 className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                onClick={() => trackUseCaseCTA('Try tickk Now - It&apos;s Free')}
               >
                 Try tickk Now - It&apos;s Free
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -717,7 +879,7 @@ export default function Home() {
         </section>
 
         {/* Interactive Demo Section */}
-        <section id="demo" className="relative py-20 bg-gray-50 ">
+        <section ref={demoSectionRef} id="demo" className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -849,7 +1011,7 @@ export default function Home() {
         </section>
 
         {/* Blog Section */}
-        <section className="py-16 bg-white">
+        <section ref={blogSectionRef} className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Learn More About Voice Productivity
@@ -876,7 +1038,7 @@ export default function Home() {
         </section>
 
         {/* FAQ Section - ChatGPT Recommended SEO Magnet */}
-        <section className="py-16 bg-gray-50">
+        <section ref={faqSectionRef} className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="heading-secondary text-gray-900 mb-4">
@@ -889,7 +1051,7 @@ export default function Home() {
 
             <div className="space-y-6">
               {/* FAQ 1 - ADHD Focus */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
+              <div data-faq="adhd-free-app" className="bg-white rounded-lg p-6 border border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
                   Is tickk a free productivity app for ADHD?
                 </h3>
@@ -957,6 +1119,7 @@ export default function Home() {
               <Link 
                 href="/" 
                 className="inline-flex items-center bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                onClick={() => trackFaqCTA('Start Using tickk - Free Forever')}
               >
                 Start Using tickk - Free Forever
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -968,7 +1131,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gray-50 ">
+        <section ref={finalCtaSectionRef} className="relative py-20 bg-gray-50 ">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
@@ -980,7 +1143,11 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
-              <Link href="/" className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg">
+              <Link 
+                href="/" 
+                className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg"
+                onClick={() => trackFinalCTA('Start Using tickk Free')}
+              >
                 Start Using tickk Free
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
