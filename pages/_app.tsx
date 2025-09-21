@@ -3,19 +3,24 @@ import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import defaultSEOConfig from '@/lib/seo.config'
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { pageview, GA_TRACKING_ID } from '@/lib/analytics'
+import { trackPageView } from '@/lib/analytics/enhanced-analytics'
 import { LanguageProvider } from '@/contexts/LanguageContext'
+
+// Get GA tracking ID from environment
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
+    // Enhanced analytics will auto-initialize
     const handleRouteChange = (url: string) => {
-      pageview(url)
+      trackPageView(url)
     }
     
     router.events.on('routeChangeComplete', handleRouteChange)
@@ -49,30 +54,30 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://compromise.cool" />
 
-        {/* Google Analytics */}
-        {GA_TRACKING_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${GA_TRACKING_ID}', {
-                    page_path: window.location.pathname,
-                    anonymize_ip: true,
-                    cookie_flags: 'SameSite=None;Secure'
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics - moved to next/script */}
       </Head>
+      
+      {/* Google Analytics with next/script */}
+      {GA_TRACKING_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+                anonymize_ip: true,
+                cookie_flags: 'SameSite=None;Secure'
+              });
+            `}
+          </Script>
+        </>
+      )}
       
       <LanguageProvider>
         <Component {...pageProps} />

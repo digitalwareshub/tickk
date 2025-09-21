@@ -18,8 +18,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Left: Logo and Badge */}
-          <div className="flex flex-col items-start space-y-1 w-1/3">
+          {/* Left: Logo */}
+          <div className="flex items-center justify-start w-1/3">
             <Link href={language === 'es' ? '/es' : '/'} className="group flex items-center space-x-2">
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
                 tickk
@@ -28,12 +28,6 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 🎙️
               </span>
             </Link>
-            <div className="relative">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200 shadow-sm">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
-                FREE
-              </span>
-            </div>
           </div>
 
           {/* Center: Simple Back Link for Non-Home Pages */}

@@ -64,19 +64,23 @@ class EnhancedAnalytics {
    */
   private initializeTracking() {
     if (typeof window === 'undefined') return;
+    
+    // Debug logging for development
+    console.log('🔍 Analytics Debug:', {
+      hasWindow: typeof window !== 'undefined',
+      hasGtag: typeof window.gtag === 'function',
+      gaId: process.env.NEXT_PUBLIC_GA_ID,
+      nodeEnv: process.env.NODE_ENV
+    });
 
-    // Generate or retrieve user ID (anonymous)
-    this.userId = this.getOrCreateUserId();
-    
-    // Detect traffic source
-    this.trafficSource = this.detectTrafficSource();
-    
-    // Set up enhanced ecommerce tracking
-    this.setupEnhancedEcommerce();
-    
-    // Track page load performance
-    this.trackPagePerformance();
-    
+    // GA4 script is now loaded via next/script in _app.tsx
+    // We just need to wait for it to be available
+    if (process.env.NEXT_PUBLIC_GA_ID) {
+      console.log('✅ GA4 will be initialized via next/script with ID:', process.env.NEXT_PUBLIC_GA_ID);
+    } else {
+      console.warn('⚠️ GA_TRACKING_ID not found in environment variables');
+    }
+
     this.isInitialized = true;
   }
 

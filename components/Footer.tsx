@@ -32,7 +32,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xs bg-orange-100  text-orange-700  px-2 py-1 rounded-full">FREE</span>
             </div>
             <p className="text-gray-600  text-sm mb-4 leading-relaxed px-4">
-              {language === 'es' ? 'Finalmente, una app que se calla y escucha.' : 'Finally, an app that shuts up and listens.'}
+              {language === 'es' ? 'Una app que se calla y escucha.' : 'Finally, an app that shuts up and listens.'}
             </p>
           </div>
 
