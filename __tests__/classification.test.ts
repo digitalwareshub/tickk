@@ -22,8 +22,8 @@ describe('Voice Classification', () => {
       ['Maybe we should consider this', 'notes'],
       ['Milk', 'notes'], // Single word, no context
       ['That meeting was interesting', 'notes'], // Past tense
-    ])('classifies "%s" as %s', (text, expected) => {
-      const result = classifier.classify(text)
+    ])('classifies "%s" as %s', async (text, expected) => {
+      const result = await classifier.classify(text)
       expect(result.category).toBe(expected)
       expect(result.confidence).toBeGreaterThan(0)
       expect(result.confidence).toBeLessThanOrEqual(1)
@@ -31,22 +31,22 @@ describe('Voice Classification', () => {
   })
 
   describe('Confidence Scoring', () => {
-    test('returns higher confidence for clear classifications', () => {
-      const clearTask = classifier.classify('Buy groceries today')
-      const clearNote = classifier.classify('I wonder what time it is')
+    test('returns higher confidence for clear classifications', async () => {
+      const clearTask = await classifier.classify('Buy groceries today')
+      const clearNote = await classifier.classify('I wonder what time it is')
       
       expect(clearTask.confidence).toBeGreaterThan(0.7)
       expect(clearNote.confidence).toBeGreaterThan(0.7)
     })
 
-    test('returns lower confidence for ambiguous text', () => {
-      const ambiguous = classifier.classify('Maybe')
+    test('returns lower confidence for ambiguous text', async () => {
+      const ambiguous = await classifier.classify('Maybe')
       expect(ambiguous.confidence).toBeLessThan(0.7)
     })
   })
 
   describe('Feature Detection', () => {
-    test('detects action verbs correctly', () => {
+    test('detects action verbs correctly', async () => {
       const actionTexts = [
         'Buy groceries',
         'Call the doctor',
@@ -54,13 +54,13 @@ describe('Voice Classification', () => {
         'Fix the broken door'
       ]
       
-      actionTexts.forEach(text => {
-        const result = classifier.classify(text)
+      for (const text of actionTexts) {
+        const result = await classifier.classify(text)
         expect(result.category).toBe('tasks')
-      })
+      }
     })
 
-    test('detects thought patterns correctly', () => {
+    test('detects thought patterns correctly', async () => {
       const thoughtTexts = [
         'What if we changed the design',
         'I wonder how this works',
@@ -68,13 +68,13 @@ describe('Voice Classification', () => {
         'Imagine if we could do this'
       ]
       
-      thoughtTexts.forEach(text => {
-        const result = classifier.classify(text)
+      for (const text of thoughtTexts) {
+        const result = await classifier.classify(text)
         expect(result.category).toBe('notes')
-      })
+      }
     })
 
-    test('detects temporal indicators', () => {
+    test('detects temporal indicators', async () => {
       const temporalTexts = [
         'Meeting today at 3pm',
         'Call mom tomorrow',
@@ -82,36 +82,35 @@ describe('Voice Classification', () => {
         'Schedule for this weekend'
       ]
       
-      temporalTexts.forEach(text => {
-        const result = classifier.classify(text)
+      for (const text of temporalTexts) {
+        const result = await classifier.classify(text)
         expect(result.category).toBe('tasks')
         // Temporal indicators should increase task confidence
         expect(result.confidence).toBeGreaterThan(0.6)
-      })
+      }
     })
   })
 
   describe('Edge Cases', () => {
-    test('handles empty or whitespace-only text', () => {
-      const emptyResults = ['', '   ', '\n\t'].map(text => 
-        classifier.classify(text)
-      )
+    test('handles empty or whitespace-only text', async () => {
+      const emptyTexts = ['', '   ', '\n\t']
       
-      emptyResults.forEach(result => {
+      for (const text of emptyTexts) {
+        const result = await classifier.classify(text)
         expect(result.category).toBeDefined()
         expect(result.confidence).toBeGreaterThan(0)
-      })
+      }
     })
 
-    test('handles very long text', () => {
+    test('handles very long text', async () => {
       const longText = 'I need to buy groceries and pick up milk and eggs and bread and also remember to call mom about the family dinner this weekend and maybe we should discuss the vacation plans for next month'.repeat(5)
       
-      const result = classifier.classify(longText)
+      const result = await classifier.classify(longText)
       expect(result.category).toBeDefined()
       expect(result.confidence).toBeGreaterThan(0)
     })
 
-    test('handles special characters and emojis', () => {
+    test('handles special characters and emojis', async () => {
       const specialTexts = [
         'Buy groceries 🛒 for dinner tonight!',
         'Meeting @ 3pm w/ John & Sarah',
@@ -119,11 +118,11 @@ describe('Voice Classification', () => {
         'What if we used AI/ML for this? 🤔'
       ]
       
-      specialTexts.forEach(text => {
-        const result = classifier.classify(text)
+      for (const text of specialTexts) {
+        const result = await classifier.classify(text)
         expect(result.category).toBeDefined()
         expect(result.confidence).toBeGreaterThan(0)
-      })
+      }
     })
   })
 })

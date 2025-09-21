@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface FooterProps {
   showHomeLink?: boolean
@@ -7,7 +8,16 @@ interface FooterProps {
 
 export default function Footer({ showHomeLink = false }: FooterProps) {
   const router = useRouter()
+  const { language } = useLanguage()
   const currentYear = new Date().getFullYear()
+  
+  // Helper function to get language-aware URLs
+  const getLocalizedUrl = (path: string) => {
+    if (language === 'es') {
+      return `/es${path}`
+    }
+    return path
+  }
 
   return (
     <footer className="bg-gray-100  border-t border-gray-200 ">
@@ -22,31 +32,31 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xs bg-orange-100  text-orange-700  px-2 py-1 rounded-full">FREE</span>
             </div>
             <p className="text-gray-600  text-sm mb-4 leading-relaxed px-4">
-              Finally, an app that shuts up and listens.
+              {language === 'es' ? 'Finalmente, una app que se calla y escucha.' : 'Finally, an app that shuts up and listens.'}
             </p>
           </div>
 
           {/* Quick Links Grid */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="space-y-2">
-              <Link href="/contact" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/contact')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Contact
               </Link>
-              <Link href="/support" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/support')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Support
               </Link>
-              <Link href="/privacy" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Privacy
               </Link>
             </div>
             <div className="space-y-2">
-              <Link href="/terms" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/terms')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Terms
               </Link>
-              <Link href="/blog" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/blog')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Blog
               </Link>
-              <Link href="/bug-report" className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
+              <Link href={getLocalizedUrl('/bug-report')} className="block text-sm text-gray-600  hover:text-orange-600  transition-colors">
                 Bug Report
               </Link>
               <a 
@@ -106,9 +116,12 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xl font-bold text-gray-900 ">tickk</span>
               <span className="text-xs bg-orange-100  text-orange-700  px-2 py-1 rounded-full">FREE</span>
             </div>
-            <p className="text-gray-600  text-sm mb-4 leading-relaxed">
-              Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders.
-            </p>
+                  <p className="text-gray-600  text-sm mb-4 leading-relaxed">
+                    {language === 'es' 
+                      ? 'Finalmente, una app que se calla y escucha. Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y recordatorios.'
+                      : 'Finally, an app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders.'
+                    }
+                  </p>
             <div className="flex space-x-4">
               <a 
                 href="https://twitter.com/tickkapp" 
@@ -153,17 +166,17 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Voice Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/landing" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/landing')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   About tickk
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/blog')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Blog
                 </Link>
               </li>
@@ -214,27 +227,27 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/privacy" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/privacy')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/terms')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/support')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Support & Help
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/contact')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/bug-report" className="text-gray-600  hover:text-orange-600  transition-colors">
+                <Link href={getLocalizedUrl('/bug-report')} className="text-gray-600  hover:text-orange-600  transition-colors">
                   Bug Reports
                 </Link>
               </li>
@@ -251,7 +264,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </div>
             {showHomeLink && (
               <button 
-                onClick={() => router.push('/')}
+                onClick={() => router.push(getLocalizedUrl('/'))}
                 className="text-xs text-orange-600  hover:text-orange-700  transition-colors flex items-center justify-center gap-1 mx-auto mb-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -273,7 +286,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             
             {showHomeLink && (
               <button 
-                onClick={() => router.push('/')}
+                onClick={() => router.push(getLocalizedUrl('/'))}
                 className="text-sm text-orange-600  hover:text-orange-700  transition-colors flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

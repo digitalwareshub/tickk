@@ -13,6 +13,19 @@
         <priority>1.0</priority>
         <lastmod>2024-09-19T00:00:00Z</lastmod>
         <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/"/>
+    </url>
+
+    <!-- Spanish Homepage - High Priority -->
+    <url>
+        <loc>https://tickk.app/es</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <lastmod>2024-09-19T00:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/"/>
     </url>
 
     <!-- Landing Page - About tickk -->
@@ -22,6 +35,19 @@
         <priority>0.8</priority>
         <lastmod>2024-09-20T00:00:00Z</lastmod>
         <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/landing"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/landing"/>
+    </url>
+
+    <!-- Spanish Landing Page - About tickk -->
+    <url>
+        <loc>https://tickk.app/es/landing</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2024-09-20T00:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/landing"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/landing"/>
     </url>
 
     <!-- Blog Index - SEO Content -->

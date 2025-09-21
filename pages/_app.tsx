@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { pageview, GA_TRACKING_ID } from '@/lib/analytics'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -73,7 +74,9 @@ export default function App({ Component, pageProps }: AppProps) {
         )}
       </Head>
       
+      <LanguageProvider>
         <Component {...pageProps} />
+      </LanguageProvider>
 
       {/* Vercel Analytics */}
       <Analytics />

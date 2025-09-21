@@ -14,7 +14,6 @@ import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
 import MicroLanding from '@/components/MicroLanding'
-import ReturningUserInterface from '@/components/ReturningUserInterface'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
@@ -41,6 +40,9 @@ export default function App() {
   // UI state
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
+  const [currentTranscript, setCurrentTranscript] = useState('')
+  const [recordingError, setRecordingError] = useState<string | null>(null)
+  const [isSupported, setIsSupported] = useState(true)
   const [recordingControls, setRecordingControls] = useState<{
     startRecording: () => void
     stopRecording: () => void
@@ -233,6 +235,26 @@ export default function App() {
   }
   
   /**
+   * Handle recording state changes from BraindumpInterface
+   */
+  const handleRecordingStateChange = useCallback((recording: boolean) => {
+    setIsRecording(recording)
+  }, [])
+  
+  /**
+   * Handle recording status updates from BraindumpInterface
+   */
+  const handleRecordingStatusUpdate = useCallback((status: {
+    transcript?: string
+    error?: string | null
+    isSupported?: boolean
+  }) => {
+    if (status.transcript !== undefined) setCurrentTranscript(status.transcript)
+    if (status.error !== undefined) setRecordingError(status.error)
+    if (status.isSupported !== undefined) setIsSupported(status.isSupported)
+  }, [])
+  
+  /**
    * Handle example prompt clicks
    */
   const handleExampleClick = async (text: string) => {
@@ -350,18 +372,17 @@ export default function App() {
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (
             <>
-              {/* Show MicroLanding for new users, ReturningUserInterface for users with data */}
-              {totalItemCount === 0 ? (
-                <MicroLanding
-                  itemCount={totalItemCount}
-                  onExampleClick={handleExampleClick}
-                />
-              ) : (
-                <ReturningUserInterface 
-                  totalItems={totalItemCount} 
-                  onModeChange={handleModeSwitch}
-                />
-              )}
+              {/* Always show MicroLanding for the main interface as seen in screenshot */}
+              <MicroLanding
+                itemCount={totalItemCount}
+                onExampleClick={handleExampleClick}
+                isRecording={isRecording}
+                isSupported={isSupported}
+                onStartRecording={recordingControls?.startRecording}
+                onStopRecording={recordingControls?.stopRecording}
+                currentTranscript={currentTranscript}
+                recordingError={recordingError}
+              />
             </>
           )}
           
@@ -373,8 +394,10 @@ export default function App() {
                   appData={appData}
                   preferences={preferences}
                   onDataUpdate={handleDataUpdate}
-                  onRecordingStateChange={setIsRecording}
+                  onRecordingStateChange={handleRecordingStateChange}
                   onRecordingControls={setRecordingControls}
+                  onRecordingStatusUpdate={handleRecordingStatusUpdate}
+                  showMainInterface={false}
                 />
               ) : (
                 <OrganizedView 

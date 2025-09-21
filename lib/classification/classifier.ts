@@ -1,10 +1,27 @@
 /**
  * Local NLP Classification Service
- * Uses compromise.js for rule-based classification without AI dependencies
+ * Uses compromise.js for English and es-compromise for Spanish classification without AI dependencies
  */
 
 import nlp from 'compromise'
 import type { Classification, UrgencyLevel } from '@/types/braindump'
+
+// Dynamic import for Spanish NLP - temporarily disabled due to TypeScript issues
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let esNlp: any = null
+const loadSpanishNLP = async () => {
+  if (!esNlp) {
+    try {
+      // Temporarily use English NLP for Spanish until es-compromise TypeScript issues are resolved
+      console.warn('Spanish NLP temporarily using English NLP - will be fixed in next update')
+      esNlp = nlp
+    } catch {
+      console.warn('Spanish NLP not available, falling back to English')
+      esNlp = nlp
+    }
+  }
+  return esNlp
+}
 
 interface Features {
   hasImperative: boolean
@@ -22,6 +39,7 @@ interface Features {
 export class VoiceClassifier {
   private static instance: VoiceClassifier
   private nlp: typeof nlp
+  private currentLanguage: 'en' | 'es' = 'en'
   
   static getInstance(): VoiceClassifier {
     if (!this.instance) {
@@ -33,12 +51,27 @@ export class VoiceClassifier {
   constructor() {
     this.nlp = nlp
   }
+
+  /**
+   * Set the language for classification
+   */
+  setLanguage(language: 'en' | 'es') {
+    this.currentLanguage = language
+  }
   
   /**
    * Main classification method
    */
-  classify(text: string): Classification {
-    const doc = this.nlp(text)
+  async classify(text: string): Promise<Classification> {
+    // Use appropriate NLP library based on language
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let doc: any
+    if (this.currentLanguage === 'es') {
+      const spanishNlp = await loadSpanishNLP()
+      doc = spanishNlp(text)
+    } else {
+      doc = this.nlp(text)
+    }
     
     // Extract linguistic features
     const features = this.extractFeatures(doc, text)
@@ -174,7 +207,9 @@ export class VoiceClassifier {
    * Check for thought/idea patterns
    */
   private hasThoughtPattern(text: string): boolean {
-    const thoughtPatterns = /\b(what if|I wonder|it would be|interesting|curious|strange|funny|cool if|imagine|thinking about|occurred to me|realized|noticed)\b/i
+    const thoughtPatterns = this.currentLanguage === 'es' 
+      ? /\b(qué tal si|me pregunto|sería|interesante|curioso|extraño|divertido|genial si|imagino|pensando en|se me ocurrió|me di cuenta|noté|creo que|siento que|pienso que|me parece que|tal vez|quizás|supongo que|parece que|noto que|entiendo que|recuerdo que|olvidé que|sé que|no sé|no estoy seguro|estoy pensando|me pregunto|me siento|me parece|me gusta|me molesta|me preocupa)\b/i
+      : /\b(what if|I wonder|it would be|interesting|curious|strange|funny|cool if|imagine|thinking about|occurred to me|realized|noticed)\b/i
     return thoughtPatterns.test(text)
   }
   
@@ -182,7 +217,23 @@ export class VoiceClassifier {
    * Check for intent/desire patterns (strongest note indicator)
    */
   private hasIntentPattern(text: string): boolean {
-    const intentPatterns = [
+    const intentPatterns = this.currentLanguage === 'es' ? [
+      /\bquiero\s+que\b/i,
+      /\bme\s+gustaría\s+que\b/i,
+      /\bdesearía\s+que\b/i,
+      /\bespero\s+que\b/i,
+      /\bestoy\s+pensando\s+en\b/i,
+      /\bestoy\s+interesado\s+en\b/i,
+      /\bme\s+encanta\s+que\b/i,
+      /\bdisfruto\s+de\b/i,
+      /\bme\s+gustaría\s+que\b/i,
+      /\bdesearía\s+poder\b/i,
+      /\bespero\s+que\b/i,
+      /\bnecesito\s+que\b/i,
+      /\btengo\s+que\b/i,
+      /\bdebo\s+que\b/i,
+      /\bdebería\s+que\b/i
+    ] : [
       /\bi\s+want\s+to\b/i,
       /\bi'd\s+like\s+to\b/i,
       /\bi\s+wish\s+to\b/i,

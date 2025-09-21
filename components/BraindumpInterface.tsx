@@ -9,6 +9,7 @@ import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem, BraindumpSession } from '@/types/braindump'
 
 interface BraindumpInterfaceProps {
@@ -22,6 +23,12 @@ interface BraindumpInterfaceProps {
     canProcess: boolean
     processItems: () => void
   }) => void
+  onRecordingStatusUpdate?: (status: {
+    transcript?: string
+    error?: string | null
+    isSupported?: boolean
+  }) => void
+  showMainInterface?: boolean // Controls whether to show the main recording interface
 }
 
 export default function BraindumpInterface({ 
@@ -29,8 +36,11 @@ export default function BraindumpInterface({
   preferences, 
   onDataUpdate,
   onRecordingStateChange,
-  onRecordingControls
+  onRecordingControls,
+  onRecordingStatusUpdate,
+  showMainInterface = true
 }: BraindumpInterfaceProps) {
+  const { language, t } = useLanguage()
   // Recording state
   const [isRecording, setIsRecording] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -69,16 +79,21 @@ export default function BraindumpInterface({
       
       recognitionInstance.continuous = false
       recognitionInstance.interimResults = true
-      recognitionInstance.lang = 'en-US'
+      recognitionInstance.lang = language === 'es' ? 'es-ES' : 'en-US'
       recognitionInstance.maxAlternatives = 1
       
       setRecognition(recognitionInstance)
       setIsSupported(true)
+      onRecordingStatusUpdate?.({ isSupported: true })
     } else {
       setIsSupported(false)
-      setRecordingError('Speech recognition not supported in this browser')
+      setRecordingError(t('braindump.speech_not_supported'))
+      onRecordingStatusUpdate?.({ 
+        isSupported: false, 
+        error: t('braindump.speech_not_supported') 
+      })
     }
-  }, [])
+  }, [language, onRecordingStatusUpdate, t])
   
   /**
    * Load recent braindump items on mount
@@ -110,6 +125,7 @@ export default function BraindumpInterface({
     setCurrentTranscript('')
     transcriptRef.current = ''
     setIsRecording(true)
+    onRecordingStatusUpdate?.({ transcript: '', error: null })
     
     // Create new session if none exists
     if (!currentSession) {
@@ -132,13 +148,16 @@ export default function BraindumpInterface({
       }
       transcriptRef.current = transcript
       setCurrentTranscript(transcript)
+      onRecordingStatusUpdate?.({ transcript })
     }
     
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onerror = (event: any) => {
       console.error('Speech recognition error:', event.error)
-      setRecordingError(`Recording error: ${event.error}`)
+      const errorMessage = `Recording error: ${event.error}`
+      setRecordingError(errorMessage)
       setIsRecording(false)
+      onRecordingStatusUpdate?.({ error: errorMessage })
     }
     
     recognition.onend = () => {
@@ -217,7 +236,8 @@ export default function BraindumpInterface({
         }
       }
       
-      // Classify the item
+      // Set language for classifier and classify the item
+      classifier.setLanguage(language)
       const classificationResult = await classifier.classify(newItem.text)
       newItem.classification = classificationResult
       newItem.confidence = classificationResult.confidence
@@ -261,6 +281,7 @@ export default function BraindumpInterface({
       
       setCurrentTranscript('')
       setLastAddedItem(transcript.slice(0, 50) + (transcript.length > 50 ? '...' : ''))
+      onRecordingStatusUpdate?.({ transcript: '' })
       
       // Clear success notification after 3 seconds
       setTimeout(() => setLastAddedItem(null), 3000)
@@ -272,7 +293,7 @@ export default function BraindumpInterface({
     } finally {
       setIsProcessing(false)
     }
-  }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer])
+  }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer, language, onRecordingStatusUpdate])
   
   /**
    * Handle completion of processing modal
@@ -404,133 +425,133 @@ export default function BraindumpInterface({
             }}
             className="px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 rounded border"
           >
-            Clear All Data (Dev)
+{t('braindump.clear_data')}
           </button>
         </div>
       )}
       
       {/* Main Recording Interface */}
-      <div className="text-center mb-8">
-        <div 
-          className="border border-gray-200 rounded-lg p-6 bg-white"
-          role="region"
-          aria-label="Voice recording controls"
-        >
-          
-          {/* Current Session Info */}
-          {currentSession && (
-            <div 
-              className="bg-gray-50 rounded-md p-3 mb-4 text-sm text-gray-600"
-              role="status"
-              aria-live="polite"
-            >
-              Session: {currentSession.itemCount} items
-            </div>
-          )}
-          
-          {/* Success Notification */}
-          {lastAddedItem && (
-            <div 
-              className="bg-gray-50 border border-gray-200 rounded-md p-3 mb-4 text-sm text-gray-700"
-              role="status"
-              aria-live="polite"
-            >
-              ✅ Added: &ldquo;{lastAddedItem}&rdquo;
-              <br />
-              <span className="text-xs opacity-75">Click &ldquo;Organize&rdquo; below to categorize</span>
-            </div>
-          )}
-          
-          {/* Recording Button */}
-          <div className="mb-4">
-            <button
-              id="recording-button"
-              onClick={isRecording ? stopRecording : startRecording}
-              disabled={!isSupported || isProcessing}
-              aria-label={
-                isRecording 
-                  ? 'Stop recording (currently recording)' 
-                  : isSupported 
-                    ? 'Start voice recording' 
-                    : 'Voice recording not supported'
-              }
-              aria-pressed={isRecording}
-              aria-describedby="recording-help"
-              className={`w-16 h-16 rounded-full border-2 transition-colors ${
-                isRecording
-                  ? 'bg-gray-100 border-gray-300 text-gray-700'
-                  : isSupported
-                  ? 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
-                  : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
-              } text-sm font-medium`}
-            >
-              {isRecording ? 'Stop' : 'Record'}
-            </button>
-          </div>
-          
-          {/* Hidden help text for screen readers */}
-          <div id="recording-help" className="sr-only">
-            Press spacebar to start or stop recording. 
-            Speak clearly after clicking record. 
-            Your speech will be transcribed and organized automatically.
-          </div>
-          
-          {/* Recording Status */}
-          <div className="mb-4" role="status" aria-live="polite">
-            {isRecording && (
-              <p className="text-sm text-gray-600">
-                Recording...
-              </p>
+      {showMainInterface && (
+        <div className="text-center mb-8">
+          <div 
+            className="border border-gray-200 rounded-lg p-6 bg-white"
+            role="region"
+            aria-label="Voice recording controls"
+          >
+            
+            {/* Current Session Info */}
+            {currentSession && (
+              <div 
+                className="bg-gray-50 rounded-md p-3 mb-4 text-sm text-gray-600"
+                role="status"
+                aria-live="polite"
+              >
+{t('braindump.session_info').replace('{count}', currentSession.itemCount.toString())}
+              </div>
             )}
-            {isProcessing && (
-              <p className="text-sm text-gray-600">
-                Processing...
-              </p>
+            
+            {/* Success Notification */}
+            {lastAddedItem && (
+              <div 
+                className="bg-gray-50 border border-gray-200 rounded-md p-3 mb-4 text-sm text-gray-700"
+                role="status"
+                aria-live="polite"
+              >
+                ✅ {t('braindump.added_item').replace('{text}', lastAddedItem)}
+                <br />
+                <span className="text-xs opacity-75">{t('braindump.click_organize')}</span>
+              </div>
             )}
-            {!isRecording && !isProcessing && isSupported && (
-              <p className="text-sm text-gray-500">
-                Click to record
-                {preferences?.enableKeyboardShortcuts && (
-                  <span className="block text-xs mt-1">Spacebar shortcut</span>
-                )}
-              </p>
+            
+            {/* Recording Button */}
+            <div className="mb-4">
+              <button
+                id="recording-button"
+                onClick={isRecording ? stopRecording : startRecording}
+                disabled={!isSupported || isProcessing}
+                aria-label={
+                  isRecording 
+                    ? 'Stop recording (currently recording)' 
+                    : isSupported 
+                      ? 'Start voice recording' 
+                      : 'Voice recording not supported'
+                }
+                aria-pressed={isRecording}
+                aria-describedby="recording-help"
+                className={`w-16 h-16 rounded-full border-2 transition-colors ${
+                  isRecording
+                    ? 'bg-gray-100 border-gray-300 text-gray-700'
+                    : isSupported
+                    ? 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
+                    : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
+                } text-sm font-medium`}
+              >
+{isRecording ? t('braindump.stop') : t('braindump.record')}
+              </button>
+            </div>
+            
+            {/* Hidden help text for screen readers */}
+            <div id="recording-help" className="sr-only">
+              {t('braindump.recording_help')}
+            </div>
+            
+            {/* Recording Status */}
+            <div className="mb-4" role="status" aria-live="polite">
+              {isRecording && (
+                <p className="text-sm text-gray-600">
+                  {t('braindump.recording')}
+                </p>
+              )}
+              {isProcessing && (
+                <p className="text-sm text-gray-600">
+                  {t('braindump.processing')}
+                </p>
+              )}
+              {!isRecording && !isProcessing && isSupported && (
+                <p className="text-sm text-gray-500">
+                  {t('braindump.click_to_record')}
+                  {preferences?.enableKeyboardShortcuts && (
+                    <span className="block text-xs mt-1">{t('braindump.spacebar_shortcut')}</span>
+                  )}
+                </p>
+              )}
+            </div>
+            
+            {/* Live Transcript */}
+            {currentTranscript && (
+              <div 
+                className="bg-gray-50 rounded-md p-3 mb-4 text-left"
+                role="region"
+                aria-label="Live transcript"
+                aria-live="polite"
+              >
+                <p className="text-xs text-gray-500 mb-1">Transcript:</p>
+                <p className="text-sm text-gray-900">
+                  {currentTranscript}
+                </p>
+              </div>
+            )}
+            
+            {/* Error Display */}
+            {recordingError && (
+              <div className="bg-gray-50 border border-gray-200 rounded-md p-3 mb-4">
+                <p className="text-gray-700 text-xs">
+                  {recordingError}
+                </p>
+              </div>
+            )}
+            
+            {/* Browser Support Warning */}
+            {!isSupported && (
+              <div className="bg-gray-50 border border-gray-200 rounded-md p-3">
+                <p className="text-gray-700 text-xs">
+                  {t('braindump.speech_not_supported')}
+                </p>
+              </div>
             )}
           </div>
-          
-          {/* Live Transcript */}
-          {currentTranscript && (
-            <div 
-              className="bg-gray-50 rounded-md p-3 mb-4 text-left"
-              role="region"
-              aria-label="Live transcript"
-              aria-live="polite"
-            >
-              <p className="text-xs text-gray-500 mb-1">Transcript:</p>
-              <p className="text-sm text-gray-900">
-                {currentTranscript}
-              </p>
-            </div>
-          )}
-          
-          {/* Error Display */}
-          {recordingError && (
-            <div className="bg-gray-50 border border-gray-200 rounded-md p-3 mb-4">
-              <p className="text-gray-700 text-xs">
-                {recordingError}
-              </p>
-            </div>
-          )}
-          
-          {/* Browser Support Warning */}
-          {!isSupported && (
-            <div className="bg-gray-50 border border-gray-200 rounded-md p-3">
-              <p className="text-gray-700 text-xs">
-                Speech recognition not supported in this browser.
-              </p>
-            </div>
-          )}
         </div>
-      </div>
+      )}
       
       {/* Recent Items & Process Button */}
       {recentItems.length > 0 && (
