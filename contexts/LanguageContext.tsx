@@ -127,7 +127,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'Todos los Dispositivos',
     
     // MicroLanding
-    'microlanding.headline': 'Finalmente, una app que se calla y escucha.',
+    'microlanding.headline': 'Una app que se calla y escucha.',
     'microlanding.subheadline': 'Simplemente toca el micrófono y comienza a hablar. Organizaremos todo en tareas y notas.',
     'microlanding.got_it': 'Entendido',
     'microlanding.try_saying': 'Prueba diciendo',

@@ -100,7 +100,7 @@ export default function SpanishLanding() {
         <section className="hero-section py-16 md:py-24">
           <div className="max-w-4xl mx-auto text-center px-4">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Finalmente, una app que se calla y escucha.
+              Una app que se calla y escucha.
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
               Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural.
