@@ -64,19 +64,39 @@ class EnhancedAnalytics {
    */
   private initializeTracking() {
     if (typeof window === 'undefined') return;
+    
+    // Debug logging for development
+    console.log('🔍 Analytics Debug:', {
+      hasWindow: typeof window !== 'undefined',
+      hasGtag: typeof window.gtag === 'function',
+      gaId: process.env.NEXT_PUBLIC_GA_ID,
+      nodeEnv: process.env.NODE_ENV
+    });
 
-    // Generate or retrieve user ID (anonymous)
-    this.userId = this.getOrCreateUserId();
-    
-    // Detect traffic source
-    this.trafficSource = this.detectTrafficSource();
-    
-    // Set up enhanced ecommerce tracking
-    this.setupEnhancedEcommerce();
-    
-    // Track page load performance
-    this.trackPagePerformance();
-    
+    if (process.env.NEXT_PUBLIC_GA_ID) {
+      // Load Google Analytics script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
+      document.head.appendChild(script);
+
+      // Initialize gtag
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function() {
+        window.dataLayer.push(Array.from(arguments) as unknown as Record<string, unknown>);
+      };
+      
+      window.gtag('js', new Date());
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
+        anonymize_ip: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+      
+      console.log('✅ GA4 initialized with ID:', process.env.NEXT_PUBLIC_GA_ID);
+    } else {
+      console.warn('⚠️ GA_TRACKING_ID not found in environment variables');
+    }
+
     this.isInitialized = true;
   }
 
