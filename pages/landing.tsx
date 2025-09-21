@@ -556,8 +556,8 @@ export default function Home() {
 
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 mb-8 text-center">
-                A Progressive Web App that works completely offline with no AI dependencies. 
-                Speak naturally and watch your words become perfectly organized tasks, notes, and calendar events using pure browser technology. <Link href="/privacy" className="text-orange-600 hover:text-orange-700 underline">Complete privacy protection</Link> with zero data collection.
+                Just speak your thoughts and watch them become organized tasks and notes. 
+                No complex setup, no subscriptions, no data collection. <Link href="/privacy" className="text-orange-600 hover:text-orange-700 underline">Your privacy is protected</Link> - everything stays on your device.
               </p>
 
               {/* Trust Indicators */}
@@ -1179,6 +1179,12 @@ export default function Home() {
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>Complete Privacy</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                </svg>
+                <span>Open Source</span>
               </div>
             </div>
           </div>
