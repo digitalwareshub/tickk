@@ -3,7 +3,7 @@
  * Enhanced dashboard that preserves legacy functionality while integrating with new data structure
  */
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Analytics from './Analytics'
 import type { AppData, UserPreferences } from '@/types/braindump'
 
@@ -18,6 +18,9 @@ export default function OrganizedView({
   onDataUpdate 
 }: OrganizedViewProps) {
   const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'analytics'>('all')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [showExportMenu, setShowExportMenu] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   
   // Get organized items (tasks and notes)
   const organizedTasks = appData.tasks || []
@@ -48,6 +51,101 @@ export default function OrganizedView({
     
     onDataUpdate(updatedData)
   }
+
+  // Export functionality
+  const exportToCSV = () => {
+    const allItems = [
+      ...organizedTasks.map(task => ({
+        type: 'Task',
+        content: task.text,
+        completed: task.completed,
+        priority: task.priority || '',
+        tags: task.tags?.join(', ') || '',
+        timestamp: new Date(task.timestamp).toISOString()
+      })),
+      ...organizedNotes.map(note => ({
+        type: 'Note',
+        content: note.text,
+        completed: '',
+        priority: '',
+        tags: note.tags?.join(', ') || '',
+        timestamp: new Date(note.timestamp).toISOString()
+      }))
+    ]
+
+    const headers = ['Type', 'Content', 'Completed', 'Priority', 'Tags', 'Timestamp']
+    const csvContent = [
+      headers.join(','),
+      ...allItems.map(item => 
+        headers.map(header => {
+          const value = item[header.toLowerCase() as keyof typeof item]
+          return `"${String(value).replace(/"/g, '""')}"`
+        }).join(',')
+      )
+    ].join('\n')
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `tickk-export-${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+  }
+
+  const exportToJSON = () => {
+    const exportData = {
+      exportDate: new Date().toISOString(),
+      tasks: organizedTasks,
+      notes: organizedNotes,
+      summary: {
+        totalTasks: organizedTasks.length,
+        completedTasks: organizedTasks.filter(t => t.completed).length,
+        totalNotes: organizedNotes.length
+      }
+    }
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `tickk-export-${new Date().toISOString().split('T')[0]}.json`
+    link.click()
+  }
+
+  // Search functionality
+  const filteredTasks = organizedTasks.filter(task => 
+    task.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    task.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  )
+
+  const filteredNotes = organizedNotes.filter(note => 
+    note.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    note.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  )
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + E - Export menu
+      if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+        e.preventDefault()
+        setShowExportMenu(!showExportMenu)
+      }
+      
+      // Ctrl/Cmd + F - Focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+        e.preventDefault()
+        searchInputRef.current?.focus()
+      }
+      
+      // Escape - Clear search
+      if (e.key === 'Escape') {
+        setSearchQuery('')
+        setShowExportMenu(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [showExportMenu])
   
   return (
     <div className="min-h-screen bg-white">
@@ -77,6 +175,75 @@ export default function OrganizedView({
               <span className="text-orange-600"><strong>{unprocessedCount}</strong> unprocessed</span>
             </>
           )}
+        </div>
+
+        {/* Search and Export Bar */}
+        <div className="flex items-center justify-between mb-8 gap-4">
+          {/* Search Bar */}
+          <div className="flex-1 max-w-md">
+            <div className="relative">
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search tasks and notes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 focus:bg-white"
+              />
+              <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-2.5 w-4 h-4 text-gray-400 hover:text-gray-600"
+                >
+                  ×
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <p className="text-xs text-gray-500 mt-1">
+                Found {filteredTasks.length + filteredNotes.length} results
+              </p>
+            )}
+          </div>
+
+          {/* Export Button */}
+          <div className="relative">
+            <button
+              onClick={() => setShowExportMenu(!showExportMenu)}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Export
+            </button>
+            
+            {showExportMenu && (
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <button
+                  onClick={() => {
+                    exportToCSV()
+                    setShowExportMenu(false)
+                  }}
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 first:rounded-t-lg"
+                >
+                  Export as CSV
+                </button>
+                <button
+                  onClick={() => {
+                    exportToJSON()
+                    setShowExportMenu(false)
+                  }}
+                  className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg"
+                >
+                  Export as JSON
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Clean Navigation */}
@@ -137,6 +304,20 @@ export default function OrganizedView({
             )}
           </button>
         </div>
+
+        {/* Keyboard Shortcuts Help */}
+        <div className="text-center mb-8">
+          <details className="inline-block">
+            <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">
+              Keyboard shortcuts
+            </summary>
+            <div className="mt-2 text-xs text-gray-500 space-y-1">
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> Export data</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> Focus search</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> Clear search</div>
+            </div>
+          </details>
+        </div>
         
         {/* Content Area */}
         {filter === 'analytics' ? (
@@ -146,9 +327,9 @@ export default function OrganizedView({
         ) : (
           <div className="space-y-8">
             {/* Clean Task List */}
-            {(filter === 'all' || filter === 'tasks') && organizedTasks.length > 0 && (
+            {(filter === 'all' || filter === 'tasks') && (searchQuery ? filteredTasks : organizedTasks).length > 0 && (
               <div className="space-y-4">
-                {organizedTasks.map((task) => (
+                {(searchQuery ? filteredTasks : organizedTasks).map((task) => (
                   <div key={task.id} className="flex items-start gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <button
                       onClick={() => handleToggleTask(task.id)}
@@ -205,9 +386,9 @@ export default function OrganizedView({
             )}
 
             {/* Clean Notes List */}
-            {(filter === 'all' || filter === 'notes') && organizedNotes.length > 0 && (
+            {(filter === 'all' || filter === 'notes') && (searchQuery ? filteredNotes : organizedNotes).length > 0 && (
               <div className="space-y-4">
-                {organizedNotes.map((note) => (
+                {(searchQuery ? filteredNotes : organizedNotes).map((note) => (
                   <div key={note.id} className="flex items-start gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <div className="w-4 h-4 mt-1 bg-gray-200 rounded-full flex-shrink-0"></div>
                     <div className="flex-1 min-w-0">
@@ -238,14 +419,25 @@ export default function OrganizedView({
             )}
 
             {/* Empty State */}
-            {((filter === 'tasks' && organizedTasks.length === 0) || 
-              (filter === 'notes' && organizedNotes.length === 0) || 
-              (filter === 'all' && organizedTasks.length === 0 && organizedNotes.length === 0)) && (
+            {((filter === 'tasks' && (searchQuery ? filteredTasks : organizedTasks).length === 0) || 
+              (filter === 'notes' && (searchQuery ? filteredNotes : organizedNotes).length === 0) || 
+              (filter === 'all' && (searchQuery ? filteredTasks : organizedTasks).length === 0 && (searchQuery ? filteredNotes : organizedNotes).length === 0)) && (
               <div className="text-center py-12 text-gray-500">
-                <p className="text-sm mb-2">No {filter === 'all' ? 'items' : filter} yet</p>
-                <p className="text-xs text-gray-400">
-                  Switch to Braindump mode to start capturing your thoughts
-                </p>
+                {searchQuery ? (
+                  <>
+                    <p className="text-sm mb-2">No results found for &quot;{searchQuery}&quot;</p>
+                    <p className="text-xs text-gray-400">
+                      Try a different search term or clear the search
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm mb-2">No {filter === 'all' ? 'items' : filter} yet</p>
+                    <p className="text-xs text-gray-400">
+                      Switch to Braindump mode to start capturing your thoughts
+                    </p>
+                  </>
+                )}
               </div>
             )}
           </div>
