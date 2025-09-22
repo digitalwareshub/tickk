@@ -54,3 +54,10 @@ next-env.d.ts
 # OS
 Thumbs.db
 node_modules
+
+# Build cache
+.swc/
+
+# AI conversation logs
+claude.txt
+chatgpt.txt
