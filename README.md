@@ -133,15 +133,7 @@ This is a personal project. If you want to use or improve the code:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## 🔒 Code Protection
-
-Your code is automatically backed up daily. Manual backup available:
-
-```bash
-./scripts/backup-repo.sh
-```
-
-## 🐛 Issues
+##  Issues
 
 Found a bug? Fork the repository and fix it in your own version. This repository is not accepting bug reports or feature requests.
 - Expected vs actual behavior

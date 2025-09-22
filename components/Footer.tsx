@@ -40,27 +40,27 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="space-y-2 text-center">
               <Link href={getLocalizedUrl('/landing')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors font-medium">
-                About
+                {language === 'es' ? 'Acerca de' : 'About'}
               </Link>
               <Link href={getLocalizedUrl('/contact')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Contact
+                {language === 'es' ? 'Contacto' : 'Contact'}
               </Link>
               <Link href={getLocalizedUrl('/support')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Support
+                {language === 'es' ? 'Soporte' : 'Support'}
               </Link>
               <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Privacy
+                {language === 'es' ? 'Privacidad' : 'Privacy'}
               </Link>
             </div>
             <div className="space-y-2 text-center">
               <Link href={getLocalizedUrl('/terms')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Terms
+                {language === 'es' ? 'Términos' : 'Terms'}
               </Link>
               <Link href={getLocalizedUrl('/blog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 Blog
               </Link>
               <Link href={getLocalizedUrl('/bug-report')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Bug Report
+                {language === 'es' ? 'Reportar Error' : 'Bug Report'}
               </Link>
               <a 
                 href="https://github.com/digitalwareshub/tickk" 
@@ -165,17 +165,17 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Product Column */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              Product
+              {language === 'es' ? 'Producto' : 'Product'}
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href={getLocalizedUrl('/')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Voice Dashboard
+                  {language === 'es' ? 'Panel de Voz' : 'Voice Dashboard'}
                 </Link>
               </li>
               <li>
                 <Link href={getLocalizedUrl('/landing')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  About
+                  {language === 'es' ? 'Acerca de' : 'About'}
                 </Link>
               </li>
               <li>
@@ -190,7 +190,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-orange-600 transition-colors"
                 >
-                  Open Source
+                  {language === 'es' ? 'Código Abierto' : 'Open Source'}
                 </a>
               </li>
             </ul>
@@ -199,26 +199,38 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Use Cases Column */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              Use Cases
+              {language === 'es' ? 'Casos de Uso' : 'Use Cases'}
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <span className="text-gray-600">Meeting Notes</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Notas de Reuniones' : 'Meeting Notes'}
+                </span>
               </li>
               <li>
-                <span className="text-gray-600">Task Management</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Gestión de Tareas' : 'Task Management'}
+                </span>
               </li>
               <li>
-                <span className="text-gray-600">Voice Reminders</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Recordatorios por Voz' : 'Voice Reminders'}
+                </span>
               </li>
               <li>
-                <span className="text-gray-600">Brainstorming</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Lluvia de Ideas' : 'Brainstorming'}
+                </span>
               </li>
               <li>
-                <span className="text-gray-600">Project Planning</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Planificación de Proyectos' : 'Project Planning'}
+                </span>
               </li>
               <li>
-                <span className="text-gray-600">Accessibility</span>
+                <span className="text-gray-600">
+                  {language === 'es' ? 'Accesibilidad' : 'Accessibility'}
+                </span>
               </li>
             </ul>
           </div>
@@ -226,32 +238,32 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Legal & Support Column */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              Legal & Support
+              {language === 'es' ? 'Legal y Soporte' : 'Legal & Support'}
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href={getLocalizedUrl('/privacy')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Privacy Policy
+                  {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
                 </Link>
               </li>
               <li>
                 <Link href={getLocalizedUrl('/terms')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Terms of Service
+                  {language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
                 </Link>
               </li>
               <li>
                 <Link href={getLocalizedUrl('/support')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Support & Help
+                  {language === 'es' ? 'Soporte y Ayuda' : 'Support & Help'}
                 </Link>
               </li>
               <li>
                 <Link href={getLocalizedUrl('/contact')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Contact
+                  {language === 'es' ? 'Contacto' : 'Contact'}
                 </Link>
               </li>
               <li>
                 <Link href={getLocalizedUrl('/bug-report')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Bug Reports
+                  {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
                 </Link>
               </li>
             </ul>
@@ -263,7 +275,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Mobile Bottom */}
           <div className="block md:hidden text-center">
             <div className="text-xs text-gray-600 mb-2">
-              © {currentYear} tickk. Built with ❤️ for productivity.
+              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para la productividad.' : 'Built with ❤️ for productivity.'}
             </div>
             {showHomeLink && (
               <button 
@@ -273,7 +285,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                Back to Homepage
+                {language === 'es' ? 'Volver al Inicio' : 'Back to Homepage'}
               </button>
             )}
             <div className="text-xs text-gray-500">
@@ -284,7 +296,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Desktop Bottom */}
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-600 mb-4 md:mb-0">
-              © {currentYear} tickk. Built with ❤️ for productivity enthusiasts.
+              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para entusiastas de la productividad.' : 'Built with ❤️ for productivity enthusiasts.'}
             </div>
             
             {showHomeLink && (
@@ -295,16 +307,16 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                Back to Homepage
+                {language === 'es' ? 'Volver al Inicio' : 'Back to Homepage'}
               </button>
             )}
 
             <div className="flex items-center space-x-4 text-xs text-gray-500">
-              <span>Made with Next.js</span>
+              <span>{language === 'es' ? 'Hecho con Next.js' : 'Made with Next.js'}</span>
               <span>•</span>
-              <span>Powered by Web Speech API</span>
+              <span>{language === 'es' ? 'Impulsado por Web Speech API' : 'Powered by Web Speech API'}</span>
               <span>•</span>
-              <span>NLP by compromise.js</span>
+              <span>{language === 'es' ? 'PLN por compromise.js' : 'NLP by compromise.js'}</span>
             </div>
           </div>
         </div>
