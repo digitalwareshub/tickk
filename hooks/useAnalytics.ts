@@ -152,7 +152,7 @@ export const useFormTracking = (formId: string) => {
     });
   }, [formId]);
 
-  const trackFormComplete = useCallback((fields: Record<string, any>) => {
+  const trackFormComplete = useCallback((fields: Record<string, string | number | boolean>) => {
     enhancedAnalytics.trackConversion({
       action: 'form_complete',
       category: 'conversion',
@@ -191,10 +191,10 @@ export const useLinkTracking = () => {
     const isGitHub = url.includes('github.com');
     const isBlog = url.includes('/blog');
 
-    let conversionType: any = 'internal_navigation';
+    let conversionType: 'landing_to_app' | 'blog_to_app' | 'faq_to_app' | 'github_click' | 'social_share' = 'landing_to_app';
     if (isGitHub) conversionType = 'github_click';
     else if (isBlog) conversionType = 'blog_to_app';
-    else if (isExternal) conversionType = 'external_link';
+    else if (url.includes('/faq') || url.includes('/support')) conversionType = 'faq_to_app';
 
     enhancedAnalytics.trackConversion({
       action: 'link_click',
@@ -266,17 +266,20 @@ export const usePerformanceTracking = (pageName: string) => {
       // First Input Delay
       new PerformanceObserver((entryList) => {
         const entries = entryList.getEntries();
-        entries.forEach((entry: any) => {
-          enhancedAnalytics.trackEvent({
-            action: 'web_vital_fid',
-            category: 'performance',
-            label: pageName,
-            value: Math.round(entry.processingStart - entry.startTime),
-            custom_parameters: {
+        entries.forEach((entry) => {
+          const eventEntry = entry as PerformanceEventTiming;
+          if ('processingStart' in eventEntry) {
+            enhancedAnalytics.trackEvent({
+              action: 'web_vital_fid',
+              category: 'performance',
+              label: pageName,
+              value: Math.round(eventEntry.processingStart - eventEntry.startTime),
+              custom_parameters: {
               metric_type: 'first_input_delay',
               page_name: pageName
             }
           });
+          }
         });
       }).observe({ entryTypes: ['first-input'] });
 
@@ -284,8 +287,12 @@ export const usePerformanceTracking = (pageName: string) => {
       let clsValue = 0;
       new PerformanceObserver((entryList) => {
         for (const entry of entryList.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          const layoutShiftEntry = entry as PerformanceEntry & { 
+            hadRecentInput?: boolean; 
+            value: number; 
+          };
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
           }
         }
         
