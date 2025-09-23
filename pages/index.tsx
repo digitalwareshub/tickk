@@ -32,6 +32,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [needsMigration, setNeedsMigration] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false) // Show only for new users
+  const [modalLanguage, setModalLanguage] = useState<'en' | 'es'>('en') // Language for onboarding modal
   
   // Smart context state
   const [hasEverRecorded, setHasEverRecorded] = useState(false)
@@ -54,13 +55,111 @@ export default function App() {
   const [storageService] = useState(() => StorageService.getInstance())
   const [migrator] = useState(() => DataMigrator.getInstance())
   // const [announcer] = useState(() => AccessibilityAnnouncer.getInstance())
+
+  // Modal content in both languages
+  const modalContent = {
+    en: {
+      title: "Speak it. Save it. Sort it later.",
+      subtitle: "Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.",
+      demoTitle: "See it in action:",
+      youSay: "You say:",
+      weOrganize: "We organize:",
+      exampleText: "I need to call mom tomorrow and don't forget to buy groceries",
+      task1: "Call mom tomorrow",
+      task2: "Buy groceries",
+      tagTask: "task",
+      trustPrivate: "100% Private",
+      trustPrivateDesc: "Local processing",
+      trustNoSignup: "No Sign-up",
+      trustNoSignupDesc: "Start instantly",
+      trustOffline: "Works Offline",
+      trustOfflineDesc: "Your device only",
+      trustSmart: "Smart AI",
+      trustSmartDesc: "Auto-organize",
+      howItWorks: "How it works:",
+      step1: "Speak your thoughts naturally",
+      step2: "Review organized tasks & notes", 
+      step3: "Get productive immediately",
+      startRecording: "🎤 Start Recording",
+      tryDemo: "👁️ Try Demo First",
+      skipIntro: "Skip intro"
+    },
+    es: {
+      title: "Háblalo. Guárdalo. Ordénalo después.",
+      subtitle: "Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local.",
+      demoTitle: "Míralo en acción:",
+      youSay: "Tú dices:",
+      weOrganize: "Nosotros organizamos:",
+      exampleText: "Necesito llamar a mamá mañana y no olvidar comprar víveres",
+      task1: "Llamar a mamá mañana",
+      task2: "Comprar víveres",
+      tagTask: "tarea",
+      trustPrivate: "100% Privado",
+      trustPrivateDesc: "Procesamiento local",
+      trustNoSignup: "Sin Registro",
+      trustNoSignupDesc: "Comienza al instante",
+      trustOffline: "Funciona Sin Conexión",
+      trustOfflineDesc: "Solo tu dispositivo",
+      trustSmart: "IA Inteligente",
+      trustSmartDesc: "Auto-organiza",
+      howItWorks: "Cómo funciona:",
+      step1: "Habla tus pensamientos de forma natural",
+      step2: "Revisa tareas y notas organizadas",
+      step3: "Sé productivo inmediatamente",
+      startRecording: "🎤 Comenzar a Grabar",
+      tryDemo: "👁️ Probar Demo Primero",
+      skipIntro: "Saltar introducción"
+    }
+  }
+
+  const content = modalContent[modalLanguage]
   
+  /**
+   * Auto-redirect to user's preferred language (must happen first)
+   */
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Check for reset parameter (for testing)
+      const urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get('reset') === 'true') {
+        localStorage.removeItem('tickk_language_choice_made')
+        localStorage.removeItem('tickk_language')
+        localStorage.removeItem('tickk_has_used')
+        // Remove the parameter from URL
+        window.history.replaceState({}, document.title, window.location.pathname)
+      }
+      
+      const savedLanguage = localStorage.getItem('tickk_language')
+      const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
+      
+      // If user has made a language choice and prefers Spanish, redirect immediately
+      if (hasLanguageChoice && savedLanguage === 'es') {
+        window.location.replace('/es')
+        return
+      }
+    }
+  }, [])
+
   /**
    * Initialize app on mount
    */
   useEffect(() => {
     const initializeApp = async () => {
       setMounted(true)
+      
+      // Check for early redirect - if we're still here, proceed with initialization
+      const savedLanguage = localStorage.getItem('tickk_language')
+      const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
+      
+      // If user should be redirected, don't initialize the app
+      if (hasLanguageChoice && savedLanguage === 'es') {
+        return
+      }
+      
+      // Update modal language to match saved preference (for English users)
+      if (savedLanguage === 'es') {
+        setModalLanguage('es')
+      }
       
       // Track page view
       trackPageView('main_app')
@@ -92,13 +191,13 @@ export default function App() {
           const savedMode = data.preferences?.defaultMode || 'braindump'
           setMode(savedMode)
           
-          // Only show onboarding MODAL for truly new users with no data and no previous visits
+          // Only show onboarding MODAL for users who haven't made a language choice yet
           // The rich interface should always show regardless of user status
-          const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
-          const hasAnyData = totalItems > 0
+          const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
           const onboardingPref = data.preferences?.showOnboarding !== false
           
-          if (!hasUsedBefore && !hasAnyData && onboardingPref && !migrationNeeded) {
+          // Always show modal if no language choice has been made (for proper i18n experience)
+          if (!hasLanguageChoice && onboardingPref && !migrationNeeded) {
             setShowOnboarding(true)
           }
         } else {
@@ -127,10 +226,10 @@ export default function App() {
           setPreferences(freshData.preferences!)
           setMode('braindump')
           
-          // Show onboarding MODAL for truly new users only
+          // Show onboarding MODAL for users who haven't made a language choice yet
           // The rich interface will always show via MicroLanding component
-          const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
-          if (!hasUsedBefore) {
+          const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
+          if (!hasLanguageChoice) {
             setShowOnboarding(true)
           }
         }
@@ -155,13 +254,32 @@ export default function App() {
   }, [storageService, migrator])
 
   /**
-   * Handle onboarding completion
+   * Handle onboarding completion with language preference
    */
   const handleOnboardingComplete = useCallback(async () => {
     setShowOnboarding(false)
     
+    // Save language preference and choice flag
+    localStorage.setItem('tickk_language', modalLanguage)
+    localStorage.setItem('tickk_language_choice_made', 'true')
+    
     // Mark user as having used the app
     localStorage.setItem('tickk_has_used', 'true')
+    
+    // Force localStorage to be written immediately
+    try {
+      // Ensure localStorage is written before redirect
+      await new Promise(resolve => setTimeout(resolve, 10))
+    } catch {
+      // Continue regardless
+    }
+    
+    // If Spanish was selected, redirect to Spanish version
+    if (modalLanguage === 'es') {
+      // Use location.replace to ensure redirect happens
+      window.location.replace('/es')
+      return // Don't continue with the rest if redirecting
+    }
     
     if (preferences) {
       const updatedPreferences = { ...preferences, showOnboarding: false }
@@ -169,16 +287,18 @@ export default function App() {
       await storageService.savePreferences(updatedPreferences)
     }
     
-    // Track successful onboarding completion
+    // Track successful onboarding completion with language selection
     enhancedAnalytics.trackEvent({
       action: 'onboarding_completed',
       category: 'user_journey',
-      label: 'success',
+      label: `language_${modalLanguage}`,
       custom_parameters: {
+        language_selected: modalLanguage,
+        modal_version: 'enhanced_with_language_selection',
         items_count: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
       }
     })
-  }, [preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
+  }, [modalLanguage, preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
 
   /**
    * Handle modal keyboard accessibility (ESC to close)
@@ -390,13 +510,13 @@ export default function App() {
       <Head>
         <title>
           {mode === 'braindump' 
-            ? 'tickk - An app that shuts up and listens'
+            ? 'tickk - Speak it. Save it. Sort it later.'
             : 'Organized | tickk'
           }
         </title>
         <meta 
           name="description" 
-          content="An app that shuts up and listens. Speak your thoughts, organize later. No AI, just privacy." 
+          content="Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage." 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
@@ -477,6 +597,32 @@ export default function App() {
         >
           <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
             <div className="text-center">
+              {/* Language Selector */}
+              <div className="flex justify-center mb-4 sm:mb-6">
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button 
+                    onClick={() => setModalLanguage('en')}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                      modalLanguage === 'en' 
+                        ? 'bg-white shadow-sm text-gray-900' 
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    🇺🇸 English
+                  </button>
+                  <button 
+                    onClick={() => setModalLanguage('es')}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+                      modalLanguage === 'es' 
+                        ? 'bg-white shadow-sm text-gray-900' 
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    🇪🇸 Español
+                  </button>
+                </div>
+              </div>
+
               {/* Header with icon - Mobile optimized */}
               <div className="mb-4 sm:mb-6">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
@@ -486,28 +632,28 @@ export default function App() {
                   id="onboarding-title"
                   className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2"
                 >
-                  Welcome to tickk
+                  {content.title}
                 </h1>
                 <p 
                   id="onboarding-description"
                   className="text-gray-600 text-sm sm:text-base leading-relaxed px-2 sm:px-0"
                 >
-                  Transform scattered thoughts into organized action
+                  {content.subtitle}
                 </p>
               </div>
 
               {/* Demo Preview - Mobile optimized */}
               <div className="bg-gray-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                <h3 className="text-sm font-medium text-gray-900 mb-3">See it in action:</h3>
+                <h3 className="text-sm font-medium text-gray-900 mb-3">{content.demoTitle}</h3>
                 <div className="space-y-3">
                   {/* Input example */}
                   <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                      <span className="text-xs text-gray-500">You say:</span>
+                      <span className="text-xs text-gray-500">{content.youSay}</span>
                     </div>
                     <p className="text-xs sm:text-sm text-gray-800 italic text-left">
-                      &quot;I need to call mom tomorrow and don&apos;t forget to buy groceries&quot;
+                      &quot;{content.exampleText}&quot;
                     </p>
                   </div>
                   
@@ -520,17 +666,17 @@ export default function App() {
                   
                   {/* Output example */}
                   <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
-                    <div className="text-xs text-gray-500 mb-2 text-left">We organize:</div>
+                    <div className="text-xs text-gray-500 mb-2 text-left">{content.weOrganize}</div>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-xs sm:text-sm">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
-                        <span className="flex-1 text-left">Call mom tomorrow</span>
-                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">task</span>
+                        <span className="flex-1 text-left">{content.task1}</span>
+                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">{content.tagTask}</span>
                       </div>
                       <div className="flex items-center gap-2 text-xs sm:text-sm">
                         <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
-                        <span className="flex-1 text-left">Buy groceries</span>
-                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">task</span>
+                        <span className="flex-1 text-left">{content.task2}</span>
+                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">{content.tagTask}</span>
                       </div>
                     </div>
                   </div>
@@ -541,41 +687,41 @@ export default function App() {
               <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <div className="flex flex-col items-center p-2 sm:p-3 bg-green-50 rounded-lg">
                   <span className="text-base sm:text-lg mb-1">🔒</span>
-                  <span className="text-xs font-medium text-green-700">100% Private</span>
-                  <span className="text-xs text-green-600 hidden sm:block">Local processing</span>
+                  <span className="text-xs font-medium text-green-700">{content.trustPrivate}</span>
+                  <span className="text-xs text-green-600 hidden sm:block">{content.trustPrivateDesc}</span>
                 </div>
                 <div className="flex flex-col items-center p-2 sm:p-3 bg-blue-50 rounded-lg">
                   <span className="text-base sm:text-lg mb-1">⚡</span>
-                  <span className="text-xs font-medium text-blue-700">No Sign-up</span>
-                  <span className="text-xs text-blue-600 hidden sm:block">Start instantly</span>
+                  <span className="text-xs font-medium text-blue-700">{content.trustNoSignup}</span>
+                  <span className="text-xs text-blue-600 hidden sm:block">{content.trustNoSignupDesc}</span>
                 </div>
                 <div className="flex flex-col items-center p-2 sm:p-3 bg-purple-50 rounded-lg">
                   <span className="text-base sm:text-lg mb-1">🌐</span>
-                  <span className="text-xs font-medium text-purple-700">Works Offline</span>
-                  <span className="text-xs text-purple-600 hidden sm:block">Your device only</span>
+                  <span className="text-xs font-medium text-purple-700">{content.trustOffline}</span>
+                  <span className="text-xs text-purple-600 hidden sm:block">{content.trustOfflineDesc}</span>
                 </div>
                 <div className="flex flex-col items-center p-2 sm:p-3 bg-orange-50 rounded-lg">
                   <span className="text-base sm:text-lg mb-1">✨</span>
-                  <span className="text-xs font-medium text-orange-700">Smart AI</span>
-                  <span className="text-xs text-orange-600 hidden sm:block">Auto-organize</span>
+                  <span className="text-xs font-medium text-orange-700">{content.trustSmart}</span>
+                  <span className="text-xs text-orange-600 hidden sm:block">{content.trustSmartDesc}</span>
                 </div>
               </div>
 
               {/* How it works - Mobile optimized */}
               <div className="text-left mb-4 sm:mb-6">
-                <h3 className="text-sm font-medium text-gray-900 mb-3 text-center">How it works:</h3>
+                <h3 className="text-sm font-medium text-gray-900 mb-3 text-center">{content.howItWorks}</h3>
                 <div className="space-y-2 sm:space-y-3">
                   <div className="flex items-start gap-3">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">1</div>
-                    <span className="text-xs sm:text-sm text-gray-700">Speak your thoughts naturally</span>
+                    <span className="text-xs sm:text-sm text-gray-700">{content.step1}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">2</div>
-                    <span className="text-xs sm:text-sm text-gray-700">Review organized tasks & notes</span>
+                    <span className="text-xs sm:text-sm text-gray-700">{content.step2}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">3</div>
-                    <span className="text-xs sm:text-sm text-gray-700">Get productive immediately</span>
+                    <span className="text-xs sm:text-sm text-gray-700">{content.step3}</span>
                   </div>
                 </div>
               </div>
@@ -585,16 +731,16 @@ export default function App() {
                 <button
                   onClick={handleOnboardingComplete}
                   className="w-full py-3 sm:py-3 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors min-h-[48px]"
-                  aria-label="Start using tickk with microphone"
+                  aria-label={`Start using tickk with microphone - ${modalLanguage}`}
                 >
-                  🎤 Start Recording
+                  {content.startRecording}
                 </button>
                 <button
                   onClick={handleOnboardingComplete}
                   className="w-full py-3 sm:py-3 px-4 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors min-h-[48px]"
-                  aria-label="Try tickk demo first"
+                  aria-label={`Try tickk demo first - ${modalLanguage}`}
                 >
-                  👁️ Try Demo First
+                  {content.tryDemo}
                 </button>
               </div>
 
@@ -604,7 +750,7 @@ export default function App() {
                   onClick={handleOnboardingComplete}
                   className="text-xs text-gray-500 hover:text-gray-700 underline min-h-[44px] px-2"
                 >
-                  Skip intro
+                  {content.skipIntro}
                 </button>
               </div>
             </div>

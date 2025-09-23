@@ -32,7 +32,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">FREE</span>
             </div>
             <p className="text-responsive text-gray-600 mb-4 px-4">
-              {language === 'es' ? 'Una app que se calla y escucha.' : 'An app that shuts up and listens.'}
+              {language === 'es' ? 'Háblalo. Guárdalo. Ordénalo después.' : 'Speak it. Save it. Sort it later.'}
             </p>
           </div>
 
@@ -122,7 +122,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   <p className="text-responsive text-gray-600 mb-4">
                     {language === 'es' 
                       ? 'Una app que se calla y escucha. Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y recordatorios.'
-                      : 'An app that shuts up and listens. Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and reminders.'
+                      : 'Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.'
                     }
                   </p>
             <div className="flex space-x-4">

@@ -116,8 +116,11 @@ export default function SpanishApp() {
             setPreferences(freshData.preferences!)
             setMode('braindump')
             
-            // Show onboarding for new Spanish users
-            setShowOnboarding(true)
+            // Only show onboarding if user hasn't already made a language choice
+            const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
+            if (!hasLanguageChoice) {
+              setShowOnboarding(true)
+            }
           }
         }
         
@@ -276,8 +279,8 @@ export default function SpanishApp() {
   return (
     <>
       <Head>
-        <title>Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz</title>
-        <meta name="description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <title>tickk - Háblalo. Guárdalo. Ordénalo después.</title>
+        <meta name="description" content="Háblalo. Guárdalo. Ordénalo después. Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
         <meta name="keywords" content="aplicación gratuita de voz a texto, software de productividad por voz, gestor de tareas por reconocimiento de voz, asistente de voz, toma de notas sin manos, lista de tareas controlada por voz, productividad de procesamiento de lenguaje natural, organizador de voz a texto, aplicación de comandos de voz, gestión de tareas impulsada por voz, herramientas de productividad gratuitas, reconocimiento de voz offline, aplicación de voz enfocada en privacidad, aplicación de toma de notas por voz, suite de productividad por reconocimiento de voz, flujo de trabajo impulsado por voz, productividad sin manos, organizador activado por voz, categorización de tareas por voz, asistente de voz inteligente, panel de productividad por voz, convertidor de voz a acción, gestión de proyectos basada en voz, software de transcripción por voz, aplicación PWA de voz, aplicación web progresiva de productividad, reconocimiento de voz offline, tecnología de voz del navegador, asistente de voz sin IA, automatización de flujo de trabajo por voz" />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />
@@ -285,8 +288,8 @@ export default function SpanishApp() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
-        <meta property="og:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <meta property="og:title" content="tickk - Háblalo. Guárdalo. Ordénalo después." />
+        <meta property="og:description" content="Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tickk.app/es" />
         <meta property="og:image" content="https://tickk.app/og-image.svg" />
@@ -301,8 +304,8 @@ export default function SpanishApp() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@tickkapp" />
         <meta name="twitter:creator" content="@tickkapp" />
-        <meta name="twitter:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
-        <meta name="twitter:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <meta name="twitter:title" content="tickk - Háblalo. Guárdalo. Ordénalo después." />
+        <meta name="twitter:description" content="Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
         <meta name="twitter:image" content="https://tickk.app/og-image.svg" />
         <meta name="twitter:image:alt" content="tickk - Aplicación de Voz a Productividad" />
         
@@ -353,6 +356,7 @@ export default function SpanishApp() {
                   appData={appData}
                   preferences={preferences}
                   onDataUpdate={handleDataUpdate}
+                  language="es"
                 />
               )}
             </main>
@@ -394,13 +398,13 @@ export default function SpanishApp() {
                     id="onboarding-title-es"
                     className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2"
                   >
-                    Bienvenido a tickk
+                    Háblalo. Guárdalo. Ordénalo después.
                   </h1>
                   <p 
                     id="onboarding-description-es"
                     className="text-gray-600 text-sm sm:text-base leading-relaxed px-2 sm:px-0"
                   >
-                    Transforma pensamientos dispersos en acción organizada
+                    Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local.
                   </p>
                 </div>
 

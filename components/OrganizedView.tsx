@@ -11,16 +11,68 @@ interface OrganizedViewProps {
   appData: AppData
   preferences: UserPreferences | null
   onDataUpdate: (data: AppData) => void
+  language?: 'en' | 'es'
 }
 
 export default function OrganizedView({ 
   appData, 
-  onDataUpdate 
+  onDataUpdate,
+  language = 'en'
 }: OrganizedViewProps) {
   const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'analytics'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [showExportMenu, setShowExportMenu] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  
+  // Translations
+  const translations = {
+    en: {
+      yourWorkspace: 'Your Workspace',
+      everythingOrganized: 'Everything organized and actionable.',
+      tasks: 'tasks',
+      notes: 'notes', 
+      completed: 'completed',
+      unprocessed: 'unprocessed',
+      search: 'Search...',
+      found: 'Found',
+      results: 'results',
+      export: 'Export',
+      exportAsCSV: 'Export as CSV',
+      exportAsJSON: 'Export as JSON',
+      tasksFilter: 'Tasks',
+      notesFilter: 'Notes',
+      analytics: 'Analytics',
+      allItems: 'All Items',
+      keyboardShortcuts: 'Keyboard shortcuts',
+      exportData: 'Export data',
+      focusSearch: 'Focus search',
+      clearSearch: 'Clear search'
+    },
+    es: {
+      yourWorkspace: 'Tu Espacio de Trabajo',
+      everythingOrganized: 'Todo organizado y accionable.',
+      tasks: 'tareas',
+      notes: 'notas',
+      completed: 'completadas',
+      unprocessed: 'sin procesar',
+      search: 'Buscar...',
+      found: 'Encontrado',
+      results: 'resultados',
+      export: 'Exportar',
+      exportAsCSV: 'Exportar como CSV',
+      exportAsJSON: 'Exportar como JSON',
+      tasksFilter: 'Tareas',
+      notesFilter: 'Notas',
+      analytics: 'Analíticas',
+      allItems: 'Todos los Elementos',
+      keyboardShortcuts: 'Atajos de teclado',
+      exportData: 'Exportar datos',
+      focusSearch: 'Enfocar búsqueda',
+      clearSearch: 'Limpiar búsqueda'
+    }
+  }
+  
+  const t = translations[language]
   
   // Get organized items (tasks and notes)
   const organizedTasks = appData.tasks || []
@@ -155,24 +207,24 @@ export default function OrganizedView({
         {/* Page Header */}
         <div className="text-center mb-8">
           <h1 className="heading-primary text-gray-900 mb-2">
-            Your Workspace
+            {t.yourWorkspace}
           </h1>
           <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
-            Everything organized and actionable.
+            {t.everythingOrganized}
           </p>
         </div>
 
         {/* Clean Stats Summary - Mobile Optimized */}
         <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 sm:gap-x-8 mb-8 text-sm text-gray-600 px-4">
-          <span><strong className="text-gray-900">{organizedTasks.length}</strong> tasks</span>
+          <span><strong className="text-gray-900">{organizedTasks.length}</strong> {t.tasks}</span>
           <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedNotes.length}</strong> notes</span>
+          <span><strong className="text-gray-900">{organizedNotes.length}</strong> {t.notes}</span>
           <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedTasks.filter(t => t.completed).length}</strong> completed</span>
+          <span><strong className="text-gray-900">{organizedTasks.filter(t => t.completed).length}</strong> {t.completed}</span>
           {unprocessedCount > 0 && (
             <>
               <span className="text-gray-300 hidden sm:inline">•</span>
-              <span className="text-orange-600"><strong>{unprocessedCount}</strong> unprocessed</span>
+              <span className="text-orange-600"><strong>{unprocessedCount}</strong> {t.unprocessed}</span>
             </>
           )}
         </div>
@@ -185,7 +237,7 @@ export default function OrganizedView({
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search..."
+                placeholder={t.search}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-3 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 focus:bg-white min-h-[44px]"
@@ -204,7 +256,7 @@ export default function OrganizedView({
             </div>
             {searchQuery && (
               <p className="text-xs text-gray-500 mt-1 px-1">
-                Found {filteredTasks.length + filteredNotes.length} results
+                {t.found} {filteredTasks.length + filteredNotes.length} {t.results}
               </p>
             )}
           </div>
@@ -218,7 +270,7 @@ export default function OrganizedView({
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Export
+              {t.export}
             </button>
             
             {showExportMenu && (
@@ -230,7 +282,7 @@ export default function OrganizedView({
                   }}
                   className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 first:rounded-t-lg min-h-[44px] flex items-center"
                 >
-                  Export as CSV
+                  {t.exportAsCSV}
                 </button>
                 <button
                   onClick={() => {
@@ -239,7 +291,7 @@ export default function OrganizedView({
                   }}
                   className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg min-h-[44px] flex items-center"
                 >
-                  Export as JSON
+                  {t.exportAsJSON}
                 </button>
               </div>
             )}
@@ -256,7 +308,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            Tasks ({organizedTasks.length})
+            {t.tasksFilter} ({organizedTasks.length})
             {filter === 'tasks' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -270,7 +322,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            Notes ({organizedNotes.length})
+            {t.notesFilter} ({organizedNotes.length})
             {filter === 'notes' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -284,7 +336,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            Analytics
+            {t.analytics}
             {filter === 'analytics' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -298,7 +350,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            All Items
+            {t.allItems}
             {filter === 'all' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -309,12 +361,12 @@ export default function OrganizedView({
         <div className="text-center mb-8">
           <details className="inline-block">
             <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">
-              Keyboard shortcuts
+              {t.keyboardShortcuts}
             </summary>
             <div className="mt-2 text-xs text-gray-500 space-y-1">
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> Export data</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> Focus search</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> Clear search</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> {t.exportData}</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> {t.focusSearch}</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> {t.clearSearch}</div>
             </div>
           </details>
         </div>
