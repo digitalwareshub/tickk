@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.5.3",
-    "@types/uuid": "^10.0.0",
+    "@types/uuid": "^11.0.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "compromise": "^14.14.0",
