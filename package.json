@@ -27,7 +27,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "compromise": "^14.14.0",
-    "critters": "^0.0.23",
+    "critters": "^0.0.25",
     "es-compromise": "^0.2.11",
     "gtag": "^1.0.1",
     "next": "15.5.3",
