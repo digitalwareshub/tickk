@@ -1,41 +1,64 @@
-# CONTRIBUTING.md
-
 # Contributing to tickk
 
-## ⚠️ IMPORTANT NOTICE
+Thank you for your interest in contributing to tickk! We welcome contributions from the community.
 
-**This repository is currently NOT ACCEPTING external contributions.**
+## How to Contribute
 
-This is a personal project and I am not actively seeking:
-- Pull requests
-- Feature requests
-- Bug reports
-- Code contributions
+### 1. Fork the Repository
+- Fork the project on GitHub
+- Clone your fork locally
 
-## What You CAN Do
+### 2. Set Up Development Environment
+```bash
+# Clone your fork
+git clone https://github.com/yourusername/tickk.git
+cd tickk
 
-✅ **Fork the repository** - Create your own version
-✅ **Use the code** - It's MIT licensed, use it freely
-✅ **Learn from it** - Study the code and implementation
-✅ **Create derivatives** - Build your own voice productivity app
+# Install dependencies
+npm install
 
-## What You CANNOT Do
+# Start development server
+npm run dev
+```
 
-❌ Submit pull requests to this repository
-❌ Open issues requesting features or bug fixes
-❌ Expect maintenance or support
+### 3. Make Your Changes
+- Create a new branch for your feature/fix
+- Make your changes following our coding standards
+- Test your changes thoroughly
 
-## If You Find Issues
+### 4. Submit a Pull Request
+- Push your changes to your fork
+- Submit a pull request with a clear description
+- Wait for review and feedback
 
-If you discover critical security vulnerabilities, you may email:
-- security@digiwares.xyz
+## Development Guidelines
 
-For all other issues, please fork the repository and fix them in your own version.
+### Code Style
+- Use TypeScript for all new code
+- Follow the existing code formatting
+- Add tests for new features
+- Update documentation as needed
+
+### Testing
+```bash
+# Run tests
+npm test
+
+# Run linting
+npm run lint
+
+# Type checking
+npm run type-check
+```
+
+### Commit Messages
+- Use clear, descriptive commit messages
+- Follow conventional commit format when possible
+
+## Questions?
+
+Feel free to open an issue for questions or discussions.
 
 ## License
 
-This project is MIT licensed - you have full freedom to use, modify, and distribute the code in your own projects.
-
----
-
-**Thank you for understanding!**
+By contributing, you agree that your contributions will be licensed under the MIT License.
