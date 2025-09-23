@@ -209,7 +209,7 @@ export default function OrganizedView({
           <h1 className="heading-primary text-gray-900 mb-2">
             {t.yourWorkspace}
           </h1>
-          <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             {t.everythingOrganized}
           </p>
         </div>
