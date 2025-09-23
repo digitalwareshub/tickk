@@ -465,37 +465,148 @@ export default function App() {
       {/* ARIA Live Regions for screen readers */}
       <LiveRegions />
       
-      {/* Modal onboarding overlay */}
+      {/* Enhanced Modal onboarding overlay - Mobile Optimized */}
       {showOnboarding && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:px-4"
           role="dialog"
           aria-modal="true"
           aria-labelledby="onboarding-title"
           aria-describedby="onboarding-description"
           tabIndex={-1}
         >
-          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
             <div className="text-center">
-              <h1 
-                id="onboarding-title"
-                className="text-2xl font-semibold text-gray-900 mb-2"
-              >
-                Welcome to tickk
-              </h1>
-              <p 
-                id="onboarding-description"
-                className="text-gray-600 mb-8 text-sm leading-relaxed"
-              >
-                Speak your thoughts. We&apos;ll organize them later.
-              </p>
-              <button
-                onClick={handleOnboardingComplete}
-                className="w-full py-2 px-4 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 transition-colors"
-                aria-label="Start using tickk application"
-              >
-                Start using tickk
-              </button>
+              {/* Header with icon - Mobile optimized */}
+              <div className="mb-4 sm:mb-6">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <span className="text-xl sm:text-2xl">🎤</span>
+                </div>
+                <h1 
+                  id="onboarding-title"
+                  className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2"
+                >
+                  Welcome to tickk
+                </h1>
+                <p 
+                  id="onboarding-description"
+                  className="text-gray-600 text-sm sm:text-base leading-relaxed px-2 sm:px-0"
+                >
+                  Transform scattered thoughts into organized action
+                </p>
+              </div>
+
+              {/* Demo Preview - Mobile optimized */}
+              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                <h3 className="text-sm font-medium text-gray-900 mb-3">See it in action:</h3>
+                <div className="space-y-3">
+                  {/* Input example */}
+                  <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-gray-500">You say:</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-gray-800 italic text-left">
+                      &quot;I need to call mom tomorrow and don&apos;t forget to buy groceries&quot;
+                    </p>
+                  </div>
+                  
+                  {/* Arrow */}
+                  <div className="flex justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </div>
+                  
+                  {/* Output example */}
+                  <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
+                    <div className="text-xs text-gray-500 mb-2 text-left">We organize:</div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm">
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
+                        <span className="flex-1 text-left">Call mom tomorrow</span>
+                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">task</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs sm:text-sm">
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
+                        <span className="flex-1 text-left">Buy groceries</span>
+                        <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">task</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trust indicators - Mobile grid optimized */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <div className="flex flex-col items-center p-2 sm:p-3 bg-green-50 rounded-lg">
+                  <span className="text-base sm:text-lg mb-1">🔒</span>
+                  <span className="text-xs font-medium text-green-700">100% Private</span>
+                  <span className="text-xs text-green-600 hidden sm:block">Local processing</span>
+                </div>
+                <div className="flex flex-col items-center p-2 sm:p-3 bg-blue-50 rounded-lg">
+                  <span className="text-base sm:text-lg mb-1">⚡</span>
+                  <span className="text-xs font-medium text-blue-700">No Sign-up</span>
+                  <span className="text-xs text-blue-600 hidden sm:block">Start instantly</span>
+                </div>
+                <div className="flex flex-col items-center p-2 sm:p-3 bg-purple-50 rounded-lg">
+                  <span className="text-base sm:text-lg mb-1">🌐</span>
+                  <span className="text-xs font-medium text-purple-700">Works Offline</span>
+                  <span className="text-xs text-purple-600 hidden sm:block">Your device only</span>
+                </div>
+                <div className="flex flex-col items-center p-2 sm:p-3 bg-orange-50 rounded-lg">
+                  <span className="text-base sm:text-lg mb-1">✨</span>
+                  <span className="text-xs font-medium text-orange-700">Smart AI</span>
+                  <span className="text-xs text-orange-600 hidden sm:block">Auto-organize</span>
+                </div>
+              </div>
+
+              {/* How it works - Mobile optimized */}
+              <div className="text-left mb-4 sm:mb-6">
+                <h3 className="text-sm font-medium text-gray-900 mb-3 text-center">How it works:</h3>
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">1</div>
+                    <span className="text-xs sm:text-sm text-gray-700">Speak your thoughts naturally</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">2</div>
+                    <span className="text-xs sm:text-sm text-gray-700">Review organized tasks & notes</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">3</div>
+                    <span className="text-xs sm:text-sm text-gray-700">Get productive immediately</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action buttons - Mobile optimized */}
+              <div className="space-y-3">
+                <button
+                  onClick={handleOnboardingComplete}
+                  className="w-full py-3 sm:py-3 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors min-h-[48px]"
+                  aria-label="Start using tickk with microphone"
+                >
+                  🎤 Start Recording
+                </button>
+                <button
+                  onClick={handleOnboardingComplete}
+                  className="w-full py-3 sm:py-3 px-4 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors min-h-[48px]"
+                  aria-label="Try tickk demo first"
+                >
+                  👁️ Try Demo First
+                </button>
+              </div>
+
+              {/* Skip option - Mobile optimized */}
+              <div className="mt-4">
+                <button
+                  onClick={handleOnboardingComplete}
+                  className="text-xs text-gray-500 hover:text-gray-700 underline min-h-[44px] px-2"
+                >
+                  Skip intro
+                </button>
+              </div>
             </div>
           </div>
         </div>

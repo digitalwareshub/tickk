@@ -31,6 +31,7 @@ export default function SpanishApp() {
   // Loading and migration states
   const [isLoading, setIsLoading] = useState(true)
   const [needsMigration, setNeedsMigration] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(false)
   // Smart context state
   const [totalItemCount, setTotalItemCount] = useState(0)
   
@@ -98,7 +99,7 @@ export default function SpanishApp() {
               version: '1.0.0',
               preferences: {
                 defaultMode: 'braindump',
-                showOnboarding: false,
+                showOnboarding: true,
                 enableKeyboardShortcuts: true,
                 recordingTimeout: 30000,
                 enableContinuousRecording: false,
@@ -115,12 +116,8 @@ export default function SpanishApp() {
             setPreferences(freshData.preferences!)
             setMode('braindump')
             
-            // Show onboarding MODAL for truly new users only
-            // The rich interface will always show via MicroLanding component
-            // const hasUsedBefore = localStorage.getItem('tickk_has_used') === 'true'
-            // if (!hasUsedBefore) {
-            //   setShowOnboarding(true)
-            // }
+            // Show onboarding for new Spanish users
+            setShowOnboarding(true)
           }
         }
         
@@ -375,6 +372,153 @@ export default function SpanishApp() {
           {/* Live Regions for Accessibility */}
           <LiveRegions />
         </div>
+
+        {/* Enhanced Modal onboarding overlay - Mobile Optimized Spanish */}
+        {showOnboarding && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:px-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="onboarding-title-es"
+            aria-describedby="onboarding-description-es"
+            tabIndex={-1}
+          >
+            <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+              <div className="text-center">
+                {/* Header with icon - Mobile optimized */}
+                <div className="mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <span className="text-xl sm:text-2xl">🎤</span>
+                  </div>
+                  <h1 
+                    id="onboarding-title-es"
+                    className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2"
+                  >
+                    Bienvenido a tickk
+                  </h1>
+                  <p 
+                    id="onboarding-description-es"
+                    className="text-gray-600 text-sm sm:text-base leading-relaxed px-2 sm:px-0"
+                  >
+                    Transforma pensamientos dispersos en acción organizada
+                  </p>
+                </div>
+
+                {/* Demo Preview - Mobile optimized */}
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <h3 className="text-sm font-medium text-gray-900 mb-3">Míralo en acción:</h3>
+                  <div className="space-y-3">
+                    {/* Input example */}
+                    <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-gray-500">Tú dices:</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-gray-800 italic text-left">
+                        &quot;Necesito llamar a mamá mañana y no olvidar comprar víveres&quot;
+                      </p>
+                    </div>
+                    
+                    {/* Arrow */}
+                    <div className="flex justify-center">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </div>
+                    
+                    {/* Output example */}
+                    <div className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
+                      <div className="text-xs text-gray-500 mb-2 text-left">Nosotros organizamos:</div>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-xs sm:text-sm">
+                          <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
+                          <span className="flex-1 text-left">Llamar a mamá mañana</span>
+                          <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">tarea</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs sm:text-sm">
+                          <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-green-500 flex-shrink-0"></div>
+                          <span className="flex-1 text-left">Comprar víveres</span>
+                          <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded flex-shrink-0">tarea</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Trust indicators - Mobile grid optimized */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className="flex flex-col items-center p-2 sm:p-3 bg-green-50 rounded-lg">
+                    <span className="text-base sm:text-lg mb-1">🔒</span>
+                    <span className="text-xs font-medium text-green-700">100% Privado</span>
+                    <span className="text-xs text-green-600 hidden sm:block">Procesamiento local</span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 sm:p-3 bg-blue-50 rounded-lg">
+                    <span className="text-base sm:text-lg mb-1">⚡</span>
+                    <span className="text-xs font-medium text-blue-700">Sin Registro</span>
+                    <span className="text-xs text-blue-600 hidden sm:block">Comienza al instante</span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 sm:p-3 bg-purple-50 rounded-lg">
+                    <span className="text-base sm:text-lg mb-1">🌐</span>
+                    <span className="text-xs font-medium text-purple-700">Funciona Sin Conexión</span>
+                    <span className="text-xs text-purple-600 hidden sm:block">Solo tu dispositivo</span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 sm:p-3 bg-orange-50 rounded-lg">
+                    <span className="text-base sm:text-lg mb-1">✨</span>
+                    <span className="text-xs font-medium text-orange-700">IA Inteligente</span>
+                    <span className="text-xs text-orange-600 hidden sm:block">Auto-organiza</span>
+                  </div>
+                </div>
+
+                {/* How it works - Mobile optimized */}
+                <div className="text-left mb-4 sm:mb-6">
+                  <h3 className="text-sm font-medium text-gray-900 mb-3 text-center">Cómo funciona:</h3>
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">1</div>
+                      <span className="text-xs sm:text-sm text-gray-700">Habla tus pensamientos de forma natural</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">2</div>
+                      <span className="text-xs sm:text-sm text-gray-700">Revisa tareas y notas organizadas</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-900 text-white rounded-full flex items-center justify-center text-xs font-medium flex-shrink-0 mt-0.5">3</div>
+                      <span className="text-xs sm:text-sm text-gray-700">Sé productivo inmediatamente</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action buttons - Mobile optimized */}
+                <div className="space-y-3">
+                  <button
+                    onClick={() => setShowOnboarding(false)}
+                    className="w-full py-3 sm:py-3 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors min-h-[48px]"
+                    aria-label="Comenzar a usar tickk con micrófono"
+                  >
+                    🎤 Comenzar a Grabar
+                  </button>
+                  <button
+                    onClick={() => setShowOnboarding(false)}
+                    className="w-full py-3 sm:py-3 px-4 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors min-h-[48px]"
+                    aria-label="Probar demo de tickk primero"
+                  >
+                    👁️ Probar Demo Primero
+                  </button>
+                </div>
+
+                {/* Skip option - Mobile optimized */}
+                <div className="mt-4">
+                  <button
+                    onClick={() => setShowOnboarding(false)}
+                    className="text-xs text-gray-500 hover:text-gray-700 underline min-h-[44px] px-2"
+                  >
+                    Saltar introducción
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </Layout>
     </>
   )
