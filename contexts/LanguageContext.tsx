@@ -49,7 +49,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'All Devices',
     
     // MicroLanding
-    'microlanding.headline': 'An app that shuts up and listens.',
+    'microlanding.headline': 'Speak it. Save it. Sort it later.',
     'microlanding.subheadline': 'Just tap the mic and start talking. We\'ll organize everything into tasks and notes.',
     'microlanding.got_it': 'Got it',
     'microlanding.try_saying': 'Try saying',
@@ -127,7 +127,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'Todos los Dispositivos',
     
     // MicroLanding
-    'microlanding.headline': 'Una app que se calla y escucha.',
+    'microlanding.headline': 'Háblalo. Guárdalo. Ordénalo después.',
     'microlanding.subheadline': 'Simplemente toca el micrófono y comienza a hablar. Organizaremos todo en tareas y notas.',
     'microlanding.got_it': 'Entendido',
     'microlanding.try_saying': 'Prueba diciendo',
