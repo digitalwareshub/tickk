@@ -50,7 +50,7 @@ const translations = {
     
     // MicroLanding
     'microlanding.headline': 'Speak it. Save it. Sort it later.',
-    'microlanding.subheadline': 'Just tap the mic and start talking. We\'ll organize everything into tasks and notes.',
+    'microlanding.subheadline': 'Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.',
     'microlanding.got_it': 'Got it',
     'microlanding.try_saying': 'Try saying',
     'microlanding.example1': 'Buy groceries tomorrow',
@@ -128,7 +128,7 @@ const translations = {
     
     // MicroLanding
     'microlanding.headline': 'Háblalo. Guárdalo. Ordénalo después.',
-    'microlanding.subheadline': 'Simplemente toca el micrófono y comienza a hablar. Organizaremos todo en tareas y notas.',
+    'microlanding.subheadline': 'Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local.',
     'microlanding.got_it': 'Entendido',
     'microlanding.try_saying': 'Prueba diciendo',
     'microlanding.example1': 'Comprar comestibles mañana',
