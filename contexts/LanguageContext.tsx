@@ -49,7 +49,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'All Devices',
     
     // MicroLanding
-    'microlanding.headline': 'Speak it. Save it. Sort it later.',
+    'microlanding.headline': 'Speak. Save. Sort it later.',
     'microlanding.subheadline': 'Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.',
     'microlanding.got_it': 'Got it',
     'microlanding.try_saying': 'Try saying',
@@ -127,7 +127,7 @@ const translations = {
     'landing.hero.trust.all_devices': 'Todos los Dispositivos',
     
     // MicroLanding
-    'microlanding.headline': 'Háblalo. Guárdalo. Ordénalo después.',
+    'microlanding.headline': 'Habla. Guarda. Ordénalo después.',
     'microlanding.subheadline': 'Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local.',
     'microlanding.got_it': 'Entendido',
     'microlanding.try_saying': 'Prueba diciendo',

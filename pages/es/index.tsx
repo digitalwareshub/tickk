@@ -279,8 +279,8 @@ export default function SpanishApp() {
   return (
     <>
       <Head>
-        <title>tickk - Háblalo. Guárdalo. Ordénalo después.</title>
-        <meta name="description" content="Háblalo. Guárdalo. Ordénalo después. Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
+        <title>tickk - Habla. Guarda. Ordénalo después.</title>
+        <meta name="description" content="Habla. Guarda. Ordénalo después. Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
         <meta name="keywords" content="aplicación gratuita de voz a texto, software de productividad por voz, gestor de tareas por reconocimiento de voz, asistente de voz, toma de notas sin manos, lista de tareas controlada por voz, productividad de procesamiento de lenguaje natural, organizador de voz a texto, aplicación de comandos de voz, gestión de tareas impulsada por voz, herramientas de productividad gratuitas, reconocimiento de voz offline, aplicación de voz enfocada en privacidad, aplicación de toma de notas por voz, suite de productividad por reconocimiento de voz, flujo de trabajo impulsado por voz, productividad sin manos, organizador activado por voz, categorización de tareas por voz, asistente de voz inteligente, panel de productividad por voz, convertidor de voz a acción, gestión de proyectos basada en voz, software de transcripción por voz, aplicación PWA de voz, aplicación web progresiva de productividad, reconocimiento de voz offline, tecnología de voz del navegador, asistente de voz sin IA, automatización de flujo de trabajo por voz" />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />

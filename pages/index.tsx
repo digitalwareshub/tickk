@@ -59,7 +59,7 @@ export default function App() {
   // Modal content in both languages
   const modalContent = {
     en: {
-      title: "Speak it. Save it. Sort it later.",
+      title: "Speak. Save. Sort it later.",
       subtitle: "Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.",
       demoTitle: "See it in action:",
       youSay: "You say:",
@@ -85,7 +85,7 @@ export default function App() {
       skipIntro: "Skip intro"
     },
     es: {
-      title: "Háblalo. Guárdalo. Ordénalo después.",
+      title: "Habla. Guarda. Ordénalo después.",
       subtitle: "Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local.",
       demoTitle: "Míralo en acción:",
       youSay: "Tú dices:",
@@ -510,13 +510,13 @@ export default function App() {
       <Head>
         <title>
           {mode === 'braindump' 
-            ? 'tickk - Speak it. Save it. Sort it later.'
+            ? 'tickk - Speak. Save. Sort it later.'
             : 'Organized | tickk'
           }
         </title>
         <meta 
           name="description" 
-          content="Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage." 
+          content="Speak. Save. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage." 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
