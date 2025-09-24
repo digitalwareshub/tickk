@@ -1,11 +1,11 @@
 {
   "name": "tickk - Speak it. Save it. Sort it later.",
   "short_name": "tickk",
-  "description": "Speak your thoughts. We organize them. No AI chatbots, no suggestions, just a microphone that works.",
+  "description": "Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ea580c",
+  "theme_color": "#16a34a",
   "orientation": "portrait-primary",
   "icons": [
     {

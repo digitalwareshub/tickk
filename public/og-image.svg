@@ -1,90 +1,50 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background Gradient -->
+  <!-- Subtle gradient background -->
   <defs>
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
-    </linearGradient>
-    
-    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
     </linearGradient>
   </defs>
-  
-  <!-- Background -->
   <rect width="1200" height="630" fill="url(#bgGradient)"/>
   
-  <!-- Grid Pattern -->
-  <defs>
-    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-    </pattern>
-  </defs>
-  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3"/>
-  
-  <!-- Main Icon -->
-  <g transform="translate(200, 315)">
-    <!-- Large Microphone -->
-    <circle cx="0" cy="0" r="80" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="4"/>
-    
-    <!-- Microphone Body -->
-    <rect x="-20" y="-50" width="40" height="60" rx="20" fill="white"/>
-    
-    <!-- Microphone Stand -->
-    <rect x="-2" y="10" width="4" height="30" fill="white"/>
-    
-    <!-- Microphone Base -->
-    <rect x="-25" y="35" width="50" height="8" rx="4" fill="white"/>
-    
-    <!-- Sound Waves -->
-    <g stroke="white" stroke-width="4" fill="none" stroke-linecap="round">
-      <!-- Left waves -->
-      <path d="M -50 -20 Q -70 -30 -70 -30" opacity="0.8"/>
-      <path d="M -50 0 Q -80 0 -80 0" opacity="0.8"/>
-      <path d="M -50 20 Q -70 30 -70 30" opacity="0.8"/>
-      
-      <!-- Right waves -->
-      <path d="M 50 -20 Q 70 -30 70 -30" opacity="0.8"/>
-      <path d="M 50 0 Q 80 0 80 0" opacity="0.8"/>
-      <path d="M 50 20 Q 70 30 70 30" opacity="0.8"/>
-    </g>
-    
-    <!-- Recording indicator -->
-    <circle cx="0" cy="-70" r="6" fill="#fbbf24">
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-    </circle>
-  </g>
+  <!-- Main Icon - Green Checkmark in Circle -->
+  <circle cx="180" cy="315" r="90" fill="#22c55e"/>
+  <path d="M140 315 L170 345 L230 285" 
+        stroke="#ffffff" 
+        stroke-width="14" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
   
   <!-- Main Text -->
-  <text x="450" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="url(#textGradient)">tickk</text>
+  <text x="320" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="84" font-weight="700" fill="#1f2937">tickk</text>
+  
+  <!-- Main Tagline -->
+  <text x="320" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="400" fill="#16a34a">Brain dump first, organize later</text>
   
   <!-- Subtitle -->
-  <text x="450" y="330" font-family="Arial, sans-serif" font-size="32" font-weight="normal" fill="rgba(255,255,255,0.9)">Free Voice Productivity App</text>
+  <text x="320" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="300" fill="#6b7280">Instant thought capture for busy minds</text>
   
-  <!-- Features -->
-  <g font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.8)">
-    <text x="450" y="380">🎤 Advanced Speech Recognition</text>
-    <text x="450" y="410">🧠 Smart Text Classification</text>
-    <text x="450" y="440">🔒 Complete Privacy • No AI • Works Offline</text>
+  <!-- Features with checkmarks -->
+  <g fill="#374151" font-family="system-ui, -apple-system, sans-serif" font-size="22">
+    <circle cx="330" cy="428" r="8" fill="#22c55e"/>
+    <path d="M326 428 L329 431 L334 426" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <text x="350" y="435">Voice-first brain dumping</text>
+    
+    <circle cx="330" cy="458" r="8" fill="#22c55e"/>
+    <path d="M326 458 L329 461 L334 456" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <text x="350" y="465">Auto-organized tasks and notes</text>
+    
+    <circle cx="330" cy="488" r="8" fill="#22c55e"/>
+    <path d="M326 488 L329 491 L334 486" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <text x="350" y="495">Complete privacy • Works offline</text>
   </g>
   
-  <!-- Call to Action -->
-  <rect x="450" y="480" width="300" height="60" rx="30" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
-  <text x="600" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">Try It Free Now</text>
-  
-  <!-- Floating Elements -->
-  <g opacity="0.6">
-    <!-- Task Icon -->
-    <circle cx="900" cy="150" r="30" fill="rgba(255,255,255,0.2)"/>
-    <text x="900" y="160" text-anchor="middle" font-size="30">📋</text>
-    
-    <!-- Note Icon -->
-    <circle cx="1000" cy="250" r="30" fill="rgba(255,255,255,0.2)"/>
-    <text x="1000" y="260" text-anchor="middle" font-size="30">📝</text>
-    
-    <!-- Calendar Icon -->
-    <circle cx="950" cy="400" r="30" fill="rgba(255,255,255,0.2)"/>
-    <text x="950" y="410" text-anchor="middle" font-size="30">📅</text>
+  <!-- Decorative elements -->
+  <g opacity="0.08">
+    <circle cx="950" cy="120" r="25" fill="#22c55e"/>
+    <circle cx="1050" cy="480" r="20" fill="#22c55e"/>
+    <circle cx="80" cy="520" r="30" fill="#22c55e"/>
   </g>
 </svg>

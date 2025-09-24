@@ -1,62 +1,50 @@
 <svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background Gradient -->
+  <!-- Subtle gradient background -->
   <defs>
-    <linearGradient id="twitterBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+    <linearGradient id="twitterBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
     </linearGradient>
   </defs>
+  <rect width="1200" height="600" fill="url(#twitterBgGradient)"/>
   
-  <!-- Background -->
-  <rect width="1200" height="600" fill="url(#twitterBg)"/>
+  <!-- Main Icon - Green Checkmark in Circle -->
+  <circle cx="170" cy="300" r="80" fill="#22c55e"/>
+  <path d="M135 300 L160 325 L215 270" 
+        stroke="#ffffff" 
+        stroke-width="12" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
   
-  <!-- Grid Pattern -->
-  <defs>
-    <pattern id="twitterGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-    </pattern>
-  </defs>
-  <rect width="1200" height="600" fill="url(#twitterGrid)" opacity="0.3"/>
+  <!-- Main Text -->
+  <text x="300" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="76" font-weight="700" fill="#1f2937">tickk</text>
   
-  <!-- Centered Content -->
-  <g transform="translate(600, 300)">
-    <!-- Main Icon -->
-    <circle cx="-200" cy="0" r="60" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="3"/>
+  <!-- Main Tagline -->
+  <text x="300" y="310" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="400" fill="#16a34a">Brain dump first, organize later</text>
+  
+  <!-- Subtitle -->
+  <text x="300" y="350" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="300" fill="#6b7280">Instant thought capture for busy minds</text>
+  
+  <!-- Features with checkmarks -->
+  <g fill="#374151" font-family="system-ui, -apple-system, sans-serif" font-size="20">
+    <circle cx="310" cy="388" r="7" fill="#22c55e"/>
+    <path d="M307 388 L309 390 L313 386" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <text x="325" y="395">Voice-first brain dumping</text>
     
-    <!-- Microphone -->
-    <g transform="translate(-200, 0)">
-      <rect x="-15" y="-35" width="30" height="45" rx="15" fill="white"/>
-      <rect x="-1.5" y="10" width="3" height="20" fill="white"/>
-      <rect x="-20" y="25" width="40" height="6" rx="3" fill="white"/>
-      
-      <!-- Sound waves -->
-      <g stroke="white" stroke-width="3" fill="none">
-        <path d="M -40 -15 Q -50 -20 -50 -20"/>
-        <path d="M -40 15 Q -50 20 -50 20"/>
-        <path d="M 40 -15 Q 50 -20 50 -20"/>
-        <path d="M 40 15 Q 50 20 50 20"/>
-      </g>
-    </g>
+    <circle cx="310" cy="413" r="7" fill="#22c55e"/>
+    <path d="M307 413 L309 415 L313 411" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <text x="325" y="420">Auto-organized tasks and notes</text>
     
-    <!-- Main Text -->
-    <text x="50" y="-40" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="white">tickk</text>
-    
-    <!-- Subtitle -->
-    <text x="50" y="10" font-family="Arial, sans-serif" font-size="28" fill="rgba(255,255,255,0.9)">Transform Voice into Organized Tasks</text>
-    
-    <!-- Features -->
-    <text x="50" y="50" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.8)">🔒 Privacy First • 🆓 Free Forever • ⚡ Works Offline</text>
+    <circle cx="310" cy="438" r="7" fill="#22c55e"/>
+    <path d="M307 438 L309 440 L313 436" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <text x="325" y="445">Complete privacy • Works offline</text>
   </g>
   
-  <!-- Side Icons -->
-  <g opacity="0.5">
-    <circle cx="100" cy="150" r="25" fill="rgba(255,255,255,0.2)"/>
-    <text x="100" y="160" text-anchor="middle" font-size="25">📋</text>
-    
-    <circle cx="1100" cy="200" r="25" fill="rgba(255,255,255,0.2)"/>
-    <text x="1100" y="210" text-anchor="middle" font-size="25">📝</text>
-    
-    <circle cx="150" cy="450" r="25" fill="rgba(255,255,255,0.2)"/>
-    <text x="150" y="460" text-anchor="middle" font-size="25">📅</text>
+  <!-- Decorative elements -->
+  <g opacity="0.06">
+    <circle cx="950" cy="150" r="30" fill="#22c55e"/>
+    <circle cx="1050" cy="450" r="25" fill="#22c55e"/>
+    <circle cx="80" cy="480" r="35" fill="#22c55e"/>
   </g>
 </svg>

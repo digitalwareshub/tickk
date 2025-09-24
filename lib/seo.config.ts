@@ -55,7 +55,7 @@ const defaultSEOConfig = {
     },
     {
       name: 'msapplication-TileColor',
-      content: '#ea580c',
+      content: '#16a34a',
     },
     {
       name: 'msapplication-config',
@@ -63,7 +63,7 @@ const defaultSEOConfig = {
     },
     {
       name: 'theme-color',
-      content: '#ea580c',
+      content: '#16a34a',
     },
     {
       name: 'color-scheme',
@@ -173,7 +173,7 @@ const defaultSEOConfig = {
     {
       rel: 'mask-icon',
       href: '/safari-pinned-tab.svg',
-      color: '#ea580c',
+      color: '#16a34a',
     },
     // Preconnect to improve performance
     {
