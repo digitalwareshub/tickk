@@ -13,7 +13,7 @@ import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analy
 export default function LandingES() {
   const [mounted, setMounted] = useState(false)
   const [demoText, setDemoText] = useState('')
-  const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
+  const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | null>(null)
 
   // Analytics hooks
   const heroSectionRef = useSectionTracking('hero_es');
@@ -34,14 +34,14 @@ export default function LandingES() {
 
   // Performance tracking
   usePerformanceTracking('landing_page_es');
-  // const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const demoExamples = [
-    { text: "Necesito llamar a Juan mañana a las 3pm sobre la reunión del proyecto", category: 'calendar' as const },
     { text: "Recordar comprar comestibles y recoger la tintorería", category: 'tasks' as const },
     { text: "Excelente idea para el nuevo diseño de producto usando interfaces de voz", category: 'notes' as const },
-    { text: "Programar una cita con el dentista la próxima semana", category: 'calendar' as const },
+    { text: "Programar una cita con el dentista la próxima semana", category: 'tasks' as const },
     { text: "No olvidar enviar el reporte trimestral antes del viernes", category: 'tasks' as const },
+    { text: "Perspectivas interesantes sobre patrones de comportamiento del usuario", category: 'notes' as const },
   ]
 
   useEffect(() => {
@@ -57,25 +57,63 @@ export default function LandingES() {
     localStorage.setItem('tickk_has_visited', 'true');
   }, [identifySegment])
 
-  const handleDemoExample = (text: string, category: 'tasks' | 'notes' | 'calendar') => {
+    const handleDemoExample = (text: string, category: 'tasks' | 'notes') => {
     setDemoText(text)
     setDemoCategory(category)
     
-    enhancedAnalytics.trackEvent({
-      action: 'demo_example_click',
-      category: 'engagement',
-      label: category,
-      custom_parameters: { 
-        example_text: text, 
-        category: category,
-        language: 'es'
-      }
-    });
-    
     // Simulate processing
     setTimeout(() => {
-      // setIsPlaying(false)
+      setIsPlaying(false)
     }, 2000)
+  }
+
+  const classifyText = (text: string): 'tasks' | 'notes' => {
+    const originalText = text.trim()
+    
+    // Early return for empty text
+    if (!originalText) return 'notes'
+    
+    // Task patterns in Spanish
+    const taskPatterns = [
+      /\b(?:necesito|tengo que|debo|recordar|no olvidar)\b/i,
+      /\b(?:programar|agendar|cita|reunión)\b/i,
+      /\b(?:comprar|hacer|enviar|llamar)\b/i,
+    ]
+    
+    const hasTaskPattern = taskPatterns.some(pattern => pattern.test(originalText))
+    if (hasTaskPattern) {
+      return 'tasks'
+    }
+    
+    // Default to notes for ideas, thoughts, etc.
+    return 'notes'
+  }
+
+  const playDemo = async () => {
+    if (isPlaying) return
+    
+    setIsPlaying(true)
+    setDemoText('')
+    setDemoCategory(null)
+    
+    // Pick a random example
+    const example = demoExamples[Math.floor(Math.random() * demoExamples.length)]
+    
+    // Simulate typing the text
+    for (let i = 0; i <= example.text.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 50))
+      setDemoText(example.text.slice(0, i))
+    }
+    
+    // Wait a moment, then show classification
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const predictedCategory = classifyText(example.text)
+    setDemoCategory(predictedCategory)
+    
+    // Reset after showing result
+    setTimeout(() => {
+      setIsPlaying(false)
+    }, 3000)
   }
 
   const handleFinalCTA = () => {
@@ -100,7 +138,7 @@ export default function LandingES() {
     <Layout className="min-h-screen bg-white">
       <Head>
         <title>Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz</title>
-        <meta name="description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <meta name="description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
         <meta name="keywords" content="aplicación de productividad por voz, app de voz a texto, gestor de tareas por voz, notas de voz, organización por voz, productividad sin teclado, app gratuita de voz, reconocimiento de voz, procesamiento de lenguaje natural, PWA de voz, app offline de voz, privacidad de voz, sin registro, ADHD, neurodivergente, accesibilidad, estudiantes, profesionales, padres, creativos, español" />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />
@@ -109,7 +147,7 @@ export default function LandingES() {
         
         {/* Open Graph */}
         <meta property="og:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
-        <meta property="og:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <meta property="og:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tickk.app/es/landing" />
         <meta property="og:image" content="https://tickk.app/og-image.svg" />
@@ -125,7 +163,7 @@ export default function LandingES() {
         <meta name="twitter:site" content="@tickkapp" />
         <meta name="twitter:creator" content="@tickkapp" />
         <meta name="twitter:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
-        <meta name="twitter:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y eventos de calendario usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
+        <meta name="twitter:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
         <meta name="twitter:image" content="https://tickk.app/og-image.svg" />
         <meta name="twitter:image:alt" content="tickk - Aplicación de Voz a Productividad" />
         
@@ -275,7 +313,7 @@ export default function LandingES() {
                   Procesamiento Inteligente
                 </h3>
                 <p className="text-gray-600 mb-6 text-sm sm:text-base">
-                  El procesamiento de lenguaje natural analiza tu habla y determina automáticamente si es una tarea, nota o evento de calendario.
+                  El procesamiento de lenguaje natural analiza tu habla y determina automáticamente si es una tarea o nota.
                 </p>
                 
                 <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -285,7 +323,7 @@ export default function LandingES() {
                   </div>
                   <div className="p-2 bg-white rounded border">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-medium text-gray-700">📅 Evento de Calendario</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700">� Tarea</span>
                       <span className="text-green-600 font-bold text-xs">✓ DETECTADO</span>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
@@ -320,12 +358,12 @@ export default function LandingES() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="text-green-600">✓</div>
-                        <span className="text-xs sm:text-sm font-medium text-gray-700">Añadido al Calendario</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-700">Añadido a Tareas</span>
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500">📅</div>
+                      <div className="text-xs sm:text-sm text-gray-500">�</div>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
-                      Listo para sincronizar con tu app de calendario
+                      Listo para gestionar y completar
                     </div>
                   </div>
                 </div>
@@ -344,7 +382,7 @@ export default function LandingES() {
                 Ve el Reconocimiento de Voz en Acción
               </h2>
               <p className="text-responsive text-gray-600 max-w-3xl mx-auto">
-                Observa cómo el procesamiento de lenguaje natural categoriza instantáneamente tu habla en tareas, notas y eventos de calendario
+                Observa cómo el procesamiento de lenguaje natural categoriza instantáneamente tu habla en tareas y notas
               </p>
             </div>
 
@@ -355,17 +393,28 @@ export default function LandingES() {
                 <div className="bg-white px-4 sm:px-6 py-4 border-b border-gray-200">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                     <h3 className="text-base sm:text-lg font-semibold text-gray-900">Demo de Clasificación en Vivo</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {demoExamples.map((example, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleDemoExample(example.text, example.category)}
-                          className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-sm transition-colors"
-                        >
-                          {example.text.slice(0, 20)}...
-                        </button>
-                      ))}
-                    </div>
+                    <button 
+                      onClick={playDemo}
+                      disabled={isPlaying}
+                      className={`w-full sm:w-auto px-4 py-2 rounded-lg transition-colors font-medium ${
+                        isPlaying 
+                          ? 'bg-gray-400 text-white cursor-not-allowed' 
+                          : 'bg-gray-900 hover:bg-black text-white'
+                      }`}
+                    >
+                      {isPlaying ? '⏳ Reproduciendo...' : '▶ Reproducir Demo'}
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {demoExamples.map((example, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleDemoExample(example.text, example.category)}
+                        className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md text-sm transition-colors"
+                      >
+                        {example.text.slice(0, 20)}...
+                      </button>
+                    ))}
                   </div>
                 </div>
 
@@ -433,24 +482,6 @@ export default function LandingES() {
                           {demoCategory === 'notes' && (
                             <div className="text-xs text-green-600 mt-1 font-medium">
                               Contenido informativo detectado
-                            </div>
-                          )}
-                        </div>
-                        
-                        <div className={`bg-purple-50 border-l-4 border-purple-400 p-3 rounded-r-lg transition-all duration-500 ${
-                          demoCategory === 'calendar' ? 'opacity-100 ring-2 ring-purple-400' : 'opacity-50'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-purple-500">📅</span>
-                            <span className="font-medium text-purple-700">Calendario</span>
-                            {demoCategory === 'calendar' && (
-                              <span className="text-purple-600 text-xs ml-auto animate-pulse">✓ SELECCIONADO</span>
-                            )}
-                          </div>
-                          <div className="text-sm text-gray-600">Eventos programados</div>
-                          {demoCategory === 'calendar' && (
-                            <div className="text-xs text-purple-600 mt-1 font-medium">
-                              Referencias temporales detectadas: &quot;mañana&quot;, &quot;2pm&quot;
                             </div>
                           )}
                         </div>

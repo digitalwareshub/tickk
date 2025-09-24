@@ -16,7 +16,7 @@ import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analy
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [demoText, setDemoText] = useState('')
-  const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | 'calendar' | null>(null)
+  const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
 
   // Analytics hooks
@@ -58,11 +58,11 @@ export default function Home() {
   const professionalsFAQ = useFAQTracking('professionals-parents');
 
   const demoExamples = [
-    { text: "I need to call John tomorrow at 3pm about the project meeting", category: 'calendar' as const },
     { text: "Remember to buy groceries and pick up dry cleaning", category: 'tasks' as const },
     { text: "Great idea for the new product design using voice interfaces", category: 'notes' as const },
-    { text: "Schedule a dentist appointment next week", category: 'calendar' as const },
+    { text: "Schedule a dentist appointment next week", category: 'tasks' as const },
     { text: "Don't forget to submit the quarterly report by Friday", category: 'tasks' as const },
+    { text: "Interesting insights about user behavior patterns", category: 'notes' as const },
   ]
 
   useEffect(() => {
@@ -161,7 +161,7 @@ export default function Home() {
     }, 100);
   }, [adhdUseCase, professionalUseCase, studentUseCase, accessibilityUseCase, creativeUseCase, parentUseCase, adhdFAQ, hyperfocusFAQ, comparisonFAQ, studentsFAQ, accessibilityFAQ, professionalsFAQ])
 
-  const classifyText = (text: string): 'tasks' | 'notes' | 'calendar' => {
+  const classifyText = (text: string): 'tasks' | 'notes' => {
     const originalText = text.trim()
     
     // Early return for empty text
@@ -202,33 +202,16 @@ export default function Home() {
       return 'notes'
     }
     
-    // 3. CALENDAR PATTERNS (Time-specific events)
-    const calendarPatterns = [
-      // Specific time patterns (word boundaries)
-      /\b(?:at\s+\d{1,2}(?::\d{2})?\s*(?:am|pm))\b/i,
-      /\b(?:at\s+noon|at\s+midnight)\b/i,
-      
-      // Day patterns  
-      /\b(?:tomorrow|today|yesterday)\b/i,
-      /\b(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i,
-      /\b(?:next\s+week|next\s+month|this\s+week|this\s+month)\b/i,
-      
-      // Meeting/appointment words
-      /\b(?:meet(?:ing)?|appointment|call|lunch|dinner|conference)\b/i,
-      /\b(?:schedule|remind\s+me\s+(?:to|at))\b/i,
-      
-      // Time indicators
-      /\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b/i
+    // 3. SCHEDULING/APPOINTMENT PATTERNS → Tasks 
+    const schedulingPatterns = [
+      /\b(?:schedule|book|arrange)\b/i,
+      /\b(?:appointment|meeting|call)\b/i,
+      /\b(?:remind\s+me\s+to)\b/i,
     ]
     
-    const hasCalendarPattern = calendarPatterns.some(pattern => pattern.test(originalText))
-    if (hasCalendarPattern) {
-      // Double-check it's not just an intent with time words
-      const intentWithTime = /\bi\s+want\s+to.*(?:tomorrow|next\s+week)\b/i.test(originalText)
-      if (intentWithTime) {
-        return 'notes'  // "I want to read this tomorrow" = note with time preference
-      }
-      return 'calendar'
+    const hasSchedulingPattern = schedulingPatterns.some(pattern => pattern.test(originalText))
+    if (hasSchedulingPattern) {
+      return 'tasks'
     }
     
     // 4. STRONG OBLIGATION PATTERNS → Tasks
@@ -317,7 +300,7 @@ export default function Home() {
           <Layout 
       className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50   "
       seoTitle="tickk - Transform Voice into Organized Tasks"
-      seoDescription="Privacy-first voice productivity app that converts speech into organized tasks, notes, and calendar events. Works offline and keeps your data secure."
+      seoDescription="Privacy-first voice productivity app that converts speech into organized tasks and notes. Works offline and keeps your data secure."
       seoImage="/og-image.svg"
     >
         <div className="text-center">
@@ -672,7 +655,7 @@ export default function Home() {
                   Smart Processing
                 </h3>
                 <p className="text-gray-600  mb-6 text-sm sm:text-base">
-                  Natural language processing analyzes your speech and automatically determines if it&apos;s a task, note, or calendar event.
+                  Natural language processing analyzes your speech and automatically determines if it&apos;s a task or note.
                 </p>
                 
                 <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
@@ -682,7 +665,7 @@ export default function Home() {
                   </div>
                   <div className="p-2 bg-white  rounded border">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-medium text-gray-700 ">📅 Calendar Event</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700 ">� Task</span>
                       <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
                     </div>
                     <div className="text-xs text-gray-500  mt-1">
@@ -717,12 +700,12 @@ export default function Home() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="text-green-600">✓</div>
-                        <span className="text-xs sm:text-sm font-medium text-gray-700 ">Added to Calendar</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-700 ">Added to Tasks</span>
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500 ">📅</div>
+                      <div className="text-xs sm:text-sm text-gray-500 ">�</div>
                     </div>
                     <div className="text-xs text-gray-500  mt-1">
-                      Ready to sync with your calendar app
+                      Ready to manage and complete
                     </div>
                   </div>
                 </div>
@@ -1138,7 +1121,7 @@ export default function Home() {
                 See Voice Recognition in Action
               </h2>
               <p className="text-xl text-gray-600  max-w-3xl mx-auto">
-                Watch how natural language processing instantly categorizes your speech into tasks, notes, and calendar events
+                Watch how natural language processing instantly categorizes your speech into tasks and notes
               </p>
             </div>
 
@@ -1234,23 +1217,7 @@ export default function Home() {
                           )}
                         </div>
                         
-                        <div className={`bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-400 p-3 rounded-r-lg transition-all duration-500 ${
-                          demoCategory === 'calendar' ? 'opacity-100 ring-2 ring-purple-400' : 'opacity-50'
-                        }`}>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-purple-500">📅</span>
-                            <span className="font-medium text-purple-700 dark:text-purple-300">Calendar</span>
-                            {demoCategory === 'calendar' && (
-                              <span className="text-purple-600 dark:text-purple-400 text-xs ml-auto animate-pulse">✓ SELECTED</span>
-                            )}
-                          </div>
-                          <div className="text-sm text-gray-600 ">Scheduled events</div>
-                          {demoCategory === 'calendar' && (
-                            <div className="text-xs text-purple-600 dark:text-purple-400 mt-1 font-medium">
-                              Time references detected: &quot;tomorrow&quot;, &quot;at 3pm&quot;, &quot;schedule&quot;
-                            </div>
-                          )}
-                        </div>
+
                       </div>
                     </div>
                   </div>

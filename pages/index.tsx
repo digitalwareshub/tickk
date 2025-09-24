@@ -33,6 +33,7 @@ export default function App() {
   const [needsMigration, setNeedsMigration] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false) // Show only for new users
   const [modalLanguage, setModalLanguage] = useState<'en' | 'es'>('en') // Language for onboarding modal
+  const [rememberChoice, setRememberChoice] = useState(false) // Checkbox for "don't show again"
   
   // Smart context state
   const [hasEverRecorded, setHasEverRecorded] = useState(false)
@@ -82,7 +83,8 @@ export default function App() {
       step3: "Get productive immediately",
       startRecording: "🎤 Start Recording",
       tryDemo: "👁️ Try Demo First",
-      skipIntro: "Skip intro"
+      skipIntro: "Skip intro",
+      rememberChoice: "Remember my choice and don't ask again"
     },
     es: {
       title: "Habla. Guarda. Ordénalo después.",
@@ -108,7 +110,8 @@ export default function App() {
       step3: "Sé productivo inmediatamente",
       startRecording: "🎤 Comenzar a Grabar",
       tryDemo: "👁️ Probar Demo Primero",
-      skipIntro: "Saltar introducción"
+      skipIntro: "Saltar introducción",
+      rememberChoice: "Recordar mi elección y no preguntar de nuevo"
     }
   }
 
@@ -122,7 +125,7 @@ export default function App() {
       // Check for reset parameter (for testing)
       const urlParams = new URLSearchParams(window.location.search)
       if (urlParams.get('reset') === 'true') {
-        localStorage.removeItem('tickk_language_choice_made')
+        localStorage.removeItem('tickk_hide_language_modal')
         localStorage.removeItem('tickk_language')
         localStorage.removeItem('tickk_has_used')
         // Remove the parameter from URL
@@ -130,10 +133,9 @@ export default function App() {
       }
       
       const savedLanguage = localStorage.getItem('tickk_language')
-      const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
       
-      // If user has made a language choice and prefers Spanish, redirect immediately
-      if (hasLanguageChoice && savedLanguage === 'es') {
+      // If user prefers Spanish, redirect immediately
+      if (savedLanguage === 'es') {
         window.location.replace('/es')
         return
       }
@@ -149,10 +151,9 @@ export default function App() {
       
       // Check for early redirect - if we're still here, proceed with initialization
       const savedLanguage = localStorage.getItem('tickk_language')
-      const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
       
       // If user should be redirected, don't initialize the app
-      if (hasLanguageChoice && savedLanguage === 'es') {
+      if (savedLanguage === 'es') {
         return
       }
       
@@ -191,13 +192,12 @@ export default function App() {
           const savedMode = data.preferences?.defaultMode || 'braindump'
           setMode(savedMode)
           
-          // Only show onboarding MODAL for users who haven't made a language choice yet
-          // The rich interface should always show regardless of user status
-          const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
+          // Show onboarding modal unless user explicitly chose to hide it
+          const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
           const onboardingPref = data.preferences?.showOnboarding !== false
           
-          // Always show modal if no language choice has been made (for proper i18n experience)
-          if (!hasLanguageChoice && onboardingPref && !migrationNeeded) {
+          // Show modal if user hasn't explicitly chosen to hide it
+          if (!hideModal && onboardingPref && !migrationNeeded) {
             setShowOnboarding(true)
           }
         } else {
@@ -226,10 +226,9 @@ export default function App() {
           setPreferences(freshData.preferences!)
           setMode('braindump')
           
-          // Show onboarding MODAL for users who haven't made a language choice yet
-          // The rich interface will always show via MicroLanding component
-          const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
-          if (!hasLanguageChoice) {
+          // Show onboarding modal unless user explicitly chose to hide it
+          const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+          if (!hideModal) {
             setShowOnboarding(true)
           }
         }
@@ -259,9 +258,13 @@ export default function App() {
   const handleOnboardingComplete = useCallback(async () => {
     setShowOnboarding(false)
     
-    // Save language preference and choice flag
+    // Save language preference
     localStorage.setItem('tickk_language', modalLanguage)
-    localStorage.setItem('tickk_language_choice_made', 'true')
+    
+    // Only hide modal permanently if user checked the "remember" checkbox
+    if (rememberChoice) {
+      localStorage.setItem('tickk_hide_language_modal', 'true')
+    }
     
     // Mark user as having used the app
     localStorage.setItem('tickk_has_used', 'true')
@@ -298,7 +301,7 @@ export default function App() {
         items_count: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
       }
     })
-  }, [modalLanguage, preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
+  }, [modalLanguage, rememberChoice, preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
 
   /**
    * Handle modal keyboard accessibility (ESC to close)
@@ -724,6 +727,19 @@ export default function App() {
                     <span className="text-xs sm:text-sm text-gray-700">{content.step3}</span>
                   </div>
                 </div>
+              </div>
+
+              {/* Remember choice checkbox */}
+              <div className="mb-4 flex items-center justify-center">
+                <label className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={rememberChoice}
+                    onChange={(e) => setRememberChoice(e.target.checked)}
+                    className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-500 focus:ring-2"
+                  />
+                  <span>{content.rememberChoice}</span>
+                </label>
               </div>
 
               {/* Action buttons - Mobile optimized */}

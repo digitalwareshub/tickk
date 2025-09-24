@@ -32,6 +32,7 @@ export default function SpanishApp() {
   const [isLoading, setIsLoading] = useState(true)
   const [needsMigration, setNeedsMigration] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+  const [rememberChoice, setRememberChoice] = useState(false) // Checkbox for "don't show again"
   // Smart context state
   const [totalItemCount, setTotalItemCount] = useState(0)
   
@@ -116,9 +117,9 @@ export default function SpanishApp() {
             setPreferences(freshData.preferences!)
             setMode('braindump')
             
-            // Only show onboarding if user hasn't already made a language choice
-            const hasLanguageChoice = localStorage.getItem('tickk_language_choice_made') === 'true'
-            if (!hasLanguageChoice) {
+            // Show onboarding modal unless user explicitly chose to hide it
+            const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+            if (!hideModal) {
               setShowOnboarding(true)
             }
           }
@@ -140,6 +141,22 @@ export default function SpanishApp() {
     setTotalItemCount(newData.braindump.length)
     await storageService.saveAllData(newData)
   }, [storageService])
+
+  // Handle onboarding completion
+  const handleOnboardingComplete = useCallback(() => {
+    setShowOnboarding(false)
+    
+    // Only hide modal permanently if user checked the "remember" checkbox
+    if (rememberChoice) {
+      localStorage.setItem('tickk_hide_language_modal', 'true')
+    }
+    
+    // Mark user as having used the app
+    localStorage.setItem('tickk_has_used', 'true')
+    
+    // Save Spanish language preference
+    localStorage.setItem('tickk_language', 'es')
+  }, [rememberChoice])
 
   // Handle recording state changes
   const handleRecordingStateChange = useCallback((recording: boolean) => {
@@ -492,17 +509,30 @@ export default function SpanishApp() {
                   </div>
                 </div>
 
+                {/* Remember choice checkbox */}
+                <div className="mb-4 flex items-center justify-center">
+                  <label className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={rememberChoice}
+                      onChange={(e) => setRememberChoice(e.target.checked)}
+                      className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-500 focus:ring-2"
+                    />
+                    <span>Recordar mi elección y no preguntar de nuevo</span>
+                  </label>
+                </div>
+
                 {/* Action buttons - Mobile optimized */}
                 <div className="space-y-3">
                   <button
-                    onClick={() => setShowOnboarding(false)}
+                    onClick={handleOnboardingComplete}
                     className="w-full py-3 sm:py-3 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors min-h-[48px]"
                     aria-label="Comenzar a usar tickk con micrófono"
                   >
                     🎤 Comenzar a Grabar
                   </button>
                   <button
-                    onClick={() => setShowOnboarding(false)}
+                    onClick={handleOnboardingComplete}
                     className="w-full py-3 sm:py-3 px-4 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors min-h-[48px]"
                     aria-label="Probar demo de tickk primero"
                   >
@@ -513,7 +543,7 @@ export default function SpanishApp() {
                 {/* Skip option - Mobile optimized */}
                 <div className="mt-4">
                   <button
-                    onClick={() => setShowOnboarding(false)}
+                    onClick={handleOnboardingComplete}
                     className="text-xs text-gray-500 hover:text-gray-700 underline min-h-[44px] px-2"
                   >
                     Saltar introducción
