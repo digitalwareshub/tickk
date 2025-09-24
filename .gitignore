@@ -61,3 +61,6 @@ node_modules
 # AI conversation logs
 claude.txt
 chatgpt.txt
+
+# Internal planning documents
+docs/improvement-roadmap.md
