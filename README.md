@@ -1,6 +1,8 @@
 # tickk
 
-**Speak. Save. Sort.**
+*- 🎤 **Voice-first capture** - Speak naturally, we'll organize later
+- 🧠 **Smart NLP classification** - Automatically sorts into tasks and notes  
+- 🌐 **Works offline** - Local processing, no internet requiredeak. Save. Sort.**
 
 Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.
 

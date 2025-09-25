@@ -485,7 +485,7 @@ export default function SpanishApp() {
                   </div>
                   <div className="flex flex-col items-center p-2 sm:p-3 bg-orange-50 rounded-lg">
                     <span className="text-base sm:text-lg mb-1">✨</span>
-                    <span className="text-xs font-medium text-orange-700">IA Inteligente</span>
+                    <span className="text-xs font-medium text-orange-700">PLN Inteligente</span>
                     <span className="text-xs text-orange-600 hidden sm:block">Auto-organiza</span>
                   </div>
                 </div>

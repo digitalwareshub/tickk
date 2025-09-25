@@ -1,6 +1,10 @@
 /**
  * Main App - Clean, Minimal Design Like Notion/Cal.com
- * Direct braindump-first experience without flashy graphics
+ * Direct braindump-first experience with      trustNoSignupDesc: "Comenzar al instante",
+      trustOffline: "Funciona Sin Conexión",
+      trustOfflineDesc: "Solo tu dispositivo",
+      trustSmart: "PLN Inteligente",
+      trustSmartDesc: "Auto-organiza",lashy graphics
  */
 
 import { useState, useEffect, useCallback } from 'react'
@@ -75,7 +79,7 @@ export default function App() {
       trustNoSignupDesc: "Start instantly",
       trustOffline: "Works Offline",
       trustOfflineDesc: "Your device only",
-      trustSmart: "Smart AI",
+      trustSmart: "Smart NLP",
       trustSmartDesc: "Auto-organize",
       howItWorks: "How it works:",
       step1: "Speak your thoughts naturally",
