@@ -626,6 +626,26 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Firefox Notice */}
+              {typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('firefox') && (
+                <div className="mb-4 sm:mb-6 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <span className="text-amber-600 text-lg flex-shrink-0">⚠️</span>
+                    <div className="text-left">
+                      <p className="text-sm font-medium text-amber-800 mb-1">
+                        {modalLanguage === 'es' ? 'Aviso para Firefox' : 'Firefox Notice'}
+                      </p>
+                      <p className="text-xs text-amber-700">
+                        {modalLanguage === 'es' 
+                          ? 'Las funciones de voz están actualmente en desarrollo para Firefox. Recomendamos usar Chrome o Safari mientras trabajamos en la compatibilidad completa con Firefox.'
+                          : 'Voice features are currently in development for Firefox. We recommend using Chrome or Safari while we work on full Firefox compatibility.'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Header with icon - Mobile optimized */}
               <div className="mb-4 sm:mb-6">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
