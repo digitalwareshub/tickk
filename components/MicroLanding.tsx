@@ -3,6 +3,7 @@
  * Shows the main headline, subtitle, examples, and record button
  */
 
+import { useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 interface MicroLandingProps {
@@ -14,6 +15,7 @@ interface MicroLandingProps {
   onStopRecording?: () => void
   currentTranscript?: string
   recordingError?: string | null
+  onTextSubmit?: (text: string) => void
 }
 
 export default function MicroLanding({ 
@@ -24,9 +26,11 @@ export default function MicroLanding({
   onStartRecording,
   onStopRecording,
   currentTranscript,
-  recordingError
+  recordingError,
+  onTextSubmit
 }: MicroLandingProps) {
   const { t } = useLanguage()
+  const [textInput, setTextInput] = useState('')
 
   const handleRecordClick = () => {
     if (isRecording) {
@@ -83,34 +87,74 @@ export default function MicroLanding({
           </div>
         </div>
 
-        {/* Record Button - Central Focus */}
+        {/* Record Button or Text Input - Central Focus */}
         <div className="mb-8">
-          <div className="relative inline-block">
-            <button 
-              onClick={handleRecordClick}
-              disabled={!isSupported}
-              aria-label={isRecording ? "Stop recording" : "Click to record your thoughts"}
-              className={`
-                w-20 h-20 rounded-full flex items-center justify-center 
-                transition-all duration-200 transform hover:scale-105 shadow-lg
-                ${isRecording 
-                  ? 'bg-red-500 hover:bg-red-600' 
-                  : isSupported
-                  ? 'bg-gray-900 hover:bg-gray-800'
-                  : 'bg-gray-400 cursor-not-allowed'
-                }
-              `}
-            >
-              {isRecording ? (
-                <div className="w-6 h-6 bg-white rounded-sm"></div>
-              ) : (
-                <div className="w-8 h-8 bg-white rounded-full"></div>
-              )}
-            </button>
-          </div>
-          <p className="text-gray-600 text-sm mt-4">
-            {isRecording ? 'Recording...' : 'Click to record'}
-          </p>
+          {isSupported ? (
+            <div>
+              <div className="relative inline-block">
+                <button 
+                  onClick={handleRecordClick}
+                  aria-label={isRecording ? "Stop recording" : "Click to record your thoughts"}
+                  className={`
+                    w-20 h-20 rounded-full flex items-center justify-center 
+                    transition-all duration-200 transform hover:scale-105 shadow-lg
+                    ${isRecording 
+                      ? 'bg-red-500 hover:bg-red-600' 
+                      : 'bg-gray-900 hover:bg-gray-800'
+                    }
+                  `}
+                >
+                  {isRecording ? (
+                    <div className="w-6 h-6 bg-white rounded-sm"></div>
+                  ) : (
+                    <div className="w-8 h-8 bg-white rounded-full"></div>
+                  )}
+                </button>
+              </div>
+              <p className="text-gray-600 text-sm mt-4">
+                {isRecording ? 'Recording...' : 'Click to record'}
+              </p>
+            </div>
+          ) : (
+            <div className="max-w-md mx-auto">
+              <textarea
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault()
+                    const text = textInput.trim()
+                    if (text && onTextSubmit) {
+                      onTextSubmit(text)
+                      setTextInput('')
+                    }
+                  }
+                }}
+                placeholder="Type your thoughts here..."
+                className="w-full p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-gray-500 focus:border-transparent bg-white text-gray-900 text-left"
+                rows={3}
+                aria-label="Enter your thoughts"
+              />
+              <div className="flex justify-between items-center mt-3">
+                <span className="text-xs text-gray-500">
+                  Press Enter to add • Shift+Enter for new line
+                </span>
+                <button
+                  onClick={() => {
+                    const text = textInput.trim()
+                    if (text && onTextSubmit) {
+                      onTextSubmit(text)
+                      setTextInput('')
+                    }
+                  }}
+                  disabled={!textInput.trim()}
+                  className="px-4 py-2 text-sm bg-gray-800 text-white rounded hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Live Transcript */}
@@ -135,7 +179,10 @@ export default function MicroLanding({
         {/* Helper Text */}
         <div className="mb-8">
           <p className="text-gray-500 text-sm">
-            Press the microphone to record your thoughts. We&apos;ll organize them later.
+            {isSupported 
+              ? "Press the microphone to capture your thoughts. We'll organize them later."
+              : "Type your thoughts below and hit Enter. We'll organize them later."
+            }
           </p>
         </div>
 

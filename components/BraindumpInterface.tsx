@@ -48,6 +48,9 @@ export default function BraindumpInterface({
   const [recordingError, setRecordingError] = useState<string | null>(null)
   const [lastAddedItem, setLastAddedItem] = useState<string | null>(null)
   
+  // Text input fallback state
+  const [textInput, setTextInput] = useState('')
+  
   // Use ref to store transcript for immediate access in callbacks
   const transcriptRef = useRef('')
   
@@ -69,6 +72,8 @@ export default function BraindumpInterface({
   const [recognition, setRecognition] = useState<any>(null)
   const [isSupported, setIsSupported] = useState(false)
   
+
+  
   /**
    * Initialize speech recognition
    */
@@ -87,10 +92,9 @@ export default function BraindumpInterface({
       onRecordingStatusUpdate?.({ isSupported: true })
     } else {
       setIsSupported(false)
-      setRecordingError(t('braindump.speech_not_supported'))
+      // Don't set recordingError since we have a text input fallback
       onRecordingStatusUpdate?.({ 
-        isSupported: false, 
-        error: t('braindump.speech_not_supported') 
+        isSupported: false
       })
     }
   }, [language, onRecordingStatusUpdate, t])
@@ -294,6 +298,20 @@ export default function BraindumpInterface({
       setIsProcessing(false)
     }
   }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer, language, onRecordingStatusUpdate])
+
+  /**
+   * Handle text input submission (for browsers without speech support)
+   */
+  const handleTextSubmit = useCallback(async () => {
+    const text = textInput.trim()
+    if (!text) return
+    
+    // Clear the input immediately for better UX
+    setTextInput('')
+    
+    // Process the text the same way as voice transcript
+    await handleTranscriptComplete(text)
+  }, [textInput, handleTranscriptComplete])
   
   /**
    * Handle completion of processing modal
@@ -398,8 +416,8 @@ export default function BraindumpInterface({
   return (
     <div className="max-w-4xl mx-auto px-4 py-8" role="main" aria-label="Braindump recording interface">
       {/* Skip to content link */}
-      <a href="#recording-button" className="sr-only focus:not-sr-only">
-        Skip to recording button
+      <a href={isSupported ? "#recording-button" : "#text-input"} className="sr-only focus:not-sr-only">
+        {isSupported ? "Skip to recording button" : "Skip to text input"}
       </a>
       
       {/* Simple intro for first-time users */}
@@ -410,7 +428,10 @@ export default function BraindumpInterface({
           aria-label="Getting started instructions"
         >
           <p className="text-sm text-gray-600 text-center">
-            Press the microphone to record your thoughts. We&apos;ll organize them later.
+            {isSupported 
+              ? "Press the microphone to capture your thoughts. We'll organize them later."
+              : "Type your thoughts below and hit Enter. We'll organize them later."
+            }
           </p>
         </div>
       )}
@@ -463,32 +484,63 @@ export default function BraindumpInterface({
               </div>
             )}
             
-            {/* Recording Button */}
-            <div className="mb-4">
-              <button
-                id="recording-button"
-                onClick={isRecording ? stopRecording : startRecording}
-                disabled={!isSupported || isProcessing}
-                aria-label={
-                  isRecording 
-                    ? 'Stop recording (currently recording)' 
-                    : isSupported 
-                      ? 'Start voice recording' 
-                      : 'Voice recording not supported'
-                }
-                aria-pressed={isRecording}
-                aria-describedby="recording-help"
-                className={`w-16 h-16 rounded-full border-2 transition-colors ${
-                  isRecording
-                    ? 'bg-gray-100 border-gray-300 text-gray-700'
-                    : isSupported
-                    ? 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
-                    : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
-                } text-sm font-medium`}
-              >
+            {/* Recording Button or Text Input */}
+            {isSupported ? (
+              <div className="mb-4">
+                <button
+                  id="recording-button"
+                  onClick={isRecording ? stopRecording : startRecording}
+                  disabled={isProcessing}
+                  aria-label={
+                    isRecording 
+                      ? 'Stop recording (currently recording)' 
+                      : 'Start voice recording'
+                  }
+                  aria-pressed={isRecording}
+                  aria-describedby="recording-help"
+                  className={`w-16 h-16 rounded-full border-2 transition-colors ${
+                    isRecording
+                      ? 'bg-gray-100 border-gray-300 text-gray-700'
+                      : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
+                  } text-sm font-medium`}
+                >
 {isRecording ? t('braindump.stop') : t('braindump.record')}
-              </button>
-            </div>
+                </button>
+              </div>
+            ) : (
+              <div className="mb-4">
+                <div className="max-w-md mx-auto">
+                  <textarea
+                    id="text-input"
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault()
+                        handleTextSubmit()
+                      }
+                    }}
+                    placeholder="Type your thoughts here..."
+                    disabled={isProcessing}
+                    className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                    rows={3}
+                    aria-label="Enter your thoughts"
+                  />
+                  <div className="flex justify-between items-center mt-2">
+                    <span className="text-xs text-gray-500">
+                      Press Enter to add • Shift+Enter for new line
+                    </span>
+                    <button
+                      onClick={handleTextSubmit}
+                      disabled={!textInput.trim() || isProcessing}
+                      className="px-3 py-1 text-xs bg-gray-800 text-white rounded hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
             
             {/* Hidden help text for screen readers */}
             <div id="recording-help" className="sr-only">
@@ -541,14 +593,7 @@ export default function BraindumpInterface({
               </div>
             )}
             
-            {/* Browser Support Warning */}
-            {!isSupported && (
-              <div className="bg-gray-50 border border-gray-200 rounded-md p-3">
-                <p className="text-gray-700 text-xs">
-                  {t('braindump.speech_not_supported')}
-                </p>
-              </div>
-            )}
+
           </div>
         </div>
       )}

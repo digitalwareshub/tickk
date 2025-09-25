@@ -434,6 +434,104 @@ export default function App() {
       }
     })
   }
+
+  /**
+   * Split text into separate sentences for better classification
+   */
+  const splitIntoSentences = (text: string): string[] => {
+    let sentences: string[] = []
+    
+    // First, try splitting on sentence boundaries (periods, exclamation, question marks)
+    sentences = text
+      .split(/[.!?]+/)
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
+    
+    // If we got multiple sentences from punctuation, return them
+    if (sentences.length > 1) {
+      return sentences
+    }
+    
+    // No sentence punctuation found, try splitting on patterns that indicate separate thoughts:
+    
+    // Pattern 1: Split on conjunctions followed by "I" + action/state verbs
+    sentences = text
+      .split(/(?:,\s*(?:and|but|so|then|also)\s+|,\s+)(?=I\s+(?:need|have|want|should|will|am|going|think|feel|must|can|could|would|might))/i)
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
+    
+    if (sentences.length > 1) {
+      return sentences
+    }
+    
+    // Pattern 2: Split on "and I" or "but I" patterns  
+    sentences = text
+      .split(/\s+(?:and|but|so|then|also)\s+(?=I\s+(?:need|have|want|should|will|am|going|think|feel|must|can|could|would|might))/i)
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
+    
+    if (sentences.length > 1) {
+      return sentences
+    }
+    
+    // Pattern 3: Split on commas before common task/note starters (without "I")
+    sentences = text
+      .split(/,\s*(?=(?:need\s+to|have\s+to|want\s+to|should|must|remember\s+to|don't\s+forget|call|buy|get|pick\s+up|schedule|book|pay|fix|clean|organize|maybe|perhaps|what\s+if|interesting|cool|weird))/i)
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
+    
+    if (sentences.length > 1) {
+      return sentences
+    }
+    
+    // If still no splits found, return the original text as a single item
+    return [text.trim()]
+  }
+
+  /**
+   * Handle text input submission (for browsers without speech support)
+   */
+  const handleTextSubmit = async (text: string) => {
+    if (!appData) return
+    
+    // Split input into separate sentences/thoughts
+    const sentences = splitIntoSentences(text.trim())
+    const newItems: VoiceItem[] = []
+    const sessionId = `session-${Date.now()}`
+    
+    // Create separate braindump items for each sentence
+    sentences.forEach((sentence, index) => {
+      if (sentence.length > 0) {
+        newItems.push({
+          id: crypto.randomUUID(),
+          text: sentence,
+          timestamp: new Date(Date.now() + index).toISOString(), // Slight time offset
+          category: 'braindump',
+          sessionId,
+          processed: false
+        })
+      }
+    })
+    
+    const updatedData = {
+      ...appData,
+      braindump: [...appData.braindump, ...newItems]
+    }
+    
+    await handleDataUpdate(updatedData)
+    
+    // Track the text input
+    enhancedAnalytics.trackEvent({
+      action: 'text_input_submitted',
+      category: 'engagement', 
+      label: 'fallback_mode',
+      custom_parameters: {
+        input_length: text.length,
+        sentences_created: sentences.length,
+        source: 'text_fallback'
+      }
+    })
+  }
   
   /**
    * Keyboard shortcuts handlers
@@ -547,6 +645,7 @@ export default function App() {
                 onStopRecording={recordingControls?.stopRecording}
                 currentTranscript={currentTranscript}
                 recordingError={recordingError}
+                onTextSubmit={handleTextSubmit}
               />
             </>
           )}
