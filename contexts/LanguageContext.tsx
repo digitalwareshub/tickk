@@ -36,6 +36,12 @@ const translations = {
     'common.search': 'Search',
     'common.export': 'Export',
     'common.import': 'Import',
+    'common.confirm': 'Confirm',
+    'common.edit_item': 'Edit Item',
+    'common.delete_item': 'Delete Item',
+    'common.delete_confirm': 'Are you sure you want to delete this item?',
+    'common.item_updated': 'Item updated successfully',
+    'common.item_deleted': 'Item deleted successfully',
     
     // Landing page
     'landing.hero.title': 'Organized Productivity',
@@ -81,6 +87,8 @@ const translations = {
     'braindump.organize_with_count': 'Organize ({count})',
     'braindump.organize_help': 'This will categorize your thoughts into tasks and notes. You can review and adjust the categorization before applying.',
     'braindump.recent_thoughts': 'Recent thoughts',
+    'braindump.edit_item': 'Edit item',
+    'braindump.delete_item': 'Delete item',
     
     // ReturningUserInterface
     'returning.welcome_back': 'Welcome back to tickk',
@@ -114,6 +122,12 @@ const translations = {
     'common.search': 'Buscar',
     'common.export': 'Exportar',
     'common.import': 'Importar',
+    'common.confirm': 'Confirmar',
+    'common.edit_item': 'Editar Elemento',
+    'common.delete_item': 'Eliminar Elemento',
+    'common.delete_confirm': '¿Estás seguro de que quieres eliminar este elemento?',
+    'common.item_updated': 'Elemento actualizado exitosamente',
+    'common.item_deleted': 'Elemento eliminado exitosamente',
     
     // Landing page
     'landing.hero.title': 'Productividad Organizada',
@@ -159,6 +173,8 @@ const translations = {
     'braindump.organize_with_count': 'Organizar ({count})',
     'braindump.organize_help': 'Esto categorizará tus pensamientos en tareas y notas. Puedes revisar y ajustar la categorización antes de aplicar.',
     'braindump.recent_thoughts': 'Pensamientos recientes',
+    'braindump.edit_item': 'Editar elemento',
+    'braindump.delete_item': 'Eliminar elemento',
     
     // ReturningUserInterface
     'returning.welcome_back': 'Bienvenido de vuelta a tickk',

@@ -9,6 +9,7 @@ import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
+import EditItemModal from './EditItemModal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem, BraindumpSession } from '@/types/braindump'
 
@@ -61,6 +62,10 @@ export default function BraindumpInterface({
   // Processing modal state
   const [showProcessModal, setShowProcessModal] = useState(false)
   const [itemsToProcess, setItemsToProcess] = useState<VoiceItem[]>([])
+  
+  // Edit modal state
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [itemToEdit, setItemToEdit] = useState<VoiceItem | null>(null)
   
   // Services
   const [storageService] = useState(() => StorageService.getInstance())
@@ -366,6 +371,66 @@ export default function BraindumpInterface({
   }, [])
   
   /**
+   * Handle edit item
+   */
+  const handleEditItem = useCallback((item: VoiceItem) => {
+    setItemToEdit(item)
+    setShowEditModal(true)
+  }, [])
+  
+  /**
+   * Handle save edited item
+   */
+  const handleSaveEditedItem = useCallback(async (updatedItem: VoiceItem) => {
+    try {
+      const updatedBraindump = appData.braindump.map(item => 
+        item.id === updatedItem.id ? updatedItem : item
+      )
+      
+      const updatedData: AppData = {
+        ...appData,
+        braindump: updatedBraindump
+      }
+      
+      await storageService.saveAllData(updatedData)
+      onDataUpdate(updatedData)
+      
+      announcer.announce('Item updated successfully', 'polite')
+      trackPageInteraction('braindump_item_edited', 'braindump')
+      
+    } catch (error) {
+      console.error('Failed to update item:', error)
+      announcer.announce('Failed to update item', 'assertive')
+    }
+  }, [appData, storageService, onDataUpdate, announcer])
+  
+  /**
+   * Handle delete item
+   */
+  const handleDeleteItem = useCallback(async (itemId: string) => {
+    if (!confirm(t('common.delete_confirm'))) return
+    
+    try {
+      const updatedBraindump = appData.braindump.filter(item => item.id !== itemId)
+      
+      const updatedData: AppData = {
+        ...appData,
+        braindump: updatedBraindump
+      }
+      
+      await storageService.saveAllData(updatedData)
+      onDataUpdate(updatedData)
+      
+      announcer.announce('Item deleted successfully', 'polite')
+      trackPageInteraction('braindump_item_deleted', 'braindump')
+      
+    } catch (error) {
+      console.error('Failed to delete item:', error)
+      announcer.announce('Failed to delete item', 'assertive')
+    }
+  }, [appData, storageService, onDataUpdate, announcer, t])
+  
+  /**
    * Update the process button to use the modal
    */
   const handleOrganizeClick = useCallback(() => {
@@ -651,30 +716,59 @@ export default function BraindumpInterface({
                     >
                       &quot;{item.text}&quot;
                     </p>
-                    <div className="flex items-center gap-3 text-xs text-gray-500">
-                      <span aria-label={`Recorded at ${new Date(item.timestamp).toLocaleString()}`}>
-                        ⏰ {new Date(item.timestamp).toLocaleTimeString()}
-                      </span>
-                      {item.classification && (
-                        <span 
-                          className={`px-2 py-1 rounded text-xs ${
-                            item.classification.category === 'tasks' 
-                              ? 'bg-gray-100 text-gray-700 border border-gray-200'
-                              : 'bg-gray-50 text-gray-600 border border-gray-200'
-                          }`}
-                          aria-label={`Classified as ${item.classification.category}`}
-                        >
-                          {item.classification.category}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                          aria-label="Mark as completed"
+                        />
+                        <span aria-label={`Recorded at ${new Date(item.timestamp).toLocaleString()}`}>
+                          ⏰ {new Date(item.timestamp).toLocaleString()}
                         </span>
-                      )}
-                      {item.confidence && (
-                        <span 
-                          className="text-gray-400 text-xs"
-                          aria-label={`${Math.round(item.confidence * 100)}% confidence`}
+                        {item.classification && (
+                          <span 
+                            className={`px-2 py-1 rounded text-xs ${
+                              item.classification.category === 'tasks' 
+                                ? 'bg-gray-100 text-gray-700 border border-gray-200'
+                                : 'bg-gray-50 text-gray-600 border border-gray-200'
+                            }`}
+                            aria-label={`Classified as ${item.classification.category}`}
+                          >
+                            {item.classification.category}
+                          </span>
+                        )}
+                        {item.confidence && (
+                          <span 
+                            className="text-gray-400 text-xs"
+                            aria-label={`${Math.round(item.confidence * 100)}% confidence`}
+                          >
+                            {Math.round(item.confidence * 100)}%
+                          </span>
+                        )}
+                      </div>
+                      
+                      {/* Action buttons */}
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => handleEditItem(item)}
+                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                          aria-label={t('braindump.edit_item')}
                         >
-                          {Math.round(item.confidence * 100)}%
-                        </span>
-                      )}
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => handleDeleteItem(item.id)}
+                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          aria-label={t('braindump.delete_item')}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -705,6 +799,17 @@ export default function BraindumpInterface({
           items={itemsToProcess}
           onClose={handleProcessingClose}
           onComplete={handleProcessingComplete}
+        />
+      )}
+      
+      {/* Edit Item Modal */}
+      {showEditModal && (
+        <EditItemModal
+          isOpen={showEditModal}
+          item={itemToEdit}
+          onClose={() => setShowEditModal(false)}
+          onSave={handleSaveEditedItem}
+          type="braindump"
         />
       )}
     </div>

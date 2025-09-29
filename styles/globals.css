@@ -235,3 +235,57 @@ body {
     linear-gradient(90deg, rgba(156, 163, 175, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
+
+/* Custom checkbox styling */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Green checkboxes for tasks */
+input[type="checkbox"].text-green-600:checked {
+  background-color: #16a34a;
+  border-color: #16a34a;
+}
+
+/* Purple checkboxes for notes */
+input[type="checkbox"].text-purple-600:checked {
+  background-color: #9333ea;
+  border-color: #9333ea;
+}
