@@ -27,37 +27,20 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
         <div className="block md:hidden">
           {/* Brand Section */}
           <div className="text-center mb-6">
-            <div className="flex items-center justify-center space-x-2 mb-3">
+            <div className="flex items-center justify-center space-x-2 mb-6">
               <span className="heading-secondary text-gray-900">tickk</span>
               <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">FREE</span>
             </div>
-            <p className="text-responsive text-gray-600 mb-4 px-4">
-              {language === 'es' ? 'Háblalo. Guárdalo. Ordénalo después.' : 'Speak it. Save it. Sort it later.'}
-            </p>
           </div>
 
           {/* Quick Links Grid */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="space-y-2 text-center">
+              <Link href={getLocalizedUrl('/')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Panel de Voz' : 'Voice Dashboard'}
+              </Link>
               <Link href={getLocalizedUrl('/landing')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors font-medium">
                 {language === 'es' ? 'Acerca de' : 'About'}
-              </Link>
-              <Link href={getLocalizedUrl('/contact')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Contacto' : 'Contact'}
-              </Link>
-              <Link href={getLocalizedUrl('/support')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Soporte' : 'Support'}
-              </Link>
-              <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Privacidad' : 'Privacy'}
-              </Link>
-              <Link href={getLocalizedUrl('/changelog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Changelog
-              </Link>
-            </div>
-            <div className="space-y-2 text-center">
-              <Link href={getLocalizedUrl('/terms')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Términos' : 'Terms'}
               </Link>
               <Link href={getLocalizedUrl('/blog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 Blog
@@ -65,17 +48,34 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <span className="block text-sm text-gray-400 cursor-not-allowed">
                 {language === 'es' ? 'Reseñas' : 'Reviews'}
               </span>
-              <Link href={getLocalizedUrl('/bug-report')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Reportar Error' : 'Bug Report'}
-              </Link>
               <a 
                 href="https://github.com/digitalwareshub/tickk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="block text-sm text-gray-600 hover:text-orange-600 transition-colors"
               >
-                GitHub
+                {language === 'es' ? 'Código Abierto' : 'Open Source'}
               </a>
+            </div>
+            <div className="space-y-2 text-center">
+              <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Privacidad' : 'Privacy'}
+              </Link>
+              <Link href={getLocalizedUrl('/terms')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Términos' : 'Terms'}
+              </Link>
+              <Link href={getLocalizedUrl('/support')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Soporte' : 'Support'}
+              </Link>
+              <Link href={getLocalizedUrl('/contact')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Contacto' : 'Contact'}
+              </Link>
+              <Link href={getLocalizedUrl('/bug-report')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
+              </Link>
+              <Link href={getLocalizedUrl('/changelog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                Changelog
+              </Link>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   <p className="text-responsive text-gray-600 mb-4">
                     {language === 'es' 
                       ? 'Una app que se calla y escucha. Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y recordatorios.'
-                      : 'Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.'
+                      : 'Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.'
                     }
                   </p>
             <div className="flex space-x-4">
