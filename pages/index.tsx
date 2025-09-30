@@ -587,7 +587,11 @@ export default function App() {
    */
   if (!mounted || isLoading) {
     return (
-      <Layout>
+      <>
+        <Head>
+          <title>Loading... | tickk</title>
+          <meta name="description" content="Loading tickk voice productivity app..." />
+        </Head>
         <div className="min-h-screen flex items-center justify-center bg-white">
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mx-auto mb-4"></div>
@@ -596,7 +600,7 @@ export default function App() {
             </p>
           </div>
         </div>
-      </Layout>
+      </>
     )
   }
   

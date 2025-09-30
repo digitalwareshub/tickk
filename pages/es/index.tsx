@@ -241,16 +241,18 @@ export default function SpanishApp() {
   // Show loading state
   if (isLoading) {
     return (
-      <Layout className="min-h-screen bg-white">
-        <main>
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
-              <p className="text-gray-600">Cargando...</p>
-            </div>
+      <>
+        <Head>
+          <title>Cargando... | tickk</title>
+          <meta name="description" content="Cargando la aplicación de productividad por voz tickk..." />
+        </Head>
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
+            <p className="text-gray-600">Cargando...</p>
           </div>
-        </main>
-      </Layout>
+        </div>
+      </>
     )
   }
 
