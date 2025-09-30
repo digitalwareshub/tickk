@@ -1,10 +1,6 @@
 /**
  * Main App - Clean, Minimal Design Like Notion/Cal.com
- * Direct braindump-first experience with      trustNoSignupDesc: "Comenzar al instante",
-      trustOffline: "Funciona Sin Conexión",
-      trustOfflineDesc: "Solo tu dispositivo",
-      trustSmart: "PLN Inteligente",
-      trustSmartDesc: "Auto-organiza",lashy graphics
+ * Direct braindump-first experience without flashy graphics
  */
 
 import { useState, useEffect, useCallback } from 'react'
@@ -729,12 +725,12 @@ export default function App() {
           {appData && (
             <main>
               {/* SEO H1 - Hidden but accessible to search engines */}
-              <h1 className="seo-hidden">
+              <h1 className="sr-only">
                 tickk - Free Voice Productivity App: Speak, Save, Sort it Later
               </h1>
               
               {/* SEO H2 - Hidden but accessible to search engines */}
-              <h2 className="seo-hidden">
+              <h2 className="sr-only">
                 {mode === 'braindump' 
                   ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
                   : 'Organized Tasks and Notes Dashboard'
@@ -742,7 +738,7 @@ export default function App() {
               </h2>
               
               {/* Hidden internal links for SEO - invisible to users */}
-              <div className="seo-hidden">
+              <div className="sr-only">
                 <Link href="/privacy">Privacy Policy</Link>
                 <Link href="/terms">Terms of Service</Link>
                 <Link href="/support">Support</Link>

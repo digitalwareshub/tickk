@@ -434,12 +434,12 @@ export default function SpanishApp() {
           {appData && (
             <main>
               {/* SEO H1 - Hidden but accessible to search engines */}
-              <h1 className="seo-hidden">
+              <h1 className="sr-only">
                 tickk - Aplicación Gratuita de Productividad por Voz: Habla, Guarda, Ordénalo Después
               </h1>
               
               {/* SEO H2 - Hidden but accessible to search engines */}
-              <h2 className="seo-hidden">
+              <h2 className="sr-only">
                 {mode === 'braindump' 
                   ? 'Interfaz de Grabación por Voz - Captura Tus Pensamientos al Instante'
                   : 'Panel de Tareas y Notas Organizadas'
@@ -447,7 +447,7 @@ export default function SpanishApp() {
               </h2>
               
               {/* Hidden internal links for SEO - invisible to users */}
-              <div className="seo-hidden">
+              <div className="sr-only">
                 <Link href="/es/privacy">Política de Privacidad</Link>
                 <Link href="/es/terms">Términos de Servicio</Link>
                 <Link href="/es/support">Soporte</Link>
