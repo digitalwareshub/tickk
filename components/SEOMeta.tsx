@@ -11,7 +11,7 @@ interface SEOMetaProps {
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
   description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
-  image = '/og-image.svg',
+  image = '/og-image.png',
   url = 'https://tickk.app'
 }: SEOMetaProps) {
   const fullTitle = title.includes('tickk') ? title : `${title} | tickk`
@@ -64,13 +64,13 @@ export default function SEOMeta({
               width: 1200,
               height: 630,
               alt: 'tickk - Voice to Productivity App',
-              type: 'image/svg+xml',
+              type: 'image/png',
             },
           ],
         }}
         twitter={{
-          handle: '@tickkapp',
-          site: '@tickkapp',
+          handle: '@TheTickkApp',
+          site: '@TheTickkApp',
           cardType: 'summary_large_image',
         }}
         additionalMetaTags={[
@@ -145,6 +145,11 @@ export default function SEOMeta({
           {
             name: 'format-detection',
             content: 'telephone=no',
+          },
+          // Twitter Card Image
+          {
+            name: 'twitter:image',
+            content: `${url}/twitter-image.png`,
           },
         ]}
       />

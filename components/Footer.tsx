@@ -51,6 +51,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 {language === 'es' ? 'Privacidad' : 'Privacy'}
               </Link>
+              <Link href={getLocalizedUrl('/changelog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
+                Changelog
+              </Link>
             </div>
             <div className="space-y-2 text-center">
               <Link href={getLocalizedUrl('/terms')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
@@ -59,6 +62,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <Link href={getLocalizedUrl('/blog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 Blog
               </Link>
+              <span className="block text-sm text-gray-400 cursor-not-allowed">
+                Reviews
+              </span>
               <Link href={getLocalizedUrl('/bug-report')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 {language === 'es' ? 'Reportar Error' : 'Bug Report'}
               </Link>
@@ -76,7 +82,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-4">
             <a 
-              href="https://twitter.com/tickkapp" 
+              href="https://x.com/TheTickkApp" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -127,7 +133,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   </p>
             <div className="flex space-x-4">
               <a 
-                href="https://twitter.com/tickkapp" 
+                href="https://x.com/TheTickkApp" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-blue-500  transition-colors"
@@ -184,6 +190,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <span className="text-gray-400 cursor-not-allowed">
+                  Reviews
+                </span>
+              </li>
+              <li>
                 <a 
                   href="https://github.com/digitalwareshub/tickk" 
                   target="_blank" 
@@ -196,44 +207,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </ul>
           </div>
 
-          {/* Use Cases Column */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
-              {language === 'es' ? 'Casos de Uso' : 'Use Cases'}
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Notas de Reuniones' : 'Meeting Notes'}
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Gestión de Tareas' : 'Task Management'}
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Recordatorios por Voz' : 'Voice Reminders'}
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Lluvia de Ideas' : 'Brainstorming'}
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Planificación de Proyectos' : 'Project Planning'}
-                </span>
-              </li>
-              <li>
-                <span className="text-gray-600">
-                  {language === 'es' ? 'Accesibilidad' : 'Accessibility'}
-                </span>
-              </li>
-            </ul>
-          </div>
 
           {/* Legal & Support Column */}
           <div>
@@ -264,6 +237,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <li>
                 <Link href={getLocalizedUrl('/bug-report')} className="text-gray-600 hover:text-orange-600 transition-colors">
                   {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
+                </Link>
+              </li>
+              <li>
+                <Link href={getLocalizedUrl('/changelog')} className="text-gray-600 hover:text-orange-600 transition-colors">
+                  Changelog
                 </Link>
               </li>
             </ul>

@@ -319,8 +319,8 @@ export default function SpanishApp() {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@tickkapp" />
-        <meta name="twitter:creator" content="@tickkapp" />
+        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@TheTickkApp" />
         <meta name="twitter:title" content="tickk - Háblalo. Guárdalo. Ordénalo después." />
         <meta name="twitter:description" content="Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
         <meta name="twitter:image" content="https://tickk.app/og-image.svg" />
