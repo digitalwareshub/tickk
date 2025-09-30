@@ -46,10 +46,10 @@ export default function MicroLanding({
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="heading-primary text-gray-900 mb-4">
             {t('microlanding.headline')}
           </h1>
-          <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-responsive text-gray-600 mb-8 max-w-2xl mx-auto">
             {t('microlanding.subheadline')}
           </p>
         </div>

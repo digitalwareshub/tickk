@@ -18,18 +18,11 @@ const defaultSEOConfig = {
         alt: 'tickk Voice Productivity App',
         type: 'image/png',
       },
-      {
-        url: 'https://tickk.app/og-image-square.png',
-        width: 1080,
-        height: 1080,
-        alt: 'tickk Voice App Logo',
-        type: 'image/png',
-      },
     ],
   },
   twitter: {
-    handle: '@tickkapp',
-    site: '@tickkapp',
+    handle: '@TheTickkApp',
+    site: '@TheTickkApp',
     cardType: 'summary_large_image',
   },
   additionalMetaTags: [

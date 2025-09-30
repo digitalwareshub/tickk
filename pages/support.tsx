@@ -142,7 +142,7 @@ export default function Support() {
                 <ul className="text-gray-600 space-y-1 ml-4">
                   <li>• Google Chrome (recommended)</li>
                   <li>• Microsoft Edge</li>
-                  <li>• Mozilla Firefox</li>
+                  <li>• Mozilla Firefox (<strong>Work in Progress</strong>)</li>
                   <li>• Safari (macOS/iOS)</li>
                 </ul>
               </div>

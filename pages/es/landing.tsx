@@ -160,8 +160,8 @@ export default function LandingES() {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@tickkapp" />
-        <meta name="twitter:creator" content="@tickkapp" />
+        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@TheTickkApp" />
         <meta name="twitter:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
         <meta name="twitter:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
         <meta name="twitter:image" content="https://tickk.app/og-image.svg" />
