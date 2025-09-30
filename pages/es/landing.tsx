@@ -143,7 +143,6 @@ export default function LandingES() {
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />
         <meta name="language" content="es-ES" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Open Graph */}
         <meta property="og:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />

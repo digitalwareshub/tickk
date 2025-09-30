@@ -25,6 +25,7 @@ body {
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility;
+  font-display: swap; /* Prevent flash of invisible text */
 }
 
 /* Language flag specific styling */
@@ -34,6 +35,7 @@ body {
   font-size: 1.2em;
   line-height: 1;
   vertical-align: middle;
+  font-display: swap; /* Prevent flash of invisible text */
 }
 
 @layer utilities {

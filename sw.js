@@ -1,10 +1,9 @@
-const CACHE_NAME = 'tickk-voice-v10'; // Updated cache name for tickk
+const CACHE_NAME = 'tickk-voice-v11'; // Updated cache name for tickk
 const urlsToCache = [
     '/',
     '/app.js',
     '/manifest.json',
     'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
     'https://unpkg.com/compromise@latest/builds/compromise.min.js'
 ];
 
