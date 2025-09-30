@@ -11,7 +11,7 @@ interface SEOMetaProps {
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
   description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
-  image = '/og-image.svg',
+  image = '/og-image.png',
   url = 'https://tickk.app'
 }: SEOMetaProps) {
   const fullTitle = title.includes('tickk') ? title : `${title} | tickk`
