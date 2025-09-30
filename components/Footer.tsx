@@ -227,7 +227,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Mobile Bottom */}
           <div className="block md:hidden text-center">
             <div className="text-xs text-gray-600 mb-2">
-              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para la productividad.' : 'Built with ❤️ for productivity.'}
+              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para la productividad diaria.' : 'Built with ❤️ for daily productivity.'}
             </div>
             {showHomeLink && (
               <button 
@@ -248,7 +248,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Desktop Bottom */}
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-600 mb-4 md:mb-0">
-              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para entusiastas de la productividad.' : 'Built with ❤️ for productivity enthusiasts.'}
+              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para entusiastas de la productividad diaria.' : 'Built with ❤️ for daily productivity enthusiasts.'}
             </div>
             
             {showHomeLink && (
