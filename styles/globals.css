@@ -17,6 +17,16 @@
   color: transparent;
 }
 
+/* Hide scrollbars while keeping scroll functionality */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

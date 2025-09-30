@@ -799,7 +799,7 @@ export default function App() {
           aria-describedby="onboarding-description"
           tabIndex={-1}
         >
-          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto no-scrollbar">
             <div className="text-center">
               {/* Language Selector */}
               <div className="flex justify-center mb-4 sm:mb-6">

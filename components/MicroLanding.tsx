@@ -59,7 +59,7 @@ export default function MicroLanding({
           <p className="text-gray-600 text-center mb-6">
             {t('microlanding.try_saying')}:
           </p>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 max-w-4xl mx-auto">
             <ExampleChip 
               text={t('microlanding.example1')}
               emoji="📋"
@@ -231,18 +231,18 @@ function ExampleChip({ text, emoji, type, onClick }: ExampleChipProps) {
     <button
       onClick={() => onClick?.(text)}
       className={`
-        inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm
+        flex items-start gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-full text-xs sm:text-sm
         border transition-all hover:scale-105 hover:shadow-md
-        whitespace-nowrap
+        text-left leading-tight min-w-0 w-full sm:w-auto min-h-0
         ${type === 'task' 
           ? 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100' 
           : 'border-green-200 bg-green-50 text-green-700 hover:bg-green-100'
         }
       `}
     >
-      <span>{emoji}</span>
-      <span>&ldquo;{text}&rdquo;</span>
-      <span className="text-xs opacity-60">→ {type}</span>
+      <span className="flex-shrink-0 mt-0.5">{emoji}</span>
+      <span className="flex-1 break-words whitespace-normal">&ldquo;{text}&rdquo;</span>
+      <span className="text-xs opacity-60 flex-shrink-0 hidden sm:inline mt-0.5">→ {type}</span>
     </button>
   )
 }
