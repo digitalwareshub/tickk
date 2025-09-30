@@ -123,10 +123,6 @@ export default function SEOMeta({
             content: 'productivity software, voice recognition, voice assistant',
           },
           {
-            name: 'viewport',
-            content: 'width=device-width, initial-scale=1',
-          },
-          {
             name: 'application-name',
             content: 'tickk',
           },

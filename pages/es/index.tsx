@@ -302,7 +302,6 @@ export default function SpanishApp() {
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />
         <meta name="language" content="es-ES" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Open Graph */}
         <meta property="og:title" content="tickk - Háblalo. Guárdalo. Ordénalo después." />

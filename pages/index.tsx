@@ -623,7 +623,6 @@ export default function App() {
           name="description" 
           content="Speak. Save. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage." 
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <Layout 
