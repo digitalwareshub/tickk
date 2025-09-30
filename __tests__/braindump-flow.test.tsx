@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import BraindumpInterface from '../components/BraindumpInterface'
+import { LanguageProvider } from '../contexts/LanguageContext'
 import type { AppData, UserPreferences } from '../types/braindump'
 
 // Mock the speech recognition and other browser APIs
@@ -113,13 +114,15 @@ const setup = (appData = defaultAppData, preferences = defaultPreferences) => {
   const mockOnRecordingControls = jest.fn()
 
   const utils = render(
-    <BraindumpInterface
-      appData={appData}
-      preferences={preferences}
-      onDataUpdate={mockOnDataUpdate}
-      onRecordingStateChange={mockOnRecordingStateChange}
-      onRecordingControls={mockOnRecordingControls}
-    />
+    <LanguageProvider>
+      <BraindumpInterface
+        appData={appData}
+        preferences={preferences}
+        onDataUpdate={mockOnDataUpdate}
+        onRecordingStateChange={mockOnRecordingStateChange}
+        onRecordingControls={mockOnRecordingControls}
+      />
+    </LanguageProvider>
   )
 
   return {

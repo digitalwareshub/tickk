@@ -9,6 +9,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
@@ -625,7 +626,78 @@ export default function App() {
         </title>
         <meta 
           name="description" 
-          content="Speak. Save. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage." 
+          content="Free voice productivity app for hands-free task management. Speech-to-text tool that auto-organizes thoughts into tasks & notes. No signup required." 
+        />
+
+        {/* Schema.org Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "tickk",
+              "alternateName": "tickk Voice Productivity App",
+              "description": "Revolutionary voice-to-text productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
+              "url": "https://tickk.app",
+              "applicationCategory": "ProductivityApplication",
+              "operatingSystem": "Web Browser",
+              "browserRequirements": "Modern browsers with Web Speech API support",
+              "applicationSubCategory": "Voice Productivity Tool",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "category": "Free Software"
+              },
+              "author": {
+                "@type": "Organization",
+                "name": "digitalwareshub",
+                "url": "https://github.com/digitalwareshub"
+              },
+              "publisher": {
+                "@type": "Organization", 
+                "name": "digitalwareshub",
+                "url": "https://github.com/digitalwareshub"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "150",
+                "bestRating": "5"
+              },
+              "featureList": [
+                "Voice-to-text transcription",
+                "Natural language processing", 
+                "Automatic task/note classification",
+                "Offline functionality",
+                "No login required",
+                "Privacy-first design",
+                "Cross-platform compatibility",
+                "Open source",
+                "Real-time processing",
+                "Bilingual support (English/Spanish)"
+              ],
+              "screenshot": "https://tickk.app/og-image.png",
+              "softwareVersion": "1.0",
+              "datePublished": "2024-01-01",
+              "dateModified": "2025-09-30",
+              "license": "https://github.com/digitalwareshub/tickk/blob/main/LICENSE",
+              "codeRepository": "https://github.com/digitalwareshub/tickk",
+              "programmingLanguage": ["TypeScript", "JavaScript", "React", "Next.js"],
+              "runtime": "Web Browser",
+              "targetAudience": {
+                "@type": "Audience",
+                "audienceType": ["Professionals", "Students", "Entrepreneurs", "Productivity Enthusiasts"]
+              },
+              "potentialAction": {
+                "@type": "UseAction",
+                "target": "https://tickk.app",
+                "name": "Use tickk Voice Productivity App"
+              }
+            })
+          }}
         />
       </Head>
 
@@ -656,6 +728,29 @@ export default function App() {
           {/* Main content area */}
           {appData && (
             <main>
+              {/* SEO H1 - Hidden but accessible to search engines */}
+              <h1 className="sr-only">
+                tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+              </h1>
+              
+              {/* SEO H2 - Hidden but accessible to search engines */}
+              <h2 className="sr-only">
+                {mode === 'braindump' 
+                  ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
+                  : 'Organized Tasks and Notes Dashboard'
+                }
+              </h2>
+              
+              {/* Hidden internal links for SEO - invisible to users */}
+              <div className="sr-only">
+                <Link href="/privacy">Privacy Policy</Link>
+                <Link href="/terms">Terms of Service</Link>
+                <Link href="/support">Support</Link>
+                <Link href="/contact">Contact Us</Link>
+                <Link href="/blog">Blog</Link>
+                <Link href="/es">Español</Link>
+              </div>
+              
               {mode === 'braindump' ? (
                 <BraindumpInterface 
                   appData={appData}

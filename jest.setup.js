@@ -5,6 +5,31 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
+// Mock Next.js router
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '/',
+      query: {},
+      asPath: '/',
+      push: jest.fn(),
+      replace: jest.fn(),
+      back: jest.fn(),
+      beforePopState: jest.fn(),
+      prefetch: jest.fn(() => Promise.resolve()),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+        emit: jest.fn(),
+      },
+      isFallback: false,
+      isReady: true,
+      isPreview: false,
+    }
+  },
+}))
+
 // Mock IntersectionObserver
 global.IntersectionObserver = jest.fn(() => ({
   observe: jest.fn(),
