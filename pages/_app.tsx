@@ -44,6 +44,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="apple-mobile-web-app-title" content="tickk" />
         
         
+        {/* Preload social media images to prevent flickering */}
+        <link rel="preload" as="image" href="/og-image.png" />
+        <link rel="preload" as="image" href="/twitter-image.png" />
+        
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
