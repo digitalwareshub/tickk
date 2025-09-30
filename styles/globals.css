@@ -5,6 +5,28 @@
 /* Import accessibility styles */
 @import './accessibility.css';
 
+/* SEO-friendly hidden elements - visible to crawlers but not to users */
+.seo-hidden {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  font-size: 1px;
+  line-height: 1;
+  color: transparent;
+}
+
+/* Hide scrollbars while keeping scroll functionality */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
