@@ -24,6 +24,7 @@ const defaultSEOConfig = {
     handle: '@TheTickkApp',
     site: '@TheTickkApp',
     cardType: 'summary_large_image',
+    images: ['https://tickk.app/twitter-image.png'],
   },
   additionalMetaTags: [
     {
@@ -163,11 +164,7 @@ const defaultSEOConfig = {
       rel: 'manifest',
       href: '/manifest.json',
     },
-    {
-      rel: 'mask-icon',
-      href: '/safari-pinned-tab.svg',
-      color: '#16a34a',
-    },
+
     // Preconnect to improve performance
     {
       rel: 'preconnect',
