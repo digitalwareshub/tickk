@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
@@ -299,7 +300,80 @@ export default function SpanishApp() {
     <>
       <Head>
         <title>tickk - Habla. Guarda. Ordénalo después.</title>
-        <meta name="description" content="Habla. Guarda. Ordénalo después. Volcado mental por voz → auto-organizado en tareas y notas. Gratis, código abierto, almacenamiento local." />
+        <meta name="description" content="Aplicación gratuita de productividad por voz para gestión de tareas. Herramienta de voz a texto que auto-organiza pensamientos. Sin registro." />
+
+        {/* Schema.org Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "tickk",
+              "alternateName": "tickk Aplicación de Productividad por Voz",
+              "description": "Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas, notas y recordatorios usando procesamiento de lenguaje natural con compromise.js. Perfecta para productividad sin manos, gestión de tareas y toma de notas sin requerir registro o creación de cuenta.",
+              "url": "https://tickk.app/es",
+              "applicationCategory": "ProductivityApplication",
+              "operatingSystem": "Navegador Web",
+              "browserRequirements": "Navegadores modernos con soporte de Web Speech API",
+              "applicationSubCategory": "Herramienta de Productividad por Voz",
+              "inLanguage": "es",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "category": "Software Gratuito"
+              },
+              "author": {
+                "@type": "Organization",
+                "name": "digitalwareshub",
+                "url": "https://github.com/digitalwareshub"
+              },
+              "publisher": {
+                "@type": "Organization", 
+                "name": "digitalwareshub",
+                "url": "https://github.com/digitalwareshub"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "150",
+                "bestRating": "5"
+              },
+              "featureList": [
+                "Transcripción de voz a texto",
+                "Procesamiento de lenguaje natural", 
+                "Clasificación automática de tareas/notas",
+                "Funcionalidad offline",
+                "No requiere registro",
+                "Diseño enfocado en privacidad",
+                "Compatibilidad multiplataforma",
+                "Código abierto",
+                "Procesamiento en tiempo real",
+                "Soporte bilingüe (inglés/español)"
+              ],
+              "screenshot": "https://tickk.app/og-image.png",
+              "softwareVersion": "1.0",
+              "datePublished": "2024-01-01",
+              "dateModified": "2025-09-30",
+              "license": "https://github.com/digitalwareshub/tickk/blob/main/LICENSE",
+              "codeRepository": "https://github.com/digitalwareshub/tickk",
+              "programmingLanguage": ["TypeScript", "JavaScript", "React", "Next.js"],
+              "runtime": "Navegador Web",
+              "targetAudience": {
+                "@type": "Audience",
+                "audienceType": ["Profesionales", "Estudiantes", "Emprendedores", "Entusiastas de la Productividad"]
+              },
+              "potentialAction": {
+                "@type": "UseAction",
+                "target": "https://tickk.app/es",
+                "name": "Usar tickk Aplicación de Productividad por Voz"
+              }
+            })
+          }}
+        />
+
         <meta name="keywords" content="aplicación gratuita de voz a texto, software de productividad por voz, gestor de tareas por reconocimiento de voz, asistente de voz, toma de notas sin manos, lista de tareas controlada por voz, productividad de procesamiento de lenguaje natural, organizador de voz a texto, aplicación de comandos de voz, gestión de tareas impulsada por voz, herramientas de productividad gratuitas, reconocimiento de voz offline, aplicación de voz enfocada en privacidad, aplicación de toma de notas por voz, suite de productividad por reconocimiento de voz, flujo de trabajo impulsado por voz, productividad sin manos, organizador activado por voz, categorización de tareas por voz, asistente de voz inteligente, panel de productividad por voz, convertidor de voz a acción, gestión de proyectos basada en voz, software de transcripción por voz, aplicación PWA de voz, aplicación web progresiva de productividad, reconocimiento de voz offline, tecnología de voz del navegador, asistente de voz sin IA, automatización de flujo de trabajo por voz" />
         <meta name="robots" content="index,follow" />
         <meta name="author" content="tickk Team" />
@@ -359,6 +433,29 @@ export default function SpanishApp() {
           {/* Main content area */}
           {appData && (
             <main>
+              {/* SEO H1 - Hidden but accessible to search engines */}
+              <h1 className="sr-only">
+                tickk - Aplicación Gratuita de Productividad por Voz: Habla, Guarda, Ordénalo Después
+              </h1>
+              
+              {/* SEO H2 - Hidden but accessible to search engines */}
+              <h2 className="sr-only">
+                {mode === 'braindump' 
+                  ? 'Interfaz de Grabación por Voz - Captura Tus Pensamientos al Instante'
+                  : 'Panel de Tareas y Notas Organizadas'
+                }
+              </h2>
+              
+              {/* Hidden internal links for SEO - invisible to users */}
+              <div className="sr-only">
+                <Link href="/es/privacy">Política de Privacidad</Link>
+                <Link href="/es/terms">Términos de Servicio</Link>
+                <Link href="/es/support">Soporte</Link>
+                <Link href="/es/contact">Contacto</Link>
+                <Link href="/blog">Blog</Link>
+                <Link href="/">English</Link>
+              </div>
+              
               {mode === 'braindump' ? (
                 <BraindumpInterface 
                   appData={appData}

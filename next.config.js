@@ -166,6 +166,19 @@ const nextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
+      // WWW to non-WWW redirect (canonical)
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.tickk.app',
+          },
+        ],
+        destination: 'https://tickk.app/:path*',
+        permanent: true,
+      },
+      // Legacy redirects
       {
         source: '/home',
         destination: '/',
