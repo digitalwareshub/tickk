@@ -150,9 +150,9 @@ export default function LandingES() {
         <meta property="og:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tickk.app/es/landing" />
-        <meta property="og:image" content="https://tickk.app/og-image.svg" />
+        <meta property="og:image" content="https://tickk.app/og-image.png" />
         <meta property="og:image:alt" content="tickk - Aplicación de Voz a Productividad" />
-        <meta property="og:image:type" content="image/svg+xml" />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="es_ES" />
@@ -164,7 +164,7 @@ export default function LandingES() {
         <meta name="twitter:creator" content="@TheTickkApp" />
         <meta name="twitter:title" content="Aplicación Gratuita de Productividad por Voz | tickk - Gestor de Tareas por Reconocimiento de Voz" />
         <meta name="twitter:description" content="Aplicación revolucionaria gratuita de productividad por voz que transforma el habla en tareas organizadas y notas usando procesamiento avanzado de lenguaje natural. Sin registro requerido, funciona completamente offline, protección completa de privacidad. 99% de precisión en reconocimiento de voz." />
-        <meta name="twitter:image" content="https://tickk.app/og-image.svg" />
+        <meta name="twitter:image" content="https://tickk.app/og-image.png" />
         <meta name="twitter:image:alt" content="tickk - Aplicación de Voz a Productividad" />
         
         {/* Canonical and hreflang */}
