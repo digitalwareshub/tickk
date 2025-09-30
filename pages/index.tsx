@@ -729,12 +729,12 @@ export default function App() {
           {appData && (
             <main>
               {/* SEO H1 - Hidden but accessible to search engines */}
-              <h1 className="sr-only">
+              <h1 className="seo-hidden">
                 tickk - Free Voice Productivity App: Speak, Save, Sort it Later
               </h1>
               
               {/* SEO H2 - Hidden but accessible to search engines */}
-              <h2 className="sr-only">
+              <h2 className="seo-hidden">
                 {mode === 'braindump' 
                   ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
                   : 'Organized Tasks and Notes Dashboard'
@@ -742,7 +742,7 @@ export default function App() {
               </h2>
               
               {/* Hidden internal links for SEO - invisible to users */}
-              <div className="sr-only">
+              <div className="seo-hidden">
                 <Link href="/privacy">Privacy Policy</Link>
                 <Link href="/terms">Terms of Service</Link>
                 <Link href="/support">Support</Link>
