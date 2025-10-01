@@ -30,7 +30,7 @@ export default function Changelog() {
             <div className="flex items-center gap-2 text-sm text-orange-600 mb-4">
               <span>🚀 Latest Release</span>
               <span>•</span>
-              <span>September 2024</span>
+              <span>September 2025</span>
             </div>
             
             <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.9.1</h2>
@@ -71,7 +71,7 @@ export default function Changelog() {
             {/* V1.9.0 */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                <span>📅 September 2024</span>
+                <span>📅 September 2025</span>
                 <span>•</span>
                 <span>Initial Release</span>
               </div>
@@ -112,7 +112,7 @@ export default function Changelog() {
             
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.10.0 - October 2024</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">V1.10.0 - October 2025</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
                   <li>• Mozilla Firefox support completion</li>
                   <li>• Additional language support (French, German)</li>
@@ -122,22 +122,11 @@ export default function Changelog() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.11.0 - November 2024</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">V1.11.0 - November 2025</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
                   <li>• Advanced task categorization</li>
                   <li>• Export to popular productivity apps</li>
                   <li>• Voice command shortcuts</li>
-                  <li>• Dark mode support</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V2.0.0 - December 2024</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Mobile app version (iOS/Android)</li>
-                  <li>• Team collaboration features</li>
-                  <li>• Advanced analytics dashboard</li>
-                  <li>• Integration with calendar apps</li>
                 </ul>
               </div>
             </div>
