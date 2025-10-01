@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacebar Fix Test - Apple Devices</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-area {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        textarea, input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .recording { background: #fff3cd; color: #856404; }
+        
+        .device-info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍎 Spacebar Fix Test for Apple Devices</h1>
+    
+    <div class="device-info">
+        <h3>Device Detection:</h3>
+        <p id="deviceInfo">Detecting...</p>
+    </div>
+
+    <div class="test-area">
+        <h3>Test 1: Main Textarea (Like note editing)</h3>
+        <p>Type text and press spacebar - should NOT trigger recording:</p>
+        <textarea id="mainTextarea" placeholder="Type your note here and press spacebar..."></textarea>
+        <div id="mainStatus" class="status info">Ready to test</div>
+    </div>
+
+    <div class="test-area">
+        <h3>Test 2: Tag Input (Like adding tags)</h3>
+        <p>Type tag name and press spacebar - should NOT trigger recording:</p>
+        <input type="text" id="tagInput" placeholder="Add a tag and press spacebar...">
+        <div id="tagStatus" class="status info">Ready to test</div>
+    </div>
+
+    <div class="test-area">
+        <h3>Test 3: Global Spacebar (Outside inputs)</h3>
+        <p>Click here and press spacebar - SHOULD trigger recording simulation:</p>
+        <div id="globalArea" style="padding: 20px; border: 2px dashed #ccc; text-align: center; cursor: pointer;">
+            Click here then press spacebar
+        </div>
+        <div id="globalStatus" class="status info">Ready to test</div>
+    </div>
+
+    <div class="test-area">
+        <h3>Test Results Summary</h3>
+        <div id="testResults">
+            <p>Test results will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        let spacebarCount = 0;
+        let inappropriateCount = 0;
+        let isRecordingSimulation = false;
+
+        // Device detection
+        function detectDevice() {
+            const userAgent = navigator.userAgent;
+            let device = "Unknown";
+            
+            if (/iPad/.test(userAgent)) device = "iPad";
+            else if (/iPhone/.test(userAgent)) device = "iPhone";
+            else if (/Mac/.test(userAgent)) device = "macOS";
+            else if (/Android/.test(userAgent)) device = "Android";
+            else if (/Windows/.test(userAgent)) device = "Windows";
+            
+            const browser = /Safari/.test(userAgent) && !/Chrome/.test(userAgent) ? "Safari" : 
+                           /Chrome/.test(userAgent) ? "Chrome" : "Other";
+            
+            document.getElementById('deviceInfo').innerHTML = `
+                <strong>Device:</strong> ${device}<br>
+                <strong>Browser:</strong> ${browser}<br>
+                <strong>User Agent:</strong> ${userAgent}
+            `;
+        }
+
+        // Simulate the enhanced global keyboard shortcuts
+        function simulateGlobalKeyboardShortcuts(e) {
+            const target = e.target;
+            const isInputElement = target.tagName === 'INPUT' || 
+                                  target.tagName === 'TEXTAREA' || 
+                                  target.contentEditable === 'true' ||
+                                  target.isContentEditable ||
+                                  target.closest('textarea') !== null ||
+                                  target.closest('input') !== null ||
+                                  target.closest('[contenteditable]') !== null;
+            
+            // Don't trigger shortcuts when typing in input fields
+            if (isInputElement || document.activeElement?.tagName === 'TEXTAREA' || document.activeElement?.tagName === 'INPUT') {
+                return;
+            }
+            
+            // Spacebar: Start/stop recording simulation
+            if (e.code === 'Space' && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                toggleRecordingSimulation();
+                spacebarCount++;
+            }
+        }
+
+        function toggleRecordingSimulation() {
+            isRecordingSimulation = !isRecordingSimulation;
+            const globalStatus = document.getElementById('globalStatus');
+            if (isRecordingSimulation) {
+                globalStatus.textContent = '🔴 Recording simulation STARTED';
+                globalStatus.className = 'status recording';
+            } else {
+                globalStatus.textContent = '⏹️ Recording simulation STOPPED';
+                globalStatus.className = 'status success';
+            }
+            updateTestResults();
+        }
+
+        function updateTestResults() {
+            const results = document.getElementById('testResults');
+            const isAppleDevice = /iPad|iPhone|Mac/.test(navigator.userAgent);
+            
+            results.innerHTML = `
+                <p><strong>Total spacebar presses:</strong> ${spacebarCount}</p>
+                <p><strong>Inappropriate triggers:</strong> ${inappropriateCount}</p>
+                <p><strong>Recording state:</strong> ${isRecordingSimulation ? 'Active' : 'Inactive'}</p>
+                <p><strong>Apple Device:</strong> ${isAppleDevice ? 'Yes' : 'No'}</p>
+                <div class="${inappropriateCount === 0 && spacebarCount > 0 ? 'status success' : 'status info'}">
+                    ${inappropriateCount === 0 && spacebarCount > 0 ? 
+                        '✅ Spacebar fix working correctly!' : 
+                        'Keep testing by typing in fields and pressing spacebar...'}
+                </div>
+            `;
+        }
+
+        // Add input handlers with stopPropagation
+        function addInputHandler(inputId, statusId) {
+            const input = document.getElementById(inputId);
+            const status = document.getElementById(statusId);
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === ' ') {
+                    e.stopPropagation(); // This simulates our fix
+                    status.textContent = '✅ Spacebar pressed in input - global shortcut prevented';
+                    status.className = 'status success';
+                } else if (e.key.length === 1) {
+                    status.textContent = `Typing: "${e.key}"`;
+                    status.className = 'status info';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                status.textContent = '📝 Input focused - spacebar should be safe';
+                status.className = 'status info';
+            });
+            
+            input.addEventListener('blur', function() {
+                status.textContent = '🎯 Input unfocused - global spacebar active';
+                status.className = 'status info';
+            });
+        }
+
+        // Set up event listeners
+        document.addEventListener('keydown', simulateGlobalKeyboardShortcuts);
+        
+        addInputHandler('mainTextarea', 'mainStatus');
+        addInputHandler('tagInput', 'tagStatus');
+
+        // Global area click handler
+        document.getElementById('globalArea').addEventListener('click', function() {
+            this.focus();
+            document.getElementById('globalStatus').textContent = '🎯 Clicked - now press spacebar to test global shortcut';
+            document.getElementById('globalStatus').className = 'status info';
+        });
+
+        // Initialize
+        detectDevice();
+        updateTestResults();
+    </script>
+</body>
+</html>

@@ -34,7 +34,11 @@ export function useKeyboardShortcuts({
       const target = e.target as HTMLElement
       const isInputElement = target.tagName === 'INPUT' || 
                             target.tagName === 'TEXTAREA' || 
-                            target.contentEditable === 'true'
+                            target.contentEditable === 'true' ||
+                            target.isContentEditable ||
+                            target.closest('textarea') !== null ||
+                            target.closest('input') !== null ||
+                            target.closest('[contenteditable]') !== null
       
       // Modal-specific shortcuts
       if (isModalOpen) {
@@ -45,8 +49,8 @@ export function useKeyboardShortcuts({
         return
       }
       
-      // Don't trigger shortcuts when typing in input fields
-      if (isInputElement) return
+      // Don't trigger shortcuts when typing in input fields or when any input is focused
+      if (isInputElement || document.activeElement?.tagName === 'TEXTAREA' || document.activeElement?.tagName === 'INPUT') return
       
       // Spacebar: Start/stop recording
       if (e.code === 'Space' && !e.shiftKey && !e.ctrlKey && !e.metaKey) {

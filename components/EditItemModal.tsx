@@ -69,6 +69,11 @@ export default function EditItemModal({
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
+    // Prevent spacebar from triggering global shortcuts
+    if (e.key === ' ') {
+      e.stopPropagation()
+    }
+    
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       if (e.target === document.activeElement && tagInput.trim()) {
@@ -164,6 +169,10 @@ export default function EditItemModal({
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyDown={(e) => {
+                    // Prevent spacebar from triggering global shortcuts
+                    if (e.key === ' ') {
+                      e.stopPropagation()
+                    }
                     if (e.key === 'Enter') {
                       e.preventDefault()
                       handleAddTag()
