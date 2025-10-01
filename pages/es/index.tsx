@@ -464,6 +464,7 @@ export default function SpanishApp() {
                   onRecordingStateChange={handleRecordingStateChange}
                   onRecordingControls={handleRecordingControls}
                   onRecordingStatusUpdate={handleRecordingStatusUpdate}
+                  onModeSwitch={handleModeSwitch}
                   showMainInterface={false}
                 />
               ) : (

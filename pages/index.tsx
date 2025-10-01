@@ -755,6 +755,7 @@ export default function App() {
                   onRecordingStateChange={handleRecordingStateChange}
                   onRecordingControls={setRecordingControls}
                   onRecordingStatusUpdate={handleRecordingStatusUpdate}
+                  onModeSwitch={handleModeSwitch}
                   showMainInterface={false}
                 />
               ) : (

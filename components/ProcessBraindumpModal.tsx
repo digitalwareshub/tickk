@@ -306,10 +306,10 @@ export default function ProcessBraindumpModal({
                 Your {items.length} thoughts have been organized into {taskCount} tasks and {noteCount} notes.
               </p>
               
-              <div className="bg-gray-50 rounded-lg p-4 mb-6 border border-gray-200">
-                <p className="text-sm text-gray-700">
+              <div className="bg-green-50 rounded-lg p-4 mb-6 border border-green-200">
+                <p className="text-sm text-green-800">
                   ✅ Items saved successfully<br/>
-                  🔄 Switching to organized mode...
+                  🔄 Taking you to your organized workspace...
                 </p>
               </div>
             </div>
