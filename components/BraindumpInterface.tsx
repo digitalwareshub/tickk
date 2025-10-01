@@ -29,6 +29,7 @@ interface BraindumpInterfaceProps {
     error?: string | null
     isSupported?: boolean
   }) => void
+  onModeSwitch?: (mode: 'braindump' | 'organized') => void // New prop for mode switching
   showMainInterface?: boolean // Controls whether to show the main recording interface
 }
 
@@ -39,6 +40,7 @@ export default function BraindumpInterface({
   onRecordingStateChange,
   onRecordingControls,
   onRecordingStatusUpdate,
+  onModeSwitch,
   showMainInterface = true
 }: BraindumpInterfaceProps) {
   const { language, t } = useLanguage()
@@ -354,13 +356,20 @@ export default function BraindumpInterface({
       setShowProcessModal(false)
       setItemsToProcess([])
       
+      // Automatically switch to organized mode to show the results
+      if (onModeSwitch) {
+        setTimeout(() => {
+          onModeSwitch('organized')
+        }, 500) // Small delay to ensure smooth transition
+      }
+      
       trackPageInteraction('braindump_session_completed', `${organizedData.tasks.length}_tasks_${organizedData.notes.length}_notes`)
       
     } catch (error) {
       console.error('Failed to complete processing:', error)
       alert('Failed to save organized items. Please try again.')
     }
-  }, [appData, storageService, onDataUpdate])
+  }, [appData, storageService, onDataUpdate, onModeSwitch])
   
   /**
    * Handle processing modal close
