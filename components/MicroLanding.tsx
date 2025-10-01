@@ -121,6 +121,10 @@ export default function MicroLanding({
                 value={textInput}
                 onChange={(e) => setTextInput(e.target.value)}
                 onKeyDown={(e) => {
+                  // Prevent spacebar from triggering global shortcuts
+                  if (e.key === ' ') {
+                    e.stopPropagation()
+                  }
                   if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault()
                     const text = textInput.trim()

@@ -455,6 +455,19 @@ export default function BraindumpInterface({
     const handleKeyPress = (event: KeyboardEvent) => {
       if (!preferences?.enableKeyboardShortcuts) return
       
+      // Check if user is typing in an input field
+      const target = event.target as HTMLElement
+      const isInputElement = target.tagName === 'INPUT' || 
+                            target.tagName === 'TEXTAREA' || 
+                            target.contentEditable === 'true' ||
+                            target.isContentEditable ||
+                            target.closest('textarea') !== null ||
+                            target.closest('input') !== null ||
+                            target.closest('[contenteditable]') !== null
+      
+      // Don't trigger shortcuts when typing in input fields
+      if (isInputElement || document.activeElement?.tagName === 'TEXTAREA' || document.activeElement?.tagName === 'INPUT') return
+      
       // Space bar to start/stop recording
       if (event.code === 'Space' && !event.repeat) {
         event.preventDefault()
@@ -580,6 +593,10 @@ export default function BraindumpInterface({
                     value={textInput}
                     onChange={(e) => setTextInput(e.target.value)}
                     onKeyDown={(e) => {
+                      // Prevent spacebar from triggering global shortcuts
+                      if (e.key === ' ') {
+                        e.stopPropagation()
+                      }
                       if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault()
                         handleTextSubmit()
