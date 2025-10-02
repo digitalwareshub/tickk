@@ -35,7 +35,7 @@ export default function Reviews() {
                 <div className="flex items-center gap-2 mb-4">
                   <h3 className="font-semibold text-gray-900">From Reddit r/InternetIsBeautiful</h3>
                   <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-medium">
-                    72 upvotes
+                    74 upvotes
                   </span>
                 </div>
                 
@@ -184,7 +184,7 @@ export default function Reviews() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-orange-600 mb-2">72</div>
+                <div className="text-2xl sm:text-3xl font-bold text-orange-600 mb-2">74</div>
                 <div className="text-sm text-gray-600">Reddit Upvotes</div>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
