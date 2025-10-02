@@ -2,9 +2,11 @@
 
 *- 🎤 **Voice-first capture** - Speak naturally, we'll organize later
 - 🧠 **Smart NLP classification** - Automatically sorts into tasks and notes  
-- 🌐 **Works offline** - Local processing, no internet requiredeak. Save. Sort.**
+- 🌐 **Works offline** - Local processing, no internet required
 
 Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.
+
+**Latest Update:** V1.10.0 - October 2025 - Enhanced user experience with custom delete modals and improved data management.
 
 ![PWA](https://img.shields.io/badge/PWA-enabled-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-blue) ![Next.js](https://img.shields.io/badge/Next.js-black) ![MIT License](https://img.shields.io/badge/license-MIT-green) ![Privacy First](https://img.shields.io/badge/privacy-first-green)
 
