@@ -6,7 +6,7 @@ export type Language = 'en' | 'es'
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: string) => string
+  t: (key: string, params?: Record<string, any>) => string
   isSpanish: boolean
 }
 
@@ -42,6 +42,21 @@ const translations = {
     'common.delete_confirm': 'Are you sure you want to delete this item?',
     'common.item_updated': 'Item updated successfully',
     'common.item_deleted': 'Item deleted successfully',
+    
+    // Analytics
+    'analytics.title': 'Analytics & Insights',
+    'analytics.time_range.week': 'Last Week',
+    'analytics.time_range.month': 'Last Month',
+    'analytics.time_range.all': 'All Time',
+    'analytics.stats.total_sessions': 'Total Sessions',
+    'analytics.stats.total_items': 'Total Items',
+    'analytics.stats.avg_items_per_session': 'Avg Items/Session',
+    'analytics.stats.organization_accuracy': 'Organization Accuracy',
+    'analytics.category_breakdown': 'Category Breakdown',
+    'analytics.productivity_by_time': 'Productivity by Time of Day',
+    'analytics.most_productive_time': 'Most Productive Time',
+    'analytics.categories.tasks': 'Tasks',
+    'analytics.categories.notes': 'Notes',
     
     // Landing page
     'landing.hero.title': 'Organized Productivity',
@@ -79,6 +94,28 @@ const translations = {
     'braindump.click_to_record': 'Click to record',
     'braindump.spacebar_shortcut': 'Spacebar shortcut',
     'braindump.recording_help': 'Press spacebar to start or stop recording. Speak clearly after clicking record. Your speech will be transcribed and organized automatically.',
+    'braindump.press_microphone': "Press the microphone to capture your thoughts. We'll organize them later.",
+    'braindump.type_thoughts': "Type your thoughts below and hit Enter. We'll organize them later.",
+    'braindump.recording_status': 'Recording...',
+    
+    // Process Modal
+    'process.organizing': 'Organizing...',
+    'process.review_adjust': 'Review & Adjust',
+    'process.complete': 'Complete',
+    'process.analyzing': 'Analyzing and categorizing your thoughts...',
+    'process.processing': 'Processing:',
+    'process.tasks': 'Tasks',
+    'process.notes': 'Notes',
+    'process.confidence': 'Confidence',
+    'process.perfect_organized': 'Perfect! All Organized',
+    'process.organized_into': 'Your {count} thoughts have been organized into {tasks} tasks and {notes} notes.',
+    'process.items_saved': 'Items saved successfully',
+    'process.taking_to_workspace': 'Taking you to your organized workspace...',
+    'process.apply_organization': 'Apply Organization',
+    'process.reprocess': 'Re-process',
+    'process.cancel': 'Cancel',
+    'process.task': 'Task',
+    'process.note': 'Note',
     'braindump.transcript': 'Transcript:',
     'braindump.speech_not_supported': 'Speech recognition not supported in this browser.',
     'braindump.recent': 'Recent ({count})',
@@ -99,6 +136,16 @@ const translations = {
     'returning.view_progress': 'View Progress',
     'returning.learn_more': 'Learn More',
     'returning.total_items': '{count} total items',
+    
+    // Common (additional)
+    'common.category': 'Category',
+    'common.convert_to_task': 'Convert to Task',
+    'common.convert_to_note': 'Convert to Note',
+    'common.task': 'Task',
+    'common.note': 'Note',
+    'common.braindump': 'Braindump',
+    'common.item': 'Item',
+    'common.delete_confirm_message': 'Are you sure you want to delete this item? This action cannot be undone.',
   },
   es: {
     // Navigation
@@ -128,6 +175,21 @@ const translations = {
     'common.delete_confirm': '¿Estás seguro de que quieres eliminar este elemento?',
     'common.item_updated': 'Elemento actualizado exitosamente',
     'common.item_deleted': 'Elemento eliminado exitosamente',
+    
+    // Analytics
+    'analytics.title': 'Análisis e Información',
+    'analytics.time_range.week': 'Última Semana',
+    'analytics.time_range.month': 'Último Mes',
+    'analytics.time_range.all': 'Todo el Tiempo',
+    'analytics.stats.total_sessions': 'Sesiones Totales',
+    'analytics.stats.total_items': 'Elementos Totales',
+    'analytics.stats.avg_items_per_session': 'Promedio Elementos/Sesión',
+    'analytics.stats.organization_accuracy': 'Precisión de Organización',
+    'analytics.category_breakdown': 'Desglose por Categoría',
+    'analytics.productivity_by_time': 'Productividad por Hora del Día',
+    'analytics.most_productive_time': 'Hora Más Productiva',
+    'analytics.categories.tasks': 'Tareas',
+    'analytics.categories.notes': 'Notas',
     
     // Landing page
     'landing.hero.title': 'Productividad Organizada',
@@ -165,6 +227,28 @@ const translations = {
     'braindump.click_to_record': 'Haz clic para grabar',
     'braindump.spacebar_shortcut': 'Atajo de barra espaciadora',
     'braindump.recording_help': 'Presiona la barra espaciadora para comenzar o detener la grabación. Habla claramente después de hacer clic en grabar. Tu habla será transcrita y organizada automáticamente.',
+    'braindump.press_microphone': "Presiona el micrófono para capturar tus pensamientos. Los organizaremos después.",
+    'braindump.type_thoughts': "Escribe tus pensamientos abajo y presiona Enter. Los organizaremos después.",
+    'braindump.recording_status': 'Grabando...',
+    
+    // Process Modal
+    'process.organizing': 'Organizando...',
+    'process.review_adjust': 'Revisar y Ajustar',
+    'process.complete': 'Completo',
+    'process.analyzing': 'Analizando y categorizando tus pensamientos...',
+    'process.processing': 'Procesando:',
+    'process.tasks': 'Tareas',
+    'process.notes': 'Notas',
+    'process.confidence': 'Confianza',
+    'process.perfect_organized': '¡Perfecto! Todo Organizado',
+    'process.organized_into': 'Tus {count} pensamientos han sido organizados en {tasks} tareas y {notes} notas.',
+    'process.items_saved': 'Elementos guardados exitosamente',
+    'process.taking_to_workspace': 'Llevándote a tu espacio de trabajo organizado...',
+    'process.apply_organization': 'Aplicar Organización',
+    'process.reprocess': 'Reprocesar',
+    'process.cancel': 'Cancelar',
+    'process.task': 'Tarea',
+    'process.note': 'Nota',
     'braindump.transcript': 'Transcripción:',
     'braindump.speech_not_supported': 'Reconocimiento de voz no compatible con este navegador.',
     'braindump.recent': 'Recientes ({count})',
@@ -185,6 +269,16 @@ const translations = {
     'returning.view_progress': 'Ver Progreso',
     'returning.learn_more': 'Aprender Más',
     'returning.total_items': '{count} elementos en total',
+    
+    // Common (additional)
+    'common.category': 'Categoría',
+    'common.convert_to_task': 'Convertir a Tarea',
+    'common.convert_to_note': 'Convertir a Nota',
+    'common.task': 'Tarea',
+    'common.note': 'Nota',
+    'common.braindump': 'Lluvia de Ideas',
+    'common.item': 'Elemento',
+    'common.delete_confirm_message': '¿Estás seguro de que quieres eliminar este elemento? Esta acción no se puede deshacer.',
   }
 }
 
@@ -243,8 +337,18 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     }
   }
 
-  const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations[typeof language]] || key
+  const t = (key: string, params?: Record<string, any>): string => {
+    let translation = translations[language][key as keyof typeof translations[typeof language]] || key
+    
+    // Handle parameter interpolation
+    if (params) {
+      Object.keys(params).forEach(paramKey => {
+        const placeholder = `{${paramKey}}`
+        translation = translation.replace(new RegExp(placeholder, 'g'), params[paramKey])
+      })
+    }
+    
+    return translation
   }
 
   const isSpanish = language === 'es'

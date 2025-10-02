@@ -112,7 +112,7 @@ export default function MicroLanding({
                 </button>
               </div>
               <p className="text-gray-600 text-sm mt-4">
-                {isRecording ? 'Recording...' : 'Click to record'}
+                {isRecording ? t('braindump.recording_status') : t('braindump.click_to_record')}
               </p>
             </div>
           ) : (

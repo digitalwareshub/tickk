@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
+import DeleteConfirmModal from './DeleteConfirmModal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
@@ -31,6 +32,11 @@ export default function OrganizedView({
   const [showEditModal, setShowEditModal] = useState(false)
   const [itemToEdit, setItemToEdit] = useState<VoiceItem | null>(null)
   const [editType, setEditType] = useState<'task' | 'note'>('task')
+  
+  // Delete modal state
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [itemToDelete, setItemToDelete] = useState<VoiceItem | null>(null)
+  const [deleteType, setDeleteType] = useState<'task' | 'note'>('task')
   
   // Local translations for this component
   const localTranslations = {
@@ -102,16 +108,29 @@ export default function OrganizedView({
     onDataUpdate(updatedData)
   }
   
-  const handleDeleteItem = async (itemId: string, type: 'task' | 'note') => {
-    if (!confirm(t('common.delete_confirm'))) return
+  const handleDeleteItem = (item: VoiceItem, type: 'task' | 'note') => {
+    setItemToDelete(item)
+    setDeleteType(type)
+    setShowDeleteModal(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (!itemToDelete) return
     
     const updatedData = {
       ...appData,
-      tasks: type === 'task' ? organizedTasks.filter(t => t.id !== itemId) : organizedTasks,
-      notes: type === 'note' ? organizedNotes.filter(n => n.id !== itemId) : organizedNotes
+      tasks: deleteType === 'task' ? organizedTasks.filter(t => t.id !== itemToDelete.id) : organizedTasks,
+      notes: deleteType === 'note' ? organizedNotes.filter(n => n.id !== itemToDelete.id) : organizedNotes
     }
     
     onDataUpdate(updatedData)
+    setShowDeleteModal(false)
+    setItemToDelete(null)
+  }
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false)
+    setItemToDelete(null)
   }
   
   /**
@@ -153,6 +172,66 @@ export default function OrganizedView({
       
     } catch (error) {
       console.error('Failed to update item:', error)
+    }
+  }
+
+  /**
+   * Handle category change (task ↔ note)
+   */
+  const handleCategoryChange = (newCategory: 'task' | 'note') => {
+    if (!itemToEdit || !editType) return
+
+    try {
+      let updatedData: AppData
+
+      if (editType === 'task' && newCategory === 'note') {
+        // Move from tasks to notes
+        const updatedTasks = organizedTasks.filter(task => task.id !== itemToEdit.id)
+        const updatedNotes = [...organizedNotes, { 
+          ...itemToEdit, 
+          classification: { 
+            ...itemToEdit.classification, 
+            category: 'notes' as const,
+            confidence: itemToEdit.classification?.confidence || 0.5,
+            reasoning: itemToEdit.classification?.reasoning || 'Converted from task'
+          } 
+        }]
+        
+        updatedData = {
+          ...appData,
+          tasks: updatedTasks,
+          notes: updatedNotes
+        }
+      } else if (editType === 'note' && newCategory === 'task') {
+        // Move from notes to tasks
+        const updatedNotes = organizedNotes.filter(note => note.id !== itemToEdit.id)
+        const updatedTasks = [...organizedTasks, { 
+          ...itemToEdit, 
+          classification: { 
+            ...itemToEdit.classification, 
+            category: 'tasks' as const,
+            confidence: itemToEdit.classification?.confidence || 0.5,
+            reasoning: itemToEdit.classification?.reasoning || 'Converted from note'
+          } 
+        }]
+        
+        updatedData = {
+          ...appData,
+          tasks: updatedTasks,
+          notes: updatedNotes
+        }
+      } else {
+        // No change needed
+        return
+      }
+
+      onDataUpdate(updatedData)
+      // Keep modal open so user can save manually
+      // Update editType to reflect the new category
+      setEditType(newCategory)
+      
+    } catch (error) {
+      console.error('Failed to change category:', error)
     }
   }
 
@@ -482,7 +561,7 @@ export default function OrganizedView({
                           </svg>
                         </button>
                         <button
-                          onClick={() => handleDeleteItem(task.id, 'task')}
+                          onClick={() => handleDeleteItem(task, 'task')}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
                           aria-label={t('common.delete_item')}
                         >
@@ -534,7 +613,7 @@ export default function OrganizedView({
                           </svg>
                         </button>
                         <button
-                          onClick={() => handleDeleteItem(note.id, 'note')}
+                          onClick={() => handleDeleteItem(note, 'note')}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
                           aria-label={t('common.delete_item')}
                         >
@@ -595,7 +674,19 @@ export default function OrganizedView({
           item={itemToEdit}
           onClose={() => setShowEditModal(false)}
           onSave={handleSaveEditedItem}
+          onCategoryChange={handleCategoryChange}
           type={editType}
+        />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && itemToDelete && (
+        <DeleteConfirmModal
+          isOpen={showDeleteModal}
+          itemText={itemToDelete.text}
+          itemType={deleteType}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
         />
       )}
     </div>

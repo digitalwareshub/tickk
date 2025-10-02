@@ -74,7 +74,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
               </Link>
               <Link href={getLocalizedUrl('/changelog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
-                Changelog
+                {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
               </Link>
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               </li>
               <li>
                 <Link href={getLocalizedUrl('/changelog')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                  Changelog
+                  {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
                 </Link>
               </li>
             </ul>

@@ -516,8 +516,8 @@ export default function BraindumpInterface({
         >
           <p className="text-sm text-gray-600 text-center">
             {isSupported 
-              ? "Press the microphone to capture your thoughts. We'll organize them later."
-              : "Type your thoughts below and hit Enter. We'll organize them later."
+              ? t('braindump.press_microphone')
+              : t('braindump.type_thoughts')
             }
           </p>
         </div>
@@ -698,18 +698,18 @@ export default function BraindumpInterface({
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-gray-900">
-              Recent ({recentItems.length})
+              {t('braindump.recent', { count: recentItems.length })}
             </h3>
             <div className="flex items-center gap-2">
               {recentItems.length > 0 && (
                 <span className="text-xs text-gray-500 animate-pulse">
-                  Click Organize →
+                  {t('braindump.click_organize_arrow')}
                 </span>
               )}
               <button
                 onClick={handleOrganizeClick}
                 disabled={isProcessing || recentItems.length === 0}
-                aria-label={`Organize ${recentItems.length} thoughts into tasks and notes`}
+                aria-label={t('braindump.organize_help')}
                 aria-describedby="organize-help"
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
                   recentItems.length > 0 
@@ -717,17 +717,16 @@ export default function BraindumpInterface({
                     : 'bg-gray-300 text-gray-500'
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {isProcessing ? 'Processing...' : `Organize${recentItems.length > 0 ? ` (${recentItems.length})` : ''}`}
+                {isProcessing ? t('braindump.processing') : recentItems.length > 0 ? t('braindump.organize_with_count', { count: recentItems.length }) : t('braindump.organize')}
               </button>
             </div>
           </div>
           
           <div id="organize-help" className="sr-only">
-            This will categorize your thoughts into tasks and notes. 
-            You can review and adjust the categorization before applying.
+            {t('braindump.organize_help')}
           </div>
           
-          <ul className="space-y-2" role="list" aria-label="Recent thoughts">
+          <ul className="space-y-2" role="list" aria-label={t('braindump.recent_thoughts')}>
             {recentItems.map((item) => (
               <li 
                 key={item.id} 

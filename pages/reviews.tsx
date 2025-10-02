@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import Layout from '@/components/Layout'
 
 export default function Reviews() {
@@ -50,9 +51,11 @@ export default function Reviews() {
                       className="block"
                     >
                       <div className="relative">
-                        <img 
+                        <Image 
                           src="/reviews/reddit/review-1.webp" 
                           alt="Reddit review 1" 
+                          width={400}
+                          height={300}
                           className="w-full h-auto object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
@@ -73,9 +76,11 @@ export default function Reviews() {
                       className="block"
                     >
                       <div className="relative">
-                        <img 
+                        <Image 
                           src="/reviews/reddit/review-2.webp" 
                           alt="Reddit review 2" 
+                          width={400}
+                          height={300}
                           className="w-full h-auto object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
@@ -96,9 +101,11 @@ export default function Reviews() {
                       className="block"
                     >
                       <div className="relative">
-                        <img 
+                        <Image 
                           src="/reviews/reddit/review-3.webp" 
                           alt="Reddit review 3" 
+                          width={400}
+                          height={300}
                           className="w-full h-auto object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
@@ -119,9 +126,11 @@ export default function Reviews() {
                       className="block"
                     >
                       <div className="relative">
-                        <img 
+                        <Image 
                           src="/reviews/reddit/review-4.webp" 
                           alt="Reddit review 4" 
+                          width={400}
+                          height={300}
                           className="w-full h-auto object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">

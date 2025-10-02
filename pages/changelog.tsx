@@ -60,7 +60,7 @@ export default function Changelog() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">🐛 Critical Bug Fixes</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Fixed voice recording issues where notes weren't saving properly</li>
+                  <li>• Fixed voice recording issues where notes weren&apos;t saving properly</li>
                   <li>• Fixed language switching data loss between English and Spanish</li>
                   <li>• Fixed loading problems where pages would get stuck</li>
                   <li>• Fixed Ctrl+Enter keyboard shortcut inconsistency</li>
