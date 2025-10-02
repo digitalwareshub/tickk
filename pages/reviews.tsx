@@ -26,20 +26,127 @@ export default function Reviews() {
           </div>
 
           {/* Community Feedback Section */}
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 mb-8">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 mb-8">
             <h2 className="heading-secondary text-gray-900 mb-6">Community Feedback</h2>
             
             <div className="space-y-6">
               {/* Reddit Section */}
               <div className="border-l-4 border-orange-400 pl-4">
-                <h3 className="font-semibold text-gray-900 mb-2">From Reddit r/productivity</h3>
-                <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
-                  <p className="text-gray-600 mb-4">
-                    <em>Real user feedback from the Reddit community will be displayed here.</em>
-                  </p>
-                  <div className="text-sm text-gray-500">
-                    Screenshots and testimonials from Reddit users will be added soon.
+                <div className="flex items-center gap-2 mb-4">
+                  <h3 className="font-semibold text-gray-900">From Reddit r/InternetIsBeautiful</h3>
+                  <span className="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-medium">
+                    72 upvotes
+                  </span>
+                </div>
+                
+                {/* Reddit Reviews Grid - Mobile First */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  {/* Review 1 */}
+                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                    <a 
+                      href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <div className="relative">
+                        <img 
+                          src="/reviews/reddit/review-1.webp" 
+                          alt="Reddit review 1" 
+                          className="w-full h-auto object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 px-3 py-1 rounded-full">
+                            <span className="text-sm font-medium text-gray-900">View on Reddit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
                   </div>
+
+                  {/* Review 2 */}
+                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                    <a 
+                      href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <div className="relative">
+                        <img 
+                          src="/reviews/reddit/review-2.webp" 
+                          alt="Reddit review 2" 
+                          className="w-full h-auto object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 px-3 py-1 rounded-full">
+                            <span className="text-sm font-medium text-gray-900">View on Reddit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  {/* Review 3 */}
+                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                    <a 
+                      href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <div className="relative">
+                        <img 
+                          src="/reviews/reddit/review-3.webp" 
+                          alt="Reddit review 3" 
+                          className="w-full h-auto object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 px-3 py-1 rounded-full">
+                            <span className="text-sm font-medium text-gray-900">View on Reddit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  {/* Review 4 */}
+                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                    <a 
+                      href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <div className="relative">
+                        <img 
+                          src="/reviews/reddit/review-4.webp" 
+                          alt="Reddit review 4" 
+                          className="w-full h-auto object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 px-3 py-1 rounded-full">
+                            <span className="text-sm font-medium text-gray-900">View on Reddit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Reddit Link */}
+                <div className="text-center">
+                  <a 
+                    href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-medium text-sm transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+                    </svg>
+                    View full discussion on Reddit
+                  </a>
                 </div>
               </div>
 
@@ -71,54 +178,26 @@ export default function Reviews() {
             </div>
           </div>
 
-          {/* User Testimonials Section */}
+          {/* Community Stats Section */}
           <div className="mb-8">
-            <h2 className="heading-secondary text-gray-900 mb-6">User Testimonials</h2>
+            <h2 className="heading-secondary text-gray-900 mb-6">Community Impact</h2>
             
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Placeholder for real testimonials */}
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                  <span>⭐⭐⭐⭐⭐</span>
-                  <span>•</span>
-                  <span>Real User</span>
-                </div>
-                
-                <blockquote className="text-gray-700 mb-4 leading-relaxed">
-                  <em>Real user testimonials will be displayed here as they come in.</em>
-                </blockquote>
-                
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-gray-600 font-semibold text-sm">?</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">User Name</p>
-                    <p className="text-sm text-gray-600">Role/Title</p>
-                  </div>
-                </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-orange-600 mb-2">72</div>
+                <div className="text-sm text-gray-600">Reddit Upvotes</div>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                  <span>⭐⭐⭐⭐⭐</span>
-                  <span>•</span>
-                  <span>Real User</span>
-                </div>
-                
-                <blockquote className="text-gray-700 mb-4 leading-relaxed">
-                  <em>More real user testimonials will be added here.</em>
-                </blockquote>
-                
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-gray-600 font-semibold text-sm">?</span>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">User Name</p>
-                    <p className="text-sm text-gray-600">Role/Title</p>
-                  </div>
-                </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">4+</div>
+                <div className="text-sm text-gray-600">Positive Reviews</div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-green-600 mb-2">100%</div>
+                <div className="text-sm text-gray-600">Privacy Focused</div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-2">Free</div>
+                <div className="text-sm text-gray-600">Forever</div>
               </div>
             </div>
           </div>
@@ -131,10 +210,15 @@ export default function Reviews() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="mailto:write@digiwares.xyz?subject=tickk Review"
-                className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors"
+                href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-responsive bg-gray-900 hover:bg-gray-800 text-white transition-colors inline-flex items-center justify-center gap-2"
               >
-                Share Your Review
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+                </svg>
+                Share on Reddit
               </a>
               <Link 
                 href="/" 

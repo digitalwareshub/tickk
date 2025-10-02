@@ -45,9 +45,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <Link href={getLocalizedUrl('/blog')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 Blog
               </Link>
-              <span className="block text-sm text-gray-400 cursor-not-allowed">
+              <Link href={getLocalizedUrl('/reviews')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
                 {language === 'es' ? 'Reseñas' : 'Reviews'}
-              </span>
+              </Link>
               <a 
                 href="https://github.com/digitalwareshub/tickk" 
                 target="_blank" 
@@ -168,9 +168,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <span className="text-gray-400 cursor-not-allowed">
+                <Link href={getLocalizedUrl('/reviews')} className="text-gray-600 hover:text-orange-600 transition-colors">
                   {language === 'es' ? 'Reseñas' : 'Reviews'}
-                </span>
+                </Link>
               </li>
               <li>
                 <a 
