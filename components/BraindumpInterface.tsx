@@ -8,48 +8,35 @@ import { StorageService } from '@/lib/storage/storage-service'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
+import { logError } from '@/lib/logger'
+import type { SpeechRecognition, SpeechRecognitionEvent, SpeechRecognitionErrorEvent } from '@/types/speech-recognition'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
 import EditItemModal from './EditItemModal'
+import DeleteConfirmModal from './DeleteConfirmModal'
 import { useLanguage } from '@/contexts/LanguageContext'
-import type { AppData, UserPreferences, VoiceItem, BraindumpSession } from '@/types/braindump'
+import { useBraindump } from '@/contexts/BraindumpContext'
+import type { AppData, VoiceItem, BraindumpSession } from '@/types/braindump'
 
-interface BraindumpInterfaceProps {
-  appData: AppData
-  preferences: UserPreferences | null
-  onDataUpdate: (data: AppData) => void
-  onRecordingStateChange?: (isRecording: boolean) => void
-  onRecordingControls?: (controls: {
-    startRecording: () => void
-    stopRecording: () => void
-    canProcess: boolean
-    processItems: () => void
-  }) => void
-  onRecordingStatusUpdate?: (status: {
-    transcript?: string
-    error?: string | null
-    isSupported?: boolean
-  }) => void
-  onModeSwitch?: (mode: 'braindump' | 'organized') => void // New prop for mode switching
-  showMainInterface?: boolean // Controls whether to show the main recording interface
-}
-
-export default function BraindumpInterface({ 
-  appData, 
-  preferences, 
-  onDataUpdate,
-  onRecordingStateChange,
-  onRecordingControls,
-  onRecordingStatusUpdate,
-  onModeSwitch,
-  showMainInterface = true
-}: BraindumpInterfaceProps) {
+export default function BraindumpInterface() {
   const { language, t } = useLanguage()
+  const { 
+    appData, 
+    preferences, 
+    updateData,
+    setRecordingState,
+    setRecordingControls,
+    updateRecordingStatus,
+    switchMode,
+    showMainInterface
+  } = useBraindump()
+  
   // Recording state
   const [isRecording, setIsRecording] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
   const [lastAddedItem, setLastAddedItem] = useState<string | null>(null)
+  const [recordingStartTime, setRecordingStartTime] = useState<Date | null>(null)
   
   // Text input fallback state
   const [textInput, setTextInput] = useState('')
@@ -69,14 +56,17 @@ export default function BraindumpInterface({
   const [showEditModal, setShowEditModal] = useState(false)
   const [itemToEdit, setItemToEdit] = useState<VoiceItem | null>(null)
   
+  // Delete confirmation modal state
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [itemToDelete, setItemToDelete] = useState<{ id: string; text: string } | null>(null)
+  
   // Services
   const [storageService] = useState(() => StorageService.getInstance())
   const [classifier] = useState(() => VoiceClassifier.getInstance())
   const [announcer] = useState(() => AccessibilityAnnouncer.getInstance())
   
   // Web Speech API references
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [recognition, setRecognition] = useState<any>(null)
+  const [recognition, setRecognition] = useState<SpeechRecognition | null>(null)
   const [isSupported, setIsSupported] = useState(false)
   
 
@@ -96,15 +86,15 @@ export default function BraindumpInterface({
       
       setRecognition(recognitionInstance)
       setIsSupported(true)
-      onRecordingStatusUpdate?.({ isSupported: true })
+      updateRecordingStatus({ isSupported: true })
     } else {
       setIsSupported(false)
       // Don't set recordingError since we have a text input fallback
-      onRecordingStatusUpdate?.({ 
+      updateRecordingStatus({ 
         isSupported: false
       })
     }
-  }, [language, onRecordingStatusUpdate, t])
+  }, [language, updateRecordingStatus, t])
   
   /**
    * Load recent braindump items on mount
@@ -136,7 +126,8 @@ export default function BraindumpInterface({
     setCurrentTranscript('')
     transcriptRef.current = ''
     setIsRecording(true)
-    onRecordingStatusUpdate?.({ transcript: '', error: null })
+    setRecordingStartTime(new Date())
+    updateRecordingStatus({ transcript: '', error: null })
     
     // Create new session if none exists
     if (!currentSession) {
@@ -151,24 +142,22 @@ export default function BraindumpInterface({
     }
     
     // Set up recognition event handlers
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       let transcript = ''
       for (let i = event.resultIndex; i < event.results.length; i++) {
         transcript += event.results[i][0].transcript
       }
       transcriptRef.current = transcript
       setCurrentTranscript(transcript)
-      onRecordingStatusUpdate?.({ transcript })
+      updateRecordingStatus({ transcript })
     }
     
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    recognition.onerror = (event: any) => {
-      console.error('Speech recognition error:', event.error)
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      logError('Speech recognition error', event.error, 'speech-recognition')
       const errorMessage = `Recording error: ${event.error}`
       setRecordingError(errorMessage)
       setIsRecording(false)
-      onRecordingStatusUpdate?.({ error: errorMessage })
+      updateRecordingStatus({ error: errorMessage })
     }
     
     recognition.onend = () => {
@@ -177,6 +166,7 @@ export default function BraindumpInterface({
       if (finalTranscript) {
         handleTranscriptComplete(finalTranscript)
       }
+      setRecordingStartTime(null) // Reset start time
     }
     
     // Start recording
@@ -185,7 +175,7 @@ export default function BraindumpInterface({
       announcer.announceRecordingStatus('started')
       trackPageInteraction('voice_recording_started', 'braindump')
     } catch (error) {
-      console.error('Failed to start recording:', error)
+      logError('Failed to start recording', error, 'braindump-interface')
       setRecordingError('Failed to start recording')
       announcer.announce('Failed to start recording', 'assertive')
       setIsRecording(false)
@@ -207,20 +197,20 @@ export default function BraindumpInterface({
    * Provide recording controls to parent for keyboard shortcuts
    */
   useEffect(() => {
-    onRecordingControls?.({
+    setRecordingControls({
       startRecording,
       stopRecording,
-      canProcess: recentItems.length >= 5,
+      canProcess: recentItems.length > 0,
       processItems: () => setShowProcessModal(true)
     })
-  }, [startRecording, stopRecording, recentItems.length, onRecordingControls])
+  }, [startRecording, stopRecording, recentItems.length, setRecordingControls])
 
   /**
    * Notify parent of recording state changes
    */
   useEffect(() => {
-    onRecordingStateChange?.(isRecording)
-  }, [isRecording, onRecordingStateChange])
+    setRecordingState(isRecording)
+  }, [isRecording, setRecordingState])
   
   /**
    * Handle completed transcript
@@ -231,6 +221,11 @@ export default function BraindumpInterface({
     setIsProcessing(true)
     
     try {
+      // Calculate actual recording duration
+      const duration = recordingStartTime 
+        ? Math.round((new Date().getTime() - recordingStartTime.getTime()) / 1000) 
+        : 0
+      
       // Create new braindump item
       const newItem: VoiceItem = {
         id: crypto.randomUUID(),
@@ -242,7 +237,7 @@ export default function BraindumpInterface({
         classification: undefined,
         metadata: {
           source: 'braindump',
-          duration: 0, // TODO: Track actual recording duration
+          duration: duration, // Track actual recording duration
           retryCount: 0
         }
       }
@@ -269,7 +264,7 @@ export default function BraindumpInterface({
         setCurrentSession(updatedSession)
         
         // Update sessions in app data
-        const existingSessionIndex = updatedData.sessions.findIndex(s => s.id === currentSession.id)
+        const existingSessionIndex = updatedData.sessions.findIndex((s: BraindumpSession) => s.id === currentSession.id)
         if (existingSessionIndex >= 0) {
           updatedData.sessions[existingSessionIndex] = updatedSession
         } else {
@@ -279,7 +274,7 @@ export default function BraindumpInterface({
       
       // Save to storage and update parent
       await storageService.saveAllData(updatedData)
-      onDataUpdate(updatedData)
+      updateData(updatedData)
       
       // Announce success with more helpful feedback
       announcer.announceBraindumpAction('item-added', { 
@@ -292,19 +287,19 @@ export default function BraindumpInterface({
       
       setCurrentTranscript('')
       setLastAddedItem(transcript.slice(0, 50) + (transcript.length > 50 ? '...' : ''))
-      onRecordingStatusUpdate?.({ transcript: '' })
+      updateRecordingStatus({ transcript: '' })
       
       // Clear success notification after 3 seconds
       setTimeout(() => setLastAddedItem(null), 3000)
       
     } catch (error) {
-      console.error('Failed to process transcript:', error)
+      logError('Failed to process transcript', error, 'braindump-interface')
       setRecordingError('Failed to process recording')
       announcer.announce('Failed to process recording', 'assertive')
     } finally {
       setIsProcessing(false)
     }
-  }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer, language, onRecordingStatusUpdate])
+  }, [currentSession, appData, classifier, storageService, updateData, announcer, language, updateRecordingStatus, recordingStartTime])
 
   /**
    * Handle text input submission (for browsers without speech support)
@@ -350,26 +345,24 @@ export default function BraindumpInterface({
       await storageService.saveAllData(updatedAppData)
       
       // Update parent state
-      onDataUpdate(updatedAppData)
+      updateData(updatedAppData)
       
       // Close modal
       setShowProcessModal(false)
       setItemsToProcess([])
       
       // Automatically switch to organized mode to show the results
-      if (onModeSwitch) {
-        setTimeout(() => {
-          onModeSwitch('organized')
-        }, 500) // Small delay to ensure smooth transition
-      }
+      setTimeout(() => {
+        switchMode('organized')
+      }, 500) // Small delay to ensure smooth transition
       
       trackPageInteraction('braindump_session_completed', `${organizedData.tasks.length}_tasks_${organizedData.notes.length}_notes`)
       
     } catch (error) {
-      console.error('Failed to complete processing:', error)
+      logError('Failed to complete processing', error, 'braindump-interface')
       alert('Failed to save organized items. Please try again.')
     }
-  }, [appData, storageService, onDataUpdate, onModeSwitch])
+  }, [appData, storageService, updateData, switchMode])
   
   /**
    * Handle processing modal close
@@ -402,25 +395,36 @@ export default function BraindumpInterface({
       }
       
       await storageService.saveAllData(updatedData)
-      onDataUpdate(updatedData)
+      updateData(updatedData)
       
       announcer.announce('Item updated successfully', 'polite')
       trackPageInteraction('braindump_item_edited', 'braindump')
       
     } catch (error) {
-      console.error('Failed to update item:', error)
+      logError('Failed to update item', error, 'braindump-interface')
       announcer.announce('Failed to update item', 'assertive')
     }
-  }, [appData, storageService, onDataUpdate, announcer])
+  }, [appData, storageService, updateData, announcer])
   
   /**
-   * Handle delete item
+   * Handle delete item - show confirmation modal
    */
-  const handleDeleteItem = useCallback(async (itemId: string) => {
-    if (!confirm(t('common.delete_confirm'))) return
+  const handleDeleteItem = useCallback((itemId: string) => {
+    const item = appData.braindump.find(item => item.id === itemId)
+    if (item) {
+      setItemToDelete({ id: itemId, text: item.text })
+      setShowDeleteModal(true)
+    }
+  }, [appData.braindump])
+  
+  /**
+   * Confirm delete item
+   */
+  const confirmDeleteItem = useCallback(async () => {
+    if (!itemToDelete) return
     
     try {
-      const updatedBraindump = appData.braindump.filter(item => item.id !== itemId)
+      const updatedBraindump = appData.braindump.filter(item => item.id !== itemToDelete.id)
       
       const updatedData: AppData = {
         ...appData,
@@ -428,16 +432,31 @@ export default function BraindumpInterface({
       }
       
       await storageService.saveAllData(updatedData)
-      onDataUpdate(updatedData)
+      updateData(updatedData)
       
-      announcer.announce('Item deleted successfully', 'polite')
+      // Update recent items
+      setRecentItems(prev => prev.filter(item => item.id !== itemToDelete.id))
+      
+      announcer.announce(t('common.item_deleted'), 'polite')
       trackPageInteraction('braindump_item_deleted', 'braindump')
       
+      // Close modal
+      setShowDeleteModal(false)
+      setItemToDelete(null)
+      
     } catch (error) {
-      console.error('Failed to delete item:', error)
+      logError('Failed to delete item', error, 'braindump-interface')
       announcer.announce('Failed to delete item', 'assertive')
     }
-  }, [appData, storageService, onDataUpdate, announcer, t])
+  }, [itemToDelete, appData, storageService, updateData, announcer, t])
+  
+  /**
+   * Cancel delete item
+   */
+  const cancelDeleteItem = useCallback(() => {
+    setShowDeleteModal(false)
+    setItemToDelete(null)
+  }, [])
   
   /**
    * Update the process button to use the modal
@@ -523,20 +542,6 @@ export default function BraindumpInterface({
         </div>
       )}
 
-      {/* Development: Clear Data Button */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="text-center mb-4">
-          <button
-            onClick={async () => {
-              await StorageService.getInstance().clearAllData()
-              window.location.reload()
-            }}
-            className="px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 rounded border"
-          >
-{t('braindump.clear_data')}
-          </button>
-        </div>
-      )}
       
       {/* Main Recording Interface */}
       {showMainInterface && (
@@ -817,6 +822,22 @@ export default function BraindumpInterface({
           <span>{appData.tasks.length} tasks</span>
           <span>{appData.notes.length} notes</span>
         </div>
+        
+        {/* Clear All Data Button - Available in all environments */}
+        <div className="mt-4">
+          <button
+            onClick={async () => {
+              if (confirm(t('braindump.clear_data_confirm'))) {
+                await storageService.clearAllData()
+                window.location.reload()
+              }
+            }}
+            className="px-3 py-1 text-xs bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors"
+            title={t('braindump.clear_data_tooltip')}
+          >
+            🗑️ {t('braindump.clear_data')}
+          </button>
+        </div>
       </div>
       
       {/* Processing Modal - The Magic Moment */}
@@ -838,6 +859,14 @@ export default function BraindumpInterface({
           type="braindump"
         />
       )}
+      
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmModal
+        isOpen={showDeleteModal}
+        itemText={itemToDelete?.text}
+        onConfirm={confirmDeleteItem}
+        onCancel={cancelDeleteItem}
+      />
     </div>
   )
 }

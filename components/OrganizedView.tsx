@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
+import DeleteConfirmModal from './DeleteConfirmModal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
@@ -31,6 +32,10 @@ export default function OrganizedView({
   const [showEditModal, setShowEditModal] = useState(false)
   const [itemToEdit, setItemToEdit] = useState<VoiceItem | null>(null)
   const [editType, setEditType] = useState<'task' | 'note'>('task')
+  
+  // Delete confirmation modal state
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [itemToDelete, setItemToDelete] = useState<{ id: string; text: string; type: 'task' | 'note' } | null>(null)
   
   // Local translations for this component
   const localTranslations = {
@@ -102,16 +107,34 @@ export default function OrganizedView({
     onDataUpdate(updatedData)
   }
   
-  const handleDeleteItem = async (itemId: string, type: 'task' | 'note') => {
-    if (!confirm(t('common.delete_confirm'))) return
+  const handleDeleteItem = (itemId: string, type: 'task' | 'note') => {
+    const items = type === 'task' ? organizedTasks : organizedNotes
+    const item = items.find(item => item.id === itemId)
+    if (item) {
+      setItemToDelete({ id: itemId, text: item.text, type })
+      setShowDeleteModal(true)
+    }
+  }
+  
+  const confirmDeleteItem = async () => {
+    if (!itemToDelete) return
     
     const updatedData = {
       ...appData,
-      tasks: type === 'task' ? organizedTasks.filter(t => t.id !== itemId) : organizedTasks,
-      notes: type === 'note' ? organizedNotes.filter(n => n.id !== itemId) : organizedNotes
+      tasks: itemToDelete.type === 'task' ? organizedTasks.filter(t => t.id !== itemToDelete.id) : organizedTasks,
+      notes: itemToDelete.type === 'note' ? organizedNotes.filter(n => n.id !== itemToDelete.id) : organizedNotes
     }
     
     onDataUpdate(updatedData)
+    
+    // Close modal
+    setShowDeleteModal(false)
+    setItemToDelete(null)
+  }
+  
+  const cancelDeleteItem = () => {
+    setShowDeleteModal(false)
+    setItemToDelete(null)
   }
   
   /**
@@ -598,6 +621,14 @@ export default function OrganizedView({
           type={editType}
         />
       )}
+      
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmModal
+        isOpen={showDeleteModal}
+        itemText={itemToDelete?.text}
+        onConfirm={confirmDeleteItem}
+        onCancel={cancelDeleteItem}
+      />
     </div>
   )
 }

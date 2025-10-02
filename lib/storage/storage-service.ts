@@ -20,11 +20,19 @@ export class StorageService {
   private db: IDBDatabase | null = null
   private useIndexedDB = false
   
+  // Private constructor to prevent direct instantiation
+  private constructor() {}
+  
   static getInstance(): StorageService {
     if (!this.instance) {
       this.instance = new StorageService()
     }
     return this.instance
+  }
+  
+  // Reset instance for testing
+  static resetInstance(): void {
+    this.instance = undefined as unknown as StorageService
   }
   
   /**

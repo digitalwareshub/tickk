@@ -2,6 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import BraindumpInterface from '../components/BraindumpInterface'
+import { BraindumpProvider } from '../contexts/BraindumpContext'
 import { LanguageProvider } from '../contexts/LanguageContext'
 import type { AppData, UserPreferences } from '../types/braindump'
 
@@ -115,13 +116,15 @@ const setup = (appData = defaultAppData, preferences = defaultPreferences) => {
 
   const utils = render(
     <LanguageProvider>
-      <BraindumpInterface
-        appData={appData}
-        preferences={preferences}
+      <BraindumpProvider
+        initialAppData={appData}
+        initialPreferences={preferences}
         onDataUpdate={mockOnDataUpdate}
         onRecordingStateChange={mockOnRecordingStateChange}
         onRecordingControls={mockOnRecordingControls}
-      />
+      >
+        <BraindumpInterface />
+      </BraindumpProvider>
     </LanguageProvider>
   )
 

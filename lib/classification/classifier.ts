@@ -7,13 +7,25 @@ import nlp from 'compromise'
 import type { Classification, UrgencyLevel } from '@/types/braindump'
 
 // Dynamic import for Spanish NLP - temporarily disabled due to TypeScript issues
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let esNlp: any = null
+// Using proper interface for NLP library
+interface NLPDocument {
+  verbs(): { found: string[] }
+  nouns(): { found: string[] }
+  adjectives(): { found: string[] }
+  topics(): { found: string[] }
+}
+
+interface NLPLibrary {
+  (text: string): NLPDocument
+}
+
+let esNlp: NLPLibrary | null = null
 const loadSpanishNLP = async () => {
   if (!esNlp) {
     try {
       // Temporarily use English NLP for Spanish until es-compromise TypeScript issues are resolved
-      console.warn('Spanish NLP temporarily using English NLP - will be fixed in next update')
+      // The es-compromise library has broken TypeScript definitions that prevent compilation
+      console.warn('Spanish NLP temporarily using English NLP - es-compromise has broken TypeScript definitions')
       esNlp = nlp
     } catch {
       console.warn('Spanish NLP not available, falling back to English')
@@ -41,6 +53,11 @@ export class VoiceClassifier {
   private nlp: typeof nlp
   private currentLanguage: 'en' | 'es' = 'en'
   
+  // Private constructor to prevent direct instantiation
+  private constructor() {
+    this.nlp = nlp
+  }
+  
   static getInstance(): VoiceClassifier {
     if (!this.instance) {
       this.instance = new VoiceClassifier()
@@ -48,8 +65,9 @@ export class VoiceClassifier {
     return this.instance
   }
   
-  constructor() {
-    this.nlp = nlp
+  // Reset instance for testing
+  static resetInstance(): void {
+    this.instance = undefined as unknown as VoiceClassifier
   }
 
   /**
@@ -64,13 +82,12 @@ export class VoiceClassifier {
    */
   async classify(text: string): Promise<Classification> {
     // Use appropriate NLP library based on language
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let doc: any
+    let doc: ReturnType<typeof nlp>
     if (this.currentLanguage === 'es') {
       const spanishNlp = await loadSpanishNLP()
-      doc = spanishNlp(text)
+      doc = spanishNlp(text) as unknown as ReturnType<typeof nlp>
     } else {
-      doc = this.nlp(text)
+      doc = nlp(text)
     }
     
     // Extract linguistic features

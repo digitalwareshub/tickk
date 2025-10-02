@@ -1,7 +1,13 @@
 import { VoiceClassifier } from '../lib/classification/classifier'
 
 describe('Voice Classification', () => {
-  const classifier = new VoiceClassifier()
+  let classifier: VoiceClassifier
+  
+  beforeEach(() => {
+    // Reset singleton instance for clean test state
+    VoiceClassifier.resetInstance()
+    classifier = VoiceClassifier.getInstance()
+  })
   
   describe('Tasks vs Notes', () => {
     test.each([

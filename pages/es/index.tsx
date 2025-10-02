@@ -10,10 +10,12 @@ import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
 import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
+import { logError } from '@/lib/logger'
 import type { AppData, UserPreferences } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
+import { BraindumpProvider } from '@/contexts/BraindumpContext'
 import MicroLanding from '@/components/MicroLanding'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
@@ -69,9 +71,11 @@ export default function SpanishApp() {
         
         // Check for migration needs
         const migrationNeeded = await migrator.needsMigration()
+        
         if (migrationNeeded) {
           setNeedsMigration(true)
           const migrationResult = await migrator.migrate()
+          
           if (migrationResult.success) {
             // After migration, load the data normally
             const data = await storageService.getAllData()
@@ -79,18 +83,42 @@ export default function SpanishApp() {
             setAppData(data)
             setPreferences(prefs)
             setMode('braindump')
+            setIsLoading(false)
+          } else {
+            setIsLoading(false)
           }
         } else {
           // Load existing data
           const data = await storageService.getAllData()
           const prefs = await storageService.getPreferences()
           
-          if (data && prefs) {
+          if (data) {
+            // Use existing data, even if preferences are missing
             setAppData(data)
-            setPreferences(prefs)
+            // Ensure preferences are always set - use data.preferences as fallback
+            const finalPreferences = prefs || data.preferences || {
+              defaultMode: 'braindump',
+              showOnboarding: false,
+              enableKeyboardShortcuts: true,
+              recordingTimeout: 30000,
+              enableContinuousRecording: false,
+              confidenceThreshold: 0.7,
+              enableManualReview: true,
+              enableScreenReader: false,
+              highContrast: false,
+              reducedMotion: false
+            }
+            setPreferences(finalPreferences)
             setTotalItemCount(data.braindump.length)
-                   // setHasEverRecorded(data.braindump.length > 0)
             setMode('braindump')
+            
+            // Show onboarding modal if no preferences exist and user hasn't recorded anything
+            if (!prefs && !data.preferences && data.braindump.length === 0) {
+              const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+              if (!hideModal) {
+                setShowOnboarding(true)
+              }
+            }
           } else {
             // Create fresh data for new users
             const freshData: AppData = {
@@ -128,20 +156,20 @@ export default function SpanishApp() {
         
         setIsLoading(false)
       } catch (error) {
-        console.error('Failed to initialize app:', error)
+        logError('Failed to initialize app', error, 'app-initialization')
         setIsLoading(false)
       }
     }
     
     initializeApp()
-  }, [storageService, migrator])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Handle data updates
   const handleDataUpdate = useCallback(async (newData: AppData) => {
     setAppData(newData)
     setTotalItemCount(newData.braindump.length)
     await storageService.saveAllData(newData)
-  }, [storageService])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Handle onboarding completion
   const handleOnboardingComplete = useCallback(() => {
@@ -457,16 +485,18 @@ export default function SpanishApp() {
               </div>
               
               {mode === 'braindump' ? (
-                <BraindumpInterface 
-                  appData={appData}
-                  preferences={preferences}
+                <BraindumpProvider
+                  initialAppData={appData}
+                  initialPreferences={preferences}
                   onDataUpdate={handleDataUpdate}
                   onRecordingStateChange={handleRecordingStateChange}
                   onRecordingControls={handleRecordingControls}
                   onRecordingStatusUpdate={handleRecordingStatusUpdate}
                   onModeSwitch={handleModeSwitch}
                   showMainInterface={false}
-                />
+                >
+                  <BraindumpInterface />
+                </BraindumpProvider>
               ) : (
                 <OrganizedView 
                   appData={appData}

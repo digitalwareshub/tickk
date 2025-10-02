@@ -3,17 +3,11 @@
  * Comprehensive user behavior tracking and conversion analysis
  */
 
-// Declare gtag function for TypeScript
-declare global {
-  interface Window {
-    gtag: (
-      command: 'config' | 'event' | 'js' | 'set',
-      targetId: string | Date | object,
-      config?: object
-    ) => void
-    dataLayer: Record<string, unknown>[]
-  }
-}
+import type { 
+  GtagConfigOptions, 
+  GtagEventParameters
+} from '@/types/gtag'
+import { isGtagAvailable } from '@/types/gtag'
 
 // Analytics event types for type safety
 export interface AnalyticsEvent {
@@ -68,7 +62,7 @@ class EnhancedAnalytics {
     // Debug logging for development
     console.log('🔍 Analytics Debug:', {
       hasWindow: typeof window !== 'undefined',
-      hasGtag: typeof window.gtag === 'function',
+      hasGtag: isGtagAvailable(),
       gaId: process.env.NEXT_PUBLIC_GA_ID,
       nodeEnv: process.env.NODE_ENV
     });
@@ -136,16 +130,18 @@ class EnhancedAnalytics {
    * Setup enhanced ecommerce for conversion tracking
    */
   private setupEnhancedEcommerce() {
-    if (typeof window === 'undefined' || !window.gtag || !process.env.NEXT_PUBLIC_GA_ID) return;
+    if (!isGtagAvailable() || !process.env.NEXT_PUBLIC_GA_ID) return;
 
-    window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
+    const config: GtagConfigOptions = {
       custom_map: {
         custom_dimension_1: 'user_segment',
         custom_dimension_2: 'traffic_source',
         custom_dimension_3: 'user_type',
         custom_dimension_4: 'page_section'
       }
-    });
+    };
+    
+    window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, config);
   }
 
   /**
@@ -188,14 +184,16 @@ class EnhancedAnalytics {
   identifyUserSegment(segment: string, confidence: number = 1.0) {
     this.userSegment = segment;
     
-    if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_ID) {
-      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
+    if (isGtagAvailable() && process.env.NEXT_PUBLIC_GA_ID) {
+      const config: GtagConfigOptions = {
         user_properties: {
           user_segment: segment,
           segment_confidence: confidence,
-          traffic_source: this.trafficSource
+          traffic_source: this.trafficSource || 'unknown'
         }
-      });
+      };
+      
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, config);
     }
 
     // Store for session persistence
@@ -220,15 +218,19 @@ class EnhancedAnalytics {
     };
 
     // Send to Google Analytics
-    if (window.gtag && process.env.NEXT_PUBLIC_GA_ID) {
-      window.gtag('event', event.action, {
+    if (isGtagAvailable() && process.env.NEXT_PUBLIC_GA_ID) {
+      const parameters: GtagEventParameters = {
         event_category: event.category,
         event_label: event.label,
         value: event.value,
-        custom_parameter_1: this.userSegment,
-        custom_parameter_2: this.trafficSource,
-        ...event.custom_parameters
-      });
+        custom_parameters: {
+          custom_parameter_1: this.userSegment,
+          custom_parameter_2: this.trafficSource,
+          ...event.custom_parameters
+        }
+      };
+      
+      window.gtag('event', event.action, parameters);
     }
 
     // Log for debugging in development
@@ -266,15 +268,19 @@ class EnhancedAnalytics {
     } as ConversionEvent);
 
     // Track in GA4 as conversion
-    if (typeof window !== 'undefined' && window.gtag && process.env.NEXT_PUBLIC_GA_ID) {
-      window.gtag('event', 'conversion', {
+    if (isGtagAvailable() && process.env.NEXT_PUBLIC_GA_ID) {
+      const parameters: GtagEventParameters = {
         event_category: 'conversion',
         event_label: event.conversion_type,
         value: 1,
-        conversion_type: event.conversion_type,
-        user_segment: event.user_segment,
-        funnel_step: event.funnel_step
-      });
+        custom_parameters: {
+          conversion_type: event.conversion_type,
+          user_segment: event.user_segment,
+          funnel_step: event.funnel_step
+        }
+      };
+      
+      window.gtag('event', 'conversion', parameters);
     }
   }
 

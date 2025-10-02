@@ -1,22 +1,16 @@
-declare global {
-  interface Window {
-    gtag: (
-      command: 'config' | 'event' | 'js' | 'set',
-      targetId: string | Date | object,
-      config?: object
-    ) => void
-  }
-}
+import type { GtagConfigOptions, GtagEventParameters } from '@/types/gtag'
+import { isGtagAvailable } from '@/types/gtag'
 
 // Google Analytics configuration
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
 
 // Log the page view with their URL
 export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && GA_TRACKING_ID) {
-    window.gtag('config', GA_TRACKING_ID, {
+  if (isGtagAvailable() && GA_TRACKING_ID) {
+    const config: GtagConfigOptions = {
       page_path: url,
-    })
+    }
+    window.gtag('config', GA_TRACKING_ID, config)
   }
 }
 
@@ -32,12 +26,13 @@ export const event = ({
   label?: string
   value?: number
 }) => {
-  if (typeof window !== 'undefined' && GA_TRACKING_ID) {
-    window.gtag('event', action, {
+  if (isGtagAvailable() && GA_TRACKING_ID) {
+    const parameters: GtagEventParameters = {
       event_category: category,
       event_label: label,
       value: value,
-    })
+    }
+    window.gtag('event', action, parameters)
   }
 }
 

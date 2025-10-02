@@ -30,37 +30,51 @@ export default function Changelog() {
             <div className="flex items-center gap-2 text-sm text-orange-600 mb-4">
               <span>🚀 Latest Release</span>
               <span>•</span>
-              <span>September 2025</span>
+              <span>October 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.9.1</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.0</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Edit and delete functionality for tasks and notes</li>
-                  <li>• Checkboxes to replace circles for better &quot;tickk&quot; experience</li>
-                  <li>• Reviews page with user testimonials section</li>
+                  <li>• Custom delete confirmation modals with beautiful UI</li>
+                  <li>• Clear all data option for complete privacy control</li>
+                  <li>• Tag system for organizing tasks and notes in edit mode</li>
+                  <li>• Unified view: All English and Spanish braindumps visible together</li>
+                  <li>• Improved voice recording experience</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">🔧 Major Improvements</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Better visual consistency across the app</li>
-                  <li>• Improved checkbox visibility and styling</li>
-                  <li>• Enhanced navigation with new Reviews section</li>
-                  <li>• Updated browser compatibility information</li>
+                  <li>• Faster performance with optimized loading times</li>
+                  <li>• Better accessibility with enhanced screen reader support</li>
+                  <li>• Improved reliability and stability across all features</li>
+                  <li>• Enhanced user interface with cleaner design</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🐛 Bug Fixes</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">🐛 Critical Bug Fixes</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Fixed various display issues</li>
-                  <li>• Improved mobile experience</li>
-                  <li>• Enhanced overall stability</li>
+                  <li>• Fixed voice recording issues where notes weren&apos;t saving properly</li>
+                  <li>• Fixed language switching data loss between English and Spanish</li>
+                  <li>• Fixed loading problems where pages would get stuck</li>
+                  <li>• Fixed Ctrl+Enter keyboard shortcut inconsistency</li>
+                  <li>• Fixed data synchronization issues in the interface</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">🏗️ Technical Improvements</h3>
+                <ul className="text-gray-700 space-y-1 ml-4">
+                  <li>• Better code quality and app stability</li>
+                  <li>• Enhanced error handling and user feedback</li>
+                  <li>• Improved data management and synchronization</li>
+                  <li>• More reliable voice recognition processing</li>
                 </ul>
               </div>
             </div>
@@ -68,6 +82,80 @@ export default function Changelog() {
 
           {/* Previous Versions */}
           <div className="space-y-8">
+            {/* V1.11.0 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <span>📅 November 2025</span>
+                <span>•</span>
+                <span>Planned Release</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.11.0</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Mozilla Firefox support completion</li>
+                    <li>• Additional language support (French, German)</li>
+                    <li>• Voice command shortcuts for hands-free operation</li>
+                    <li>• Bulk operations for tasks and notes</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Enhanced voice recognition accuracy</li>
+                    <li>• Enhanced mobile experience and touch interactions</li>
+                    <li>• Advanced keyboard shortcuts and accessibility improvements</li>
+                    <li>• Improved overall user experience</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* V1.9.1 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <span>📅 September 2025</span>
+                <span>•</span>
+                <span>Previous Release</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.9.1</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Edit and delete functionality for tasks and notes</li>
+                    <li>• Checkboxes to replace circles for better &quot;tickk&quot; experience</li>
+                    <li>• Reviews page with user testimonials section</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Better visual consistency across the app</li>
+                    <li>• Improved checkbox visibility and styling</li>
+                    <li>• Enhanced navigation with new Reviews section</li>
+                    <li>• Updated browser compatibility information</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🐛 Bug Fixes</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Fixed various display issues</li>
+                    <li>• Improved mobile experience</li>
+                    <li>• Enhanced overall stability</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* V1.9.0 */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
@@ -112,21 +200,22 @@ export default function Changelog() {
             
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.10.0 - October 2025</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">V1.12.0 - December 2025</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Mozilla Firefox support completion</li>
-                  <li>• Additional language support (French, German)</li>
-                  <li>• Enhanced voice recognition accuracy</li>
-                  <li>• Improved mobile experience</li>
+                  <li>• Advanced productivity features</li>
+                  <li>• Enhanced user experience improvements</li>
+                  <li>• Additional accessibility enhancements</li>
+                  <li>• Performance optimizations</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.11.0 - November 2025</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">Future Releases</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Advanced task categorization</li>
-                  <li>• Export to popular productivity apps</li>
-                  <li>• Voice command shortcuts</li>
+                  <li>• More language support</li>
+                  <li>• Advanced voice recognition features</li>
+                  <li>• Enhanced mobile experience</li>
+                  <li>• Additional productivity tools</li>
                 </ul>
               </div>
             </div>

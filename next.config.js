@@ -1,9 +1,59 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+const path = require('path')
+const fs = require('fs')
+
+// PWA Configuration with Development Support
+const isDevelopment = process.env.NODE_ENV === 'development'
+const enablePWA = process.env.ENABLE_PWA === 'true'
+const pwaEnabled = !isDevelopment || enablePWA
+
+// Log PWA status
+console.log(`\n🚀 PWA Configuration:`)
+console.log(`   Environment: ${process.env.NODE_ENV}`)
+console.log(`   PWA Enabled: ${pwaEnabled ? '✅ YES' : '❌ NO'}`)
+if (isDevelopment && enablePWA) {
+  console.log(`   Development PWA Testing: ✅ ENABLED`)
+  console.log(`   💡 Use 'ENABLE_PWA=true npm run dev' to test PWA features`)
+} else if (isDevelopment) {
+  console.log(`   Development PWA Testing: ❌ DISABLED`)
+  console.log(`   💡 Use 'ENABLE_PWA=true npm run dev' to enable PWA testing`)
+}
+console.log(`\n`)
+
+// Validate manifest.json exists
+const manifestPath = path.join(__dirname, 'public', 'manifest.json')
+if (!fs.existsSync(manifestPath)) {
+  console.error('❌ PWA Error: manifest.json not found in public directory')
+  process.exit(1)
+}
+
+// Validate manifest.json content
+try {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+  const requiredFields = ['name', 'short_name', 'start_url', 'display', 'icons']
+  const missingFields = requiredFields.filter(field => !manifest[field])
+  
+  if (missingFields.length > 0) {
+    console.error(`❌ PWA Error: manifest.json missing required fields: ${missingFields.join(', ')}`)
+    process.exit(1)
+  }
+  
+  if (pwaEnabled) {
+    console.log(`✅ PWA Manifest validated successfully`)
+    console.log(`   App Name: ${manifest.name}`)
+    console.log(`   Short Name: ${manifest.short_name}`)
+    console.log(`   Icons: ${manifest.icons?.length || 0} configured`)
+  }
+} catch (error) {
+  console.error('❌ PWA Error: Invalid manifest.json format:', error.message)
+  process.exit(1)
+}
+
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV === 'development' && !process.env.ENABLE_PWA,
   buildExcludes: [/middleware-manifest\.json$/],
   runtimeCaching: [
     {
@@ -143,7 +193,7 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['compromise'],
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled to prevent dynamic-css-manifest.json 404 errors
     scrollRestoration: true,
   },
 
@@ -152,16 +202,47 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  // Bundle analyzer (uncomment for analysis)
-  // webpack: (config, { isServer }) => {
-  //   if (!isServer) {
-  //     config.resolve.fallback = {
-  //       ...config.resolve.fallback,
-  //       fs: false,
-  //     };
-  //   }
-  //   return config;
-  // },
+  // Bundle analyzer and webpack optimizations
+  webpack: (config, { isServer, dev }) => {
+    // Bundle size monitoring and warnings
+    if (!dev) {
+      config.performance = {
+        hints: 'warning',
+        maxEntrypointSize: 512000, // 500KB
+        maxAssetSize: 512000, // 500KB
+        assetFilter: (assetFilename) => {
+          return !assetFilename.endsWith('.map') && !assetFilename.includes('sw.js')
+        }
+      }
+    }
+
+    // Client-side fallbacks
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+      }
+    }
+
+    // Bundle analyzer integration
+    if (process.env.ANALYZE === 'true') {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          openAnalyzer: false,
+          reportFilename: isServer ? '../bundle-analysis-server.html' : '../bundle-analysis-client.html',
+          generateStatsFile: true,
+          statsFilename: isServer ? '../bundle-stats-server.json' : '../bundle-stats-client.json',
+        })
+      )
+    }
+
+    return config
+  },
 
   // Redirects for SEO
   async redirects() {

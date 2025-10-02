@@ -10,10 +10,12 @@ import Layout from '@/components/Layout'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
 import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
+import { logError } from '@/lib/logger'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
+import { BraindumpProvider } from '@/contexts/BraindumpContext'
 import MicroLanding from '@/components/MicroLanding'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
@@ -175,7 +177,7 @@ export default function App() {
         if (migrationNeeded) {
           const migrationResult = await migrator.migrate()
           if (!migrationResult.success) {
-            console.error('Migration failed:', migrationResult.errors)
+            logError('Migration failed', migrationResult.errors, 'app-initialization')
           }
         }
         
@@ -235,7 +237,7 @@ export default function App() {
         }
         
       } catch (error) {
-        console.error('App initialization failed:', error)
+        logError('App initialization failed', error, 'app-initialization')
         const fallbackData: AppData = {
           tasks: [],
           notes: [],
@@ -748,16 +750,18 @@ export default function App() {
               </div>
               
               {mode === 'braindump' ? (
-                <BraindumpInterface 
-                  appData={appData}
-                  preferences={preferences}
+                <BraindumpProvider
+                  initialAppData={appData}
+                  initialPreferences={preferences}
                   onDataUpdate={handleDataUpdate}
                   onRecordingStateChange={handleRecordingStateChange}
                   onRecordingControls={setRecordingControls}
                   onRecordingStatusUpdate={handleRecordingStatusUpdate}
                   onModeSwitch={handleModeSwitch}
                   showMainInterface={false}
-                />
+                >
+                  <BraindumpInterface />
+                </BraindumpProvider>
               ) : (
                 <OrganizedView 
                   appData={appData}

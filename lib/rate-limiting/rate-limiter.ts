@@ -3,6 +3,8 @@
  * Controls recording frequency, duration, and session quotas
  */
 
+import { logWarn } from '@/lib/logger'
+
 export interface RateLimitConfig {
   maxRecordingLength: number  // Milliseconds
   minTimeBetween: number      // Milliseconds between recordings
@@ -50,12 +52,21 @@ export class RateLimiter {
     }
   }
   
+  // Private constructor to prevent direct instantiation
+  private constructor() {
+    this.loadHistory()
+  }
+  
   static getInstance(): RateLimiter {
     if (!this.instance) {
       this.instance = new RateLimiter()
-      this.instance.loadHistory()
     }
     return this.instance
+  }
+  
+  // Reset instance for testing
+  static resetInstance(): void {
+    this.instance = undefined as unknown as RateLimiter
   }
   
   /**
@@ -186,7 +197,7 @@ export class RateLimiter {
         this.history = JSON.parse(stored)
       }
     } catch (error) {
-      console.warn('Failed to load rate limit history:', error)
+      logWarn('Failed to load rate limit history', error, 'rate-limiter')
       this.history = []
     }
   }
@@ -195,7 +206,7 @@ export class RateLimiter {
     try {
       localStorage.setItem('tickk_rate_limit_history', JSON.stringify(this.history))
     } catch (error) {
-      console.warn('Failed to save rate limit history:', error)
+      logWarn('Failed to save rate limit history', error, 'rate-limiter')
     }
   }
   
@@ -231,7 +242,7 @@ export class RateLimiter {
     if (process.env.NODE_ENV === 'development') {
       this.history = []
       this.saveHistory()
-      console.warn('Rate limits bypassed (development mode only)')
+      logWarn('Rate limits bypassed (development mode only)', null, 'rate-limiter')
     }
   }
   

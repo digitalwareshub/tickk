@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { StorageService } from '@/lib/storage/storage-service'
 import { trackPageInteraction } from '@/lib/analytics'
+import { logError } from '@/lib/logger'
 import type { VoiceItem, Classification } from '@/types/braindump'
 
 interface ProcessedItem extends VoiceItem {
@@ -101,7 +102,7 @@ export default function ProcessBraindumpModal({
       trackPageInteraction('braindump_processing_complete', `${items.length}_items`)
       
     } catch (error) {
-      console.error('Processing failed:', error)
+      logError('Processing failed', error, 'process-modal')
       // Could add error handling UI here
     } finally {
       setIsProcessing(false)
@@ -150,7 +151,7 @@ export default function ProcessBraindumpModal({
       }, 2000) // Show success state for 2 seconds
       
     } catch (error) {
-      console.error('Failed to apply organization:', error)
+      logError('Failed to apply organization', error, 'process-modal')
       // Could add error handling UI
     }
   }

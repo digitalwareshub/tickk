@@ -12,6 +12,7 @@ import type {
   MigrationResult,
   UserPreferences 
 } from '@/types/braindump'
+import { logError, logInfo } from '@/lib/logger'
 
 const CURRENT_VERSION = '2.0.0'
 const LEGACY_STORAGE_KEY = 'voiceAppData'
@@ -21,11 +22,19 @@ const BACKUP_STORAGE_KEY = 'tickk_backup_data'
 export class DataMigrator {
   private static instance: DataMigrator
   
+  // Private constructor to prevent direct instantiation
+  private constructor() {}
+  
   static getInstance(): DataMigrator {
     if (!this.instance) {
       this.instance = new DataMigrator()
     }
     return this.instance
+  }
+  
+  // Reset instance for testing
+  static resetInstance(): void {
+    this.instance = undefined as unknown as DataMigrator
   }
   
   /**
@@ -44,7 +53,7 @@ export class DataMigrator {
       const legacyData = localStorage.getItem(LEGACY_STORAGE_KEY)
       return !!legacyData
     } catch (error) {
-      console.error('Error checking migration status:', error)
+      logError('Error checking migration status', error, 'migrator')
       return false
     }
   }
@@ -53,7 +62,7 @@ export class DataMigrator {
    * Perform complete migration from legacy to new structure
    */
   async migrate(): Promise<MigrationResult> {
-    console.log('🔄 Starting data migration...')
+    logInfo('Starting data migration', 'migrator')
     
     const result: MigrationResult = {
       success: false,
@@ -96,10 +105,10 @@ export class DataMigrator {
       this.archiveLegacyData()
       
       result.success = true
-      console.log('✅ Migration completed successfully')
+      logInfo('Migration completed successfully', 'migrator')
       
     } catch (error) {
-      console.error('❌ Migration failed:', error)
+      logError('Migration failed', error, 'migrator')
       result.errors.push(error instanceof Error ? error.message : 'Unknown error')
       
       // Attempt rollback
@@ -122,10 +131,10 @@ export class DataMigrator {
           version: '1.0.0'
         }
         localStorage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(backup))
-        console.log('💾 Backup created successfully')
+        logInfo('Backup created successfully', 'migrator')
       }
     } catch (error) {
-      console.error('Failed to create backup:', error)
+      logError('Failed to create backup', error, 'migrator')
       throw new Error('Backup creation failed')
     }
   }
@@ -147,7 +156,7 @@ export class DataMigrator {
       
       return parsed as LegacyVoiceData
     } catch (error) {
-      console.error('Failed to load legacy data:', error)
+      logError('Failed to load legacy data', error, 'migrator')
       return null
     }
   }
@@ -156,7 +165,7 @@ export class DataMigrator {
    * Transform legacy data to new structure
    */
   private async transformLegacyData(legacyData: LegacyVoiceData): Promise<AppData> {
-    console.log('🔄 Transforming legacy data...')
+    logInfo('Transforming legacy data', 'migrator')
     
     // Create a session for existing items
     const migrationSession: BraindumpSession = {
@@ -305,9 +314,9 @@ export class DataMigrator {
   private async saveNewData(data: AppData): Promise<void> {
     try {
       localStorage.setItem(NEW_STORAGE_KEY, JSON.stringify(data))
-      console.log('💾 New data structure saved')
+      logInfo('New data structure saved', 'migrator')
     } catch (error) {
-      console.error('Failed to save new data:', error)
+      logError('Failed to save new data', error, 'migrator')
       throw new Error('Failed to save migrated data')
     }
   }
@@ -321,10 +330,10 @@ export class DataMigrator {
       if (legacyData) {
         localStorage.setItem(`${LEGACY_STORAGE_KEY}_archived`, legacyData)
         localStorage.removeItem(LEGACY_STORAGE_KEY)
-        console.log('📦 Legacy data archived')
+        logInfo('Legacy data archived', 'migrator')
       }
     } catch (error) {
-      console.error('Failed to archive legacy data:', error)
+      logError('Failed to archive legacy data', error, 'migrator')
       // Don't throw - this is not critical
     }
   }
@@ -334,7 +343,7 @@ export class DataMigrator {
    */
   private async rollbackMigration(): Promise<void> {
     try {
-      console.log('🔄 Rolling back migration...')
+      logInfo('Rolling back migration', 'migrator')
       
       // Remove failed new data
       localStorage.removeItem(NEW_STORAGE_KEY)
@@ -344,10 +353,10 @@ export class DataMigrator {
       if (backup) {
         const backupData = JSON.parse(backup)
         localStorage.setItem(LEGACY_STORAGE_KEY, backupData.data)
-        console.log('✅ Rollback completed')
+        logInfo('Rollback completed', 'migrator')
       }
     } catch (error) {
-      console.error('❌ Rollback failed:', error)
+      logError('Rollback failed', error, 'migrator')
     }
   }
   
@@ -375,7 +384,7 @@ export class DataMigrator {
       
       return JSON.parse(rawData) as AppData
     } catch (error) {
-      console.error('Failed to load current data:', error)
+      logError('Failed to load current data', error, 'migrator')
       return null
     }
   }
@@ -401,7 +410,7 @@ export class DataMigrator {
       
       return true
     } catch (error) {
-      console.error('Failed to restore from backup:', error)
+      logError('Failed to restore from backup', error, 'migrator')
       return false
     }
   }
