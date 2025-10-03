@@ -354,7 +354,7 @@ export default function Home() {
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
-        <link rel="canonical" href="https://tickk.app/" />
+        <link rel="canonical" href="https://tickk.app/landing" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="language" content="en-US" />

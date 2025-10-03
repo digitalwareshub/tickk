@@ -179,7 +179,7 @@ const nextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
-      // WWW to non-WWW redirect (canonical)
+      // WWW to non-WWW redirect (canonical) - 301 permanent redirect
       {
         source: '/:path*',
         has: [
@@ -190,6 +190,7 @@ const nextConfig = {
         ],
         destination: 'https://tickk.app/:path*',
         permanent: true,
+        statusCode: 301,
       },
       // Legacy redirects
       {
@@ -205,6 +206,12 @@ const nextConfig = {
       {
         source: '/voice-dashboard',
         destination: '/app',
+        permanent: true,
+      },
+      // Spanish page redirects (in case of old broken redirects)
+      {
+        source: '/es/blog/braindump-first-organize-later-productivity',
+        destination: '/es/blog',
         permanent: true,
       },
     ]

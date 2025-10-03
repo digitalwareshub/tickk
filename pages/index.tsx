@@ -624,6 +624,7 @@ export default function App() {
           name="description" 
           content="Free voice productivity app for hands-free task management. Speech-to-text tool that auto-organizes thoughts into tasks & notes. No signup required." 
         />
+        <link rel="canonical" href="https://tickk.app/" />
 
         {/* Schema.org Structured Data for SEO */}
         <script

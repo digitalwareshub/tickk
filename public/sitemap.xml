@@ -68,6 +68,37 @@
         <mobile:mobile/>
     </url>
 
+    <!-- Spanish Blog Index -->
+    <url>
+        <loc>https://tickk.app/es/blog</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2025-09-30T14:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/blog"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/blog"/>
+    </url>
+
+    <!-- Reviews Page -->
+    <url>
+        <loc>https://tickk.app/reviews</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2025-09-30T14:00:00Z</lastmod>
+        <mobile:mobile/>
+    </url>
+
+    <!-- Spanish Reviews Page -->
+    <url>
+        <loc>https://tickk.app/es/reviews</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <lastmod>2025-09-30T14:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/reviews"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/reviews"/>
+    </url>
+
     <!-- Privacy Policy - Important for Trust/SEO -->
     <url>
         <loc>https://tickk.app/privacy</loc>
@@ -131,32 +162,61 @@
         <mobile:mobile/>
     </url>
 
-    <!-- Deep Link to Landing Page Features -->
+    <!-- Spanish Privacy Policy -->
     <url>
-        <loc>https://tickk.app/landing#features</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <loc>https://tickk.app/es/privacy</loc>
+        <changefreq>quarterly</changefreq>
+        <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/privacy"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/privacy"/>
     </url>
 
-    <!-- Deep Link to How It Works Section -->
+    <!-- Spanish Terms of Service -->
     <url>
-        <loc>https://tickk.app/landing#how-it-works</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <loc>https://tickk.app/es/terms</loc>
+        <changefreq>quarterly</changefreq>
+        <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/terms"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/terms"/>
     </url>
 
-    <!-- Deep Link to Demo Section -->
+    <!-- Spanish Contact Page -->
     <url>
-        <loc>https://tickk.app/landing#demo</loc>
+        <loc>https://tickk.app/es/contact</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/contact"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/contact"/>
     </url>
+
+    <!-- Spanish Support Page -->
+    <url>
+        <loc>https://tickk.app/es/support</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <lastmod>2025-09-30T14:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/support"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/support"/>
+    </url>
+
+    <!-- Spanish Bug Report Page -->
+    <url>
+        <loc>https://tickk.app/es/bug-report</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <lastmod>2025-09-30T14:00:00Z</lastmod>
+        <mobile:mobile/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/bug-report"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/bug-report"/>
+    </url>
+
 
     <!-- PWA Manifest for App Store Discovery -->
         <!-- Robots.txt for SEO Transparency -->
