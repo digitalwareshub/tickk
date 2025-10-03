@@ -136,8 +136,21 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1 year
     // Exclude social media images from optimization to prevent flickering
     unoptimized: false,
-    domains: [],
-    remotePatterns: [],
+    domains: ['peerpush.net', 'api.producthunt.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'peerpush.net',
+        port: '',
+        pathname: '/p/tickk/badge',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.producthunt.com',
+        port: '',
+        pathname: '/widgets/embed-image/v1/featured.svg',
+      },
+    ],
   },
 
   // Performance optimizations
