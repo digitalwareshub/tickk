@@ -78,7 +78,10 @@ export default function SpanishApp() {
             const prefs = await storageService.getPreferences()
             setAppData(data)
             setPreferences(prefs)
-            setMode('braindump')
+            
+            // Use saved mode preference or default to braindump
+            const savedMode = data?.preferences?.defaultMode || 'braindump'
+            setMode(savedMode)
           }
         } else {
           // Load existing data
@@ -90,7 +93,10 @@ export default function SpanishApp() {
             setPreferences(prefs)
             setTotalItemCount(data.braindump.length)
                    // setHasEverRecorded(data.braindump.length > 0)
-            setMode('braindump')
+            
+            // Use saved mode preference or default to braindump
+            const savedMode = data?.preferences?.defaultMode || 'braindump'
+            setMode(savedMode)
           } else {
             // Create fresh data for new users
             const freshData: AppData = {

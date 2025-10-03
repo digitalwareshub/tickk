@@ -190,8 +190,8 @@ export default function App() {
           setTotalItemCount(totalItems)
           setHasEverRecorded(totalItems > 0)
           
-          const savedMode = data.preferences?.defaultMode || 'braindump'
-          setMode(savedMode)
+          // Always default to braindump for better UX
+          setMode('braindump')
           
           // Show onboarding modal unless user explicitly chose to hide it
           const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
