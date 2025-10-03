@@ -10,6 +10,7 @@ import { trackPageInteraction } from '@/lib/analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
 import EditItemModal from './EditItemModal'
+import DeleteConfirmModal from './DeleteConfirmModal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem, BraindumpSession } from '@/types/braindump'
 
@@ -68,6 +69,10 @@ export default function BraindumpInterface({
   // Edit modal state
   const [showEditModal, setShowEditModal] = useState(false)
   const [itemToEdit, setItemToEdit] = useState<VoiceItem | null>(null)
+  
+  // Delete modal state
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [itemToDelete, setItemToDelete] = useState<VoiceItem | null>(null)
   
   // Services
   const [storageService] = useState(() => StorageService.getInstance())
@@ -414,13 +419,21 @@ export default function BraindumpInterface({
   }, [appData, storageService, onDataUpdate, announcer])
   
   /**
-   * Handle delete item
+   * Handle delete item - show custom modal
    */
-  const handleDeleteItem = useCallback(async (itemId: string) => {
-    if (!confirm(t('common.delete_confirm'))) return
+  const handleDeleteItem = useCallback((item: VoiceItem) => {
+    setItemToDelete(item)
+    setShowDeleteModal(true)
+  }, [])
+
+  /**
+   * Handle confirm delete
+   */
+  const handleConfirmDelete = useCallback(async () => {
+    if (!itemToDelete) return
     
     try {
-      const updatedBraindump = appData.braindump.filter(item => item.id !== itemId)
+      const updatedBraindump = appData.braindump.filter(item => item.id !== itemToDelete.id)
       
       const updatedData: AppData = {
         ...appData,
@@ -433,11 +446,22 @@ export default function BraindumpInterface({
       announcer.announce('Item deleted successfully', 'polite')
       trackPageInteraction('braindump_item_deleted', 'braindump')
       
+      setShowDeleteModal(false)
+      setItemToDelete(null)
+      
     } catch (error) {
       console.error('Failed to delete item:', error)
       announcer.announce('Failed to delete item', 'assertive')
     }
-  }, [appData, storageService, onDataUpdate, announcer, t])
+  }, [itemToDelete, appData, storageService, onDataUpdate, announcer])
+
+  /**
+   * Handle cancel delete
+   */
+  const handleCancelDelete = useCallback(() => {
+    setShowDeleteModal(false)
+    setItemToDelete(null)
+  }, [])
   
   /**
    * Update the process button to use the modal
@@ -785,7 +809,7 @@ export default function BraindumpInterface({
                           </svg>
                         </button>
                         <button
-                          onClick={() => handleDeleteItem(item.id)}
+                          onClick={() => handleDeleteItem(item)}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
                           aria-label={t('braindump.delete_item')}
                         >
@@ -835,6 +859,17 @@ export default function BraindumpInterface({
           onClose={() => setShowEditModal(false)}
           onSave={handleSaveEditedItem}
           type="braindump"
+        />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && itemToDelete && (
+        <DeleteConfirmModal
+          isOpen={showDeleteModal}
+          itemText={itemToDelete.text}
+          itemType="braindump"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
         />
       )}
     </div>
