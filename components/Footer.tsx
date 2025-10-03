@@ -56,6 +56,17 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               >
                 {language === 'es' ? 'Código Abierto' : 'Open Source'}
               </a>
+              <div className="flex items-center justify-center space-x-1">
+                <span className="text-xs text-blue-600 cursor-not-allowed flex items-center">
+                  <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                  </svg>
+                  {language === 'es' ? 'Tickk Pro' : 'Tickk Pro'}
+                </span>
+                <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-full">
+                  {language === 'es' ? 'Próximamente' : 'Soon'}
+                </span>
+              </div>
             </div>
             <div className="space-y-2 text-center">
               <Link href={getLocalizedUrl('/privacy')} className="block text-sm text-gray-600 hover:text-orange-600 transition-colors">
@@ -247,6 +258,19 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 >
                   {language === 'es' ? 'Código Abierto' : 'Open Source'}
                 </a>
+              </li>
+              <li>
+                <div className="flex items-center space-x-1">
+                  <span className="text-blue-600 cursor-not-allowed flex items-center text-sm">
+                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                    {language === 'es' ? 'Tickk Pro' : 'Tickk Pro'}
+                  </span>
+                  <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-full">
+                    {language === 'es' ? 'Próximamente' : 'Soon'}
+                  </span>
+                </div>
               </li>
             </ul>
           </div>
