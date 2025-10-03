@@ -298,7 +298,9 @@ export class AnalyticsService {
     items.forEach(item => {
       const weekKey = this.getWeekKey(new Date(item.timestamp))
       if (weeks[weekKey] && item.confidence) {
-        weeks[weekKey].accuracySum += item.confidence
+        // Ensure confidence is treated as decimal (0-1), not percentage
+        const confidenceValue = item.confidence > 1 ? item.confidence / 100 : item.confidence
+        weeks[weekKey].accuracySum += confidenceValue
       }
     })
     

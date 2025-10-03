@@ -28,7 +28,7 @@ export default function Blog() {
           {/* Featured Post */}
           <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-              <span>January 2024</span>
+              <span>September 2025</span>
               <span>•</span>
               <span>5 min read</span>
               <span>•</span>

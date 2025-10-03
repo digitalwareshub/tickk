@@ -43,8 +43,8 @@ export default function BraindumpFirstBlogPost() {
                 "name": "tickk",
                 "url": "https://tickk.app"
               },
-              "datePublished": "2024-01-01",
-              "dateModified": "2024-01-01",
+              "datePublished": "2025-09-24",
+              "dateModified": "2025-09-24",
               "mainEntityOfPage": "https://tickk.app/blog/braindump-first-organize-later-productivity",
               "url": "https://tickk.app/blog/braindump-first-organize-later-productivity",
               "keywords": ["voice productivity", "braindump method", "thought organization", "productivity without AI"]
@@ -68,7 +68,7 @@ export default function BraindumpFirstBlogPost() {
           {/* Article Header */}
           <header className="mb-12">
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-              <span>January 2024</span>
+              <span>September 2025</span>
               <span>•</span>
               <span>5 min read</span>
             </div>
@@ -326,15 +326,6 @@ export default function BraindumpFirstBlogPost() {
 
             <p className="mb-6">You don&apos;t need to change your entire workflow. Just try this:</p>
 
-            <div className="bg-gray-900 text-white p-6 rounded-lg mb-8">
-              <ol className="space-y-2">
-                <li>1. Go to <Link href="/" className="text-orange-400 hover:text-orange-300 underline">tickk.app</Link></li>
-                <li>2. Tap the microphone</li>
-                <li>3. Speak 5-10 thoughts without categorizing</li>
-                <li>4. Hit organize</li>
-                <li>5. See the magic</li>
-              </ol>
-            </div>
 
             <p className="mb-8">
               No email required. No credit card. No &quot;free trial that&apos;s actually paid.&quot;
