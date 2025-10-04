@@ -13,7 +13,7 @@ Voice-first brain dump → auto-organized into tasks & notes. Free, open-source,
 ## Features
 
 - � **Voice-first capture** - Speak naturally, we'll organize later
-- 🧠 **Smart AI classification** - Automatically sorts into tasks and notes  
+- 🧠 **Smart NLP classification** - Automatically sorts into tasks and notes  
 - 🌐 **Works offline** - Local processing, no internet required
 - � **100% private** - Your data never leaves your device
 - � **PWA ready** - Install as an app on any device
