@@ -22,7 +22,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
   }
 
   return (
-    <footer className="bg-gray-100  border-t border-gray-200 ">
+    <footer className="bg-gray-100 border-t border-gray-200 -mt-8">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Mobile Compact Layout */}
@@ -173,19 +173,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 />
               </a>
             </div>
-            <a 
-              href="https://www.producthunt.com/products/tickk-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-tickk&#0045;2" 
-              target="_blank"
-              rel="noopener"
-              className="inline-block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1022667&theme=light&t=1759502669643" 
-                alt="tickk - Speak, save & sort ideas into tasks & notes using voice | Product Hunt" 
-                className="h-10 hover:opacity-80 transition-opacity"
-              />
-            </a>
             </div>
           </div>
         </div>
@@ -193,7 +180,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
       {/* Desktop Full Layout */}
       <div className="hidden md:block">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-1">
           {/* Centered Tagline */}
           <div className="text-center mb-4">
             <p className="text-responsive text-gray-500">
@@ -205,7 +192,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           </div>
 
           {/* Three Column Layout */}
-          <div className="grid grid-cols-3 gap-4 mb-2 max-w-2xl mx-auto">
+          <div className="grid grid-cols-3 gap-4 mb-1 max-w-2xl mx-auto">
             {/* Product Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
@@ -309,7 +296,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
 
           {/* Badges */}
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-4 mb-1">
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-500 whitespace-nowrap">Vote on</span>
               <a 
@@ -326,24 +313,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 />
               </a>
             </div>
-            <a 
-              href="https://www.producthunt.com/products/tickk-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-tickk&#0045;2" 
-              target="_blank"
-              rel="noopener"
-              className="inline-block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1022667&theme=light&t=1759502669643" 
-                alt="tickk - Speak, save & sort ideas into tasks & notes using voice | Product Hunt" 
-                className="h-10 hover:opacity-80 transition-opacity"
-              />
-            </a>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-2 md:mt-3 pt-2 md:pt-3 border-t border-gray-200 ">
+        <div className="border-t border-gray-200">
           {/* Mobile Bottom */}
           <div className="block md:hidden text-center">
             <div className="text-xs text-gray-600 mb-2">
