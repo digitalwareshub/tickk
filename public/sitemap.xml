@@ -102,7 +102,7 @@
     <!-- Privacy Policy - Important for Trust/SEO -->
     <url>
         <loc>https://tickk.app/privacy</loc>
-        <changefreq>quarterly</changefreq>
+        <changefreq>yearly</changefreq>
         <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
@@ -111,7 +111,7 @@
     <!-- Terms of Service - Important for Trust/SEO -->
     <url>
         <loc>https://tickk.app/terms</loc>
-        <changefreq>quarterly</changefreq>
+        <changefreq>yearly</changefreq>
         <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
@@ -165,7 +165,7 @@
     <!-- Spanish Privacy Policy -->
     <url>
         <loc>https://tickk.app/es/privacy</loc>
-        <changefreq>quarterly</changefreq>
+        <changefreq>yearly</changefreq>
         <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
@@ -176,7 +176,7 @@
     <!-- Spanish Terms of Service -->
     <url>
         <loc>https://tickk.app/es/terms</loc>
-        <changefreq>quarterly</changefreq>
+        <changefreq>yearly</changefreq>
         <priority>0.7</priority>
         <lastmod>2025-09-30T14:00:00Z</lastmod>
         <mobile:mobile/>
