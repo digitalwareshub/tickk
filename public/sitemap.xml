@@ -1,221 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="data:text/xsl;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN0eWxlc2hlZXQgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS9YU0wvVHJhbnNmb3JtIj4KICA8b3V0cHV0IG1ldGhvZD0iaHRtbCIgaW5kZW50PSJ5ZXMiLz4KICA8dGVtcGxhdGUgbWF0Y2g9Ii8iPgogICAgPGh0bWw+CiAgICAgIDxoZWFkPgogICAgICAgIDx0aXRsZT5TaXRlbWFwPC90aXRsZT4KICAgICAgICA8c3R5bGU+CiAgICAgICAgICBib2R5IHsgZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOyBwYWRkaW5nOiAyMHB4OyB9CiAgICAgICAgICB1cmwgeyBkaXNwbGF5OiBibG9jazsgbWFyZ2luOiAxMHB4IDA7IHBhZGRpbmc6IDEwcHg7IGJvcmRlcjogMXB4IHNvbGlkICNkZGQ7IH0KICAgICAgICAgIGxvYyB7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogIzAwNzNlNjsgfQogICAgICAgIDwvc3R5bGU+CiAgICAgIDwvaGVhZD4KICAgICAgPGJvZHk+CiAgICAgICAgPGgxPlNpdGVtYXA8L2gxPgogICAgICAgIDxwPkZvdW5kIDx4c2w6dmFsdWUtb2Ygc2VsZWN0PSJjb3VudCgvL3VybCkiLz4gVVJMczwvcD4KICAgICAgICA8eHNsOmZvci1lYWNoIHNlbGVjdD0iLy91cmwiPgogICAgICAgICAgPGRpdiBjbGFzcz0idXJsIj4KICAgICAgICAgICAgPHhzbDp2YWx1ZS1vZiBzZWxlY3Q9ImxvYyIvPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC94c2w6Zm9yLWVhY2g+CiAgICAgIDwvYm9keT4KICAgIDwvaHRtbD4KICA8L3RlbXBsYXRlPgo8L3N0eWxlc2hlZXQ+"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-
-    <!-- Homepage - High Priority -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://tickk.app/</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Homepage - High Priority -->
     <url>
         <loc>https://tickk.app/es</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Landing Page - About tickk -->
     <url>
         <loc>https://tickk.app/landing</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/landing"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/landing"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Landing Page - About tickk -->
     <url>
         <loc>https://tickk.app/es/landing</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/landing"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/landing"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Blog Index - SEO Content -->
     <url>
         <loc>https://tickk.app/blog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Blog Post - Braindump First Method -->
     <url>
         <loc>https://tickk.app/blog/braindump-first-organize-later-productivity</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Blog Index -->
     <url>
         <loc>https://tickk.app/es/blog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/blog"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/blog"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Reviews Page -->
     <url>
         <loc>https://tickk.app/reviews</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Reviews Page -->
     <url>
         <loc>https://tickk.app/es/reviews</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/reviews"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/reviews"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Privacy Policy - Important for Trust/SEO -->
     <url>
         <loc>https://tickk.app/privacy</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Terms of Service - Important for Trust/SEO -->
     <url>
         <loc>https://tickk.app/terms</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Contact Page -->
     <url>
         <loc>https://tickk.app/contact</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Support & Help -->
     <url>
         <loc>https://tickk.app/support</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Bug Report -->
     <url>
         <loc>https://tickk.app/bug-report</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Changelog - Recently Added -->
     <url>
         <loc>https://tickk.app/changelog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Changelog -->
     <url>
         <loc>https://tickk.app/es/changelog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Privacy Policy -->
     <url>
         <loc>https://tickk.app/es/privacy</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/privacy"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/privacy"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Terms of Service -->
     <url>
         <loc>https://tickk.app/es/terms</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/terms"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/terms"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Contact Page -->
     <url>
         <loc>https://tickk.app/es/contact</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/contact"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/contact"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Support Page -->
     <url>
         <loc>https://tickk.app/es/support</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/support"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/support"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
-    <!-- Spanish Bug Report Page -->
     <url>
         <loc>https://tickk.app/es/bug-report</loc>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
-        <lastmod>2025-09-30T14:00:00Z</lastmod>
-        <mobile:mobile/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://tickk.app/es/bug-report"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://tickk.app/bug-report"/>
+        <lastmod>2025-10-07</lastmod>
     </url>
-
 </urlset>
