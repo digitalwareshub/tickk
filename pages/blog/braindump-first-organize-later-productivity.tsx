@@ -6,24 +6,39 @@ export default function BraindumpFirstBlogPost() {
   return (
     <>
       <Head>
+        {/* Primary Meta Tags */}
         <title>Why Your Best Ideas Die in Your Productivity App | tickk Blog</title>
+        <meta name="title" content="Why Your Best Ideas Die in Your Productivity App | tickk Blog" />
         <meta name="description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
         <meta name="keywords" content="voice note organization app, braindump productivity method, organize thoughts after capture, free voice to task app, productivity without AI, voice brainstorming tool, capture thoughts without categorizing, productivity app without AI, free voice to task converter, organize thoughts after capture" />
         <meta name="author" content="tickk" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/braindump-first-organize-later-productivity" />
         
-        {/* Open Graph */}
+        {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://tickk.app/blog/braindump-first-organize-later-productivity" />
         <meta property="og:title" content="Why Your Best Ideas Die in Your Productivity App" />
         <meta property="og:description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
-        <meta property="og:site_name" content="tickk" />
+        <meta property="og:site_name" content="Tickk Blog" />
+        <meta property="article:published_time" content="2025-09-24T00:00:00Z" />
+        <meta property="article:author" content="Tickk" />
+        <meta property="article:section" content="Productivity" />
+        <meta property="article:tag" content="productivity" />
+        <meta property="article:tag" content="voice-notes" />
+        <meta property="article:tag" content="braindump-method" />
         
         {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://tickk.app/blog/braindump-first-organize-later-productivity" />
-        <meta property="twitter:title" content="Why Your Best Ideas Die in Your Productivity App" />
-        <meta property="twitter:description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://tickk.app/blog/braindump-first-organize-later-productivity" />
+        <meta name="twitter:title" content="Why Your Best Ideas Die in Your Productivity App" />
+        <meta name="twitter:description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
+        <meta name="twitter:creator" content="@TheTickkApp" />
+        <meta name="twitter:site" content="@TheTickkApp" />
+
+        {/* Additional SEO */}
+        <meta name="theme-color" content="#16a34a" />
+        <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
         
         {/* Article Schema */}
         <script

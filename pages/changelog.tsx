@@ -39,8 +39,8 @@ export default function Changelog() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Custom delete confirmation modals with beautiful UI</li>
-                  <li>• Clear all data option for complete privacy control</li>
+                  <li>• Custom delete confirmation modals</li>
+                  <li>• Clear all data option to reset and restart</li>
                   <li>• Tag system for organizing tasks and notes in edit mode</li>
                   <li>• Unified view: All English and Spanish braindumps visible together</li>
                   <li>• Improved voice recording experience</li>

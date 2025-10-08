@@ -25,6 +25,38 @@ export default function Blog() {
             </p>
           </div>
 
+          {/* Latest Article */}
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+              <span>October 2025</span>
+              <span>•</span>
+              <span>8 min read</span>
+              <span>•</span>
+              <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">Latest</span>
+            </div>
+            
+            <Link href="/blog/hidden-cost-of-typing" className="block group">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                The Hidden Cost of Typing: How Your Keyboard Slows Down Your Mind
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                The average person thinks at 400 WPM, speaks at 150 WPM, but types at just 40 WPM. Discover why voice-first capture transforms productivity and aligns with natural cognition.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Voice Productivity</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Cognitive Science</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Voice vs Typing</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Productivity</span>
+              </div>
+              <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
+                Read article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </Link>
+          </div>
+
           {/* Featured Post */}
           <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">

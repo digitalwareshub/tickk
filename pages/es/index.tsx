@@ -29,9 +29,8 @@ export default function SpanishApp() {
   const [appData, setAppData] = useState<AppData | null>(null)
   const [preferences, setPreferences] = useState<UserPreferences | null>(null)
   
-  // Loading and migration states
+  // Loading states
   const [isLoading, setIsLoading] = useState(true)
-  const [needsMigration, setNeedsMigration] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
   const [rememberChoice, setRememberChoice] = useState(false) // Checkbox for "don't show again"
   // Smart context state
@@ -70,33 +69,74 @@ export default function SpanishApp() {
         // Check for migration needs
         const migrationNeeded = await migrator.needsMigration()
         if (migrationNeeded) {
-          setNeedsMigration(true)
           const migrationResult = await migrator.migrate()
           if (migrationResult.success) {
             // After migration, load the data normally
             const data = await storageService.getAllData()
-            const prefs = await storageService.getPreferences()
-            setAppData(data)
-            setPreferences(prefs)
             
-            // Use saved mode preference or default to braindump
-            const savedMode = data?.preferences?.defaultMode || 'braindump'
-            setMode(savedMode)
+            if (data) {
+              setAppData(data)
+              setPreferences(data.preferences || null)
+              
+              // Track engagement for smart context
+              const totalItems = data.braindump.length + data.tasks.length + data.notes.length
+              setTotalItemCount(totalItems)
+              
+              // Use saved mode preference or default to braindump
+              const savedMode = data?.preferences?.defaultMode || 'braindump'
+              setMode(savedMode)
+            }
+          } else {
+            // Migration failed, create fresh data as fallback
+            const freshData: AppData = {
+              tasks: [],
+              notes: [],
+              braindump: [],
+              sessions: [],
+              version: '2.0.0',
+              preferences: {
+                defaultMode: 'braindump',
+                showOnboarding: true,
+                enableKeyboardShortcuts: true,
+                recordingTimeout: 30000,
+                enableContinuousRecording: false,
+                confidenceThreshold: 0.7,
+                enableManualReview: true,
+                enableScreenReader: false,
+                highContrast: false,
+                reducedMotion: false
+              }
+            }
+            
+            await storageService.saveAllData(freshData)
+            setAppData(freshData)
+            setPreferences(freshData.preferences!)
+            setMode('braindump')
           }
         } else {
           // Load existing data
           const data = await storageService.getAllData()
-          const prefs = await storageService.getPreferences()
           
-          if (data && prefs) {
+          if (data) {
             setAppData(data)
-            setPreferences(prefs)
-            setTotalItemCount(data.braindump.length)
-                   // setHasEverRecorded(data.braindump.length > 0)
+            setPreferences(data.preferences || null)
+            
+            // Track engagement for smart context
+            const totalItems = data.braindump.length + data.tasks.length + data.notes.length
+            setTotalItemCount(totalItems)
             
             // Use saved mode preference or default to braindump
             const savedMode = data?.preferences?.defaultMode || 'braindump'
             setMode(savedMode)
+            
+            // Show onboarding modal unless user explicitly chose to hide it
+            const hideModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+            const onboardingPref = data.preferences?.showOnboarding !== false
+            
+            // Show modal if user hasn't explicitly chosen to hide it
+            if (!hideModal && onboardingPref) {
+              setShowOnboarding(true)
+            }
           } else {
             // Create fresh data for new users
             const freshData: AppData = {
@@ -104,7 +144,7 @@ export default function SpanishApp() {
               notes: [],
               braindump: [],
               sessions: [],
-              version: '1.0.0',
+              version: '2.0.0',
               preferences: {
                 defaultMode: 'braindump',
                 showOnboarding: true,
@@ -143,11 +183,27 @@ export default function SpanishApp() {
   }, [storageService, migrator])
 
   // Handle data updates
-  const handleDataUpdate = useCallback(async (newData: AppData) => {
-    setAppData(newData)
-    setTotalItemCount(newData.braindump.length)
-    await storageService.saveAllData(newData)
-  }, [storageService])
+  const handleDataUpdate = useCallback(async (updatedData: AppData) => {
+    const previousUnprocessedCount = appData?.braindump.filter(item => !item.processed).length || 0
+    const newUnprocessedCount = updatedData.braindump.filter(item => !item.processed).length || 0
+    
+    setAppData(updatedData)
+    await storageService.saveAllData(updatedData)
+    
+    // Track user engagement for smart context
+    const totalItems = updatedData.braindump.length + updatedData.tasks.length + updatedData.notes.length
+    setTotalItemCount(totalItems)
+    
+    // Mark as having recorded if any items exist
+    if (totalItems > 0) {
+      localStorage.setItem('tickk_has_used', 'true')
+    }
+    
+    // Auto-switch to braindump mode if new unprocessed items were added and we're not already there
+    if (newUnprocessedCount > previousUnprocessedCount && mode === 'organized') {
+      setMode('braindump')
+    }
+  }, [storageService, appData?.braindump, mode])
 
   // Handle onboarding completion
   const handleOnboardingComplete = useCallback(() => {
@@ -224,22 +280,6 @@ export default function SpanishApp() {
     })
   }, [mode])
 
-
-  // Handle migration completion
-  const handleMigrationComplete = useCallback(() => {
-    setNeedsMigration(false)
-    // Track migration completion
-    enhancedAnalytics.trackEvent({
-      action: 'migration_completed',
-      category: 'system',
-      label: 'spanish',
-      custom_parameters: {
-        language: 'es',
-        migration_version: '1.0'
-      }
-    })
-  }, [])
-
   // Don't render until mounted (prevents hydration mismatch)
   if (!mounted) {
     return null
@@ -263,31 +303,8 @@ export default function SpanishApp() {
     )
   }
 
-  // Show migration screen if needed
-  if (needsMigration) {
-    return (
-      <Layout className="min-h-screen bg-white">
-        <main>
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="text-center max-w-md mx-auto px-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">Actualizando datos</h2>
-              <p className="text-gray-600 mb-4">Estamos actualizando tu información para la nueva versión.</p>
-              <button
-                onClick={handleMigrationComplete}
-                className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
-              >
-                Continuar
-              </button>
-            </div>
-          </div>
-        </main>
-      </Layout>
-    )
-  }
-
   // Ensure we have data before rendering
-  if (!appData || !preferences) {
+  if (!appData) {
     return (
       <Layout className="min-h-screen bg-white">
         <main>

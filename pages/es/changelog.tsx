@@ -41,8 +41,8 @@ export default function Changelog() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">🚀 Nuevas Funciones</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Modales de confirmación personalizados con hermosa interfaz</li>
-                  <li>• Opción de limpiar todos los datos para control completo de privacidad</li>
+                  <li>• Modales de confirmación personalizados</li>
+                  <li>• Opción de limpiar todos los datos para reiniciar y comenzar de nuevo</li>
                   <li>• Sistema de etiquetas para organizar tareas y notas en modo edición</li>
                   <li>• Vista unificada: Todas las lluvias de ideas en inglés y español visibles juntas</li>
                   <li>• Experiencia de grabación de voz mejorada</li>

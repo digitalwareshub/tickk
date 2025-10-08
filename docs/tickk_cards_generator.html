@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickk Social Cards Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 40px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #0f172a;
+        }
+        .cards-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .card-section {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card-section h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #64748b;
+        }
+        canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        button {
+            flex: 1;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .info {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .info h3 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+        .info code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #4CAF50;
+        }
+        @media (max-width: 1024px) {
+            .cards-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Tickk Social Cards Generator</h1>
+        
+        <div class="cards-wrapper">
+            <div class="card-section">
+                <h2>Open Graph Card (1200×630)</h2>
+                <canvas id="ogCanvas" width="1200" height="630"></canvas>
+                <div class="buttons">
+                    <button onclick="downloadCard('og')">Download OG Card</button>
+                </div>
+            </div>
+            
+            <div class="card-section">
+                <h2>Twitter Card (1200×628)</h2>
+                <canvas id="twitterCanvas" width="1200" height="628"></canvas>
+                <div class="buttons">
+                    <button onclick="downloadCard('twitter')">Download Twitter Card</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="info">
+            <h3>📁 Usage Instructions</h3>
+            <p>1. Click the download buttons to save the images</p>
+            <p>2. Save as <code>og-image.png</code> and <code>twitter-image.png</code></p>
+            <p>3. Place them in your <code>public</code> folder</p>
+            <p>4. Add the meta tags from the previous artifact to your <code>&lt;head&gt;</code></p>
+        </div>
+    </div>
+
+    <script>
+        function drawCard(canvas, height) {
+            const ctx = canvas.getContext('2d');
+            const width = 1200;
+            
+            // Bright gradient background
+            const gradient = ctx.createLinearGradient(0, 0, width, height);
+            gradient.addColorStop(0, '#f0fdf4');
+            gradient.addColorStop(0.5, '#dcfce7');
+            gradient.addColorStop(1, '#bbf7d0');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Decorative circles with bright colors
+            ctx.globalAlpha = 0.15;
+            ctx.fillStyle = '#4CAF50';
+            ctx.beginPath();
+            ctx.arc(1000, 100, 300, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.arc(200, height - 100, 200, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add some accent circles
+            ctx.fillStyle = '#86efac';
+            ctx.beginPath();
+            ctx.arc(900, height - 80, 150, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+            
+            // Draw tick mark emoji (large)
+            ctx.font = 'bold 140px Arial';
+            ctx.fillStyle = '#16a34a';
+            ctx.textAlign = 'left';
+            ctx.fillText('✅', 80, 200);
+            
+            // App name
+            ctx.font = 'bold 120px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = '#0f172a';
+            ctx.fillText('tickk', 310, 210);
+            
+            // Tagline with slogan
+            ctx.font = '38px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = '#16a34a';
+            ctx.fillText('Voice Productivity App - Speak. Save. Sort it later.', 80, 290);
+            
+            // Main description line 1
+            ctx.font = '34px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = '#334155';
+            ctx.fillText('Transform your speech into organized tasks,', 80, 360);
+            ctx.fillText('notes and calendar events', 80, 405);
+            
+            // New line about automatic categorization
+            ctx.font = '32px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = '#16a34a';
+            ctx.fillText('Speak naturally - Tickk automatically categorizes.', 80, 465);
+            
+            // Feature badges
+            const features = [
+                { text: '99% Accurate', icon: '🎯' },
+                { text: 'No Login', icon: '🔓' },
+                { text: 'Works Offline', icon: '📱' },
+                { text: 'Private', icon: '🔒' }
+            ];
+            
+            let xPos = 80;
+            const yPos = height - 100;
+            
+            features.forEach((feature, index) => {
+                // Badge background
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetY = 2;
+                ctx.beginPath();
+                ctx.roundRect(xPos, yPos - 35, 200, 50, 25);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetY = 0;
+                
+                // Badge text
+                ctx.font = '24px -apple-system, system-ui, sans-serif';
+                ctx.fillStyle = '#16a34a';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${feature.icon} ${feature.text}`, xPos + 20, yPos - 5);
+                
+                xPos += 220;
+            });
+            
+            // URL
+            ctx.font = 'bold 32px -apple-system, system-ui, sans-serif';
+            ctx.fillStyle = '#16a34a';
+            ctx.textAlign = 'right';
+            ctx.fillText('tickk.app', width - 80, height - 60);
+        }
+        
+        // Draw both cards
+        const ogCanvas = document.getElementById('ogCanvas');
+        const twitterCanvas = document.getElementById('twitterCanvas');
+        
+        drawCard(ogCanvas, 630);
+        drawCard(twitterCanvas, 628);
+        
+        function downloadCard(type) {
+            const canvas = type === 'og' ? ogCanvas : twitterCanvas;
+            const filename = type === 'og' ? 'og-image.png' : 'twitter-image.png';
+            
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+    </script>
+</body>
+</html>
