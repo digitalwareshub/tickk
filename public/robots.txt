@@ -60,6 +60,18 @@ Allow: /favicon.ico
 Disallow: /_next/
 Disallow: /api/
 
+# Disallow URLs with tracking parameters to prevent duplicate content issues
+Disallow: /*?utm_source=*
+Disallow: /*?utm_medium=*
+Disallow: /*?utm_campaign=*
+Disallow: /*?ref=*
+Disallow: /*?gclid=*
+Disallow: /*?fbclid=*
+Disallow: /*?productunti*
+Disallow: /*?source=*
+Disallow: /*?twclid=*
+Disallow: /*?msclkid=*
+
 # Set crawl delay for aggressive bots
 User-agent: *
 Crawl-delay: 1

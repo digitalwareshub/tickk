@@ -60,6 +60,7 @@ export default function OrganizedView({
       export: 'Export',
       exportAsCSV: 'Export as CSV',
       exportAsJSON: 'Export as JSON',
+      exportAsCalendar: 'Export as Calendar (.ics)',
       tasksFilter: 'Tasks',
       notesFilter: 'Notes',
       analytics: 'Analytics',
@@ -82,6 +83,7 @@ export default function OrganizedView({
       export: 'Exportar',
       exportAsCSV: 'Exportar como CSV',
       exportAsJSON: 'Exportar como JSON',
+      exportAsCalendar: 'Exportar como Calendario (.ics)',
       tasksFilter: 'Tareas',
       notesFilter: 'Notas',
       analytics: 'Analíticas',
@@ -248,16 +250,16 @@ export default function OrganizedView({
       ...organizedTasks.map(task => ({
         type: 'Task',
         content: task.text,
-        completed: task.completed,
-        priority: task.priority || '',
+        completed: task.completed ? 'true' : 'false',
+        priority: task.priority || 'none',
         tags: task.tags?.join(', ') || '',
         timestamp: new Date(task.timestamp).toISOString()
       })),
       ...organizedNotes.map(note => ({
         type: 'Note',
         content: note.text,
-        completed: '',
-        priority: '',
+        completed: 'N/A',
+        priority: 'N/A',
         tags: note.tags?.join(', ') || '',
         timestamp: new Date(note.timestamp).toISOString()
       }))
@@ -297,6 +299,107 @@ export default function OrganizedView({
     const link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
     link.download = `tickk-export-${new Date().toISOString().split('T')[0]}.json`
+    link.click()
+  }
+
+  const exportToCalendar = () => {
+    // Helper function to format date for .ics
+    const formatICSDate = (date: Date): string => {
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+    }
+
+    // Helper function to parse date from task text
+    const parseTaskDate = (text: string): Date | null => {
+      const now = new Date()
+      const tomorrow = new Date(now)
+      tomorrow.setDate(now.getDate() + 1)
+
+      const lowerText = text.toLowerCase()
+      
+      // Check for specific date indicators
+      if (lowerText.includes('today')) {
+        return now
+      } else if (lowerText.includes('tomorrow')) {
+        return tomorrow
+      } else if (lowerText.includes('morning')) {
+        const morningDate = new Date(now)
+        morningDate.setHours(9, 0, 0, 0)
+        return morningDate
+      } else if (lowerText.includes('evening') || lowerText.includes('tonight')) {
+        const eveningDate = new Date(now)
+        eveningDate.setHours(18, 0, 0, 0)
+        return eveningDate
+      } else if (lowerText.includes('afternoon')) {
+        const afternoonDate = new Date(now)
+        afternoonDate.setHours(14, 0, 0, 0)
+        return afternoonDate
+      }
+      
+      return null
+    }
+
+    // Generate unique ID for each event
+    const generateUID = (id: string): string => {
+      return `${id}@tickk.app`
+    }
+
+    // Create .ics content
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//tickk//Voice Productivity App//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH'
+    ]
+
+    // Add tasks as calendar events
+    organizedTasks.forEach(task => {
+      const taskDate = parseTaskDate(task.text)
+      if (taskDate) {
+        const startDate = formatICSDate(taskDate)
+        const endDate = formatICSDate(new Date(taskDate.getTime() + 60 * 60 * 1000)) // 1 hour duration
+        
+        icsContent.push(
+          'BEGIN:VEVENT',
+          `UID:${generateUID(task.id)}`,
+          `DTSTART:${startDate}`,
+          `DTEND:${endDate}`,
+          `SUMMARY:${task.text.replace(/,/g, '\\,')}`,
+          `DESCRIPTION:Imported from tickk voice note\\nPriority: ${task.priority || 'none'}\\nCompleted: ${task.completed ? 'Yes' : 'No'}`,
+          `CATEGORIES:TASK${task.priority ? ',' + task.priority.toUpperCase() : ''}`,
+          `PRIORITY:${task.priority === 'high' ? '1' : task.priority === 'medium' ? '5' : '9'}`,
+          `STATUS:${task.completed ? 'COMPLETED' : 'CONFIRMED'}`,
+          `CREATED:${formatICSDate(new Date(task.timestamp))}`,
+          `LAST-MODIFIED:${formatICSDate(new Date())}`,
+          'END:VEVENT'
+        )
+      } else {
+        // Add as all-day event if no specific time detected
+        const today = new Date()
+        const dateOnly = today.toISOString().split('T')[0].replace(/-/g, '')
+        
+        icsContent.push(
+          'BEGIN:VEVENT',
+          `UID:${generateUID(task.id)}`,
+          `DTSTART;VALUE=DATE:${dateOnly}`,
+          `SUMMARY:${task.text.replace(/,/g, '\\,')}`,
+          `DESCRIPTION:Imported from tickk voice note\\nPriority: ${task.priority || 'none'}\\nCompleted: ${task.completed ? 'Yes' : 'No'}`,
+          `CATEGORIES:TASK${task.priority ? ',' + task.priority.toUpperCase() : ''}`,
+          `PRIORITY:${task.priority === 'high' ? '1' : task.priority === 'medium' ? '5' : '9'}`,
+          `STATUS:${task.completed ? 'COMPLETED' : 'CONFIRMED'}`,
+          `CREATED:${formatICSDate(new Date(task.timestamp))}`,
+          `LAST-MODIFIED:${formatICSDate(new Date())}`,
+          'END:VEVENT'
+        )
+      }
+    })
+
+    icsContent.push('END:VCALENDAR')
+
+    const blob = new Blob([icsContent.join('\r\n')], { type: 'text/calendar;charset=utf-8' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `tickk-calendar-${new Date().toISOString().split('T')[0]}.ics`
     link.click()
   }
 
@@ -486,7 +589,7 @@ export default function OrganizedView({
             </button>
             
             {showExportMenu && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                 <button
                   onClick={() => {
                     exportToCSV()
@@ -501,9 +604,18 @@ export default function OrganizedView({
                     exportToJSON()
                     setShowExportMenu(false)
                   }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg min-h-[44px] flex items-center"
+                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 min-h-[44px] flex items-center"
                 >
                   {localT.exportAsJSON}
+                </button>
+                <button
+                  onClick={() => {
+                    exportToCalendar()
+                    setShowExportMenu(false)
+                  }}
+                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg min-h-[44px] flex items-center"
+                >
+                  {localT.exportAsCalendar}
                 </button>
               </div>
             )}

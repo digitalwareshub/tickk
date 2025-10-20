@@ -1,20 +1,28 @@
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
+import { getCleanUrl } from '@/lib/canonical'
 
 interface SEOMetaProps {
   title?: string
   description?: string
   image?: string
   url?: string
+  noIndex?: boolean
 }
 
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
   description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
   image = '/og-image.png',
-  url = 'https://tickk.app'
+  url,
+  noIndex = false
 }: SEOMetaProps) {
+  const router = useRouter()
   const fullTitle = title.includes('tickk') ? title : `${title} | tickk`
+  
+  // Generate canonical URL - clean parameters and ensure consistency
+  const canonicalUrl = url || getCleanUrl(router.asPath)
   
   return (
     <>
@@ -43,6 +51,9 @@ export default function SEOMeta({
         <meta name="msapplication-TileColor" content="#f97316" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
+        {/* RSS Feed */}
+        <link rel="alternate" type="application/rss+xml" title="tickk Blog RSS Feed" href="/feed.xml" />
+        
         {/* Preload critical assets */}
         <link rel="preload" href="/icon.svg" as="image" type="image/svg+xml" />
       </Head>
@@ -50,17 +61,19 @@ export default function SEOMeta({
       <NextSeo
         title={fullTitle}
         description={description}
-        canonical={url}
+        canonical={canonicalUrl}
+        noindex={noIndex}
+        nofollow={noIndex}
         openGraph={{
           type: 'website',
           locale: 'en_US',
-          url: url,
+          url: canonicalUrl,
           site_name: 'tickk',
           title: fullTitle,
           description: description,
           images: [
             {
-              url: `${url}${image}`,
+              url: `${canonicalUrl}${image}`,
               width: 1200,
               height: 630,
               alt: 'tickk - Voice to Productivity App',

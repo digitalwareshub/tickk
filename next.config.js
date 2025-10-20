@@ -192,6 +192,43 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+      // Redirect URLs with common parameters to clean versions
+      {
+        source: '/',
+        has: [
+          {
+            type: 'query',
+            key: 'ref'
+          }
+        ],
+        destination: '/',
+        permanent: false,
+        statusCode: 302,
+      },
+      {
+        source: '/',
+        has: [
+          {
+            type: 'query',
+            key: 'utm_source'
+          }
+        ],
+        destination: '/',
+        permanent: false,
+        statusCode: 302,
+      },
+      {
+        source: '/',
+        has: [
+          {
+            type: 'query',
+            key: 'gclid'
+          }
+        ],
+        destination: '/',
+        permanent: false,
+        statusCode: 302,
+      },
       // Legacy redirects
       {
         source: '/home',
