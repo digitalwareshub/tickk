@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function Changelog() {
   return (
@@ -16,6 +17,9 @@ export default function Changelog() {
 
       <Layout className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          
+          {/* Breadcrumbs */}
+          <Breadcrumb />
           
           {/* Page Header */}
           <div className="text-center mb-12">
@@ -35,48 +39,24 @@ export default function Changelog() {
               <span>Octubre 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.0</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.1</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🚀 Nuevas Funciones</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">✨ Nuevas Funciones</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Modales de confirmación personalizados</li>
-                  <li>• Opción de limpiar todos los datos para reiniciar y comenzar de nuevo</li>
-                  <li>• Sistema de etiquetas para organizar tareas y notas en modo edición</li>
-                  <li>• Vista unificada: Todas las lluvias de ideas en inglés y español visibles juntas</li>
-                  <li>• Experiencia de grabación de voz mejorada</li>
+                  <li>• <strong>Operaciones de Eliminación Masiva</strong> - Selecciona múltiples elementos completados para eliminación eficiente</li>
+                  <li>• Página de documentación completa de <Link href="/es/shortcuts" className="text-blue-600 hover:text-blue-700 underline">atajos</Link> de teclado</li>
+                  <li>• Funcionalidad de selección múltiple con controles de casillas de verificación</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🔧 Mejoras Importantes</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">� Mejoras</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Rendimiento más rápido con tiempos de carga optimizados</li>
-                  <li>• Mejor accesibilidad con soporte mejorado para lectores de pantalla</li>
-                  <li>• Mayor confiabilidad y estabilidad en todas las funciones</li>
-                  <li>• Interfaz de usuario mejorada con diseño más limpio</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🐛 Correcciones Críticas de Errores</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Corregidos problemas de grabación de voz donde las notas no se guardaban correctamente</li>
-                  <li>• Corregida la pérdida de datos al cambiar entre inglés y español</li>
-                  <li>• Corregidos problemas de carga donde las páginas se quedaban atascadas</li>
-                  <li>• Corregida la inconsistencia del atajo de teclado Ctrl+Enter</li>
-                  <li>• Corregidos problemas de sincronización de datos en la interfaz</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🏗️ Mejoras Técnicas</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Mejor calidad de código y estabilidad de la aplicación</li>
-                  <li>• Manejo de errores mejorado y retroalimentación del usuario</li>
-                  <li>• Gestión y sincronización de datos mejoradas</li>
-                  <li>• Procesamiento de reconocimiento de voz más confiable</li>
+                  <li>• Diseño de pie de página simplificado con mejor navegación</li>
+                  <li>• Experiencia de usuario mejorada para gestionar tareas completadas</li>
+                  <li>• Accesibilidad mejorada con navegación adecuada por teclado</li>
                 </ul>
               </div>
             </div>
@@ -84,6 +64,59 @@ export default function Changelog() {
 
           {/* Previous Versions */}
           <div className="space-y-8">
+            {/* V1.10.0 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <span>📅 Octubre 2025</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.10.0</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🚀 Nuevas Funciones</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Modales de confirmación personalizados</li>
+                    <li>• Opción de limpiar todos los datos para reiniciar y comenzar de nuevo</li>
+                    <li>• Sistema de etiquetas para organizar tareas y notas en modo edición</li>
+                    <li>• Vista unificada: Todas las lluvias de ideas en inglés y español visibles juntas</li>
+                    <li>• Experiencia de grabación de voz mejorada</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Mejoras Importantes</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Rendimiento más rápido con tiempos de carga optimizados</li>
+                    <li>• Mejor accesibilidad con soporte mejorado para lectores de pantalla</li>
+                    <li>• Mayor confiabilidad y estabilidad en todas las funciones</li>
+                    <li>• Interfaz de usuario mejorada con diseño más limpio</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🐛 Correcciones Críticas de Errores</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Corregidos problemas de grabación de voz donde las notas no se guardaban correctamente</li>
+                    <li>• Corregida la pérdida de datos al cambiar entre inglés y español</li>
+                    <li>• Corregidos problemas de carga donde las páginas se quedaban atascadas</li>
+                    <li>• Corregida la inconsistencia del atajo de teclado Ctrl+Enter</li>
+                    <li>• Corregidos problemas de sincronización de datos en la interfaz</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🏗️ Mejoras Técnicas</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Mejor calidad de código y estabilidad de la aplicación</li>
+                    <li>• Manejo de errores mejorado y retroalimentación del usuario</li>
+                    <li>• Gestión y sincronización de datos mejoradas</li>
+                    <li>• Procesamiento de reconocimiento de voz más confiable</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* V1.9.1 */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">

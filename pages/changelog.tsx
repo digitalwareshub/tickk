@@ -37,48 +37,24 @@ export default function Changelog() {
               <span>October 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.0</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.1</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Custom delete confirmation modals</li>
-                  <li>• Clear all data option to reset and restart</li>
-                  <li>• Tag system for organizing tasks and notes in edit mode</li>
-                  <li>• Unified view: All English and Spanish braindumps visible together</li>
-                  <li>• Improved voice recording experience</li>
+                  <li>• <strong>Bulk Delete Operations</strong> - Select multiple completed items for efficient deletion</li>
+                  <li>• Comprehensive keyboard <Link href="/shortcuts" className="text-blue-600 hover:text-blue-700 underline">shortcuts</Link> documentation page</li>
+                  <li>• Multi-select functionality with checkbox controls</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🔧 Major Improvements</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Faster performance with optimized loading times</li>
-                  <li>• Better accessibility with enhanced screen reader support</li>
-                  <li>• Improved reliability and stability across all features</li>
-                  <li>• Enhanced user interface with cleaner design</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🐛 Critical Bug Fixes</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Fixed voice recording issues where notes weren&apos;t saving properly</li>
-                  <li>• Fixed language switching data loss between English and Spanish</li>
-                  <li>• Fixed loading problems where pages would get stuck</li>
-                  <li>• Fixed Ctrl+Enter keyboard shortcut inconsistency</li>
-                  <li>• Fixed data synchronization issues in the interface</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🏗️ Technical Improvements</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Better code quality and app stability</li>
-                  <li>• Enhanced error handling and user feedback</li>
-                  <li>• Improved data management and synchronization</li>
-                  <li>• More reliable voice recognition processing</li>
+                  <li>• Streamlined footer design with better navigation</li>
+                  <li>• Enhanced user experience for managing completed tasks</li>
+                  <li>• Improved accessibility with proper keyboard navigation</li>
                 </ul>
               </div>
             </div>
@@ -86,6 +62,59 @@ export default function Changelog() {
 
           {/* Previous Versions */}
           <div className="space-y-8">
+            {/* V1.10.0 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <span>📅 October 2025</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.10.0</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Custom delete confirmation modals</li>
+                    <li>• Clear all data option to reset and restart</li>
+                    <li>• Tag system for organizing tasks and notes in edit mode</li>
+                    <li>• Unified view: All English and Spanish braindumps visible together</li>
+                    <li>• Improved voice recording experience</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Major Improvements</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Faster performance with optimized loading times</li>
+                    <li>• Better accessibility with enhanced screen reader support</li>
+                    <li>• Improved reliability and stability across all features</li>
+                    <li>• Enhanced user interface with cleaner design</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🐛 Critical Bug Fixes</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Fixed voice recording issues where notes weren&apos;t saving properly</li>
+                    <li>• Fixed language switching data loss between English and Spanish</li>
+                    <li>• Fixed loading problems where pages would get stuck</li>
+                    <li>• Fixed Ctrl+Enter keyboard shortcut inconsistency</li>
+                    <li>• Fixed data synchronization issues in the interface</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🏗️ Technical Improvements</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Better code quality and app stability</li>
+                    <li>• Enhanced error handling and user feedback</li>
+                    <li>• Improved data management and synchronization</li>
+                    <li>• More reliable voice recognition processing</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* V1.9.1 */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
