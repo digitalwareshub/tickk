@@ -146,6 +146,28 @@ const translations = {
     'common.braindump': 'Braindump',
     'common.item': 'Item',
     'common.delete_confirm_message': 'Are you sure you want to delete this item? This action cannot be undone.',
+    
+    // Bulk operations
+    'common.select_all': 'Select All',
+    'common.select_none': 'Select None',
+    'common.selected': 'selected',
+    'common.delete_selected': 'Delete Selected',
+    'common.delete_completed': 'Delete Completed',
+    'common.bulk_delete_confirm': 'Are you sure you want to delete {count} items? This action cannot be undone.',
+    'common.bulk_delete_completed_confirm': 'Are you sure you want to delete all completed items? This action cannot be undone.',
+    'common.items_deleted': '{count} items deleted successfully',
+    
+    // Keyboard shortcuts
+    'shortcuts.title': 'Keyboard Shortcuts',
+    'shortcuts.recording.start_stop': 'Start/Stop Recording',
+    'shortcuts.recording.stop': 'Stop Recording',
+    'shortcuts.organization.process': 'Organize Thoughts', 
+    'shortcuts.data.export': 'Export Data',
+    'shortcuts.navigation.help': 'Show Keyboard Help',
+    'shortcuts.navigation.close_modal': 'Close Modal',
+    'shortcuts.organized.focus_search': 'Focus Search',
+    'shortcuts.organized.clear_search': 'Clear Search',
+    'shortcuts.organized.export_menu': 'Export Menu',
   },
   es: {
     // Navigation
@@ -279,6 +301,28 @@ const translations = {
     'common.braindump': 'Lluvia de Ideas',
     'common.item': 'Elemento',
     'common.delete_confirm_message': '¿Estás seguro de que quieres eliminar este elemento? Esta acción no se puede deshacer.',
+    
+    // Bulk operations
+    'common.select_all': 'Seleccionar Todo',
+    'common.select_none': 'Deseleccionar Todo',
+    'common.selected': 'seleccionados',
+    'common.delete_selected': 'Eliminar Seleccionados',
+    'common.delete_completed': 'Eliminar Completados',
+    'common.bulk_delete_confirm': '¿Estás seguro de que quieres eliminar {count} elementos? Esta acción no se puede deshacer.',
+    'common.bulk_delete_completed_confirm': '¿Estás seguro de que quieres eliminar todos los elementos completados? Esta acción no se puede deshacer.',
+    'common.items_deleted': '{count} elementos eliminados exitosamente',
+    
+    // Keyboard shortcuts
+    'shortcuts.title': 'Atajos de Teclado',
+    'shortcuts.recording.start_stop': 'Iniciar/Detener Grabación',
+    'shortcuts.recording.stop': 'Detener Grabación',
+    'shortcuts.organization.process': 'Organizar Pensamientos',
+    'shortcuts.data.export': 'Exportar Datos',
+    'shortcuts.navigation.help': 'Mostrar Ayuda de Teclado',
+    'shortcuts.navigation.close_modal': 'Cerrar Modal',
+    'shortcuts.organized.focus_search': 'Enfocar Búsqueda',
+    'shortcuts.organized.clear_search': 'Limpiar Búsqueda',
+    'shortcuts.organized.export_menu': 'Menú de Exportación',
   }
 }
 

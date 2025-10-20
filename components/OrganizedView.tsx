@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react'
 import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
+import BulkDeleteModal from './BulkDeleteModal'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
@@ -37,6 +38,12 @@ export default function OrganizedView({
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [itemToDelete, setItemToDelete] = useState<VoiceItem | null>(null)
   const [deleteType, setDeleteType] = useState<'task' | 'note'>('task')
+  
+  // Bulk operations state
+  const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set())
+  const [bulkMode, setBulkMode] = useState(false)
+  const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false)
+  const [bulkDeleteType, setBulkDeleteType] = useState<'selected' | 'completed'>('selected')
   
   // Local translations for this component
   const localTranslations = {
@@ -293,6 +300,80 @@ export default function OrganizedView({
     link.click()
   }
 
+  // Bulk operations
+  const toggleBulkMode = () => {
+    setBulkMode(!bulkMode)
+    setSelectedItems(new Set())
+  }
+
+  const toggleItemSelection = (itemId: string) => {
+    const newSelected = new Set(selectedItems)
+    if (newSelected.has(itemId)) {
+      newSelected.delete(itemId)
+    } else {
+      newSelected.add(itemId)
+    }
+    setSelectedItems(newSelected)
+  }
+
+  const selectAllItems = () => {
+    const currentItems = filter === 'tasks' 
+      ? (searchQuery ? filteredTasks : organizedTasks)
+      : filter === 'notes'
+      ? (searchQuery ? filteredNotes : organizedNotes)
+      : [...(searchQuery ? filteredTasks : organizedTasks), ...(searchQuery ? filteredNotes : organizedNotes)]
+    
+    const allIds = new Set(currentItems.map(item => item.id))
+    setSelectedItems(allIds)
+  }
+
+  const selectNoneItems = () => {
+    setSelectedItems(new Set())
+  }
+
+  const deleteSelectedItems = () => {
+    setBulkDeleteType('selected')
+    setShowBulkDeleteModal(true)
+  }
+
+  const deleteCompletedItems = () => {
+    setBulkDeleteType('completed')
+    setShowBulkDeleteModal(true)
+  }
+
+  const handleBulkDeleteConfirm = () => {
+    if (bulkDeleteType === 'selected') {
+      const updatedTasks = organizedTasks.filter(task => !selectedItems.has(task.id))
+      const updatedNotes = organizedNotes.filter(note => !selectedItems.has(note.id))
+      
+      onDataUpdate({
+        ...appData,
+        tasks: updatedTasks,
+        notes: updatedNotes
+      })
+      
+      setSelectedItems(new Set())
+    } else if (bulkDeleteType === 'completed') {
+      const updatedTasks = organizedTasks.filter(task => !task.completed)
+      
+      onDataUpdate({
+        ...appData,
+        tasks: updatedTasks
+      })
+    }
+    
+    setShowBulkDeleteModal(false)
+    setBulkMode(false)
+  }
+
+  const handleBulkDeleteCancel = () => {
+    setShowBulkDeleteModal(false)
+  }
+
+  const getCompletedTasksCount = () => {
+    return organizedTasks.filter(task => task.completed).length
+  }
+
   // Search functionality
   const filteredTasks = organizedTasks.filter(task => 
     task.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -429,6 +510,69 @@ export default function OrganizedView({
           </div>
         </div>
 
+        {/* Bulk Operations Bar */}
+        {filter !== 'analytics' && (
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between mb-6 gap-4 p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={toggleBulkMode}
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  bulkMode 
+                    ? 'bg-orange-600 text-white hover:bg-orange-700' 
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {bulkMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
+              </button>
+              
+              {bulkMode && (
+                <>
+                  <span className="text-sm text-gray-600">
+                    {selectedItems.size} {t('common.selected')}
+                  </span>
+                  
+                  <div className="flex gap-2">
+                    <button
+                      onClick={selectAllItems}
+                      className="px-3 py-1 text-xs text-blue-600 hover:text-blue-800"
+                    >
+                      {t('common.select_all')}
+                    </button>
+                    <button
+                      onClick={selectNoneItems}
+                      className="px-3 py-1 text-xs text-gray-600 hover:text-gray-800"
+                    >
+                      {t('common.select_none')}
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+            
+            {bulkMode && (
+              <div className="flex gap-2">
+                {selectedItems.size > 0 && (
+                  <button
+                    onClick={deleteSelectedItems}
+                    className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
+                  >
+                    {t('common.delete_selected')} ({selectedItems.size})
+                  </button>
+                )}
+                
+                {getCompletedTasksCount() > 0 && (
+                  <button
+                    onClick={deleteCompletedItems}
+                    className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
+                  >
+                    {t('common.delete_completed')} ({getCompletedTasksCount()})
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Clean Navigation - Mobile Optimized */}
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-8 mb-12">
           <button
@@ -516,10 +660,17 @@ export default function OrganizedView({
                   <div key={task.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <input
                       type="checkbox"
-                      checked={task.completed || false}
-                      onChange={() => handleToggleTask(task.id)}
-                      className="mt-1 w-4 h-4 text-green-600 bg-white border-gray-300 rounded focus:ring-green-500 focus:ring-2 flex-shrink-0"
-                      aria-label={`Mark task as ${task.completed ? 'incomplete' : 'complete'}`}
+                      checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
+                      onChange={() => bulkMode ? toggleItemSelection(task.id) : handleToggleTask(task.id)}
+                      className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                        bulkMode 
+                          ? 'text-orange-600 focus:ring-orange-500' 
+                          : 'text-green-600 focus:ring-green-500'
+                      }`}
+                      aria-label={bulkMode 
+                        ? `Select task for bulk operations`
+                        : `Mark task as ${task.completed ? 'incomplete' : 'complete'}`
+                      }
                     />
                     <div className="flex-1 min-w-0 overflow-hidden">
                       <p className={`text-sm break-words ${
@@ -583,8 +734,17 @@ export default function OrganizedView({
                   <div key={note.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <input
                       type="checkbox"
-                      className="mt-1 w-4 h-4 text-purple-600 bg-white border-gray-300 rounded focus:ring-purple-500 focus:ring-2 flex-shrink-0"
-                      aria-label="Mark note as completed"
+                      checked={bulkMode ? selectedItems.has(note.id) : false}
+                      onChange={() => bulkMode ? toggleItemSelection(note.id) : undefined}
+                      className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                        bulkMode 
+                          ? 'text-orange-600 focus:ring-orange-500' 
+                          : 'text-purple-600 focus:ring-purple-500'
+                      }`}
+                      aria-label={bulkMode 
+                        ? "Select note for bulk operations"
+                        : "Mark note as completed"
+                      }
                     />
                     <div className="flex-1 min-w-0 overflow-hidden">
                       <p className="text-sm text-gray-900 break-words">{note.text}</p>
@@ -687,6 +847,17 @@ export default function OrganizedView({
           itemType={deleteType}
           onConfirm={handleConfirmDelete}
           onCancel={handleCancelDelete}
+        />
+      )}
+
+      {/* Bulk Delete Modal */}
+      {showBulkDeleteModal && (
+        <BulkDeleteModal
+          isOpen={showBulkDeleteModal}
+          itemCount={bulkDeleteType === 'selected' ? selectedItems.size : getCompletedTasksCount()}
+          itemType={bulkDeleteType}
+          onConfirm={handleBulkDeleteConfirm}
+          onCancel={handleBulkDeleteCancel}
         />
       )}
     </div>

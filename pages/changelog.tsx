@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function Changelog() {
   return (
@@ -14,6 +15,9 @@ export default function Changelog() {
 
       <Layout className="min-h-screen bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          
+          {/* Breadcrumbs */}
+          <Breadcrumb />
           
           {/* Page Header */}
           <div className="text-center mb-12">

@@ -2,6 +2,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function Contact() {
   return (
@@ -15,6 +16,10 @@ export default function Contact() {
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
+        
+        {/* Breadcrumbs */}
+        <Breadcrumb />
+        
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="heading-primary text-gray-900 mb-4">

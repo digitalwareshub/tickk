@@ -309,7 +309,7 @@ export class AnalyticsService {
         week,
         itemCount: data.itemCount,
         sessionCount: data.sessionCount,
-        accuracy: data.itemCount > 0 ? Math.round((data.accuracySum / data.itemCount) * 100) : 0
+        accuracy: data.itemCount > 0 ? (data.accuracySum / data.itemCount) : 0  // Return as decimal (0-1)
       }))
       .sort((a, b) => a.week.localeCompare(b.week))
       .slice(-8) // Last 8 weeks

@@ -265,6 +265,28 @@ export default function SpanishApp() {
     canProcess: recordingControls?.canProcess || false
   })
 
+  // Handle onboarding modal keyboard accessibility (ESC to close)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && showOnboarding) {
+        handleOnboardingComplete()
+      }
+    }
+
+    if (showOnboarding) {
+      document.addEventListener('keydown', handleKeyDown)
+      // Focus management - focus the modal when it opens
+      const modal = document.querySelector('[role="dialog"]')
+      if (modal) {
+        ;(modal as HTMLElement).focus()
+      }
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [showOnboarding, handleOnboardingComplete])
+
   // Handle mode switching
   const handleModeSwitch = useCallback((newMode: AppMode) => {
     setMode(newMode)

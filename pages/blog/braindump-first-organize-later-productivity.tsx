@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default function BraindumpFirstBlogPost() {
   return (
@@ -72,13 +73,11 @@ export default function BraindumpFirstBlogPost() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumb */}
-          <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-            <Link href="/" className="hover:text-gray-700">Home</Link>
-            <span>›</span>
-            <Link href="/blog" className="hover:text-gray-700">Blog</Link>
-            <span>›</span>
-            <span className="text-gray-900">Braindump-First Productivity</span>
-          </nav>
+          <Breadcrumb items={[
+            { label: 'Home', href: '/' },
+            { label: 'Blog', href: '/blog' },
+            { label: 'Braindump-First Productivity', active: true }
+          ]} />
 
           {/* Article Header */}
           <header className="mb-12">

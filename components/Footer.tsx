@@ -113,6 +113,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <Link href={getLocalizedUrl('/changelog')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                 {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
               </Link>
+              <Link href={getLocalizedUrl('/shortcuts')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                {language === 'es' ? 'Atajos' : 'Shortcuts'}
+              </Link>
             </div>
 
             {/* Legal Column */}
@@ -155,25 +158,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </a>
           </div>
 
-          {/* Badges - Mobile */}
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-500">Vote on</span>
-              <a 
-                href="https://peerpush.net/p/tickk"
-                target="_blank"
-                rel="noopener"
-                className="inline-block"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://peerpush.net/p/tickk/badge"
-                  alt="tickk badge"
-                  className="h-8 hover:opacity-80 transition-opacity"
-                />
-              </a>
-            </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -271,6 +256,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                     {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
                   </Link>
                 </li>
+                <li>
+                  <Link href={getLocalizedUrl('/shortcuts')} className="text-gray-600 hover:text-orange-600 transition-colors">
+                    {language === 'es' ? 'Atajos' : 'Shortcuts'}
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -295,31 +285,13 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           </div>
 
 
-          {/* Badges */}
-          <div className="flex justify-center items-center space-x-4 mb-1">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-500 whitespace-nowrap">Vote on</span>
-              <a 
-                href="https://peerpush.net/p/tickk"
-                target="_blank"
-                rel="noopener"
-                className="inline-block"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://peerpush.net/p/tickk/badge"
-                  alt="tickk badge"
-                  className="h-10 hover:opacity-80 transition-opacity"
-                />
-              </a>
-            </div>
-          </div>
+
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-200">
+        <div className="border-t border-gray-200 mt-8">
           {/* Mobile Bottom */}
-          <div className="block md:hidden text-center">
+          <div className="block md:hidden text-center pt-6 pb-4">
             <div className="text-xs text-gray-600 mb-2">
               © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para la productividad diaria.' : 'Built with ❤️ for daily productivity.'}
             </div>
@@ -340,7 +312,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           </div>
 
           {/* Desktop Bottom */}
-          <div className="hidden md:flex flex-col md:flex-row justify-between items-center">
+          <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-6">
             <div className="flex items-center space-x-4">
               <div className="text-sm text-gray-600">
                 © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para entusiastas de la productividad diaria.' : 'Built with ❤️ for daily productivity enthusiasts.'}

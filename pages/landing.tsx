@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/Layout'
+import Breadcrumb from '@/components/Breadcrumb'
 import { 
   useSectionTracking, 
   useCTATracking, 
@@ -522,6 +523,9 @@ export default function Home() {
         <section ref={heroSectionRef} className="bg-white py-16">
           
           <div className="max-w-4xl mx-auto px-4 py-8">
+            
+            {/* Breadcrumbs */}
+            <Breadcrumb />
             <div className="text-center">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-700 mb-6">

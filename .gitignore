@@ -67,3 +67,6 @@ docs/improvement-roadmap.md
 docs/roadmap.md
 docs/ChatGPT-Classifier.md
 docs/ChatGPT-Classifier 2.md
+
+# Exclude entire docs folder
+/docs/

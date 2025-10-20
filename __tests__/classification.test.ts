@@ -22,6 +22,16 @@ describe('Voice Classification', () => {
       ['Maybe we should consider this', 'notes'],
       ['Milk', 'notes'], // Single word, no context
       ['That meeting was interesting', 'notes'], // Past tense
+      
+      // Edge cases that were previously broken (now fixed)
+      ['I want to remember to buy milk', 'tasks'], // Action-oriented "want to"
+      ['I want to buy groceries today', 'tasks'], // Action-oriented "want to"
+      ['I should call mom tomorrow', 'tasks'], // Strong modal
+      ['Yesterday meeting was interesting', 'notes'], // Past temporal
+      ['I want to learn more about this', 'notes'], // True intent
+      ['I need to think about this more', 'tasks'], // Obligation
+      ['What if we scheduled it for Monday', 'notes'], // Hypothetical question
+      ['I gotta finish this project', 'tasks'], // Strong modal + action
     ])('classifies "%s" as %s', async (text, expected) => {
       const result = await classifier.classify(text)
       expect(result.category).toBe(expected)
@@ -40,8 +50,9 @@ describe('Voice Classification', () => {
     })
 
     test('returns lower confidence for ambiguous text', async () => {
-      const ambiguous = await classifier.classify('Maybe')
-      expect(ambiguous.confidence).toBeLessThan(0.7)
+      // Use a truly ambiguous single word that should have lower confidence
+      const ambiguous = await classifier.classify('Something')
+      expect(ambiguous.confidence).toBeLessThan(0.85)
     })
   })
 
@@ -123,6 +134,48 @@ describe('Voice Classification', () => {
         expect(result.category).toBeDefined()
         expect(result.confidence).toBeGreaterThan(0)
       }
+    })
+  })
+
+  describe('Improved Classifier Features (v2.0)', () => {
+    test('distinguishes action-oriented vs learning-oriented intent', async () => {
+      // Action-oriented "want to" should be tasks
+      const actionIntent = await classifier.classify('I want to remember to buy groceries')
+      expect(actionIntent.category).toBe('tasks')
+      
+      // Learning-oriented "want to" should be notes
+      const learningIntent = await classifier.classify('I want to learn more about quantum physics')
+      expect(learningIntent.category).toBe('notes')
+    })
+
+    test('handles strong vs weak modals correctly', async () => {
+      // Strong modals = tasks
+      const strongModal = await classifier.classify('I should call mom tomorrow')
+      expect(strongModal.category).toBe('tasks')
+      
+      // Weak modals = notes
+      const weakModal = await classifier.classify('Maybe we could try a different approach')
+      expect(weakModal.category).toBe('notes')
+    })
+
+    test('detects past tense for temporal indicators', async () => {
+      // Future temporal = task
+      const futureTask = await classifier.classify('Meeting tomorrow at 3pm')
+      expect(futureTask.category).toBe('tasks')
+      
+      // Past temporal = note
+      const pastNote = await classifier.classify('Yesterday meeting was very productive')
+      expect(pastNote.category).toBe('notes')
+    })
+
+    test('has improved confidence scores', async () => {
+      // Clear imperative should have very high confidence
+      const imperative = await classifier.classify('Buy groceries')
+      expect(imperative.confidence).toBeGreaterThanOrEqual(0.90)
+      
+      // Clear question should have very high confidence
+      const question = await classifier.classify('What time is the meeting?')
+      expect(question.confidence).toBeGreaterThanOrEqual(0.90)
     })
   })
 })

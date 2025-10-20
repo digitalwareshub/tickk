@@ -20,6 +20,8 @@ Voice-first brain dump → auto-organized into tasks & notes. Free, open-source,
 - 🌍 **Bilingual** - English and Spanish support
 - ✨ **No sign-up** - Start using immediately
 - 💾 **Local storage** - All data stays on your device
+- 🗑️ **Bulk operations** - Select multiple items for deletion or delete all completed tasks
+- 📝 **Smart editing** - Edit items individually or switch between task/note categories
 
 ## Quick Start
 
