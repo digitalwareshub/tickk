@@ -4,3 +4,34 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # Ignore major version updates for critical dependencies
+    ignore:
+      # Prevent TailwindCSS v4 updates (breaking changes)
+      - dependency-name: "tailwindcss"
+        versions: [">=4.0.0"]
+      # Prevent React v19 type updates (compatibility issues)  
+      - dependency-name: "@types/react"
+        versions: [">=19.0.0"]
+      - dependency-name: "@types/react-dom"
+        versions: [">=19.0.0"]
+      # Prevent React v19 updates (not ready yet)
+      - dependency-name: "react"
+        versions: [">=19.0.0"]
+      - dependency-name: "react-dom"
+        versions: [">=19.0.0"]
+    # Limit number of open PRs
+    open-pull-requests-limit: 3
+    # Group related updates
+    groups:
+      react-ecosystem:
+        patterns:
+          - "react*"
+          - "@types/react*"
+      testing:
+        patterns:
+          - "@testing-library/*"
+          - "jest*"
+      linting:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
