@@ -1,6 +1,7 @@
 /**
- * Pricing Page - Clean, Minimal Design
- * Shows Free, Pro, and Enterprise tiers with clear value props
+ * Pricing Page - Sync-Based Monetization Model
+ * Free: Unlimited local storage (single device)
+ * Pro: Cross-device sync + advanced features
  */
 
 import { useState, useEffect } from 'react'
@@ -32,17 +33,19 @@ export default function Pricing() {
     {
       name: 'Free',
       price: { monthly: 0, yearly: 0 },
-      description: 'Perfect for getting started',
+      description: 'Perfect for single-device productivity',
       features: [
-        { text: 'Unlimited voice recordings', included: true },
-        { text: '500 items storage', included: true },
-        { text: '30 days history', included: true },
-        { text: 'Smart NLP classification', included: true },
-        { text: 'Basic export (JSON)', included: true },
-        { text: 'Offline PWA', included: true },
-        { text: 'English + Spanish', included: true },
-        { text: 'Advanced exports', included: false },
+        { text: '✓ Unlimited voice recordings', included: true },
+        { text: '✓ Unlimited local storage', included: true, highlight: true },
+        { text: '✓ Single device (phone OR laptop OR desktop)', included: true },
+        { text: '✓ Smart NLP classification', included: true },
+        { text: '✓ Basic exports (JSON, Markdown, CSV)', included: true },
+        { text: '✓ Offline PWA', included: true },
+        { text: '✓ English + Spanish', included: true },
+        { text: '✓ 100% private (data never leaves device)', included: true },
+        { text: 'Cross-device sync', included: false },
         { text: 'Cloud backup', included: false },
+        { text: 'Advanced exports (PDF)', included: false },
         { text: 'Analytics dashboard', included: false },
       ],
       cta: 'Start Free',
@@ -52,83 +55,83 @@ export default function Pricing() {
     {
       name: 'Pro',
       price: { monthly: 4.99, yearly: 49 },
-      description: 'Unlimited power for productivity enthusiasts',
+      description: 'Sync across all your devices',
       features: [
         { text: 'Everything in Free, plus:', included: true, bold: true },
-        { text: '✓ Unlimited storage', included: true },
-        { text: '✓ Forever history', included: true },
-        { text: '✓ Advanced exports (MD, CSV, PDF)', included: true },
-        { text: '✓ Cloud backup (E2E encrypted)', included: true },
-        { text: '✓ Advanced analytics', included: true },
+        { text: '✓ Sync across ALL devices', included: true, highlight: true },
+        { text: '✓ Real-time sync (phone ↔ laptop ↔ desktop)', included: true },
+        { text: '✓ Encrypted cloud backup', included: true },
+        { text: '✓ Advanced exports (formatted PDF)', included: true },
+        { text: '✓ Advanced analytics dashboard', included: true },
         { text: '✓ Custom voice commands', included: true },
-        { text: '✓ Priority support (24h)', included: true },
+        { text: '✓ Priority support (24h response)', included: true },
         { text: '✓ Pro badge', included: true },
-        { text: '✓ Early access to features', included: true },
+        { text: '✓ Early access to new features', included: true },
       ],
       cta: 'Upgrade to Pro',
       ctaLink: '#', // Will connect to Stripe later
       highlighted: true,
       popular: true,
     },
-    {
-      name: 'Enterprise',
-      price: { monthly: null, yearly: null },
-      description: 'Custom solutions for teams',
-      features: [
-        { text: 'Everything in Pro, plus:', included: true, bold: true },
-        { text: '✓ Team workspaces', included: true },
-        { text: '✓ Admin dashboard', included: true },
-        { text: '✓ SSO integration', included: true },
-        { text: '✓ API access', included: true },
-        { text: '✓ White-label option', included: true },
-        { text: '✓ Dedicated support', included: true },
-        { text: '✓ SLA guarantees', included: true },
-        { text: '✓ On-premise deployment', included: true },
-      ],
-      cta: 'Contact Sales',
-      ctaLink: '/contact',
-      highlighted: false,
-    },
   ]
 
   const faqs = [
     {
-      question: 'What happens when I reach 500 items on the free plan?',
-      answer: 'You\'ll see a friendly reminder to upgrade or clean up old items. We give you a grace period of 20 extra items (520 total) so you\'re never blocked suddenly. You can export your data, delete old items, or upgrade to Pro for unlimited storage.',
+      question: 'Why is local storage unlimited but sync costs money?',
+      answer: 'Your local data costs us nothing - it\'s stored on YOUR device using your browser\'s storage. Sync infrastructure (servers, bandwidth, real-time updates, conflict resolution) costs real money to run and maintain. We only charge for what actually costs us to provide.',
     },
     {
-      question: 'Can I cancel my Pro subscription anytime?',
-      answer: 'Absolutely! Cancel anytime from your account settings. Your Pro features will remain active until the end of your billing period. No questions asked, no hassle.',
+      question: 'How many devices can I use with the free plan?',
+      answer: 'The free plan works on one device at a time. You can use it on your phone, laptop, or desktop - but your data stays local to that device only. With Pro, your data syncs across unlimited devices automatically.',
     },
     {
-      question: 'Is my data still private with Pro?',
-      answer: 'Yes! Your tasks and notes NEVER leave your device. With Pro, we only store your email and subscription status. Cloud backup (optional Pro feature) uses end-to-end encryption to YOUR Google Drive or Dropbox - we never see your data.',
+      question: 'What happens if I upgrade to Pro and then cancel?',
+      answer: 'You can export all your data anytime. After canceling Pro, sync stops but you keep all your data locally on each device. You can continue using the free tier on any single device with all your existing data.',
     },
     {
-      question: 'What\'s included in cloud backup?',
-      answer: 'Cloud backup automatically encrypts and saves your data to your own Google Drive or Dropbox account. Only you have the encryption key - we literally cannot read your data. It\'s an optional Pro feature you can enable in settings.',
+      question: 'Is my data still private with Pro sync?',
+      answer: 'Absolutely! Your tasks and notes are end-to-end encrypted before leaving your device. We only see encrypted data on our servers - we literally cannot read your productivity data. With optional cloud backup, data is encrypted to YOUR Google Drive or Dropbox account.',
     },
     {
-      question: 'Do you offer refunds?',
-      answer: 'Yes! If you\'re not satisfied within the first 30 days, we\'ll refund you in full, no questions asked. Just email support@tickk.app.',
+      question: 'How does sync work technically?',
+      answer: 'When you create or edit an item on one device, it\'s encrypted and securely synced to our servers, then pushed to your other devices in real-time. Conflicts are automatically resolved intelligently. All sync happens in the background - you just use the app naturally.',
     },
     {
-      question: 'Can I switch from monthly to yearly billing?',
-      answer: 'Yes! You can switch anytime from your account settings. When you switch to yearly, you save $10 (2 months free) and the change takes effect at your next billing date.',
+      question: 'Can I try Pro before paying?',
+      answer: 'We offer a 14-day free trial of Pro when you first sign up for sync. No credit card required upfront. Cancel anytime during the trial with no charges.',
     },
     {
       question: 'What payment methods do you accept?',
-      answer: 'We accept all major credit cards (Visa, Mastercard, Amex), Apple Pay, and Google Pay through our secure payment processor Stripe. We never see or store your payment information.',
+      answer: 'We accept all major credit cards (Visa, Mastercard, Amex), Apple Pay, and Google Pay through Stripe. We never see or store your payment information.',
     },
+    {
+      question: 'Can I switch from monthly to yearly billing?',
+      answer: 'Yes! Switch anytime from your account settings. Yearly billing saves you $10 (equivalent to 2 months free). The change takes effect at your next billing date.',
+    },
+  ]
+
+  const comparisonFeatures = [
+    { feature: 'Voice recordings', free: 'Unlimited', pro: 'Unlimited' },
+    { feature: 'Local storage', free: 'Unlimited', pro: 'Unlimited' },
+    { feature: 'Number of devices', free: '1 device', pro: 'Unlimited', highlight: true },
+    { feature: 'Cross-device sync', free: '✗', pro: '✓ Real-time', highlight: true },
+    { feature: 'Smart classification', free: '✓', pro: '✓' },
+    { feature: 'Basic exports (JSON, MD, CSV)', free: '✓', pro: '✓' },
+    { feature: 'Advanced exports (PDF)', free: '✗', pro: '✓' },
+    { feature: 'Cloud backup (encrypted)', free: '✗', pro: '✓' },
+    { feature: 'Advanced analytics', free: 'Basic', pro: 'Advanced' },
+    { feature: 'Custom voice commands', free: '✗', pro: '✓' },
+    { feature: 'Priority support', free: 'Community', pro: '24h email' },
+    { feature: 'Early access', free: '✗', pro: '✓' },
   ]
 
   return (
     <>
       <Head>
         <title>Pricing - Tickk Pro</title>
-        <meta name="description" content="Free forever, or upgrade to Pro for unlimited storage and power features. Simple, honest pricing for voice productivity." />
+        <meta name="description" content="Unlimited local storage, forever free. Upgrade to sync across all your devices. Simple, honest pricing for voice productivity." />
         <meta property="og:title" content="Pricing - Tickk Pro" />
-        <meta property="og:description" content="Free forever, or upgrade to Pro for unlimited storage and power features." />
+        <meta property="og:description" content="Unlimited local storage, forever free. Upgrade to sync across all your devices." />
         <link rel="canonical" href="https://tickk.app/pricing" />
       </Head>
 
@@ -144,16 +147,38 @@ export default function Pricing() {
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Free Forever, or Unlock
+              Unlimited Local Storage.
               <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block mt-2">
-                Unlimited Power
+                Sync When You Need It.
               </span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Start with our generous free tier. Upgrade when you need unlimited storage and advanced features.
+              Store unlimited items on your device for free. Upgrade to sync across phone, laptop, and desktop.
             </p>
+
+            {/* Value Props */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span>Unlimited local storage</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span>100% private (local-first)</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span>Free forever</span>
+              </div>
+            </div>
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
@@ -186,8 +211,8 @@ export default function Pricing() {
 
         {/* Pricing Tiers */}
         <section className="py-8 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {tiers.map((tier) => (
                 <div
                   key={tier.name}
@@ -214,11 +239,7 @@ export default function Pricing() {
 
                   {/* Price */}
                   <div className="mb-6">
-                    {tier.price.monthly === null ? (
-                      <div className="flex items-baseline">
-                        <span className="text-4xl font-bold text-gray-900">Custom</span>
-                      </div>
-                    ) : tier.price.monthly === 0 ? (
+                    {tier.price.monthly === 0 ? (
                       <div className="flex items-baseline">
                         <span className="text-4xl font-bold text-gray-900">$0</span>
                         <span className="ml-2 text-gray-600">/forever</span>
@@ -267,7 +288,13 @@ export default function Pricing() {
                             <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                         )}
-                        <span className={`text-sm ${'bold' in feature && feature.bold ? 'font-semibold text-gray-900' : 'text-gray-600'}`}>
+                        <span className={`text-sm ${
+                          'bold' in feature && feature.bold
+                            ? 'font-semibold text-gray-900'
+                            : 'highlight' in feature && feature.highlight
+                            ? 'font-medium text-gray-900'
+                            : 'text-gray-600'
+                        }`}>
                           {feature.text}
                         </span>
                       </li>
@@ -279,14 +306,78 @@ export default function Pricing() {
           </div>
         </section>
 
-        {/* Detailed Feature Comparison */}
+        {/* Why Sync Costs Section */}
         <section className="py-16 px-4 bg-gray-50">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+              Why We Charge for Sync
+            </h2>
+            <p className="text-gray-600 text-center mb-12">
+              We believe in honest, transparent pricing
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Free (No Cost to Us) */}
+              <div className="bg-white rounded-xl p-6 border border-gray-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Free Forever</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Your local data costs us <strong>$0</strong> to store - it&apos;s on YOUR device using YOUR browser&apos;s storage.
+                </p>
+                <ul className="text-sm text-gray-600 space-y-2">
+                  <li>• No servers needed</li>
+                  <li>• No bandwidth costs</li>
+                  <li>• No storage fees</li>
+                  <li>• Completely free to provide</li>
+                </ul>
+              </div>
+
+              {/* Pro (Real Costs) */}
+              <div className="bg-white rounded-xl p-6 border-2 border-orange-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">Pro Sync</h3>
+                </div>
+                <p className="text-gray-600 mb-4">
+                  Sync infrastructure costs <strong>real money</strong> to run and maintain reliably.
+                </p>
+                <ul className="text-sm text-gray-600 space-y-2">
+                  <li>• Server infrastructure</li>
+                  <li>• Database hosting</li>
+                  <li>• Bandwidth for real-time sync</li>
+                  <li>• Conflict resolution logic</li>
+                  <li>• 24/7 uptime monitoring</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-gray-600">
+                <strong>Bottom line:</strong> We only charge for features that cost us money to provide.
+                Local storage is truly unlimited and free forever.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature Comparison Table */}
+        <section className="py-16 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
               Feature Comparison
             </h2>
             <p className="text-gray-600 text-center mb-12">
-              Choose the plan that fits your productivity needs
+              Choose the plan that fits your workflow
             </p>
 
             <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -296,31 +387,17 @@ export default function Pricing() {
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Feature</th>
                       <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Free</th>
-                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Pro</th>
-                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Enterprise</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 bg-orange-50">Pro</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {[
-                      { feature: 'Voice recordings', free: 'Unlimited', pro: 'Unlimited', enterprise: 'Unlimited' },
-                      { feature: 'Storage', free: '500 items', pro: 'Unlimited', enterprise: 'Unlimited' },
-                      { feature: 'History retention', free: '30 days', pro: 'Forever', enterprise: 'Forever' },
-                      { feature: 'Smart classification', free: '✓', pro: '✓', enterprise: '✓' },
-                      { feature: 'Basic export (JSON)', free: '✓', pro: '✓', enterprise: '✓' },
-                      { feature: 'Advanced exports (MD, CSV, PDF)', free: '✗', pro: '✓', enterprise: '✓' },
-                      { feature: 'Cloud backup (encrypted)', free: '✗', pro: '✓', enterprise: '✓' },
-                      { feature: 'Advanced analytics', free: '✗', pro: '✓', enterprise: '✓' },
-                      { feature: 'Custom voice commands', free: '✗', pro: '✓', enterprise: '✓' },
-                      { feature: 'Team workspaces', free: '✗', pro: '✗', enterprise: '✓' },
-                      { feature: 'API access', free: '✗', pro: '✗', enterprise: '✓' },
-                      { feature: 'SSO integration', free: '✗', pro: '✗', enterprise: '✓' },
-                      { feature: 'Priority support', free: '✗', pro: '24h email', enterprise: 'Dedicated' },
-                    ].map((row, idx) => (
-                      <tr key={idx} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{row.feature}</td>
+                    {comparisonFeatures.map((row, idx) => (
+                      <tr key={idx} className={`hover:bg-gray-50 ${row.highlight ? 'bg-orange-50/30' : ''}`}>
+                        <td className={`px-6 py-4 text-sm font-medium ${row.highlight ? 'text-gray-900' : 'text-gray-900'}`}>
+                          {row.feature}
+                        </td>
                         <td className="px-6 py-4 text-sm text-gray-600 text-center">{row.free}</td>
-                        <td className="px-6 py-4 text-sm text-gray-600 text-center font-semibold">{row.pro}</td>
-                        <td className="px-6 py-4 text-sm text-gray-600 text-center">{row.enterprise}</td>
+                        <td className="px-6 py-4 text-sm text-gray-900 text-center font-semibold bg-orange-50/50">{row.pro}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -331,7 +408,7 @@ export default function Pricing() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 px-4">
+        <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
               Frequently Asked Questions
@@ -364,9 +441,9 @@ export default function Pricing() {
         {/* Final CTA */}
         <section className="py-16 px-4 bg-gray-900 text-white">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Unlock Your Productivity?</h2>
+            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-gray-300 text-lg mb-8">
-              Start free, upgrade when you need more power. No credit card required.
+              Start free with unlimited local storage. Upgrade anytime for sync across all your devices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -379,7 +456,7 @@ export default function Pricing() {
                 href="#"
                 className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors"
               >
-                Upgrade to Pro
+                Try Pro Free (14 Days)
               </Link>
             </div>
             <p className="text-sm text-gray-400 mt-6">
