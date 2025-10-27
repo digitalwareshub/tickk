@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useLanguage } from '../contexts/LanguageContext'
 import LanguageDropdown from './LanguageDropdown'
+import { FEATURES } from '@/lib/config/features'
 
 interface HeaderProps {
   mode?: 'braindump' | 'organized'
@@ -30,14 +31,22 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
             </Link>
           </div>
 
-          {/* Center: Simple Back Link for Non-Home Pages */}
-          <div className="hidden md:flex items-center justify-center w-1/3">
+          {/* Center: Navigation Links */}
+          <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
             {!isHomePage && (
               <Link href={language === 'es' ? '/es' : '/'} className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
                 {t('nav.back_to_app')}
+              </Link>
+            )}
+            {FEATURES.PRICING_PAGE.enabled && (
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Pricing
               </Link>
             )}
           </div>
