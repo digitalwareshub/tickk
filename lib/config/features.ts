@@ -97,8 +97,8 @@ export const isMonetizationEnabled = (): boolean => {
  */
 export const getEnabledFeatures = (): string[] => {
   return Object.entries(FEATURES)
-    .filter(([_, flag]) => flag.enabled)
-    .map(([name, _]) => name)
+    .filter(([, flag]) => flag.enabled)
+    .map(([name]) => name)
 }
 
 /**
