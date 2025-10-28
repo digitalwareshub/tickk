@@ -9,6 +9,8 @@ import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
 import BulkDeleteModal from './BulkDeleteModal'
 import DateBadge from './DateBadge'
+import ContextMenu, { type ContextMenuAction } from './ContextMenu'
+import { useContextMenu } from '@/hooks/useContextMenu'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 import { parseEarliestDate } from '@/lib/utils/dateParser'
@@ -47,7 +49,17 @@ export default function OrganizedView({
   const [bulkMode, setBulkMode] = useState(false)
   const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false)
   const [bulkDeleteType, setBulkDeleteType] = useState<'selected' | 'completed'>('selected')
-  
+
+  // Context menu state
+  const {
+    menuState,
+    handleContextMenu,
+    handleTouchStart,
+    handleTouchEnd,
+    handleTouchMove,
+    closeMenu
+  } = useContextMenu()
+
   // Local translations for this component
   const localTranslations = {
     en: {
@@ -245,6 +257,149 @@ export default function OrganizedView({
     } catch (error) {
       console.error('Failed to change category:', error)
     }
+  }
+
+  /**
+   * Copy item text to clipboard
+   */
+  const handleCopyText = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      // Could add a toast notification here
+    } catch (error) {
+      console.error('Failed to copy text:', error)
+    }
+  }
+
+  /**
+   * Pin/unpin item
+   */
+  const handlePinItem = (itemId: string, type: 'task' | 'note') => {
+    const items = type === 'task' ? organizedTasks : organizedNotes
+    const updatedItems = items.map(item =>
+      item.id === itemId
+        ? {
+            ...item,
+            metadata: {
+              ...item.metadata,
+              pinned: !item.metadata?.pinned
+            }
+          }
+        : item
+    )
+
+    onDataUpdate({
+      ...appData,
+      [type === 'task' ? 'tasks' : 'notes']: updatedItems
+    })
+  }
+
+  /**
+   * Convert item between task and note
+   */
+  const handleConvertItem = (item: VoiceItem, fromType: 'task' | 'note') => {
+    if (fromType === 'task') {
+      const updatedTasks = organizedTasks.filter(t => t.id !== item.id)
+      const convertedItem: VoiceItem = {
+        ...item,
+        classification: item.classification ? {
+          category: 'notes' as const,
+          confidence: item.classification.confidence || 0,
+          reasoning: item.classification.reasoning || '',
+          metadata: item.classification.metadata
+        } : {
+          category: 'notes' as const,
+          confidence: 0.5,
+          reasoning: 'Converted from task',
+        }
+      }
+      const updatedNotes = [...organizedNotes, convertedItem]
+
+      onDataUpdate({
+        ...appData,
+        tasks: updatedTasks,
+        notes: updatedNotes
+      })
+    } else {
+      const updatedNotes = organizedNotes.filter(n => n.id !== item.id)
+      const convertedItem: VoiceItem = {
+        ...item,
+        classification: item.classification ? {
+          category: 'tasks' as const,
+          confidence: item.classification.confidence || 0,
+          reasoning: item.classification.reasoning || '',
+          metadata: item.classification.metadata
+        } : {
+          category: 'tasks' as const,
+          confidence: 0.5,
+          reasoning: 'Converted from note',
+        }
+      }
+      const updatedTasks = [...organizedTasks, convertedItem]
+
+      onDataUpdate({
+        ...appData,
+        tasks: updatedTasks,
+        notes: updatedNotes
+      })
+    }
+  }
+
+  /**
+   * Get context menu actions for an item
+   */
+  const getContextMenuActions = (item: VoiceItem | null, type: 'task' | 'note'): ContextMenuAction[] => {
+    if (!item) return []
+
+    const actions: ContextMenuAction[] = []
+
+    // Mark complete (tasks only)
+    if (type === 'task') {
+      actions.push({
+        label: item.completed ? 'Mark Incomplete' : 'Mark Complete',
+        icon: '✅',
+        onClick: () => handleToggleTask(item.id),
+        variant: 'success'
+      })
+    }
+
+    // Pin/Unpin
+    actions.push({
+      label: item.metadata?.pinned ? 'Unpin' : 'Pin to Top',
+      icon: '📌',
+      onClick: () => handlePinItem(item.id, type)
+    })
+
+    // Edit
+    actions.push({
+      label: 'Edit',
+      icon: '✏️',
+      onClick: () => handleEditItem(item, type)
+    })
+
+    // Convert
+    actions.push({
+      label: type === 'task' ? 'Convert to Note' : 'Convert to Task',
+      icon: '🔄',
+      onClick: () => handleConvertItem(item, type)
+    })
+
+    // Copy text
+    actions.push({
+      label: 'Copy Text',
+      icon: '📋',
+      onClick: () => handleCopyText(item.text)
+    })
+
+    // Delete
+    actions.push({
+      label: 'Delete',
+      icon: '🗑️',
+      onClick: () => handleDeleteItem(item, type),
+      variant: 'danger'
+    })
+
+    return actions
   }
 
   // Export functionality
@@ -825,7 +980,14 @@ export default function OrganizedView({
             {(filter === 'all' || filter === 'tasks') && filteredTasks.length > 0 && (
               <div className="space-y-4">
                 {filteredTasks.map((task) => (
-                  <div key={task.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
+                  <div
+                    key={task.id}
+                    className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                    onContextMenu={(e) => handleContextMenu(e, task.id)}
+                    onTouchStart={(e) => handleTouchStart(e, task.id)}
+                    onTouchEnd={handleTouchEnd}
+                    onTouchMove={handleTouchMove}
+                  >
                     <input
                       type="checkbox"
                       checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
@@ -902,7 +1064,14 @@ export default function OrganizedView({
             {(filter === 'all' || filter === 'notes') && filteredNotes.length > 0 && (
               <div className="space-y-4">
                 {filteredNotes.map((note) => (
-                  <div key={note.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
+                  <div
+                    key={note.id}
+                    className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                    onContextMenu={(e) => handleContextMenu(e, note.id)}
+                    onTouchStart={(e) => handleTouchStart(e, note.id)}
+                    onTouchEnd={handleTouchEnd}
+                    onTouchMove={handleTouchMove}
+                  >
                     <input
                       type="checkbox"
                       checked={bulkMode ? selectedItems.has(note.id) : false}
@@ -1032,6 +1201,19 @@ export default function OrganizedView({
           itemType={bulkDeleteType}
           onConfirm={handleBulkDeleteConfirm}
           onCancel={handleBulkDeleteCancel}
+        />
+      )}
+
+      {/* Context Menu */}
+      {menuState && (
+        <ContextMenu
+          x={menuState.x}
+          y={menuState.y}
+          actions={getContextMenuActions(
+            [...filteredTasks, ...filteredNotes].find(item => item.id === menuState.itemId) || null,
+            filteredTasks.find(t => t.id === menuState.itemId) ? 'task' : 'note'
+          )}
+          onClose={closeMenu}
         />
       )}
     </div>
