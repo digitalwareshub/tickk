@@ -21,6 +21,7 @@ import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
+import WhatsNewBanner, { useWhatsNewBanner } from '@/components/WhatsNewBanner'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -44,6 +45,10 @@ export default function App() {
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showTour, setShowTour] = useState(false)
+  
+  // What's New banner
+  const { showBanner, dismissBanner } = useWhatsNewBanner('1.11.0')
+  
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -664,6 +669,14 @@ export default function App() {
         onModeChange={handleModeSwitch}
         className="min-h-screen bg-white"
       >
+        {/* What's New Banner for existing users */}
+        {showBanner && (
+          <WhatsNewBanner 
+            version="1.11.0" 
+            onDismiss={dismissBanner} 
+          />
+        )}
+        
         <div className="min-h-screen bg-white">
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (

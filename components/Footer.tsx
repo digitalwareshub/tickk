@@ -100,9 +100,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <Link href="/changelog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                 Changelog
               </Link>
-              <Link href="/shortcuts" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Shortcuts
-              </Link>
             </div>
 
             {/* Legal Column */}
@@ -238,11 +235,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/changelog" className="text-gray-600 hover:text-orange-600 transition-colors">
                     Changelog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/shortcuts" className="text-gray-600 hover:text-orange-600 transition-colors">
-                    Shortcuts
                   </Link>
                 </li>
               </ul>

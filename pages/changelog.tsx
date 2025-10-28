@@ -37,24 +37,31 @@ export default function Changelog() {
               <span>October 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.1</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.11.0 - Major Feature Update</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">🎯 Major New Features</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• <strong>Bulk Delete Operations</strong> - Select multiple completed items for efficient deletion</li>
-                  <li>• Comprehensive keyboard <Link href="/shortcuts" className="text-blue-600 hover:text-blue-700 underline">shortcuts</Link> documentation page</li>
-                  <li>• Multi-select functionality with checkbox controls</li>
+                  <li>• <strong>Focus Mode</strong> - New dedicated tab for today&apos;s priorities and focused productivity, especially helpful for ADHD users</li>
+                  <li>• <strong>Command Palette (⌘K / Ctrl+K)</strong> - VS Code-style quick actions with fuzzy search</li>
+                  <li>• <strong>Advanced Analytics Dashboard</strong> - Activity heatmaps, productivity charts, and comprehensive insights</li>
+                  <li>• <strong>Streak Tracking System</strong> - Daily activity calendar with current and longest streak counters</li>
+                  <li>• <strong>ICS Calendar Export</strong> - Export tasks with dates to Google Calendar, Outlook, and other calendar apps</li>
+                  <li>• <strong>Interactive Onboarding Tour</strong> - Step-by-step guidance for new users with contextual highlights</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">⚡ Enhanced User Experience</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Streamlined footer design with better navigation</li>
-                  <li>• Enhanced user experience for managing completed tasks</li>
-                  <li>• Improved accessibility with proper keyboard navigation</li>
+                  <li>• <strong>English-Only Focus</strong> - Simplified to English-only interface for better performance and user focus</li>
+                  <li>• <strong>Faster App Performance</strong> - Pages load quicker and navigation is more responsive</li>
+                  <li>• <strong>Enhanced Keyboard Shortcuts</strong> - Complete keyboard navigation with new shortcut combinations</li>
+                  <li>• <strong>Professional UI Improvements</strong> - Consistent design language and better responsive design</li>
+                  <li>• <strong>Activity Heatmap</strong> - GitHub-style visual showing productivity patterns by hour and day</li>
+                  <li>• <strong>Productivity Charts</strong> - Line graphs showing task completion trends over time</li>
+                  <li>• <strong>Smart Calendar Export</strong> - Seamlessly add your tasks to any calendar app (Google, Outlook, Apple)</li>
                 </ul>
               </div>
             </div>
@@ -62,6 +69,35 @@ export default function Changelog() {
 
           {/* Previous Versions */}
           <div className="space-y-8">
+            {/* V1.10.1 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <span>📅 October 2025</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.10.1</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• <strong>Bulk Delete Operations</strong> - Select multiple completed items for efficient deletion</li>
+                    <li>• Comprehensive keyboard shortcuts accessible via ⌘K / Ctrl+K command palette</li>
+                    <li>• Multi-select functionality with checkbox controls</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
+                  <ul className="text-gray-700 space-y-1 ml-4">
+                    <li>• Streamlined footer design with better navigation</li>
+                    <li>• Enhanced user experience for managing completed tasks</li>
+                    <li>• Improved accessibility with proper keyboard navigation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
             {/* V1.10.0 */}
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
@@ -198,22 +234,23 @@ export default function Changelog() {
             
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.11.0 - November 2025</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">V1.12.0 - December 2025</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
                   <li>• Mozilla Firefox support completion</li>
-                  <li>• Additional language support (French, German)</li>
-                  <li>• Voice command shortcuts for hands-free operation</li>
-                  <li>• Bulk operations for tasks and notes</li>
+                  <li>• Enhanced voice command shortcuts for hands-free operation</li>
+                  <li>• Advanced productivity insights and goal setting</li>
+                  <li>• Team collaboration features (Pro tier)</li>
+                  <li>• Cloud backup and sync capabilities</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.12.0 - December 2025</h3>
+                <h3 className="font-semibold text-gray-900 mb-2">V1.13.0 - January 2026</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
-                  <li>• Advanced productivity features</li>
-                  <li>• Enhanced user experience improvements</li>
-                  <li>• Additional accessibility enhancements</li>
-                  <li>• Performance optimizations</li>
+                  <li>• AI-powered task prioritization and suggestions</li>
+                  <li>• Integration with popular productivity tools</li>
+                  <li>• Advanced export formats (PDF, Markdown, CSV)</li>
+                  <li>• Custom themes and personalization options</li>
                 </ul>
               </div>
             </div>

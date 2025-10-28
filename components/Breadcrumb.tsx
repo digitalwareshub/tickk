@@ -114,7 +114,6 @@ function generateAutoBreadcrumbs(pathname: string): BreadcrumbItem[] {
 
   // Route mappings
   const routeMap: Record<string, string> = {
-    '/shortcuts': 'Shortcuts',
     '/support': 'Support',
     '/contact': 'Contact',
     '/privacy': 'Privacy Policy',
