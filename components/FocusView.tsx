@@ -47,13 +47,23 @@ export default function FocusView({
     return dateGroup === 'today' || dateGroup === 'overdue'
   })
 
-  // Filter: Recently added tasks (last 3, created in last 24 hours)
+  // Filter: Recently added tasks (last 3, created in last 24 hours, but exclude future dates)
   const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
   const recentTasks = allTasks
     .filter(task => {
       if (task.completed) return false
       const createdDate = new Date(task.timestamp)
-      return createdDate > oneDayAgo
+      if (createdDate <= oneDayAgo) return false // Not recent
+
+      // Exclude tasks with explicit future dates (tomorrow, this-week, later)
+      const dateGroup = categorizeDateGroup(
+        parseEarliestDate(task.metadata?.dateInfo as string)
+      )
+      if (dateGroup === 'tomorrow' || dateGroup === 'this-week' || dateGroup === 'later') {
+        return false
+      }
+
+      return true
     })
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, 3)
@@ -215,10 +225,10 @@ export default function FocusView({
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="heading-primary text-gray-900 mb-2">
             Today&apos;s Focus
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
+          <p className="text-responsive text-gray-600">
             {focusTasks.length === 0
               ? 'Nothing on your plate right now'
               : `${focusTasks.length} task${focusTasks.length === 1 ? '' : 's'} need your attention`}
@@ -228,10 +238,10 @@ export default function FocusView({
         {/* Pomodoro Timer */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            <h2 className="text-base font-semibold text-gray-900 mb-4">
               Focus Timer
             </h2>
-            <div className="text-6xl font-mono font-bold text-gray-900 mb-6">
+            <div className="text-4xl font-mono font-bold text-gray-900 mb-6">
               {formatTime(pomodoroTime)}
             </div>
             <div className="flex items-center justify-center gap-3 flex-wrap">
@@ -276,8 +286,8 @@ export default function FocusView({
         {/* Task List */}
         {focusTasks.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
-            <div className="text-6xl mb-4">🎉</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="text-4xl mb-4">🎉</div>
+            <h3 className="text-base font-semibold text-gray-900 mb-2">
               All clear!
             </h3>
             <p className="text-gray-600 text-sm">
@@ -310,14 +320,14 @@ export default function FocusView({
                       type="checkbox"
                       checked={task.completed || false}
                       onChange={() => handleToggleTask(task.id)}
-                      className="mt-1 w-6 h-6 text-green-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-green-500 flex-shrink-0"
+                      className="mt-1 w-4 h-4 text-green-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-green-500 flex-shrink-0"
                       aria-label={`Mark task as ${task.completed ? 'incomplete' : 'complete'}`}
                     />
 
                     {/* Task Content */}
                     <div className="flex-1 min-w-0">
                       <p
-                        className={`text-lg sm:text-xl font-medium break-words ${
+                        className={`text-sm break-words ${
                           task.completed
                             ? 'text-gray-500 line-through'
                             : 'text-gray-900'
