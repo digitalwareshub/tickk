@@ -14,13 +14,14 @@ import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
+import FocusView from '@/components/FocusView'
 import MicroLanding from '@/components/MicroLanding'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
-type AppMode = 'braindump' | 'organized'
+type AppMode = 'braindump' | 'organized' | 'focus'
 
 export default function App() {
   // Core state
@@ -749,7 +750,7 @@ export default function App() {
               </div>
               
               {mode === 'braindump' ? (
-                <BraindumpInterface 
+                <BraindumpInterface
                   appData={appData}
                   preferences={preferences}
                   onDataUpdate={handleDataUpdate}
@@ -759,8 +760,13 @@ export default function App() {
                   onModeSwitch={handleModeSwitch}
                   showMainInterface={false}
                 />
+              ) : mode === 'focus' ? (
+                <FocusView
+                  appData={appData}
+                  onDataUpdate={handleDataUpdate}
+                />
               ) : (
-                <OrganizedView 
+                <OrganizedView
                   appData={appData}
                   preferences={preferences}
                   onDataUpdate={handleDataUpdate}

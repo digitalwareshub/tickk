@@ -13,8 +13,8 @@ interface LayoutProps {
   seoTitle?: string
   seoDescription?: string
   seoImage?: string
-  mode?: 'braindump' | 'organized'
-  onModeChange?: (mode: 'braindump' | 'organized') => void
+  mode?: 'braindump' | 'organized' | 'focus'
+  onModeChange?: (mode: 'braindump' | 'organized' | 'focus') => void
 }
 
 export default function Layout({ 
