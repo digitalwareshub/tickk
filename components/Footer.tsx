@@ -63,12 +63,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </Link>
               </div>
 
-              {/* Features Column */}
-                          {/* Community Column */}
-            <div className="space-y-3 text-center">
-              <h3 className="text-sm font-medium text-gray-900 mb-3">
-                Community
-              </h3>
+              {/* Community Column */}
+              <div className="space-y-2 text-center">
+                <h3 className="text-xs font-medium text-gray-900 mb-2">
+                  Community
+                </h3>
                 <Link href="/reviews" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                   Reviews
                 </Link>
