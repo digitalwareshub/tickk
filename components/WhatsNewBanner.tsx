@@ -17,7 +17,15 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
   useEffect(() => {
     // Check if user has already seen this version's updates
     const lastSeenVersion = localStorage.getItem('tickk_last_seen_version')
-    const hasSeenOnboarding = localStorage.getItem('tickk_onboarding_completed')
+    const hasSeenOnboarding = localStorage.getItem('tickk_onboarding_completed') || localStorage.getItem('tickk_onboarding_tour_completed')
+    
+    // Debug logging
+    console.log('🎯 WhatsNewBanner Debug:', {
+      lastSeenVersion,
+      hasSeenOnboarding,
+      version,
+      shouldShow: hasSeenOnboarding && lastSeenVersion !== version
+    })
     
     // Only show to existing users who haven't seen this version
     if (hasSeenOnboarding && lastSeenVersion !== version) {
@@ -105,7 +113,15 @@ export function useWhatsNewBanner(version: string) {
 
   useEffect(() => {
     const lastSeenVersion = localStorage.getItem('tickk_last_seen_version')
-    const hasSeenOnboarding = localStorage.getItem('tickk_onboarding_completed')
+    const hasSeenOnboarding = localStorage.getItem('tickk_onboarding_completed') || localStorage.getItem('tickk_onboarding_tour_completed')
+    
+    // Debug logging
+    console.log('🎯 useWhatsNewBanner Debug:', {
+      lastSeenVersion,
+      hasSeenOnboarding,
+      version,
+      shouldShow: hasSeenOnboarding && lastSeenVersion !== version
+    })
     
     // Show banner to existing users who haven't seen this version
     if (hasSeenOnboarding && lastSeenVersion !== version) {

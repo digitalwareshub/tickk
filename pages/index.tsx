@@ -678,7 +678,7 @@ export default function App() {
         {/* What's New Banner for existing users */}
         {showBanner && (
           <WhatsNewBanner 
-            version="1.11.0" 
+            version="1.10.2" 
             onDismiss={dismissBanner} 
           />
         )}
