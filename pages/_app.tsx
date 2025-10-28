@@ -9,7 +9,6 @@ import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { trackPageView } from '@/lib/analytics/enhanced-analytics'
-import { LanguageProvider } from '@/contexts/LanguageContext'
 
 // Get GA tracking ID from environment
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -92,10 +91,8 @@ export default function App({ Component, pageProps }: AppProps) {
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
         `}
       </Script>
-      
-      <LanguageProvider>
-        <Component {...pageProps} />
-      </LanguageProvider>
+
+      <Component {...pageProps} />
 
       {/* Vercel Analytics */}
       <Analytics />

@@ -9,7 +9,6 @@ import StatCard from './StatCard'
 import ActivityHeatmap from './ActivityHeatmap'
 import ProductivityChart from './ProductivityChart'
 import StreakTracker from './StreakTracker'
-import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData } from '@/types/braindump'
 
 interface AnalyticsProps {
@@ -17,7 +16,6 @@ interface AnalyticsProps {
 }
 
 export default function Analytics({ appData }: AnalyticsProps) {
-  const { t } = useLanguage()
   const [stats, setStats] = useState<BraindumpStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [timeRange, setTimeRange] = useState<'week' | 'month' | 'all'>('month')
@@ -168,7 +166,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
       {/* Time Range Selector */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-900 ">
-          {t('analytics.title')}
+          Analytics
         </h2>
         <div className="flex space-x-2">
           {(['week', 'month', 'all'] as const).map((range) => (
@@ -181,7 +179,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300   '
               }`}
             >
-              {t(`analytics.time_range.${range}`)}
+              {range === 'week' ? 'Week' : range === 'month' ? 'Month' : 'All'}
             </button>
           ))}
         </div>
@@ -190,25 +188,25 @@ export default function Analytics({ appData }: AnalyticsProps) {
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          label={t('analytics.stats.total_sessions')}
+          label="Total Sessions"
           value={stats.totalSessions}
           trend="neutral"
           icon="📝"
         />
         <StatCard
-          label={t('analytics.stats.total_items')}
+          label="Total Items"
           value={stats.totalItems}
           trend="neutral"
           icon="�"
         />
         <StatCard
-          label={t('analytics.stats.avg_items_per_session')}
+          label="Avg Items/Session"
           value={stats.avgItemsPerSession.toFixed(1)}
           trend="neutral"
           icon="📊"
         />
         <StatCard
-          label={t('analytics.stats.organization_accuracy')}
+          label="Organization Accuracy"
           value={`${Math.round(stats.organizationAccuracy)}%`}
           trend={stats.organizationAccuracy > 80 ? 'up' : stats.organizationAccuracy > 60 ? 'neutral' : 'down'}
           icon="🎯"
@@ -218,12 +216,12 @@ export default function Analytics({ appData }: AnalyticsProps) {
       {/* Category Distribution */}
       <div className="bg-white  rounded-lg border border-gray-200  p-6">
         <h3 className="text-lg font-semibold text-gray-900  mb-4">
-          {t('analytics.category_breakdown')}
+          Category Breakdown
         </h3>
         <div className="space-y-4">
           <div className="flex items-center">
             <div className="w-24 text-sm text-gray-600  capitalize">
-              {t('analytics.categories.tasks')}
+              Tasks
             </div>
             <div className="flex-1 mx-4">
               <div className="w-full bg-gray-200  rounded-full h-2">
@@ -239,7 +237,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
           </div>
           <div className="flex items-center">
             <div className="w-24 text-sm text-gray-600  capitalize">
-              {t('analytics.categories.notes')}
+              Notes
             </div>
             <div className="flex-1 mx-4">
               <div className="w-full bg-gray-200  rounded-full h-2">
@@ -259,11 +257,11 @@ export default function Analytics({ appData }: AnalyticsProps) {
       {/* Productivity Trends */}
       <div className="bg-white  rounded-lg border border-gray-200  p-6">
         <h3 className="text-lg font-semibold text-gray-900  mb-4">
-          {t('analytics.productivity_by_time')}
+          Productivity by Time
         </h3>
         <div className="text-center mb-4">
           <div className="text-sm text-gray-600 ">
-            {t('analytics.most_productive_time')}: <span className="font-semibold">{stats.mostProductiveTime}</span>
+            Most Productive Time: <span className="font-semibold">{stats.mostProductiveTime}</span>
           </div>
         </div>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2">

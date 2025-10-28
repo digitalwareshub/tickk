@@ -4,15 +4,12 @@
  * Positioned below the header for maximum visibility
  */
 
-import { useLanguage } from '@/contexts/LanguageContext'
-
 interface ModeNavigationTabsProps {
   mode: 'braindump' | 'organized' | 'focus'
   onModeChange: (mode: 'braindump' | 'organized' | 'focus') => void
 }
 
 export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigationTabsProps) {
-  const { t } = useLanguage()
 
   return (
     <div className="border-b border-gray-200 bg-white sticky top-16 z-40 shadow-sm" data-tour="mode-tabs">
@@ -30,9 +27,9 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
           >
             <div className="flex flex-col items-center space-y-1.5">
               <span className="text-xl sm:text-2xl" role="img" aria-label="Microphone">🎙️</span>
-              <span className="font-semibold text-xs sm:text-sm">{t('nav.braindump')}</span>
+              <span className="font-semibold text-xs sm:text-sm">Braindump</span>
               <span className="text-xs text-gray-500 hidden lg:block">
-                {t('nav.braindump_description')}
+                Capture your thoughts
               </span>
             </div>
           </button>
@@ -68,9 +65,9 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
           >
             <div className="flex flex-col items-center space-y-1.5">
               <span className="text-xl sm:text-2xl" role="img" aria-label="Clipboard">📋</span>
-              <span className="font-semibold text-xs sm:text-sm">{t('nav.organized')}</span>
+              <span className="font-semibold text-xs sm:text-sm">Organized</span>
               <span className="text-xs text-gray-500 hidden lg:block">
-                {t('nav.organized_description')}
+                View your tasks & notes
               </span>
             </div>
           </button>

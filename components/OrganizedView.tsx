@@ -15,7 +15,6 @@ import TemplateLibrary from './TemplateLibrary'
 import ProjectGroupView from './ProjectGroupView'
 import { useContextMenu } from '@/hooks/useContextMenu'
 import { useTemplates } from '@/hooks/useTemplates'
-import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem, TaskTemplate } from '@/types/braindump'
 import { parseEarliestDate } from '@/lib/utils/dateParser'
 import { exportToCalendar as exportICS, getExportableTasksCount } from '@/lib/utils/icsExport'
@@ -24,15 +23,12 @@ interface OrganizedViewProps {
   appData: AppData
   preferences: UserPreferences | null
   onDataUpdate: (data: AppData) => void
-  language?: 'en' | 'es'
 }
 
-export default function OrganizedView({ 
-  appData, 
-  onDataUpdate,
-  language = 'en'
+export default function OrganizedView({
+  appData,
+  onDataUpdate
 }: OrganizedViewProps) {
-  const { t } = useLanguage()
   const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'projects' | 'analytics'>('all')
   const [sortBy, setSortBy] = useState<'date' | 'created' | 'none'>('none')
   const [searchQuery, setSearchQuery] = useState('')
@@ -77,60 +73,6 @@ export default function OrganizedView({
   const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false)
   const [showTemplateLibrary, setShowTemplateLibrary] = useState(false)
   const [itemToTemplate, setItemToTemplate] = useState<VoiceItem | null>(null)
-
-  // Local translations for this component
-  const localTranslations = {
-    en: {
-      yourWorkspace: 'Your Workspace',
-      everythingOrganized: 'Everything organized and actionable.',
-      tasks: 'tasks',
-      notes: 'notes', 
-      completed: 'completed',
-      unprocessed: 'unprocessed',
-      search: 'Search...',
-      found: 'Found',
-      results: 'results',
-      export: 'Export',
-      exportAsCSV: 'Export as CSV',
-      exportAsJSON: 'Export as JSON',
-      exportAsCalendar: 'Export as Calendar (.ics)',
-      tasksFilter: 'Tasks',
-      notesFilter: 'Notes',
-      projectsFilter: 'Projects',
-      analytics: 'Analytics',
-      allItems: 'All Items',
-      keyboardShortcuts: 'Keyboard shortcuts',
-      exportData: 'Export data',
-      focusSearch: 'Focus search',
-      clearSearch: 'Clear search'
-    },
-    es: {
-      yourWorkspace: 'Tu Espacio de Trabajo',
-      everythingOrganized: 'Todo organizado y accionable.',
-      tasks: 'tareas',
-      notes: 'notas',
-      completed: 'completadas',
-      unprocessed: 'sin procesar',
-      search: 'Buscar...',
-      found: 'Encontrado',
-      results: 'resultados',
-      export: 'Exportar',
-      exportAsCSV: 'Exportar como CSV',
-      exportAsJSON: 'Exportar como JSON',
-      exportAsCalendar: 'Exportar como Calendario (.ics)',
-      tasksFilter: 'Tareas',
-      notesFilter: 'Notas',
-      projectsFilter: 'Proyectos',
-      analytics: 'Analíticas',
-      allItems: 'Todos los Elementos',
-      keyboardShortcuts: 'Atajos de teclado',
-      exportData: 'Exportar datos',
-      focusSearch: 'Enfocar búsqueda',
-      clearSearch: 'Limpiar búsqueda'
-    }
-  }
-  
-  const localT = localTranslations[language]
   
   // Get organized items (tasks and notes)
   const organizedTasks = appData.tasks || []
@@ -706,24 +648,24 @@ export default function OrganizedView({
         {/* Page Header */}
         <div className="text-center mb-8">
           <h1 className="heading-primary text-gray-900 mb-2">
-            {localT.yourWorkspace}
+            {'Your Workspace'}
           </h1>
           <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
-            {localT.everythingOrganized}
+            {'Everything organized and actionable.'}
           </p>
         </div>
 
         {/* Clean Stats Summary - Mobile Optimized */}
         <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 sm:gap-x-8 mb-8 text-sm text-gray-600 px-4">
-          <span><strong className="text-gray-900">{organizedTasks.length}</strong> {localT.tasks}</span>
+          <span><strong className="text-gray-900">{organizedTasks.length}</strong> {'tasks'}</span>
           <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedNotes.length}</strong> {localT.notes}</span>
+          <span><strong className="text-gray-900">{organizedNotes.length}</strong> notes</span>
           <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedTasks.filter(t => t.completed).length}</strong> {localT.completed}</span>
+          <span><strong className="text-gray-900">{organizedTasks.filter(t => t.completed).length}</strong> {'completed'}</span>
           {unprocessedCount > 0 && (
             <>
               <span className="text-gray-300 hidden sm:inline">•</span>
-              <span className="text-orange-600"><strong>{unprocessedCount}</strong> {localT.unprocessed}</span>
+              <span className="text-orange-600"><strong>{unprocessedCount}</strong> {'unprocessed'}</span>
             </>
           )}
         </div>
@@ -736,7 +678,7 @@ export default function OrganizedView({
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder={localT.search}
+                placeholder={'Search...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-3 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 focus:bg-white min-h-[44px]"
@@ -755,7 +697,7 @@ export default function OrganizedView({
             </div>
             {searchQuery && (
               <p className="text-xs text-gray-500 mt-1 px-1">
-                {localT.found} {filteredTasks.length + filteredNotes.length} {localT.results}
+                {'Found'} {filteredTasks.length + filteredNotes.length} {'results'}
               </p>
             )}
           </div>
@@ -769,7 +711,7 @@ export default function OrganizedView({
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              {localT.export}
+              {'Export'}
             </button>
             
             {showExportMenu && (
@@ -781,7 +723,7 @@ export default function OrganizedView({
                   }}
                   className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 first:rounded-t-lg min-h-[44px] flex items-center"
                 >
-                  {localT.exportAsCSV}
+                  Export as CSV
                 </button>
                 <button
                   onClick={() => {
@@ -790,7 +732,7 @@ export default function OrganizedView({
                   }}
                   className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 min-h-[44px] flex items-center"
                 >
-                  {localT.exportAsJSON}
+                  Export as JSON
                 </button>
                 <button
                   onClick={() => {
@@ -799,7 +741,7 @@ export default function OrganizedView({
                   }}
                   className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg min-h-[44px] flex items-center"
                 >
-                  {localT.exportAsCalendar}
+                  Export as Calendar (.ics)
                 </button>
               </div>
             )}
@@ -837,7 +779,7 @@ export default function OrganizedView({
               {bulkMode && (
                 <>
                   <span className="text-sm text-gray-600">
-                    {selectedItems.size} {t('common.selected')}
+                    {selectedItems.size} selected
                   </span>
                   
                   <div className="flex gap-2">
@@ -845,13 +787,13 @@ export default function OrganizedView({
                       onClick={selectAllItems}
                       className="px-3 py-1 text-xs text-blue-600 hover:text-blue-800"
                     >
-                      {t('common.select_all')}
+                      Select All
                     </button>
                     <button
                       onClick={selectNoneItems}
                       className="px-3 py-1 text-xs text-gray-600 hover:text-gray-800"
                     >
-                      {t('common.select_none')}
+                      Select None
                     </button>
                   </div>
                 </>
@@ -865,7 +807,7 @@ export default function OrganizedView({
                     onClick={deleteSelectedItems}
                     className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
                   >
-                    {t('common.delete_selected')} ({selectedItems.size})
+                    Delete Selected ({selectedItems.size})
                   </button>
                 )}
                 
@@ -874,7 +816,7 @@ export default function OrganizedView({
                     onClick={deleteCompletedItems}
                     className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
                   >
-                    {t('common.delete_completed')} ({getCompletedTasksCount()})
+                    Delete Completed ({getCompletedTasksCount()})
                   </button>
                 )}
               </div>
@@ -892,7 +834,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            {localT.tasksFilter} ({organizedTasks.length})
+            Tasks ({organizedTasks.length})
             {filter === 'tasks' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -906,7 +848,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            {localT.notesFilter} ({organizedNotes.length})
+            Notes ({organizedNotes.length})
             {filter === 'notes' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -920,7 +862,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            {localT.projectsFilter}
+            {'Projects'}
             {filter === 'projects' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -934,7 +876,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            {localT.analytics}
+            {'Analytics'}
             {filter === 'analytics' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -948,7 +890,7 @@ export default function OrganizedView({
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
-            {localT.allItems}
+            {'All Items'}
             {filter === 'all' && (
               <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
             )}
@@ -985,12 +927,12 @@ export default function OrganizedView({
         <div className="text-center mb-8">
           <details className="inline-block">
             <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">
-              {localT.keyboardShortcuts}
+              Keyboard shortcuts
             </summary>
             <div className="mt-2 text-xs text-gray-500 space-y-1">
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> {localT.exportData}</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> {localT.focusSearch}</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> {localT.clearSearch}</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> Export Data</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> Focus search</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> Clear search</div>
             </div>
           </details>
         </div>
@@ -1075,7 +1017,7 @@ export default function OrganizedView({
                         <button
                           onClick={() => handleEditItem(task, 'task')}
                           className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          aria-label={t('common.edit_item')}
+                          aria-label="Edit item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -1084,7 +1026,7 @@ export default function OrganizedView({
                         <button
                           onClick={() => handleDeleteItem(task, 'task')}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          aria-label={t('common.delete_item')}
+                          aria-label="Delete item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -1146,7 +1088,7 @@ export default function OrganizedView({
                         <button
                           onClick={() => handleEditItem(note, 'note')}
                           className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          aria-label={t('common.edit_item')}
+                          aria-label="Edit item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -1155,7 +1097,7 @@ export default function OrganizedView({
                         <button
                           onClick={() => handleDeleteItem(note, 'note')}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          aria-label={t('common.delete_item')}
+                          aria-label="Delete item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

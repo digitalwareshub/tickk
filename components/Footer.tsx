@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useLanguage } from '@/contexts/LanguageContext'
 import { useState } from 'react'
 
 interface FooterProps {
@@ -9,17 +8,8 @@ interface FooterProps {
 
 export default function Footer({ showHomeLink = false }: FooterProps) {
   const router = useRouter()
-  const { language } = useLanguage()
   const currentYear = new Date().getFullYear()
   const [isFooterExpanded, setIsFooterExpanded] = useState(true)
-  
-  // Helper function to get language-aware URLs
-  const getLocalizedUrl = (path: string) => {
-    if (language === 'es') {
-      return `/es${path}`
-    }
-    return path
-  }
 
   return (
     <footer className="bg-gray-100 border-t border-gray-200 -mt-8">
@@ -49,10 +39,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               {/* Brand Section */}
               <div className="text-center mb-4">
                 <p className="text-responsive text-gray-500">
-                  {language === 'es' 
-                    ? 'Parte del ecosistema' 
-                    : 'Part of the'
-                  } <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 transition-colors font-medium">Digiwares</a> {language === 'es' ? 'ecosistema.' : 'ecosystem.'}
+                  Part of the <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 transition-colors font-medium">Digiwares</a> ecosystem.
                 </p>
               </div>
 
@@ -61,37 +48,37 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             {/* Product Column */}
             <div className="space-y-2 text-center">
               <h3 className="text-xs font-medium text-gray-900 mb-2">
-                {language === 'es' ? 'Producto' : 'Product'}
+                Product
               </h3>
-              <Link href={getLocalizedUrl('/')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Panel de Voz' : 'Voice Dashboard'}
+              <Link href="/" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Voice Dashboard
               </Link>
-              <Link href={getLocalizedUrl('/landing')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Acerca de' : 'About'}
+              <Link href="/landing" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                About
               </Link>
-              <Link href={getLocalizedUrl('/blog')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+              <Link href="/blog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                 Blog
               </Link>
-              <Link href={getLocalizedUrl('/reviews')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Reseñas' : 'Reviews'}
+              <Link href="/reviews" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Reviews
               </Link>
-              <a 
-                href="https://github.com/digitalwareshub/tickk" 
-                target="_blank" 
+              <a
+                href="https://github.com/digitalwareshub/tickk"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="block text-xs text-gray-600 hover:text-orange-600 transition-colors"
               >
-                {language === 'es' ? 'Código Abierto' : 'Open Source'}
+                Open Source
               </a>
               <div className="flex items-center justify-center space-x-1">
                 <span className="text-xs text-blue-600 cursor-not-allowed flex items-center">
                   <svg className="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                   </svg>
-                  {language === 'es' ? 'Tickk Pro' : 'Tickk Pro'}
+                  Tickk Pro
                 </span>
                 <span className="text-xs bg-blue-100 text-blue-600 px-1 py-0.5 rounded-full">
-                  {language === 'es' ? 'Próximamente' : 'Soon'}
+                  Soon
                 </span>
               </div>
             </div>
@@ -99,35 +86,35 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             {/* Support Column */}
             <div className="space-y-2 text-center">
               <h3 className="text-xs font-medium text-gray-900 mb-2">
-                {language === 'es' ? 'Soporte' : 'Support'}
+                Support
               </h3>
-              <Link href={getLocalizedUrl('/support')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Soporte y Ayuda' : 'Support & Help'}
+              <Link href="/support" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Support & Help
               </Link>
-              <Link href={getLocalizedUrl('/contact')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Contacto' : 'Contact'}
+              <Link href="/contact" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Contact
               </Link>
-              <Link href={getLocalizedUrl('/bug-report')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
+              <Link href="/bug-report" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Bug Reports
               </Link>
-              <Link href={getLocalizedUrl('/changelog')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
+              <Link href="/changelog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Changelog
               </Link>
-              <Link href={getLocalizedUrl('/shortcuts')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Atajos' : 'Shortcuts'}
+              <Link href="/shortcuts" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Shortcuts
               </Link>
             </div>
 
             {/* Legal Column */}
             <div className="space-y-2 text-center">
               <h3 className="text-xs font-medium text-gray-900 mb-2">
-                {language === 'es' ? 'Legal' : 'Legal'}
+                Legal
               </h3>
-              <Link href={getLocalizedUrl('/privacy')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+              <Link href="/privacy" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Privacy Policy
               </Link>
-              <Link href={getLocalizedUrl('/terms')} className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                {language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
+              <Link href="/terms" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                Terms of Service
               </Link>
             </div>
           </div>
@@ -169,10 +156,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Centered Tagline */}
           <div className="text-center mb-4">
             <p className="text-responsive text-gray-500">
-              {language === 'es' 
-                ? 'Parte del ecosistema' 
-                : 'Part of the'
-              } <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 transition-colors font-medium">Digiwares</a> {language === 'es' ? 'ecosistema.' : 'ecosystem.'}
+              Part of the <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="text-orange-600 hover:text-orange-700 transition-colors font-medium">Digiwares</a> ecosystem.
             </p>
           </div>
 
@@ -181,27 +165,27 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             {/* Product Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
-                {language === 'es' ? 'Producto' : 'Product'}
+                Product
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href={getLocalizedUrl('/')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Panel de Voz' : 'Voice Dashboard'}
+                  <Link href="/" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Voice Dashboard
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/landing')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Acerca de' : 'About'}
+                  <Link href="/landing" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    About
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/blog')} className="text-gray-600 hover:text-orange-600 transition-colors">
+                  <Link href="/blog" className="text-gray-600 hover:text-orange-600 transition-colors">
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/reviews')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Reseñas' : 'Reviews'}
+                  <Link href="/reviews" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Reviews
                   </Link>
                 </li>
                 <li>
@@ -211,7 +195,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                     rel="noopener noreferrer"
                     className="text-gray-600 hover:text-orange-600 transition-colors"
                   >
-                    {language === 'es' ? 'Código Abierto' : 'Open Source'}
+                    Open Source
                   </a>
                 </li>
                 <li>
@@ -220,10 +204,10 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                       <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                       </svg>
-                      {language === 'es' ? 'Tickk Pro' : 'Tickk Pro'}
+                      Tickk Pro
                     </span>
                     <span className="text-xs bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded-full">
-                      {language === 'es' ? 'Próximamente' : 'Soon'}
+                      Soon
                     </span>
                   </div>
                 </li>
@@ -233,32 +217,32 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             {/* Support Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
-                {language === 'es' ? 'Soporte' : 'Support'}
+                Support
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href={getLocalizedUrl('/support')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Soporte y Ayuda' : 'Support & Help'}
+                  <Link href="/support" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Support & Help
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/contact')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Contacto' : 'Contact'}
+                  <Link href="/contact" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Contact
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/bug-report')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Reportar Errores' : 'Bug Reports'}
+                  <Link href="/bug-report" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Bug Reports
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/changelog')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Registro de Cambios' : 'Changelog'}
+                  <Link href="/changelog" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Changelog
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/shortcuts')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Atajos' : 'Shortcuts'}
+                  <Link href="/shortcuts" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Shortcuts
                   </Link>
                 </li>
               </ul>
@@ -267,17 +251,17 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             {/* Legal Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
-                {language === 'es' ? 'Legal' : 'Legal'}
+                Legal
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href={getLocalizedUrl('/privacy')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                  <Link href="/privacy" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href={getLocalizedUrl('/terms')} className="text-gray-600 hover:text-orange-600 transition-colors">
-                    {language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
+                  <Link href="/terms" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Terms of Service
                   </Link>
                 </li>
               </ul>
@@ -293,17 +277,17 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Mobile Bottom */}
           <div className="block md:hidden text-center pt-6 pb-4">
             <div className="text-xs text-gray-600 mb-2">
-              © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para la productividad diaria.' : 'Built with ❤️ for daily productivity.'}
+              © {currentYear} tickk. Built with ❤️ for daily productivity.
             </div>
             {showHomeLink && (
-              <button 
-                onClick={() => router.push(getLocalizedUrl('/'))}
+              <button
+                onClick={() => router.push('/')}
                 className="text-xs text-orange-600 hover:text-orange-700 transition-colors flex items-center justify-center gap-1 mx-auto mb-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                {language === 'es' ? 'Volver al Inicio' : 'Back to Homepage'}
+                Back to Homepage
               </button>
             )}
             <div className="text-xs text-gray-500">
@@ -315,7 +299,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-6">
             <div className="flex items-center space-x-4">
               <div className="text-sm text-gray-600">
-                © {currentYear} tickk. {language === 'es' ? 'Hecho con ❤️ para entusiastas de la productividad diaria.' : 'Built with ❤️ for daily productivity enthusiasts.'}
+                © {currentYear} tickk. Built with ❤️ for daily productivity enthusiasts.
               </div>
               
               {/* Social Links */}
@@ -346,23 +330,23 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </div>
             
             {showHomeLink && (
-              <button 
-                onClick={() => router.push(getLocalizedUrl('/'))}
+              <button
+                onClick={() => router.push('/')}
                 className="text-sm text-orange-600 hover:text-orange-700 transition-colors flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                {language === 'es' ? 'Volver al Inicio' : 'Back to Homepage'}
+                Back to Homepage
               </button>
             )}
 
             <div className="flex items-center space-x-4 text-xs text-gray-500">
-              <span>{language === 'es' ? 'Hecho con Next.js' : 'Made with Next.js'}</span>
+              <span>Made with Next.js</span>
               <span>•</span>
-              <span>{language === 'es' ? 'Impulsado por Web Speech API' : 'Powered by Web Speech API'}</span>
+              <span>Powered by Web Speech API</span>
               <span>•</span>
-              <span>{language === 'es' ? 'PLN por compromise.js' : 'NLP by compromise.js'}</span>
+              <span>NLP by compromise.js</span>
             </div>
           </div>
         </div>

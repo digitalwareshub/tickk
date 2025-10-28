@@ -4,7 +4,6 @@
  */
 
 import { useState, useEffect } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
 import type { VoiceItem } from '@/types/braindump'
 
 interface EditItemModalProps {
@@ -16,15 +15,14 @@ interface EditItemModalProps {
   type: 'task' | 'note' | 'braindump'
 }
 
-export default function EditItemModal({ 
-  isOpen, 
-  item, 
-  onClose, 
-  onSave, 
+export default function EditItemModal({
+  isOpen,
+  item,
+  onClose,
+  onSave,
   onCategoryChange,
-  type 
+  type
 }: EditItemModalProps) {
-  const { t } = useLanguage()
   const [editedText, setEditedText] = useState('')
   const [editedTags, setEditedTags] = useState<string[]>([])
   const [tagInput, setTagInput] = useState('')
@@ -109,7 +107,7 @@ export default function EditItemModal({
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 id="edit-modal-title" className="text-lg font-semibold text-gray-900">
-            {t('common.edit_item')}
+            Edit Item
           </h2>
           <button
             onClick={onClose}
@@ -145,7 +143,7 @@ export default function EditItemModal({
           {(type === 'task' || type === 'note') && onCategoryChange && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('common.category')}
+                Category
               </label>
               <div className="flex gap-2">
                 <button
@@ -160,7 +158,7 @@ export default function EditItemModal({
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
-                    {t('common.convert_to_task')}
+                    Convert to Task
                   </div>
                 </button>
                 <button
@@ -175,7 +173,7 @@ export default function EditItemModal({
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
-                    {t('common.convert_to_note')}
+                    Convert to Note
                   </div>
                 </button>
               </div>
@@ -261,14 +259,14 @@ export default function EditItemModal({
             onClick={onClose}
             className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            {t('common.cancel')}
+            Cancel
           </button>
           <button
             onClick={handleSave}
             disabled={!editedText.trim()}
             className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
           >
-            {t('common.save')}
+            Save
           </button>
         </div>
 

@@ -5,7 +5,6 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useLanguage } from '@/contexts/LanguageContext'
 import Head from 'next/head'
 
 export interface BreadcrumbItem {
@@ -20,16 +19,15 @@ interface BreadcrumbProps {
   showStructuredData?: boolean
 }
 
-export default function Breadcrumb({ 
-  items = [], 
-  className = "mb-6", 
-  showStructuredData = true 
+export default function Breadcrumb({
+  items = [],
+  className = "mb-6",
+  showStructuredData = true
 }: BreadcrumbProps) {
   const router = useRouter()
-  const { language } = useLanguage()
-  
+
   // Auto-generate breadcrumbs if none provided
-  const breadcrumbItems = items.length > 0 ? items : generateAutoBreadcrumbs(router.pathname, language)
+  const breadcrumbItems = items.length > 0 ? items : generateAutoBreadcrumbs(router.pathname)
   
   // Generate JSON-LD structured data for SEO
   const structuredData = {
@@ -108,49 +106,40 @@ export default function Breadcrumb({
 }
 
 // Auto-generate breadcrumbs based on current path
-function generateAutoBreadcrumbs(pathname: string, language: string): BreadcrumbItem[] {
-  const isSpanish = language === 'es'
-  const homeLabel = isSpanish ? 'Inicio' : 'Home'
-  const homeHref = isSpanish ? '/es' : '/'
-  
+function generateAutoBreadcrumbs(pathname: string): BreadcrumbItem[] {
   // Always start with Home
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: homeLabel, href: homeHref }
+    { label: 'Home', href: '/' }
   ]
-  
-  // Handle Spanish routes
-  if (pathname.startsWith('/es/')) {
-    pathname = pathname.replace('/es', '')
-  }
-  
+
   // Route mappings
   const routeMap: Record<string, string> = {
-    '/shortcuts': isSpanish ? 'Atajos' : 'Shortcuts',
-    '/support': isSpanish ? 'Soporte' : 'Support',
-    '/contact': isSpanish ? 'Contacto' : 'Contact',
-    '/privacy': isSpanish ? 'Política de Privacidad' : 'Privacy Policy',
-    '/terms': isSpanish ? 'Términos de Servicio' : 'Terms of Service',
-    '/changelog': isSpanish ? 'Registro de Cambios' : 'Changelog',
-    '/reviews': isSpanish ? 'Reseñas' : 'Reviews',
-    '/landing': isSpanish ? 'Acerca de' : 'About',
+    '/shortcuts': 'Shortcuts',
+    '/support': 'Support',
+    '/contact': 'Contact',
+    '/privacy': 'Privacy Policy',
+    '/terms': 'Terms of Service',
+    '/changelog': 'Changelog',
+    '/reviews': 'Reviews',
+    '/landing': 'About',
     '/blog': 'Blog',
-    '/bug-report': isSpanish ? 'Reportar Errores' : 'Bug Reports'
+    '/bug-report': 'Bug Reports'
   }
-  
+
   // Handle blog posts
   if (pathname.startsWith('/blog/')) {
     breadcrumbs.push({
       label: 'Blog',
-      href: isSpanish ? '/es/blog' : '/blog'
+      href: '/blog'
     })
-    
+
     // Extract article title from pathname
     const slug = pathname.replace('/blog/', '')
     const articleTitle = slug
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
-    
+
     breadcrumbs.push({
       label: articleTitle,
       active: true
@@ -162,6 +151,6 @@ function generateAutoBreadcrumbs(pathname: string, language: string): Breadcrumb
       active: true
     })
   }
-  
+
   return breadcrumbs
 }
