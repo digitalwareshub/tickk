@@ -426,7 +426,11 @@ export default function App() {
       title: 'Start Recording',
       description: 'Click the microphone or press Space to start capturing your thoughts. Press Space again to stop.',
       target: '[data-tour="record-button"]',
-      placement: 'bottom'
+      placement: 'bottom',
+      action: () => {
+        // Ensure we're in braindump mode and give extra time for DOM to stabilize
+        setMode('braindump')
+      }
     },
     {
       id: 'organized',
