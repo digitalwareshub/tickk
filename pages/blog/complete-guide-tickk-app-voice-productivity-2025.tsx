@@ -103,7 +103,7 @@ export default function CompleteGuideTickkApp() {
           {/* Article Content */}
           <article className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              tickk.app has evolved into the most powerful free voice-to-text productivity platform available in 2025. Whether you&apos;re managing ADHD, optimizing workflows, or just want hands-free productivity, this complete guide covers every feature you need to master.
+              tickk.app has evolved into the most powerful free voice-to-text productivity platform available in 2025. With the V1.10.2 release, we&apos;ve streamlined to an English-only architecture and added powerful new features. Whether you&apos;re managing ADHD, optimizing workflows, or just want hands-free productivity, this complete guide covers every feature you need to master.
             </p>
 
             {/* Table of Contents */}
@@ -126,7 +126,7 @@ export default function CompleteGuideTickkApp() {
             </h2>
 
             <p className="mb-6">
-              tickk.app is a <strong>completely free</strong>, privacy-first voice productivity app that requires no account or sign-up. Everything runs locally in your browser, meaning your data never leaves your device.
+              tickk.app is a <strong>completely free</strong>, privacy-first voice productivity app that requires no account or sign-up. Everything runs locally in your browser, meaning your data never leaves your device. As of V1.10.2, tickk.app focuses exclusively on English to provide the best possible voice recognition and user experience.
             </p>
 
             {/* Visual Guide Box */}
@@ -602,7 +602,7 @@ export default function CompleteGuideTickkApp() {
                   → Why Your Best Ideas Die in Your Productivity App
                 </Link>
                 <Link href="/changelog" className="block text-blue-600 hover:text-blue-700 text-sm">
-                  → See All New Features in V1.11.0
+                  → See All New Features in V1.10.2
                 </Link>
                 <Link href="/reviews" className="block text-blue-600 hover:text-blue-700 text-sm">
                   → What Users Are Saying About tickk.app

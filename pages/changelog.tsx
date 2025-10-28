@@ -37,12 +37,13 @@ export default function Changelog() {
               <span>October 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.11.0 - Major Feature Update</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.2 - Major Feature Update</h2>
             
             <div className="space-y-4">
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">🎯 Major New Features</h3>
                 <ul className="text-gray-700 space-y-1 ml-4">
+                  <li>• <strong>English-Only Architecture</strong> - Removed Spanish localization for simplified, focused experience</li>
                   <li>• <strong>Focus Mode</strong> - New dedicated tab for today&apos;s priorities and focused productivity, especially helpful for ADHD users</li>
                   <li>• <strong>Command Palette (⌘K / Ctrl+K)</strong> - VS Code-style quick actions with fuzzy search</li>
                   <li>• <strong>Advanced Analytics Dashboard</strong> - Activity heatmaps, productivity charts, and comprehensive insights</li>
