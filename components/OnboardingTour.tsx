@@ -67,26 +67,26 @@ export default function OnboardingTour({
     }
   }, [isOpen, step])
 
-  const handleNext = useCallback(() => {
-    if (isLastStep) {
-      handleComplete()
-    } else {
-      setCurrentStep(prev => prev + 1)
-    }
-  }, [isLastStep])
-
-  const handlePrevious = useCallback(() => {
-    if (!isFirstStep) {
-      setCurrentStep(prev => prev - 1)
-    }
-  }, [isFirstStep])
-
   const handleComplete = useCallback(() => {
     if (storageKey) {
       localStorage.setItem(storageKey, 'true')
     }
     onComplete()
   }, [onComplete, storageKey])
+
+  const handleNext = useCallback(() => {
+    if (isLastStep) {
+      handleComplete()
+    } else {
+      setCurrentStep(prev => prev + 1)
+    }
+  }, [isLastStep, handleComplete])
+
+  const handlePrevious = useCallback(() => {
+    if (!isFirstStep) {
+      setCurrentStep(prev => prev - 1)
+    }
+  }, [isFirstStep])
 
   const handleSkip = useCallback(() => {
     if (storageKey) {
