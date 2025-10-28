@@ -386,23 +386,61 @@ export class VoiceClassifier {
    */
   private extractTaskMetadata(features: Features, text: string): Record<string, unknown> {
     const metadata: Record<string, unknown> = {}
-    
+
     // Date and time information
     if (features.dates.length > 0 || features.times.length > 0) {
       metadata.hasDate = features.dates.length > 0
       metadata.hasTime = features.times.length > 0
       metadata.dateInfo = [...features.dates, ...features.times].join(', ')
     }
-    
+
     // Urgency detection
     metadata.urgency = this.extractUrgency(text)
-    
+
     // Action patterns
     if (features.actionWords.length > 0) {
       metadata.patterns = features.actionWords
     }
-    
+
+    // Project detection
+    const project = this.extractProject(text)
+    if (project) {
+      metadata.project = project
+    }
+
     return metadata
+  }
+
+  /**
+   * Extract project name from text
+   * Detects patterns like: #project, for ProjectName, ProjectName:, etc.
+   */
+  private extractProject(text: string): string | undefined {
+    // Pattern 1: Hashtag style (#project-name or #ProjectName)
+    const hashtagMatch = text.match(/#([a-zA-Z][a-zA-Z0-9-_]*)/i)
+    if (hashtagMatch) {
+      return hashtagMatch[1]
+    }
+
+    // Pattern 2: "for [Project]" or "for the [Project]"
+    const forMatch = text.match(/\bfor\s+(?:the\s+)?([A-Z][a-zA-Z0-9-_\s]{1,30}?)(?:\s+project|:|,|$)/i)
+    if (forMatch) {
+      return forMatch[1].trim()
+    }
+
+    // Pattern 3: "[Project] project:" or "[Project]:"
+    const projectMatch = text.match(/^([A-Z][a-zA-Z0-9-_\s]{1,30}?)(?:\s+project)?:\s/i)
+    if (projectMatch) {
+      return projectMatch[1].trim()
+    }
+
+    // Pattern 4: "@project-name" (at-mention style)
+    const atMentionMatch = text.match(/@([a-zA-Z][a-zA-Z0-9-_]*)/i)
+    if (atMentionMatch) {
+      return atMentionMatch[1]
+    }
+
+    return undefined
   }
   
   /**

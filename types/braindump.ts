@@ -128,6 +128,7 @@ export interface Classification {
     urgency?: UrgencyLevel
     dateInfo?: string
     patterns?: string[]
+    project?: string                   // Detected project name
   }
 }
 

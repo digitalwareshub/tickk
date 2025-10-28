@@ -12,6 +12,7 @@ import DateBadge from './DateBadge'
 import ContextMenu, { type ContextMenuAction } from './ContextMenu'
 import SaveTemplateModal from './SaveTemplateModal'
 import TemplateLibrary from './TemplateLibrary'
+import ProjectGroupView from './ProjectGroupView'
 import { useContextMenu } from '@/hooks/useContextMenu'
 import { useTemplates } from '@/hooks/useTemplates'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -31,7 +32,7 @@ export default function OrganizedView({
   language = 'en'
 }: OrganizedViewProps) {
   const { t } = useLanguage()
-  const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'analytics'>('all')
+  const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'projects' | 'analytics'>('all')
   const [sortBy, setSortBy] = useState<'date' | 'created' | 'none'>('none')
   const [searchQuery, setSearchQuery] = useState('')
   const [showExportMenu, setShowExportMenu] = useState(false)
@@ -94,6 +95,7 @@ export default function OrganizedView({
       exportAsCalendar: 'Export as Calendar (.ics)',
       tasksFilter: 'Tasks',
       notesFilter: 'Notes',
+      projectsFilter: 'Projects',
       analytics: 'Analytics',
       allItems: 'All Items',
       keyboardShortcuts: 'Keyboard shortcuts',
@@ -117,6 +119,7 @@ export default function OrganizedView({
       exportAsCalendar: 'Exportar como Calendario (.ics)',
       tasksFilter: 'Tareas',
       notesFilter: 'Notas',
+      projectsFilter: 'Proyectos',
       analytics: 'Analíticas',
       allItems: 'Todos los Elementos',
       keyboardShortcuts: 'Atajos de teclado',
@@ -995,6 +998,20 @@ export default function OrganizedView({
           </button>
           <span className="text-gray-300 hidden sm:inline">|</span>
           <button
+            onClick={() => setFilter('projects')}
+            className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
+              filter === 'projects'
+                ? 'text-gray-900 bg-gray-100'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
+          >
+            {localT.projectsFilter}
+            {filter === 'projects' && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+            )}
+          </button>
+          <span className="text-gray-300 hidden sm:inline">|</span>
+          <button
             onClick={() => setFilter('analytics')}
             className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
               filter === 'analytics'
@@ -1061,6 +1078,17 @@ export default function OrganizedView({
           <div data-analytics>
             <Analytics appData={appData} />
           </div>
+        ) : filter === 'projects' ? (
+          <ProjectGroupView
+            tasks={organizedTasks}
+            onToggleTask={handleToggleTask}
+            onEditTask={(task) => handleEditItem(task, 'task')}
+            onDeleteTask={(task) => handleDeleteItem(task, 'task')}
+            onContextMenu={handleContextMenu}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
+          />
         ) : (
           <div className="space-y-8">
             {/* Clean Task List - Mobile Optimized */}
