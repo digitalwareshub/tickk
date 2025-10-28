@@ -213,18 +213,24 @@ export default function SpanishApp() {
   // Handle onboarding completion
   const handleOnboardingComplete = useCallback(() => {
     setShowOnboarding(false)
-    
+
     // Only hide modal permanently if user checked the "remember" checkbox
     if (rememberChoice) {
       localStorage.setItem('tickk_hide_language_modal', 'true')
     }
-    
+
     // Mark user as having used the app
     localStorage.setItem('tickk_has_used', 'true')
-    
+
     // Save Spanish language preference
     localStorage.setItem('tickk_language', 'es')
-  }, [rememberChoice])
+
+    // Show tour for new users after language modal closes
+    const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
+    if (!tourCompleted && totalItemCount === 0) {
+      setTimeout(() => setShowTour(true), 500)
+    }
+  }, [rememberChoice, totalItemCount])
 
   // Handle recording state changes
   const handleRecordingStateChange = useCallback((recording: boolean) => {
@@ -402,22 +408,6 @@ export default function SpanishApp() {
     isModalOpen: showHelpModal || showCommandPalette || showTour,
     canProcess: recordingControls?.canProcess || false
   })
-
-  /**
-   * Check if user should see onboarding tour
-   */
-  useEffect(() => {
-    if (!isLoading && mounted && appData) {
-      const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
-      const hideLanguageModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
-
-      // Show tour only for new users who haven't completed it and have dismissed the language modal
-      if (!tourCompleted && hideLanguageModal && !showOnboarding && totalItemCount === 0) {
-        // Delay slightly to ensure UI is ready
-        setTimeout(() => setShowTour(true), 500)
-      }
-    }
-  }, [isLoading, mounted, appData, showOnboarding, totalItemCount])
 
   // Handle onboarding modal keyboard accessibility (ESC to close)
   useEffect(() => {

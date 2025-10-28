@@ -259,22 +259,6 @@ export default function App() {
   }, [storageService, migrator])
 
   /**
-   * Check if user should see onboarding tour
-   */
-  useEffect(() => {
-    if (!isLoading && mounted && appData) {
-      const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
-      const hideLanguageModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
-
-      // Show tour only for new users who haven't completed it and have dismissed the language modal
-      if (!tourCompleted && hideLanguageModal && !showOnboarding && totalItemCount === 0) {
-        // Delay slightly to ensure UI is ready
-        setTimeout(() => setShowTour(true), 500)
-      }
-    }
-  }, [isLoading, mounted, appData, showOnboarding, totalItemCount])
-
-  /**
    * Handle onboarding completion with language preference
    */
   const handleOnboardingComplete = useCallback(async () => {
@@ -323,7 +307,13 @@ export default function App() {
         items_count: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
       }
     })
-  }, [modalLanguage, rememberChoice, preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length])
+
+    // Show tour for new users after language modal closes
+    const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
+    if (!tourCompleted && totalItemCount === 0) {
+      setTimeout(() => setShowTour(true), 500)
+    }
+  }, [modalLanguage, rememberChoice, preferences, storageService, appData?.braindump.length, appData?.notes.length, appData?.tasks.length, totalItemCount])
 
   /**
    * Handle modal keyboard accessibility (ESC to close)
