@@ -63,37 +63,29 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
                 🚀 New features just landed!
               </p>
               <p className="text-xs sm:text-sm text-blue-100">
-                Command Palette (⌘K), Analytics Dashboard, Streak Tracking & more!
+                Analytics accuracy improved, comprehensive ADHD productivity guide & better navigation!
               </p>
             </div>
 
             {/* Quick Feature Highlights */}
             <div className="flex flex-wrap justify-center gap-3 text-xs text-blue-100 mb-2">
               <div className="flex items-center gap-1">
-                <span>⌘K</span>
-                <span>Command Palette</span>
-              </div>
-              <div className="flex items-center gap-1">
                 <span>📊</span>
-                <span>Analytics Dashboard</span>
+                <span>Better Analytics</span>
               </div>
               <div className="flex items-center gap-1">
-                <span>🔥</span>
-                <span>Streak Tracking</span>
+                <span>🧠</span>
+                <span>ADHD Guide</span>
               </div>
               <div className="flex items-center gap-1">
-                <span>📅</span>
-                <span>Calendar Export</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span>🎓</span>
-                <span>Interactive Tour</span>
+                <span>🎯</span>
+                <span>Improved Navigation</span>
               </div>
             </div>
 
             {/* Call to action button - at bottom */}
             <Link
-              href="/changelog"
+              href="/changelog#v1-10-2"
               className="bg-blue-500 hover:bg-blue-400 text-white text-sm px-4 py-1.5 rounded-md transition-colors font-medium inline-flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

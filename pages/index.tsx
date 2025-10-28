@@ -47,7 +47,7 @@ export default function App() {
   const [showTour, setShowTour] = useState(false)
   
   // What's New banner
-  const { showBanner, dismissBanner } = useWhatsNewBanner('1.11.0')
+  const { showBanner, dismissBanner } = useWhatsNewBanner('1.10.2')
   
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
