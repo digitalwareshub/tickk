@@ -8,8 +8,10 @@ import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
 import BulkDeleteModal from './BulkDeleteModal'
+import DateBadge from './DateBadge'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
+import { parseEarliestDate } from '@/lib/utils/dateParser'
 
 interface OrganizedViewProps {
   appData: AppData
@@ -25,6 +27,7 @@ export default function OrganizedView({
 }: OrganizedViewProps) {
   const { t } = useLanguage()
   const [filter, setFilter] = useState<'all' | 'tasks' | 'notes' | 'analytics'>('all')
+  const [sortBy, setSortBy] = useState<'date' | 'created' | 'none'>('none')
   const [searchQuery, setSearchQuery] = useState('')
   const [showExportMenu, setShowExportMenu] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
@@ -420,12 +423,12 @@ export default function OrganizedView({
   }
 
   const selectAllItems = () => {
-    const currentItems = filter === 'tasks' 
-      ? (searchQuery ? filteredTasks : organizedTasks)
+    const currentItems = filter === 'tasks'
+      ? filteredTasks
       : filter === 'notes'
-      ? (searchQuery ? filteredNotes : organizedNotes)
-      : [...(searchQuery ? filteredTasks : organizedTasks), ...(searchQuery ? filteredNotes : organizedNotes)]
-    
+      ? filteredNotes
+      : [...filteredTasks, ...filteredNotes]
+
     const allIds = new Set(currentItems.map(item => item.id))
     setSelectedItems(allIds)
   }
@@ -477,16 +480,50 @@ export default function OrganizedView({
     return organizedTasks.filter(task => task.completed).length
   }
 
-  // Search functionality
-  const filteredTasks = organizedTasks.filter(task => 
-    task.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    task.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-  )
+  // Sorting function
+  const sortItems = (items: VoiceItem[]) => {
+    if (sortBy === 'none') return items
 
-  const filteredNotes = organizedNotes.filter(note => 
-    note.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    note.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-  )
+    return [...items].sort((a, b) => {
+      if (sortBy === 'date') {
+        const dateA = parseEarliestDate(a.metadata?.dateInfo as string)
+        const dateB = parseEarliestDate(b.metadata?.dateInfo as string)
+
+        // Items with dates come first
+        if (dateA && !dateB) return -1
+        if (!dateA && dateB) return 1
+        if (dateA && dateB) return dateA.getTime() - dateB.getTime()
+
+        // If no dates, fall back to created time
+        return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      }
+
+      if (sortBy === 'created') {
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      }
+
+      return 0
+    })
+  }
+
+  // Apply sorting to all items
+  const sortedTasks = sortItems(organizedTasks)
+  const sortedNotes = sortItems(organizedNotes)
+
+  // Search functionality (applied after sorting)
+  const filteredTasks = searchQuery
+    ? sortedTasks.filter(task =>
+        task.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        task.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : sortedTasks
+
+  const filteredNotes = searchQuery
+    ? sortedNotes.filter(note =>
+        note.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : sortedNotes
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -744,6 +781,25 @@ export default function OrganizedView({
           </button>
         </div>
 
+        {/* Sort Options */}
+        {filter !== 'analytics' && (
+          <div className="flex justify-center items-center gap-2 mb-6">
+            <label htmlFor="sort-select" className="text-xs text-gray-600">
+              Sort by:
+            </label>
+            <select
+              id="sort-select"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as 'date' | 'created' | 'none')}
+              className="text-xs px-3 py-1.5 border border-gray-300 rounded-lg bg-white text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            >
+              <option value="none">Default</option>
+              <option value="date">Date (earliest first)</option>
+              <option value="created">Recently Created</option>
+            </select>
+          </div>
+        )}
+
         {/* Keyboard Shortcuts Help */}
         <div className="text-center mb-8">
           <details className="inline-block">
@@ -766,9 +822,9 @@ export default function OrganizedView({
         ) : (
           <div className="space-y-8">
             {/* Clean Task List - Mobile Optimized */}
-            {(filter === 'all' || filter === 'tasks') && (searchQuery ? filteredTasks : organizedTasks).length > 0 && (
+            {(filter === 'all' || filter === 'tasks') && filteredTasks.length > 0 && (
               <div className="space-y-4">
-                {(searchQuery ? filteredTasks : organizedTasks).map((task) => (
+                {filteredTasks.map((task) => (
                   <div key={task.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <input
                       type="checkbox"
@@ -790,8 +846,11 @@ export default function OrganizedView({
                       }`}>
                         {task.text}
                       </p>
-                      {((task.tags && task.tags.length > 0) || task.priority) && (
+                      {((task.tags && task.tags.length > 0) || task.priority || task.metadata?.dateInfo) && (
                         <div className="flex flex-wrap items-center gap-2 mt-2">
+                          {task.metadata?.dateInfo && (
+                            <DateBadge dateInfo={task.metadata.dateInfo as string} />
+                          )}
                           {task.priority && (
                             <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
                               task.priority === 'high' ? 'bg-red-100 text-red-600' :
@@ -840,9 +899,9 @@ export default function OrganizedView({
             )}
 
             {/* Clean Notes List - Mobile Optimized */}
-            {(filter === 'all' || filter === 'notes') && (searchQuery ? filteredNotes : organizedNotes).length > 0 && (
+            {(filter === 'all' || filter === 'notes') && filteredNotes.length > 0 && (
               <div className="space-y-4">
-                {(searchQuery ? filteredNotes : organizedNotes).map((note) => (
+                {filteredNotes.map((note) => (
                   <div key={note.id} className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0">
                     <input
                       type="checkbox"
@@ -860,9 +919,12 @@ export default function OrganizedView({
                     />
                     <div className="flex-1 min-w-0 overflow-hidden">
                       <p className="text-sm text-gray-900 break-words">{note.text}</p>
-                      {note.tags && note.tags.length > 0 && (
+                      {((note.tags && note.tags.length > 0) || note.metadata?.dateInfo) && (
                         <div className="flex flex-wrap items-center gap-2 mt-2">
-                          {note.tags.map((tag, index) => (
+                          {note.metadata?.dateInfo && (
+                            <DateBadge dateInfo={note.metadata.dateInfo as string} />
+                          )}
+                          {note.tags && note.tags.map((tag, index) => (
                             <span key={index} className="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs flex-shrink-0">
                               #{tag}
                             </span>
@@ -901,9 +963,9 @@ export default function OrganizedView({
             )}
 
             {/* Empty State */}
-            {((filter === 'tasks' && (searchQuery ? filteredTasks : organizedTasks).length === 0) || 
-              (filter === 'notes' && (searchQuery ? filteredNotes : organizedNotes).length === 0) || 
-              (filter === 'all' && (searchQuery ? filteredTasks : organizedTasks).length === 0 && (searchQuery ? filteredNotes : organizedNotes).length === 0)) && (
+            {((filter === 'tasks' && filteredTasks.length === 0) ||
+              (filter === 'notes' && filteredNotes.length === 0) ||
+              (filter === 'all' && filteredTasks.length === 0 && filteredNotes.length === 0)) && (
               <div className="text-center py-12 text-gray-500">
                 {searchQuery ? (
                   <>
