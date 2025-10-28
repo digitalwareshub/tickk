@@ -212,13 +212,22 @@ export default function BraindumpInterface({
    * Provide recording controls to parent for keyboard shortcuts
    */
   useEffect(() => {
+    const unprocessedCount = appData.braindump.filter(item => !item.processed).length
+    const processItems = () => {
+      const unprocessedItems = appData.braindump.filter(item => !item.processed)
+      if (unprocessedItems.length > 0) {
+        setItemsToProcess(unprocessedItems)
+        setShowProcessModal(true)
+      }
+    }
+
     onRecordingControls?.({
       startRecording,
       stopRecording,
-      canProcess: recentItems.length >= 5,
-      processItems: () => setShowProcessModal(true)
+      canProcess: unprocessedCount > 0,
+      processItems
     })
-  }, [startRecording, stopRecording, recentItems.length, onRecordingControls])
+  }, [startRecording, stopRecording, appData.braindump, onRecordingControls])
 
   /**
    * Notify parent of recording state changes

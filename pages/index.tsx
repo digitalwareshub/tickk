@@ -595,7 +595,7 @@ export default function App() {
     {
       id: 'braindump',
       title: 'Braindump Mode 🎤',
-      description: 'Speak naturally. Your thoughts are automatically organized into tasks and notes with smart AI classification.',
+      description: 'Speak naturally. Your thoughts are automatically organized into tasks and notes with smart NLP classification.',
       target: '[data-tour="braindump-section"]',
       placement: 'center',
       action: () => setMode('braindump')

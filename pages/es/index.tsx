@@ -282,7 +282,7 @@ export default function SpanishApp() {
     {
       id: 'braindump',
       title: 'Modo Braindump 🎤',
-      description: 'Habla naturalmente. Tus pensamientos se organizan automáticamente en tareas y notas con clasificación inteligente de IA.',
+      description: 'Habla naturalmente. Tus pensamientos se organizan automáticamente en tareas y notas con clasificación inteligente de NLP.',
       target: '[data-tour="braindump-section"]',
       placement: 'center',
       action: () => setMode('braindump')
