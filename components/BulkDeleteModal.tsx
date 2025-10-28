@@ -3,8 +3,6 @@
  * Modal for confirming bulk deletion operations
  */
 
-import { useLanguage } from '@/contexts/LanguageContext'
-
 interface BulkDeleteModalProps {
   isOpen: boolean
   itemCount: number
@@ -13,14 +11,13 @@ interface BulkDeleteModalProps {
   onCancel: () => void
 }
 
-export default function BulkDeleteModal({ 
-  isOpen, 
+export default function BulkDeleteModal({
+  isOpen,
   itemCount,
   itemType,
-  onConfirm, 
-  onCancel 
+  onConfirm,
+  onCancel
 }: BulkDeleteModalProps) {
-  const { t } = useLanguage()
 
   if (!isOpen) return null
 
@@ -34,16 +31,16 @@ export default function BulkDeleteModal({
 
   const getConfirmMessage = () => {
     if (itemType === 'completed') {
-      return t('common.bulk_delete_completed_confirm')
+      return 'Are you sure you want to delete all completed tasks? This action cannot be undone.'
     }
-    return t('common.bulk_delete_confirm').replace('{count}', itemCount.toString())
+    return `Are you sure you want to delete ${itemCount} selected item${itemCount > 1 ? 's' : ''}? This action cannot be undone.`
   }
 
   const getTitle = () => {
     if (itemType === 'completed') {
-      return t('common.delete_completed')
+      return 'Delete Completed'
     }
-    return t('common.delete_selected')
+    return 'Delete Selected'
   }
 
   return (
@@ -75,13 +72,13 @@ export default function BulkDeleteModal({
             className="flex-1 px-4 py-3 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors font-medium"
             autoFocus
           >
-            {t('common.cancel')}
+            Cancel
           </button>
           <button
             onClick={onConfirm}
             className="flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
           >
-            {t('common.delete')}
+            Delete
           </button>
         </div>
       </div>

@@ -4,7 +4,6 @@
  */
 
 import { useState } from 'react'
-import { useLanguage } from '@/contexts/LanguageContext'
 
 interface MicroLandingProps {
   itemCount: number
@@ -18,8 +17,8 @@ interface MicroLandingProps {
   onTextSubmit?: (text: string) => void
 }
 
-export default function MicroLanding({ 
-  itemCount, 
+export default function MicroLanding({
+  itemCount,
   onExampleClick,
   isRecording = false,
   isSupported = true,
@@ -29,7 +28,6 @@ export default function MicroLanding({
   recordingError,
   onTextSubmit
 }: MicroLandingProps) {
-  const { t } = useLanguage()
   const [textInput, setTextInput] = useState('')
 
   const handleRecordClick = () => {
@@ -41,45 +39,45 @@ export default function MicroLanding({
   }
 
   return (
-    <div className="micro-landing">
+    <div className="micro-landing" data-tour="braindump-section">
       {/* Main Content Area */}
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
         <div className="mb-8">
           <h1 className="heading-primary text-gray-900 mb-4">
-            {t('microlanding.headline')}
+            Speak. Save. Sort it later.
           </h1>
           <p className="text-responsive text-gray-600 mb-8 max-w-2xl mx-auto">
-            {t('microlanding.subheadline')}
+            Capture your thoughts by voice. We&apos;ll organize them into tasks and notes.
           </p>
         </div>
 
         {/* Example Prompts */}
         <div className="mb-12">
           <p className="text-gray-600 text-center mb-6">
-            {t('microlanding.try_saying')}:
+            Try saying:
           </p>
           <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 max-w-4xl mx-auto">
-            <ExampleChip 
-              text={t('microlanding.example1')}
+            <ExampleChip
+              text="Buy groceries tomorrow at 3pm"
               emoji="📋"
               type="task"
               onClick={onExampleClick}
             />
-            <ExampleChip 
-              text={t('microlanding.example2')}
+            <ExampleChip
+              text="Ideas for the blog post about productivity"
               emoji="📝"
               type="note"
               onClick={onExampleClick}
             />
-            <ExampleChip 
-              text={t('microlanding.example3')}
+            <ExampleChip
+              text="Call mom this weekend"
               emoji="📋"
               type="task"
               onClick={onExampleClick}
             />
-            <ExampleChip 
-              text={t('microlanding.example4')}
+            <ExampleChip
+              text="Remember to backup files"
               emoji="📝"
               type="note"
               onClick={onExampleClick}
@@ -92,14 +90,15 @@ export default function MicroLanding({
           {isSupported ? (
             <div>
               <div className="relative inline-block">
-                <button 
+                <button
                   onClick={handleRecordClick}
+                  data-tour="record-button"
                   aria-label={isRecording ? "Stop recording" : "Click to record your thoughts"}
                   className={`
-                    w-20 h-20 rounded-full flex items-center justify-center 
+                    w-20 h-20 rounded-full flex items-center justify-center
                     transition-all duration-200 transform hover:scale-105 shadow-lg
-                    ${isRecording 
-                      ? 'bg-red-500 hover:bg-red-600' 
+                    ${isRecording
+                      ? 'bg-red-500 hover:bg-red-600'
                       : 'bg-gray-900 hover:bg-gray-800'
                     }
                   `}
@@ -112,7 +111,7 @@ export default function MicroLanding({
                 </button>
               </div>
               <p className="text-gray-600 text-sm mt-4">
-                {isRecording ? t('braindump.recording_status') : t('braindump.click_to_record')}
+                {isRecording ? 'Recording...' : 'Click to start recording'}
               </p>
             </div>
           ) : (
@@ -183,7 +182,7 @@ export default function MicroLanding({
         {/* Helper Text */}
         <div className="mb-8">
           <p className="text-gray-500 text-sm">
-            {isSupported 
+            {isSupported
               ? "Press the microphone to capture your thoughts. We'll organize them later."
               : "Type your thoughts below and hit Enter. We'll organize them later."
             }
@@ -206,15 +205,15 @@ export default function MicroLanding({
           <div className="flex justify-center items-center gap-6 text-xs text-gray-500">
             <span className="flex items-center gap-1">
               <span>🔒</span>
-              <span>{t('microlanding.private')}</span>
+              <span>Private</span>
             </span>
             <span className="flex items-center gap-1">
               <span>🌐</span>
-              <span>{t('microlanding.works_offline')}</span>
+              <span>Works Offline</span>
             </span>
             <span className="flex items-center gap-1">
               <span>✨</span>
-              <span>{t('microlanding.no_account')}</span>
+              <span>No Account</span>
             </span>
           </div>
         </div>
@@ -238,8 +237,8 @@ function ExampleChip({ text, emoji, type, onClick }: ExampleChipProps) {
         flex items-start gap-1 sm:gap-2 px-2 sm:px-3 py-2 rounded-full text-xs sm:text-sm
         border transition-all hover:scale-105 hover:shadow-md
         text-left leading-tight min-w-0 w-full sm:w-auto min-h-0
-        ${type === 'task' 
-          ? 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100' 
+        ${type === 'task'
+          ? 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100'
           : 'border-green-200 bg-green-50 text-green-700 hover:bg-green-100'
         }
       `}

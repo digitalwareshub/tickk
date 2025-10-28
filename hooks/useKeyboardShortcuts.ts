@@ -12,6 +12,7 @@ interface KeyboardShortcutsConfig {
   onExport?: () => void
   onShowHelp?: () => void
   onCloseModal?: () => void
+  onShowCommandPalette?: () => void
   isRecording?: boolean
   canProcess?: boolean
   isModalOpen?: boolean
@@ -24,6 +25,7 @@ export function useKeyboardShortcuts({
   onExport,
   onShowHelp,
   onCloseModal,
+  onShowCommandPalette,
   isRecording = false,
   canProcess = false,
   isModalOpen = false
@@ -73,7 +75,13 @@ export function useKeyboardShortcuts({
         e.preventDefault()
         onExport()
       }
-      
+
+      // Ctrl/Cmd + K: Show command palette
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k' && onShowCommandPalette) {
+        e.preventDefault()
+        onShowCommandPalette()
+      }
+
       // ?: Show keyboard shortcuts help
       if (e.key === '?' && e.shiftKey && onShowHelp) {
         e.preventDefault()
@@ -96,6 +104,7 @@ export function useKeyboardShortcuts({
     onExport,
     onShowHelp,
     onCloseModal,
+    onShowCommandPalette,
     isRecording,
     canProcess,
     isModalOpen

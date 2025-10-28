@@ -194,9 +194,16 @@ export class AnalyticsService {
     const classifiedItems = items.filter(item => item.classification && item.confidence)
     if (classifiedItems.length === 0) return 0
     
-    const highConfidenceItems = classifiedItems.filter(item => 
-      (item.confidence || 0) > 0.7
-    )
+    const highConfidenceItems = classifiedItems.filter(item => {
+      let confidence = item.confidence || 0
+      
+      // Normalize confidence to 0-1 range
+      if (confidence > 1) {
+        confidence = confidence / 100
+      }
+      
+      return confidence > 0.7
+    })
     
     return Math.round((highConfidenceItems.length / classifiedItems.length) * 100)
   }
@@ -262,7 +269,15 @@ export class AnalyticsService {
             }
           }
           themes[theme].count++
-          themes[theme].confidenceSum += (item.confidence || 0.5)
+          
+          // Normalize confidence value
+          let confidence = item.confidence || 0.5
+          if (confidence > 1) {
+            confidence = confidence / 100
+          }
+          confidence = Math.min(Math.max(confidence, 0), 1)
+          
+          themes[theme].confidenceSum += confidence
         }
       })
     })
@@ -282,25 +297,40 @@ export class AnalyticsService {
    * Calculate weekly statistics
    */
   private static calculateWeeklyStats(sessions: BraindumpSession[], items: VoiceItem[]): WeeklyStats[] {
-    const weeks: Record<string, { itemCount: number; sessionCount: number; accuracySum: number }> = {}
+    const weeks: Record<string, { itemCount: number; sessionCount: number; accuracySum: number; processedItems: Set<string> }> = {}
     
     // Group by week
     sessions.forEach(session => {
       const weekKey = this.getWeekKey(new Date(session.startTime))
       if (!weeks[weekKey]) {
-        weeks[weekKey] = { itemCount: 0, sessionCount: 0, accuracySum: 0 }
+        weeks[weekKey] = { itemCount: 0, sessionCount: 0, accuracySum: 0, processedItems: new Set() }
       }
       weeks[weekKey].sessionCount++
       weeks[weekKey].itemCount += session.itemCount
     })
     
-    // Add accuracy data from items
+    // Add accuracy data from items (with deduplication)
     items.forEach(item => {
       const weekKey = this.getWeekKey(new Date(item.timestamp))
       if (weeks[weekKey] && item.confidence) {
-        // Ensure confidence is treated as decimal (0-1), not percentage
-        const confidenceValue = item.confidence > 1 ? item.confidence / 100 : item.confidence
+        // Skip if this item was already processed for this week
+        if (weeks[weekKey].processedItems.has(item.id)) {
+          return
+        }
+        
+        // Normalize confidence to 0-1 range regardless of how it's stored
+        let confidenceValue = item.confidence
+        
+        // If confidence is stored as percentage (0-100), convert to decimal
+        if (confidenceValue > 1) {
+          confidenceValue = confidenceValue / 100
+        }
+        
+        // Ensure confidence stays within valid range (0-1)
+        confidenceValue = Math.min(Math.max(confidenceValue, 0), 1)
+        
         weeks[weekKey].accuracySum += confidenceValue
+        weeks[weekKey].processedItems.add(item.id)
       }
     })
     
@@ -309,7 +339,7 @@ export class AnalyticsService {
         week,
         itemCount: data.itemCount,
         sessionCount: data.sessionCount,
-        accuracy: data.itemCount > 0 ? (data.accuracySum / data.itemCount) : 0  // Return as decimal (0-1)
+        accuracy: data.processedItems.size > 0 ? (data.accuracySum / data.processedItems.size) : 0  // Divide by actual items with confidence scores
       }))
       .sort((a, b) => a.week.localeCompare(b.week))
       .slice(-8) // Last 8 weeks

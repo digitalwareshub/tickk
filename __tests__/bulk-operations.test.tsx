@@ -4,7 +4,7 @@
  */
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { LanguageProvider } from '@/contexts/LanguageContext'
+// import { LanguageProvider } from '@/contexts/LanguageContext' // TODO: Fix tests after LanguageContext removal
 import OrganizedView from '@/components/OrganizedView'
 import type { AppData, VoiceItem } from '@/types/braindump'
 
@@ -76,10 +76,11 @@ const mockAppData: AppData = {
   version: '1.0.0'
 }
 
+// TODO: Fix tests after LanguageContext removal
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <LanguageProvider>
-    {children}
-  </LanguageProvider>
+  // <LanguageProvider>
+    <>{children}</>
+  // </LanguageProvider>
 )
 
 describe('OrganizedView Bulk Operations', () => {

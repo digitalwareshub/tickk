@@ -19,7 +19,10 @@
     "clean": "rm -rf .next out",
     "test:lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
     "sitemap": "next-sitemap",
-    "prebuild": "npm run lint && npm run type-check"
+    "prebuild": "npm run lint && npm run type-check",
+    "features:on": "node scripts/toggle-features.js on",
+    "features:off": "node scripts/toggle-features.js off",
+    "features:status": "node scripts/toggle-features.js status"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.5.3",

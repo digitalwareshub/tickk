@@ -11,7 +11,6 @@ import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
-import { useLanguage } from '@/contexts/LanguageContext'
 import type { AppData, UserPreferences, VoiceItem, BraindumpSession } from '@/types/braindump'
 
 interface BraindumpInterfaceProps {
@@ -34,9 +33,9 @@ interface BraindumpInterfaceProps {
   showMainInterface?: boolean // Controls whether to show the main recording interface
 }
 
-export default function BraindumpInterface({ 
-  appData, 
-  preferences, 
+export default function BraindumpInterface({
+  appData,
+  preferences,
   onDataUpdate,
   onRecordingStateChange,
   onRecordingControls,
@@ -44,7 +43,6 @@ export default function BraindumpInterface({
   onModeSwitch,
   showMainInterface = true
 }: BraindumpInterfaceProps) {
-  const { language, t } = useLanguage()
   // Recording state
   const [isRecording, setIsRecording] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -93,10 +91,10 @@ export default function BraindumpInterface({
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition
       const recognitionInstance = new SpeechRecognition()
-      
+
       recognitionInstance.continuous = false
       recognitionInstance.interimResults = true
-      recognitionInstance.lang = language === 'es' ? 'es-ES' : 'en-US'
+      recognitionInstance.lang = 'en-US'
       recognitionInstance.maxAlternatives = 1
       
       setRecognition(recognitionInstance)
@@ -105,11 +103,11 @@ export default function BraindumpInterface({
     } else {
       setIsSupported(false)
       // Don't set recordingError since we have a text input fallback
-      onRecordingStatusUpdate?.({ 
+      onRecordingStatusUpdate?.({
         isSupported: false
       })
     }
-  }, [language, onRecordingStatusUpdate, t])
+  }, [onRecordingStatusUpdate])
   
   /**
    * Load recent braindump items on mount
@@ -212,13 +210,22 @@ export default function BraindumpInterface({
    * Provide recording controls to parent for keyboard shortcuts
    */
   useEffect(() => {
+    const unprocessedCount = appData.braindump.filter(item => !item.processed).length
+    const processItems = () => {
+      const unprocessedItems = appData.braindump.filter(item => !item.processed)
+      if (unprocessedItems.length > 0) {
+        setItemsToProcess(unprocessedItems)
+        setShowProcessModal(true)
+      }
+    }
+
     onRecordingControls?.({
       startRecording,
       stopRecording,
-      canProcess: recentItems.length >= 5,
-      processItems: () => setShowProcessModal(true)
+      canProcess: unprocessedCount > 0,
+      processItems
     })
-  }, [startRecording, stopRecording, recentItems.length, onRecordingControls])
+  }, [startRecording, stopRecording, appData.braindump, onRecordingControls])
 
   /**
    * Notify parent of recording state changes
@@ -252,8 +259,8 @@ export default function BraindumpInterface({
         }
       }
       
-      // Set language for classifier and classify the item
-      classifier.setLanguage(language)
+      // Classify the item
+      classifier.setLanguage('en')
       const classificationResult = await classifier.classify(newItem.text)
       newItem.classification = classificationResult
       newItem.confidence = classificationResult.confidence
@@ -309,7 +316,7 @@ export default function BraindumpInterface({
     } finally {
       setIsProcessing(false)
     }
-  }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer, language, onRecordingStatusUpdate])
+  }, [currentSession, appData, classifier, storageService, onDataUpdate, announcer, onRecordingStatusUpdate])
 
   /**
    * Handle text input submission (for browsers without speech support)
@@ -539,9 +546,9 @@ export default function BraindumpInterface({
           aria-label="Getting started instructions"
         >
           <p className="text-sm text-gray-600 text-center">
-            {isSupported 
-              ? t('braindump.press_microphone')
-              : t('braindump.type_thoughts')
+            {isSupported
+              ? "Press the microphone to capture your thoughts"
+              : "Type your thoughts below to get started"
             }
           </p>
         </div>
@@ -557,7 +564,7 @@ export default function BraindumpInterface({
             }}
             className="px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 rounded border"
           >
-{t('braindump.clear_data')}
+            Clear Data (Dev)
           </button>
         </div>
       )}
@@ -578,7 +585,7 @@ export default function BraindumpInterface({
                 role="status"
                 aria-live="polite"
               >
-{t('braindump.session_info').replace('{count}', currentSession.itemCount.toString())}
+                Current session: {currentSession.itemCount} items captured
               </div>
             )}
             
@@ -589,9 +596,9 @@ export default function BraindumpInterface({
                 role="status"
                 aria-live="polite"
               >
-                ✅ {t('braindump.added_item').replace('{text}', lastAddedItem)}
+                ✅ Added: {lastAddedItem}
                 <br />
-                <span className="text-xs opacity-75">{t('braindump.click_organize')}</span>
+                <span className="text-xs opacity-75">Click Organize to categorize your thoughts</span>
               </div>
             )}
             
@@ -615,7 +622,7 @@ export default function BraindumpInterface({
                       : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
                   } text-sm font-medium`}
                 >
-{isRecording ? t('braindump.stop') : t('braindump.record')}
+                  {isRecording ? 'Stop' : 'Record'}
                 </button>
               </div>
             ) : (
@@ -659,26 +666,26 @@ export default function BraindumpInterface({
             
             {/* Hidden help text for screen readers */}
             <div id="recording-help" className="sr-only">
-              {t('braindump.recording_help')}
+              Press the button to start or stop recording your thoughts
             </div>
             
             {/* Recording Status */}
             <div className="mb-4" role="status" aria-live="polite">
               {isRecording && (
                 <p className="text-sm text-gray-600">
-                  {t('braindump.recording')}
+                  Recording...
                 </p>
               )}
               {isProcessing && (
                 <p className="text-sm text-gray-600">
-                  {t('braindump.processing')}
+                  Processing...
                 </p>
               )}
               {!isRecording && !isProcessing && isSupported && (
                 <p className="text-sm text-gray-500">
-                  {t('braindump.click_to_record')}
+                  Click to start recording
                   {preferences?.enableKeyboardShortcuts && (
-                    <span className="block text-xs mt-1">{t('braindump.spacebar_shortcut')}</span>
+                    <span className="block text-xs mt-1">Press spacebar to record</span>
                   )}
                 </p>
               )}
@@ -722,35 +729,35 @@ export default function BraindumpInterface({
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-medium text-gray-900">
-              {t('braindump.recent', { count: recentItems.length })}
+              Recent ({recentItems.length})
             </h3>
             <div className="flex items-center gap-2">
               {recentItems.length > 0 && (
                 <span className="text-xs text-gray-500 animate-pulse">
-                  {t('braindump.click_organize_arrow')}
+                  Click Organize →
                 </span>
               )}
               <button
                 onClick={handleOrganizeClick}
                 disabled={isProcessing || recentItems.length === 0}
-                aria-label={t('braindump.organize_help')}
+                aria-label="Organize your captured thoughts into tasks and notes"
                 aria-describedby="organize-help"
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
-                  recentItems.length > 0 
-                    ? 'bg-black hover:bg-gray-800 text-white border border-gray-300' 
+                  recentItems.length > 0
+                    ? 'bg-black hover:bg-gray-800 text-white border border-gray-300'
                     : 'bg-gray-300 text-gray-500'
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {isProcessing ? t('braindump.processing') : recentItems.length > 0 ? t('braindump.organize_with_count', { count: recentItems.length }) : t('braindump.organize')}
+                {isProcessing ? 'Processing...' : recentItems.length > 0 ? `Organize (${recentItems.length})` : 'Organize'}
               </button>
             </div>
           </div>
-          
+
           <div id="organize-help" className="sr-only">
-            {t('braindump.organize_help')}
+            Click to organize your braindump items into tasks and notes
           </div>
-          
-          <ul className="space-y-2" role="list" aria-label={t('braindump.recent_thoughts')}>
+
+          <ul className="space-y-2" role="list" aria-label="Recent captured thoughts">
             {recentItems.map((item) => (
               <li 
                 key={item.id} 
@@ -802,7 +809,7 @@ export default function BraindumpInterface({
                         <button
                           onClick={() => handleEditItem(item)}
                           className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          aria-label={t('braindump.edit_item')}
+                          aria-label="Edit this item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -811,7 +818,7 @@ export default function BraindumpInterface({
                         <button
                           onClick={() => handleDeleteItem(item)}
                           className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          aria-label={t('braindump.delete_item')}
+                          aria-label="Delete this item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

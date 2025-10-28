@@ -7,7 +7,6 @@ import { useState, useEffect, useRef } from 'react'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { StorageService } from '@/lib/storage/storage-service'
 import { trackPageInteraction } from '@/lib/analytics'
-import { useLanguage } from '@/contexts/LanguageContext'
 import type { VoiceItem, Classification } from '@/types/braindump'
 
 interface ProcessedItem extends VoiceItem {
@@ -24,12 +23,11 @@ interface ProcessBraindumpModalProps {
 
 type ProcessingStage = 'processing' | 'review' | 'complete'
 
-export default function ProcessBraindumpModal({ 
-  items, 
-  onClose, 
-  onComplete 
+export default function ProcessBraindumpModal({
+  items,
+  onClose,
+  onComplete
 }: ProcessBraindumpModalProps) {
-  const { t } = useLanguage()
   const [stage, setStage] = useState<ProcessingStage>('processing')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [processed, setProcessed] = useState<ProcessedItem[]>([])
@@ -128,29 +126,46 @@ export default function ProcessBraindumpModal({
    */
   const applyOrganization = async () => {
     setStage('complete')
-    
+
     try {
-      // Separate into tasks and notes
-      const tasks = processed.filter(item => item.suggestedCategory === 'tasks')
-      const notes = processed.filter(item => item.suggestedCategory === 'notes')
-      
+      // Separate into tasks and notes, merging classification metadata
+      const tasks = processed
+        .filter(item => item.suggestedCategory === 'tasks')
+        .map(item => ({
+          ...item,
+          metadata: {
+            ...item.metadata,
+            ...item.classification.metadata, // Merge classification metadata (dateInfo, hasDate, hasTime, urgency)
+          }
+        }))
+
+      const notes = processed
+        .filter(item => item.suggestedCategory === 'notes')
+        .map(item => ({
+          ...item,
+          metadata: {
+            ...item.metadata,
+            ...item.classification.metadata, // Merge classification metadata
+          }
+        }))
+
       // Mark original items as processed
       const updatedBraindumpItems = items.map(item => ({
         ...item,
         processed: true
       }))
-      
+
       // Save to storage
       await storageService.processBraindumpItems(updatedBraindumpItems)
-      
+
       // Track successful organization
       trackPageInteraction('braindump_organization_applied', `${tasks.length}_tasks_${notes.length}_notes`)
-      
+
       // Return organized data to parent
       setTimeout(() => {
         onComplete({ tasks, notes })
       }, 2000) // Show success state for 2 seconds
-      
+
     } catch (error) {
       console.error('Failed to apply organization:', error)
       // Could add error handling UI
@@ -200,9 +215,9 @@ export default function ProcessBraindumpModal({
         <div className="flex-shrink-0 p-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
-              {stage === 'processing' && t('process.organizing')}
-              {stage === 'review' && t('process.review_adjust')}
-              {stage === 'complete' && t('process.complete')}
+              {stage === 'processing' && 'Organizing Your Thoughts...'}
+              {stage === 'review' && 'Review & Adjust'}
+              {stage === 'complete' && 'All Done!'}
             </h2>
             
             {stage !== 'processing' && (
@@ -225,7 +240,7 @@ export default function ProcessBraindumpModal({
               <div className="mb-8">
                 <div className="text-4xl mb-4">⏳</div>
                 <div className="text-lg text-gray-600 mb-6">
-                  {t('process.analyzing')}
+                  Analyzing your thoughts...
                 </div>
               </div>
               
@@ -246,7 +261,7 @@ export default function ProcessBraindumpModal({
               {items[currentIndex] && (
                 <div className="bg-gray-50 rounded-lg p-4 max-w-md mx-auto">
                   <div className="text-sm text-gray-500 mb-1">
-                    {t('process.processing')}
+                    Processing:
                   </div>
                   <div className="font-medium text-gray-900">
                     &quot;{items[currentIndex].text.slice(0, 100)}{items[currentIndex].text.length > 100 ? '...' : ''}&quot;
@@ -265,7 +280,7 @@ export default function ProcessBraindumpModal({
                   <div className="text-2xl font-bold text-gray-700">
                     {taskCount}
                   </div>
-                  <div className="text-sm text-gray-600">{t('process.tasks')}</div>
+                  <div className="text-sm text-gray-600">Tasks</div>
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg p-4 text-center border border-gray-200">
@@ -273,7 +288,7 @@ export default function ProcessBraindumpModal({
                   <div className="text-2xl font-bold text-gray-700">
                     {noteCount}
                   </div>
-                  <div className="text-sm text-gray-600">{t('process.notes')}</div>
+                  <div className="text-sm text-gray-600">Notes</div>
                 </div>
                 
                 <div className="bg-gray-50 rounded-lg p-4 text-center border border-gray-200">
@@ -281,7 +296,7 @@ export default function ProcessBraindumpModal({
                   <div className="text-2xl font-bold text-gray-700">
                     {Math.round(averageConfidence * 100)}%
                   </div>
-                  <div className="text-sm text-gray-600">{t('process.confidence')}</div>
+                  <div className="text-sm text-gray-600">Confidence</div>
                 </div>
               </div>
               
@@ -302,16 +317,16 @@ export default function ProcessBraindumpModal({
             <div className="text-center py-8">
               <div className="text-6xl mb-6">🎉</div>
               <h3 className="text-3xl font-bold mb-4 text-gray-900 ">
-                {t('process.perfect_organized')}
+                Perfectly Organized!
               </h3>
               <p className="text-lg text-gray-600  mb-6">
-                {t('process.organized_into', { count: items.length, tasks: taskCount, notes: noteCount })}
+                Organized {items.length} items into {taskCount} tasks and {noteCount} notes.
               </p>
               
               <div className="bg-green-50 rounded-lg p-4 mb-6 border border-green-200">
                 <p className="text-sm text-green-800">
-                  ✅ {t('process.items_saved')}<br/>
-                  🔄 {t('process.taking_to_workspace')}
+                  ✅ Your items have been safely organized<br/>
+                  🔄 Taking you to your workspace...
                 </p>
               </div>
             </div>
@@ -326,21 +341,21 @@ export default function ProcessBraindumpModal({
                 onClick={applyOrganization}
                 className="flex-1 px-4 sm:px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all text-sm sm:text-base"
               >
-                ✅ {t('process.apply_organization')}
+                ✅ Apply Organization
               </button>
               
               <button
                 onClick={reProcess}
                 className="px-4 sm:px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
               >
-                🔄 {t('process.reprocess')}
+                🔄 Re-Process
               </button>
               
               <button
                 onClick={handleClose}
                 className="px-4 sm:px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
               >
-                {t('process.cancel')}
+                Cancel
               </button>
             </div>
           </div>
@@ -359,7 +374,6 @@ interface ReviewItemProps {
 }
 
 function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
-  const { t } = useLanguage()
   const [category, setCategory] = useState(item.suggestedCategory)
   
   const handleCategoryChange = (newCategory: 'tasks' | 'notes') => {
@@ -384,7 +398,7 @@ function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
           {/* Confidence Indicator */}
           <div className="mb-3">
             <div className="text-xs text-gray-500 mb-1">
-              {t('process.confidence')}: {Math.round(item.confidence * 100)}%
+              Confidence: {Math.round(item.confidence * 100)}%
             </div>
             <div className="w-full bg-gray-200  rounded-full h-1">
               <div 
@@ -427,7 +441,7 @@ function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
                 : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}
             `}
           >
-            📋 {t('process.task')}
+            📋 Task
           </button>
           
           <button
@@ -439,7 +453,7 @@ function ReviewItem({ item, onCategoryChange }: ReviewItemProps) {
                 : 'bg-gray-200 text-gray-600 hover:bg-gray-300'}
             `}
           >
-            📝 {t('process.note')}
+            📝 Note
           </button>
         </div>
       </div>

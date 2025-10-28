@@ -9,7 +9,7 @@ updates:
       # Prevent TailwindCSS v4 updates (breaking changes)
       - dependency-name: "tailwindcss"
         versions: [">=4.0.0"]
-      # Prevent React v19 type updates (compatibility issues)  
+      # Prevent React v19 type updates (compatibility issues)
       - dependency-name: "@types/react"
         versions: [">=19.0.0"]
       - dependency-name: "@types/react-dom"
@@ -19,6 +19,12 @@ updates:
         versions: [">=19.0.0"]
       - dependency-name: "react-dom"
         versions: [">=19.0.0"]
+      # Prevent ESLint v9 updates (requires flat config migration)
+      - dependency-name: "eslint"
+        versions: [">=9.0.0"]
+      # Prevent eslint-config-next v16 updates (requires ESLint 9)
+      - dependency-name: "eslint-config-next"
+        versions: [">=16.0.0"]
     # Limit number of open PRs
     open-pull-requests-limit: 3
     # Group related updates

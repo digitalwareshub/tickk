@@ -13,7 +13,7 @@ interface SEOMetaProps {
 
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
-  description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
+  description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. ADHD-friendly with Focus Mode, Command Palette (⌘K), and executive function support. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
   image = '/og-image.png',
   url,
   noIndex = false
@@ -89,7 +89,7 @@ export default function SEOMeta({
         additionalMetaTags={[
           {
             name: 'keywords',
-            content: 'free voice to text app, voice productivity software, speech recognition task manager, voice assistant, hands-free note taking, voice controlled todo list, natural language processing productivity, speech to text organizer, voice command app, voice powered task management, free productivity tools, offline voice recognition, privacy focused voice app, voice note taking app, speech recognition productivity suite, voice driven workflow, hands-free productivity, voice activated organizer, voice task categorization, smart voice assistant, voice productivity dashboard, speech to action converter, voice based project management, voice transcription software, PWA voice app, progressive web app productivity, offline speech recognition, browser voice technology, no AI voice assistant, voice workflow automation',
+            content: 'free voice to text app, voice productivity software, speech recognition task manager, ADHD productivity app, neurodivergent productivity tools, ADHD voice assistant, executive function support app, ADHD task management, focus mode productivity, command palette app, voice controlled todo list, hands-free note taking, natural language processing productivity, speech to text organizer, voice command app, voice powered task management, free productivity tools, offline voice recognition, privacy focused voice app, voice note taking app, speech recognition productivity suite, voice driven workflow, hands-free productivity, voice activated organizer, voice task categorization, smart voice assistant, voice productivity dashboard, speech to action converter, voice based project management, voice transcription software, PWA voice app, progressive web app productivity, offline speech recognition, browser voice technology, no AI voice assistant, voice workflow automation, productivity analytics dashboard, streak tracking app, calendar export productivity, keyboard shortcuts productivity, ADHD friendly interface, executive function tools, focus productivity app, voice braindump method',
           },
           {
             name: 'author',
