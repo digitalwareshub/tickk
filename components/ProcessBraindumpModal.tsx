@@ -128,29 +128,46 @@ export default function ProcessBraindumpModal({
    */
   const applyOrganization = async () => {
     setStage('complete')
-    
+
     try {
-      // Separate into tasks and notes
-      const tasks = processed.filter(item => item.suggestedCategory === 'tasks')
-      const notes = processed.filter(item => item.suggestedCategory === 'notes')
-      
+      // Separate into tasks and notes, merging classification metadata
+      const tasks = processed
+        .filter(item => item.suggestedCategory === 'tasks')
+        .map(item => ({
+          ...item,
+          metadata: {
+            ...item.metadata,
+            ...item.classification.metadata, // Merge classification metadata (dateInfo, hasDate, hasTime, urgency)
+          }
+        }))
+
+      const notes = processed
+        .filter(item => item.suggestedCategory === 'notes')
+        .map(item => ({
+          ...item,
+          metadata: {
+            ...item.metadata,
+            ...item.classification.metadata, // Merge classification metadata
+          }
+        }))
+
       // Mark original items as processed
       const updatedBraindumpItems = items.map(item => ({
         ...item,
         processed: true
       }))
-      
+
       // Save to storage
       await storageService.processBraindumpItems(updatedBraindumpItems)
-      
+
       // Track successful organization
       trackPageInteraction('braindump_organization_applied', `${tasks.length}_tasks_${notes.length}_notes`)
-      
+
       // Return organized data to parent
       setTimeout(() => {
         onComplete({ tasks, notes })
       }, 2000) // Show success state for 2 seconds
-      
+
     } catch (error) {
       console.error('Failed to apply organization:', error)
       // Could add error handling UI
