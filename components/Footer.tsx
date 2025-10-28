@@ -43,76 +43,89 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </p>
               </div>
 
-          {/* Three Column Layout */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            {/* Product Column */}
-            <div className="space-y-2 text-center">
-              <h3 className="text-xs font-medium text-gray-900 mb-2">
-                Product
-              </h3>
-              <Link href="/" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Voice Dashboard
-              </Link>
-              <Link href="/landing" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                About
-              </Link>
-              <Link href="/blog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Blog
-              </Link>
-              <Link href="/reviews" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Reviews
-              </Link>
-              <a
-                href="https://github.com/digitalwareshub/tickk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-xs text-gray-600 hover:text-orange-600 transition-colors"
-              >
-                Open Source
-              </a>
-              <div className="flex items-center justify-center space-x-1">
-                <span className="text-xs text-blue-600 cursor-not-allowed flex items-center">
-                  <svg className="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                  </svg>
-                  Tickk Pro
-                </span>
-                <span className="text-xs bg-blue-100 text-blue-600 px-1 py-0.5 rounded-full">
-                  Soon
-                </span>
+          {/* Mobile: 2x2 Grid Layout (2 rows, 2 columns each) */}
+          <div className="space-y-4 mb-6">
+            {/* Top Row - 2 Columns */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Product Column */}
+              <div className="space-y-2 text-center">
+                <h3 className="text-xs font-medium text-gray-900 mb-2">
+                  Product
+                </h3>
+                <Link href="/" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Voice Dashboard
+                </Link>
+                <Link href="/landing" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  About
+                </Link>
+                <Link href="/blog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Blog
+                </Link>
+              </div>
+
+              {/* Features Column */}
+              <div className="space-y-2 text-center">
+                <h3 className="text-xs font-medium text-gray-900 mb-2">
+                  Features
+                </h3>
+                <Link href="/reviews" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Reviews
+                </Link>
+                <a
+                  href="https://github.com/digitalwareshub/tickk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-xs text-gray-600 hover:text-orange-600 transition-colors"
+                >
+                  Open Source
+                </a>
+                <div className="flex items-center justify-center space-x-1">
+                  <span className="text-xs text-blue-600 cursor-not-allowed flex items-center">
+                    <svg className="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                    Tickk Pro
+                  </span>
+                  <span className="text-xs bg-blue-100 text-blue-600 px-1 py-0.5 rounded-full">
+                    Soon
+                  </span>
+                </div>
               </div>
             </div>
 
-            {/* Support Column */}
-            <div className="space-y-2 text-center">
-              <h3 className="text-xs font-medium text-gray-900 mb-2">
-                Support
-              </h3>
-              <Link href="/support" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Support & Help
-              </Link>
-              <Link href="/contact" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Contact
-              </Link>
-              <Link href="/bug-report" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Bug Reports
-              </Link>
-              <Link href="/changelog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Changelog
-              </Link>
-            </div>
+            {/* Bottom Row - 2 Columns */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Support Column */}
+              <div className="space-y-2 text-center">
+                <h3 className="text-xs font-medium text-gray-900 mb-2">
+                  Support
+                </h3>
+                <Link href="/support" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Support & Help
+                </Link>
+                <Link href="/contact" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Contact
+                </Link>
+                <Link href="/bug-report" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Bug Reports
+                </Link>
+              </div>
 
-            {/* Legal Column */}
-            <div className="space-y-2 text-center">
-              <h3 className="text-xs font-medium text-gray-900 mb-2">
-                Legal
-              </h3>
-              <Link href="/privacy" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
-                Terms of Service
-              </Link>
+              {/* Legal & Info Column */}
+              <div className="space-y-2 text-center">
+                <h3 className="text-xs font-medium text-gray-900 mb-2">
+                  Legal & Info
+                </h3>
+                <Link href="/privacy" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Terms of Service
+                </Link>
+                <Link href="/changelog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Changelog
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -157,8 +170,8 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </p>
           </div>
 
-          {/* Three Column Layout */}
-          <div className="grid grid-cols-3 gap-4 mb-1 max-w-2xl mx-auto">
+          {/* Four Column Layout */}
+          <div className="grid grid-cols-4 gap-4 mb-1 max-w-4xl mx-auto">
             {/* Product Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
@@ -180,6 +193,15 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                     Blog
                   </Link>
                 </li>
+              </ul>
+            </div>
+
+            {/* Features Column */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
+                Features
+              </h3>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/reviews" className="text-gray-600 hover:text-orange-600 transition-colors">
                     Reviews
@@ -232,18 +254,13 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                     Bug Reports
                   </Link>
                 </li>
-                <li>
-                  <Link href="/changelog" className="text-gray-600 hover:text-orange-600 transition-colors">
-                    Changelog
-                  </Link>
-                </li>
               </ul>
             </div>
 
-            {/* Legal Column */}
+            {/* Legal & Info Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-2">
-                Legal
+                Legal & Info
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
@@ -254,6 +271,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/terms" className="text-gray-600 hover:text-orange-600 transition-colors">
                     Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/changelog" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Changelog
                   </Link>
                 </li>
               </ul>

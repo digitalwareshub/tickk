@@ -589,7 +589,7 @@ export default function App() {
         </title>
         <meta 
           name="description" 
-          content="Free voice productivity app for hands-free task management. Speech-to-text tool that auto-organizes thoughts into tasks & notes. No signup required." 
+          content="Free voice productivity app for hands-free task management. ADHD-friendly speech-to-text tool with Focus Mode, Command Palette (⌘K), and analytics. Auto-organizes thoughts into tasks & notes. No signup required." 
         />
         <link rel="canonical" href="https://tickk.app/" />
 
@@ -602,7 +602,7 @@ export default function App() {
               "@type": "WebApplication",
               "name": "tickk",
               "alternateName": "tickk Voice Productivity App",
-              "description": "Revolutionary voice-to-text productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
+              "description": "Revolutionary voice-to-text productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Features ADHD-friendly Focus Mode, Command Palette (⌘K), and executive function support. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
               "url": "https://tickk.app",
               "applicationCategory": "ProductivityApplication",
               "operatingSystem": "Web Browser",
@@ -633,19 +633,25 @@ export default function App() {
               },
               "featureList": [
                 "Voice-to-text transcription",
-                "Natural language processing",
+                "Natural language processing", 
                 "Automatic task/note classification",
+                "ADHD-friendly Focus Mode",
+                "Command Palette with keyboard shortcuts (⌘K)",
+                "Productivity Analytics Dashboard",
+                "Activity Streak Tracking",
+                "Calendar Export (.ics format)",
                 "Offline functionality",
                 "No login required",
                 "Privacy-first design",
+                "Executive function support",
                 "Cross-platform compatibility",
                 "Open source",
                 "Real-time processing"
               ],
               "screenshot": "https://tickk.app/og-image.png",
-              "softwareVersion": "1.0",
+              "softwareVersion": "1.10.2",
               "datePublished": "2024-01-01",
-              "dateModified": "2025-09-30",
+              "dateModified": "2025-10-28",
               "license": "https://github.com/digitalwareshub/tickk/blob/main/LICENSE",
               "codeRepository": "https://github.com/digitalwareshub/tickk",
               "programmingLanguage": ["TypeScript", "JavaScript", "React", "Next.js"],
