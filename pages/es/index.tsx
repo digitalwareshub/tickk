@@ -20,6 +20,7 @@ import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
+import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -41,6 +42,7 @@ export default function SpanishApp() {
   // UI state
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
+  const [showTour, setShowTour] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -256,6 +258,67 @@ export default function SpanishApp() {
     if (status.isSupported !== undefined) setIsSupported(status.isSupported)
   }, [])
 
+  // Define onboarding tour steps (Spanish)
+  const tourSteps: TourStep[] = [
+    {
+      id: 'welcome',
+      title: '¡Bienvenido a Tickk! 🎉',
+      description: 'Tu compañero de productividad por voz. Hagamos un recorrido rápido de las funciones clave.',
+      placement: 'center'
+    },
+    {
+      id: 'modes',
+      title: 'Tres Modos Potentes',
+      description: 'Cambia entre Braindump (captura de voz), Organizado (ver tareas y notas), y Focus (prioridades de hoy).',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom'
+    },
+    {
+      id: 'braindump',
+      title: 'Modo Braindump 🎤',
+      description: 'Habla naturalmente. Tus pensamientos se organizan automáticamente en tareas y notas con clasificación inteligente de IA.',
+      target: '[data-tour="braindump-section"]',
+      placement: 'center',
+      action: () => setMode('braindump')
+    },
+    {
+      id: 'recording',
+      title: 'Comenzar a Grabar',
+      description: 'Haz clic en el micrófono o presiona Espacio para comenzar a capturar tus pensamientos. Presiona Espacio nuevamente para detener.',
+      target: '[data-tour="record-button"]',
+      placement: 'bottom'
+    },
+    {
+      id: 'organized',
+      title: 'Vista Organizada 📋',
+      description: 'Revisa tus elementos capturados organizados por tipo. Edita, completa o exporta tareas a tu calendario.',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom',
+      action: () => setMode('organized')
+    },
+    {
+      id: 'focus',
+      title: 'Modo Focus 🎯',
+      description: 'Mantente productivo con las tareas de hoy y un temporizador Pomodoro integrado.',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom',
+      action: () => setMode('focus')
+    },
+    {
+      id: 'command-palette',
+      title: 'Paleta de Comandos ⌨️',
+      description: 'Presiona Cmd/Ctrl + K en cualquier momento para acceder rápidamente a todas las funciones con atajos de teclado.',
+      placement: 'center'
+    },
+    {
+      id: 'complete',
+      title: '¡Todo Listo! 🚀',
+      description: 'Comienza a capturar tus pensamientos ahora. Tus datos se almacenan localmente y funcionan sin conexión. ¡Diviértete!',
+      placement: 'center',
+      action: () => setMode('braindump')
+    }
+  ]
+
   // Define command palette commands (Spanish)
   const commands: Command[] = [
     // Mode navigation
@@ -316,6 +379,14 @@ export default function SpanishApp() {
       icon: '⌨️',
       action: () => setShowHelpModal(true),
       keywords: ['ayuda', 'atajos', 'teclas', 'comandos']
+    },
+    {
+      id: 'show-tour',
+      label: 'Mostrar Recorrido',
+      description: 'Reiniciar el recorrido de introducción',
+      icon: '🎓',
+      action: () => setShowTour(true),
+      keywords: ['recorrido', 'guía', 'tutorial', 'ayuda', 'aprender']
     }
   ]
 
@@ -328,9 +399,25 @@ export default function SpanishApp() {
     onCloseModal: () => setShowHelpModal(false),
     onShowCommandPalette: () => setShowCommandPalette(true),
     isRecording,
-    isModalOpen: showHelpModal || showCommandPalette,
+    isModalOpen: showHelpModal || showCommandPalette || showTour,
     canProcess: recordingControls?.canProcess || false
   })
+
+  /**
+   * Check if user should see onboarding tour
+   */
+  useEffect(() => {
+    if (!isLoading && mounted && appData) {
+      const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
+      const hideLanguageModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+
+      // Show tour only for new users who haven't completed it and have dismissed the language modal
+      if (!tourCompleted && hideLanguageModal && !showOnboarding && totalItemCount === 0) {
+        // Delay slightly to ensure UI is ready
+        setTimeout(() => setShowTour(true), 500)
+      }
+    }
+  }, [isLoading, mounted, appData, showOnboarding, totalItemCount])
 
   // Handle onboarding modal keyboard accessibility (ESC to close)
   useEffect(() => {
@@ -611,6 +698,15 @@ export default function SpanishApp() {
             isOpen={showCommandPalette}
             commands={commands}
             onClose={() => setShowCommandPalette(false)}
+          />
+
+          {/* Interactive Onboarding Tour */}
+          <OnboardingTour
+            isOpen={showTour}
+            steps={tourSteps}
+            onComplete={() => setShowTour(false)}
+            onSkip={() => setShowTour(false)}
+            storageKey="tickk_onboarding_tour_completed"
           />
 
           {/* Live Regions for Accessibility */}

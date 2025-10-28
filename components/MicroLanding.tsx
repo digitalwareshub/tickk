@@ -41,7 +41,7 @@ export default function MicroLanding({
   }
 
   return (
-    <div className="micro-landing">
+    <div className="micro-landing" data-tour="braindump-section">
       {/* Main Content Area */}
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
@@ -92,11 +92,12 @@ export default function MicroLanding({
           {isSupported ? (
             <div>
               <div className="relative inline-block">
-                <button 
+                <button
                   onClick={handleRecordClick}
+                  data-tour="record-button"
                   aria-label={isRecording ? "Stop recording" : "Click to record your thoughts"}
                   className={`
-                    w-20 h-20 rounded-full flex items-center justify-center 
+                    w-20 h-20 rounded-full flex items-center justify-center
                     transition-all duration-200 transform hover:scale-105 shadow-lg
                     ${isRecording 
                       ? 'bg-red-500 hover:bg-red-600' 

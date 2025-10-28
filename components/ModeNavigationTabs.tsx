@@ -15,7 +15,7 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
   const { t } = useLanguage()
 
   return (
-    <div className="border-b border-gray-200 bg-white sticky top-16 z-40 shadow-sm">
+    <div className="border-b border-gray-200 bg-white sticky top-16 z-40 shadow-sm" data-tour="mode-tabs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex">
           {/* Braindump Tab */}

@@ -20,6 +20,7 @@ import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
+import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -45,6 +46,7 @@ export default function App() {
   // UI state
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
+  const [showTour, setShowTour] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -255,6 +257,22 @@ export default function App() {
     
     initializeApp()
   }, [storageService, migrator])
+
+  /**
+   * Check if user should see onboarding tour
+   */
+  useEffect(() => {
+    if (!isLoading && mounted && appData) {
+      const tourCompleted = localStorage.getItem('tickk_onboarding_tour_completed') === 'true'
+      const hideLanguageModal = localStorage.getItem('tickk_hide_language_modal') === 'true'
+
+      // Show tour only for new users who haven't completed it and have dismissed the language modal
+      if (!tourCompleted && hideLanguageModal && !showOnboarding && totalItemCount === 0) {
+        // Delay slightly to ensure UI is ready
+        setTimeout(() => setShowTour(true), 500)
+      }
+    }
+  }, [isLoading, mounted, appData, showOnboarding, totalItemCount])
 
   /**
    * Handle onboarding completion with language preference
@@ -569,6 +587,67 @@ export default function App() {
     })
   }
 
+  // Define onboarding tour steps
+  const tourSteps: TourStep[] = [
+    {
+      id: 'welcome',
+      title: 'Welcome to Tickk! 🎉',
+      description: 'Your voice-first productivity companion. Let\'s take a quick tour of the key features.',
+      placement: 'center'
+    },
+    {
+      id: 'modes',
+      title: 'Three Powerful Modes',
+      description: 'Switch between Braindump (voice capture), Organized (view tasks & notes), and Focus (today\'s priorities).',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom'
+    },
+    {
+      id: 'braindump',
+      title: 'Braindump Mode 🎤',
+      description: 'Speak naturally. Your thoughts are automatically organized into tasks and notes with smart AI classification.',
+      target: '[data-tour="braindump-section"]',
+      placement: 'center',
+      action: () => setMode('braindump')
+    },
+    {
+      id: 'recording',
+      title: 'Start Recording',
+      description: 'Click the microphone or press Space to start capturing your thoughts. Press Space again to stop.',
+      target: '[data-tour="record-button"]',
+      placement: 'bottom'
+    },
+    {
+      id: 'organized',
+      title: 'Organized View 📋',
+      description: 'Review your captured items organized by type. Edit, complete, or export tasks to your calendar.',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom',
+      action: () => setMode('organized')
+    },
+    {
+      id: 'focus',
+      title: 'Focus Mode 🎯',
+      description: 'Stay productive with today\'s tasks and a built-in Pomodoro timer.',
+      target: '[data-tour="mode-tabs"]',
+      placement: 'bottom',
+      action: () => setMode('focus')
+    },
+    {
+      id: 'command-palette',
+      title: 'Command Palette ⌨️',
+      description: 'Press Cmd/Ctrl + K anytime to quickly access all features with keyboard shortcuts.',
+      placement: 'center'
+    },
+    {
+      id: 'complete',
+      title: 'You\'re All Set! 🚀',
+      description: 'Start capturing your thoughts now. Your data is stored locally and works offline. Have fun!',
+      placement: 'center',
+      action: () => setMode('braindump')
+    }
+  ]
+
   // Define command palette commands
   const commands: Command[] = [
     // Mode navigation
@@ -638,6 +717,14 @@ export default function App() {
       icon: '⌨️',
       action: () => setShowHelpModal(true),
       keywords: ['help', 'shortcuts', 'keys', 'commands']
+    },
+    {
+      id: 'show-tour',
+      label: 'Show Tour',
+      description: 'Restart the onboarding tour',
+      icon: '🎓',
+      action: () => setShowTour(true),
+      keywords: ['tour', 'guide', 'tutorial', 'onboarding', 'help', 'learn']
     }
   ]
 
@@ -651,7 +738,7 @@ export default function App() {
     onShowCommandPalette: () => setShowCommandPalette(true),
     onExport: handleExportData,
     isRecording,
-    isModalOpen: showHelpModal || showCommandPalette,
+    isModalOpen: showHelpModal || showCommandPalette || showTour,
     canProcess: recordingControls?.canProcess || false
   })
   
@@ -870,6 +957,15 @@ export default function App() {
         isOpen={showCommandPalette}
         commands={commands}
         onClose={() => setShowCommandPalette(false)}
+      />
+
+      {/* Interactive Onboarding Tour */}
+      <OnboardingTour
+        isOpen={showTour}
+        steps={tourSteps}
+        onComplete={() => setShowTour(false)}
+        onSkip={() => setShowTour(false)}
+        storageKey="tickk_onboarding_tour_completed"
       />
 
       {/* ARIA Live Regions for screen readers */}
