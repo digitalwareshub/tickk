@@ -43,7 +43,7 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
 
   return (
     <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg border-b-2 border-blue-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3">
         <div className="text-center">
           {/* Close button - top right */}
           <div className="flex justify-end mb-1">
@@ -52,22 +52,22 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
               className="text-blue-200 hover:text-white transition-colors p-1"
               aria-label="Dismiss banner"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
           {/* Icon and main content - centered */}
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-1 sm:gap-2">
             {/* Icon */}
-            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-              <span className="text-lg">🎉</span>
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-full flex items-center justify-center">
+              <span className="text-sm sm:text-lg">🎉</span>
             </div>
 
             {/* Main text */}
             <div className="text-center">
-              <p className="text-base sm:text-lg font-bold mb-1">
+              <p className="text-sm sm:text-base lg:text-lg font-bold mb-1">
                 🚀 New features just landed!
               </p>
               <p className="text-xs sm:text-sm text-blue-100">
@@ -76,7 +76,7 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
             </div>
 
             {/* Quick Feature Highlights */}
-            <div className="flex flex-wrap justify-center gap-3 text-xs text-blue-100 mb-2">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs text-blue-100 mb-1 sm:mb-2">
               <div className="flex items-center gap-1">
                 <span>📊</span>
                 <span>Better Analytics</span>
@@ -94,9 +94,9 @@ export default function WhatsNewBanner({ version, onDismiss }: WhatsNewBannerPro
             {/* Call to action button - at bottom */}
             <Link
               href="/changelog#v1-10-2"
-              className="bg-blue-500 hover:bg-blue-400 text-white text-sm px-4 py-1.5 rounded-md transition-colors font-medium inline-flex items-center gap-2"
+              className="bg-blue-500 hover:bg-blue-400 text-white text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-md transition-colors font-medium inline-flex items-center gap-2"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               See What&apos;s New
