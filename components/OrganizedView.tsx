@@ -10,9 +10,12 @@ import DeleteConfirmModal from './DeleteConfirmModal'
 import BulkDeleteModal from './BulkDeleteModal'
 import DateBadge from './DateBadge'
 import ContextMenu, { type ContextMenuAction } from './ContextMenu'
+import SaveTemplateModal from './SaveTemplateModal'
+import TemplateLibrary from './TemplateLibrary'
 import { useContextMenu } from '@/hooks/useContextMenu'
+import { useTemplates } from '@/hooks/useTemplates'
 import { useLanguage } from '@/contexts/LanguageContext'
-import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
+import type { AppData, UserPreferences, VoiceItem, TaskTemplate } from '@/types/braindump'
 import { parseEarliestDate } from '@/lib/utils/dateParser'
 
 interface OrganizedViewProps {
@@ -59,6 +62,19 @@ export default function OrganizedView({
     handleTouchMove,
     closeMenu
   } = useContextMenu()
+
+  // Template state
+  const {
+    templates,
+    loading: templatesLoading,
+    addTemplate,
+    deleteTemplate,
+    incrementUsage
+  } = useTemplates()
+
+  const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false)
+  const [showTemplateLibrary, setShowTemplateLibrary] = useState(false)
+  const [itemToTemplate, setItemToTemplate] = useState<VoiceItem | null>(null)
 
   // Local translations for this component
   const localTranslations = {
@@ -346,6 +362,57 @@ export default function OrganizedView({
   }
 
   /**
+   * Open save template modal for an item
+   */
+  const handleSaveAsTemplate = (item: VoiceItem) => {
+    setItemToTemplate(item)
+    setShowSaveTemplateModal(true)
+    closeMenu()
+  }
+
+  /**
+   * Use a template to create a new item
+   */
+  const handleUseTemplate = async (template: TaskTemplate) => {
+    const newItem: VoiceItem = {
+      id: crypto.randomUUID(),
+      text: template.text,
+      timestamp: new Date().toISOString(),
+      category: template.category,
+      processed: true,
+      priority: template.priority,
+      tags: template.tags,
+      completed: false,
+      classification: {
+        category: template.category,
+        confidence: 1.0,
+        reasoning: 'Created from template'
+      },
+      metadata: {
+        source: 'template'
+      }
+    }
+
+    if (template.category === 'tasks') {
+      onDataUpdate({
+        ...appData,
+        tasks: [newItem, ...appData.tasks]
+      })
+    } else {
+      onDataUpdate({
+        ...appData,
+        notes: [newItem, ...appData.notes]
+      })
+    }
+
+    // Increment usage count
+    await incrementUsage(template.id)
+
+    // Close library
+    setShowTemplateLibrary(false)
+  }
+
+  /**
    * Get context menu actions for an item
    */
   const getContextMenuActions = (item: VoiceItem | null, type: 'task' | 'note'): ContextMenuAction[] => {
@@ -389,6 +456,13 @@ export default function OrganizedView({
       label: 'Copy Text',
       icon: '📋',
       onClick: () => handleCopyText(item.text)
+    })
+
+    // Save as Template
+    actions.push({
+      label: 'Save as Template',
+      icon: '💾',
+      onClick: () => handleSaveAsTemplate(item)
     })
 
     // Delete
@@ -821,14 +895,27 @@ export default function OrganizedView({
               <button
                 onClick={toggleBulkMode}
                 className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  bulkMode 
-                    ? 'bg-orange-600 text-white hover:bg-orange-700' 
+                  bulkMode
+                    ? 'bg-orange-600 text-white hover:bg-orange-700'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                 }`}
               >
                 {bulkMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
               </button>
-              
+
+              <button
+                onClick={() => setShowTemplateLibrary(true)}
+                className="px-3 py-2 text-sm font-medium rounded-lg transition-colors bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2"
+              >
+                <span>📝</span>
+                Templates
+                {templates.length > 0 && (
+                  <span className="px-1.5 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full">
+                    {templates.length}
+                  </span>
+                )}
+              </button>
+
               {bulkMode && (
                 <>
                   <span className="text-sm text-gray-600">
@@ -1216,6 +1303,27 @@ export default function OrganizedView({
           onClose={closeMenu}
         />
       )}
+
+      {/* Save Template Modal */}
+      <SaveTemplateModal
+        isOpen={showSaveTemplateModal}
+        item={itemToTemplate}
+        onSave={addTemplate}
+        onClose={() => {
+          setShowSaveTemplateModal(false)
+          setItemToTemplate(null)
+        }}
+      />
+
+      {/* Template Library Modal */}
+      <TemplateLibrary
+        isOpen={showTemplateLibrary}
+        templates={templates}
+        onUseTemplate={handleUseTemplate}
+        onDeleteTemplate={deleteTemplate}
+        onClose={() => setShowTemplateLibrary(false)}
+        loading={templatesLoading}
+      />
     </div>
   )
 }

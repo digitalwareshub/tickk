@@ -208,3 +208,21 @@ export interface ExportData {
   version: string
   format: 'json' | 'markdown'
 }
+
+/**
+ * Task Template for recurring tasks
+ */
+export interface TaskTemplate {
+  id: string                           // UUID
+  text: string                         // Template text
+  category: 'tasks' | 'notes'          // Template type
+  priority?: 'low' | 'medium' | 'high' // Default priority
+  tags?: string[]                      // Default tags
+  createdAt: string                    // ISO timestamp
+  usageCount: number                   // How many times used
+  lastUsed?: string                    // ISO timestamp of last use
+  metadata?: {
+    description?: string               // Template description
+    icon?: string                      // Optional emoji icon
+  }
+}
