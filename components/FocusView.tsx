@@ -216,7 +216,7 @@ export default function FocusView({
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-            Today's Focus
+            Today&apos;s Focus
           </h1>
           <p className="text-sm sm:text-base text-gray-600">
             {focusTasks.length === 0
@@ -432,24 +432,22 @@ export default function FocusView({
       </div>
 
       {/* Edit Modal */}
-      {showEditModal && itemToEdit && (
-        <EditItemModal
-          item={itemToEdit}
-          type={editType}
-          onSave={handleConfirmEdit}
-          onCancel={handleCancelEdit}
-        />
-      )}
+      <EditItemModal
+        isOpen={showEditModal}
+        item={itemToEdit}
+        type={editType}
+        onSave={handleConfirmEdit}
+        onClose={handleCancelEdit}
+      />
 
       {/* Delete Modal */}
-      {showDeleteModal && itemToDelete && (
-        <DeleteConfirmModal
-          item={itemToDelete}
-          type={deleteType}
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-        />
-      )}
+      <DeleteConfirmModal
+        isOpen={showDeleteModal}
+        itemText={itemToDelete?.text || ''}
+        itemType={deleteType}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </div>
   )
 }

@@ -5,8 +5,8 @@ import LanguageDropdown from './LanguageDropdown'
 import { FEATURES } from '@/lib/config/features'
 
 interface HeaderProps {
-  mode?: 'braindump' | 'organized'
-  onModeChange?: (mode: 'braindump' | 'organized') => void
+  mode?: 'braindump' | 'organized' | 'focus'
+  onModeChange?: (mode: 'braindump' | 'organized' | 'focus') => void
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

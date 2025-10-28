@@ -39,15 +39,16 @@ export interface VoiceItem {
     dateInfo?: string                    // Extracted date/time info
     urgency?: UrgencyLevel              // Extracted urgency level
     completed?: boolean                  // Task completion status
-    
+    pinned?: boolean                     // Pinned to top in Focus mode
+
     // Classification context
     reasoning?: string                   // Why it was classified this way
     patterns?: string[]                  // Detected patterns in text
-    
+
     // User adjustments
     userCorrected?: boolean             // User manually changed category
     originalSuggestion?: 'tasks' | 'notes' // Original classification if corrected
-    
+
     // Recording metadata
     source?: string                      // Source of recording
     duration?: number                    // Recording duration
@@ -96,7 +97,7 @@ export interface AppData {
  */
 export interface UserPreferences {
   // UI Preferences
-  defaultMode: 'braindump' | 'organized'     // Default app mode
+  defaultMode: 'braindump' | 'organized' | 'focus'     // Default app mode
   showOnboarding: boolean                    // Whether to show onboarding
   enableKeyboardShortcuts: boolean           // Keyboard shortcuts enabled
   

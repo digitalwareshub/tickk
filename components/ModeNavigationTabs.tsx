@@ -51,7 +51,7 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
               <span className="text-xl sm:text-2xl" role="img" aria-label="Target">🎯</span>
               <span className="font-semibold text-xs sm:text-sm">Focus</span>
               <span className="text-xs text-gray-500 hidden lg:block">
-                Today's priorities
+                Today&apos;s priorities
               </span>
             </div>
           </button>
