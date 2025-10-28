@@ -19,6 +19,7 @@ import MicroLanding from '@/components/MicroLanding'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
+import CommandPalette, { type Command } from '@/components/CommandPalette'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -39,6 +40,7 @@ export default function SpanishApp() {
   
   // UI state
   const [showHelpModal, setShowHelpModal] = useState(false)
+  const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -254,6 +256,69 @@ export default function SpanishApp() {
     if (status.isSupported !== undefined) setIsSupported(status.isSupported)
   }, [])
 
+  // Define command palette commands (Spanish)
+  const commands: Command[] = [
+    // Mode navigation
+    {
+      id: 'go-braindump',
+      label: 'Ir a Braindump',
+      description: 'Cambiar al modo braindump',
+      icon: '🎤',
+      action: () => setMode('braindump'),
+      keywords: ['modo', 'voz', 'grabar']
+    },
+    {
+      id: 'go-organized',
+      label: 'Ir a Organizado',
+      description: 'Cambiar a vista organizada',
+      icon: '📋',
+      action: () => setMode('organized'),
+      keywords: ['modo', 'tareas', 'notas', 'lista']
+    },
+    {
+      id: 'go-focus',
+      label: 'Ir a Enfoque',
+      description: 'Cambiar al modo enfoque',
+      icon: '🎯',
+      action: () => setMode('focus'),
+      keywords: ['modo', 'hoy', 'pomodoro']
+    },
+    // Recording actions
+    {
+      id: 'start-recording',
+      label: 'Iniciar Grabación',
+      description: 'Iniciar grabación de voz',
+      icon: '⏺️',
+      action: () => recordingControls?.startRecording(),
+      keywords: ['voz', 'micrófono', 'grabar', 'hablar']
+    },
+    {
+      id: 'stop-recording',
+      label: 'Detener Grabación',
+      description: 'Detener grabación de voz',
+      icon: '⏹️',
+      action: () => recordingControls?.stopRecording(),
+      keywords: ['voz', 'micrófono', 'grabar']
+    },
+    {
+      id: 'process-braindump',
+      label: 'Procesar y Organizar',
+      description: 'Organizar elementos braindump en tareas y notas',
+      icon: '✨',
+      action: () => recordingControls?.processItems(),
+      keywords: ['organizar', 'clasificar', 'procesar', 'ordenar']
+    },
+    // Help
+    {
+      id: 'show-help',
+      label: 'Atajos de Teclado',
+      description: 'Mostrar todos los atajos de teclado',
+      icon: '⌨️',
+      action: () => setShowHelpModal(true),
+      keywords: ['ayuda', 'atajos', 'teclas', 'comandos']
+    }
+  ]
+
   // Set up keyboard shortcuts
   useKeyboardShortcuts({
     onStartRecording: recordingControls?.startRecording,
@@ -261,8 +326,9 @@ export default function SpanishApp() {
     onProcessBraindump: recordingControls?.processItems,
     onShowHelp: () => setShowHelpModal(true),
     onCloseModal: () => setShowHelpModal(false),
+    onShowCommandPalette: () => setShowCommandPalette(true),
     isRecording,
-    isModalOpen: showHelpModal,
+    isModalOpen: showHelpModal || showCommandPalette,
     canProcess: recordingControls?.canProcess || false
   })
 
@@ -539,6 +605,13 @@ export default function SpanishApp() {
 
           {/* Keyboard Hints */}
           <KeyboardHint show={false} />
+
+          {/* Command Palette (Cmd+K) */}
+          <CommandPalette
+            isOpen={showCommandPalette}
+            commands={commands}
+            onClose={() => setShowCommandPalette(false)}
+          />
 
           {/* Live Regions for Accessibility */}
           <LiveRegions />

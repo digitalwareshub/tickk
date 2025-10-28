@@ -19,6 +19,7 @@ import MicroLanding from '@/components/MicroLanding'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
+import CommandPalette, { type Command } from '@/components/CommandPalette'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -43,6 +44,7 @@ export default function App() {
   
   // UI state
   const [showHelpModal, setShowHelpModal] = useState(false)
+  const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
   const [recordingError, setRecordingError] = useState<string | null>(null)
@@ -566,7 +568,79 @@ export default function App() {
       }
     })
   }
-  
+
+  // Define command palette commands
+  const commands: Command[] = [
+    // Mode navigation
+    {
+      id: 'go-braindump',
+      label: 'Go to Braindump',
+      description: 'Switch to braindump mode',
+      icon: '🎤',
+      action: () => setMode('braindump'),
+      keywords: ['mode', 'voice', 'record']
+    },
+    {
+      id: 'go-organized',
+      label: 'Go to Organized',
+      description: 'Switch to organized view',
+      icon: '📋',
+      action: () => setMode('organized'),
+      keywords: ['mode', 'tasks', 'notes', 'list']
+    },
+    {
+      id: 'go-focus',
+      label: 'Go to Focus',
+      description: 'Switch to focus mode',
+      icon: '🎯',
+      action: () => setMode('focus'),
+      keywords: ['mode', 'today', 'pomodoro']
+    },
+    // Recording actions
+    {
+      id: 'start-recording',
+      label: 'Start Recording',
+      description: 'Start voice recording',
+      icon: '⏺️',
+      action: () => recordingControls?.startRecording(),
+      keywords: ['voice', 'mic', 'record', 'speak']
+    },
+    {
+      id: 'stop-recording',
+      label: 'Stop Recording',
+      description: 'Stop voice recording',
+      icon: '⏹️',
+      action: () => recordingControls?.stopRecording(),
+      keywords: ['voice', 'mic', 'record']
+    },
+    {
+      id: 'process-braindump',
+      label: 'Process & Organize',
+      description: 'Organize braindump items into tasks and notes',
+      icon: '✨',
+      action: () => recordingControls?.processItems(),
+      keywords: ['organize', 'classify', 'process', 'sort']
+    },
+    // Data actions
+    {
+      id: 'export-data',
+      label: 'Export Data',
+      description: 'Export all your data',
+      icon: '💾',
+      action: handleExportData,
+      keywords: ['save', 'backup', 'download', 'export']
+    },
+    // Help
+    {
+      id: 'show-help',
+      label: 'Keyboard Shortcuts',
+      description: 'Show all keyboard shortcuts',
+      icon: '⌨️',
+      action: () => setShowHelpModal(true),
+      keywords: ['help', 'shortcuts', 'keys', 'commands']
+    }
+  ]
+
   // Set up keyboard shortcuts
   useKeyboardShortcuts({
     onStartRecording: recordingControls?.startRecording,
@@ -574,9 +648,10 @@ export default function App() {
     onProcessBraindump: recordingControls?.processItems,
     onShowHelp: () => setShowHelpModal(true),
     onCloseModal: () => setShowHelpModal(false),
+    onShowCommandPalette: () => setShowCommandPalette(true),
     onExport: handleExportData,
     isRecording,
-    isModalOpen: showHelpModal,
+    isModalOpen: showHelpModal || showCommandPalette,
     canProcess: recordingControls?.canProcess || false
   })
   
@@ -784,12 +859,19 @@ export default function App() {
       />
       
       {/* Keyboard shortcuts hint */}
-      <KeyboardHint 
+      <KeyboardHint
         show={hasEverRecorded && totalItemCount < 10}
         isRecording={isRecording}
         canProcess={recordingControls?.canProcess}
       />
-      
+
+      {/* Command Palette (Cmd+K) */}
+      <CommandPalette
+        isOpen={showCommandPalette}
+        commands={commands}
+        onClose={() => setShowCommandPalette(false)}
+      />
+
       {/* ARIA Live Regions for screen readers */}
       <LiveRegions />
       
