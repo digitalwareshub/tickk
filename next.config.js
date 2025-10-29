@@ -179,6 +179,20 @@ const nextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
+      // HTTP to HTTPS redirect (force secure) - 301 permanent redirect
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'http',
+          },
+        ],
+        destination: 'https://tickk.app/:path*',
+        permanent: true,
+        statusCode: 301,
+      },
       // WWW to non-WWW redirect (canonical) - 301 permanent redirect
       {
         source: '/:path*',
@@ -237,19 +251,25 @@ const nextConfig = {
       },
       {
         source: '/voice-app',
-        destination: '/app',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/voice-dashboard',
-        destination: '/app',
+        destination: '/',
         permanent: true,
       },
-      // Spanish page redirects (in case of old broken redirects)
       {
-        source: '/es/blog/braindump-first-organize-later-productivity',
-        destination: '/es/blog',
+        source: '/app',
+        destination: '/',
         permanent: true,
+      },
+      // Remove old Spanish page redirects (they don't exist anymore)
+      {
+        source: '/es/:path*',
+        destination: '/',
+        permanent: true,
+        statusCode: 301,
       },
     ]
   },
