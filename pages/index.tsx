@@ -632,7 +632,7 @@ export default function App() {
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.8",
-                "ratingCount": "150",
+                "ratingCount": "79",
                 "bestRating": "5"
               },
               "featureList": [
