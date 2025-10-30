@@ -236,50 +236,49 @@ export default function BraindumpInterface({
   
   /**
    * Handle completed transcript
+   * Now supports multi-item braindumps (automatically splits and classifies)
    */
   const handleTranscriptComplete = useCallback(async (transcript: string) => {
     if (!transcript.trim()) return
-    
+
     setIsProcessing(true)
-    
+
     try {
-      // Create new braindump item
-      const newItem: VoiceItem = {
+      // Process the transcript (splits into multiple items if needed and classifies each)
+      classifier.setLanguage('en')
+      const processedItems = await classifier.processBraindump(transcript)
+
+      // Create braindump items for each processed result
+      const newItems: VoiceItem[] = processedItems.map(result => ({
         id: crypto.randomUUID(),
-        text: transcript,
+        text: result.text,
         timestamp: new Date().toISOString(),
         sessionId: currentSession?.id || crypto.randomUUID(),
         processed: false,
-        confidence: undefined,
-        classification: undefined,
+        confidence: result.classification.confidence,
+        classification: result.classification,
         metadata: {
           source: 'braindump',
-          duration: 0, // TODO: Track actual recording duration
+          duration: 0,
           retryCount: 0
         }
-      }
-      
-      // Classify the item
-      classifier.setLanguage('en')
-      const classificationResult = await classifier.classify(newItem.text)
-      newItem.classification = classificationResult
-      newItem.confidence = classificationResult.confidence
-      
-      // Update app data
+      }))
+
+      // Update app data with all new items
       const updatedData: AppData = {
         ...appData,
-        braindump: [...appData.braindump, newItem]
+        braindump: [...appData.braindump, ...newItems]
       }
-      
+
       // Update session
       if (currentSession) {
         const updatedSession = {
           ...currentSession,
-          itemCount: currentSession.itemCount + 1,
+          itemCount: currentSession.itemCount + newItems.length,
           endTime: new Date().toISOString()
         }
         setCurrentSession(updatedSession)
-        
+
         // Update sessions in app data
         const existingSessionIndex = updatedData.sessions.findIndex(s => s.id === currentSession.id)
         if (existingSessionIndex >= 0) {
@@ -288,27 +287,29 @@ export default function BraindumpInterface({
           updatedData.sessions.push(updatedSession)
         }
       }
-      
+
       // Save to storage and update parent
       await storageService.saveAllData(updatedData)
       onDataUpdate(updatedData)
-      
-      // Announce success with more helpful feedback
-      announcer.announceBraindumpAction('item-added', { 
-        count: updatedData.braindump.length 
+
+      // Announce success with count of items added
+      const itemCount = newItems.length
+      const itemWord = itemCount === 1 ? 'item' : 'items'
+      announcer.announceBraindumpAction('item-added', {
+        count: updatedData.braindump.length
       })
-      announcer.announce(`Added: "${transcript.slice(0, 50)}${transcript.length > 50 ? '...' : ''}". Click Organize to categorize your thoughts.`, 'polite')
-      
+      announcer.announce(`Added ${itemCount} ${itemWord}. Click Organize to categorize your thoughts.`, 'polite')
+
       // Track success
-      trackPageInteraction('braindump_item_added', classificationResult.category)
-      
+      trackPageInteraction('braindump_items_added', `count_${itemCount}`)
+
       setCurrentTranscript('')
-      setLastAddedItem(transcript.slice(0, 50) + (transcript.length > 50 ? '...' : ''))
+      setLastAddedItem(`${itemCount} ${itemWord} added`)
       onRecordingStatusUpdate?.({ transcript: '' })
-      
+
       // Clear success notification after 3 seconds
       setTimeout(() => setLastAddedItem(null), 3000)
-      
+
     } catch (error) {
       console.error('Failed to process transcript:', error)
       setRecordingError('Failed to process recording')

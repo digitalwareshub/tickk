@@ -517,14 +517,139 @@ export class VoiceClassifier {
   }
 
   /**
+   * Split a long transcript into multiple items
+   * Handles cases where user braindumps multiple tasks/notes in one go
+   * Example: "I need to email John, also buy milk, oh and document that idea"
+   */
+  splitTranscript(text: string): string[] {
+    if (!text || text.trim().length === 0) {
+      return []
+    }
+
+    const trimmed = text.trim()
+    let items: string[] = [trimmed]
+
+    // Step 1: Split by explicit separators (also, oh and, and then, etc.)
+    const explicitSeparators = this.currentLanguage === 'es'
+      ? /,?\s*\b(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa)\s+/gi
+      : /,?\s*\b(also|oh and|and also|and then|plus|additionally|another thing|by the way)\s+/gi
+
+    if (explicitSeparators.test(trimmed)) {
+      items = trimmed.split(explicitSeparators).filter(item => {
+        const cleaned = item.trim()
+        return cleaned.length > 0 && !this.isSeparatorWord(cleaned)
+      })
+    }
+
+    // Step 2: Further split each item by commas if they contain multiple distinct commands
+    const furtherSplit: string[] = []
+    for (const item of items) {
+      // Look for comma-separated items within each part
+      // Pattern: "X, Y, Z" where each part has action/thought indicators
+      const commaParts = item.split(/,\s+/).filter(s => s.trim().length > 0)
+
+      if (commaParts.length > 1) {
+        // Check if each part looks like a distinct item
+        const distinctParts = commaParts.filter(part => this.looksLikeDistinctItem(part))
+
+        if (distinctParts.length === commaParts.length) {
+          // All parts are distinct items - split them
+          furtherSplit.push(...commaParts)
+        } else {
+          // Not all parts are distinct - keep as single item
+          furtherSplit.push(item)
+        }
+      } else {
+        furtherSplit.push(item)
+      }
+    }
+
+    items = furtherSplit
+
+    // Step 3: Split by sentence boundaries (period, exclamation, question mark) if no other splits occurred
+    if (items.length === 1) {
+      const sentences = trimmed.split(/[.!?]+/).filter(s => s.trim().length > 0)
+      if (sentences.length > 1) {
+        items = sentences
+      }
+    }
+
+    // Clean up items
+    return items
+      .map(item => {
+        let cleaned = item.trim()
+        // Remove leading "and" or "y" from split items
+        cleaned = cleaned.replace(/^(and|y)\s+/i, '')
+        // Remove trailing commas
+        cleaned = cleaned.replace(/,\s*$/, '')
+        return cleaned
+      })
+      .filter(item => {
+        // Filter out very short or empty items
+        const words = item.split(/\s+/).filter(w => w.length > 0)
+        return words.length >= 2 // At least 2 words to be a valid item
+      })
+  }
+
+  /**
+   * Check if a string is just a separator word
+   */
+  private isSeparatorWord(text: string): boolean {
+    const separatorWords = this.currentLanguage === 'es'
+      ? /^(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa|y|and)$/i
+      : /^(also|oh and|and also|and then|plus|additionally|another thing|by the way|and)$/i
+
+    return separatorWords.test(text.trim())
+  }
+
+  /**
+   * Check if a text fragment looks like a distinct item (task or note)
+   * Used to determine if comma-separated parts should be split
+   */
+  private looksLikeDistinctItem(text: string): boolean {
+    const trimmed = text.trim()
+
+    // Check for action verbs, modal verbs, or thought patterns
+    const hasActionIndicator = this.currentLanguage === 'es'
+      ? /\b(necesito|tengo que|debo|quiero|voy a|comprar|llamar|enviar|recordar|hacer|ir a)\b/i.test(trimmed)
+      : /\b(need to|have to|must|want to|should|gonna|buy|call|email|send|remember|do|make|go to)\b/i.test(trimmed)
+
+    const hasThoughtIndicator = this.currentLanguage === 'es'
+      ? /\b(idea|pensamiento|creo|pienso|interesante|noté)\b/i.test(trimmed)
+      : /\b(idea|thought|think|interesting|noticed|wonder)\b/i.test(trimmed)
+
+    return hasActionIndicator || hasThoughtIndicator
+  }
+
+  /**
+   * Process a braindump transcript and return classified items
+   * This is the main entry point for handling raw voice transcripts
+   */
+  async processBraindump(text: string): Promise<Array<{ text: string; classification: Classification }>> {
+    // Split the transcript into individual items
+    const items = this.splitTranscript(text)
+
+    // Classify each item
+    const results = await Promise.all(
+      items.map(async (itemText) => ({
+        text: itemText,
+        classification: await this.classify(itemText)
+      }))
+    )
+
+    return results
+  }
+
+  /**
    * Get classification statistics for debugging
    */
   getStats(): { version: string; features: string[] } {
     return {
-      version: '2.0.0-improved',
+      version: '2.1.0-multi-item',
       features: [
+        'multi_item_splitting',
         'improved_intent_detection',
-        'past_tense_detection', 
+        'past_tense_detection',
         'strong_weak_modal_split',
         'better_confidence_scores',
         'enhanced_spanish_support',
