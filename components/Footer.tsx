@@ -367,14 +367,12 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
         
         {/* Small Support Badge */}
         <div className="text-center py-4 border-t border-gray-100">
-          <a 
-            href="https://buymeacoffee.com/tickkapp" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link 
+            href="/donate" 
             className="inline-flex items-center px-3 py-1.5 bg-yellow-50 hover:bg-yellow-100 text-yellow-800 text-xs font-medium rounded-md transition-colors border border-yellow-200 hover:border-yellow-300"
           >
             <span>Support the project</span>
-          </a>
+          </Link>
         </div>
       </div>
       </div>
