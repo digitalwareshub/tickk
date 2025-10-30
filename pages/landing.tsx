@@ -316,7 +316,7 @@ export default function Home() {
     <>
       <Head>
         <title>Best Free Productivity App for ADHD & Brain Dump | tickk - Voice-First Task Manager 2025</title>
-        <meta name="description" content="Free productivity app for ADHD & neurodivergent minds. Brain dump first, organize later with voice-to-text technology. Simple alternative to complex task managers - no overwhelming setup, capture racing thoughts instantly. Perfect for students, professionals & anyone overwhelmed by productivity apps. Works offline, no subscription required." />
+        <meta name="description" content="Revolutionary free voice productivity startup for ADHD & neurodivergent minds. Featured indie app: brain dump first, organize later with voice-to-text technology. Trending startup alternative to complex task managers - no overwhelming setup, capture racing thoughts instantly. Perfect for students, professionals & anyone overwhelmed by productivity apps. Works offline, no subscription required." />
         <meta name="keywords" content="progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools, voice memo organization app, dictation software for tasks, speech to text for productivity, voice recording productivity tool, voice note taking for meetings, mobile voice productivity app, voice notes on mobile browser, voice controlled task management, speech recognition for project management, hands-free note taking app, voice dictation task organizer, browser speech recognition app, offline voice memo app, privacy voice productivity tool, no login voice app, voice braindump organizer, speech to organized tasks, voice thought capture app, hands-free brainstorming tool" />
         <meta name="author" content="tickk" />
         
@@ -325,6 +325,9 @@ export default function Home() {
         
         {/* ChatGPT-recommended Voice-First & Brain Dump Keywords */}
         <meta name="keywords-voice-braindump" content="brain dump app online free, voice to notes productivity app, capture ideas with voice app, free brain dump organizer app, instant voice transcription productivity tool, note taking app that organizes later, quick voice capture app for ideas" />
+        
+        {/* Startup Discovery Keywords */}
+        <meta name="keywords-startup" content="new productivity startup 2025, featured indie app, trending startup tools, best new productivity apps, innovative voice startup, ADHD startup tools, neurodivergent tech startup, bootstrapped productivity app, indie maker productivity tool, startup discovery, new app launch 2025, featured on Product Hunt, trending on Hacker News" />
         
         {/* ChatGPT-recommended Free vs Paid / Affordability Keywords */}
         <meta name="keywords-affordability" content="free alternative to ADHD productivity apps, free alternative to TickTick Notion for ADHD, free ADHD organization apps 2025, free task manager app for busy minds, productivity tools for ADHD without subscription, free alternative to expensive ADHD productivity apps, free productivity app with no subscription" />
@@ -433,7 +436,7 @@ export default function Home() {
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.8",
-                "reviewCount": "1250",
+                "reviewCount": "79",
                 "bestRating": "5",
                 "worstRating": "1"
               },
