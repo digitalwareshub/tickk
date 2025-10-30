@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
 interface FooterProps {
   showHomeLink?: boolean
@@ -9,33 +8,14 @@ interface FooterProps {
 export default function Footer({ showHomeLink = false }: FooterProps) {
   const router = useRouter()
   const currentYear = new Date().getFullYear()
-  const [isFooterExpanded, setIsFooterExpanded] = useState(true)
 
   return (
     <footer className="bg-gray-100 border-t border-gray-200 -mt-8">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
-        {/* Mobile Compact Layout */}
+        {/* Mobile Simple Layout */}
         <div className="block md:hidden">
-          {/* Toggle Button */}
-          <button 
-            onClick={() => setIsFooterExpanded(!isFooterExpanded)}
-            className="flex items-center justify-center w-full py-3 text-gray-400 hover:text-gray-600 transition-colors border-t border-gray-200"
-            aria-label={isFooterExpanded ? 'Collapse footer' : 'Expand footer'}
-          >
-            <svg 
-              className={`w-5 h-5 transition-transform duration-300 ${isFooterExpanded ? 'rotate-180' : ''}`} 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          {/* Collapsible Content */}
-          <div className={`overflow-hidden transition-all duration-300 ${isFooterExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="pt-4">
+          <div className="pt-4">
               {/* Brand Section */}
               <div className="text-center mb-4">
                 <p className="text-responsive text-gray-500">
@@ -155,10 +135,35 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </a>
           </div>
 
+          {/* Support the Project Button */}
+          <div className="flex justify-center py-4">
+            <Link
+              href="/donate"
+              className="inline-flex items-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium rounded-md transition-colors duration-200"
+            >
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Support the Project
+            </Link>
+          </div>
+
+          {/* Mobile Tech Stack Credits */}
+          <div className="text-center pt-4 space-y-2">
+            <div className="text-xs text-gray-600">
+              © {currentYear} tickk. Built with ❤️ for daily productivity.
+            </div>
+            <div className="text-xs text-gray-500 space-x-2">
+              <span>Next.js</span>
+              <span>•</span>
+              <span>Web Speech API</span>
+              <span>•</span>
+              <span>compromise.js</span>
+            </div>
+          </div>
 
           </div>
         </div>
-      </div>
 
       {/* Desktop Full Layout */}
       <div className="hidden md:block">
@@ -309,6 +314,19 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </div>
           </div>
 
+          {/* Desktop Support Button */}
+          <div className="hidden md:flex justify-center py-4">
+            <Link
+              href="/donate"
+              className="inline-flex items-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium rounded-md transition-colors duration-200"
+            >
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Support the Project
+            </Link>
+          </div>
+
           {/* Desktop Bottom */}
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-6">
             <div className="flex items-center space-x-4">
@@ -365,15 +383,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           </div>
         </div>
         
-        {/* Small Support Badge */}
-        <div className="text-center py-4 border-t border-gray-100">
-          <Link 
-            href="/donate" 
-            className="inline-flex items-center px-3 py-1.5 bg-yellow-50 hover:bg-yellow-100 text-yellow-800 text-xs font-medium rounded-md transition-colors border border-yellow-200 hover:border-yellow-300"
-          >
-            <span>Support the project</span>
-          </Link>
-        </div>
       </div>
       </div>
 
