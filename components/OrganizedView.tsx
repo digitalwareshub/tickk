@@ -571,9 +571,20 @@ export default function OrganizedView({
 
   // Sorting function
   const sortItems = (items: VoiceItem[]) => {
-    if (sortBy === 'none') return items
-
     return [...items].sort((a, b) => {
+      // ALWAYS prioritize pinned items first, regardless of other sorting
+      const aPinned = a.metadata?.pinned || false
+      const bPinned = b.metadata?.pinned || false
+      
+      if (aPinned && !bPinned) return -1
+      if (!aPinned && bPinned) return 1
+      
+      // If both are pinned or both are not pinned, apply secondary sorting
+      if (sortBy === 'none') {
+        // For 'none', maintain creation order (newer first) after pinned sorting
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      }
+
       if (sortBy === 'date') {
         const dateA = parseEarliestDate(a.metadata?.dateInfo as string)
         const dateB = parseEarliestDate(b.metadata?.dateInfo as string)
@@ -613,6 +624,46 @@ export default function OrganizedView({
         note.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     : sortedNotes
+
+  // Combined and sorted list for "All Items" view
+  const allItemsCombined = (() => {
+    const combined = [
+      ...filteredTasks.map(task => ({ ...task, itemType: 'task' as const })),
+      ...filteredNotes.map(note => ({ ...note, itemType: 'note' as const }))
+    ]
+    
+    // Sort the combined list with pinned items first
+    return combined.sort((a, b) => {
+      // ALWAYS prioritize pinned items first
+      const aPinned = a.metadata?.pinned || false
+      const bPinned = b.metadata?.pinned || false
+      
+      if (aPinned && !bPinned) return -1
+      if (!aPinned && bPinned) return 1
+      
+      // If both are pinned or both are not pinned, apply secondary sorting
+      if (sortBy === 'none') {
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      }
+
+      if (sortBy === 'date') {
+        const dateA = parseEarliestDate(a.metadata?.dateInfo as string)
+        const dateB = parseEarliestDate(b.metadata?.dateInfo as string)
+
+        if (dateA && !dateB) return -1
+        if (!dateA && dateB) return 1
+        if (dateA && dateB) return dateA.getTime() - dateB.getTime()
+
+        return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      }
+
+      if (sortBy === 'created') {
+        return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      }
+
+      return 0
+    })
+  })()
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -955,165 +1006,302 @@ export default function OrganizedView({
           />
         ) : (
           <div className="space-y-8">
-            {/* Clean Task List - Mobile Optimized */}
-            {(filter === 'all' || filter === 'tasks') && filteredTasks.length > 0 && (
-              <div className="space-y-4">
-                {filteredTasks.map((task) => (
-                  <div
-                    key={task.id}
-                    className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
-                    onContextMenu={(e) => handleContextMenu(e, task.id)}
-                    onTouchStart={(e) => handleTouchStart(e, task.id)}
-                    onTouchEnd={handleTouchEnd}
-                    onTouchMove={handleTouchMove}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
-                      onChange={() => bulkMode ? toggleItemSelection(task.id) : handleToggleTask(task.id)}
-                      className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
-                        bulkMode 
-                          ? 'text-orange-600 focus:ring-orange-500' 
-                          : 'text-green-600 focus:ring-green-500'
-                      }`}
-                      aria-label={bulkMode 
-                        ? `Select task for bulk operations`
-                        : `Mark task as ${task.completed ? 'incomplete' : 'complete'}`
-                      }
-                    />
-                    <div className="flex-1 min-w-0 overflow-hidden">
-                      <p className={`text-sm break-words ${
-                        task.completed ? 'text-gray-500 line-through' : 'text-gray-900'
-                      }`}>
-                        {task.text}
-                      </p>
-                      {((task.tags && task.tags.length > 0) || task.priority || task.metadata?.dateInfo) && (
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          {task.metadata?.dateInfo && (
-                            <DateBadge dateInfo={task.metadata.dateInfo as string} />
+            {filter === 'all' ? (
+              /* Combined All Items List - Properly sorted with pinned items first */
+              allItemsCombined.length > 0 ? (
+                <div className="space-y-4">
+                  {allItemsCombined.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                      onContextMenu={(e) => handleContextMenu(e, item.id)}
+                      onTouchStart={(e) => handleTouchStart(e, item.id)}
+                      onTouchEnd={handleTouchEnd}
+                      onTouchMove={handleTouchMove}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={bulkMode ? selectedItems.has(item.id) : (item.itemType === 'task' ? (item.completed || false) : false)}
+                        onChange={() => bulkMode ? toggleItemSelection(item.id) : (item.itemType === 'task' ? handleToggleTask(item.id) : undefined)}
+                        className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                          bulkMode 
+                            ? 'text-orange-600 focus:ring-orange-500' 
+                            : item.itemType === 'task'
+                              ? 'text-green-600 focus:ring-green-500'
+                              : 'text-purple-600 focus:ring-purple-500'
+                        }`}
+                        aria-label={bulkMode 
+                          ? `Select ${item.itemType} for bulk operations`
+                          : item.itemType === 'task' 
+                            ? `Mark task as ${item.completed ? 'incomplete' : 'complete'}`
+                            : "Mark note as completed"
+                        }
+                      />
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <div className="flex items-center gap-2">
+                          <p className={`text-sm break-words flex-1 ${
+                            item.itemType === 'task' && item.completed ? 'text-gray-500 line-through' : 'text-gray-900'
+                          }`}>
+                            {item.text}
+                          </p>
+                          {/* Item type badge */}
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${
+                            item.itemType === 'task' 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'bg-purple-100 text-purple-700'
+                          }`}>
+                            {item.itemType === 'task' ? 'Task' : 'Note'}
+                          </span>
+                          {item.metadata?.pinned && (
+                            <span 
+                              className="text-yellow-600 text-sm flex-shrink-0" 
+                              aria-label="Pinned item"
+                              title="This item is pinned to the top"
+                            >
+                              📌
+                            </span>
                           )}
-                          {task.priority && (
-                            <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
-                              task.priority === 'high' ? 'bg-red-100 text-red-600' :
-                              task.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' :
-                              'bg-gray-100 text-gray-600'
+                        </div>
+                        {((item.tags && item.tags.length > 0) || (item.itemType === 'task' && item.priority) || item.metadata?.dateInfo) && (
+                          <div className="flex flex-wrap items-center gap-2 mt-2">
+                            {item.metadata?.dateInfo && (
+                              <DateBadge dateInfo={item.metadata.dateInfo as string} />
+                            )}
+                            {item.itemType === 'task' && item.priority && (
+                              <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
+                                item.priority === 'high' ? 'bg-red-100 text-red-600' :
+                                item.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' :
+                                'bg-gray-100 text-gray-600'
+                              }`}>
+                                {item.priority}
+                              </span>
+                            )}
+                            {item.tags && item.tags.map((tag, index) => (
+                              <span key={index} className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
+                                item.itemType === 'task' 
+                                  ? 'bg-blue-100 text-blue-600' 
+                                  : 'bg-purple-100 text-purple-600'
+                              }`}>
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                        <span className="text-right">{new Date(item.timestamp).toLocaleString()}</span>
+                        
+                        {/* Action buttons */}
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => handleEditItem(item, item.itemType)}
+                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                            aria-label="Edit item"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteItem(item, item.itemType)}
+                            className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                            aria-label="Delete item"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null
+            ) : (
+              <>
+                {/* Clean Task List - Mobile Optimized */}
+                {filter === 'tasks' && filteredTasks.length > 0 && (
+                  <div className="space-y-4">
+                    {filteredTasks.map((task) => (
+                      <div
+                        key={task.id}
+                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                        onContextMenu={(e) => handleContextMenu(e, task.id)}
+                        onTouchStart={(e) => handleTouchStart(e, task.id)}
+                        onTouchEnd={handleTouchEnd}
+                        onTouchMove={handleTouchMove}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
+                          onChange={() => bulkMode ? toggleItemSelection(task.id) : handleToggleTask(task.id)}
+                          className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                            bulkMode 
+                              ? 'text-orange-600 focus:ring-orange-500' 
+                              : 'text-green-600 focus:ring-green-500'
+                          }`}
+                          aria-label={bulkMode 
+                            ? `Select task for bulk operations`
+                            : `Mark task as ${task.completed ? 'incomplete' : 'complete'}`
+                          }
+                        />
+                        <div className="flex-1 min-w-0 overflow-hidden">
+                          <div className="flex items-center gap-2">
+                            <p className={`text-sm break-words flex-1 ${
+                              task.completed ? 'text-gray-500 line-through' : 'text-gray-900'
                             }`}>
-                              {task.priority}
-                            </span>
+                              {task.text}
+                            </p>
+                            {task.metadata?.pinned && (
+                              <span 
+                                className="text-yellow-600 text-sm flex-shrink-0" 
+                                aria-label="Pinned item"
+                                title="This item is pinned to the top"
+                              >
+                                📌
+                              </span>
+                            )}
+                          </div>
+                          {((task.tags && task.tags.length > 0) || task.priority || task.metadata?.dateInfo) && (
+                            <div className="flex flex-wrap items-center gap-2 mt-2">
+                              {task.metadata?.dateInfo && (
+                                <DateBadge dateInfo={task.metadata.dateInfo as string} />
+                              )}
+                              {task.priority && (
+                                <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
+                                  task.priority === 'high' ? 'bg-red-100 text-red-600' :
+                                  task.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' :
+                                  'bg-gray-100 text-gray-600'
+                                }`}>
+                                  {task.priority}
+                                </span>
+                              )}
+                              {task.tags && task.tags.map((tag, index) => (
+                                <span key={index} className="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-xs flex-shrink-0">
+                                  #{tag}
+                                </span>
+                              ))}
+                            </div>
                           )}
-                          {task.tags && task.tags.map((tag, index) => (
-                            <span key={index} className="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-xs flex-shrink-0">
-                              #{tag}
-                            </span>
-                          ))}
                         </div>
-                      )}
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
-                      <span className="text-right">{new Date(task.timestamp).toLocaleString()}</span>
-                      
-                      {/* Action buttons */}
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => handleEditItem(task, 'task')}
-                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          aria-label="Edit item"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => handleDeleteItem(task, 'task')}
-                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          aria-label="Delete item"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
-                        </button>
+                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                          <span className="text-right">{new Date(task.timestamp).toLocaleString()}</span>
+                          
+                          {/* Action buttons */}
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => handleEditItem(task, 'task')}
+                              className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                              aria-label="Edit item"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => handleDeleteItem(task, 'task')}
+                              className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                              aria-label="Delete item"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            )}
+                )}
 
-            {/* Clean Notes List - Mobile Optimized */}
-            {(filter === 'all' || filter === 'notes') && filteredNotes.length > 0 && (
-              <div className="space-y-4">
-                {filteredNotes.map((note) => (
-                  <div
-                    key={note.id}
-                    className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
-                    onContextMenu={(e) => handleContextMenu(e, note.id)}
-                    onTouchStart={(e) => handleTouchStart(e, note.id)}
-                    onTouchEnd={handleTouchEnd}
-                    onTouchMove={handleTouchMove}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={bulkMode ? selectedItems.has(note.id) : false}
-                      onChange={() => bulkMode ? toggleItemSelection(note.id) : undefined}
-                      className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
-                        bulkMode 
-                          ? 'text-orange-600 focus:ring-orange-500' 
-                          : 'text-purple-600 focus:ring-purple-500'
-                      }`}
-                      aria-label={bulkMode 
-                        ? "Select note for bulk operations"
-                        : "Mark note as completed"
-                      }
-                    />
-                    <div className="flex-1 min-w-0 overflow-hidden">
-                      <p className="text-sm text-gray-900 break-words">{note.text}</p>
-                      {((note.tags && note.tags.length > 0) || note.metadata?.dateInfo) && (
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          {note.metadata?.dateInfo && (
-                            <DateBadge dateInfo={note.metadata.dateInfo as string} />
+                {/* Clean Notes List - Mobile Optimized */}
+                {filter === 'notes' && filteredNotes.length > 0 && (
+                  <div className="space-y-4">
+                    {filteredNotes.map((note) => (
+                      <div
+                        key={note.id}
+                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                        onContextMenu={(e) => handleContextMenu(e, note.id)}
+                        onTouchStart={(e) => handleTouchStart(e, note.id)}
+                        onTouchEnd={handleTouchEnd}
+                        onTouchMove={handleTouchMove}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={bulkMode ? selectedItems.has(note.id) : false}
+                          onChange={() => bulkMode ? toggleItemSelection(note.id) : undefined}
+                          className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                            bulkMode 
+                              ? 'text-orange-600 focus:ring-orange-500' 
+                              : 'text-purple-600 focus:ring-purple-500'
+                          }`}
+                          aria-label={bulkMode 
+                            ? "Select note for bulk operations"
+                            : "Mark note as completed"
+                          }
+                        />
+                        <div className="flex-1 min-w-0 overflow-hidden">
+                          <div className="flex items-center gap-2">
+                            <p className="text-sm text-gray-900 break-words flex-1">{note.text}</p>
+                            {note.metadata?.pinned && (
+                              <span 
+                                className="text-yellow-600 text-sm flex-shrink-0" 
+                                aria-label="Pinned item"
+                                title="This item is pinned to the top"
+                              >
+                                📌
+                              </span>
+                            )}
+                          </div>
+                          {((note.tags && note.tags.length > 0) || note.metadata?.dateInfo) && (
+                            <div className="flex flex-wrap items-center gap-2 mt-2">
+                              {note.metadata?.dateInfo && (
+                                <DateBadge dateInfo={note.metadata.dateInfo as string} />
+                              )}
+                              {note.tags && note.tags.map((tag, index) => (
+                                <span key={index} className="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs flex-shrink-0">
+                                  #{tag}
+                                </span>
+                              ))}
+                            </div>
                           )}
-                          {note.tags && note.tags.map((tag, index) => (
-                            <span key={index} className="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs flex-shrink-0">
-                              #{tag}
-                            </span>
-                          ))}
                         </div>
-                      )}
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
-                      <span className="text-right">{new Date(note.timestamp).toLocaleString()}</span>
-                      
-                      {/* Action buttons */}
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => handleEditItem(note, 'note')}
-                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                          aria-label="Edit item"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => handleDeleteItem(note, 'note')}
-                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                          aria-label="Delete item"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
-                        </button>
+                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                          <span className="text-right">{new Date(note.timestamp).toLocaleString()}</span>
+                          
+                          {/* Action buttons */}
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => handleEditItem(note, 'note')}
+                              className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                              aria-label="Edit item"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => handleDeleteItem(note, 'note')}
+                              className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                              aria-label="Delete item"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                )}
+              </>
             )}
 
             {/* Empty State */}
             {((filter === 'tasks' && filteredTasks.length === 0) ||
               (filter === 'notes' && filteredNotes.length === 0) ||
-              (filter === 'all' && filteredTasks.length === 0 && filteredNotes.length === 0)) && (
+              (filter === 'all' && allItemsCombined.length === 0)) && (
               <div className="text-center py-12 text-gray-500">
                 {searchQuery ? (
                   <>
