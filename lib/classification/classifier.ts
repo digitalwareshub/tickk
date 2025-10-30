@@ -529,20 +529,91 @@ export class VoiceClassifier {
     const trimmed = text.trim()
     let items: string[] = [trimmed]
 
-    // Step 1: Split by explicit separators (also, oh and, and then, etc.)
-    const explicitSeparators = this.currentLanguage === 'es'
-      ? /,?\s*\b(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa)\s+/gi
-      : /,?\s*\b(also|oh and|and also|and then|plus|additionally|another thing|by the way)\s+/gi
+    // Step 1: Split by "and I need to" / "I need to" pattern (very common in natural speech)
+    // Matches both "and I need to" and standalone "I need to" (but not at sentence start)
+    const actionConnectors = this.currentLanguage === 'es'
+      ? /(?:\s+y\s+)?(?<!\.)I\s+(necesito|tengo que|debo|voy a)\s+/gi
+      : /(?:\s+and\s+)?(?<!\.)I\s+(need to|have to|must|should|gonna|want to)\s+/gi
 
-    if (explicitSeparators.test(trimmed)) {
-      items = trimmed.split(explicitSeparators).filter(item => {
-        const cleaned = item.trim()
-        return cleaned.length > 0 && !this.isSeparatorWord(cleaned)
-      })
+    // First, check if we need to split (skip if pattern only appears at start)
+    const matches = [...trimmed.matchAll(actionConnectors)]
+    const needsSplitting = matches.length > 1 || (matches.length === 1 && matches[0].index! > 0)
+
+    if (needsSplitting) {
+      // Split includes captured groups, so array is: [text, captured, text, captured, ...]
+      const parts = trimmed.split(actionConnectors)
+
+      items = []
+      for (let i = 0; i < parts.length; i += 2) {
+        const text = parts[i].trim()
+        if (text.length > 0) {
+          if (i === 0) {
+            // First item - use as is
+            items.push(text)
+          } else {
+            // Subsequent items - add back the action phrase
+            const actionPhrase = parts[i - 1] // The captured group before this text
+            const reconstructed = this.currentLanguage === 'es'
+              ? 'I ' + actionPhrase + ' ' + text
+              : 'I ' + actionPhrase + ' ' + text
+            items.push(reconstructed)
+          }
+        }
+      }
     }
 
-    // Step 2: Further split each item by commas if they contain multiple distinct commands
-    const furtherSplit: string[] = []
+    // Step 2: Split by bare action modals (need to, have to without "I")
+    // This handles cases like "tomorrow need to visit the doctor"
+    const bareActionItems: string[] = []
+    for (const item of items) {
+      const bareActions = this.currentLanguage === 'es'
+        ? /\s+(necesito|tengo que|debo|voy a)\s+/gi
+        : /\s+(need to|have to|must|should|gotta)\s+/gi
+
+      const bareMatches = [...item.matchAll(bareActions)]
+      if (bareMatches.length > 0 && bareMatches[0].index! > 0) {
+        const parts = item.split(bareActions)
+        for (let i = 0; i < parts.length; i += 2) {
+          const text = parts[i].trim()
+          if (text.length > 0) {
+            if (i === 0) {
+              bareActionItems.push(text)
+            } else {
+              const actionPhrase = parts[i - 1]
+              const reconstructed = this.currentLanguage === 'es'
+                ? 'I ' + actionPhrase + ' ' + text
+                : 'I ' + actionPhrase + ' ' + text
+              bareActionItems.push(reconstructed)
+            }
+          }
+        }
+      } else {
+        bareActionItems.push(item)
+      }
+    }
+    items = bareActionItems
+
+    // Step 3: Split by explicit separators (also, oh and, and then, etc.)
+    const furtherItems: string[] = []
+    for (const item of items) {
+      const explicitSeparators = this.currentLanguage === 'es'
+        ? /,?\s*\b(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa)\s+/gi
+        : /,?\s*\b(also|oh and|and also|and then|plus|additionally|another thing|by the way)\s+/gi
+
+      if (explicitSeparators.test(item)) {
+        const splitItems = item.split(explicitSeparators).filter(part => {
+          const cleaned = part.trim()
+          return cleaned.length > 0 && !this.isSeparatorWord(cleaned)
+        })
+        furtherItems.push(...splitItems)
+      } else {
+        furtherItems.push(item)
+      }
+    }
+    items = furtherItems
+
+    // Step 4: Further split each item by commas if they contain multiple distinct commands
+    const commaSplit: string[] = []
     for (const item of items) {
       // Look for comma-separated items within each part
       // Pattern: "X, Y, Z" where each part has action/thought indicators
@@ -554,19 +625,19 @@ export class VoiceClassifier {
 
         if (distinctParts.length === commaParts.length) {
           // All parts are distinct items - split them
-          furtherSplit.push(...commaParts)
+          commaSplit.push(...commaParts)
         } else {
           // Not all parts are distinct - keep as single item
-          furtherSplit.push(item)
+          commaSplit.push(item)
         }
       } else {
-        furtherSplit.push(item)
+        commaSplit.push(item)
       }
     }
 
-    items = furtherSplit
+    items = commaSplit
 
-    // Step 3: Split by sentence boundaries (period, exclamation, question mark) if no other splits occurred
+    // Step 5: Split by sentence boundaries (period, exclamation, question mark) if no other splits occurred
     if (items.length === 1) {
       const sentences = trimmed.split(/[.!?]+/).filter(s => s.trim().length > 0)
       if (sentences.length > 1) {
@@ -578,11 +649,12 @@ export class VoiceClassifier {
     return items
       .map(item => {
         let cleaned = item.trim()
-        // Remove leading "and" or "y" from split items
+        // Remove leading "and" or "y" (but not "I")
         cleaned = cleaned.replace(/^(and|y)\s+/i, '')
-        // Remove trailing commas
+        // Remove trailing commas, "and", "and I", "I"
+        cleaned = cleaned.replace(/[,\s]+(and\s+I|and|I)\s*$/i, '')
         cleaned = cleaned.replace(/,\s*$/, '')
-        return cleaned
+        return cleaned.trim()
       })
       .filter(item => {
         // Filter out very short or empty items
