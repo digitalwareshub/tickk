@@ -517,18 +517,169 @@ export class VoiceClassifier {
   }
 
   /**
+   * Split a long transcript into multiple items using NLP + pattern matching
+   * Uses compromise.js for grammatical understanding with pattern fallbacks
+   * Example: "I need to email John, also buy milk, oh and document that idea"
+   */
+  splitTranscript(text: string): string[] {
+    if (!text || text.trim().length === 0) {
+      return []
+    }
+
+    const trimmed = text.trim()
+    const doc = this.nlp(trimmed)
+    let items: string[] = []
+
+    // Strategy 1: Split by repeated action phrases (most common in natural speech)
+    // This handles: "I need to X I need to Y and I need to Z" (no punctuation)
+    // Also handles: "need to X and I should Y" (bare action at start)
+    const repeatedActionPattern = this.currentLanguage === 'es'
+      ? /(?:^|\s+)(?:y\s+)?I?\s*(necesito|tengo que|debo|debería|voy a)\s+/gi
+      : /(?:^|\s+)(?:and\s+)?I?\s*(need to|have to|must|should|ought to|gonna|got to|gotta)\s+/gi
+
+    const actionMatches = [...trimmed.matchAll(repeatedActionPattern)]
+
+    // If we have multiple action phrases, split by them
+    if (actionMatches.length > 1) {
+      const parts = trimmed.split(repeatedActionPattern)
+      // parts = [before_first, captured1, text1, captured2, text2, ...]
+
+      for (let i = 0; i < parts.length; i++) {
+        if (i % 2 === 0) {
+          // Even indices are text parts
+          const text = parts[i].trim()
+          if (i === 0 && text.length === 0) {
+            // Skip empty first part (e.g., "need to X" starts with action)
+            continue
+          } else if (i > 0 && text.length > 0) {
+            // Reconstruct with previous captured action phrase
+            const actionPhrase = parts[i - 1] // Previous captured group
+            const reconstructed = this.currentLanguage === 'es'
+              ? 'I ' + actionPhrase + ' ' + text
+              : 'I ' + actionPhrase + ' ' + text
+            items.push(reconstructed)
+          }
+        }
+      }
+    } else {
+      // Strategy 2: Try splitting by clauses (independent grammatical units)
+      const clauses = doc.clauses()
+      if (clauses.length > 1) {
+        items = clauses.out('array')
+      } else {
+        // Strategy 3: Try splitting by sentences
+        const sentences = doc.sentences()
+        if (sentences.length > 1) {
+          items = sentences.out('array')
+        } else {
+          // Strategy 4: Try splitting by coordinating conjunctions
+          const conjunctionPattern = this.currentLanguage === 'es'
+            ? /,?\s*\b(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa)\s+/gi
+            : /,?\s*\b(also|oh and|and also|and then|plus|additionally|another thing|by the way)\s+/gi
+
+          if (conjunctionPattern.test(trimmed)) {
+            items = trimmed
+              .split(conjunctionPattern)
+              .filter(part => part.trim().length > 0 && !this.isSeparatorWord(part.trim()))
+          } else {
+            // Strategy 5: Last resort - split by commas if each part is distinct
+            const commaParts = trimmed.split(/,\s+/).filter(s => s.trim().length > 0)
+
+            if (commaParts.length > 1 && commaParts.every(part => this.looksLikeDistinctItem(part))) {
+              items = commaParts
+            } else {
+              // Single item - no splitting possible
+              items = [trimmed]
+            }
+          }
+        }
+      }
+    }
+
+    // Clean up and filter
+    return items
+      .map(item => {
+        let cleaned = item.trim()
+        // Remove leading "and" or "y" (but preserve "I")
+        cleaned = cleaned.replace(/^(and|y)\s+/i, '')
+        // Remove trailing fragments
+        cleaned = cleaned.replace(/[,\s]+(and\s+I|and|I)\s*$/i, '')
+        cleaned = cleaned.replace(/,\s*$/, '')
+        return cleaned.trim()
+      })
+      .filter(item => {
+        // Filter out very short or empty items
+        const words = item.split(/\s+/).filter(w => w.length > 0)
+        return words.length >= 2 // At least 2 words to be a valid item
+      })
+  }
+
+  /**
+   * Check if a string is just a separator word
+   */
+  private isSeparatorWord(text: string): boolean {
+    const separatorWords = this.currentLanguage === 'es'
+      ? /^(también|además|y también|ah y|y luego|y después|y por cierto|otra cosa|y|and)$/i
+      : /^(also|oh and|and also|and then|plus|additionally|another thing|by the way|and)$/i
+
+    return separatorWords.test(text.trim())
+  }
+
+  /**
+   * Check if a text fragment looks like a distinct item (task or note)
+   * Used to determine if comma-separated parts should be split
+   */
+  private looksLikeDistinctItem(text: string): boolean {
+    const trimmed = text.trim()
+
+    // Check for action verbs, modal verbs, or thought patterns
+    const hasActionIndicator = this.currentLanguage === 'es'
+      ? /\b(necesito|tengo que|debo|quiero|voy a|comprar|llamar|enviar|recordar|hacer|ir a)\b/i.test(trimmed)
+      : /\b(need to|have to|must|want to|should|gonna|buy|call|email|send|remember|do|make|go to)\b/i.test(trimmed)
+
+    const hasThoughtIndicator = this.currentLanguage === 'es'
+      ? /\b(idea|pensamiento|creo|pienso|interesante|noté)\b/i.test(trimmed)
+      : /\b(idea|thought|think|interesting|noticed|wonder)\b/i.test(trimmed)
+
+    return hasActionIndicator || hasThoughtIndicator
+  }
+
+  /**
+   * Process a braindump transcript and return classified items
+   * This is the main entry point for handling raw voice transcripts
+   */
+  async processBraindump(text: string): Promise<Array<{ text: string; classification: Classification }>> {
+    // Split the transcript into individual items
+    const items = this.splitTranscript(text)
+
+    // Classify each item
+    const results = await Promise.all(
+      items.map(async (itemText) => ({
+        text: itemText,
+        classification: await this.classify(itemText)
+      }))
+    )
+
+    return results
+  }
+
+  /**
    * Get classification statistics for debugging
    */
   getStats(): { version: string; features: string[] } {
     return {
-      version: '2.0.0-improved',
+      version: '3.0.0-nlp-powered',
       features: [
+        'nlp_clause_detection',
+        'intelligent_grammatical_splitting',
+        'multi_item_splitting',
         'improved_intent_detection',
-        'past_tense_detection', 
+        'past_tense_detection',
         'strong_weak_modal_split',
         'better_confidence_scores',
         'enhanced_spanish_support',
-        'no_external_dependencies'
+        'no_external_dependencies',
+        'no_ai_or_ml'
       ]
     }
   }
