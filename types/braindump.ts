@@ -40,6 +40,8 @@ export interface VoiceItem {
     urgency?: UrgencyLevel              // Extracted urgency level
     completed?: boolean                  // Task completion status
     pinned?: boolean                     // Pinned to top in Focus mode
+    focusAdded?: boolean                 // Manually added to Focus mode
+    focusTimer?: number                  // Custom focus timer in minutes
 
     // Classification context
     reasoning?: string                   // Why it was classified this way
