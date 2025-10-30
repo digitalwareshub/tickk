@@ -10,6 +10,7 @@ import DeleteConfirmModal from './DeleteConfirmModal'
 import BulkDeleteModal from './BulkDeleteModal'
 import DateBadge from './DateBadge'
 import ContextMenu, { type ContextMenuAction } from './ContextMenu'
+import ActionButtons from './ActionButtons'
 import SaveTemplateModal from './SaveTemplateModal'
 import TemplateLibrary from './TemplateLibrary'
 import ProjectGroupView from './ProjectGroupView'
@@ -359,6 +360,42 @@ export default function OrganizedView({
   }
 
   /**
+   * Handle adding item to Focus with custom timer
+   */
+  const handleAddToFocus = (item: VoiceItem, type: 'task' | 'note') => {
+    console.log('Add to Focus clicked for:', item.text, type)
+    // TODO: Implement custom timer modal
+    // For now, just add a focus metadata flag
+    const updatedItem = {
+      ...item,
+      metadata: {
+        ...item.metadata,
+        focusAdded: true,
+        focusTimer: 25 // Default timer for now
+      }
+    }
+    
+    // Update the item in the appropriate array
+    let updatedData: AppData
+    if (type === 'task') {
+      const updatedTasks = organizedTasks.map(task => 
+        task.id === item.id ? updatedItem : task
+      )
+      updatedData = { ...appData, tasks: updatedTasks }
+    } else {
+      const updatedNotes = organizedNotes.map(note => 
+        note.id === item.id ? updatedItem : note
+      )
+      updatedData = { ...appData, notes: updatedNotes }
+    }
+    
+    onDataUpdate(updatedData)
+    
+    // TODO: Show confirmation or navigate to Focus mode
+    console.log('Item added to Focus:', updatedItem)
+  }
+
+  /**
    * Get context menu actions for an item
    */
   const getContextMenuActions = (item: VoiceItem | null, type: 'task' | 'note'): ContextMenuAction[] => {
@@ -388,6 +425,13 @@ export default function OrganizedView({
       label: 'Edit',
       icon: '✏️',
       onClick: () => handleEditItem(item, type)
+    })
+
+    // Add to Focus
+    actions.push({
+      label: 'Add to Focus',
+      icon: '🎯',
+      onClick: () => handleAddToFocus(item, type)
     })
 
     // Convert
@@ -1091,27 +1135,12 @@ export default function OrganizedView({
                       <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
                         <span className="text-right">{new Date(item.timestamp).toLocaleString()}</span>
                         
-                        {/* Action buttons */}
-                        <div className="flex items-center gap-1">
-                          <button
-                            onClick={() => handleEditItem(item, item.itemType)}
-                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                            aria-label="Edit item"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                          </button>
-                          <button
-                            onClick={() => handleDeleteItem(item, item.itemType)}
-                            className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                            aria-label="Delete item"
-                          >
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                          </button>
-                        </div>
+                        {/* New Action Buttons Component */}
+                        <ActionButtons
+                          actions={getContextMenuActions(item, item.itemType)}
+                          onTriggerContextMenu={(e) => handleContextMenu(e, item.id)}
+                          itemId={item.id}
+                        />
                       </div>
                     </div>
                   ))}
@@ -1187,27 +1216,12 @@ export default function OrganizedView({
                         <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
                           <span className="text-right">{new Date(task.timestamp).toLocaleString()}</span>
                           
-                          {/* Action buttons */}
-                          <div className="flex items-center gap-1">
-                            <button
-                              onClick={() => handleEditItem(task, 'task')}
-                              className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                              aria-label="Edit item"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                              </svg>
-                            </button>
-                            <button
-                              onClick={() => handleDeleteItem(task, 'task')}
-                              className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                              aria-label="Delete item"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                            </button>
-                          </div>
+                          {/* New Action Buttons Component */}
+                          <ActionButtons
+                            actions={getContextMenuActions(task, 'task')}
+                            onTriggerContextMenu={(e) => handleContextMenu(e, task.id)}
+                            itemId={task.id}
+                          />
                         </div>
                       </div>
                     ))}
@@ -1269,27 +1283,12 @@ export default function OrganizedView({
                         <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
                           <span className="text-right">{new Date(note.timestamp).toLocaleString()}</span>
                           
-                          {/* Action buttons */}
-                          <div className="flex items-center gap-1">
-                            <button
-                              onClick={() => handleEditItem(note, 'note')}
-                              className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                              aria-label="Edit item"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                              </svg>
-                            </button>
-                            <button
-                              onClick={() => handleDeleteItem(note, 'note')}
-                              className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                              aria-label="Delete item"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                            </button>
-                          </div>
+                          {/* New Action Buttons Component */}
+                          <ActionButtons
+                            actions={getContextMenuActions(note, 'note')}
+                            onTriggerContextMenu={(e) => handleContextMenu(e, note.id)}
+                            itemId={note.id}
+                          />
                         </div>
                       </div>
                     ))}
