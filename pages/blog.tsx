@@ -34,23 +34,23 @@ export default function Blog() {
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
               <span>October 2025</span>
               <span>•</span>
-              <span>12 min read</span>
+              <span>8 min read</span>
               <span>•</span>
               <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">Latest</span>
             </div>
             
-            <Link href="/blog/complete-guide-tickk-app-voice-productivity-2025" className="block group">
+            <Link href="/blog/voice-productivity-vs-ai-tools-local-processing-wins" className="block group">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
-                Complete Guide to tickk.app: Voice-to-Text Productivity in 2025
+                Voice Productivity vs AI Tools: Why Local Processing Wins
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Master tickk.app&apos;s voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export. Complete tutorial with visual guides.
+                Discover why local voice processing beats AI-dependent productivity tools. Compare privacy, speed, and reliability of voice-first vs AI-powered productivity solutions in the battle for your thoughts.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">Tutorial</span>
-                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">ADHD Friendly</span>
-                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">Command Palette</span>
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">Privacy First</span>
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">Local Processing</span>
                 <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm">Voice Productivity</span>
+                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">AI Alternative</span>
               </div>
               <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
                 Read article
@@ -61,7 +61,123 @@ export default function Blog() {
             </Link>
           </div>
 
-          {/* Recent Article */}
+          {/* Recent Article - Mobile Voice */}
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+              <span>October 2025</span>
+              <span>•</span>
+              <span>7 min read</span>
+            </div>
+            
+            <Link href="/blog/mobile-voice-productivity-capture-ideas-on-the-go" className="block group">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                Mobile Voice Productivity: Capture Ideas on the Go
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Master mobile voice productivity for hands-free idea capture anywhere. Learn best practices for voice notes on phones, commuting workflows, and transforming in-between moments into productive time.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">Mobile Productivity</span>
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">Voice Notes</span>
+                <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm">Hands-Free</span>
+                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">On-the-Go</span>
+              </div>
+              <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
+                Read article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </Link>
+          </div>
+
+          {/* Recent Article - ADHD */}
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+              <span>October 2025</span>
+              <span>•</span>
+              <span>10 min read</span>
+            </div>
+            
+            <Link href="/blog/adhd-voice-technology-perfect-match" className="block group">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                ADHD and Voice Technology: A Perfect Match for Scattered Minds
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Discover why voice technology is revolutionary for ADHD brains. Bypass typing barriers, reduce cognitive load, and capture racing thoughts naturally with voice-first productivity designed for neurodivergent minds.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">ADHD Productivity</span>
+                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">Voice Technology</span>
+                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">Neurodiversity</span>
+                <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm">Focus Tools</span>
+              </div>
+              <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
+                Read article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </Link>
+          </div>
+
+          {/* Recent Article - Complete Guide */}
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+              <span>October 2025</span>
+              <span>•</span>
+              <span>12 min read</span>
+            </div>
+            
+            <Link href="/blog/complete-guide-tickk-app-voice-productivity-2025" className="block group">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                Complete Guide to tickk.app: Voice-to-Text Productivity in 2025
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Master tickk.app&apos;s voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export. Complete tutorial with visual guides.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tutorial</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">ADHD Friendly</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Command Palette</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Voice Productivity</span>
+              </div>
+              <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
+                Read article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </Link>
+          </div>          {/* Recent Article */}
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+              <span>October 2025</span>
+              <span>•</span>
+              <span>12 min read</span>
+            </div>
+            
+            <Link href="/blog/complete-guide-tickk-app-voice-productivity-2025" className="block group">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                Complete Guide to tickk.app: Voice-to-Text Productivity in 2025
+              </h2>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Master tickk.app&apos;s voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export. Complete tutorial with visual guides.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Tutorial</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">ADHD Friendly</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Command Palette</span>
+                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Voice Productivity</span>
+              </div>
+              <span className="inline-flex items-center text-orange-600 font-medium group-hover:text-orange-700">
+                Read article
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </span>
+            </Link>
+          </div>
           <div className="bg-white border border-gray-200 rounded-lg p-8 mb-8 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
               <span>October 2025</span>
