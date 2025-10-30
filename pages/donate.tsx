@@ -227,8 +227,8 @@ export default function DonatePage() {
           </p>
           <div className="mt-6 text-sm text-gray-400">
             Questions? Reach out to us at{' '}
-            <a href="mailto:support@tickk.app" className="text-yellow-400 hover:text-yellow-300">
-              support@tickk.app
+            <a href="mailto:write@digiwares.xyz" className="text-yellow-400 hover:text-yellow-300">
+              write@digiwares.xyz
             </a>
           </div>
         </div>
