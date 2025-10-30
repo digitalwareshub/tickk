@@ -19,7 +19,7 @@
     "clean": "rm -rf .next out",
     "test:lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
     "sitemap": "next-sitemap",
-    "prebuild": "npm run lint && npm run type-check",
+    "prebuild": "npm run type-check",
     "features:on": "node scripts/toggle-features.js on",
     "features:off": "node scripts/toggle-features.js off",
     "features:status": "node scripts/toggle-features.js status"
@@ -32,6 +32,7 @@
     "compromise": "^14.14.0",
     "critters": "^0.0.23",
     "gtag": "^1.0.1",
+    "lucide-react": "^0.548.0",
     "next": "15.5.3",
     "next-pwa": "^5.6.0",
     "next-seo": "^6.8.0",

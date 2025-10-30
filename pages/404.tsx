@@ -56,10 +56,10 @@ export default function Custom404() {
               🏠 Go Home
             </Link>
             <Link 
-              href="/app" 
+              href="/blog" 
               className="inline-flex items-center px-6 py-3 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 font-semibold rounded-lg hover:bg-gray-900 dark:hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl"
             >
-              🚀 Try Voice App
+              � Read Blog
             </Link>
           </div>
 
@@ -78,8 +78,8 @@ export default function Custom404() {
               <Link href="/" className="text-orange-600 dark:text-orange-400 hover:underline">
                 Homepage
               </Link>
-              <Link href="/app" className="text-orange-600 dark:text-orange-400 hover:underline">
-                Voice App
+              <Link href="/blog" className="text-orange-600 dark:text-orange-400 hover:underline">
+                Blog
               </Link>
               <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:underline">
                 Privacy Policy

@@ -29,13 +29,28 @@ export default function FocusView({
   const [itemToDelete, setItemToDelete] = useState<VoiceItem | null>(null)
   const [deleteType, setDeleteType] = useState<'task' | 'note'>('task')
 
+  // Customizable timer durations (in minutes)
+  const [workDuration, setWorkDuration] = useState(25)
+  const [breakDuration, setBreakDuration] = useState(5)
+  
   // Pomodoro state
-  const [pomodoroTime, setPomodoroTime] = useState(25 * 60) // 25 minutes in seconds
+  const [pomodoroTime, setPomodoroTime] = useState(25 * 60) // Initialize with default work duration
   const [isPomodoroRunning, setIsPomodoroRunning] = useState(false)
   const [pomodoroMode, setPomodoroMode] = useState<'work' | 'break'>('work')
+  
+  const [editingDuration, setEditingDuration] = useState<'work' | 'break' | null>(null)
+  const [tempDuration, setTempDuration] = useState('')
 
-  // Get tasks
+  // Sync timer display when durations change (only when not running)
+  useEffect(() => {
+    if (!isPomodoroRunning) {
+      setPomodoroTime(pomodoroMode === 'work' ? workDuration * 60 : breakDuration * 60)
+    }
+  }, [workDuration, breakDuration, pomodoroMode, isPomodoroRunning])
+
+  // Get tasks and notes
   const allTasks = appData.tasks || []
+  const allNotes = appData.notes || []
 
   // Filter: Tasks due today or overdue
   const todayTasks = allTasks.filter(task => {
@@ -73,16 +88,38 @@ export default function FocusView({
     task => !task.completed && task.metadata?.pinned
   )
 
-  // Combine all focus tasks (remove duplicates)
-  const focusTasks = [
+  // Filter: Tasks manually added to Focus
+  const focusAddedTasks = allTasks.filter(
+    task => !task.completed && task.metadata?.focusAdded
+  )
+
+  // Filter: Notes manually added to Focus  
+  const focusAddedNotes = allNotes.filter(
+    note => note.metadata?.focusAdded
+  )
+
+  // Combine all focus tasks and notes (remove duplicates)
+  const focusItems = [
     ...pinnedTasks,
-    ...todayTasks.filter(t => !pinnedTasks.find(p => p.id === t.id)),
+    ...focusAddedTasks.filter(t => !pinnedTasks.find(p => p.id === t.id)),
+    ...focusAddedNotes, // Notes don't have pinned duplicates to worry about
+    ...todayTasks.filter(
+      t => 
+        !pinnedTasks.find(p => p.id === t.id) && 
+        !focusAddedTasks.find(f => f.id === t.id)
+    ),
     ...recentTasks.filter(
       t =>
         !pinnedTasks.find(p => p.id === t.id) &&
+        !focusAddedTasks.find(f => f.id === t.id) &&
         !todayTasks.find(td => td.id === t.id)
     )
   ]
+
+  // Keep the old focusTasks name for compatibility with existing code
+  const focusTasks = focusItems.filter(item => 
+    item.category === 'tasks' || !item.category || allTasks.includes(item)
+  )
 
   const handleToggleTask = (taskId: string) => {
     const updatedTasks = allTasks.map(task =>
@@ -199,9 +236,70 @@ export default function FocusView({
     return () => clearInterval(interval)
   }, [isPomodoroRunning, pomodoroTime, pomodoroMode])
 
+  // Duration editing functions
+  const startEditingDuration = (type: 'work' | 'break') => {
+    setEditingDuration(type)
+    setTempDuration((type === 'work' ? workDuration : breakDuration).toString())
+  }
+
+  const saveEditedDuration = () => {
+    const duration = parseInt(tempDuration)
+    if (duration > 0 && duration <= 120) { // Max 2 hours
+      if (editingDuration === 'work') {
+        setWorkDuration(duration)
+      } else {
+        setBreakDuration(duration)
+      }
+    }
+    setEditingDuration(null)
+    setTempDuration('')
+  }
+
+  const cancelEditingDuration = () => {
+    setEditingDuration(null)
+    setTempDuration('')
+  }
+
+  const handleDurationKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      saveEditedDuration()
+    } else if (e.key === 'Escape') {
+      cancelEditingDuration()
+    }
+  }
+
+  // Editable duration component
+  const EditableDuration = ({ type, duration, label }: { type: 'work' | 'break', duration: number, label: string }) => {
+    if (editingDuration === type) {
+      return (
+        <input
+          type="number"
+          value={tempDuration}
+          onChange={(e) => setTempDuration(e.target.value)}
+          onBlur={saveEditedDuration}
+          onKeyDown={handleDurationKeyPress}
+          className="w-14 px-2 py-1 text-center border border-orange-300 rounded bg-orange-50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500"
+          min="1"
+          max="120"
+          autoFocus
+        />
+      )
+    }
+    
+    return (
+      <span
+        onClick={() => startEditingDuration(type)}
+        className="cursor-pointer hover:bg-orange-50 px-2 py-1 rounded text-sm font-medium border border-dashed border-orange-300 text-orange-700 hover:border-orange-400 transition-colors"
+        title={`Click to edit ${label.toLowerCase()} duration`}
+      >
+        {duration}min
+      </span>
+    )
+  }
+
   const startPomodoro = (mode: 'work' | 'break') => {
     setPomodoroMode(mode)
-    setPomodoroTime(mode === 'work' ? 25 * 60 : 5 * 60)
+    setPomodoroTime(mode === 'work' ? workDuration * 60 : breakDuration * 60)
     setIsPomodoroRunning(true)
   }
 
@@ -211,7 +309,7 @@ export default function FocusView({
 
   const resetPomodoro = () => {
     setIsPomodoroRunning(false)
-    setPomodoroTime(pomodoroMode === 'work' ? 25 * 60 : 5 * 60)
+    setPomodoroTime(pomodoroMode === 'work' ? workDuration * 60 : breakDuration * 60)
   }
 
   const formatTime = (seconds: number) => {
@@ -244,6 +342,22 @@ export default function FocusView({
             <div className="text-4xl font-mono font-bold text-gray-900 mb-6">
               {formatTime(pomodoroTime)}
             </div>
+            
+            {/* Duration Settings */}
+            {!isPomodoroRunning && (
+              <div className="flex items-center justify-center gap-6 mb-6 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <span>Work:</span>
+                  <EditableDuration type="work" duration={workDuration} label="Work" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span>Break:</span>
+                  <EditableDuration type="break" duration={breakDuration} label="Break" />
+                </div>
+              </div>
+            )}
+            
+            {/* Timer Controls */}
             <div className="flex items-center justify-center gap-3 flex-wrap">
               {!isPomodoroRunning ? (
                 <>
@@ -251,13 +365,13 @@ export default function FocusView({
                     onClick={() => startPomodoro('work')}
                     className="px-6 py-3 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors"
                   >
-                    Start Work (25min)
+                    Start Work
                   </button>
                   <button
                     onClick={() => startPomodoro('break')}
                     className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
                   >
-                    Start Break (5min)
+                    Start Break
                   </button>
                 </>
               ) : (

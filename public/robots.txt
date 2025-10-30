@@ -59,6 +59,17 @@ Allow: /favicon.ico
 # Disallow Next.js internal paths that shouldn't be crawled
 Disallow: /_next/
 Disallow: /api/
+Disallow: /admin/
+
+# Disallow technical files from being indexed (but still allow crawling for functionality)
+Disallow: /manifest.json
+Disallow: /sitemap.xml
+Disallow: /robots.txt
+Disallow: /favicon.ico
+Disallow: /_next/static/
+
+# Disallow old Spanish pages that no longer exist
+Disallow: /es/
 
 # Disallow URLs with tracking parameters to prevent duplicate content issues
 Disallow: /*?utm_source=*
