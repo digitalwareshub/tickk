@@ -162,7 +162,7 @@
             // App name
             ctx.font = 'bold 120px -apple-system, system-ui, sans-serif';
             ctx.fillStyle = '#0f172a';
-            ctx.fillText('tickk', 310, 210);
+            ctx.fillText('tickk.app', 310, 210);
             
             // Tagline with slogan
             ctx.font = '38px -apple-system, system-ui, sans-serif';
@@ -172,13 +172,16 @@
             // Main description line 1
             ctx.font = '34px -apple-system, system-ui, sans-serif';
             ctx.fillStyle = '#334155';
-            ctx.fillText('Transform your speech into organized tasks,', 80, 360);
-            ctx.fillText('notes and calendar events', 80, 405);
+            ctx.fillText('Transform your speech into organized tasks and notes', 80, 360);
             
-            // New line about automatic categorization
+            // Feature line about automatic categorization
             ctx.font = '32px -apple-system, system-ui, sans-serif';
-            ctx.fillStyle = '#16a34a';
-            ctx.fillText('Speak naturally - Tickk automatically categorizes.', 80, 465);
+            ctx.fillStyle = '#334155';
+            ctx.fillText('Speak naturally - Tickk automatically categorizes.', 80, 410);
+            
+            // New line about NLP and No AI - split into two lines
+            ctx.fillText('Uses Browser-based NLP and local storage. No AI, No Cloud storage.', 80, 460);
+            ctx.fillText('Your data never leaves your device', 80, 510);
             
             // Feature badges
             const features = [
@@ -189,7 +192,7 @@
             ];
             
             let xPos = 80;
-            const yPos = height - 100;
+            const yPos = height - 50;
             
             features.forEach((feature, index) => {
                 // Badge background
@@ -206,18 +209,12 @@
                 
                 // Badge text
                 ctx.font = '24px -apple-system, system-ui, sans-serif';
-                ctx.fillStyle = '#16a34a';
+                ctx.fillStyle = '#334155';
                 ctx.textAlign = 'left';
                 ctx.fillText(`${feature.icon} ${feature.text}`, xPos + 20, yPos - 5);
                 
                 xPos += 220;
             });
-            
-            // URL
-            ctx.font = 'bold 32px -apple-system, system-ui, sans-serif';
-            ctx.fillStyle = '#16a34a';
-            ctx.textAlign = 'right';
-            ctx.fillText('tickk.app', width - 80, height - 60);
         }
         
         // Draw both cards
