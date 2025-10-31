@@ -629,14 +629,14 @@ export default function BraindumpInterface({
 
                   {/* Animated Waveform Bars */}
                   {isRecording && (
-                    <div className="flex items-center gap-1 h-8" role="presentation" aria-hidden="true">
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '0ms', height: '8px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '150ms', height: '12px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '300ms', height: '16px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '450ms', height: '20px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '600ms', height: '16px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '750ms', height: '12px' }}></div>
-                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '900ms', height: '8px' }}></div>
+                    <div className="flex items-center justify-center gap-1.5 h-12 px-4" role="presentation" aria-hidden="true">
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '0ms', height: '12px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '150ms', height: '20px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '300ms', height: '28px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '450ms', height: '36px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '600ms', height: '28px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '750ms', height: '20px' }}></div>
+                      <div className="w-1.5 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '900ms', height: '12px' }}></div>
                     </div>
                   )}
                 </div>
