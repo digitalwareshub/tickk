@@ -606,25 +606,40 @@ export default function BraindumpInterface({
             {/* Recording Button or Text Input */}
             {isSupported ? (
               <div className="mb-4">
-                <button
-                  id="recording-button"
-                  onClick={isRecording ? stopRecording : startRecording}
-                  disabled={isProcessing}
-                  aria-label={
-                    isRecording 
-                      ? 'Stop recording (currently recording)' 
-                      : 'Start voice recording'
-                  }
-                  aria-pressed={isRecording}
-                  aria-describedby="recording-help"
-                  className={`w-16 h-16 rounded-full border-2 transition-colors ${
-                    isRecording
-                      ? 'bg-gray-100 border-gray-300 text-gray-700'
-                      : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
-                  } text-sm font-medium`}
-                >
-                  {isRecording ? 'Stop' : 'Record'}
-                </button>
+                <div className="flex flex-col items-center gap-3">
+                  <button
+                    id="recording-button"
+                    onClick={isRecording ? stopRecording : startRecording}
+                    disabled={isProcessing}
+                    aria-label={
+                      isRecording
+                        ? 'Stop recording (currently recording)'
+                        : 'Start voice recording'
+                    }
+                    aria-pressed={isRecording}
+                    aria-describedby="recording-help"
+                    className={`w-16 h-16 rounded-full border-2 transition-all ${
+                      isRecording
+                        ? 'bg-red-500 border-red-600 text-white shadow-lg scale-105'
+                        : 'bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100'
+                    } text-sm font-medium`}
+                  >
+                    {isRecording ? '⏸' : '🎤'}
+                  </button>
+
+                  {/* Animated Waveform Bars */}
+                  {isRecording && (
+                    <div className="flex items-center gap-1 h-8" role="presentation" aria-hidden="true">
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '0ms', height: '8px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '150ms', height: '12px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '300ms', height: '16px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '450ms', height: '20px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '600ms', height: '16px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '750ms', height: '12px' }}></div>
+                      <div className="w-1 bg-red-500 rounded-full animate-wave" style={{ animationDelay: '900ms', height: '8px' }}></div>
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <div className="mb-4">
