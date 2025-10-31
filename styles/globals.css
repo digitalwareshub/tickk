@@ -252,6 +252,23 @@ body {
   animation: fade-in 0.3s ease-out;
 }
 
+/* Waveform animation for recording indicator */
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.5);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleY(1.5);
+    opacity: 1;
+  }
+}
+
+.animate-wave {
+  animation: wave 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
 /* Grid background pattern */
 .bg-grid-gray-100 {
   background-image: 
