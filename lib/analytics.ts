@@ -57,3 +57,51 @@ export const trackPageInteraction = (action: string, element: string) => {
     label: element,
   })
 }
+
+// PWA specific events
+export const trackPWAInstallPrompt = () => {
+  event({
+    action: 'pwa_install_prompt_shown',
+    category: 'pwa',
+    label: 'install_prompt',
+  })
+}
+
+export const trackPWAInstalled = () => {
+  event({
+    action: 'pwa_installed',
+    category: 'pwa',
+    label: 'app_installed',
+  })
+}
+
+export const trackPWASession = () => {
+  event({
+    action: 'pwa_session',
+    category: 'pwa',
+    label: 'standalone_mode',
+  })
+}
+
+// Initialize PWA tracking
+export const initPWATracking = () => {
+  if (typeof window === 'undefined') return
+
+  // Track when install prompt is shown
+  window.addEventListener('beforeinstallprompt', (e) => {
+    trackPWAInstallPrompt()
+  })
+
+  // Track when PWA is installed
+  window.addEventListener('appinstalled', (e) => {
+    trackPWAInstalled()
+  })
+
+  // Track if user is currently in PWA mode
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
+                (window.navigator as any).standalone === true
+
+  if (isPWA) {
+    trackPWASession()
+  }
+}

@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { trackPageView } from '@/lib/analytics/enhanced-analytics'
+import { initPWATracking } from '@/lib/analytics'
 
 // Get GA tracking ID from environment
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -24,6 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
     
     router.events.on('routeChangeComplete', handleRouteChange)
     router.events.on('hashChangeComplete', handleRouteChange)
+    
+    // Initialize PWA tracking
+    initPWATracking()
     
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
