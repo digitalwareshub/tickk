@@ -38,6 +38,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <Link href="/landing" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                   About
                 </Link>
+                <Link href="/features" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
+                  Features
+                </Link>
                 <Link href="/blog" className="block text-xs text-gray-600 hover:text-orange-600 transition-colors">
                   Blog
                 </Link>
@@ -191,6 +194,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/landing" className="text-gray-600 hover:text-orange-600 transition-colors">
                     About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/features" className="text-gray-600 hover:text-orange-600 transition-colors">
+                    Features
                   </Link>
                 </li>
                 <li>
