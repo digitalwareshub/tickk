@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
 import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
@@ -708,53 +709,55 @@ export default function App() {
           
           {/* Main content area */}
           {appData && (
-            <main>
-              {/* SEO H1 - Hidden but accessible to search engines */}
-              <h1 className="sr-only">
-                tickk - Free Voice Productivity App: Speak, Save, Sort it Later
-              </h1>
-              
-              {/* SEO H2 - Hidden but accessible to search engines */}
-              <h2 className="sr-only">
-                {mode === 'braindump' 
-                  ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
-                  : 'Organized Tasks and Notes Dashboard'
-                }
-              </h2>
-              
-              {/* Hidden internal links for SEO - invisible to users */}
-              <div className="sr-only">
-                <Link href="/privacy">Privacy Policy</Link>
-                <Link href="/terms">Terms of Service</Link>
-                <Link href="/support">Support</Link>
-                <Link href="/contact">Contact Us</Link>
-                <Link href="/blog">Blog</Link>
-              </div>
-              
-              {mode === 'braindump' ? (
-                <BraindumpInterface
-                  appData={appData}
-                  preferences={preferences}
-                  onDataUpdate={handleDataUpdate}
-                  onRecordingStateChange={handleRecordingStateChange}
-                  onRecordingControls={setRecordingControls}
-                  onRecordingStatusUpdate={handleRecordingStatusUpdate}
-                  onModeSwitch={handleModeSwitch}
-                  showMainInterface={false}
-                />
-              ) : mode === 'focus' ? (
-                <FocusView
-                  appData={appData}
-                  onDataUpdate={handleDataUpdate}
-                />
-              ) : (
-                <OrganizedView
-                  appData={appData}
-                  preferences={preferences}
-                  onDataUpdate={handleDataUpdate}
-                />
-              )}
-            </main>
+            <ErrorBoundary>
+              <main>
+                {/* SEO H1 - Hidden but accessible to search engines */}
+                <h1 className="sr-only">
+                  tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+                </h1>
+                
+                {/* SEO H2 - Hidden but accessible to search engines */}
+                <h2 className="sr-only">
+                  {mode === 'braindump' 
+                    ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
+                    : 'Organized Tasks and Notes Dashboard'
+                  }
+                </h2>
+                
+                {/* Hidden internal links for SEO - invisible to users */}
+                <div className="sr-only">
+                  <Link href="/privacy">Privacy Policy</Link>
+                  <Link href="/terms">Terms of Service</Link>
+                  <Link href="/support">Support</Link>
+                  <Link href="/contact">Contact Us</Link>
+                  <Link href="/blog">Blog</Link>
+                </div>
+                
+                {mode === 'braindump' ? (
+                  <BraindumpInterface
+                    appData={appData}
+                    preferences={preferences}
+                    onDataUpdate={handleDataUpdate}
+                    onRecordingStateChange={handleRecordingStateChange}
+                    onRecordingControls={setRecordingControls}
+                    onRecordingStatusUpdate={handleRecordingStatusUpdate}
+                    onModeSwitch={handleModeSwitch}
+                    showMainInterface={false}
+                  />
+                ) : mode === 'focus' ? (
+                  <FocusView
+                    appData={appData}
+                    onDataUpdate={handleDataUpdate}
+                  />
+                ) : (
+                  <OrganizedView
+                    appData={appData}
+                    preferences={preferences}
+                    onDataUpdate={handleDataUpdate}
+                  />
+                )}
+              </main>
+            </ErrorBoundary>
           )}
         </div>
       </Layout>

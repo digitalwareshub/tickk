@@ -4,6 +4,8 @@
  */
 
 import { v4 as uuidv4 } from 'uuid'
+import toast from 'react-hot-toast'
+import { ErrorMessages } from '@/lib/utils/error-messages'
 import type { 
   AppData, 
   VoiceItem, 
@@ -38,10 +40,18 @@ export class StorageService {
         console.log('✅ IndexedDB initialized')
       } else {
         console.log('📱 Using localStorage fallback')
+        toast(ErrorMessages.INDEXEDDB_NOT_AVAILABLE, { 
+          icon: 'ℹ️',
+          duration: 3000 
+        })
         this.useIndexedDB = false
       }
     } catch (error) {
       console.warn('⚠️ IndexedDB failed, falling back to localStorage:', error)
+      toast(ErrorMessages.INDEXEDDB_NOT_AVAILABLE, { 
+        icon: 'ℹ️',
+        duration: 3000 
+      })
       this.useIndexedDB = false
     }
   }
@@ -344,6 +354,7 @@ export class StorageService {
       }
     } catch (error) {
       console.error('Failed to load data from IndexedDB:', error)
+      toast.error(ErrorMessages.STORAGE_LOAD_FAILED)
       return null
     }
   }
@@ -354,6 +365,7 @@ export class StorageService {
       return data ? JSON.parse(data) : null
     } catch (error) {
       console.error('Failed to load data from localStorage:', error)
+      toast.error(ErrorMessages.STORAGE_LOAD_FAILED)
       return null
     }
   }
@@ -390,6 +402,12 @@ export class StorageService {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
     } catch (error) {
       console.error('Failed to save data to localStorage:', error)
+      // Check if it's a quota exceeded error
+      if (error instanceof Error && error.name === 'QuotaExceededError') {
+        toast.error(ErrorMessages.STORAGE_QUOTA_EXCEEDED)
+      } else {
+        toast.error(ErrorMessages.STORAGE_SAVE_FAILED)
+      }
       throw error
     }
   }

@@ -3,7 +3,9 @@
  * Manages task templates with IndexedDB persistence
  */
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import toast from 'react-hot-toast'
+import { ErrorMessages, SuccessMessages } from '@/lib/utils/error-messages'
 import type { TaskTemplate } from '@/types/braindump'
 
 const DB_NAME = 'tickk_db'
@@ -13,6 +15,7 @@ export function useTemplates() {
   const [templates, setTemplates] = useState<TaskTemplate[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const hasShownErrorRef = useRef(false)
 
   // Initialize IndexedDB and load templates
   useEffect(() => {
@@ -21,10 +24,32 @@ export function useTemplates() {
 
   const getDB = useCallback(async (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, 1)
+      const request = indexedDB.open(DB_NAME, 2) // Increment version to trigger upgrade
 
       request.onerror = () => reject(request.error)
-      request.onsuccess = () => resolve(request.result)
+      
+      request.onsuccess = () => {
+        const db = request.result
+        
+        // Check if the templates store exists
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          // Close and reopen with a higher version to trigger upgrade
+          db.close()
+          const upgradeRequest = indexedDB.open(DB_NAME, db.version + 1)
+          
+          upgradeRequest.onerror = () => reject(upgradeRequest.error)
+          upgradeRequest.onsuccess = () => resolve(upgradeRequest.result)
+          
+          upgradeRequest.onupgradeneeded = (event) => {
+            const upgradeDb = (event.target as IDBOpenDBRequest).result
+            if (!upgradeDb.objectStoreNames.contains(STORE_NAME)) {
+              upgradeDb.createObjectStore(STORE_NAME, { keyPath: 'id' })
+            }
+          }
+        } else {
+          resolve(db)
+        }
+      }
 
       request.onupgradeneeded = (event) => {
         const db = (event.target as IDBOpenDBRequest).result
@@ -58,15 +83,28 @@ export function useTemplates() {
           return 0
         })
         setTemplates(loadedTemplates)
+        setError(null) // Clear any previous errors
         setLoading(false)
       }
 
       request.onerror = () => {
+        console.error('Failed to load templates:', request.error)
         setError('Failed to load templates')
+        // Only show toast once to prevent duplicates
+        if (!hasShownErrorRef.current) {
+          toast.error(ErrorMessages.TEMPLATE_LOAD_FAILED)
+          hasShownErrorRef.current = true
+        }
         setLoading(false)
       }
     } catch (err) {
+      console.error('Failed to access template database:', err)
       setError('Failed to access database')
+      // Only show toast once to prevent duplicates
+      if (!hasShownErrorRef.current) {
+        toast.error(ErrorMessages.TEMPLATE_LOAD_FAILED)
+        hasShownErrorRef.current = true
+      }
       setLoading(false)
     }
   }, [getDB])
@@ -91,8 +129,10 @@ export function useTemplates() {
       })
 
       await loadTemplates()
+      toast.success(SuccessMessages.TEMPLATE_SAVED)
     } catch (err) {
       setError('Failed to add template')
+      toast.error(ErrorMessages.TEMPLATE_SAVE_FAILED)
       throw err
     }
   }, [getDB, loadTemplates])
@@ -121,8 +161,10 @@ export function useTemplates() {
       })
 
       await loadTemplates()
+      toast.success(SuccessMessages.UPDATE_SUCCESS)
     } catch (err) {
       setError('Failed to update template')
+      toast.error(ErrorMessages.TEMPLATE_UPDATE_FAILED)
       throw err
     }
   }, [getDB, loadTemplates])
@@ -140,8 +182,10 @@ export function useTemplates() {
       })
 
       await loadTemplates()
+      toast.success(SuccessMessages.TEMPLATE_DELETED)
     } catch (err) {
       setError('Failed to delete template')
+      toast.error(ErrorMessages.TEMPLATE_DELETE_FAILED)
       throw err
     }
   }, [getDB, loadTemplates])

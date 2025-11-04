@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect, useCallback } from 'react'
+import toast from 'react-hot-toast'
+import { ErrorMessages } from '@/lib/utils/error-messages'
 import { AnalyticsService, type BraindumpStats } from '@/lib/services/analytics.service'
 import StatCard from './StatCard'
 import ActivityHeatmap from './ActivityHeatmap'
@@ -28,6 +30,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
       setStats(analyticsStats)
     } catch (error) {
       console.error('Failed to load analytics:', error)
+      toast.error(ErrorMessages.ANALYTICS_LOAD_FAILED)
     } finally {
       setLoading(false)
     }

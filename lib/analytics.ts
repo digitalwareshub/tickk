@@ -88,18 +88,18 @@ export const initPWATracking = () => {
   if (typeof window === 'undefined') return
 
   // Track when install prompt is shown
-  window.addEventListener('beforeinstallprompt', (e) => {
+  window.addEventListener('beforeinstallprompt', () => {
     trackPWAInstallPrompt()
   })
 
   // Track when PWA is installed
-  window.addEventListener('appinstalled', (e) => {
+  window.addEventListener('appinstalled', () => {
     trackPWAInstalled()
   })
 
   // Track if user is currently in PWA mode
   const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
-                (window.navigator as any).standalone === true
+                (window.navigator as Navigator & { standalone?: boolean }).standalone === true
 
   if (isPWA) {
     trackPWASession()
