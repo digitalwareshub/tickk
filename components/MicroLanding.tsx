@@ -44,17 +44,82 @@ export default function MicroLanding({
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
         <div className="mb-8">
-          <h1 className="heading-primary text-gray-900 mb-4">
-            Speak. Save. Sort it later.
+          <h1 className="heading-primary text-gray-900 mb-2">
+            Think at 400 WPM. Type at 40 WPM.
           </h1>
-          <p className="text-responsive text-gray-600 mb-8 max-w-2xl mx-auto">
-            Capture your thoughts by voice. We&apos;ll organize them into tasks and notes.
+          <p className="text-xl text-gray-700 font-medium mb-4">
+            Speak. Save. Sort it later.
           </p>
+          <p className="text-responsive text-gray-600 mb-6 max-w-2xl mx-auto">
+            Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
+          </p>
+          
+          {/* Social Proof - Reddit Badge */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
+            {/* Reddit Discussion Badge */}
+            <a 
+              href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-200 rounded-full hover:bg-orange-100 transition-colors group"
+            >
+              <svg className="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+              </svg>
+              <span className="text-sm font-medium text-orange-900">
+                Featured on Reddit
+              </span>
+              <svg className="w-3 h-3 text-orange-600 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* How It Works - Simple 3 Steps */}
+        <div className="mb-10 bg-gradient-to-b from-gray-50 to-white rounded-2xl p-6 sm:p-8">
+          <div className="flex items-center justify-center gap-2 sm:gap-4">
+            {/* Step 1 */}
+            <div className="text-center flex-1">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 transform hover:scale-110 transition-transform">
+                <span className="text-2xl sm:text-3xl">🎙️</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 text-xs sm:text-base mb-1 sm:mb-2">Speak</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Brain dump everything</p>
+              <p className="text-xs text-gray-600 sm:hidden">Brain dump</p>
+            </div>
+            
+            {/* Arrow 1 */}
+            <div className="text-orange-400 text-xl sm:text-2xl mt-0 sm:-mt-8">→</div>
+            
+            {/* Step 2 */}
+            <div className="text-center flex-1">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 transform hover:scale-110 transition-transform">
+                <span className="text-2xl sm:text-3xl">🤖</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 text-xs sm:text-base mb-1 sm:mb-2">Auto-Sort</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">NLP organizes into tasks & notes</p>
+              <p className="text-xs text-gray-600 sm:hidden">Auto-organize</p>
+            </div>
+            
+            {/* Arrow 2 */}
+            <div className="text-blue-400 text-xl sm:text-2xl mt-0 sm:-mt-8">→</div>
+            
+            {/* Step 3 */}
+            <div className="text-center flex-1">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 transform hover:scale-110 transition-transform">
+                <span className="text-2xl sm:text-3xl">✅</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 text-xs sm:text-base mb-1 sm:mb-2">Get Done</h3>
+              <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">Focus on action, not organizing</p>
+              <p className="text-xs text-gray-600 sm:hidden">Take action</p>
+            </div>
+          </div>
         </div>
 
         {/* Example Prompts */}
-        <div className="mb-12">
-          <p className="text-gray-600 text-center mb-6">
+        <div className="mb-10">
+          <p className="text-gray-600 text-center mb-4 font-medium">
             Try saying:
           </p>
           <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3 max-w-4xl mx-auto">

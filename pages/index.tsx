@@ -17,6 +17,7 @@ import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
 import FocusView from '@/components/FocusView'
 import MicroLanding from '@/components/MicroLanding'
+import MarketingContent from '@/components/MarketingContent'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
@@ -734,16 +735,20 @@ export default function App() {
                 </div>
                 
                 {mode === 'braindump' ? (
-                  <BraindumpInterface
-                    appData={appData}
-                    preferences={preferences}
-                    onDataUpdate={handleDataUpdate}
-                    onRecordingStateChange={handleRecordingStateChange}
-                    onRecordingControls={setRecordingControls}
-                    onRecordingStatusUpdate={handleRecordingStatusUpdate}
-                    onModeSwitch={handleModeSwitch}
-                    showMainInterface={false}
-                  />
+                  <>
+                    <BraindumpInterface
+                      appData={appData}
+                      preferences={preferences}
+                      onDataUpdate={handleDataUpdate}
+                      onRecordingStateChange={handleRecordingStateChange}
+                      onRecordingControls={setRecordingControls}
+                      onRecordingStatusUpdate={handleRecordingStatusUpdate}
+                      onModeSwitch={handleModeSwitch}
+                      showMainInterface={false}
+                    />
+                    {/* Marketing content appears after user's braindump list */}
+                    <MarketingContent />
+                  </>
                 ) : mode === 'focus' ? (
                   <FocusView
                     appData={appData}

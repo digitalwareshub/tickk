@@ -745,20 +745,29 @@ export default function BraindumpInterface({
         </div>
       )}
       
-      {/* Recent Items & Process Button */}
+      {/* Recent Items & Process Button - ACTIVE WORK AREA */}
       {recentItems.length > 0 && (
         <div 
-          className="border border-gray-200 rounded-lg p-4 bg-white"
+          className="border-2 border-orange-300 rounded-xl p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/30 shadow-lg ring-2 ring-orange-100"
           role="region"
           aria-label="Recent captured thoughts"
         >
+          {/* Work Area Header */}
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-medium text-gray-900">
-              Recent ({recentItems.length})
-            </h3>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🎯</span>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Your Braindumps
+                </h3>
+                <p className="text-xs text-gray-600">
+                  {recentItems.length} {recentItems.length === 1 ? 'item' : 'items'} ready to organize
+                </p>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
               {recentItems.length > 0 && (
-                <span className="text-xs text-gray-500 animate-pulse">
+                <span className="text-xs text-orange-600 font-medium animate-pulse">
                   Click Organize →
                 </span>
               )}
@@ -767,9 +776,9 @@ export default function BraindumpInterface({
                 disabled={isProcessing || recentItems.length === 0}
                 aria-label="Organize your captured thoughts into tasks and notes"
                 aria-describedby="organize-help"
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md ${
                   recentItems.length > 0
-                    ? 'bg-black hover:bg-gray-800 text-white border border-gray-300'
+                    ? 'bg-orange-500 hover:bg-orange-600 text-white border-2 border-orange-400 hover:shadow-lg hover:scale-105'
                     : 'bg-gray-300 text-gray-500'
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
