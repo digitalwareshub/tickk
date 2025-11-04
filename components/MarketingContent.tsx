@@ -2,7 +2,7 @@
  * MarketingContent - Features, Reviews, and FAQ sections
  * Displayed at the bottom of the page for SEO and new user conversion
  * Updated: Nov 5, 2025 - Added Hide/Show toggle for better UX
- * Testing webhook deployment trigger
+ * Testing deployment trigger - v3
  */
 
 import { useState, useEffect } from 'react'
