@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+// Vercel deployment trigger - Updated Nov 4, 2025
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
