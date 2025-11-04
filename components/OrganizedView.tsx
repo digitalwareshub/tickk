@@ -108,6 +108,33 @@ export default function OrganizedView({
     
     toast.success(wasCompleted ? 'Marked as incomplete!' : 'Marked as complete! ✓')
   }
+
+  const handleToggleNote = async (noteId: string) => {
+    const note = organizedNotes.find(n => n.id === noteId)
+    const wasCompleted = note?.completed
+    
+    const updatedNotes = organizedNotes.map(note => 
+      note.id === noteId 
+        ? { ...note, completed: !note.completed }
+        : note
+    )
+    
+    const updatedData = {
+      ...appData,
+      notes: updatedNotes
+    }
+    
+    onDataUpdate(updatedData)
+    
+    // Remove from selected items if in bulk mode
+    if (bulkMode && selectedItems.has(noteId)) {
+      const newSelected = new Set(selectedItems)
+      newSelected.delete(noteId)
+      setSelectedItems(newSelected)
+    }
+    
+    toast.success(wasCompleted ? 'Note unmarked!' : 'Note marked! ✓')
+  }
   
   const handleDeleteItem = (item: VoiceItem, type: 'task' | 'note') => {
     setItemToDelete(item)
@@ -1125,8 +1152,16 @@ export default function OrganizedView({
                     >
                       <input
                         type="checkbox"
-                        checked={bulkMode ? selectedItems.has(item.id) : (item.itemType === 'task' ? (item.completed || false) : false)}
-                        onChange={() => bulkMode ? toggleItemSelection(item.id) : (item.itemType === 'task' ? handleToggleTask(item.id) : undefined)}
+                        checked={bulkMode ? selectedItems.has(item.id) : (item.completed || false)}
+                        onChange={() => {
+                          if (bulkMode) {
+                            toggleItemSelection(item.id)
+                          } else if (item.itemType === 'task') {
+                            handleToggleTask(item.id)
+                          } else {
+                            handleToggleNote(item.id)
+                          }
+                        }}
                         className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
                           bulkMode 
                             ? 'text-orange-600 focus:ring-orange-500' 
@@ -1138,13 +1173,13 @@ export default function OrganizedView({
                           ? `Select ${item.itemType} for bulk operations`
                           : item.itemType === 'task' 
                             ? `Mark task as ${item.completed ? 'incomplete' : 'complete'}`
-                            : "Mark note as completed"
+                            : `Mark note as ${item.completed ? 'unmarked' : 'marked'}`
                         }
                       />
                       <div className="flex-1 min-w-0 overflow-hidden">
                         <div className="flex items-center gap-2">
                           <p className={`text-sm break-words flex-1 ${
-                            item.itemType === 'task' && item.completed ? 'text-gray-500 line-through' : 'text-gray-900'
+                            item.completed ? 'text-gray-500 line-through' : 'text-gray-900'
                           }`}>
                             {item.text}
                           </p>
@@ -1302,8 +1337,14 @@ export default function OrganizedView({
                       >
                         <input
                           type="checkbox"
-                          checked={bulkMode ? selectedItems.has(note.id) : false}
-                          onChange={() => bulkMode ? toggleItemSelection(note.id) : undefined}
+                          checked={bulkMode ? selectedItems.has(note.id) : (note.completed || false)}
+                          onChange={() => {
+                            if (bulkMode) {
+                              toggleItemSelection(note.id)
+                            } else {
+                              handleToggleNote(note.id)
+                            }
+                          }}
                           className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
                             bulkMode 
                               ? 'text-orange-600 focus:ring-orange-500' 
@@ -1311,12 +1352,14 @@ export default function OrganizedView({
                           }`}
                           aria-label={bulkMode 
                             ? "Select note for bulk operations"
-                            : "Mark note as completed"
+                            : `Mark note as ${note.completed ? 'unmarked' : 'marked'}`
                           }
                         />
                         <div className="flex-1 min-w-0 overflow-hidden">
                           <div className="flex items-center gap-2">
-                            <p className="text-sm text-gray-900 break-words flex-1">{note.text}</p>
+                            <p className={`text-sm text-gray-900 break-words flex-1 ${
+                              note.completed ? 'text-gray-500 line-through' : ''
+                            }`}>{note.text}</p>
                             {note.metadata?.pinned && (
                               <span 
                                 className="text-yellow-600 text-sm flex-shrink-0" 
