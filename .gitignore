@@ -70,3 +70,6 @@ docs/ChatGPT-Classifier 2.md
 
 # Exclude entire docs folder
 /docs/
+
+# Claude documentation folder
+/ClaudeDocs/
