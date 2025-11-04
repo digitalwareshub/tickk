@@ -9,7 +9,6 @@
         }
       ],
       "destination": "https://tickk.app/:path*",
-      "permanent": true,
       "statusCode": 308
     }
   ],
