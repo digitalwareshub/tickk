@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function MarketingContent() {
+  // State management for collapsible marketing section
   const [isVisible, setIsVisible] = useState(true)
   
   // Load preference from localStorage on mount
