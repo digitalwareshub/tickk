@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { trackPageView } from '@/lib/analytics/enhanced-analytics'
 import { initPWATracking } from '@/lib/analytics'
+import { Toaster } from 'react-hot-toast'
 
 // Get GA tracking ID from environment
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -97,6 +98,32 @@ export default function App({ Component, pageProps }: AppProps) {
       </Script>
 
       <Component {...pageProps} />
+
+      {/* Toast Notifications */}
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: '#10b981',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            duration: 5000,
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
 
       {/* Vercel Analytics */}
       <Analytics />

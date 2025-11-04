@@ -4,10 +4,12 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import toast from 'react-hot-toast'
 import { StorageService } from '@/lib/storage/storage-service'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
+import { ErrorMessages, SuccessMessages } from '@/lib/utils/error-messages'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
@@ -305,6 +307,7 @@ export default function BraindumpInterface({
 
       setCurrentTranscript('')
       setLastAddedItem(`${itemCount} ${itemWord} added`)
+      toast.success(`${itemCount} ${itemWord} added!`)
       onRecordingStatusUpdate?.({ transcript: '' })
 
       // Clear success notification after 3 seconds
@@ -312,7 +315,8 @@ export default function BraindumpInterface({
 
     } catch (error) {
       console.error('Failed to process transcript:', error)
-      setRecordingError('Failed to process recording')
+      setRecordingError(ErrorMessages.PROCESSING_FAILED)
+      toast.error(ErrorMessages.PROCESSING_FAILED)
       announcer.announce('Failed to process recording', 'assertive')
     } finally {
       setIsProcessing(false)
@@ -376,11 +380,12 @@ export default function BraindumpInterface({
         }, 500) // Small delay to ensure smooth transition
       }
       
+      toast.success(SuccessMessages.PROCESSING_COMPLETE)
       trackPageInteraction('braindump_session_completed', `${organizedData.tasks.length}_tasks_${organizedData.notes.length}_notes`)
       
     } catch (error) {
       console.error('Failed to complete processing:', error)
-      alert('Failed to save organized items. Please try again.')
+      toast.error(ErrorMessages.PROCESSING_FAILED)
     }
   }, [appData, storageService, onDataUpdate, onModeSwitch])
   
@@ -417,11 +422,13 @@ export default function BraindumpInterface({
       await storageService.saveAllData(updatedData)
       onDataUpdate(updatedData)
       
+      toast.success(SuccessMessages.UPDATE_SUCCESS)
       announcer.announce('Item updated successfully', 'polite')
       trackPageInteraction('braindump_item_edited', 'braindump')
       
     } catch (error) {
       console.error('Failed to update item:', error)
+      toast.error(ErrorMessages.STORAGE_UPDATE_FAILED)
       announcer.announce('Failed to update item', 'assertive')
     }
   }, [appData, storageService, onDataUpdate, announcer])
@@ -451,6 +458,7 @@ export default function BraindumpInterface({
       await storageService.saveAllData(updatedData)
       onDataUpdate(updatedData)
       
+      toast.success(SuccessMessages.DELETE_SUCCESS)
       announcer.announce('Item deleted successfully', 'polite')
       trackPageInteraction('braindump_item_deleted', 'braindump')
       
@@ -459,6 +467,7 @@ export default function BraindumpInterface({
       
     } catch (error) {
       console.error('Failed to delete item:', error)
+      toast.error(ErrorMessages.STORAGE_DELETE_FAILED)
       announcer.announce('Failed to delete item', 'assertive')
     }
   }, [itemToDelete, appData, storageService, onDataUpdate, announcer])
@@ -478,7 +487,7 @@ export default function BraindumpInterface({
     const unprocessedItems = appData.braindump.filter(item => !item.processed)
     
     if (unprocessedItems.length === 0) {
-      alert('No unprocessed items to organize!')
+      toast.error('No unprocessed items to organize!')
       return
     }
     

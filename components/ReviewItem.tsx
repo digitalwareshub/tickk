@@ -4,6 +4,8 @@
  */
 
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { ErrorMessages, SuccessMessages } from '@/lib/utils/error-messages'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
 import type { VoiceItem, Classification } from '@/types/braindump'
@@ -69,8 +71,10 @@ export default function ReviewItem({
           category: newCategory // Override category with user choice
         }
       })
+      toast.success(SuccessMessages.UPDATE_SUCCESS)
     } catch (error) {
       console.error('Re-classification failed:', error)
+      toast.error(ErrorMessages.CLASSIFICATION_FAILED)
     }
   }
   

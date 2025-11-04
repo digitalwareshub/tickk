@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect, useRef } from 'react'
+import toast from 'react-hot-toast'
+import { ErrorMessages } from '@/lib/utils/error-messages'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { StorageService } from '@/lib/storage/storage-service'
 import { trackPageInteraction } from '@/lib/analytics'
@@ -102,7 +104,8 @@ export default function ProcessBraindumpModal({
       
     } catch (error) {
       console.error('Processing failed:', error)
-      // Could add error handling UI here
+      toast.error(ErrorMessages.PROCESSING_FAILED)
+      onClose() // Close modal on error
     } finally {
       setIsProcessing(false)
     }
@@ -168,7 +171,8 @@ export default function ProcessBraindumpModal({
 
     } catch (error) {
       console.error('Failed to apply organization:', error)
-      // Could add error handling UI
+      toast.error(ErrorMessages.CLASSIFICATION_FAILED)
+      setStage('review') // Return to review stage on error
     }
   }
   

@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect, useRef } from 'react'
+import toast from 'react-hot-toast'
+import { ErrorMessages, SuccessMessages } from '@/lib/utils/error-messages'
 import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
@@ -81,6 +83,9 @@ export default function OrganizedView({
   const unprocessedCount = appData.braindump?.filter(item => !item.processed).length || 0
   
   const handleToggleTask = async (taskId: string) => {
+    const task = organizedTasks.find(t => t.id === taskId)
+    const wasCompleted = task?.completed
+    
     const updatedTasks = organizedTasks.map(task => 
       task.id === taskId 
         ? { ...task, completed: !task.completed }
@@ -93,6 +98,15 @@ export default function OrganizedView({
     }
     
     onDataUpdate(updatedData)
+    
+    // Remove from selected items if in bulk mode
+    if (bulkMode && selectedItems.has(taskId)) {
+      const newSelected = new Set(selectedItems)
+      newSelected.delete(taskId)
+      setSelectedItems(newSelected)
+    }
+    
+    toast.success(wasCompleted ? 'Marked as incomplete!' : 'Marked as complete! ✓')
   }
   
   const handleDeleteItem = (item: VoiceItem, type: 'task' | 'note') => {
@@ -104,15 +118,22 @@ export default function OrganizedView({
   const handleConfirmDelete = async () => {
     if (!itemToDelete) return
     
-    const updatedData = {
-      ...appData,
-      tasks: deleteType === 'task' ? organizedTasks.filter(t => t.id !== itemToDelete.id) : organizedTasks,
-      notes: deleteType === 'note' ? organizedNotes.filter(n => n.id !== itemToDelete.id) : organizedNotes
+    try {
+      const updatedData = {
+        ...appData,
+        tasks: deleteType === 'task' ? organizedTasks.filter(t => t.id !== itemToDelete.id) : organizedTasks,
+        notes: deleteType === 'note' ? organizedNotes.filter(n => n.id !== itemToDelete.id) : organizedNotes
+      }
+      
+      onDataUpdate(updatedData)
+      toast.success(SuccessMessages.DELETE_SUCCESS)
+    } catch (error) {
+      console.error('Failed to delete item:', error)
+      toast.error(ErrorMessages.STORAGE_DELETE_FAILED)
+    } finally {
+      setShowDeleteModal(false)
+      setItemToDelete(null)
     }
-    
-    onDataUpdate(updatedData)
-    setShowDeleteModal(false)
-    setItemToDelete(null)
   }
 
   const handleCancelDelete = () => {
@@ -156,9 +177,11 @@ export default function OrganizedView({
       
       onDataUpdate(updatedData)
       setShowEditModal(false)
+      toast.success(SuccessMessages.UPDATE_SUCCESS)
       
     } catch (error) {
       console.error('Failed to update item:', error)
+      toast.error(ErrorMessages.STORAGE_UPDATE_FAILED)
     }
   }
 
@@ -216,9 +239,11 @@ export default function OrganizedView({
       // Keep modal open so user can save manually
       // Update editType to reflect the new category
       setEditType(newCategory)
+      toast.success('Category changed successfully')
       
     } catch (error) {
       console.error('Failed to change category:', error)
+      toast.error(ErrorMessages.STORAGE_UPDATE_FAILED)
     }
   }
 
@@ -228,9 +253,10 @@ export default function OrganizedView({
   const handleCopyText = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
-      // Could add a toast notification here
+      toast.success(SuccessMessages.COPIED_TO_CLIPBOARD)
     } catch (error) {
       console.error('Failed to copy text:', error)
+      toast.error(ErrorMessages.COPY_FAILED)
     }
   }
 
@@ -239,6 +265,8 @@ export default function OrganizedView({
    */
   const handlePinItem = (itemId: string, type: 'task' | 'note') => {
     const items = type === 'task' ? organizedTasks : organizedNotes
+    const isPinned = items.find(item => item.id === itemId)?.metadata?.pinned
+    
     const updatedItems = items.map(item =>
       item.id === itemId
         ? {
@@ -255,6 +283,8 @@ export default function OrganizedView({
       ...appData,
       [type === 'task' ? 'tasks' : 'notes']: updatedItems
     })
+    
+    toast.success(isPinned ? 'Unpinned successfully!' : 'Pinned to top!')
   }
 
   /**
@@ -283,6 +313,8 @@ export default function OrganizedView({
         tasks: updatedTasks,
         notes: updatedNotes
       })
+      
+      toast.success('Converted to note!')
     } else {
       const updatedNotes = organizedNotes.filter(n => n.id !== item.id)
       const convertedItem: VoiceItem = {
@@ -305,6 +337,8 @@ export default function OrganizedView({
         tasks: updatedTasks,
         notes: updatedNotes
       })
+      
+      toast.success('Converted to task!')
     }
   }
 
@@ -390,6 +424,7 @@ export default function OrganizedView({
     }
     
     onDataUpdate(updatedData)
+    toast.success('Added to Focus mode!')
     
     // TODO: Show confirmation or navigate to Focus mode
     console.log('Item added to Focus:', updatedItem)
@@ -522,20 +557,35 @@ export default function OrganizedView({
     link.href = URL.createObjectURL(blob)
     link.download = `tickk-export-${new Date().toISOString().split('T')[0]}.json`
     link.click()
+    toast.success(SuccessMessages.EXPORT_SUCCESS)
   }
 
   const exportToCalendar = () => {
     try {
+      const totalTasks = organizedTasks.length
       const exportableCount = getExportableTasksCount(organizedTasks)
+      
       if (exportableCount === 0) {
-        alert('No tasks with dates found to export to calendar.')
+        toast.error(ErrorMessages.EXPORT_NO_DATES)
         return
       }
 
       exportICS(organizedTasks)
+      
+      // Show different success messages based on what was exported
+      if (exportableCount < totalTasks) {
+        const skipped = totalTasks - exportableCount
+        toast.success(
+          `Calendar exported with ${exportableCount} task${exportableCount !== 1 ? 's' : ''}. ` +
+          `${skipped} task${skipped !== 1 ? 's' : ''} without dates were skipped.`,
+          { duration: 6000 }
+        )
+      } else {
+        toast.success(SuccessMessages.CALENDAR_EXPORTED)
+      }
     } catch (error) {
       console.error('Failed to export calendar:', error)
-      alert('Failed to export calendar. Please try again.')
+      toast.error(ErrorMessages.EXPORT_CALENDAR_FAILED)
     }
   }
 
@@ -581,28 +631,38 @@ export default function OrganizedView({
   }
 
   const handleBulkDeleteConfirm = () => {
-    if (bulkDeleteType === 'selected') {
-      const updatedTasks = organizedTasks.filter(task => !selectedItems.has(task.id))
-      const updatedNotes = organizedNotes.filter(note => !selectedItems.has(note.id))
+    try {
+      let deletedCount = 0
       
-      onDataUpdate({
-        ...appData,
-        tasks: updatedTasks,
-        notes: updatedNotes
-      })
+      if (bulkDeleteType === 'selected') {
+        deletedCount = selectedItems.size
+        const updatedTasks = organizedTasks.filter(task => !selectedItems.has(task.id))
+        const updatedNotes = organizedNotes.filter(note => !selectedItems.has(note.id))
+        
+        onDataUpdate({
+          ...appData,
+          tasks: updatedTasks,
+          notes: updatedNotes
+        })
+        
+        setSelectedItems(new Set())
+      } else if (bulkDeleteType === 'completed') {
+        deletedCount = getCompletedTasksCount()
+        const updatedTasks = organizedTasks.filter(task => !task.completed)
+        
+        onDataUpdate({
+          ...appData,
+          tasks: updatedTasks
+        })
+      }
       
-      setSelectedItems(new Set())
-    } else if (bulkDeleteType === 'completed') {
-      const updatedTasks = organizedTasks.filter(task => !task.completed)
-      
-      onDataUpdate({
-        ...appData,
-        tasks: updatedTasks
-      })
+      toast.success(`${deletedCount} item${deletedCount !== 1 ? 's' : ''} deleted successfully!`)
+      setShowBulkDeleteModal(false)
+      setBulkMode(false)
+    } catch (error) {
+      console.error('Failed to delete items:', error)
+      toast.error(ErrorMessages.STORAGE_DELETE_FAILED)
     }
-    
-    setShowBulkDeleteModal(false)
-    setBulkMode(false)
   }
 
   const handleBulkDeleteCancel = () => {
