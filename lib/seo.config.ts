@@ -1,3 +1,6 @@
+// Cache-busting version - increment when images change
+const IMAGE_VERSION = 'v2';
+
 const defaultSEOConfig = {
   titleTemplate: '%s | tickk - Free Voice Productivity App',
   defaultTitle: 'tickk - Free Voice Productivity App with Speech Recognition',
@@ -12,11 +15,11 @@ const defaultSEOConfig = {
     description: 'Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.',
     images: [
       {
-        url: 'https://tickk.app/og-image.png',
+        url: `https://tickk.app/og-image.webp?${IMAGE_VERSION}`,
         width: 1200,
         height: 630,
         alt: 'tickk Voice Productivity App',
-        type: 'image/png',
+        type: 'image/webp',
       },
     ],
   },
@@ -24,7 +27,7 @@ const defaultSEOConfig = {
     handle: '@TheTickkApp',
     site: '@TheTickkApp',
     cardType: 'summary_large_image',
-    images: ['https://tickk.app/twitter-image.png'],
+    images: [`https://tickk.app/twitter-image.webp?${IMAGE_VERSION}`],
   },
   additionalMetaTags: [
     {

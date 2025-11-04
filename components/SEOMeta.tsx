@@ -11,10 +11,13 @@ interface SEOMetaProps {
   noIndex?: boolean
 }
 
+// Cache-busting version for images
+const IMAGE_VERSION = 'v2';
+
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
   description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. ADHD-friendly with Focus Mode, Command Palette (⌘K), and executive function support. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
-  image = '/og-image.png',
+  image = '/og-image.webp',
   url,
   noIndex = false
 }: SEOMetaProps) {
@@ -73,11 +76,11 @@ export default function SEOMeta({
           description: description,
           images: [
             {
-              url: `${canonicalUrl}${image}`,
+              url: `${canonicalUrl}${image}?${IMAGE_VERSION}`,
               width: 1200,
               height: 630,
               alt: 'tickk - Voice to Productivity App',
-              type: 'image/png',
+              type: 'image/webp',
             },
           ],
         }}
@@ -158,7 +161,7 @@ export default function SEOMeta({
           // Twitter Card Image
           {
             name: 'twitter:image',
-            content: `${url}/twitter-image.png`,
+            content: `${url}/twitter-image.webp?${IMAGE_VERSION}`,
           },
         ]}
       />

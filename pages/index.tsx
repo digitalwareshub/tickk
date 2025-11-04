@@ -653,7 +653,7 @@ export default function App() {
                 "Open source",
                 "Real-time processing"
               ],
-              "screenshot": "https://tickk.app/og-image.png",
+              "screenshot": "https://tickk.app/og-image.webp",
               "softwareVersion": "1.10.2",
               "datePublished": "2024-01-01",
               "dateModified": "2025-10-28",

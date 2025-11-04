@@ -4,7 +4,7 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/middleware-manifest\.json$/],
+  buildExcludes: [/middleware-manifest\.json$/, /og-image\.webp$/, /twitter-image\.webp$/],
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\/.*/i,

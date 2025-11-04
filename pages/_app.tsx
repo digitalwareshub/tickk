@@ -45,8 +45,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#16a34a" />
         
         {/* Preload social media images to prevent flickering */}
-        <link rel="preload" as="image" href="/og-image.png" />
-        <link rel="preload" as="image" href="/twitter-image.png" />
+        <link rel="preload" as="image" href="/og-image.webp" />
+        <link rel="preload" as="image" href="/twitter-image.webp" />
         
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />

@@ -51,7 +51,7 @@ export default function CompleteGuideTickkApp() {
               "@type": "BlogPosting",
               "headline": "Complete Guide to tickk.app: Voice-to-Text Productivity in 2025",
               "description": "Master tickk.app's voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export.",
-              "image": "https://tickk.app/og-image.png",
+              "image": "https://tickk.app/og-image.webp",
               "author": {
                 "@type": "Organization",
                 "name": "Tickk",

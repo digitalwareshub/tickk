@@ -302,7 +302,7 @@ export default function Home() {
       className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50   "
       seoTitle="tickk - Transform Voice into Organized Tasks"
       seoDescription="Privacy-first voice productivity app that converts speech into organized tasks and notes. Works offline and keeps your data secure."
-      seoImage="/og-image.png"
+      seoImage="/og-image.webp"
     >
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 mb-4"></div>
