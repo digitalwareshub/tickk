@@ -11,6 +11,7 @@ interface HeaderProps {
 export default function Header({ mode: _mode, onModeChange: _onModeChange }: HeaderProps) {
   const router = useRouter()
   const isHomePage = router.pathname === '/'
+  const isPricingPage = router.pathname === '/pricing'
 
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
@@ -53,7 +54,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                   </svg>
                   Back to App
                 </Link>
-                {FEATURES.PRICING_PAGE.enabled && (
+                {FEATURES.PRICING_PAGE.enabled && !isPricingPage && (
                   <Link
                     href="/pricing"
                     className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"

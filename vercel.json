@@ -1,15 +1,16 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "www.tickk.app"
         }
       ],
-      "destination": "https://tickk.app/$1",
-      "permanent": true
+      "destination": "https://tickk.app/:path*",
+      "permanent": true,
+      "statusCode": 308
     }
   ],
   "headers": [
