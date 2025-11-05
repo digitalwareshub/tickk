@@ -42,7 +42,7 @@ export default function HiddenCostOfTyping() {
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumb */}
@@ -54,32 +54,32 @@ export default function HiddenCostOfTyping() {
 
           {/* Article Header */}
           <header className="mb-8">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-6">
               <span>October 2025</span>
               <span>•</span>
               <span>8 min read</span>
               <span>•</span>
-              <span className="bg-orange-100 text-orange-700 px-2 py-1 rounded-full text-xs font-medium">Cognitive Science</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-2 py-1 rounded-full text-xs font-medium">Cognitive Science</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 leading-tight mb-6">
               The Hidden Cost of Typing: How Your Keyboard Slows Down Your Mind
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
               We&apos;ve been typing for so long that we&apos;ve forgotten what it costs us.
             </p>
             
             <div className="flex flex-wrap gap-2">
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Voice Productivity</span>
-              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Cognitive Science</span>
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Productivity</span>
-              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">Voice vs Typing</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Voice Productivity</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">Cognitive Science</span>
+              <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Productivity</span>
+              <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">Voice vs Typing</span>
             </div>
           </header>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg dark:prose-invert max-w-none [&_p]:text-gray-700 [&_p]:dark:text-slate-300 [&_h2]:text-gray-900 [&_h2]:dark:text-slate-100 [&_h3]:text-gray-900 [&_h3]:dark:text-slate-100 [&_h4]:text-gray-900 [&_h4]:dark:text-slate-200 [&_ul]:text-gray-700 [&_ul]:dark:text-slate-300 [&_li]:text-gray-700 [&_li]:dark:text-slate-300 [&_.bg-gray-50]:dark:bg-slate-800 [&_.bg-blue-50]:dark:bg-blue-900/20 [&_.border-blue-400]:dark:border-blue-500 [&_.text-blue-900]:dark:text-blue-300 [&_.text-blue-800]:dark:text-blue-400 [&_.bg-green-50]:dark:bg-green-900/20 [&_.border-green-400]:dark:border-green-500 [&_.text-green-900]:dark:text-green-300 [&_.text-green-800]:dark:text-green-400 [&_.border-gray-200]:dark:border-slate-700 [&_.text-gray-900]:dark:text-slate-100 [&_.text-gray-600]:dark:text-slate-400 [&_.text-gray-800]:dark:text-slate-200 [&_.bg-white]:dark:bg-slate-800">
             <p className="text-lg leading-relaxed mb-6">
               Every day, millions of people sit down to capture their thoughts, plan their work, and organize their lives — all through the narrow bottleneck of a keyboard. We&apos;ve accepted this as normal. Productive, even. But there&apos;s a hidden tax we pay every time our fingers hit the keys, and it&apos;s costing us more than we realize.
             </p>
@@ -224,19 +224,19 @@ export default function HiddenCostOfTyping() {
               Maybe it&apos;s time your tools did too.
             </p>
 
-            <hr className="my-12 border-gray-200" />
+            <hr className="my-12 border-gray-200 dark:border-slate-700" />
 
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-8 rounded-lg text-center">
-              <p className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-8 rounded-lg text-center">
+              <p className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
                 Your mind doesn&apos;t type. It speaks. Let Tickk listen.
               </p>
-              <p className="text-gray-700 mb-6">
-                Try Tickk at <a href="https://tickk.app" className="underline font-medium">tickk.app</a> — capture your thoughts at the speed of speech, organize them at your own pace.
+              <p className="text-gray-700 dark:text-slate-300 mb-6">
+                Try Tickk at <a href="https://tickk.app" className="underline font-medium text-gray-900 dark:text-slate-50">tickk.app</a> — capture your thoughts at the speed of speech, organize them at your own pace.
               </p>
-              <Link href="/" className="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-semibold">
+              <Link href="/" className="inline-flex items-center bg-gray-900 dark:bg-orange-600 text-white px-8 py-4 rounded-lg hover:bg-gray-800 dark:hover:bg-orange-700 transition-colors text-lg font-semibold">
                 Try tickk free forever →
               </Link>
-              <p className="text-gray-600 mt-4 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 mt-4 text-sm">
                 <em>No signup. No AI. No BS. Just an app that shuts up and listens.</em>
               </p>
             </div>

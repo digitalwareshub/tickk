@@ -4,6 +4,7 @@ import Header from './Header'
 import Footer from './Footer'
 import SEOMeta from './SEOMeta'
 import ModeNavigationTabs from './ModeNavigationTabs'
+import FirefoxWarningBanner from './FirefoxWarningBanner'
 
 interface LayoutProps {
   children: ReactNode
@@ -42,6 +43,10 @@ export default function Layout({
         description={seoDescription}
         image={seoImage}
       />
+      
+      {/* Firefox Warning Banner - shows at top if Firefox detected */}
+      <FirefoxWarningBanner />
+      
       <div className={className}>
         {/* Header */}
         <Header mode={mode} onModeChange={onModeChange} />

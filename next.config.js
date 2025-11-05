@@ -5,7 +5,15 @@ const withPWA = require('next-pwa')({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/middleware-manifest\.json$/, /og-image\.webp$/, /twitter-image\.webp$/],
+  buildExcludes: [/middleware-manifest\.json$/, /og-image\.webp$/, /twitter-image\.webp$/, /_next\/dynamic-css-manifest\.json$/],
+  publicExcludes: ['!robots.txt', '!sitemap.xml'],
+  // Fallback for failed precaching - prevents white screen
+  cacheOnFrontEndNav: true,
+  reloadOnOnline: true,
+  // Cache strategies for better reliability
+  fallbacks: {
+    document: '/offline.html', // Create this page to show when offline
+  },
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\/.*/i,

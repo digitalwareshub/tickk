@@ -135,45 +135,45 @@ export default function Pricing() {
         <link rel="canonical" href="https://tickk.app/pricing" />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         {/* Hero Section */}
         <section className="py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-700 mb-6">
-              <span className="inline-block h-2 w-2 rounded-full bg-green-600"></span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 mb-6">
+              <span className="inline-block h-2 w-2 rounded-full bg-green-600 dark:bg-green-500"></span>
               Simple, Honest Pricing
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 mb-4">
               Unlimited Local Storage.
-              <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block mt-2">
+              <span className="bg-gradient-to-r from-orange-600 to-orange-500 dark:from-orange-500 dark:to-orange-400 bg-clip-text text-transparent block mt-2">
                 Sync When You Need It.
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
               Store unlimited items on your device for free. Upgrade to sync across phone, laptop, and desktop.
             </p>
 
             {/* Value Props */}
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
+                <svg className="w-5 h-5 text-green-600 dark:text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <span>Unlimited local storage</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
+                <svg className="w-5 h-5 text-green-600 dark:text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <span>100% private (local-first)</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
+                <svg className="w-5 h-5 text-green-600 dark:text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
                 <span>Free forever</span>
@@ -182,12 +182,12 @@ export default function Pricing() {
 
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm font-medium ${billingPeriod === 'monthly' ? 'text-gray-900' : 'text-gray-500'}`}>
+              <span className={`text-sm font-medium ${billingPeriod === 'monthly' ? 'text-gray-900 dark:text-slate-100' : 'text-gray-500 dark:text-slate-500'}`}>
                 Monthly
               </span>
               <button
                 onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'yearly' : 'monthly')}
-                className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
                 style={{ backgroundColor: billingPeriod === 'yearly' ? '#ea580c' : '#d1d5db' }}
                 aria-label="Toggle billing period"
               >
@@ -197,11 +197,11 @@ export default function Pricing() {
                   }`}
                 />
               </button>
-              <span className={`text-sm font-medium ${billingPeriod === 'yearly' ? 'text-gray-900' : 'text-gray-500'}`}>
+              <span className={`text-sm font-medium ${billingPeriod === 'yearly' ? 'text-gray-900 dark:text-slate-100' : 'text-gray-500 dark:text-slate-500'}`}>
                 Yearly
               </span>
               {billingPeriod === 'yearly' && (
-                <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">
+                <span className="text-xs font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded-full">
                   Save $10
                 </span>
               )}
@@ -218,14 +218,14 @@ export default function Pricing() {
                   key={tier.name}
                   className={`relative rounded-2xl border-2 p-8 ${
                     tier.highlighted
-                      ? 'border-orange-500 shadow-xl shadow-orange-100'
-                      : 'border-gray-200'
-                  }`}
+                      ? 'border-orange-500 shadow-xl shadow-orange-100 dark:shadow-orange-900/20'
+                      : 'border-gray-200 dark:border-slate-700'
+                  } bg-white dark:bg-slate-800`}
                 >
                   {/* Popular Badge */}
                   {tier.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      <span className="bg-orange-500 dark:bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                         MOST POPULAR
                       </span>
                     </div>
@@ -233,29 +233,29 @@ export default function Pricing() {
 
                   {/* Tier Name */}
                   <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                    <p className="text-sm text-gray-600">{tier.description}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-2">{tier.name}</h3>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">{tier.description}</p>
                   </div>
 
                   {/* Price */}
                   <div className="mb-6">
                     {tier.price.monthly === 0 ? (
                       <div className="flex items-baseline">
-                        <span className="text-4xl font-bold text-gray-900">$0</span>
-                        <span className="ml-2 text-gray-600">/forever</span>
+                        <span className="text-4xl font-bold text-gray-900 dark:text-slate-50">$0</span>
+                        <span className="ml-2 text-gray-600 dark:text-slate-400">/forever</span>
                       </div>
                     ) : (
                       <div>
                         <div className="flex items-baseline">
-                          <span className="text-4xl font-bold text-gray-900">
+                          <span className="text-4xl font-bold text-gray-900 dark:text-slate-50">
                             ${billingPeriod === 'monthly' ? tier.price.monthly : tier.price.yearly}
                           </span>
-                          <span className="ml-2 text-gray-600">
+                          <span className="ml-2 text-gray-600 dark:text-slate-400">
                             /{billingPeriod === 'monthly' ? 'month' : 'year'}
                           </span>
                         </div>
                         {billingPeriod === 'yearly' && (
-                          <p className="text-sm text-gray-500 mt-1">
+                          <p className="text-sm text-gray-500 dark:text-slate-500 mt-1">
                             ${(tier.price.yearly / 12).toFixed(2)}/month billed annually
                           </p>
                         )}
@@ -268,8 +268,8 @@ export default function Pricing() {
                     href={tier.ctaLink}
                     className={`block w-full text-center py-3 px-6 rounded-lg font-semibold mb-6 transition-colors ${
                       tier.highlighted
-                        ? 'bg-orange-500 hover:bg-orange-600 text-white'
-                        : 'bg-gray-900 hover:bg-gray-800 text-white'
+                        ? 'bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white'
+                        : 'bg-gray-900 hover:bg-gray-800 dark:bg-slate-700 dark:hover:bg-slate-600 text-white'
                     }`}
                   >
                     {tier.cta}
@@ -280,20 +280,20 @@ export default function Pricing() {
                     {tier.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         {feature.included ? (
-                          <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
                         ) : (
-                          <svg className="w-5 h-5 text-gray-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-5 h-5 text-gray-300 dark:text-slate-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                         )}
                         <span className={`text-sm ${
                           'bold' in feature && feature.bold
-                            ? 'font-semibold text-gray-900'
+                            ? 'font-semibold text-gray-900 dark:text-slate-100'
                             : 'highlight' in feature && feature.highlight
-                            ? 'font-medium text-gray-900'
-                            : 'text-gray-600'
+                            ? 'font-medium text-gray-900 dark:text-slate-100'
+                            : 'text-gray-600 dark:text-slate-400'
                         }`}>
                           {feature.text}
                         </span>
@@ -307,30 +307,30 @@ export default function Pricing() {
         </section>
 
         {/* Why Sync Costs Section */}
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-gray-50 dark:bg-slate-800/50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 text-center mb-4">
               Why We Charge for Sync
             </h2>
-            <p className="text-gray-600 text-center mb-12">
+            <p className="text-gray-600 dark:text-slate-400 text-center mb-12">
               We believe in honest, transparent pricing
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Free (No Cost to Us) */}
-              <div className="bg-white rounded-xl p-6 border border-gray-200">
+              <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Free Forever</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">Free Forever</h3>
                 </div>
-                <p className="text-gray-600 mb-4">
-                  Your local data costs us <strong>$0</strong> to store - it&apos;s on YOUR device using YOUR browser&apos;s storage.
+                <p className="text-gray-600 dark:text-slate-400 mb-4">
+                  Your local data costs us <strong className="text-gray-900 dark:text-slate-100">$0</strong> to store - it&apos;s on YOUR device using YOUR browser&apos;s storage.
                 </p>
-                <ul className="text-sm text-gray-600 space-y-2">
+                <ul className="text-sm text-gray-600 dark:text-slate-400 space-y-2">
                   <li>• No servers needed</li>
                   <li>• No bandwidth costs</li>
                   <li>• No storage fees</li>
@@ -339,19 +339,19 @@ export default function Pricing() {
               </div>
 
               {/* Pro (Real Costs) */}
-              <div className="bg-white rounded-xl p-6 border-2 border-orange-200">
+              <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border-2 border-orange-200 dark:border-orange-700">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900">Pro Sync</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">Pro Sync</h3>
                 </div>
-                <p className="text-gray-600 mb-4">
-                  Sync infrastructure costs <strong>real money</strong> to run and maintain reliably.
+                <p className="text-gray-600 dark:text-slate-400 mb-4">
+                  Sync infrastructure costs <strong className="text-gray-900 dark:text-slate-100">real money</strong> to run and maintain reliably.
                 </p>
-                <ul className="text-sm text-gray-600 space-y-2">
+                <ul className="text-sm text-gray-600 dark:text-slate-400 space-y-2">
                   <li>• Server infrastructure</li>
                   <li>• Database hosting</li>
                   <li>• Bandwidth for real-time sync</li>
@@ -362,8 +362,8 @@ export default function Pricing() {
             </div>
 
             <div className="mt-8 text-center">
-              <p className="text-gray-600">
-                <strong>Bottom line:</strong> We only charge for features that cost us money to provide.
+              <p className="text-gray-600 dark:text-slate-400">
+                <strong className="text-gray-900 dark:text-slate-100">Bottom line:</strong> We only charge for features that cost us money to provide.
                 Local storage is truly unlimited and free forever.
               </p>
             </div>
@@ -371,33 +371,33 @@ export default function Pricing() {
         </section>
 
         {/* Feature Comparison Table */}
-        <section className="py-16 px-4 bg-white">
+        <section className="py-16 px-4 bg-white dark:bg-slate-900">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 text-center mb-4">
               Feature Comparison
             </h2>
-            <p className="text-gray-600 text-center mb-12">
+            <p className="text-gray-600 dark:text-slate-400 text-center mb-12">
               Choose the plan that fits your workflow
             </p>
 
-            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-gray-50 dark:bg-slate-700 border-b border-gray-200 dark:border-slate-600">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Feature</th>
-                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">Free</th>
-                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 bg-orange-50">Pro</th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-slate-100">Feature</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-slate-100">Free</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-slate-100 bg-orange-50 dark:bg-orange-900/30">Pro</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
                     {comparisonFeatures.map((row, idx) => (
-                      <tr key={idx} className={`hover:bg-gray-50 ${row.highlight ? 'bg-orange-50/30' : ''}`}>
-                        <td className={`px-6 py-4 text-sm font-medium ${row.highlight ? 'text-gray-900' : 'text-gray-900'}`}>
+                      <tr key={idx} className={`hover:bg-gray-50 dark:hover:bg-slate-800/50 ${row.highlight ? 'bg-orange-50/30 dark:bg-orange-900/10' : ''}`}>
+                        <td className={`px-6 py-4 text-sm font-medium ${row.highlight ? 'text-gray-900 dark:text-slate-100' : 'text-gray-900 dark:text-slate-200'}`}>
                           {row.feature}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600 text-center">{row.free}</td>
-                        <td className="px-6 py-4 text-sm text-gray-900 text-center font-semibold bg-orange-50/50">{row.pro}</td>
+                        <td className="px-6 py-4 text-sm text-gray-600 dark:text-slate-400 text-center">{row.free}</td>
+                        <td className="px-6 py-4 text-sm text-gray-900 dark:text-slate-100 text-center font-semibold bg-orange-50/50 dark:bg-orange-900/20">{row.pro}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -408,22 +408,22 @@ export default function Pricing() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 px-4 bg-gray-50">
+        <section className="py-16 px-4 bg-gray-50 dark:bg-slate-800/50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 text-center mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600 text-center mb-12">
+            <p className="text-gray-600 dark:text-slate-400 text-center mb-12">
               Everything you need to know about Tickk Pro
             </p>
 
             <div className="space-y-6">
               {faqs.map((faq, idx) => (
-                <details key={idx} className="group bg-white rounded-lg border border-gray-200 p-6">
+                <details key={idx} className="group bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
                   <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <h3 className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 pr-4">{faq.question}</h3>
                     <svg
-                      className="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180"
+                      className="w-5 h-5 text-gray-500 dark:text-slate-400 transition-transform group-open:rotate-180"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -431,7 +431,7 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
-                  <p className="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <p className="mt-4 text-gray-600 dark:text-slate-400 leading-relaxed">{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -439,28 +439,28 @@ export default function Pricing() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-16 px-4 bg-gray-900 text-white">
+        <section className="py-16 px-4 bg-gray-900 dark:bg-slate-800 text-white">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-gray-300 text-lg mb-8">
+            <p className="text-gray-300 dark:text-slate-300 text-lg mb-8">
               Start free with unlimited local storage. Upgrade anytime for sync across all your devices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-50 font-semibold rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors"
               >
                 Start Free Now
               </Link>
               <Link
                 href="#"
-                className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 dark:bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-600 dark:hover:bg-orange-700 transition-colors"
               >
                 Try Pro Free (14 Days)
               </Link>
             </div>
-            <p className="text-sm text-gray-400 mt-6">
-              Questions? <Link href="/contact" className="text-white underline hover:text-gray-200">Contact us</Link>
+            <p className="text-sm text-gray-400 dark:text-slate-400 mt-6">
+              Questions? <Link href="/contact" className="text-white dark:text-slate-200 underline hover:text-gray-200 dark:hover:text-slate-100">Contact us</Link>
             </p>
           </div>
         </section>

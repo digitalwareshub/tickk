@@ -551,11 +551,11 @@ export default function BraindumpInterface({
       {/* Simple intro for first-time users */}
       {appData.braindump.length === 0 && (
         <div 
-          className="border border-gray-200 rounded-md p-4 mb-6 bg-gray-50"
+          className="border border-gray-200 dark:border-slate-700 rounded-md p-4 mb-6 bg-gray-50 dark:bg-slate-800/50"
           role="region"
           aria-label="Getting started instructions"
         >
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-sm text-gray-600 dark:text-slate-400 text-center">
             {isSupported
               ? "Press the microphone to capture your thoughts"
               : "Type your thoughts below to get started"
@@ -653,6 +653,21 @@ export default function BraindumpInterface({
             ) : (
               <div className="mb-4">
                 <div className="max-w-md mx-auto">
+                  {/* Helpful message for Firefox users */}
+                  <div className="mb-3 p-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700 rounded-lg">
+                    <div className="flex items-start gap-2">
+                      <span className="text-orange-600 dark:text-orange-400 text-lg">💡</span>
+                      <div className="flex-1 text-sm">
+                        <p className="font-semibold text-orange-900 dark:text-orange-300 mb-1">
+                          Voice input unavailable in your browser
+                        </p>
+                        <p className="text-orange-700 dark:text-orange-400">
+                          Type your thoughts below, or switch to Chrome/Edge/Safari for voice features.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <textarea
                     id="text-input"
                     value={textInput}
@@ -667,22 +682,22 @@ export default function BraindumpInterface({
                         handleTextSubmit()
                       }
                     }}
-                    placeholder="Type your thoughts here..."
+                    placeholder="Type your thoughts here... (Press Enter to add)"
                     disabled={isProcessing}
-                    className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                    rows={3}
+                    className="w-full p-4 border-2 border-orange-300 dark:border-orange-700 rounded-lg resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:bg-slate-800 dark:text-slate-100 text-lg"
+                    rows={4}
                     aria-label="Enter your thoughts"
                   />
                   <div className="flex justify-between items-center mt-2">
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 dark:text-slate-400">
                       Press Enter to add • Shift+Enter for new line
                     </span>
                     <button
                       onClick={handleTextSubmit}
                       disabled={!textInput.trim() || isProcessing}
-                      className="px-3 py-1 text-xs bg-gray-800 text-white rounded hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                      className="px-4 py-2 text-sm font-medium bg-orange-600 text-white rounded-lg hover:bg-orange-700 disabled:bg-gray-300 dark:disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors"
                     >
-                      Add
+                      Add Thought
                     </button>
                   </div>
                 </div>
@@ -748,7 +763,7 @@ export default function BraindumpInterface({
       {/* Recent Items & Process Button - ACTIVE WORK AREA */}
       {recentItems.length > 0 && (
         <div 
-          className="border-2 border-orange-300 rounded-xl p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/30 shadow-lg ring-2 ring-orange-100"
+          className="border-2 border-orange-300 dark:border-orange-800/50 rounded-xl p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/30 dark:from-slate-900/80 dark:to-slate-800/80 shadow-lg ring-2 ring-orange-100 dark:ring-orange-900/30"
           role="region"
           aria-label="Recent captured thoughts"
         >
@@ -757,17 +772,17 @@ export default function BraindumpInterface({
             <div className="flex items-center gap-2">
               <span className="text-2xl">🎯</span>
               <div>
-                <h3 className="text-base font-bold text-gray-900">
+                <h3 className="text-base font-bold text-gray-900 dark:text-slate-50">
                   Your Braindumps
                 </h3>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-600 dark:text-slate-300">
                   {recentItems.length} {recentItems.length === 1 ? 'item' : 'items'} ready to organize
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               {recentItems.length > 0 && (
-                <span className="text-xs text-orange-600 font-medium animate-pulse">
+                <span className="text-xs text-orange-600 dark:text-orange-400 font-medium animate-pulse">
                   Click Organize →
                 </span>
               )}
@@ -778,8 +793,8 @@ export default function BraindumpInterface({
                 aria-describedby="organize-help"
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md ${
                   recentItems.length > 0
-                    ? 'bg-orange-500 hover:bg-orange-600 text-white border-2 border-orange-400 hover:shadow-lg hover:scale-105'
-                    : 'bg-gray-300 text-gray-500'
+                    ? 'bg-orange-500 dark:bg-orange-600 hover:bg-orange-600 dark:hover:bg-orange-700 text-white border-2 border-orange-400 dark:border-orange-500 hover:shadow-lg hover:scale-105'
+                    : 'bg-gray-300 dark:bg-slate-700 text-gray-500 dark:text-slate-400'
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {isProcessing ? 'Processing...' : recentItems.length > 0 ? `Organize (${recentItems.length})` : 'Organize'}
@@ -795,22 +810,22 @@ export default function BraindumpInterface({
             {recentItems.map((item) => (
               <li 
                 key={item.id} 
-                className="bg-gray-50 rounded-md p-3 border border-gray-200"
+                className="bg-white dark:bg-slate-800/90 rounded-md p-3 border border-gray-200 dark:border-slate-700/50 hover:border-orange-300 dark:hover:border-orange-700/50 transition-all"
                 role="listitem"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <p 
-                      className="text-gray-900 font-medium mb-1"
+                      className="text-gray-900 dark:text-slate-50 font-medium mb-1"
                       id={`item-text-${item.id}`}
                     >
                       &quot;{item.text}&quot;
                     </p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                      <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-slate-300">
                         <input
                           type="checkbox"
-                          className="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                          className="w-4 h-4 text-blue-600 bg-white dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded focus:ring-blue-500 focus:ring-2"
                           aria-label="Mark as completed"
                         />
                         <span aria-label={`Recorded at ${new Date(item.timestamp).toLocaleString()}`}>
@@ -818,10 +833,10 @@ export default function BraindumpInterface({
                         </span>
                         {item.classification && (
                           <span 
-                            className={`px-2 py-1 rounded text-xs ${
+                            className={`px-2 py-1 rounded text-xs font-medium ${
                               item.classification.category === 'tasks' 
-                                ? 'bg-gray-100 text-gray-700 border border-gray-200'
-                                : 'bg-gray-50 text-gray-600 border border-gray-200'
+                                ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/50'
+                                : 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800/50'
                             }`}
                             aria-label={`Classified as ${item.classification.category}`}
                           >
@@ -830,7 +845,7 @@ export default function BraindumpInterface({
                         )}
                         {item.confidence && (
                           <span 
-                            className="text-gray-400 text-xs"
+                            className="text-gray-400 dark:text-slate-400 text-xs font-medium"
                             aria-label={`${Math.round(item.confidence * 100)}% confidence`}
                           >
                             {Math.round(item.confidence * 100)}%
@@ -842,7 +857,7 @@ export default function BraindumpInterface({
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleEditItem(item)}
-                          className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                          className="p-1 text-gray-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                           aria-label="Edit this item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -851,7 +866,7 @@ export default function BraindumpInterface({
                         </button>
                         <button
                           onClick={() => handleDeleteItem(item)}
-                          className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                          className="p-1 text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                           aria-label="Delete this item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

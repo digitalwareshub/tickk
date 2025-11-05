@@ -12,7 +12,7 @@ interface ModeNavigationTabsProps {
 export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigationTabsProps) {
 
   return (
-    <div className="border-b border-gray-200 bg-white sticky top-16 z-40 shadow-sm" data-tour="mode-tabs">
+    <div className="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900/95 sticky top-16 z-40 shadow-sm" data-tour="mode-tabs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex">
           {/* Braindump Tab */}
@@ -20,15 +20,15 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
             onClick={() => onModeChange('braindump')}
             className={`flex-1 py-4 px-2 sm:px-4 text-center border-b-2 transition-all duration-200 ${
               mode === 'braindump'
-                ? 'border-orange-500 text-orange-600 bg-orange-50/50'
-                : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'border-orange-500 dark:border-orange-600 text-orange-600 dark:text-orange-400 bg-orange-50/50 dark:bg-orange-900/20'
+                : 'border-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
             aria-label="Switch to Braindump mode to record your thoughts"
           >
             <div className="flex flex-col items-center space-y-1.5">
               <span className="text-xl sm:text-2xl" role="img" aria-label="Microphone">🎙️</span>
               <span className="font-semibold text-xs sm:text-sm">Braindump</span>
-              <span className="text-xs text-gray-500 hidden lg:block">
+              <span className="text-xs text-gray-500 dark:text-slate-500 hidden lg:block">
                 Capture your thoughts
               </span>
             </div>
@@ -39,15 +39,15 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
             onClick={() => onModeChange('focus')}
             className={`flex-1 py-4 px-2 sm:px-4 text-center border-b-2 transition-all duration-200 ${
               mode === 'focus'
-                ? 'border-orange-500 text-orange-600 bg-orange-50/50'
-                : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'border-orange-500 dark:border-orange-600 text-orange-600 dark:text-orange-400 bg-orange-50/50 dark:bg-orange-900/20'
+                : 'border-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
             aria-label="Switch to Focus mode to see today's priorities"
           >
             <div className="flex flex-col items-center space-y-1.5">
               <span className="text-xl sm:text-2xl" role="img" aria-label="Target">🎯</span>
               <span className="font-semibold text-xs sm:text-sm">Focus</span>
-              <span className="text-xs text-gray-500 hidden lg:block">
+              <span className="text-xs text-gray-500 dark:text-slate-500 hidden lg:block">
                 Today&apos;s priorities
               </span>
             </div>
@@ -58,15 +58,15 @@ export default function ModeNavigationTabs({ mode, onModeChange }: ModeNavigatio
             onClick={() => onModeChange('organized')}
             className={`flex-1 py-4 px-2 sm:px-4 text-center border-b-2 transition-all duration-200 ${
               mode === 'organized'
-                ? 'border-orange-500 text-orange-600 bg-orange-50/50'
-                : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'border-orange-500 dark:border-orange-600 text-orange-600 dark:text-orange-400 bg-orange-50/50 dark:bg-orange-900/20'
+                : 'border-transparent text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
             aria-label="Switch to Organized mode to view your tasks and notes"
           >
             <div className="flex flex-col items-center space-y-1.5">
               <span className="text-xl sm:text-2xl" role="img" aria-label="Clipboard">📋</span>
               <span className="font-semibold text-xs sm:text-sm">Organized</span>
-              <span className="text-xs text-gray-500 hidden lg:block">
+              <span className="text-xs text-gray-500 dark:text-slate-500 hidden lg:block">
                 View your tasks & notes
               </span>
             </div>

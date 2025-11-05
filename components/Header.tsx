@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FEATURES } from '@/lib/config/features'
+import { useDarkMode } from '@/hooks/useDarkMode'
 
 interface HeaderProps {
   mode?: 'braindump' | 'organized' | 'focus'
@@ -12,9 +13,10 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
   const router = useRouter()
   const isHomePage = router.pathname === '/'
   const isPricingPage = router.pathname === '/pricing'
+  const { isDark, toggleDark } = useDarkMode()
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700 shadow-sm transition-colors">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Left: Logo */}
@@ -32,23 +34,23 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           {/* Center: Keyboard Shortcut Hint or Navigation */}
           <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
             {isHomePage ? (
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-slate-700">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
                 <span className="font-medium">Press</span>
-                <kbd className="px-2 py-0.5 bg-white border border-gray-300 rounded text-xs font-semibold text-gray-700 shadow-sm">
+                <kbd className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded text-xs font-semibold text-gray-700 dark:text-slate-300 shadow-sm">
                   ⌘K
                 </kbd>
-                <span className="text-gray-400">/</span>
-                <kbd className="px-2 py-0.5 bg-white border border-gray-300 rounded text-xs font-semibold text-gray-700 shadow-sm">
+                <span className="text-gray-400 dark:text-slate-500">/</span>
+                <kbd className="px-2 py-0.5 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded text-xs font-semibold text-gray-700 dark:text-slate-300 shadow-sm">
                   Ctrl+K
                 </kbd>
                 <span>for shortcuts</span>
               </div>
             ) : (
               <>
-                <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
@@ -57,7 +59,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 {FEATURES.PRICING_PAGE.enabled && !isPricingPage && (
                   <Link
                     href="/pricing"
-                    className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors"
                   >
                     Pricing
                   </Link>
@@ -66,11 +68,28 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
             )}
           </div>
 
-          {/* Right: Mobile Home Button */}
-          <div className="flex items-center justify-end w-1/3">
+          {/* Right: Dark Mode Toggle + Mobile Home Button */}
+          <div className="flex items-center justify-end w-1/3 gap-2">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDark}
+              className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+            </button>
+
             {!isHomePage && (
               <div className="md:hidden">
-                <Link href="/" className="p-2 text-gray-600 hover:text-gray-900 transition-colors rounded-lg hover:bg-gray-100" aria-label="Go to Home">
+                <Link href="/" className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800" aria-label="Go to Home">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                   </svg>

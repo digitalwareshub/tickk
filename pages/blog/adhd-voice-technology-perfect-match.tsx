@@ -43,7 +43,7 @@ export default function ADHDVoiceTechnology() {
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumb */}
@@ -55,32 +55,32 @@ export default function ADHDVoiceTechnology() {
 
           {/* Article Header */}
           <header className="mb-8">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-6">
               <span>October 2025</span>
               <span>•</span>
               <span>10 min read</span>
               <span>•</span>
-              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">ADHD Focus</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-1 rounded-full text-xs font-medium">ADHD Focus</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 leading-tight mb-6">
               ADHD and Voice Technology: A Perfect Match for Scattered Minds
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
               When your thoughts race faster than your fingers can type, voice becomes the bridge between chaos and clarity.
             </p>
             
             <div className="flex flex-wrap gap-2">
-              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">ADHD Productivity</span>
-              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">Voice Technology</span>
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Neurodiversity</span>
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Focus Tools</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">ADHD Productivity</span>
+              <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">Voice Technology</span>
+              <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Neurodiversity</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Focus Tools</span>
             </div>
           </header>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg dark:prose-invert max-w-none [&_p]:text-gray-700 [&_p]:dark:text-slate-300 [&_h2]:text-gray-900 [&_h2]:dark:text-slate-100 [&_h3]:text-gray-900 [&_h3]:dark:text-slate-100 [&_h4]:text-gray-900 [&_h4]:dark:text-slate-200 [&_ul]:text-gray-700 [&_ul]:dark:text-slate-300 [&_li]:text-gray-700 [&_li]:dark:text-slate-300 [&_.bg-gray-50]:dark:bg-slate-800 [&_.bg-blue-50]:dark:bg-blue-900/20 [&_.border-blue-400]:dark:border-blue-500 [&_.text-blue-900]:dark:text-blue-300 [&_.text-blue-800]:dark:text-blue-400 [&_.bg-green-50]:dark:bg-green-900/20 [&_.border-green-400]:dark:border-green-500 [&_.text-green-900]:dark:text-green-300 [&_.text-green-800]:dark:text-green-400 [&_.border-gray-200]:dark:border-slate-700 [&_.text-gray-900]:dark:text-slate-100 [&_.text-gray-600]:dark:text-slate-400 [&_.text-gray-800]:dark:text-slate-200 [&_.bg-white]:dark:bg-slate-800">
             <p className="text-lg leading-relaxed mb-6">
               If you have ADHD, you know the frustration. Your mind generates ideas at lightning speed — creative connections, important reminders, brilliant insights — but by the time you open a notes app and start typing, half of those thoughts have already evaporated into the ether. The cognitive overhead of switching to text input, finding the right app, and wrestling with keyboards on tiny screens creates a barrier that&apos;s just high enough to make most thoughts slip away unrecorded.
             </p>
@@ -308,17 +308,17 @@ export default function ADHDVoiceTechnology() {
           </div>
 
           {/* Author Bio */}
-          <div className="mt-16 pt-8 border-t border-gray-200">
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">About tickk.app</h3>
-              <p className="text-gray-600 mb-4">
+          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-slate-700">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">About tickk.app</h3>
+              <p className="text-gray-600 dark:text-slate-400 mb-4">
                 tickk.app is a privacy-first voice productivity platform designed for minds that think faster than fingers can type. Built with ADHD-friendly features like instant voice capture, natural thought organization, and zero cognitive overhead.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/" className="text-orange-600 hover:text-orange-700 font-medium">
+                <Link href="/" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-medium">
                   Try tickk.app →
                 </Link>
-                <Link href="/blog" className="text-gray-600 hover:text-gray-700">
+                <Link href="/blog" className="text-gray-600 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300">
                   More Articles →
                 </Link>
               </div>
@@ -327,15 +327,15 @@ export default function ADHDVoiceTechnology() {
 
           {/* Related Articles */}
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6">Related Articles</h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link href="/blog/hidden-cost-of-typing" className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">The Hidden Cost of Typing</h4>
-                <p className="text-gray-600 text-sm">Discover why voice-first capture transforms productivity and aligns with natural cognition.</p>
+              <Link href="/blog/hidden-cost-of-typing" className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">The Hidden Cost of Typing</h4>
+                <p className="text-gray-600 dark:text-slate-400 text-sm">Discover why voice-first capture transforms productivity and aligns with natural cognition.</p>
               </Link>
-              <Link href="/blog/braindump-first-organize-later-productivity" className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Why Your Best Ideas Die in Your Productivity App</h4>
-                <p className="text-gray-600 text-sm">Learn the braindump-first approach that captures everything, then organizes later.</p>
+              <Link href="/blog/braindump-first-organize-later-productivity" className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">Why Your Best Ideas Die in Your Productivity App</h4>
+                <p className="text-gray-600 dark:text-slate-400 text-sm">Learn the braindump-first approach that captures everything, then organizes later.</p>
               </Link>
             </div>
           </div>

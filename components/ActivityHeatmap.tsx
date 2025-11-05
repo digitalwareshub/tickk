@@ -19,12 +19,12 @@ export default function ActivityHeatmap({ data, maxCount }: ActivityHeatmapProps
   const hours = Array.from({ length: 24 }, (_, i) => i)
 
   const getIntensity = (count: number): string => {
-    if (count === 0) return 'bg-gray-100'
+    if (count === 0) return 'bg-gray-100 dark:bg-slate-700'
     const percentage = (count / maxCount) * 100
-    if (percentage >= 75) return 'bg-green-600'
-    if (percentage >= 50) return 'bg-green-500'
-    if (percentage >= 25) return 'bg-green-400'
-    return 'bg-green-300'
+    if (percentage >= 75) return 'bg-green-600 dark:bg-green-500'
+    if (percentage >= 50) return 'bg-green-500 dark:bg-green-600'
+    if (percentage >= 25) return 'bg-green-400 dark:bg-green-700'
+    return 'bg-green-300 dark:bg-green-800'
   }
 
   const getCellData = (day: string, hour: number): number => {
@@ -39,7 +39,7 @@ export default function ActivityHeatmap({ data, maxCount }: ActivityHeatmapProps
         <div className="flex mb-1">
           <div className="w-12"></div>
           {[0, 6, 12, 18].map(hour => (
-            <div key={hour} className="flex-1 text-center text-xs text-gray-500">
+            <div key={hour} className="flex-1 text-center text-xs text-gray-500 dark:text-slate-400">
               {hour}:00
             </div>
           ))}
@@ -50,7 +50,7 @@ export default function ActivityHeatmap({ data, maxCount }: ActivityHeatmapProps
           {days.map(day => (
             <div key={day} className="flex items-center gap-1">
               {/* Day label */}
-              <div className="w-12 text-xs text-gray-600 font-medium">
+              <div className="w-12 text-xs text-gray-600 dark:text-slate-300 font-medium">
                 {day}
               </div>
 
@@ -72,14 +72,14 @@ export default function ActivityHeatmap({ data, maxCount }: ActivityHeatmapProps
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-end gap-2 mt-3 text-xs text-gray-600">
+        <div className="flex items-center justify-end gap-2 mt-3 text-xs text-gray-600 dark:text-slate-400">
           <span>Less</span>
           <div className="flex gap-1">
-            <div className="w-3 h-3 bg-gray-100 rounded-sm"></div>
-            <div className="w-3 h-3 bg-green-300 rounded-sm"></div>
-            <div className="w-3 h-3 bg-green-400 rounded-sm"></div>
-            <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
-            <div className="w-3 h-3 bg-green-600 rounded-sm"></div>
+            <div className="w-3 h-3 bg-gray-100 dark:bg-slate-700 rounded-sm"></div>
+            <div className="w-3 h-3 bg-green-300 dark:bg-green-800 rounded-sm"></div>
+            <div className="w-3 h-3 bg-green-400 dark:bg-green-700 rounded-sm"></div>
+            <div className="w-3 h-3 bg-green-500 dark:bg-green-600 rounded-sm"></div>
+            <div className="w-3 h-3 bg-green-600 dark:bg-green-500 rounded-sm"></div>
           </div>
           <span>More</span>
         </div>

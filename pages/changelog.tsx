@@ -13,7 +13,7 @@ export default function Changelog() {
         <link rel="canonical" href="https://tickk.app/changelog" />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumbs */}
@@ -21,28 +21,28 @@ export default function Changelog() {
           
           {/* Page Header */}
           <div className="text-center mb-12">
-            <h1 className="heading-primary text-gray-900 mb-4">
+            <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
               Changelog
             </h1>
-            <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+            <p className="text-responsive text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
               Track all updates, new features, and improvements to tickk. Stay informed about what&apos;s new in each version.
             </p>
           </div>
 
           {/* Current Version - Featured */}
-          <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-8 mb-8">
-            <div className="flex items-center gap-2 text-sm text-orange-600 mb-4">
+          <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-950/30 dark:to-yellow-950/30 border border-orange-200 dark:border-orange-800 rounded-lg p-8 mb-8">
+            <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-4">
               <span>🚀 Latest Release</span>
               <span>•</span>
               <span>October 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">V1.10.2 - Major Feature Update</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.10.2 - Major Feature Update</h2>
             
             <div className="space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">🎯 Major New Features</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🎯 Major New Features</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                   <li>• <strong>English-Only Architecture</strong> - Removed Spanish localization for simplified, focused experience</li>
                   <li>• <strong>Focus Mode</strong> - New dedicated tab for today&apos;s priorities and focused productivity, especially helpful for ADHD users</li>
                   <li>• <strong>Command Palette (⌘K / Ctrl+K)</strong> - VS Code-style quick actions with fuzzy search</li>
@@ -54,8 +54,8 @@ export default function Changelog() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">⚡ Enhanced User Experience</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">⚡ Enhanced User Experience</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                   <li>• <strong>English-Only Focus</strong> - Simplified to English-only interface for better performance and user focus</li>
                   <li>• <strong>Faster App Performance</strong> - Pages load quicker and navigation is more responsive</li>
                   <li>• <strong>Enhanced Keyboard Shortcuts</strong> - Complete keyboard navigation with new shortcut combinations</li>
@@ -71,17 +71,17 @@ export default function Changelog() {
           {/* Previous Versions */}
           <div className="space-y-8">
             {/* V1.10.1 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
                 <span>📅 October 2025</span>
               </div>
               
-              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.10.1</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.10.1</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">✨ New Features</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• <strong>Bulk Delete Operations</strong> - Select multiple completed items for efficient deletion</li>
                     <li>• Comprehensive keyboard shortcuts accessible via ⌘K / Ctrl+K command palette</li>
                     <li>• Multi-select functionality with checkbox controls</li>
@@ -89,8 +89,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🔧 Improvements</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Streamlined footer design with better navigation</li>
                     <li>• Enhanced user experience for managing completed tasks</li>
                     <li>• Improved accessibility with proper keyboard navigation</li>
@@ -100,17 +100,17 @@ export default function Changelog() {
             </div>
 
             {/* V1.10.0 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
                 <span>📅 October 2025</span>
               </div>
               
-              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.10.0</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.10.0</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🚀 New Features</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🚀 New Features</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Custom delete confirmation modals</li>
                     <li>• Clear all data option to reset and restart</li>
                     <li>• Tag system for organizing tasks and notes in edit mode</li>
@@ -120,8 +120,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Major Improvements</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🔧 Major Improvements</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Faster performance with optimized loading times</li>
                     <li>• Better accessibility with enhanced screen reader support</li>
                     <li>• Improved reliability and stability across all features</li>
@@ -130,8 +130,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🐛 Critical Bug Fixes</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🐛 Critical Bug Fixes</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Fixed voice recording issues where notes weren&apos;t saving properly</li>
                     <li>• Fixed language switching data loss between English and Spanish</li>
                     <li>• Fixed loading problems where pages would get stuck</li>
@@ -141,8 +141,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🏗️ Technical Improvements</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🏗️ Technical Improvements</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Better code quality and app stability</li>
                     <li>• Enhanced error handling and user feedback</li>
                     <li>• Improved data management and synchronization</li>
@@ -153,17 +153,17 @@ export default function Changelog() {
             </div>
 
             {/* V1.9.1 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
                 <span>📅 September 2025</span>
               </div>
               
-              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.9.1</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.9.1</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">✨ New Features</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">✨ New Features</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Edit and delete functionality for tasks and notes</li>
                     <li>• Checkboxes to replace circles for better &quot;tickk&quot; experience</li>
                     <li>• Reviews page with user testimonials section</li>
@@ -171,8 +171,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🔧 Improvements</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🔧 Improvements</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Better visual consistency across the app</li>
                     <li>• Improved checkbox visibility and styling</li>
                     <li>• Enhanced navigation with new Reviews section</li>
@@ -181,8 +181,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🐛 Bug Fixes</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🐛 Bug Fixes</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Fixed various display issues</li>
                     <li>• Improved mobile experience</li>
                     <li>• Enhanced overall stability</li>
@@ -192,19 +192,19 @@ export default function Changelog() {
             </div>
 
             {/* V1.9.0 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
                 <span>📅 September 2025</span>
                 <span>•</span>
                 <span>Initial Release</span>
               </div>
               
-              <h2 className="text-xl font-bold text-gray-900 mb-4">V1.9.0</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.9.0</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🎉 Core Features</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🎉 Core Features</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Complete date and time display in braindump and organized views</li>
                     <li>• Spanish language support with full localization</li>
                     <li>• Voice recognition integration using Web Speech API</li>
@@ -217,8 +217,8 @@ export default function Changelog() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">🔒 Privacy & Security</h3>
-                  <ul className="text-gray-700 space-y-1 ml-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🔒 Privacy & Security</h3>
+                  <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                     <li>• Zero data collection - everything stays on your device</li>
                     <li>• No account required - start using immediately</li>
                     <li>• Offline functionality for voice transcription</li>
@@ -230,13 +230,13 @@ export default function Changelog() {
           </div>
 
           {/* Future Roadmap */}
-          <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 mt-8">
-            <h2 className="heading-secondary text-gray-900 mb-6">What&apos;s Next</h2>
+          <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-8 mt-8">
+            <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-6">What&apos;s Next</h2>
             
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.12.0 - December 2025</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">V1.12.0 - December 2025</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                   <li>• Mozilla Firefox support completion</li>
                   <li>• Enhanced voice command shortcuts for hands-free operation</li>
                   <li>• Advanced productivity insights and goal setting</li>
@@ -246,8 +246,8 @@ export default function Changelog() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">V1.13.0 - January 2026</h3>
-                <ul className="text-gray-700 space-y-1 ml-4">
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">V1.13.0 - January 2026</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
                   <li>• AI-powered task prioritization and suggestions</li>
                   <li>• Integration with popular productivity tools</li>
                   <li>• Advanced export formats (PDF, Markdown, CSV)</li>
@@ -258,9 +258,9 @@ export default function Changelog() {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center bg-white border border-gray-200 rounded-lg p-8 mt-8">
-            <h2 className="heading-secondary text-gray-900 mb-4">Stay Updated</h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+          <div className="text-center bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-8 mt-8">
+            <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Stay Updated</h2>
+            <p className="text-gray-600 dark:text-slate-400 mb-6 max-w-2xl mx-auto">
               Want to be notified about new releases? Follow us on social media or check back regularly for updates.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -274,7 +274,7 @@ export default function Changelog() {
               </a>
               <Link 
                 href="/" 
-                className="btn-responsive bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 transition-colors"
+                className="btn-responsive bg-white dark:bg-slate-700 hover:bg-gray-50 dark:hover:bg-slate-600 text-gray-900 dark:text-slate-100 border border-gray-300 dark:border-slate-600 transition-colors"
               >
                 Try tickk Now
               </Link>

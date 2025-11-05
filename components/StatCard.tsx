@@ -27,7 +27,7 @@ export default function StatCard({
   }
 
   return (
-    <div className={`bg-white  rounded-lg p-4 border border-gray-200  ${className}`}>
+    <div className={`bg-white dark:bg-slate-800/90 rounded-lg p-4 border border-gray-200 dark:border-slate-700 ${className}`}>
       <div className="flex items-center justify-between mb-2">
         <span className="text-2xl" role="img" aria-label={label}>
           {icon}
@@ -40,14 +40,14 @@ export default function StatCard({
       </div>
       
       <div className="space-y-1">
-        <div className="text-2xl font-bold text-gray-900 ">
+        <div className="text-2xl font-bold text-gray-900 dark:text-slate-50">
           {value}
         </div>
-        <div className="text-sm text-gray-600 ">
+        <div className="text-sm text-gray-600 dark:text-slate-300">
           {label}
         </div>
         {subtitle && (
-          <div className="text-xs text-gray-500 ">
+          <div className="text-xs text-gray-500 dark:text-slate-400">
             {subtitle}
           </div>
         )}

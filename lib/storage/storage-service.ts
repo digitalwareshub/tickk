@@ -14,7 +14,7 @@ import type {
 } from '@/types/braindump'
 
 const DB_NAME = 'tickk_db'
-const DB_VERSION = 1
+const DB_VERSION = 2 // Updated to support templates store
 const STORAGE_KEY = 'tickk_app_data'
 
 export class StorageService {
@@ -99,6 +99,11 @@ export class StorageService {
         // Settings store
         if (!db.objectStoreNames.contains('settings')) {
           db.createObjectStore('settings', { keyPath: 'key' })
+        }
+        
+        // Templates store (added in version 2)
+        if (!db.objectStoreNames.contains('templates')) {
+          db.createObjectStore('templates', { keyPath: 'id' })
         }
       }
       

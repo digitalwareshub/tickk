@@ -17,7 +17,7 @@ interface ProductivityChartProps {
 export default function ProductivityChart({ data, height = 200 }: ProductivityChartProps) {
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48 text-gray-500">
+      <div className="flex items-center justify-center h-48 text-gray-500 dark:text-slate-400">
         No data available
       </div>
     )
@@ -72,6 +72,7 @@ export default function ProductivityChart({ data, height = 200 }: ProductivityCh
               y2={y}
               stroke="#e5e7eb"
               strokeWidth="0.2"
+              className="dark:stroke-slate-700"
             />
           )
         })}
@@ -83,6 +84,7 @@ export default function ProductivityChart({ data, height = 200 }: ProductivityCh
           stroke="#93c5fd"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
+          className="dark:stroke-blue-400"
         />
 
         {/* Completed tasks line (green) */}
@@ -92,6 +94,7 @@ export default function ProductivityChart({ data, height = 200 }: ProductivityCh
           stroke="#22c55e"
           strokeWidth="1.5"
           vectorEffect="non-scaling-stroke"
+          className="dark:stroke-green-400"
         />
 
         {/* Data points */}
@@ -124,7 +127,7 @@ export default function ProductivityChart({ data, height = 200 }: ProductivityCh
       </svg>
 
       {/* X-axis labels */}
-      <div className="flex justify-between mt-2 text-xs text-gray-600">
+      <div className="flex justify-between mt-2 text-xs text-gray-600 dark:text-slate-400">
         {data.map((d, i) => (
           <div key={i} className="flex-1 text-center">
             {d.label}
@@ -136,11 +139,11 @@ export default function ProductivityChart({ data, height = 200 }: ProductivityCh
       <div className="flex items-center justify-center gap-4 mt-3 text-xs">
         <div className="flex items-center gap-1">
           <div className="w-3 h-0.5 bg-green-500"></div>
-          <span className="text-gray-600">Completed</span>
+          <span className="text-gray-600 dark:text-slate-400">Completed</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-0.5 bg-blue-300"></div>
-          <span className="text-gray-600">Total</span>
+          <span className="text-gray-600 dark:text-slate-400">Total</span>
         </div>
       </div>
     </div>

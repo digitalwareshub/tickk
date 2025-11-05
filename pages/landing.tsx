@@ -299,14 +299,14 @@ export default function Home() {
   if (!mounted) {
     return (
           <Layout 
-      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50   "
+      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800"
       seoTitle="tickk - Transform Voice into Organized Tasks"
       seoDescription="Privacy-first voice productivity app that converts speech into organized tasks and notes. Works offline and keeps your data secure."
       seoImage="/og-image.webp"
     >
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 mb-4"></div>
-          <p className="text-gray-600 ">Loading...</p>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 dark:border-orange-400 mb-4"></div>
+          <p className="text-gray-600 dark:text-slate-400">Loading...</p>
         </div>
       </Layout>
     )
@@ -521,9 +521,9 @@ export default function Home() {
         />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         {/* Hero Section */}
-        <section ref={heroSectionRef} className="bg-white py-16">
+        <section ref={heroSectionRef} className="bg-white dark:bg-slate-900 py-16">
           
           <div className="max-w-4xl mx-auto px-4 py-8">
             
@@ -531,13 +531,13 @@ export default function Home() {
             <Breadcrumb />
             <div className="text-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm text-gray-700 mb-6">
-                <span className="inline-block h-2 w-2 rounded-full bg-gray-600 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 mb-6">
+                <span className="inline-block h-2 w-2 rounded-full bg-gray-600 dark:bg-slate-400 animate-pulse"></span>
                 🎤 PWA • Works Offline • No AI • 100% Free
               </div>
 
               {/* Main Headline */}
-              <h1 className="heading-primary text-gray-900 mb-6">
+              <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-6">
                 Transform Your Voice Into
                 <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block">
                   Organized Productivity
@@ -545,42 +545,42 @@ export default function Home() {
               </h1>
 
               {/* Subheadline */}
-              <p className="mx-auto max-w-2xl text-responsive text-gray-600 mb-8 text-center">
+              <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
                 Just speak your thoughts and watch them become organized tasks and notes. 
-                No complex setup, no subscriptions, no data collection. <Link href="/privacy" className="text-orange-600 hover:text-orange-700 underline">Your privacy is protected</Link> - everything stays on your device.
+                No complex setup, no subscriptions, no data collection. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link> - everything stays on your device.
               </p>
 
               {/* Trust Indicators */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🔒</div>
-                  <div className="text-sm font-medium text-gray-700">Complete Privacy</div>
-                  <div className="text-xs text-gray-500">No data collection</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Complete Privacy</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">No data collection</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">⚡</div>
-                  <div className="text-sm font-medium text-gray-700">99% Accuracy</div>
-                  <div className="text-xs text-gray-500">Advanced speech recognition</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">99% Accuracy</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">Advanced speech recognition</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🆓</div>
-                  <div className="text-sm font-medium text-gray-700">Free Forever</div>
-                  <div className="text-xs text-gray-500">No subscription required</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Free Forever</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">No subscription required</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">📱</div>
-                  <div className="text-sm font-medium text-gray-700">Works Offline</div>
-                  <div className="text-xs text-gray-500">PWA technology</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Works Offline</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">PWA technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🧠</div>
-                  <div className="text-sm font-medium text-gray-700">No AI Used</div>
-                  <div className="text-xs text-gray-500">Pure browser technology</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">No AI Used</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">Pure browser technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🌐</div>
-                  <div className="text-sm font-medium text-gray-700">All Devices</div>
-                  <div className="text-xs text-gray-500">Any browser</div>
+                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">All Devices</div>
+                  <div className="text-xs text-gray-500 dark:text-slate-500">Any browser</div>
                 </div>
               </div>
 
@@ -613,37 +613,37 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section ref={howItWorksSectionRef} id="how-it-works" className="bg-gray-50 py-16">
+        <section ref={howItWorksSectionRef} id="how-it-works" className="bg-gray-50 dark:bg-slate-800 py-16">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="heading-secondary text-gray-900 mb-4">
+              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">
                 How tickk Works
               </h2>
-              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+              <p className="text-responsive text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
                 Three simple steps to transform your voice into organized productivity
               </p>
             </div>
 
             <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
               {/* Step 1: Speak Naturally */}
-              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
+              <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-700">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 rounded-lg text-xl font-bold">
                     1
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Speak Naturally
                 </h3>
-                <p className="text-gray-600  mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
                   Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
                 </p>
                 
-                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
+                <div className="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                   <div className="flex items-start space-x-2">
                     <div className="text-base sm:text-lg">🎤</div>
-                    <div className="text-xs sm:text-sm text-gray-700  italic flex-1">
+                    <div className="text-xs sm:text-sm text-gray-700 dark:text-slate-300 italic flex-1">
                       &quot;I need to call John tomorrow at 3pm about the project meeting&quot;
                     </div>
                   </div>
@@ -651,31 +651,31 @@ export default function Home() {
               </div>
 
               {/* Step 2: Smart Processing */}
-              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
+              <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-700">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 rounded-lg text-xl font-bold">
                     2
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Smart Processing
                 </h3>
-                <p className="text-gray-600  mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
                   Natural language processing analyzes your speech and automatically determines if it&apos;s a task or note.
                 </p>
                 
-                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
+                <div className="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs sm:text-sm text-gray-600 ">Processing speech...</span>
+                    <span className="text-xs sm:text-sm text-gray-600 dark:text-slate-400">Processing speech...</span>
                     <div className="text-base sm:text-lg">🧠</div>
                   </div>
-                  <div className="p-2 bg-white  rounded border">
+                  <div className="p-2 bg-white dark:bg-slate-900 rounded border dark:border-slate-700">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-medium text-gray-700 ">� Task</span>
-                      <span className="text-green-600 font-bold text-xs">✓ DETECTED</span>
+                      <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-slate-300">📋 Task</span>
+                      <span className="text-green-600 dark:text-green-400 font-bold text-xs">✓ DETECTED</span>
                     </div>
-                    <div className="text-xs text-gray-500  mt-1">
+                    <div className="text-xs text-gray-500 dark:text-slate-500 mt-1">
                       Time references: &quot;tomorrow&quot;, &quot;3pm&quot;
                     </div>
                   </div>
@@ -683,35 +683,35 @@ export default function Home() {
               </div>
 
               {/* Step 3: Auto-Organized */}
-              <div className="bg-white  p-6 sm:p-8 rounded-lg border border-gray-200 ">
+              <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-lg border border-gray-200 dark:border-slate-700">
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100  text-gray-900  rounded-lg text-xl font-bold">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-slate-50 rounded-lg text-xl font-bold">
                     3
                   </div>
                 </div>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900  mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Auto-Organized
                 </h3>
-                <p className="text-gray-600  mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
                   Your voice is instantly organized into the right category, ready for action.
                 </p>
                 
-                <div className="bg-gray-50  p-4 rounded-lg border border-gray-200 ">
+                <div className="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs sm:text-sm font-medium text-gray-700 ">Successfully Organized</span>
+                    <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-slate-300">Successfully Organized</span>
                     <div className="text-base sm:text-lg">✨</div>
                   </div>
                   
-                  <div className="p-2 bg-white  rounded border">
+                  <div className="p-2 bg-white dark:bg-slate-900 rounded border dark:border-slate-700">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <div className="text-green-600">✓</div>
-                        <span className="text-xs sm:text-sm font-medium text-gray-700 ">Added to Tasks</span>
+                        <div className="text-green-600 dark:text-green-400">✓</div>
+                        <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-slate-300">Added to Tasks</span>
                       </div>
-                      <div className="text-xs sm:text-sm text-gray-500 ">�</div>
+                      <div className="text-xs sm:text-sm text-gray-500 dark:text-slate-500">📋</div>
                     </div>
-                    <div className="text-xs text-gray-500  mt-1">
+                    <div className="text-xs text-gray-500 dark:text-slate-500 mt-1">
                       Ready to manage and complete
                     </div>
                   </div>
@@ -722,13 +722,13 @@ export default function Home() {
         </section>
 
         {/* Use Cases Section */}
-        <section ref={useCasesSectionRef} className="py-16 bg-white">
+        <section ref={useCasesSectionRef} className="py-16 bg-white dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="heading-secondary text-gray-900 mb-4">
+              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">
                 Best Free Productivity App for ADHD, Students & Professionals
               </h2>
-              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+              <p className="text-responsive text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
                 Whether you think differently, work on-the-go, or just prefer speaking over typing
               </p>
             </div>
@@ -764,15 +764,15 @@ export default function Home() {
               </div>
 
               {/* Busy Professionals */}
-              <div data-use-case="busy-professionals" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="busy-professionals" className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 flex flex-col h-full">
                 <div className="text-2xl mb-4">💼</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Busy Professionals
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   Capture meeting insights, action items, and brilliant shower thoughts without missing a beat.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• Record while walking between meetings</li>
                   <li>• Voice notes during commutes</li>
                   <li>• Quick braindumps during breaks</li>
@@ -781,15 +781,15 @@ export default function Home() {
               </div>
 
               {/* Students */}
-              <div data-use-case="students-researchers" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="students-researchers" className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 flex flex-col h-full">
                 <div className="text-2xl mb-4">🎓</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Students & Researchers
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   From lecture insights to research ideas, capture knowledge without breaking your flow.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• Quick voice notes during lectures</li>
                   <li>• Capture research insights instantly</li>
                   <li>• Study session braindumps</li>
@@ -798,15 +798,15 @@ export default function Home() {
               </div>
 
               {/* Accessibility */}
-              <div data-use-case="accessibility-champions" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="accessibility-champions" className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 flex flex-col h-full">
                 <div className="text-2xl mb-4">♿</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Accessibility Champions
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   Hands-free productivity for users with mobility challenges or typing difficulties.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• Voice-first interface design</li>
                   <li>• No complex navigation required</li>
                   <li>• Works with assistive technologies</li>
@@ -815,15 +815,15 @@ export default function Home() {
               </div>
 
               {/* Creative Professionals */}
-              <div data-use-case="creative-professionals" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="creative-professionals" className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 flex flex-col h-full">
                 <div className="text-2xl mb-4">🎨</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Creative Professionals
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   Don&apos;t let brilliant ideas slip away. Capture inspiration the moment it strikes.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• Preserve creative flow states</li>
                   <li>• Voice brainstorming sessions</li>
                   <li>• Client meeting insights</li>
@@ -832,15 +832,15 @@ export default function Home() {
               </div>
 
               {/* Parents & Multitaskers */}
-              <div data-use-case="parents-multitaskers" className="bg-gray-50 rounded-lg p-6 border border-gray-200 flex flex-col h-full">
+              <div data-use-case="parents-multitaskers" className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 flex flex-col h-full">
                 <div className="text-2xl mb-4">👨‍👩‍👧‍👦</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Parents & Multitaskers
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   Capture important thoughts while your hands are full with life&apos;s beautiful chaos.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• Voice notes while cooking</li>
                   <li>• Parenting insight capture</li>
                   <li>• Household task management</li>
@@ -851,12 +851,12 @@ export default function Home() {
 
             {/* Bottom CTA for this section */}
             <div className="text-center mt-12">
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-slate-400 mb-6">
                 <strong>Overwhelmed by productivity apps?</strong> Most task managers are too complex and force you to organize while capturing ideas. tickk is a simple alternative - just brain dump first, organize later. Perfect for ADHD minds and anyone who wants to stop forgetting ideas.
               </p>
               <Link 
                 href="/" 
-                className="inline-flex items-center bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="inline-flex items-center bg-gray-900 dark:bg-slate-700 hover:bg-gray-800 dark:hover:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                 onClick={() => trackUseCaseCTA('Try tickk Now - It&apos;s Free')}
               >
                 Try tickk Now - It&apos;s Free
@@ -869,13 +869,13 @@ export default function Home() {
         </section>
 
         {/* Why Voice-First Beats Text-First Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-slate-900">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="heading-secondary text-gray-900 mb-4">
+              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">
                 Why Voice-First Beats Text-First Productivity
               </h2>
-              <p className="text-responsive text-gray-600 max-w-3xl mx-auto">
+              <p className="text-responsive text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
                 See how tickk solves problems that traditional tools can&apos;t handle
               </p>
             </div>
@@ -883,32 +883,32 @@ export default function Home() {
             {/* Problem Cards Grid */}
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {/* Notion Card */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 relative">
-                <div className="absolute -top-3 left-4 bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+              <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 relative">
+                <div className="absolute -top-3 left-4 bg-gray-600 dark:bg-slate-600 text-white text-xs px-3 py-1 rounded-full font-medium">
                   Problem
                 </div>
                 <div className="mt-3">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
-                      <span className="text-lg font-bold text-gray-700">N</span>
+                    <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-lg flex items-center justify-center shadow-sm border border-gray-200 dark:border-slate-700">
+                      <span className="text-lg font-bold text-gray-700 dark:text-slate-300">N</span>
                     </div>
-                    <h3 className="font-semibold text-gray-900">Notion & Similar</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-50">Notion & Similar</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 space-y-2">
+                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Text-heavy, overwhelming for quick thoughts</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Forces you to organize while capturing</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Complex setup breaks creative flow</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Slow when you need to capture fast</span>
                     </li>
                   </ul>
@@ -916,32 +916,32 @@ export default function Home() {
               </div>
 
               {/* Obsidian Card */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 relative">
-                <div className="absolute -top-3 left-4 bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+              <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 relative">
+                <div className="absolute -top-3 left-4 bg-gray-600 dark:bg-slate-600 text-white text-xs px-3 py-1 rounded-full font-medium">
                   Problem
                 </div>
                 <div className="mt-3">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
-                      <span className="text-lg font-bold text-gray-700">O</span>
+                    <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-lg flex items-center justify-center shadow-sm border border-gray-200 dark:border-slate-700">
+                      <span className="text-lg font-bold text-gray-700 dark:text-slate-300">O</span>
                     </div>
-                    <h3 className="font-semibold text-gray-900">Obsidian & PKM Tools</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-50">Obsidian & PKM Tools</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 space-y-2">
+                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Steep learning curve, not intuitive</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>No voice input, purely text-based</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Over-engineered for simple tasks</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Requires technical knowledge to setup</span>
                     </li>
                   </ul>
@@ -949,32 +949,32 @@ export default function Home() {
               </div>
 
               {/* Apple Notes Card */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 relative">
-                <div className="absolute -top-3 left-4 bg-gray-600 text-white text-xs px-3 py-1 rounded-full font-medium">
+              <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700 relative">
+                <div className="absolute -top-3 left-4 bg-gray-600 dark:bg-slate-600 text-white text-xs px-3 py-1 rounded-full font-medium">
                   Problem
                 </div>
                 <div className="mt-3">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm border border-gray-200">
-                      <span className="text-lg font-bold text-gray-700">📝</span>
+                    <div className="w-10 h-10 bg-white dark:bg-slate-900 rounded-lg flex items-center justify-center shadow-sm border border-gray-200 dark:border-slate-700">
+                      <span className="text-lg font-bold text-gray-700 dark:text-slate-300">📝</span>
                     </div>
-                    <h3 className="font-semibold text-gray-900">Apple Notes & Simple Apps</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-50">Apple Notes & Simple Apps</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 space-y-2">
+                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>No smart organization or categorization</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Just dumps everything in one place</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>No distinction between tasks and notes</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-gray-400 mt-0.5">✗</span>
+                      <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Becomes a messy list over time</span>
                     </li>
                   </ul>
@@ -983,113 +983,113 @@ export default function Home() {
             </div>
 
             {/* tickk Solution */}
-            <div className="bg-white rounded-2xl p-8 border-2 border-gray-300 relative mb-12 shadow-sm">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-full font-medium">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border-2 border-gray-300 dark:border-slate-600 relative mb-12 shadow-sm">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-slate-700 text-white text-sm px-4 py-2 rounded-full font-medium">
                 ✨ tickk Solution
               </div>
               <div className="text-center mt-4">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Voice-First Changes Everything
                 </h3>
-                <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
+                <p className="text-lg text-gray-700 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
                   An app designed for how your brain actually works. Capture first, organize later.
                 </p>
                 
                 {/* Feature Comparison Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-2xl">🎤</span>
                     </div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Voice-First Input</h4>
-                    <p className="text-sm text-gray-600">Natural speech, no typing required</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Voice-First Input</h4>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">Natural speech, no typing required</p>
                   </div>
                   
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-2xl">⚡</span>
                     </div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Instant Categorization</h4>
-                    <p className="text-sm text-gray-600">AI-free NLP sorts tasks from notes automatically</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Instant Categorization</h4>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">AI-free NLP sorts tasks from notes automatically</p>
                   </div>
                   
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-2xl">🔒</span>
                     </div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Complete Privacy</h4>
-                    <p className="text-sm text-gray-600">Everything stays in your browser, nothing uploaded</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Complete Privacy</h4>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">Everything stays in your browser, nothing uploaded</p>
                   </div>
                   
                   <div className="text-center">
-                    <div className="w-12 h-12 bg-gray-100 border border-gray-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className="w-12 h-12 bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl flex items-center justify-center mx-auto mb-3">
                       <span className="text-2xl">🚀</span>
                     </div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Zero Setup</h4>
-                    <p className="text-sm text-gray-600">Works instantly, no accounts or configuration</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Zero Setup</h4>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">Works instantly, no accounts or configuration</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Feature Comparison Table */}
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-              <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Feature Comparison</h3>
+            <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
+              <div className="bg-gray-50 dark:bg-slate-800 px-6 py-4 border-b border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50">Feature Comparison</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-slate-800">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">tickk</th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Notion</th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Obsidian</th>
-                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Apple Notes</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Feature</th>
+                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">tickk</th>
+                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Notion</th>
+                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Obsidian</th>
+                      <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Apple Notes</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200 dark:divide-slate-700">
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Voice Input</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 text-lg">📱</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Voice Input</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 dark:text-slate-400 text-lg">📱</td>
                     </tr>
-                    <tr className="bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Auto Categorization</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Privacy (No Upload)</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 text-lg">⚠️</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Zero Setup</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
+                    <tr className="bg-gray-50 dark:bg-slate-800">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Auto Categorization</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
                     </tr>
                     <tr>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Works Offline</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 text-lg">✗</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Privacy (No Upload)</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 dark:text-slate-400 text-lg">⚠️</td>
                     </tr>
-                    <tr className="bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Free Forever</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 text-lg">💰</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 text-lg font-semibold">✓</td>
+                    <tr className="bg-gray-50 dark:bg-slate-800">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Zero Setup</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Works Offline</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-400 dark:text-slate-500 text-lg">✗</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                    </tr>
+                    <tr className="bg-gray-50 dark:bg-slate-800">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-slate-50">Free Forever</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-600 dark:text-slate-400 text-lg">💰</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-gray-900 dark:text-slate-50 text-lg font-semibold">✓</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1098,10 +1098,10 @@ export default function Home() {
 
             {/* Bottom CTA */}
             <div className="text-center mt-12">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-4">
                 Ready to Experience Voice-First Productivity?
               </h3>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-slate-400 mb-6 max-w-2xl mx-auto">
                 Stop fighting with complex tools. Start with the simplest, most natural way to capture your thoughts.
               </p>
               <Link 
@@ -1119,26 +1119,26 @@ export default function Home() {
         </section>
 
         {/* Interactive Demo Section */}
-        <section ref={demoSectionRef} id="demo" className="relative py-20 bg-gray-50 ">
+        <section ref={demoSectionRef} id="demo" className="relative py-20 bg-gray-50 dark:bg-slate-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 opacity-30"></div>
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900  mb-4">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                 See Voice Recognition in Action
               </h2>
-              <p className="text-xl text-gray-600  max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto">
                 Watch how natural language processing instantly categorizes your speech into tasks and notes
               </p>
             </div>
 
             {/* Demo Interface */}
             <div className="max-w-4xl mx-auto px-4 sm:px-0">
-              <div className="bg-gray-50  rounded-2xl border border-gray-200  overflow-hidden shadow-xl">
+              <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 overflow-hidden shadow-xl">
                 {/* Demo Header */}
-                <div className="bg-white  px-4 sm:px-6 py-4 border-b border-gray-200 ">
+                <div className="bg-white dark:bg-slate-900 px-4 sm:px-6 py-4 border-b border-gray-200 dark:border-slate-700">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 ">Live Classification Demo</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-slate-50">Live Classification Demo</h3>
                     <button 
                       onClick={playDemo}
                       disabled={isPlaying}
@@ -1158,13 +1158,13 @@ export default function Home() {
                   <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
                     {/* Input Side */}
                     <div className="order-2 lg:order-1">
-                      <h4 className="text-sm font-medium text-gray-700  mb-3">Voice Input</h4>
-                      <div className="bg-white  rounded-lg border border-gray-200  p-4 min-h-[100px] sm:min-h-[120px] flex items-center">
-                        <div className="text-gray-900  font-mono text-sm sm:text-lg w-full">
+                      <h4 className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-3">Voice Input</h4>
+                      <div className="bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-700 p-4 min-h-[100px] sm:min-h-[120px] flex items-center">
+                        <div className="text-gray-900 dark:text-slate-50 font-mono text-sm sm:text-lg w-full">
                           {demoText ? (
                             <span>&quot;{demoText}&quot;</span>
                           ) : (
-                            <span className="text-gray-400 dark:text-gray-500 italic text-sm">
+                            <span className="text-gray-400 dark:text-slate-500 italic text-sm">
                               Click &quot;Play Demo&quot; to see classification in action...
                             </span>
                           )}
@@ -1186,7 +1186,7 @@ export default function Home() {
 
                     {/* Output Side */}
                     <div className="order-1 lg:order-2">
-                      <h4 className="text-sm font-medium text-gray-700  mb-3">Smart Classification</h4>
+                      <h4 className="text-sm font-medium text-gray-700 dark:text-slate-300 mb-3">Smart Classification</h4>
                       <div className="space-y-3">
                         <div className={`bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-3 rounded-r-lg transition-all duration-500 ${
                           demoCategory === 'tasks' ? 'opacity-100 ring-2 ring-blue-400' : 'opacity-50'
@@ -1235,23 +1235,23 @@ export default function Home() {
         </section>
 
         {/* Blog Section */}
-        <section ref={blogSectionRef} className="py-16 bg-white">
+        <section ref={blogSectionRef} className="py-16 bg-white dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 mb-4">
               Learn More About Voice Productivity
             </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
               Discover the science behind braindump-first productivity and why your best ideas die in traditional apps.
             </p>
             
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-8 max-w-2xl mx-auto">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg p-8 max-w-2xl mx-auto border border-orange-200 dark:border-orange-800">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">
                 Latest Article: Why Your Best Ideas Die in Your Productivity App
               </h3>
-              <p className="text-gray-700 mb-6">
+              <p className="text-gray-700 dark:text-slate-300 mb-6">
                 Learn the braindump-first method that separates capture from organization, and why voice changes everything.
               </p>
-              <Link href="/blog/braindump-first-organize-later-productivity" className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+              <Link href="/blog/braindump-first-organize-later-productivity" className="inline-flex items-center bg-gray-900 dark:bg-slate-700 text-white px-6 py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-slate-600 transition-colors">
                 Read the Article
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
@@ -1262,74 +1262,74 @@ export default function Home() {
         </section>
 
         {/* FAQ Section - ChatGPT Recommended SEO Magnet */}
-        <section ref={faqSectionRef} className="py-16 bg-gray-50">
+        <section ref={faqSectionRef} className="py-16 bg-gray-50 dark:bg-slate-800">
           <div className="max-w-4xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="heading-secondary text-gray-900 mb-4">
+              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">
                 Frequently Asked Questions
               </h2>
-              <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+              <p className="text-responsive text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
                 Everything you need to know about tickk&apos;s voice-first productivity approach
               </p>
             </div>
 
             <div className="space-y-6">
               {/* FAQ 1 - ADHD Focus */}
-              <div data-faq="adhd-free-app" className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div data-faq="adhd-free-app" className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Is tickk a free productivity app for ADHD?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   Yes! tickk is completely free forever and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps that cost $10-20/month, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
                 </p>
               </div>
 
               {/* FAQ 2 - Hyperfocus & Racing Thoughts */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   How does tickk help with hyperfocus and racing thoughts?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   tickk captures your thoughts instantly without breaking your flow state. During hyperfocus sessions, just hit record and keep working - no need to stop and categorize. For racing thoughts, our voice-first approach lets you dump everything out of your head in seconds, then our smart categorization organizes it automatically. Perfect for ADHD brains that think faster than they can type.
                 </p>
               </div>
 
               {/* FAQ 3 - vs Notion/TickTick */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   What makes tickk different from task managers like Notion or TickTick?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no subscription fees. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
                 </p>
               </div>
 
               {/* FAQ 4 - Students */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Can students use tickk for lectures and assignments?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   Absolutely! tickk is perfect for college students, especially those with ADHD. Capture lecture insights instantly without missing what the professor says next. Voice-record study session thoughts, assignment ideas, and research notes. Later, organize everything into actionable tasks and reference notes. It&apos;s the best free brain dump app for students who need to capture ideas quickly during fast-paced academic environments.
                 </p>
               </div>
 
               {/* FAQ 5 - Accessibility */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Is tickk accessible for mobility or typing challenges?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   Yes! tickk is a hands-free productivity app designed with accessibility in mind. Our voice-first interface works perfectly for users with mobility challenges, typing difficulties, or conditions like arthritis. No complex navigation required - just speak your thoughts and let our accessible voice technology handle the rest. It&apos;s inclusive productivity that works for everyone.
                 </p>
               </div>
 
               {/* FAQ 6 - Additional FAQ for more keywords */}
-              <div className="bg-white rounded-lg p-6 border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   What&apos;s the best way to use tickk for busy professionals and parents?
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 dark:text-slate-300">
                   tickk excels for multitaskers who need hands-free productivity. Capture meeting action items while walking between offices, record ideas during commutes, or voice-note reminders while cooking dinner. Parents love using tickk to organize household tasks and capture parenting insights when their hands are full. It&apos;s the perfect productivity app for busy people who can&apos;t always stop to type.
                 </p>
               </div>
@@ -1338,21 +1338,21 @@ export default function Home() {
         </section>
 
         {/* Final CTA Section */}
-        <section ref={finalCtaSectionRef} className="relative py-20 bg-gray-50 ">
+        <section ref={finalCtaSectionRef} className="relative py-20 bg-gray-50 dark:bg-slate-800">
           {/* Grid background */}
           <div className="absolute inset-0 bg-grid-gray-100 opacity-20"></div>
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900  mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 mb-4">
               Ready to Transform Your Voice into Productivity?
             </h2>
-            <p className="text-responsive text-gray-700 mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits. Need help getting started? Check our <Link href="/support" className="text-orange-600 hover:text-orange-700 underline">support center</Link>.
+            <p className="text-responsive text-gray-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
+              Join thousands of professionals using tickk to boost productivity. No downloads, no accounts, no limits. Need help getting started? Check our <Link href="/support" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">support center</Link>.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-0">
               <Link 
                 href="/" 
-                className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg"
+                className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-black dark:hover:bg-slate-600 transition-all duration-200 transform hover:scale-105 shadow-lg"
                 onClick={() => trackFinalCTA('Start Using tickk Free')}
               >
                 Start Using tickk Free
@@ -1362,33 +1362,33 @@ export default function Home() {
               </Link>
               <button 
                 onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-all duration-200 transform hover:scale-105 shadow-lg"
+                className="w-full sm:w-auto text-center inline-flex items-center justify-center px-6 sm:px-8 py-4 bg-gray-900 dark:bg-slate-700 text-white font-semibold rounded-lg hover:bg-black dark:hover:bg-slate-600 transition-all duration-200 transform hover:scale-105 shadow-lg"
               >
                 See Demo First
               </button>
             </div>
             
-            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 ">
+            <div className="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-slate-400">
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>100% Free Forever</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>No Account Required</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>Complete Privacy</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                 </svg>
                 <span>Open Source</span>

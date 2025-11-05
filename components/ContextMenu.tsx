@@ -83,16 +83,16 @@ export default function ContextMenu({ x, y, actions, onClose }: ContextMenuProps
   return (
     <div
       ref={menuRef}
-      className="fixed z-[100] bg-white rounded-lg shadow-xl border border-gray-200 py-1 min-w-[200px] animate-in fade-in zoom-in-95 duration-100"
+      className="fixed z-[100] bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-200 dark:border-slate-700 py-1 min-w-[200px] animate-in fade-in zoom-in-95 duration-100"
       style={{ left: x, top: y }}
       role="menu"
       aria-orientation="vertical"
     >
       {visibleActions.map((action, index) => {
         const variantClasses = {
-          default: 'text-gray-700 hover:bg-gray-100',
-          danger: 'text-red-600 hover:bg-red-50',
-          success: 'text-green-600 hover:bg-green-50'
+          default: 'text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700',
+          danger: 'text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20',
+          success: 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20'
         }
 
         return (

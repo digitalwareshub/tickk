@@ -43,7 +43,7 @@ export default function MobileVoiceProductivity() {
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumb */}
@@ -55,32 +55,32 @@ export default function MobileVoiceProductivity() {
 
           {/* Article Header */}
           <header className="mb-8">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-6">
               <span>October 2025</span>
               <span>•</span>
               <span>7 min read</span>
               <span>•</span>
-              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">Mobile Focus</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-1 rounded-full text-xs font-medium">Mobile Focus</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 leading-tight mb-6">
               Mobile Voice Productivity: Capture Ideas on the Go
             </h1>
             
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+            <p className="text-xl text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
               Your best ideas don&apos;t wait for you to get to your desk. Here&apos;s how to capture them anywhere.
             </p>
             
             <div className="flex flex-wrap gap-2">
-              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Mobile Productivity</span>
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Voice Notes</span>
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Hands-Free</span>
-              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">On-the-Go</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">Mobile Productivity</span>
+              <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Voice Notes</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Hands-Free</span>
+              <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">On-the-Go</span>
             </div>
           </header>
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg dark:prose-invert max-w-none [&_p]:text-gray-700 [&_p]:dark:text-slate-300 [&_h2]:text-gray-900 [&_h2]:dark:text-slate-100 [&_h3]:text-gray-900 [&_h3]:dark:text-slate-100 [&_h4]:text-gray-900 [&_h4]:dark:text-slate-200 [&_ul]:text-gray-700 [&_ul]:dark:text-slate-300 [&_li]:text-gray-700 [&_li]:dark:text-slate-300 [&_.bg-gray-50]:dark:bg-slate-800 [&_.bg-blue-50]:dark:bg-blue-900/20 [&_.border-blue-400]:dark:border-blue-500 [&_.text-blue-900]:dark:text-blue-300 [&_.text-blue-800]:dark:text-blue-400 [&_.bg-green-50]:dark:bg-green-900/20 [&_.border-green-400]:dark:border-green-500 [&_.text-green-900]:dark:text-green-300 [&_.text-green-800]:dark:text-green-400 [&_.border-gray-200]:dark:border-slate-700 [&_.text-gray-900]:dark:text-slate-100 [&_.text-gray-600]:dark:text-slate-400 [&_.text-gray-800]:dark:text-slate-200 [&_.bg-white]:dark:bg-slate-800">
             <p className="text-lg leading-relaxed mb-6">
               You&apos;re walking to your car after a meeting, and suddenly you have a breakthrough insight about the project you&apos;ve been stuck on for weeks. Or you&apos;re on the subway, and you realize exactly how to restructure that presentation. Maybe you&apos;re waiting in line for coffee, and you remember three important tasks you need to add to tomorrow&apos;s agenda.
             </p>
@@ -419,17 +419,17 @@ export default function MobileVoiceProductivity() {
           </div>
 
           {/* Author Bio */}
-          <div className="mt-16 pt-8 border-t border-gray-200">
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">About Mobile-First Productivity</h3>
-              <p className="text-gray-600 mb-4">
+          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-slate-700">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">About Mobile-First Productivity</h3>
+              <p className="text-gray-600 dark:text-slate-400 mb-4">
                 Mobile-first productivity recognizes that our best ideas don&apos;t wait for us to get to our desks. By optimizing for mobile voice capture, we can turn every moment into an opportunity for insight and progress.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link href="/" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
                   Try Mobile Voice Capture →
                 </Link>
-                <Link href="/blog" className="text-gray-600 hover:text-gray-700">
+                <Link href="/blog" className="text-gray-600 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300">
                   More Articles →
                 </Link>
               </div>
@@ -438,15 +438,15 @@ export default function MobileVoiceProductivity() {
 
           {/* Related Articles */}
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-6">Related Articles</h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <Link href="/blog/voice-productivity-vs-ai-tools-local-processing-wins" className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Voice Productivity vs AI Tools</h4>
-                <p className="text-gray-600 text-sm">Discover why local voice processing beats AI-dependent productivity tools.</p>
+              <Link href="/blog/voice-productivity-vs-ai-tools-local-processing-wins" className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">Voice Productivity vs AI Tools</h4>
+                <p className="text-gray-600 dark:text-slate-400 text-sm">Discover why local voice processing beats AI-dependent productivity tools.</p>
               </Link>
-              <Link href="/blog/adhd-voice-technology-perfect-match" className="block bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">ADHD and Voice Technology</h4>
-                <p className="text-gray-600 text-sm">Learn how voice technology transforms productivity for neurodivergent minds.</p>
+              <Link href="/blog/adhd-voice-technology-perfect-match" className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6 hover:shadow-md transition-shadow">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">ADHD and Voice Technology</h4>
+                <p className="text-gray-600 dark:text-slate-400 text-sm">Learn how voice technology transforms productivity for neurodivergent minds.</p>
               </Link>
             </div>
           </div>

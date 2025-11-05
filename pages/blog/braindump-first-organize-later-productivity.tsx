@@ -69,7 +69,7 @@ export default function BraindumpFirstBlogPost() {
         />
       </Head>
 
-      <Layout className="min-h-screen bg-white">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumb */}
@@ -81,25 +81,25 @@ export default function BraindumpFirstBlogPost() {
 
           {/* Article Header */}
           <header className="mb-12">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
               <span>September 2025</span>
               <span>•</span>
               <span>5 min read</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 mb-6 leading-tight">
               Why Your Best Ideas Die in Your Productivity App
             </h1>
             <div className="flex flex-wrap gap-2">
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Voice Notes</span>
-              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Braindump Method</span>
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Productivity</span>
-              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">No AI</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Voice Notes</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">Braindump Method</span>
+              <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Productivity</span>
+              <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">No AI</span>
             </div>
           </header>
 
           {/* Article Content */}
-          <article className="prose prose-lg max-w-none">
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+          <article className="prose prose-lg dark:prose-invert max-w-none [&_p]:text-gray-700 [&_p]:dark:text-slate-300 [&_h2]:text-gray-900 [&_h2]:dark:text-slate-100 [&_h3]:text-gray-900 [&_h3]:dark:text-slate-100 [&_h4]:text-gray-900 [&_h4]:dark:text-slate-200 [&_ul]:text-gray-700 [&_ul]:dark:text-slate-300 [&_li]:text-gray-700 [&_li]:dark:text-slate-300 [&_.bg-gray-50]:dark:bg-slate-800 [&_.bg-blue-50]:dark:bg-blue-900/20 [&_.border-blue-400]:dark:border-blue-500 [&_.text-blue-900]:dark:text-blue-300 [&_.text-blue-800]:dark:text-blue-400 [&_.bg-green-50]:dark:bg-green-900/20 [&_.border-green-400]:dark:border-green-500 [&_.text-green-900]:dark:text-green-300 [&_.text-green-800]:dark:text-green-400 [&_.border-gray-200]:dark:border-slate-700 [&_.text-gray-900]:dark:text-slate-100 [&_.text-gray-600]:dark:text-slate-400 [&_.text-gray-800]:dark:text-slate-200 [&_.bg-white]:dark:bg-slate-800">
+            <p className="text-xl text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
               You&apos;re in the shower. Or driving. Or just about to fall asleep.
             </p>
 
@@ -184,10 +184,10 @@ export default function BraindumpFirstBlogPost() {
 
             <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-10">How It Works:</h3>
 
-            <div className="bg-gray-50 p-6 rounded-lg mb-8">
+            <div className="bg-gray-50 dark:bg-slate-800 p-6 rounded-lg mb-8">
               <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Phase 1: Capture Everything</h4>
-                <ul className="space-y-1 text-gray-700">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">Phase 1: Capture Everything</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-slate-300">
                   <li>• Open your mouth</li>
                   <li>• Speak every thought</li>
                   <li>• Don&apos;t categorize</li>
@@ -197,8 +197,8 @@ export default function BraindumpFirstBlogPost() {
               </div>
               
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-3">Phase 2: Organize Once</h4>
-                <ul className="space-y-1 text-gray-700">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">Phase 2: Organize Once</h4>
+                <ul className="space-y-1 text-gray-700 dark:text-slate-300">
                   <li>• When you&apos;re done capturing</li>
                   <li>• Review everything at once</li>
                   <li>• Sort into simple categories</li>
@@ -217,9 +217,9 @@ export default function BraindumpFirstBlogPost() {
               Text input adds friction. Even the fastest typist thinks faster than they type. But voice? Voice moves at the speed of thought.
             </p>
 
-            <div className="bg-blue-50 p-6 rounded-lg mb-8">
-              <p className="font-semibold text-blue-900 mb-3">The average person:</p>
-              <ul className="space-y-1 text-blue-800">
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-8">
+              <p className="font-semibold text-blue-900 dark:text-blue-300 mb-3">The average person:</p>
+              <ul className="space-y-1 text-blue-800 dark:text-blue-400">
                 <li>• Types at 40 words per minute</li>
                 <li>• Speaks at 150 words per minute</li>
                 <li>• Thinks at 400 words per minute</li>
@@ -256,8 +256,8 @@ export default function BraindumpFirstBlogPost() {
 
             <p className="mb-6">Here&apos;s the entire workflow:</p>
 
-            <div className="bg-orange-50 p-6 rounded-lg mb-8">
-              <ol className="space-y-3 text-orange-900">
+            <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg mb-8">
+              <ol className="space-y-3 text-orange-900 dark:text-orange-300">
                 <li><strong>1. Open tickk.app</strong> (no signup, no download)</li>
                 <li><strong>2. Tap the microphone</strong></li>
                 <li><strong>3. Speak everything</strong> – tasks, notes, reminders, ideas, whatever</li>
@@ -278,36 +278,36 @@ export default function BraindumpFirstBlogPost() {
             <h3 className="text-2xl font-bold text-gray-900 mb-6 mt-10">What Makes tickk Different:</h3>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border border-gray-200 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-3">🧠 Braindump Mode by Default</h4>
-                <ul className="text-gray-700 space-y-1">
+              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">🧠 Braindump Mode by Default</h4>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• No categories during capture</li>
                   <li>• No decisions while speaking</li>
                   <li>• Just pure thought capture</li>
                 </ul>
               </div>
               
-              <div className="bg-white border border-gray-200 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-3">✨ One-Tap Organization</h4>
-                <ul className="text-gray-700 space-y-1">
+              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">✨ One-Tap Organization</h4>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• Processes all items at once</li>
                   <li>• Separates tasks from notes automatically</li>
                   <li>• Uses linguistic patterns, not AI</li>
                 </ul>
               </div>
               
-              <div className="bg-white border border-gray-200 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-3">🔒 Absolutely Private</h4>
-                <ul className="text-gray-700 space-y-1">
+              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">🔒 Absolutely Private</h4>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• Runs entirely in your browser</li>
                   <li>• No servers, no cloud, no accounts</li>
                   <li>• Your thoughts never leave your device</li>
                 </ul>
               </div>
               
-              <div className="bg-white border border-gray-200 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 mb-3">💰 Free Forever</h4>
-                <ul className="text-gray-700 space-y-1">
+              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">💰 Free Forever</h4>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• No trial periods</li>
                   <li>• No premium tiers</li>
                   <li>• No ads</li>
@@ -328,8 +328,8 @@ export default function BraindumpFirstBlogPost() {
               <li>• Zero anxiety about categorization</li>
             </ul>
 
-            <blockquote className="border-l-4 border-orange-500 pl-6 py-4 mb-8 bg-orange-50">
-              <p className="text-lg italic text-gray-700">
+            <blockquote className="border-l-4 border-orange-500 dark:border-orange-400 pl-6 py-4 mb-8 bg-orange-50 dark:bg-orange-900/20">
+              <p className="text-lg italic text-gray-700 dark:text-slate-300">
                 &quot;It&apos;s the first productivity app that doesn&apos;t make me feel stupid for not knowing where things go.&quot;
               </p>
             </blockquote>
@@ -371,22 +371,22 @@ export default function BraindumpFirstBlogPost() {
             </p>
 
             {/* CTA Section */}
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-8 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 p-8 rounded-lg text-center">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                 Ready to Stop Organizing and Start Capturing?
               </h3>
-              <Link href="/" className="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-semibold">
+              <Link href="/" className="inline-flex items-center bg-gray-900 dark:bg-orange-600 text-white px-8 py-4 rounded-lg hover:bg-gray-800 dark:hover:bg-orange-700 transition-colors text-lg font-semibold">
                 Try tickk free forever →
               </Link>
-              <p className="text-gray-600 mt-4 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 mt-4 text-sm">
                 <em>No signup. No AI. No BS. Just an app that shuts up and listens.</em>
               </p>
             </div>
           </article>
 
           {/* Back to Blog */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <Link href="/blog" className="inline-flex items-center text-orange-600 hover:text-orange-700">
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
+            <Link href="/blog" className="inline-flex items-center text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300">
               ← Back to Blog
             </Link>
           </div>

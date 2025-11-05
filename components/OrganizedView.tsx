@@ -76,6 +76,7 @@ export default function OrganizedView({
   const [showSaveTemplateModal, setShowSaveTemplateModal] = useState(false)
   const [showTemplateLibrary, setShowTemplateLibrary] = useState(false)
   const [itemToTemplate, setItemToTemplate] = useState<VoiceItem | null>(null)
+  const [itemToTemplateType, setItemToTemplateType] = useState<'task' | 'note'>('task')
   
   // Get organized items (tasks and notes)
   const organizedTasks = appData.tasks || []
@@ -372,8 +373,9 @@ export default function OrganizedView({
   /**
    * Open save template modal for an item
    */
-  const handleSaveAsTemplate = (item: VoiceItem) => {
+  const handleSaveAsTemplate = (item: VoiceItem, type: 'task' | 'note') => {
     setItemToTemplate(item)
+    setItemToTemplateType(type)
     setShowSaveTemplateModal(true)
     closeMenu()
   }
@@ -514,7 +516,7 @@ export default function OrganizedView({
     actions.push({
       label: 'Save as Template',
       icon: '💾',
-      onClick: () => handleSaveAsTemplate(item)
+      onClick: () => handleSaveAsTemplate(item, type)
     })
 
     // Delete
@@ -823,31 +825,31 @@ export default function OrganizedView({
   }, [showExportMenu])
   
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-950">
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="heading-primary text-gray-900 mb-2">
+          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-2">
             {'Your Workspace'}
           </h1>
-          <p className="text-responsive text-gray-600 max-w-2xl mx-auto">
+          <p className="text-responsive text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">
             {'Everything organized and actionable.'}
           </p>
         </div>
 
         {/* Clean Stats Summary - Mobile Optimized */}
-        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 sm:gap-x-8 mb-8 text-sm text-gray-600 px-4">
-          <span><strong className="text-gray-900">{organizedTasks.length}</strong> {'tasks'}</span>
-          <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedNotes.length}</strong> notes</span>
-          <span className="text-gray-300 hidden sm:inline">•</span>
-          <span><strong className="text-gray-900">{organizedTasks.filter(t => t.completed).length}</strong> {'completed'}</span>
+        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 sm:gap-x-8 mb-8 text-sm text-gray-600 dark:text-slate-300 px-4">
+          <span><strong className="text-gray-900 dark:text-slate-100">{organizedTasks.length}</strong> {'tasks'}</span>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">•</span>
+          <span><strong className="text-gray-900 dark:text-slate-100">{organizedNotes.length}</strong> notes</span>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">•</span>
+          <span><strong className="text-gray-900 dark:text-slate-100">{organizedTasks.filter(t => t.completed).length}</strong> {'completed'}</span>
           {unprocessedCount > 0 && (
             <>
-              <span className="text-gray-300 hidden sm:inline">•</span>
-              <span className="text-orange-600"><strong>{unprocessedCount}</strong> {'unprocessed'}</span>
+              <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">•</span>
+              <span className="text-orange-600 dark:text-orange-400"><strong>{unprocessedCount}</strong> {'unprocessed'}</span>
             </>
           )}
         </div>
@@ -863,22 +865,22 @@ export default function OrganizedView({
                 placeholder={'Search...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 focus:bg-white min-h-[44px]"
+                className="w-full px-4 py-3 pl-10 text-sm bg-gray-50 dark:bg-slate-800/90 border border-gray-200 dark:border-slate-700 rounded-lg text-gray-900 dark:text-slate-100 placeholder-gray-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-600 focus:border-orange-500 focus:bg-white dark:focus:bg-slate-800 min-h-[44px]"
               />
-              <svg className="absolute left-3 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute left-3 top-3.5 w-4 h-4 text-gray-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-3.5 w-4 h-4 text-gray-400 hover:text-gray-600 min-h-[44px] flex items-center justify-center"
+                  className="absolute right-3 top-3.5 w-4 h-4 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 min-h-[44px] flex items-center justify-center"
                 >
                   ×
                 </button>
               )}
             </div>
             {searchQuery && (
-              <p className="text-xs text-gray-500 mt-1 px-1">
+              <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 px-1">
                 {'Found'} {filteredTasks.length + filteredNotes.length} {'results'}
               </p>
             )}
@@ -888,7 +890,7 @@ export default function OrganizedView({
           <div className="relative">
             <button
               onClick={() => setShowExportMenu(!showExportMenu)}
-              className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full sm:w-auto"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -897,13 +899,13 @@ export default function OrganizedView({
             </button>
             
             {showExportMenu && (
-              <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+              <div className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-10">
                 <button
                   onClick={() => {
                     exportToCSV()
                     setShowExportMenu(false)
                   }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 first:rounded-t-lg min-h-[44px] flex items-center"
+                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 first:rounded-t-lg min-h-[44px] flex items-center"
                 >
                   Export as CSV
                 </button>
@@ -912,7 +914,7 @@ export default function OrganizedView({
                     exportToJSON()
                     setShowExportMenu(false)
                   }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 min-h-[44px] flex items-center"
+                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 min-h-[44px] flex items-center"
                 >
                   Export as JSON
                 </button>
@@ -921,7 +923,7 @@ export default function OrganizedView({
                     exportToCalendar()
                     setShowExportMenu(false)
                   }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-50 last:rounded-b-lg min-h-[44px] flex items-center"
+                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 last:rounded-b-lg min-h-[44px] flex items-center"
                 >
                   Export as Calendar (.ics)
                 </button>
@@ -932,14 +934,14 @@ export default function OrganizedView({
 
         {/* Bulk Operations Bar */}
         {filter !== 'analytics' && (
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between mb-6 gap-4 p-4 bg-gray-50 rounded-lg">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between mb-6 gap-4 p-4 bg-gray-50 dark:bg-slate-800/50 rounded-lg border border-gray-200 dark:border-slate-700">
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleBulkMode}
                 className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                   bulkMode
                     ? 'bg-orange-600 text-white hover:bg-orange-700'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    : 'bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700'
                 }`}
               >
                 {bulkMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
@@ -947,12 +949,12 @@ export default function OrganizedView({
 
               <button
                 onClick={() => setShowTemplateLibrary(true)}
-                className="px-3 py-2 text-sm font-medium rounded-lg transition-colors bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 flex items-center gap-2"
+                className="px-3 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2"
               >
                 <span>📝</span>
                 Templates
                 {templates.length > 0 && (
-                  <span className="px-1.5 py-0.5 text-xs bg-blue-100 text-blue-700 rounded-full">
+                  <span className="px-1.5 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">
                     {templates.length}
                   </span>
                 )}
@@ -960,20 +962,20 @@ export default function OrganizedView({
 
               {bulkMode && (
                 <>
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-gray-600 dark:text-slate-400">
                     {selectedItems.size} selected
                   </span>
                   
                   <div className="flex gap-2">
                     <button
                       onClick={selectAllItems}
-                      className="px-3 py-1 text-xs text-blue-600 hover:text-blue-800"
+                      className="px-3 py-1 text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                     >
                       Select All
                     </button>
                     <button
                       onClick={selectNoneItems}
-                      className="px-3 py-1 text-xs text-gray-600 hover:text-gray-800"
+                      className="px-3 py-1 text-xs text-gray-600 dark:text-slate-400 hover:text-gray-800 dark:hover:text-slate-300"
                     >
                       Select None
                     </button>
@@ -987,7 +989,7 @@ export default function OrganizedView({
                 {selectedItems.size > 0 && (
                   <button
                     onClick={deleteSelectedItems}
-                    className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
+                    className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
                   >
                     Delete Selected ({selectedItems.size})
                   </button>
@@ -996,7 +998,7 @@ export default function OrganizedView({
                 {getCompletedTasksCount() > 0 && (
                   <button
                     onClick={deleteCompletedItems}
-                    className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50"
+                    className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
                   >
                     Delete Completed ({getCompletedTasksCount()})
                   </button>
@@ -1012,69 +1014,69 @@ export default function OrganizedView({
             onClick={() => setFilter('tasks')}
             className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
               filter === 'tasks'
-                ? 'text-gray-900 bg-gray-100'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'text-gray-900 dark:text-slate-50 bg-gray-100 dark:bg-slate-800/90'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
           >
             Tasks ({organizedTasks.length})
             {filter === 'tasks' && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 dark:bg-orange-400 rounded-full"></span>
             )}
           </button>
-          <span className="text-gray-300 hidden sm:inline">|</span>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">|</span>
           <button
             onClick={() => setFilter('notes')}
             className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
               filter === 'notes'
-                ? 'text-gray-900 bg-gray-100'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'text-gray-900 dark:text-slate-50 bg-gray-100 dark:bg-slate-800/90'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
           >
             Notes ({organizedNotes.length})
             {filter === 'notes' && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 dark:bg-orange-400 rounded-full"></span>
             )}
           </button>
-          <span className="text-gray-300 hidden sm:inline">|</span>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">|</span>
           <button
             onClick={() => setFilter('projects')}
             className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
               filter === 'projects'
-                ? 'text-gray-900 bg-gray-100'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'text-gray-900 dark:text-slate-50 bg-gray-100 dark:bg-slate-800/90'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
           >
             {'Projects'}
             {filter === 'projects' && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 dark:bg-orange-400 rounded-full"></span>
             )}
           </button>
-          <span className="text-gray-300 hidden sm:inline">|</span>
-          <button
-            onClick={() => setFilter('analytics')}
-            className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
-              filter === 'analytics'
-                ? 'text-gray-900 bg-gray-100'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-            }`}
-          >
-            {'Analytics'}
-            {filter === 'analytics' && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
-            )}
-          </button>
-          <span className="text-gray-300 hidden sm:inline">|</span>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">|</span>
           <button
             onClick={() => setFilter('all')}
             className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
               filter === 'all'
-                ? 'text-gray-900 bg-gray-100'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'text-gray-900 dark:text-slate-50 bg-gray-100 dark:bg-slate-800/90'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
             }`}
           >
             {'All Items'}
             {filter === 'all' && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 dark:bg-orange-400 rounded-full"></span>
+            )}
+          </button>
+          <span className="text-gray-300 dark:text-slate-600 hidden sm:inline">|</span>
+          <button
+            onClick={() => setFilter('analytics')}
+            className={`text-xs sm:text-sm font-medium transition-colors duration-200 relative px-2 py-1 rounded-lg min-h-[44px] flex items-center ${
+              filter === 'analytics'
+                ? 'text-gray-900 dark:text-slate-50 bg-gray-100 dark:bg-slate-800/90'
+                : 'text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/50'
+            }`}
+          >
+            {'Analytics'}
+            {filter === 'analytics' && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 dark:bg-orange-400 rounded-full"></span>
             )}
           </button>
         </div>
@@ -1082,7 +1084,7 @@ export default function OrganizedView({
         {/* Sort Options */}
         {filter !== 'analytics' && (
           <div className="flex justify-center items-center gap-3 mb-6">
-            <label htmlFor="sort-select" className="text-sm font-medium text-gray-700">
+            <label htmlFor="sort-select" className="text-sm font-medium text-gray-700 dark:text-slate-300">
               Sort by:
             </label>
             <div className="relative">
@@ -1090,13 +1092,13 @@ export default function OrganizedView({
                 id="sort-select"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'created' | 'none')}
-                className="appearance-none text-sm pl-4 pr-10 py-2.5 border-2 border-gray-200 rounded-lg bg-white text-gray-700 hover:border-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 cursor-pointer font-medium shadow-sm"
+                className="appearance-none text-sm pl-4 pr-10 py-2.5 border-2 border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 hover:border-orange-300 dark:hover:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 cursor-pointer font-medium shadow-sm"
               >
                 <option value="none">Default Order</option>
                 <option value="date">📅 Date (earliest first)</option>
                 <option value="created">🆕 Recently Created</option>
               </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 dark:text-slate-400">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -1108,13 +1110,13 @@ export default function OrganizedView({
         {/* Keyboard Shortcuts Help */}
         <div className="text-center mb-8">
           <details className="inline-block">
-            <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">
+            <summary className="text-xs text-gray-500 dark:text-slate-400 cursor-pointer hover:text-gray-700 dark:hover:text-slate-300">
               Keyboard shortcuts
             </summary>
-            <div className="mt-2 text-xs text-gray-500 space-y-1">
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + E</kbd> Export Data</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Ctrl/Cmd + F</kbd> Focus search</div>
-              <div><kbd className="px-1 py-0.5 bg-gray-100 rounded text-xs">Esc</kbd> Clear search</div>
+            <div className="mt-2 text-xs text-gray-500 dark:text-slate-400 space-y-1">
+              <div><kbd className="px-1 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-200 rounded text-xs">Ctrl/Cmd + E</kbd> Export Data</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-200 rounded text-xs">Ctrl/Cmd + F</kbd> Focus search</div>
+              <div><kbd className="px-1 py-0.5 bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-200 rounded text-xs">Esc</kbd> Clear search</div>
             </div>
           </details>
         </div>
@@ -1144,7 +1146,7 @@ export default function OrganizedView({
                   {allItemsCombined.map((item) => (
                     <div
                       key={item.id}
-                      className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                      className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 dark:border-slate-800 last:border-b-0"
                       onContextMenu={(e) => handleContextMenu(e, item.id)}
                       onTouchStart={(e) => handleTouchStart(e, item.id)}
                       onTouchEnd={handleTouchEnd}
@@ -1162,7 +1164,7 @@ export default function OrganizedView({
                             handleToggleNote(item.id)
                           }
                         }}
-                        className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                        className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
                           bulkMode 
                             ? 'text-orange-600 focus:ring-orange-500' 
                             : item.itemType === 'task'
@@ -1179,15 +1181,15 @@ export default function OrganizedView({
                       <div className="flex-1 min-w-0 overflow-hidden">
                         <div className="flex items-center gap-2">
                           <p className={`text-sm break-words flex-1 ${
-                            item.completed ? 'text-gray-500 line-through' : 'text-gray-900'
+                            item.completed ? 'text-gray-500 dark:text-slate-500 line-through' : 'text-gray-900 dark:text-slate-100'
                           }`}>
                             {item.text}
                           </p>
                           {/* Item type badge */}
                           <span className={`px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${
                             item.itemType === 'task' 
-                              ? 'bg-green-100 text-green-700' 
-                              : 'bg-purple-100 text-purple-700'
+                              ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400' 
+                              : 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400'
                           }`}>
                             {item.itemType === 'task' ? 'Task' : 'Note'}
                           </span>
@@ -1208,9 +1210,9 @@ export default function OrganizedView({
                             )}
                             {item.itemType === 'task' && item.priority && (
                               <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
-                                item.priority === 'high' ? 'bg-red-100 text-red-600' :
-                                item.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' :
-                                'bg-gray-100 text-gray-600'
+                                item.priority === 'high' ? 'bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400' :
+                                item.priority === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400' :
+                                'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300'
                               }`}>
                                 {item.priority}
                               </span>
@@ -1218,8 +1220,8 @@ export default function OrganizedView({
                             {item.tags && item.tags.map((tag, index) => (
                               <span key={index} className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
                                 item.itemType === 'task' 
-                                  ? 'bg-blue-100 text-blue-600' 
-                                  : 'bg-purple-100 text-purple-600'
+                                  ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400' 
+                                  : 'bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400'
                               }`}>
                                 #{tag}
                               </span>
@@ -1227,7 +1229,7 @@ export default function OrganizedView({
                           </div>
                         )}
                       </div>
-                      <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                      <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 dark:text-slate-400 flex-shrink-0">
                         <span className="text-right">{new Date(item.timestamp).toLocaleString()}</span>
                         
                         {/* New Action Buttons Component */}
@@ -1249,7 +1251,7 @@ export default function OrganizedView({
                     {filteredTasks.map((task) => (
                       <div
                         key={task.id}
-                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 dark:border-slate-800 last:border-b-0"
                         onContextMenu={(e) => handleContextMenu(e, task.id)}
                         onTouchStart={(e) => handleTouchStart(e, task.id)}
                         onTouchEnd={handleTouchEnd}
@@ -1259,7 +1261,7 @@ export default function OrganizedView({
                           type="checkbox"
                           checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
                           onChange={() => bulkMode ? toggleItemSelection(task.id) : handleToggleTask(task.id)}
-                          className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                          className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
                             bulkMode 
                               ? 'text-orange-600 focus:ring-orange-500' 
                               : 'text-green-600 focus:ring-green-500'
@@ -1272,7 +1274,7 @@ export default function OrganizedView({
                         <div className="flex-1 min-w-0 overflow-hidden">
                           <div className="flex items-center gap-2">
                             <p className={`text-sm break-words flex-1 ${
-                              task.completed ? 'text-gray-500 line-through' : 'text-gray-900'
+                              task.completed ? 'text-gray-500 dark:text-slate-500 line-through' : 'text-gray-900 dark:text-slate-100'
                             }`}>
                               {task.text}
                             </p>
@@ -1293,22 +1295,22 @@ export default function OrganizedView({
                               )}
                               {task.priority && (
                                 <span className={`px-2 py-0.5 rounded-full text-xs flex-shrink-0 ${
-                                  task.priority === 'high' ? 'bg-red-100 text-red-600' :
-                                  task.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' :
-                                  'bg-gray-100 text-gray-600'
+                                  task.priority === 'high' ? 'bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400' :
+                                  task.priority === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400' :
+                                  'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300'
                                 }`}>
                                   {task.priority}
                                 </span>
                               )}
                               {task.tags && task.tags.map((tag, index) => (
-                                <span key={index} className="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-xs flex-shrink-0">
+                                <span key={index} className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full text-xs flex-shrink-0">
                                   #{tag}
                                 </span>
                               ))}
                             </div>
                           )}
                         </div>
-                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 dark:text-slate-400 flex-shrink-0">
                           <span className="text-right">{new Date(task.timestamp).toLocaleString()}</span>
                           
                           {/* New Action Buttons Component */}
@@ -1329,7 +1331,7 @@ export default function OrganizedView({
                     {filteredNotes.map((note) => (
                       <div
                         key={note.id}
-                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                        className="flex items-start gap-3 sm:gap-4 py-4 border-b border-gray-100 dark:border-slate-800 last:border-b-0"
                         onContextMenu={(e) => handleContextMenu(e, note.id)}
                         onTouchStart={(e) => handleTouchStart(e, note.id)}
                         onTouchEnd={handleTouchEnd}
@@ -1345,7 +1347,7 @@ export default function OrganizedView({
                               handleToggleNote(note.id)
                             }
                           }}
-                          className={`mt-1 w-4 h-4 bg-white border-gray-300 rounded focus:ring-2 flex-shrink-0 ${
+                          className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
                             bulkMode 
                               ? 'text-orange-600 focus:ring-orange-500' 
                               : 'text-purple-600 focus:ring-purple-500'
@@ -1357,8 +1359,8 @@ export default function OrganizedView({
                         />
                         <div className="flex-1 min-w-0 overflow-hidden">
                           <div className="flex items-center gap-2">
-                            <p className={`text-sm text-gray-900 break-words flex-1 ${
-                              note.completed ? 'text-gray-500 line-through' : ''
+                            <p className={`text-sm text-gray-900 dark:text-slate-100 break-words flex-1 ${
+                              note.completed ? 'text-gray-500 dark:text-slate-500 line-through' : ''
                             }`}>{note.text}</p>
                             {note.metadata?.pinned && (
                               <span 
@@ -1376,14 +1378,14 @@ export default function OrganizedView({
                                 <DateBadge dateInfo={note.metadata.dateInfo as string} />
                               )}
                               {note.tags && note.tags.map((tag, index) => (
-                                <span key={index} className="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs flex-shrink-0">
+                                <span key={index} className="px-2 py-0.5 bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 rounded-full text-xs flex-shrink-0">
                                   #{tag}
                                 </span>
                               ))}
                             </div>
                           )}
                         </div>
-                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 flex-shrink-0">
+                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 text-xs text-gray-500 dark:text-slate-400 flex-shrink-0">
                           <span className="text-right">{new Date(note.timestamp).toLocaleString()}</span>
                           
                           {/* New Action Buttons Component */}
@@ -1404,7 +1406,7 @@ export default function OrganizedView({
             {((filter === 'tasks' && filteredTasks.length === 0) ||
               (filter === 'notes' && filteredNotes.length === 0) ||
               (filter === 'all' && allItemsCombined.length === 0)) && (
-              <div className="text-center py-12 text-gray-500">
+              <div className="text-center py-12 text-gray-500 dark:text-slate-400">
                 {searchQuery ? (
                   <>
                     <p className="text-sm mb-2">No results found for &quot;{searchQuery}&quot;</p>
@@ -1490,6 +1492,7 @@ export default function OrganizedView({
       <SaveTemplateModal
         isOpen={showSaveTemplateModal}
         item={itemToTemplate}
+        itemType={itemToTemplateType}
         onSave={addTemplate}
         onClose={() => {
           setShowSaveTemplateModal(false)

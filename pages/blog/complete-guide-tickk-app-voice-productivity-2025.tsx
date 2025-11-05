@@ -76,7 +76,7 @@ export default function CompleteGuideTickkApp() {
         />
       </Head>
 
-      <Layout className="min-h-screen bg-white" showHomeLink={true}>
+      <Layout className="min-h-screen bg-white dark:bg-slate-900" showHomeLink={true}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           
           {/* Breadcrumbs */}
@@ -84,40 +84,40 @@ export default function CompleteGuideTickkApp() {
 
           {/* Article Header */}
           <header className="mb-12">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
               <span>October 2025</span>
               <span>•</span>
               <span>12 min read</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 mb-6 leading-tight">
               Complete Guide to tickk.app: Voice-to-Text Productivity in 2025
             </h1>
             <div className="flex flex-wrap gap-2">
-              <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">Tutorial</span>
-              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Voice Productivity</span>
-              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">ADHD Friendly</span>
-              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">Command Palette</span>
+              <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Tutorial</span>
+              <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">Voice Productivity</span>
+              <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">ADHD Friendly</span>
+              <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">Command Palette</span>
             </div>
           </header>
 
           {/* Article Content */}
-          <article className="prose prose-lg max-w-none">
-            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+          <article className="prose prose-lg dark:prose-invert max-w-none [&_p]:text-gray-700 [&_p]:dark:text-slate-300 [&_h2]:text-gray-900 [&_h2]:dark:text-slate-100 [&_h3]:text-gray-900 [&_h3]:dark:text-slate-100 [&_h4]:text-gray-900 [&_h4]:dark:text-slate-200 [&_ul]:text-gray-700 [&_ul]:dark:text-slate-300 [&_li]:text-gray-700 [&_li]:dark:text-slate-300 [&_.bg-gray-50]:dark:bg-slate-800 [&_.bg-blue-50]:dark:bg-blue-900/20 [&_.border-blue-400]:dark:border-blue-500 [&_.text-blue-900]:dark:text-blue-300 [&_.text-blue-800]:dark:text-blue-400 [&_.bg-green-50]:dark:bg-green-900/20 [&_.border-green-400]:dark:border-green-500 [&_.text-green-900]:dark:text-green-300 [&_.text-green-800]:dark:text-green-400 [&_.border-gray-200]:dark:border-slate-700 [&_.text-gray-900]:dark:text-slate-100 [&_.text-gray-600]:dark:text-slate-400 [&_.text-gray-800]:dark:text-slate-200 [&_.bg-white]:dark:bg-slate-800 [&_a]:text-blue-600 [&_a]:dark:text-blue-400 [&_a:hover]:text-blue-700 [&_a:hover]:dark:text-blue-300">
+            <p className="text-xl text-gray-600 dark:text-slate-400 leading-relaxed mb-8">
               tickk.app has evolved into the most powerful free voice-to-text productivity platform available in 2025. With the V1.10.2 release, we&apos;ve streamlined to an English-only architecture and added powerful new features. Whether you&apos;re managing ADHD, optimizing workflows, or just want hands-free productivity, this complete guide covers every feature you need to master.
             </p>
 
             {/* Table of Contents */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">📋 What You&apos;ll Learn</h3>
+            <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6 mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">📋 What You&apos;ll Learn</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#getting-started" className="text-blue-600 hover:text-blue-700">Getting Started with tickk.app</a></li>
-                <li><a href="#three-modes" className="text-blue-600 hover:text-blue-700">The Three Productivity Modes</a></li>
-                <li><a href="#command-palette" className="text-blue-600 hover:text-blue-700">Command Palette: Your Productivity Superpower</a></li>
-                <li><a href="#focus-mode-adhd" className="text-blue-600 hover:text-blue-700">Focus Mode for ADHD Users</a></li>
-                <li><a href="#analytics-insights" className="text-blue-600 hover:text-blue-700">Analytics Dashboard & Productivity Insights</a></li>
-                <li><a href="#streak-tracking" className="text-blue-600 hover:text-blue-700">Streak Tracking & Motivation</a></li>
-                <li><a href="#calendar-export" className="text-blue-600 hover:text-blue-700">Calendar Integration & Export</a></li>
-                <li><a href="#advanced-workflows" className="text-blue-600 hover:text-blue-700">Advanced Productivity Workflows</a></li>
+                <li><a href="#getting-started" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Getting Started with tickk.app</a></li>
+                <li><a href="#three-modes" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">The Three Productivity Modes</a></li>
+                <li><a href="#command-palette" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Command Palette: Your Productivity Superpower</a></li>
+                <li><a href="#focus-mode-adhd" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Focus Mode for ADHD Users</a></li>
+                <li><a href="#analytics-insights" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Analytics Dashboard & Productivity Insights</a></li>
+                <li><a href="#streak-tracking" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Streak Tracking & Motivation</a></li>
+                <li><a href="#calendar-export" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Calendar Integration & Export</a></li>
+                <li><a href="#advanced-workflows" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">Advanced Productivity Workflows</a></li>
               </ul>
             </div>
 
@@ -188,12 +188,12 @@ export default function CompleteGuideTickkApp() {
             </p>
 
             {/* Step-by-step guide */}
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
-              <h4 className="font-semibold text-orange-900 mb-4">How to Use Braindump Mode:</h4>
-              <ol className="space-y-3 text-sm">
+            <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700 rounded-lg p-6 mb-6">
+              <h4 className="font-semibold text-orange-900 dark:text-orange-300 mb-4">How to Use Braindump Mode:</h4>
+              <ol className="space-y-3 text-sm text-orange-900 dark:text-orange-200">
                 <li className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</span>
-                  <span>Click the microphone button or press <code className="bg-orange-200 px-2 py-1 rounded">Spacebar</code></span>
+                  <span>Click the microphone button or press <code className="bg-orange-200 dark:bg-orange-800 px-2 py-1 rounded">Spacebar</code></span>
                 </li>
                 <li className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</span>
@@ -205,7 +205,7 @@ export default function CompleteGuideTickkApp() {
                 </li>
                 <li className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</span>
-                  <span>Press <code className="bg-orange-200 px-2 py-1 rounded">Spacebar</code> again or click stop when finished</span>
+                  <span>Press <code className="bg-orange-200 dark:bg-orange-800 px-2 py-1 rounded">Spacebar</code> again or click stop when finished</span>
                 </li>
                 <li className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">5</span>
@@ -219,23 +219,23 @@ export default function CompleteGuideTickkApp() {
               <strong>Purpose:</strong> Dedicated workspace for today&apos;s priorities, especially helpful for ADHD users.
             </p>
 
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
-              <h4 className="font-semibold text-red-900 mb-4">ADHD-Friendly Benefits:</h4>
-              <ul className="space-y-2 text-sm">
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg p-6 mb-6">
+              <h4 className="font-semibold text-red-900 dark:text-red-300 mb-4">ADHD-Friendly Benefits:</h4>
+              <ul className="space-y-2 text-sm text-red-900 dark:text-red-200">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-red-500 dark:text-red-400 mr-2">•</span>
                   <span><strong>Reduced overwhelm:</strong> See only today&apos;s priorities, not your entire task list</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-red-500 dark:text-red-400 mr-2">•</span>
                   <span><strong>Executive function support:</strong> Clear, simple interface minimizes decision fatigue</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-red-500 dark:text-red-400 mr-2">•</span>
                   <span><strong>Hyperfocus friendly:</strong> Clean workspace without distractions</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-red-500 dark:text-red-400 mr-2">•</span>
                   <span><strong>Progress visibility:</strong> Clear completion checkboxes provide dopamine hits</span>
                 </li>
               </ul>
@@ -317,28 +317,28 @@ export default function CompleteGuideTickkApp() {
 
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">ADHD-Optimized Workflow</h3>
 
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6 mb-8">
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border border-purple-200 dark:border-purple-700 rounded-lg p-6 mb-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-purple-500 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span className="text-white text-2xl">🧠</span>
                   </div>
-                  <h4 className="font-semibold text-purple-900 mb-2">Reduce Overwhelm</h4>
-                  <p className="text-sm text-purple-700">Only see today&apos;s essential tasks, not your entire overwhelming list</p>
+                  <h4 className="font-semibold text-purple-900 dark:text-purple-300 mb-2">Reduce Overwhelm</h4>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">Only see today&apos;s essential tasks, not your entire overwhelming list</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-blue-500 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span className="text-white text-2xl">⚡</span>
                   </div>
-                  <h4 className="font-semibold text-blue-900 mb-2">Quick Decisions</h4>
-                  <p className="text-sm text-blue-700">Minimal interface reduces decision fatigue and executive function strain</p>
+                  <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">Quick Decisions</h4>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">Minimal interface reduces decision fatigue and executive function strain</p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 bg-green-500 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span className="text-white text-2xl">🎯</span>
                   </div>
-                  <h4 className="font-semibold text-green-900 mb-2">Clear Progress</h4>
-                  <p className="text-sm text-green-700">Visual completion feedback provides dopamine rewards for task completion</p>
+                  <h4 className="font-semibold text-green-900 dark:text-green-300 mb-2">Clear Progress</h4>
+                  <p className="text-sm text-green-700 dark:text-green-300">Visual completion feedback provides dopamine rewards for task completion</p>
                 </div>
               </div>
             </div>
@@ -424,17 +424,17 @@ export default function CompleteGuideTickkApp() {
             </p>
 
             {/* Streak Visual */}
-            <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-lg p-6 mb-8">
+            <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 border border-orange-200 dark:border-orange-700 rounded-lg p-6 mb-8">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-orange-600">7</div>
-                    <div className="text-sm text-orange-700">Current Streak</div>
+                    <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">7</div>
+                    <div className="text-sm text-orange-700 dark:text-orange-300">Current Streak</div>
                   </div>
                   <div className="text-4xl">🔥</div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-red-600">23</div>
-                    <div className="text-sm text-red-700">Longest Streak</div>
+                    <div className="text-3xl font-bold text-red-600 dark:text-red-400">23</div>
+                    <div className="text-sm text-red-700 dark:text-red-300">Longest Streak</div>
                   </div>
                 </div>
               </div>
@@ -442,8 +442,8 @@ export default function CompleteGuideTickkApp() {
               <div className="grid grid-cols-7 gap-2 text-center text-xs">
                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
                   <div key={i} className="space-y-1">
-                    <div className="text-gray-600">{day}</div>
-                    <div className={`w-8 h-8 rounded mx-auto ${i < 5 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
+                    <div className="text-gray-600 dark:text-slate-400">{day}</div>
+                    <div className={`w-8 h-8 rounded mx-auto ${i < 5 ? 'bg-green-500' : 'bg-gray-200 dark:bg-slate-700'}`}></div>
                   </div>
                 ))}
               </div>
@@ -494,15 +494,15 @@ export default function CompleteGuideTickkApp() {
 
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">The ADHD-Optimized Daily Workflow</h3>
 
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6 mb-8">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border border-green-200 dark:border-green-700 rounded-lg p-6 mb-8">
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
                     <span className="text-white font-bold">AM</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-green-900">Morning Brain Dump</h4>
-                    <p className="text-green-700 text-sm">Use Braindump mode to capture overnight thoughts and today&apos;s priorities</p>
+                    <h4 className="font-semibold text-green-900 dark:text-green-300">Morning Brain Dump</h4>
+                    <p className="text-green-700 dark:text-green-300 text-sm">Use Braindump mode to capture overnight thoughts and today&apos;s priorities</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -510,8 +510,8 @@ export default function CompleteGuideTickkApp() {
                     <span className="text-white font-bold">PM</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-blue-900">Focus Work Session</h4>
-                    <p className="text-blue-700 text-sm">Switch to Focus mode, work on 2-3 priority tasks without distraction</p>
+                    <h4 className="font-semibold text-blue-900 dark:text-blue-300">Focus Work Session</h4>
+                    <p className="text-blue-700 dark:text-blue-300 text-sm">Switch to Focus mode, work on 2-3 priority tasks without distraction</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -519,8 +519,8 @@ export default function CompleteGuideTickkApp() {
                     <span className="text-white font-bold">EVE</span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-purple-900">Review & Plan</h4>
-                    <p className="text-purple-700 text-sm">Check analytics, celebrate streak, use Organized mode to plan tomorrow</p>
+                    <h4 className="font-semibold text-purple-900 dark:text-purple-300">Review & Plan</h4>
+                    <p className="text-purple-700 dark:text-purple-300 text-sm">Check analytics, celebrate streak, use Organized mode to plan tomorrow</p>
                   </div>
                 </div>
               </div>
@@ -573,10 +573,10 @@ export default function CompleteGuideTickkApp() {
               tickk.app represents the evolution of voice-to-text productivity apps. By combining privacy-first design with powerful features like the Command Palette, ADHD-friendly Focus mode, and comprehensive analytics, it&apos;s become the go-to choice for modern productivity enthusiasts.
             </p>
 
-            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-8 mb-8">
+            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 border border-orange-200 dark:border-orange-700 rounded-lg p-8 mb-8">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-orange-900 mb-4">Ready to Transform Your Productivity?</h3>
-                <p className="text-orange-700 mb-6">
+                <h3 className="text-2xl font-bold text-orange-900 dark:text-orange-300 mb-4">Ready to Transform Your Productivity?</h3>
+                <p className="text-orange-700 dark:text-orange-300 mb-6">
                   Start using tickk.app today - no sign-up required, completely free, and your data stays private.
                 </p>
                 <Link 
@@ -612,16 +612,16 @@ export default function CompleteGuideTickkApp() {
           </article>
 
           {/* Article Footer */}
-          <footer className="mt-12 pt-8 border-t border-gray-200">
+          <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 dark:text-slate-400">
                 Published October 28, 2025 • Updated regularly
               </div>
               <div className="flex items-center gap-4">
-                <Link href="/" className="text-orange-600 hover:text-orange-700 font-medium text-sm">
+                <Link href="/" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-medium text-sm">
                   ← Back to tickk.app
                 </Link>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-700 font-medium text-sm">
+                <Link href="/blog" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium text-sm">
                   More Articles →
                 </Link>
               </div>

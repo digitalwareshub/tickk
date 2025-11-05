@@ -319,14 +319,14 @@ export default function FocusView({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 dark:from-slate-950 dark:via-slate-900 dark:to-violet-950">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="heading-primary text-gray-900 mb-2">
+          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-2">
             Today&apos;s Focus
           </h1>
-          <p className="text-responsive text-gray-600">
+          <p className="text-responsive text-gray-600 dark:text-slate-300">
             {focusTasks.length === 0
               ? 'Nothing on your plate right now'
               : `${focusTasks.length} task${focusTasks.length === 1 ? '' : 's'} need your attention`}
@@ -334,18 +334,18 @@ export default function FocusView({
         </div>
 
         {/* Pomodoro Timer */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-white dark:bg-slate-800/90 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 p-6 mb-8">
           <div className="text-center">
-            <h2 className="text-base font-semibold text-gray-900 mb-4">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-4">
               Focus Timer
             </h2>
-            <div className="text-4xl font-mono font-bold text-gray-900 mb-6">
+            <div className="text-4xl font-mono font-bold text-gray-900 dark:text-slate-50 mb-6">
               {formatTime(pomodoroTime)}
             </div>
             
             {/* Duration Settings */}
             {!isPomodoroRunning && (
-              <div className="flex items-center justify-center gap-6 mb-6 text-sm text-gray-600">
+              <div className="flex items-center justify-center gap-6 mb-6 text-sm text-gray-600 dark:text-slate-300">
                 <div className="flex items-center gap-2">
                   <span>Work:</span>
                   <EditableDuration type="work" duration={workDuration} label="Work" />
@@ -363,13 +363,13 @@ export default function FocusView({
                 <>
                   <button
                     onClick={() => startPomodoro('work')}
-                    className="px-6 py-3 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors"
+                    className="px-6 py-3 bg-orange-500 dark:bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-600 dark:hover:bg-orange-700 transition-colors"
                   >
                     Start Work
                   </button>
                   <button
                     onClick={() => startPomodoro('break')}
-                    className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
+                    className="px-6 py-3 bg-blue-500 dark:bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors"
                   >
                     Start Break
                   </button>
@@ -378,20 +378,20 @@ export default function FocusView({
                 <>
                   <button
                     onClick={stopPomodoro}
-                    className="px-6 py-3 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors"
+                    className="px-6 py-3 bg-red-500 dark:bg-red-600 text-white rounded-lg font-medium hover:bg-red-600 dark:hover:bg-red-700 transition-colors"
                   >
                     Pause
                   </button>
                   <button
                     onClick={resetPomodoro}
-                    className="px-6 py-3 bg-gray-500 text-white rounded-lg font-medium hover:bg-gray-600 transition-colors"
+                    className="px-6 py-3 bg-gray-500 dark:bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors"
                   >
                     Reset
                   </button>
                 </>
               )}
             </div>
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-gray-500 dark:text-slate-400 mt-3">
               {pomodoroMode === 'work' ? 'Work Session' : 'Break Time'}
             </p>
           </div>
@@ -399,12 +399,12 @@ export default function FocusView({
 
         {/* Task List */}
         {focusTasks.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white dark:bg-slate-800/90 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 p-12 text-center">
             <div className="text-4xl mb-4">🎉</div>
-            <h3 className="text-base font-semibold text-gray-900 mb-2">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-slate-100 mb-2">
               All clear!
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 dark:text-slate-300 text-sm">
               You have no tasks for today. Time to relax or braindump new ideas!
             </p>
           </div>
@@ -420,12 +420,12 @@ export default function FocusView({
               return (
                 <div
                   key={task.id}
-                  className={`bg-white rounded-xl shadow-sm border-2 p-4 sm:p-6 transition-all hover:shadow-md ${
+                  className={`bg-white dark:bg-slate-800/90 rounded-xl shadow-sm border-2 p-4 sm:p-6 transition-all hover:shadow-md ${
                     isPinned
-                      ? 'border-yellow-300 bg-yellow-50'
+                      ? 'border-yellow-300 dark:border-yellow-700/50 bg-yellow-50 dark:bg-yellow-900/20'
                       : isOverdue
-                        ? 'border-red-200 bg-red-50'
-                        : 'border-gray-200'
+                        ? 'border-red-200 dark:border-red-800/50 bg-red-50 dark:bg-red-900/20'
+                        : 'border-gray-200 dark:border-slate-700'
                   }`}
                 >
                   <div className="flex items-start gap-4">
@@ -434,7 +434,7 @@ export default function FocusView({
                       type="checkbox"
                       checked={task.completed || false}
                       onChange={() => handleToggleTask(task.id)}
-                      className="mt-1 w-4 h-4 text-green-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-green-500 flex-shrink-0"
+                      className="mt-1 w-4 h-4 text-green-600 bg-white dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded focus:ring-2 focus:ring-green-500 flex-shrink-0"
                       aria-label={`Mark task as ${task.completed ? 'incomplete' : 'complete'}`}
                     />
 
@@ -443,8 +443,8 @@ export default function FocusView({
                       <p
                         className={`text-sm break-words ${
                           task.completed
-                            ? 'text-gray-500 line-through'
-                            : 'text-gray-900'
+                            ? 'text-gray-500 dark:text-slate-400 line-through'
+                            : 'text-gray-900 dark:text-slate-100'
                         }`}
                       >
                         {task.text}
@@ -453,12 +453,12 @@ export default function FocusView({
                       {/* Badges */}
                       <div className="flex flex-wrap items-center gap-2 mt-3">
                         {isPinned && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-200 text-yellow-800 rounded">
+                          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-200 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300 rounded">
                             📌 Pinned
                           </span>
                         )}
                         {isOverdue && (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-200 text-red-800 rounded">
+                          <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-200 dark:bg-red-900/40 text-red-800 dark:text-red-300 rounded">
                             ⚠️ Overdue
                           </span>
                         )}
@@ -469,10 +469,10 @@ export default function FocusView({
                           <span
                             className={`px-2 py-1 rounded text-xs font-medium ${
                               task.priority === 'high'
-                                ? 'bg-red-100 text-red-700'
+                                ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300'
                                 : task.priority === 'medium'
-                                  ? 'bg-yellow-100 text-yellow-700'
-                                  : 'bg-gray-100 text-gray-700'
+                                  ? 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-300'
+                                  : 'bg-gray-100 dark:bg-gray-800/60 text-gray-700 dark:text-gray-300'
                             }`}
                           >
                             {task.priority}
@@ -487,8 +487,8 @@ export default function FocusView({
                         onClick={() => handlePinTask(task.id)}
                         className={`p-2 rounded transition-colors ${
                           isPinned
-                            ? 'text-yellow-600 hover:text-yellow-700 bg-yellow-100'
-                            : 'text-gray-400 hover:text-yellow-600'
+                            ? 'text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 bg-yellow-100 dark:bg-yellow-900/30'
+                            : 'text-gray-400 dark:text-slate-500 hover:text-yellow-600 dark:hover:text-yellow-400'
                         }`}
                         aria-label={isPinned ? 'Unpin task' : 'Pin task'}
                         title={isPinned ? 'Unpin task' : 'Pin to top'}
@@ -503,7 +503,7 @@ export default function FocusView({
                       </button>
                       <button
                         onClick={() => handleEditItem(task, 'task')}
-                        className="p-2 text-gray-400 hover:text-blue-600 rounded transition-colors"
+                        className="p-2 text-gray-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 rounded transition-colors"
                         aria-label="Edit task"
                       >
                         <svg
@@ -522,7 +522,7 @@ export default function FocusView({
                       </button>
                       <button
                         onClick={() => handleDeleteItem(task, 'task')}
-                        className="p-2 text-gray-400 hover:text-red-600 rounded transition-colors"
+                        className="p-2 text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 rounded transition-colors"
                         aria-label="Delete task"
                       >
                         <svg
@@ -548,7 +548,7 @@ export default function FocusView({
         )}
 
         {/* Info */}
-        <div className="mt-8 text-center text-xs text-gray-500">
+        <div className="mt-8 text-center text-xs text-gray-500 dark:text-slate-400">
           <p>
             Showing: Pinned tasks • Due today • Overdue • Recently added (24hrs)
           </p>

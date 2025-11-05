@@ -149,7 +149,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <span className="ml-2 text-gray-600 ">Loading insights...</span>
+        <span className="ml-2 text-gray-600 dark:text-slate-400">Loading insights...</span>
       </div>
     )
   }
@@ -157,7 +157,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
   if (!stats) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-gray-500 ">
+        <div className="text-gray-500 dark:text-slate-400">
           No data available for analysis
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
     <div className="space-y-6">
       {/* Time Range Selector */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900 ">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50">
           Analytics
         </h2>
         <div className="flex space-x-2">
@@ -179,7 +179,7 @@ export default function Analytics({ appData }: AnalyticsProps) {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 timeRange === range
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300   '
+                  : 'bg-gray-200 dark:bg-slate-800/90 text-gray-700 dark:text-slate-300 hover:bg-gray-300 dark:hover:bg-slate-700'
               }`}
             >
               {range === 'week' ? 'Week' : range === 'month' ? 'Month' : 'All'}
@@ -217,40 +217,40 @@ export default function Analytics({ appData }: AnalyticsProps) {
       </div>
 
       {/* Category Distribution */}
-      <div className="bg-white  rounded-lg border border-gray-200  p-6">
-        <h3 className="text-lg font-semibold text-gray-900  mb-4">
+      <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
           Category Breakdown
         </h3>
         <div className="space-y-4">
           <div className="flex items-center">
-            <div className="w-24 text-sm text-gray-600  capitalize">
+            <div className="w-24 text-sm text-gray-600 dark:text-slate-300 capitalize">
               Tasks
             </div>
             <div className="flex-1 mx-4">
-              <div className="w-full bg-gray-200  rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                 <div
                   className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${stats.categoryBreakdown.tasksPercentage}%` }}
                 />
               </div>
             </div>
-            <div className="w-16 text-sm text-gray-600  text-right">
+            <div className="w-16 text-sm text-gray-600 dark:text-slate-300 text-right">
               {stats.categoryBreakdown.tasks} ({stats.categoryBreakdown.tasksPercentage.toFixed(1)}%)
             </div>
           </div>
           <div className="flex items-center">
-            <div className="w-24 text-sm text-gray-600  capitalize">
+            <div className="w-24 text-sm text-gray-600 dark:text-slate-300 capitalize">
               Notes
             </div>
             <div className="flex-1 mx-4">
-              <div className="w-full bg-gray-200  rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
                 <div
                   className="bg-green-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${stats.categoryBreakdown.notesPercentage}%` }}
                 />
               </div>
             </div>
-            <div className="w-16 text-sm text-gray-600  text-right">
+            <div className="w-16 text-sm text-gray-600 dark:text-slate-300 text-right">
               {stats.categoryBreakdown.notes} ({stats.categoryBreakdown.notesPercentage.toFixed(1)}%)
             </div>
           </div>
@@ -258,22 +258,22 @@ export default function Analytics({ appData }: AnalyticsProps) {
       </div>
 
       {/* Productivity Trends */}
-      <div className="bg-white  rounded-lg border border-gray-200  p-6">
-        <h3 className="text-lg font-semibold text-gray-900  mb-4">
+      <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
           Productivity by Time
         </h3>
         <div className="text-center mb-4">
-          <div className="text-sm text-gray-600 ">
+          <div className="text-sm text-gray-600 dark:text-slate-300">
             Most Productive Time: <span className="font-semibold">{stats.mostProductiveTime}</span>
           </div>
         </div>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
           {stats.productivityTrends.map((trend) => (
             <div key={trend.hour} className="text-center">
-              <div className="text-lg font-bold text-blue-600 ">
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
                 {trend.itemCount}
               </div>
-              <div className="text-xs text-gray-600 ">
+              <div className="text-xs text-gray-600 dark:text-slate-400">
                 {trend.label}
               </div>
             </div>
@@ -283,22 +283,22 @@ export default function Analytics({ appData }: AnalyticsProps) {
 
       {/* Top Patterns */}
       {stats.topPatterns && stats.topPatterns.length > 0 && (
-        <div className="bg-white  rounded-lg border border-gray-200  p-6">
-          <h3 className="text-lg font-semibold text-gray-900  mb-4">
+        <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
             Top Patterns Detected
           </h3>
           <div className="space-y-3">
             {stats.topPatterns.slice(0, 5).map((pattern, index) => (
-              <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100  last:border-b-0">
+              <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-slate-700 last:border-b-0">
                 <div className="flex-1">
-                  <div className="text-sm font-medium text-gray-900 ">
+                  <div className="text-sm font-medium text-gray-900 dark:text-slate-100">
                     {pattern.theme}
                   </div>
-                  <div className="text-xs text-gray-500 ">
+                  <div className="text-xs text-gray-500 dark:text-slate-400">
                     Category: {pattern.category} • Confidence: {Math.round(pattern.confidence * 100)}%
                   </div>
                 </div>
-                <div className="text-sm text-gray-600 ">
+                <div className="text-sm text-gray-600 dark:text-slate-300">
                   {pattern.count} occurrences
                 </div>
               </div>
@@ -309,24 +309,24 @@ export default function Analytics({ appData }: AnalyticsProps) {
 
       {/* Weekly Performance */}
       {stats.weeklyStats && stats.weeklyStats.length > 0 && (
-        <div className="bg-white  rounded-lg border border-gray-200  p-6">
-          <h3 className="text-lg font-semibold text-gray-900  mb-4">
+        <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
             Weekly Performance
           </h3>
           <div className="space-y-3">
             {stats.weeklyStats.map((week, index) => (
               <div key={index} className="flex items-center justify-between">
-                <div className="text-sm text-gray-600 ">
+                <div className="text-sm text-gray-600 dark:text-slate-300">
                   Week of {week.week}
                 </div>
                 <div className="flex space-x-4 text-sm">
-                  <span className="text-blue-600 ">
+                  <span className="text-blue-600 dark:text-blue-400">
                     {week.itemCount} items
                   </span>
-                  <span className="text-green-600 ">
+                  <span className="text-green-600 dark:text-green-400">
                     {week.sessionCount} sessions
                   </span>
-                  <span className="text-purple-600 ">
+                  <span className="text-purple-600 dark:text-purple-400">
                     {Math.round(week.accuracy * 100)}% accuracy
                   </span>
                 </div>
@@ -337,27 +337,27 @@ export default function Analytics({ appData }: AnalyticsProps) {
       )}
 
       {/* Productivity Over Time Chart */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
           Productivity Trend (Last 7 Days)
         </h3>
         <ProductivityChart data={getProductivityData()} />
       </div>
 
       {/* Activity Heatmap */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
           Activity Heatmap
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 dark:text-slate-300 mb-4">
           See when you&apos;re most productive throughout the week
         </p>
         <ActivityHeatmap {...getHeatmapData()} />
       </div>
 
       {/* Streak Tracker */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-slate-800/90 rounded-lg border border-gray-200 dark:border-slate-700 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-4">
           Activity Streak
         </h3>
         <StreakTracker data={getStreakData()} />
@@ -365,15 +365,15 @@ export default function Analytics({ appData }: AnalyticsProps) {
 
       {/* Completion Rate Card */}
       {appData.tasks.length > 0 && (
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-700/50 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-2">
             Task Completion Rate
           </h3>
           <div className="flex items-end gap-4">
-            <div className="text-5xl font-bold text-green-600">
+            <div className="text-5xl font-bold text-green-600 dark:text-green-400">
               {Math.round((appData.tasks.filter(t => t.completed).length / appData.tasks.length) * 100)}%
             </div>
-            <div className="text-sm text-gray-700 mb-2">
+            <div className="text-sm text-gray-700 dark:text-slate-300 mb-2">
               {appData.tasks.filter(t => t.completed).length} of {appData.tasks.length} tasks completed
             </div>
           </div>

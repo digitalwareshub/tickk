@@ -569,10 +569,10 @@ export default function App() {
           <title>Loading... | tickk</title>
           <meta name="description" content="Loading tickk voice productivity app..." />
         </Head>
-        <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600 text-sm">
+            <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-gray-600 dark:border-t-violet-400 rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-600 dark:text-slate-300 text-sm">
               {needsMigration ? 'Upgrading data...' : 'Loading...'}
             </p>
           </div>
@@ -679,7 +679,7 @@ export default function App() {
       <Layout 
         mode={mode} 
         onModeChange={handleModeSwitch}
-        className="min-h-screen bg-white"
+        className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
       >
         {/* What's New Banner for existing users */}
         {showBanner && (
@@ -689,7 +689,7 @@ export default function App() {
           />
         )}
         
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (
             <>
