@@ -84,6 +84,7 @@ export default function OrganizedView({
   const unprocessedCount = appData.braindump?.filter(item => !item.processed).length || 0
   
   const handleToggleTask = async (taskId: string) => {
+    // If user clicks a checkbox while not in bulk mode, just toggle completion
     const task = organizedTasks.find(t => t.id === taskId)
     const wasCompleted = task?.completed
     
@@ -665,8 +666,14 @@ export default function OrganizedView({
       
       if (bulkDeleteType === 'selected') {
         deletedCount = selectedItems.size
-        const updatedTasks = organizedTasks.filter(task => !selectedItems.has(task.id))
-        const updatedNotes = organizedNotes.filter(note => !selectedItems.has(note.id))
+        
+        const updatedTasks = (appData.tasks || []).filter(task => !selectedItems.has(task.id))
+        const updatedNotes = (appData.notes || []).filter(note => !selectedItems.has(note.id))
+        
+        // Log for debugging if needed
+        const tasksDeleted = (appData.tasks?.length || 0) - updatedTasks.length
+        const notesDeleted = (appData.notes?.length || 0) - updatedNotes.length
+        console.log(`Bulk delete: ${tasksDeleted} tasks, ${notesDeleted} notes (${deletedCount} total selected)`)
         
         onDataUpdate({
           ...appData,
@@ -677,7 +684,7 @@ export default function OrganizedView({
         setSelectedItems(new Set())
       } else if (bulkDeleteType === 'completed') {
         deletedCount = getCompletedTasksCount()
-        const updatedTasks = organizedTasks.filter(task => !task.completed)
+        const updatedTasks = (appData.tasks || []).filter(task => !task.completed)
         
         onDataUpdate({
           ...appData,
@@ -935,30 +942,49 @@ export default function OrganizedView({
         {/* Bulk Operations Bar */}
         {filter !== 'analytics' && (
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between mb-6 gap-4 p-4 bg-gray-50 dark:bg-slate-800/50 rounded-lg border border-gray-200 dark:border-slate-700">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={toggleBulkMode}
-                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  bulkMode
-                    ? 'bg-orange-600 text-white hover:bg-orange-700'
-                    : 'bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700'
-                }`}
-              >
-                {bulkMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
-              </button>
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={toggleBulkMode}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    bulkMode
+                      ? 'bg-orange-600 text-white hover:bg-orange-700'
+                      : 'bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700'
+                  }`}
+                >
+                  {bulkMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
+                </button>
 
-              <button
-                onClick={() => setShowTemplateLibrary(true)}
-                className="px-3 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2"
-              >
-                <span>📝</span>
-                Templates
-                {templates.length > 0 && (
-                  <span className="px-1.5 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">
-                    {templates.length}
-                  </span>
+                {!bulkMode && (
+                  <button
+                    onClick={() => setShowTemplateLibrary(true)}
+                    className="px-3 py-2 text-sm font-medium rounded-lg transition-colors bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 border border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2"
+                  >
+                    <span>📝</span>
+                    Templates
+                    {templates.length > 0 && (
+                      <span className="px-1.5 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">
+                        {templates.length}
+                      </span>
+                    )}
+                  </button>
                 )}
-              </button>
+              </div>
+
+              {!bulkMode && getCompletedTasksCount() > 0 && (
+                <button
+                  onClick={deleteCompletedItems}
+                  className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                >
+                  Delete Completed ({getCompletedTasksCount()})
+                </button>
+              )}
+
+              {!bulkMode && (
+                <span className="text-xs text-gray-500 dark:text-slate-400 italic">
+                  💡 Tip: Enable Bulk Mode to select items for deletion using trash icons
+                </span>
+              )}
 
               {bulkMode && (
                 <>
@@ -984,25 +1010,14 @@ export default function OrganizedView({
               )}
             </div>
             
-            {bulkMode && (
-              <div className="flex gap-2">
-                {selectedItems.size > 0 && (
-                  <button
-                    onClick={deleteSelectedItems}
-                    className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  >
-                    Delete Selected ({selectedItems.size})
-                  </button>
-                )}
-                
-                {getCompletedTasksCount() > 0 && (
-                  <button
-                    onClick={deleteCompletedItems}
-                    className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  >
-                    Delete Completed ({getCompletedTasksCount()})
-                  </button>
-                )}
+            {bulkMode && selectedItems.size > 0 && (
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={deleteSelectedItems}
+                  className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800/90 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                >
+                  Delete Selected ({selectedItems.size})
+                </button>
               </div>
             )}
           </div>
@@ -1152,32 +1167,43 @@ export default function OrganizedView({
                       onTouchEnd={handleTouchEnd}
                       onTouchMove={handleTouchMove}
                     >
-                      <input
-                        type="checkbox"
-                        checked={bulkMode ? selectedItems.has(item.id) : (item.completed || false)}
-                        onChange={() => {
-                          if (bulkMode) {
-                            toggleItemSelection(item.id)
-                          } else if (item.itemType === 'task') {
-                            handleToggleTask(item.id)
-                          } else {
-                            handleToggleNote(item.id)
-                          }
-                        }}
-                        className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
-                          bulkMode 
-                            ? 'text-orange-600 focus:ring-orange-500' 
-                            : item.itemType === 'task'
+                      {/* Checkbox in normal mode, Trash icon in bulk mode */}
+                      {!bulkMode ? (
+                        <input
+                          type="checkbox"
+                          checked={item.completed || false}
+                          onChange={() => {
+                            if (item.itemType === 'task') {
+                              handleToggleTask(item.id)
+                            } else {
+                              handleToggleNote(item.id)
+                            }
+                          }}
+                          className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
+                            item.itemType === 'task'
                               ? 'text-green-600 focus:ring-green-500'
                               : 'text-purple-600 focus:ring-purple-500'
-                        }`}
-                        aria-label={bulkMode 
-                          ? `Select ${item.itemType} for bulk operations`
-                          : item.itemType === 'task' 
-                            ? `Mark task as ${item.completed ? 'incomplete' : 'complete'}`
-                            : `Mark note as ${item.completed ? 'unmarked' : 'marked'}`
-                        }
-                      />
+                          }`}
+                          aria-label={
+                            item.itemType === 'task' 
+                              ? `Mark task as ${item.completed ? 'incomplete' : 'complete'}`
+                              : `Mark note as ${item.completed ? 'unmarked' : 'marked'}`
+                          }
+                        />
+                      ) : (
+                        <button
+                          onClick={() => toggleItemSelection(item.id)}
+                          className={`mt-1 w-8 h-8 flex items-center justify-center rounded-lg border-2 transition-all flex-shrink-0 ${
+                            selectedItems.has(item.id)
+                              ? 'bg-red-100 dark:bg-red-900/40 border-red-500 dark:border-red-600 text-red-600 dark:text-red-400'
+                              : 'bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-400 dark:text-slate-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-400 dark:hover:border-red-700'
+                          }`}
+                          aria-label={`${selectedItems.has(item.id) ? 'Deselect' : 'Select'} ${item.itemType} for deletion`}
+                          title={`Click to ${selectedItems.has(item.id) ? 'deselect' : 'select'} for deletion`}
+                        >
+                          🗑️
+                        </button>
+                      )}
                       <div className="flex-1 min-w-0 overflow-hidden">
                         <div className="flex items-center gap-2">
                           <p className={`text-sm break-words flex-1 ${
@@ -1257,20 +1283,29 @@ export default function OrganizedView({
                         onTouchEnd={handleTouchEnd}
                         onTouchMove={handleTouchMove}
                       >
-                        <input
-                          type="checkbox"
-                          checked={bulkMode ? selectedItems.has(task.id) : (task.completed || false)}
-                          onChange={() => bulkMode ? toggleItemSelection(task.id) : handleToggleTask(task.id)}
-                          className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
-                            bulkMode 
-                              ? 'text-orange-600 focus:ring-orange-500' 
-                              : 'text-green-600 focus:ring-green-500'
-                          }`}
-                          aria-label={bulkMode 
-                            ? `Select task for bulk operations`
-                            : `Mark task as ${task.completed ? 'incomplete' : 'complete'}`
-                          }
-                        />
+                        {/* Checkbox in normal mode, Trash icon in bulk mode */}
+                        {!bulkMode ? (
+                          <input
+                            type="checkbox"
+                            checked={task.completed || false}
+                            onChange={() => handleToggleTask(task.id)}
+                            className="mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 text-green-600 focus:ring-green-500"
+                            aria-label={`Mark task as ${task.completed ? 'incomplete' : 'complete'}`}
+                          />
+                        ) : (
+                          <button
+                            onClick={() => toggleItemSelection(task.id)}
+                            className={`mt-1 w-8 h-8 flex items-center justify-center rounded-lg border-2 transition-all flex-shrink-0 ${
+                              selectedItems.has(task.id)
+                                ? 'bg-red-100 dark:bg-red-900/40 border-red-500 dark:border-red-600 text-red-600 dark:text-red-400'
+                                : 'bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-400 dark:text-slate-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-400 dark:hover:border-red-700'
+                            }`}
+                            aria-label={`${selectedItems.has(task.id) ? 'Deselect' : 'Select'} task for deletion`}
+                            title={`Click to ${selectedItems.has(task.id) ? 'deselect' : 'select'} for deletion`}
+                          >
+                            🗑️
+                          </button>
+                        )}
                         <div className="flex-1 min-w-0 overflow-hidden">
                           <div className="flex items-center gap-2">
                             <p className={`text-sm break-words flex-1 ${
@@ -1337,26 +1372,29 @@ export default function OrganizedView({
                         onTouchEnd={handleTouchEnd}
                         onTouchMove={handleTouchMove}
                       >
-                        <input
-                          type="checkbox"
-                          checked={bulkMode ? selectedItems.has(note.id) : (note.completed || false)}
-                          onChange={() => {
-                            if (bulkMode) {
-                              toggleItemSelection(note.id)
-                            } else {
-                              handleToggleNote(note.id)
-                            }
-                          }}
-                          className={`mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 ${
-                            bulkMode 
-                              ? 'text-orange-600 focus:ring-orange-500' 
-                              : 'text-purple-600 focus:ring-purple-500'
-                          }`}
-                          aria-label={bulkMode 
-                            ? "Select note for bulk operations"
-                            : `Mark note as ${note.completed ? 'unmarked' : 'marked'}`
-                          }
-                        />
+                        {/* Checkbox in normal mode, Trash icon in bulk mode */}
+                        {!bulkMode ? (
+                          <input
+                            type="checkbox"
+                            checked={note.completed || false}
+                            onChange={() => handleToggleNote(note.id)}
+                            className="mt-1 w-4 h-4 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 rounded focus:ring-2 flex-shrink-0 text-purple-600 focus:ring-purple-500"
+                            aria-label={`Mark note as ${note.completed ? 'unmarked' : 'marked'}`}
+                          />
+                        ) : (
+                          <button
+                            onClick={() => toggleItemSelection(note.id)}
+                            className={`mt-1 w-8 h-8 flex items-center justify-center rounded-lg border-2 transition-all flex-shrink-0 ${
+                              selectedItems.has(note.id)
+                                ? 'bg-red-100 dark:bg-red-900/40 border-red-500 dark:border-red-600 text-red-600 dark:text-red-400'
+                                : 'bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 text-gray-400 dark:text-slate-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-400 dark:hover:border-red-700'
+                            }`}
+                            aria-label={`${selectedItems.has(note.id) ? 'Deselect' : 'Select'} note for deletion`}
+                            title={`Click to ${selectedItems.has(note.id) ? 'deselect' : 'select'} for deletion`}
+                          >
+                            🗑️
+                          </button>
+                        )}
                         <div className="flex-1 min-w-0 overflow-hidden">
                           <div className="flex items-center gap-2">
                             <p className={`text-sm text-gray-900 dark:text-slate-100 break-words flex-1 ${

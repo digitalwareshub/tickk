@@ -88,7 +88,7 @@ export default function MarketingContent() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white dark:bg-slate-800/80 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border dark:border-slate-700">
                 <Image 
-                  src="/reviews/reddit/review-1.webp" 
+                  src="/reviews/reddit/review-dark-1.webp" 
                   alt="Real Reddit review" 
                   width={400}
                   height={300}
@@ -97,7 +97,7 @@ export default function MarketingContent() {
               </div>
               <div className="bg-white dark:bg-slate-800/80 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border dark:border-slate-700">
                 <Image 
-                  src="/reviews/reddit/review-2.webp" 
+                  src="/reviews/reddit/review-dark-2.webp" 
                   alt="Real Reddit review" 
                   width={400}
                   height={300}
@@ -106,7 +106,7 @@ export default function MarketingContent() {
               </div>
               <div className="bg-white dark:bg-slate-800/80 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border dark:border-slate-700">
                 <Image 
-                  src="/reviews/reddit/review-5.webp" 
+                  src="/reviews/reddit/review-dark-5.webp" 
                   alt="Real Reddit review" 
                   width={400}
                   height={300}
