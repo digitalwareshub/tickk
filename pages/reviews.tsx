@@ -56,7 +56,7 @@ export default function Reviews() {
                     >
                       <div className="relative">
                         <Image 
-                          src="/reviews/reddit/review-1.webp" 
+                          src="/reviews/reddit/review-dark-1.webp"
                           alt="Reddit review 1" 
                           width={400}
                           height={300}
@@ -81,7 +81,7 @@ export default function Reviews() {
                     >
                       <div className="relative">
                         <Image 
-                          src="/reviews/reddit/review-2.webp" 
+                          src="/reviews/reddit/review-dark-2.webp"
                           alt="Reddit review 2" 
                           width={400}
                           height={300}
@@ -106,7 +106,7 @@ export default function Reviews() {
                     >
                       <div className="relative">
                         <Image 
-                          src="/reviews/reddit/review-3.webp" 
+                          src="/reviews/reddit/review-dark-3.webp"
                           alt="Reddit review 3" 
                           width={400}
                           height={300}
@@ -131,7 +131,7 @@ export default function Reviews() {
                     >
                       <div className="relative">
                         <Image 
-                          src="/reviews/reddit/review-4.webp" 
+                          src="/reviews/reddit/review-dark-4.webp"
                           alt="Reddit review 4" 
                           width={400}
                           height={300}
@@ -156,7 +156,7 @@ export default function Reviews() {
                     >
                       <div className="relative">
                         <Image 
-                          src="/reviews/reddit/review-5.webp" 
+                          src="/reviews/reddit/review-dark-5.webp"
                           alt="Reddit review 5" 
                           width={400}
                           height={300}

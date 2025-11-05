@@ -737,7 +737,7 @@ export default function Home() {
               {/* ADHD/Neurodivergent - Featured */}
               <div 
                 data-use-case="adhd-neurodivergent"
-                className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 border-2 border-orange-200 relative flex flex-col h-full cursor-pointer transition-transform hover:scale-105"
+                className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border-2 border-orange-500 dark:border-orange-600 relative flex flex-col h-full cursor-pointer transition-all hover:scale-105 hover:shadow-lg"
                 onClick={() => {
                   adhdUseCase.trackClick();
                   identifySegment('adhd_focused', 0.9, 'clicked_adhd_use_case');
@@ -745,21 +745,21 @@ export default function Home() {
                 }}
                 onMouseEnter={() => adhdUseCase.trackHover()}
               >
-                <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
-                  Most Popular
+                <div className="absolute -top-2 -right-2 bg-orange-500 dark:bg-orange-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                  ⭐ Most Popular
                 </div>
                 <div className="text-2xl mb-4">🧠</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   ADHD & Neurodivergent Minds
                 </h3>
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
                   Finally, a productivity app that works with your brain, not against it. Capture racing thoughts instantly without getting stuck in organization paralysis.
                 </p>
-                <ul className="text-gray-600 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
                   <li>• No overwhelming setup or categories</li>
                   <li>• Capture hyperfocus insights instantly</li>
                   <li>• Process later when you&apos;re in &quot;organize mode&quot;</li>
-                  <li>• <strong>Free forever</strong> - no expensive subscriptions</li>
+                  <li>• <strong className="text-orange-600 dark:text-orange-400">Free forever</strong> - no expensive subscriptions</li>
                 </ul>
               </div>
 
@@ -1244,7 +1244,7 @@ export default function Home() {
               Discover the science behind braindump-first productivity and why your best ideas die in traditional apps.
             </p>
             
-            <div className="bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg p-8 max-w-2xl mx-auto border border-orange-200 dark:border-orange-800">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-lg p-8 max-w-2xl mx-auto border border-gray-200 dark:border-slate-700">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-slate-50 mb-3">
                 Latest Article: Why Your Best Ideas Die in Your Productivity App
               </h3>

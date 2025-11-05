@@ -99,18 +99,18 @@ export default function Features() {
               {/* Focus Mode */}
               <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-8 hover:border-orange-200 dark:hover:border-orange-600 hover:shadow-sm transition-all duration-300">
                 <div className="text-4xl mb-4">🎯</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">ADHD-Friendly Focus Mode</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-3">ADHD-Friendly Focus Mode</h3>
+                <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
                   Built-in Pomodoro timer and distraction-free interface designed specifically 
                   for neurodivergent individuals and focus-seekers.
                 </p>
               </div>
 
               {/* Command Palette */}
-              <div className="bg-white border border-gray-200 rounded-lg p-8 hover:border-orange-200 hover:shadow-sm transition-all duration-300">
+              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-8 hover:border-orange-200 dark:hover:border-orange-600 hover:shadow-sm transition-all duration-300">
                 <div className="text-4xl mb-4">⌨️</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Command Palette (⌘K)</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-3">Command Palette (⌘K)</h3>
+                <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
                   Power-user keyboard shortcuts for lightning-fast navigation. Press Cmd/Ctrl + K 
                   to access all features instantly.
                 </p>
@@ -139,7 +139,7 @@ export default function Features() {
           </div>
 
           {/* Privacy & Security Features */}
-          <div className="max-w-6xl mx-auto mb-20 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/30 rounded-lg p-12">
+          <div className="max-w-6xl mx-auto mb-20 bg-gray-50 dark:bg-slate-800 rounded-lg p-12">
             <h2 className="heading-secondary text-gray-900 dark:text-slate-50 text-center mb-12">
               Privacy-First Design
             </h2>
@@ -147,21 +147,21 @@ export default function Features() {
               <div className="text-center">
                 <div className="text-5xl mb-4">🔒</div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">Zero Data Collection</h3>
-                <p className="text-gray-700 dark:text-slate-300">
+                <p className="text-gray-600 dark:text-slate-400">
                   We never collect, store, or transmit your voice data or personal information.
                 </p>
               </div>
               <div className="text-center">
                 <div className="text-5xl mb-4">🏠</div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">Local Processing</h3>
-                <p className="text-gray-700 dark:text-slate-300">
+                <p className="text-gray-600 dark:text-slate-400">
                   All speech processing happens in your browser. Your data never leaves your device.
                 </p>
               </div>
               <div className="text-center">
                 <div className="text-5xl mb-4">🚫</div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">No Signup Required</h3>
-                <p className="text-gray-700 dark:text-slate-300">
+                <p className="text-gray-600 dark:text-slate-400">
                   Start using immediately. No email, phone number, or personal info needed.
                 </p>
               </div>
