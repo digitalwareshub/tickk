@@ -44,6 +44,22 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#16a34a" />
         
+        {/* Prevent dark mode flash - inline script runs before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('tickk_dark_mode');
+                  if (saved && JSON.parse(saved) === true) {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        
         {/* Preload social media images to prevent flickering */}
         <link rel="preload" as="image" href="/og-image.webp" />
         <link rel="preload" as="image" href="/twitter-image.webp" />

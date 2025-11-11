@@ -4,11 +4,10 @@ export function useDarkMode() {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    // Check localStorage for saved preference
+    // Check localStorage for saved preference - default to light mode
     const saved = localStorage.getItem('tickk_dark_mode')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const shouldBeDark = saved ? JSON.parse(saved) : false // Default to light mode
     
-    const shouldBeDark = saved ? JSON.parse(saved) : prefersDark
     setIsDark(shouldBeDark)
     
     if (shouldBeDark) {
