@@ -4,6 +4,18 @@
       "source": "/:path*",
       "has": [
         {
+          "type": "header",
+          "key": "x-forwarded-proto",
+          "value": "http"
+        }
+      ],
+      "destination": "https://tickk.app/:path*",
+      "statusCode": 308
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
           "type": "host",
           "value": "www.tickk.app"
         }
@@ -23,6 +35,23 @@
       ]
     },
     {
+      "source": "/manifest.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
       "source": "/sitemap.xml",
       "headers": [
         {
@@ -30,8 +59,25 @@
           "value": "application/xml"
         },
         {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/feed.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
         }
       ]
     },
@@ -41,6 +87,10 @@
         {
           "key": "Content-Type",
           "value": "text/plain"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         },
         {
           "key": "Cache-Control",

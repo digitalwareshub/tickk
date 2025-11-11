@@ -186,35 +186,10 @@ const nextConfig = {
   // },
 
   // Redirects for SEO
+  // NOTE: www→non-www and HTTP→HTTPS are handled at Vercel level (vercel.json)
+  // to avoid redirect chains
   async redirects() {
     return [
-      // HTTP to HTTPS redirect (force secure) - 301 permanent redirect
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'x-forwarded-proto',
-            value: 'http',
-          },
-        ],
-        destination: 'https://tickk.app/:path*',
-        permanent: true,
-        statusCode: 301,
-      },
-      // WWW to non-WWW redirect (canonical) - 301 permanent redirect
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.tickk.app',
-          },
-        ],
-        destination: 'https://tickk.app/:path*',
-        permanent: true,
-        statusCode: 301,
-      },
       // Redirect URLs with common parameters to clean versions
       {
         source: '/',

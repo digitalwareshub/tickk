@@ -5,33 +5,32 @@
 User-agent: *
 Allow: /
 
-# Specifically allow important crawlers
-User-agent: Googlebot
-Allow: /
+# Disallow Next.js internal paths that shouldn't be crawled
+Disallow: /_next/
+Disallow: /api/
+Disallow: /admin/
 
-User-agent: Bingbot
-Allow: /
+# Disallow technical/config files from indexing (they can be crawled but not indexed)
+Disallow: /manifest.json
+Disallow: /sitemap.xml
+Disallow: /robots.txt
+Disallow: /favicon.ico
+Disallow: /*.json$
 
-User-agent: Slurp
-Allow: /
+# Disallow old Spanish pages that no longer exist
+Disallow: /es/
 
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
+# Disallow URLs with tracking parameters to prevent duplicate content issues
+Disallow: /*?utm_source=*
+Disallow: /*?utm_medium=*
+Disallow: /*?utm_campaign=*
+Disallow: /*?ref=*
+Disallow: /*?gclid=*
+Disallow: /*?fbclid=*
+Disallow: /*?productunti*
+Disallow: /*?source=*
+Disallow: /*?twclid=*
+Disallow: /*?msclkid=*
 
 # Disallow known bad bots and scrapers
 User-agent: AhrefsBot
@@ -49,42 +48,7 @@ Disallow: /
 User-agent: BLEXBot
 Disallow: /
 
-# Allow access to important files
-Allow: /sitemap.xml
-Allow: /manifest.json
-Allow: /robots.txt
-Allow: /_next/static/
-Allow: /favicon.ico
-
-# Disallow Next.js internal paths that shouldn't be crawled
-Disallow: /_next/
-Disallow: /api/
-Disallow: /admin/
-
-# Disallow technical files from being indexed (but still allow crawling for functionality)
-Disallow: /manifest.json
-Disallow: /sitemap.xml
-Disallow: /robots.txt
-Disallow: /favicon.ico
-Disallow: /_next/static/
-
-# Disallow old Spanish pages that no longer exist
-Disallow: /es/
-
-# Disallow URLs with tracking parameters to prevent duplicate content issues
-Disallow: /*?utm_source=*
-Disallow: /*?utm_medium=*
-Disallow: /*?utm_campaign=*
-Disallow: /*?ref=*
-Disallow: /*?gclid=*
-Disallow: /*?fbclid=*
-Disallow: /*?productunti*
-Disallow: /*?source=*
-Disallow: /*?twclid=*
-Disallow: /*?msclkid=*
-
 # Set crawl delay for aggressive bots
-User-agent: *
 Crawl-delay: 1
 
 # Sitemap location for search engines
