@@ -83,7 +83,7 @@ export default function ContextMenu({ x, y, actions, onClose }: ContextMenuProps
   return (
     <div
       ref={menuRef}
-      className="fixed z-[100] bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-gray-200 dark:border-slate-700 py-1 min-w-[200px] animate-in fade-in zoom-in-95 duration-100"
+      className="fixed z-[100] bg-white dark:bg-slate-800/95 backdrop-blur-sm rounded-lg shadow-xl border border-gray-200 dark:border-slate-700/80 py-1 min-w-[200px] animate-in fade-in zoom-in-95 duration-100"
       style={{ left: x, top: y }}
       role="menu"
       aria-orientation="vertical"
@@ -102,7 +102,7 @@ export default function ContextMenu({ x, y, actions, onClose }: ContextMenuProps
               action.onClick()
               onClose()
             }}
-            className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors ${
+            className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors min-h-[44px] ${
               variantClasses[action.variant || 'default']
             }`}
             role="menuitem"

@@ -36,7 +36,9 @@ export default function OrganizedView({
   const [sortBy, setSortBy] = useState<'date' | 'created' | 'none'>('none')
   const [searchQuery, setSearchQuery] = useState('')
   const [showExportMenu, setShowExportMenu] = useState(false)
+  const [showSortMenu, setShowSortMenu] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const sortMenuRef = useRef<HTMLDivElement>(null)
   
   // Edit modal state
   const [showEditModal, setShowEditModal] = useState(false)
@@ -820,16 +822,31 @@ export default function OrganizedView({
         searchInputRef.current?.focus()
       }
       
-      // Escape - Clear search
+      // Escape - Clear search and close menus
       if (e.key === 'Escape') {
         setSearchQuery('')
         setShowExportMenu(false)
+        setShowSortMenu(false)
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [showExportMenu])
+
+  // Click outside handler for sort menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sortMenuRef.current && !sortMenuRef.current.contains(event.target as Node)) {
+        setShowSortMenu(false)
+      }
+    }
+
+    if (showSortMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showSortMenu])
   
   return (
     <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-950">
@@ -1102,22 +1119,68 @@ export default function OrganizedView({
             <label htmlFor="sort-select" className="text-sm font-medium text-gray-700 dark:text-slate-300">
               Sort by:
             </label>
-            <div className="relative">
-              <select
-                id="sort-select"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as 'date' | 'created' | 'none')}
-                className="appearance-none text-sm pl-4 pr-10 py-2.5 border-2 border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 hover:border-orange-300 dark:hover:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 cursor-pointer font-medium shadow-sm"
+            <div className="relative" ref={sortMenuRef}>
+              <button
+                onClick={() => setShowSortMenu(!showSortMenu)}
+                className="appearance-none text-sm pl-4 pr-10 py-2.5 border-2 border-gray-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800/90 text-gray-700 dark:text-slate-200 hover:border-orange-300 dark:hover:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 cursor-pointer font-medium shadow-sm min-h-[44px] flex items-center"
               >
-                <option value="none">Default Order</option>
-                <option value="date">📅 Date (earliest first)</option>
-                <option value="created">🆕 Recently Created</option>
-              </select>
+                {sortBy === 'none' && 'Default Order'}
+                {sortBy === 'date' && '📅 Date (earliest first)'}
+                {sortBy === 'created' && '🆕 Recently Created'}
+              </button>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 dark:text-slate-400">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
+              
+              {/* Custom Dropdown Menu */}
+              {showSortMenu && (
+                <div className="absolute top-full mt-2 left-0 right-0 bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 rounded-lg shadow-xl z-50 overflow-hidden">
+                  <button
+                    onClick={() => {
+                      setSortBy('none')
+                      setShowSortMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm transition-colors min-h-[44px] flex items-center ${
+                      sortBy === 'none'
+                        ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium'
+                        : 'text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {sortBy === 'none' && <span className="mr-2">✓</span>}
+                    Default Order
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSortBy('date')
+                      setShowSortMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm transition-colors min-h-[44px] flex items-center ${
+                      sortBy === 'date'
+                        ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium'
+                        : 'text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {sortBy === 'date' && <span className="mr-2">✓</span>}
+                    📅 Date (earliest first)
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSortBy('created')
+                      setShowSortMenu(false)
+                    }}
+                    className={`w-full px-4 py-3 text-left text-sm transition-colors min-h-[44px] flex items-center ${
+                      sortBy === 'created'
+                        ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium'
+                        : 'text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700'
+                    }`}
+                  >
+                    {sortBy === 'created' && <span className="mr-2">✓</span>}
+                    🆕 Recently Created
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -330,3 +330,23 @@ input[type="checkbox"].text-purple-600:checked {
   background-color: #9333ea;
   border-color: #9333ea;
 }
+
+/* Dark mode support for select dropdowns */
+select option {
+  background-color: white;
+  color: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  select option {
+    background-color: #1e293b;
+    color: #f1f5f9;
+  }
+}
+
+/* Force dark mode styles for options when dark class is present */
+.dark select option,
+:root.dark select option {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
