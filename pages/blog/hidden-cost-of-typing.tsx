@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function HiddenCostOfTyping() {
   return (
@@ -269,6 +270,33 @@ export default function HiddenCostOfTyping() {
           </footer>
 
         </article>
+
+        {/* Related Articles */}
+        <RelatedArticles 
+          articles={[
+            {
+              title: "Best Voice Productivity Apps 2025",
+              href: "/voice-productivity-apps",
+              description: "Compare speech recognition tools that eliminate typing friction."
+            },
+            {
+              title: "Braindump-First Productivity",
+              href: "/blog/braindump-first-organize-later-productivity",
+              description: "Why voice brain dumps work better than typing thoughts."
+            },
+            {
+              title: "Mobile Voice Productivity",
+              href: "/blog/mobile-voice-productivity-capture-ideas-on-the-go",
+              description: "Capture ideas hands-free while multitasking."
+            },
+            {
+              title: "Best ADHD Productivity Tools",
+              href: "/adhd-productivity-tools",
+              description: "Voice-first apps for neurodivergent minds."
+            }
+          ]}
+        />
+
       </Layout>
     </>
   )

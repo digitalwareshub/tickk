@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function MobileVoiceProductivity() {
   return (
@@ -452,6 +453,33 @@ export default function MobileVoiceProductivity() {
           </div>
 
         </article>
+
+        {/* Related Articles */}
+        <RelatedArticles 
+          articles={[
+            {
+              title: "Best Voice Productivity Apps",
+              href: "/voice-productivity-apps",
+              description: "Compare speech recognition software for mobile and desktop."
+            },
+            {
+              title: "Complete Tickk Guide 2025",
+              href: "/blog/complete-guide-tickk-app-voice-productivity-2025",
+              description: "Master all features of the Tickk voice productivity app."
+            },
+            {
+              title: "Best ADHD Productivity Tools",
+              href: "/adhd-productivity-tools",
+              description: "Apps designed for neurodivergent minds and racing thoughts."
+            },
+            {
+              title: "Voice vs AI Tools Comparison",
+              href: "/blog/voice-productivity-vs-ai-tools-local-processing-wins",
+              description: "Why local processing beats cloud-based AI for productivity."
+            }
+          ]}
+        />
+
       </Layout>
     </>
   )

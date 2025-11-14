@@ -397,17 +397,17 @@ export default function Features() {
           </div>
 
           {/* Final CTA */}
-          <div className="max-w-4xl mx-auto text-center bg-gray-900 dark:bg-slate-800 rounded-lg p-12 text-white dark:text-slate-50">
-            <h2 className="text-3xl font-bold mb-6">
+          <div className="max-w-4xl mx-auto text-center py-12">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-slate-50">
               Ready to Transform Your Productivity?
             </h2>
-            <p className="text-lg mb-8 text-gray-300 dark:text-slate-300">
+            <p className="text-lg mb-8 text-gray-700 dark:text-slate-200">
               Join thousands of users who are capturing their thoughts effortlessly with tickk.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-900 dark:text-slate-50 font-semibold rounded-lg transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors duration-200 shadow-lg"
               >
                 Start Using tickk Now
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -416,7 +416,7 @@ export default function Features() {
               </Link>
               <Link
                 href="/landing"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-gray-800 dark:hover:bg-slate-700 text-white dark:text-slate-50 font-semibold rounded-lg border-2 border-white dark:border-slate-400 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-900 dark:text-slate-50 font-semibold rounded-lg border-2 border-gray-300 dark:border-slate-600 transition-colors duration-200"
               >
                 Learn More About tickk
               </Link>

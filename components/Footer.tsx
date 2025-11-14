@@ -178,8 +178,8 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </p>
           </div>
 
-          {/* Four Column Layout */}
-          <div className="grid grid-cols-4 gap-4 mb-1 max-w-4xl mx-auto">
+          {/* Five Column Layout */}
+          <div className="grid grid-cols-5 gap-4 mb-1 max-w-6xl mx-auto">
             {/* Product Column */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
@@ -265,6 +265,35 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/bug-report" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     Bug Reports
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Collections Column */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+                Collections
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/voice-productivity-apps" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Voice Productivity Apps
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/adhd-productivity-tools" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    ADHD Productivity Tools
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/features" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/reviews" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Reviews
                   </Link>
                 </li>
               </ul>

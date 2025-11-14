@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function VoiceProductivityVsAITools() {
   return (
@@ -411,6 +412,33 @@ export default function VoiceProductivityVsAITools() {
           </div>
 
         </article>
+
+        {/* Related Articles */}
+        <RelatedArticles 
+          articles={[
+            {
+              title: "Best Voice Productivity Apps 2025",
+              href: "/voice-productivity-apps",
+              description: "Compare speech recognition tools for hands-free task management."
+            },
+            {
+              title: "Privacy Policy - Complete Protection",
+              href: "/privacy",
+              description: "How Tickk protects your privacy with local processing and zero data collection."
+            },
+            {
+              title: "ADHD & Voice Technology",
+              href: "/blog/adhd-voice-technology-perfect-match",
+              description: "Why voice input is revolutionary for ADHD brains."
+            },
+            {
+              title: "Mobile Voice Productivity Guide",
+              href: "/blog/mobile-voice-productivity-capture-ideas-on-the-go",
+              description: "Master hands-free idea capture while commuting."
+            }
+          ]}
+        />
+
       </Layout>
     </>
   )

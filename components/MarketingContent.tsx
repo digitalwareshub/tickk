@@ -115,67 +115,6 @@ export default function MarketingContent() {
               </div>
             </div>
           </div>
-
-          {/* FAQ Section */}
-          <div className="my-12 max-w-3xl mx-auto text-left">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-3">
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>Is my data safe and private?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Yes! Everything stays on YOUR device. We don&apos;t store your data on any server. No account, no tracking, 100% private. Your thoughts remain yours.</p>
-              </details>
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>Do I need to create an account?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Nope! Just open the app and start using it. No email, no password, no signup required. We respect your time and privacy.</p>
-              </details>
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>Does it work offline?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Yes! tickk is a PWA (Progressive Web App). Once loaded, core features work without internet. Your data is always available.</p>
-              </details>
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>Which browsers support voice recording?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Chrome, Edge, and Safari on iOS/Mac. We use your browser&apos;s built-in speech recognition - no external services!</p>
-              </details>
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>Is it really free?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Absolutely! Core features are free forever. We&apos;re building advanced features for a Pro tier, but the free version will always be powerful and useful.</p>
-              </details>
-              <details className="p-5 border border-gray-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/80 hover:border-orange-200 dark:hover:border-orange-600 transition-colors group">
-                <summary className="font-semibold text-gray-900 dark:text-slate-100 cursor-pointer flex items-center justify-between">
-                  <span>What languages are supported?</span>
-                  <svg className="w-5 h-5 text-gray-400 dark:text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">Currently English and Spanish. Voice recognition uses your browser&apos;s built-in capabilities, so accuracy is excellent!</p>
-              </details>
-            </div>
-          </div>
         </div>
       )}
     </>

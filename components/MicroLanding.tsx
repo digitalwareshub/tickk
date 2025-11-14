@@ -45,7 +45,7 @@ export default function MicroLanding({
         {/* Main Headline */}
         <div className="mb-8">
           <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-2">
-            Think at 400 WPM. Type at 40 WPM.
+            Think at <span className="text-orange-600 dark:text-orange-400">400 WPM</span>. Type at <span className="text-orange-600 dark:text-orange-400">40 WPM</span>.
           </h1>
           <p className="text-xl text-gray-700 dark:text-slate-200 font-medium mb-4">
             Speak. Save. Sort it later.

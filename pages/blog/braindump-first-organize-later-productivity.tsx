@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function BraindumpFirstBlogPost() {
   return (
@@ -383,6 +384,32 @@ export default function BraindumpFirstBlogPost() {
               </p>
             </div>
           </article>
+
+          {/* Related Articles */}
+          <RelatedArticles 
+            articles={[
+              {
+                title: "ADHD & Voice Technology: Perfect Match",
+                href: "/blog/adhd-voice-technology-perfect-match",
+                description: "Discover why voice input is revolutionary for ADHD brains and neurodivergent minds."
+              },
+              {
+                title: "Best Voice Productivity Apps 2025",
+                href: "/voice-productivity-apps",
+                description: "Compare speech recognition tools for hands-free task management."
+              },
+              {
+                title: "The Hidden Cost of Typing",
+                href: "/blog/hidden-cost-of-typing",
+                description: "Why typing creates friction in your productivity workflow."
+              },
+              {
+                title: "Best ADHD Productivity Tools",
+                href: "/adhd-productivity-tools",
+                description: "Apps designed for neurodivergent minds, not against them."
+              }
+            ]}
+          />
 
           {/* Back to Blog */}
           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">

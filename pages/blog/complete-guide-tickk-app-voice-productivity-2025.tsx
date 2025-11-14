@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function CompleteGuideTickkApp() {
   return (
@@ -629,6 +630,33 @@ export default function CompleteGuideTickkApp() {
           </footer>
 
         </div>
+
+        {/* Related Articles */}
+        <RelatedArticles 
+          articles={[
+            {
+              title: "Best Voice Productivity Apps",
+              href: "/voice-productivity-apps",
+              description: "Compare Tickk with other speech recognition productivity tools."
+            },
+            {
+              title: "Best ADHD Productivity Tools",
+              href: "/adhd-productivity-tools",
+              description: "Why Tickk works specifically for ADHD and neurodivergent minds."
+            },
+            {
+              title: "Braindump-First Method",
+              href: "/blog/braindump-first-organize-later-productivity",
+              description: "The cognitive science behind Tickk's core methodology."
+            },
+            {
+              title: "ADHD & Voice Technology",
+              href: "/blog/adhd-voice-technology-perfect-match",
+              description: "Why voice input is perfect for ADHD brains."
+            }
+          ]}
+        />
+
       </Layout>
     </>
   )

@@ -17,14 +17,14 @@ import BraindumpInterface from '@/components/BraindumpInterface'
 import OrganizedView from '@/components/OrganizedView'
 import FocusView from '@/components/FocusView'
 import MicroLanding from '@/components/MicroLanding'
-import MarketingContent from '@/components/MarketingContent'
 import KeyboardHelpModal from '@/components/KeyboardHelpModal'
 import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
-import WhatsNewBanner, { useWhatsNewBanner } from '@/components/WhatsNewBanner'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
+import FAQSection from '@/components/FAQSection'
+import { homepageFAQs } from '@/lib/faq-data'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
 
@@ -47,9 +47,6 @@ export default function App() {
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showTour, setShowTour] = useState(false)
-  
-  // What's New banner
-  const { showBanner, dismissBanner } = useWhatsNewBanner('1.10.2')
   
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
@@ -587,16 +584,12 @@ export default function App() {
   return (
     <>
       <Head>
-        <title>
-          {mode === 'braindump' 
-            ? 'tickk - Speak. Save. Sort it later.'
-            : 'Organized | tickk'
-          }
-        </title>
+        <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
         <meta 
           name="description" 
-          content="Free voice productivity app for hands-free task management. ADHD-friendly speech-to-text tool with Focus Mode, Command Palette (⌘K), and analytics. Auto-organizes thoughts into tasks & notes. No signup required." 
+          content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support."
         />
+        <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
         <link rel="canonical" href="https://tickk.app/" />
 
         {/* Schema.org Structured Data for SEO */}
@@ -681,14 +674,6 @@ export default function App() {
         onModeChange={handleModeSwitch}
         className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
       >
-        {/* What's New Banner for existing users */}
-        {showBanner && (
-          <WhatsNewBanner 
-            version="1.10.2" 
-            onDismiss={dismissBanner} 
-          />
-        )}
-        
         <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (
@@ -746,8 +731,6 @@ export default function App() {
                       onModeSwitch={handleModeSwitch}
                       showMainInterface={false}
                     />
-                    {/* Marketing content appears after user's braindump list */}
-                    <MarketingContent />
                   </>
                 ) : mode === 'focus' ? (
                   <FocusView
@@ -765,6 +748,31 @@ export default function App() {
             </ErrorBoundary>
           )}
         </div>
+
+        {/* SEO Content Section - Below the App */}
+        <section className="max-w-4xl mx-auto px-4 py-12 mt-8 border-t border-gray-200 dark:border-slate-700">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+            About tickk: Voice Productivity for ADHD
+          </h2>
+          <div className="prose dark:prose-invert max-w-none">
+            <p className="text-responsive text-gray-700 dark:text-slate-200 leading-relaxed mb-4">
+              tickk is a revolutionary voice-first productivity application designed for ADHD minds and 
+              neurodivergent thinkers. Unlike traditional task managers that force you to categorize while 
+              capturing thoughts, tickk lets you brain dump everything through voice, then organizes it later.
+            </p>
+            <p className="text-responsive text-gray-700 dark:text-slate-200 leading-relaxed">
+              Using advanced natural language processing (compromise.js), it automatically classifies your 
+              spoken words into tasks, notes, and reminders. Perfect for racing thoughts, overwhelmed parents, 
+              busy students, and professionals seeking hands-free productivity. 100% free, no login required, 
+              works completely offline with local storage for maximum privacy. Features include Focus Mode for 
+              deep work, Command Palette (⌘K) for power users, and executive function support specifically 
+              designed for ADHD brains.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <FAQSection faqs={homepageFAQs} showSchema={true} />
       </Layout>
       
       {/* Keyboard shortcuts help modal */}

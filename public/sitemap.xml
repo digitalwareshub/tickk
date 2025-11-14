@@ -60,6 +60,19 @@
         <priority>0.7</priority>
         <lastmod>2025-10-30T00:00:00+00:00</lastmod>
     </url>
+    <!-- NEW Collection Pages -->
+    <url>
+        <loc>https://tickk.app/voice-productivity-apps</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://tickk.app/adhd-productivity-tools</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+    </url>
     <url>
         <loc>https://tickk.app/reviews</loc>
         <changefreq>monthly</changefreq>

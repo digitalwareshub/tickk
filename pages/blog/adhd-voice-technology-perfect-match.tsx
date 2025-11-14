@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
+import RelatedArticles from '@/components/RelatedArticles'
 
 export default function ADHDVoiceTechnology() {
   return (
@@ -341,6 +342,40 @@ export default function ADHDVoiceTechnology() {
           </div>
 
         </article>
+
+        {/* Related Articles */}
+        <RelatedArticles 
+          articles={[
+            {
+              title: "Best ADHD Productivity Tools 2025",
+              href: "/adhd-productivity-tools",
+              description: "Comprehensive guide to productivity apps designed for ADHD and neurodivergent individuals."
+            },
+            {
+              title: "Braindump-First Productivity Method",
+              href: "/blog/braindump-first-organize-later-productivity",
+              description: "Why capturing before categorizing works better for ADHD brains."
+            },
+            {
+              title: "Best Voice Productivity Apps",
+              href: "/voice-productivity-apps",
+              description: "Compare the best speech recognition software for hands-free workflows."
+            },
+            {
+              title: "Complete Tickk Guide",
+              href: "/blog/complete-guide-tickk-app-voice-productivity-2025",
+              description: "Master all features including Focus Mode and Command Palette."
+            }
+          ]}
+        />
+
+        {/* Back to Blog */}
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
+          <Link href="/blog" className="inline-flex items-center text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300">
+            ← Back to Blog
+          </Link>
+        </div>
+
       </Layout>
     </>
   )
