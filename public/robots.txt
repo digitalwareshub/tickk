@@ -12,7 +12,6 @@ Disallow: /admin/
 
 # Disallow technical/config files from indexing (they can be crawled but not indexed)
 Disallow: /manifest.json
-Disallow: /sitemap.xml
 Disallow: /robots.txt
 Disallow: /favicon.ico
 Disallow: /*.json$
