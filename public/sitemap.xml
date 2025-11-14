@@ -4,121 +4,121 @@
         <loc>https://tickk.app/</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <lastmod>2025-11-15T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-14T10:30:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/landing</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-29T08:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/features</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-11-04T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-04T12:15:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-29T09:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/braindump-first-organize-later-productivity</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-15T14:20:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/hidden-cost-of-typing</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-18T11:30:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/complete-guide-tickk-app-voice-productivity-2025</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-22T16:45:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/adhd-voice-technology-perfect-match</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-30T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-25T13:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/voice-productivity-vs-ai-tools-local-processing-wins</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-30T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-28T10:30:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/blog/mobile-voice-productivity-capture-ideas-on-the-go</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-30T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-01T15:20:00+00:00</lastmod>
     </url>
-    <!-- NEW Collection Pages -->
+    <!-- Collection Pages -->
     <url>
         <loc>https://tickk.app/voice-productivity-apps</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-08T09:30:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/adhd-productivity-tools</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
-        <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-08T09:45:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/reviews</loc>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-20T12:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/pricing</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-05T14:30:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/privacy</loc>
         <changefreq>yearly</changefreq>
-        <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <priority>0.5</priority>
+        <lastmod>2025-09-15T10:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/terms</loc>
         <changefreq>yearly</changefreq>
-        <priority>0.7</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <priority>0.5</priority>
+        <lastmod>2025-09-15T10:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/contact</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-10T11:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/support</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-10-10T11:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/bug-report</loc>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <priority>0.4</priority>
+        <lastmod>2025-10-10T11:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/changelog</loc>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-12T16:00:00+00:00</lastmod>
     </url>
 </urlset>
