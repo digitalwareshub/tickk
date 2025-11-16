@@ -11,6 +11,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { trackPageView } from '@/lib/analytics/enhanced-analytics'
 import { initPWATracking } from '@/lib/analytics'
 import { Toaster } from 'react-hot-toast'
+import PWAInstallPrompt from '@/components/PWAInstallPrompt'
 
 // Get GA tracking ID from environment
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -114,6 +115,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Script>
 
       <Component {...pageProps} />
+
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
 
       {/* Toast Notifications */}
       <Toaster 
