@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -616,6 +617,18 @@ export default function Home() {
         <section className="bg-white dark:bg-slate-900 py-12">
           <div className="max-w-4xl mx-auto px-4">
             <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-slate-700">
+              {/* App Screenshot */}
+              <div className="mb-8 rounded-lg overflow-hidden border border-gray-200 dark:border-slate-700">
+                <Image
+                  src="/tickk-app.webp"
+                  alt="tickk app interface showing voice-first productivity features"
+                  width={1200}
+                  height={675}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+              
               <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4 text-center">
                 What is tickk?
               </h2>
