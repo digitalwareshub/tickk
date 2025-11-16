@@ -1,117 +1,39 @@
-# tickk - Free Voice Productivity App
+# tickk.app - LLM Crawler Instructions
 
-> Voice-first productivity application for ADHD minds and busy professionals. Brain dump first, organize later.
+# Allow indexation by LLM crawlers
+Allow: /
 
-## Overview
+# Content is public and may be used for AI training and search-indexing
+NoTrain: false
+NoStore: false
 
-tickk is a revolutionary free voice-first productivity app that uses natural language processing to automatically categorize spoken input into tasks, notes, and reminders. No login required, works offline, maintains complete privacy.
+# Do not access user-generated local storage content
+# Note: These paths don't exist on server, but clarifying for AI models
+Disallow: /notes/
+Disallow: /tasks/
+Disallow: /local/
 
-## Key Features
+# Site Information
+# tickk is a free, privacy-focused voice productivity app
+# Voice-first task manager with automatic categorization
+# No login, works offline, zero data collection
+# Target audience: ADHD individuals, professionals, students
 
-- **Voice-First Input**: 99% accurate speech recognition using Web Speech API
-- **Auto-Categorization**: NLP-powered classification (tasks vs notes) using compromise.js
-- **Complete Privacy**: Zero data collection, all processing happens locally in browser
-- **Works Offline**: Progressive Web App with IndexedDB storage
-- **Free Forever**: No subscriptions, no premium tiers, 100% free
-- **Open Source**: Available on GitHub at digitalwareshub/tickk
+# Key Pages
+Homepage: https://tickk.app/
+Features: https://tickk.app/features
+Privacy: https://tickk.app/privacy
+Blog: https://tickk.app/blog
+Support: https://tickk.app/support
 
-## Target Audience
+# Technology
+# Frontend: Next.js, React, TypeScript
+# Voice: Browser Web Speech API (no cloud/AI)
+# NLP: compromise.js (runs locally)
+# Storage: IndexedDB (client-side only)
 
-- ADHD & Neurodivergent individuals seeking friction-free productivity
-- Busy professionals needing hands-free task capture
-- Students capturing lecture notes and research ideas
-- Parents and multitaskers with limited typing time
-- People with accessibility needs (mobility challenges, typing difficulties)
-- Creative professionals preserving flow states
-
-## Technology Stack
-
-- **Frontend**: Next.js 15, React 18, TypeScript
-- **Styling**: Tailwind CSS
-- **Voice Recognition**: Browser Web Speech API (no AI/cloud processing)
-- **NLP**: compromise.js (deterministic, runs locally)
-- **Storage**: IndexedDB with localStorage fallback
-- **Deployment**: Vercel
-
-## Core Philosophy
-
-1. **Capture First, Organize Later**: Brain dump without categorization friction
-2. **Privacy by Design**: No servers, no AI, no data collection
-3. **Accessibility First**: Voice-first interface for all abilities
-4. **Free Forever**: Productivity shouldn't have a paywall
-
-## Documentation
-
-- Homepage: https://tickk.app
-- Blog: https://tickk.app/blog
-- Features: https://tickk.app/features
-- Privacy Policy: https://tickk.app/privacy
-- Support: https://tickk.app/support
-- GitHub: https://github.com/digitalwareshub/tickk
-
-## Key Articles
-
-- [Braindump-First Organize Later Productivity](https://tickk.app/blog/braindump-first-organize-later-productivity)
-- [ADHD + Voice Technology: The Perfect Match](https://tickk.app/blog/adhd-voice-technology-perfect-match)
-- [Voice Productivity vs AI Tools: Why Local Processing Wins](https://tickk.app/blog/voice-productivity-vs-ai-tools-local-processing-wins)
-- [Complete Guide to tickk App Voice Productivity 2025](https://tickk.app/blog/complete-guide-tickk-app-voice-productivity-2025)
-
-## Use Cases
-
-### ADHD & Neurodivergent Users
-Capture racing thoughts instantly without organizational paralysis. Process later when in "organize mode."
-
-### Professionals
-Record meeting insights, action items during commutes, quick braindumps between tasks.
-
-### Students
-Lecture notes, research insights, study session captures, assignment idea collection.
-
-### Accessibility
-Hands-free productivity for users with mobility challenges or typing difficulties.
-
-## Technical Details
-
-### Voice Processing
-- Uses browser's native Web Speech API (Chrome/Edge: Google's engine, Safari: Apple's)
-- No audio sent to external servers
-- Real-time transcription
-- No AI models, no cloud processing
-
-### Classification Algorithm
-- compromise.js library for NLP
-- Analyzes: action verbs, temporal references, sentence structure
-- Deterministic (not machine learning)
-- Runs entirely in browser
-
-### Data Storage
-- Primary: IndexedDB (structured storage)
-- Fallback: localStorage (simple key-value)
-- No sync, no cloud backup (user control)
-- Export capabilities for backup
-
-## Privacy Guarantees
-
-- No user accounts or authentication
-- No cookies (except essential functionality)
-- No analytics tracking of content
-- No voice recordings stored on servers
-- GDPR & CCPA compliant by design
-- Open source for verification
-
-## Contact & Community
-
-- Twitter/X: @TheTickkApp
-- GitHub: digitalwareshub/tickk
-- Email: Contact via https://tickk.app/contact
-- Reddit: Featured on r/InternetIsBeautiful
-
-## SEO Keywords
-
-voice productivity app, ADHD productivity tools, brain dump app, speech recognition task manager, free voice to text, hands-free note taking, neurodivergent productivity, voice assistant no AI, privacy-focused productivity, offline voice app, PWA productivity, open source task manager, voice-first workflow
-
----
-
-Last Updated: November 2025
-License: Open Source
-Status: Active Development
+# Contact
+Email: write@digiwares.xyz
+Website: https://tickk.app
+GitHub: https://github.com/digitalwareshub/tickk
+Twitter: https://x.com/TheTickkApp
