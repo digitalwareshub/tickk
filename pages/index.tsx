@@ -397,7 +397,7 @@ export default function Home() {
               "screenshot": "https://tickk.app/preview-image.png",
               "softwareVersion": "1.0",
               "datePublished": "2024-01-01",
-              "dateModified": "2024-09-17",
+              "dateModified": "2024-11-17",
               "author": {
                 "@type": "Organization",
                 "name": "tickk",
@@ -520,9 +520,9 @@ export default function Home() {
 
               {/* Main Headline */}
               <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-6">
-                Transform Your Voice Into
+                Best Free Productivity App for ADHD & Brain Dump
                 <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block">
-                  Organized Productivity
+                  Voice-First Task Manager 2025
                 </span>
               </h1>
 
