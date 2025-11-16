@@ -16,6 +16,7 @@ interface LayoutProps {
   seoImage?: string
   mode?: 'braindump' | 'organized' | 'focus'
   onModeChange?: (mode: 'braindump' | 'organized' | 'focus') => void
+  disableNextSeo?: boolean
 }
 
 export default function Layout({ 
@@ -27,7 +28,8 @@ export default function Layout({
   seoDescription,
   seoImage,
   mode,
-  onModeChange
+  onModeChange,
+  disableNextSeo = false
 }: LayoutProps) {
   const router = useRouter()
   
@@ -40,11 +42,13 @@ export default function Layout({
 
   return (
     <>
-      <SEOMeta 
-        title={seoTitle || title}
-        description={seoDescription}
-        image={seoImage}
-      />
+      {!disableNextSeo && (
+        <SEOMeta 
+          title={seoTitle || title}
+          description={seoDescription}
+          image={seoImage}
+        />
+      )}
       
       {/* Firefox Warning Banner - shows at top if Firefox detected */}
       <FirefoxWarningBanner />

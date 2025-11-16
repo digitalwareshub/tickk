@@ -503,7 +503,7 @@ export default function Home() {
         />
       </Head>
 
-      <Layout className="min-h-screen bg-white dark:bg-slate-900">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900" disableNextSeo={true}>
         {/* Hero Section */}
         <section ref={heroSectionRef} className="bg-white dark:bg-slate-900 py-16">
           
