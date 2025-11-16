@@ -16,7 +16,6 @@ import {
 import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analytics'
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
   const [demoText, setDemoText] = useState('')
   const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -68,8 +67,6 @@ export default function Home() {
   ]
 
   useEffect(() => {
-    setMounted(true)
-    
     // Track page view
     trackPageView('landing_page');
     
@@ -295,22 +292,6 @@ export default function Home() {
     setTimeout(() => {
       setIsPlaying(false)
     }, 3000)
-  }
-
-  if (!mounted) {
-    return (
-          <Layout 
-      className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-gray-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800"
-      seoTitle="tickk - Transform Voice into Organized Tasks"
-      seoDescription="Privacy-first voice productivity app that converts speech into organized tasks and notes. Works offline and keeps your data secure."
-      seoImage="/og-image.webp"
-    >
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600 dark:border-orange-400 mb-4"></div>
-          <p className="text-gray-600 dark:text-slate-400">Loading...</p>
-        </div>
-      </Layout>
-    )
   }
 
   return (
