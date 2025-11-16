@@ -15,21 +15,14 @@ interface SEOMetaProps {
 const IMAGE_VERSION = 'v2';
 
 export default function SEOMeta({ 
-  title,
-  description,
+  title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
+  description = 'Free voice productivity app for ADHD minds. Brain dump first, organize later. Capture racing thoughts instantly. Works offline, no signup required.',
   image = '/og-image.webp',
   url,
   noIndex = false
 }: SEOMetaProps) {
   const router = useRouter()
-  
-  // Use defaults only if not provided
-  const defaultTitle = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager'
-  const defaultDescription = 'Free voice productivity app for ADHD minds. Brain dump first, organize later. Capture racing thoughts instantly. Works offline, no signup required.'
-  
-  const finalTitle = title || defaultTitle
-  const finalDescription = description || defaultDescription
-  const fullTitle = finalTitle.includes('tickk') ? finalTitle : `${finalTitle} | tickk`
+  const fullTitle = title.includes('tickk') ? title : `${title} | tickk`
   
   // Generate canonical URL - clean parameters and ensure consistency
   const canonicalUrl = url || getCleanUrl(router.asPath)
@@ -70,7 +63,7 @@ export default function SEOMeta({
       
       <NextSeo
         title={fullTitle}
-        description={finalDescription}
+        description={description}
         canonical={canonicalUrl}
         noindex={noIndex}
         nofollow={noIndex}
@@ -80,7 +73,7 @@ export default function SEOMeta({
           url: canonicalUrl,
           site_name: 'tickk',
           title: fullTitle,
-          description: finalDescription,
+          description: description,
           images: [
             {
               url: `${canonicalUrl}${image}?${IMAGE_VERSION}`,
