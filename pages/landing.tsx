@@ -588,6 +588,7 @@ export default function App() {
           content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support."
         />
         <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://tickk.app/" />
 
         {/* Schema.org Structured Data for SEO */}
