@@ -772,8 +772,14 @@ export default function App() {
       <OnboardingTour
         isOpen={showTour}
         steps={tourSteps}
-        onComplete={() => setShowTour(false)}
-        onSkip={() => setShowTour(false)}
+        onComplete={() => {
+          setShowTour(false)
+          setMode('braindump') // Return to braindump mode after tour completes
+        }}
+        onSkip={() => {
+          setShowTour(false)
+          setMode('braindump') // Return to braindump mode if tour is skipped
+        }}
         storageKey="tickk_onboarding_tour_completed"
       />
 

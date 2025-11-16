@@ -53,27 +53,6 @@ export default function MicroLanding({
           <p className="text-responsive text-gray-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
             Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
           </p>
-          
-          {/* Social Proof - Reddit Badge */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
-            {/* Reddit Discussion Badge */}
-            <a 
-              href="https://www.reddit.com/r/InternetIsBeautiful/comments/1nsx1nc/a_voicefirst_todo_app_i_built_for_people_who/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-700/50 rounded-full hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors group"
-            >
-              <svg className="w-5 h-5 text-orange-600 dark:text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
-              </svg>
-              <span className="text-sm font-medium text-orange-900 dark:text-orange-200">
-                Featured on Reddit
-              </span>
-              <svg className="w-3 h-3 text-orange-600 dark:text-orange-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
         </div>
 
         {/* How It Works - Simple 3 Steps */}
@@ -155,13 +134,18 @@ export default function MicroLanding({
           {isSupported ? (
             <div>
               <div className="relative inline-block">
+                {/* Pulsing ring for first-time users */}
+                {!isRecording && itemCount === 0 && (
+                  <div className="absolute inset-0 w-24 h-24 -m-2 rounded-full border-4 border-blue-500 animate-pulse-ring pointer-events-none" />
+                )}
+                
                 <button
                   onClick={handleRecordClick}
                   data-tour="record-button"
                   aria-label={isRecording ? "Stop recording" : "Click to record your thoughts"}
                   className={`
                     w-20 h-20 rounded-full flex items-center justify-center
-                    transition-all duration-200 transform hover:scale-105 shadow-lg
+                    transition-all duration-200 transform hover:scale-105 shadow-lg relative z-10
                     ${isRecording
                       ? 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700'
                       : 'bg-gray-900 hover:bg-gray-800 dark:bg-violet-600 dark:hover:bg-violet-700'
