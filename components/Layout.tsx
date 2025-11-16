@@ -40,14 +40,11 @@ export default function Layout({
 
   return (
     <>
-      {/* Only render SEOMeta if seoTitle or seoDescription are explicitly provided */}
-      {(seoTitle || seoDescription || seoImage) && (
-        <SEOMeta 
-          title={seoTitle || title}
-          description={seoDescription}
-          image={seoImage}
-        />
-      )}
+      <SEOMeta 
+        title={seoTitle || title}
+        description={seoDescription}
+        image={seoImage}
+      />
       
       {/* Firefox Warning Banner - shows at top if Firefox detected */}
       <FirefoxWarningBanner />

@@ -16,7 +16,7 @@ const IMAGE_VERSION = 'v2';
 
 export default function SEOMeta({ 
   title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
-  description = 'Revolutionary free voice productivity app that transforms speech into organized tasks, notes, and calendar events using advanced natural language processing. ADHD-friendly with Focus Mode, Command Palette (⌘K), and executive function support. No login required, works completely offline, complete privacy protection. 99% accurate speech recognition.',
+  description = 'Free voice productivity app for ADHD minds. Brain dump first, organize later. Capture racing thoughts instantly. Works offline, no signup required.',
   image = '/og-image.webp',
   url,
   noIndex = false
