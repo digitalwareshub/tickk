@@ -556,13 +556,16 @@ export default function App() {
   
   /**
    * Loading state - minimal
+   * CRITICAL: Use proper SEO title even in loading state for crawlers
    */
   if (!mounted || isLoading) {
     return (
       <>
         <Head>
-          <title>Loading... | tickk</title>
-          <meta name="description" content="Loading tickk voice productivity app..." />
+          <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
+          <meta name="description" content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support." />
+          <meta name="robots" content="noindex, nofollow" />
+          <link rel="canonical" href="https://tickk.app/" />
         </Head>
         <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           <div className="text-center">
