@@ -503,7 +503,7 @@ export default function Home() {
         />
       </Head>
 
-      <Layout className="min-h-screen bg-white dark:bg-slate-900">
+      <Layout className="min-h-screen bg-white dark:bg-slate-900" seoTitle="Free ADHD Productivity App - Brain Dump & Voice Tasks | tickk" seoDescription="Free voice productivity app for ADHD minds. Brain dump first, organize later. Capture racing thoughts instantly with speech-to-text. Works offline, no signup.">
         {/* Hero Section */}
         <section ref={heroSectionRef} className="bg-white dark:bg-slate-900 py-16">
           
