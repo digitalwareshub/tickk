@@ -1,4 +1,5 @@
-const CACHE_NAME = 'tickk-voice-v11'; // Updated cache name for tickk
+// Define a cache name
+const CACHE_NAME = 'tickk-voice-v12'; // Updated cache name for tickk
 const urlsToCache = [
     '/',
     '/app.js',

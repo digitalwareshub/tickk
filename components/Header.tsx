@@ -51,9 +51,9 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
             )}
           </div>
 
-          {/* Right: Open App Button + Dark Mode Toggle + Mobile Home Button */}
+          {/* Right: Go to App Button + Dark Mode Toggle + Mobile Home Button */}
           <div className="flex items-center justify-end w-1/3 gap-2">
-            {/* Open App Button - Show everywhere except on the app page itself */}
+            {/* Go to App Button - Show everywhere except on the app page itself */}
             {!isAppPage && (
               <Link
                 href="/landing"
@@ -62,7 +62,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <span className="hidden sm:inline">Open App</span>
+                <span className="hidden sm:inline">Go to App</span>
                 <span className="sm:hidden">App</span>
               </Link>
             )}

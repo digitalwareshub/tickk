@@ -474,8 +474,44 @@ export default function ADHDProductivityTools() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                   ADHD & Voice Technology: Perfect Match →
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-base text-gray-600 dark:text-gray-400">
                   Deep dive into why voice input is revolutionary for ADHD brains.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/braindump-first-organize-later-productivity"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Braindump-First Productivity Method →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Why capturing thoughts before organizing works better for ADHD minds.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/privacy-focused-adhd-apps"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Privacy-First ADHD Tools Guide →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  ADHD-friendly apps that respect your privacy and work offline.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/executive-function-support-tools"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Executive Function Support Tools →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Apps and techniques to support working memory and task initiation.
                 </p>
               </Link>
               

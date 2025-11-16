@@ -555,33 +555,33 @@ export default function Home() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🔒</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Complete Privacy</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">No data collection</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">Complete Privacy</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">No data collection</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">⚡</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">99% Accuracy</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">Advanced speech recognition</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">99% Accuracy</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Advanced speech recognition</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🆓</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Free Forever</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">No subscription required</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">Free Forever</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">No subscription required</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">📱</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">Works Offline</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">PWA technology</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">Works Offline</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">PWA technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🧠</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">No AI Used</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">Pure browser technology</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">No AI Used</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Pure browser technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🌐</div>
-                  <div className="text-sm font-medium text-gray-700 dark:text-slate-300">All Devices</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500">Any browser</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">All Devices</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Any browser</div>
                 </div>
               </div>
 
@@ -632,7 +632,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4 text-center">
                 What is tickk?
               </h2>
-              <div className="space-y-4 text-gray-700 dark:text-slate-300 text-base leading-relaxed">
+              <div className="space-y-4 text-gray-700 dark:text-slate-300 text-lg leading-relaxed">
                 <p>
                   tickk is a revolutionary voice-first productivity application designed for ADHD minds and neurodivergent thinkers. Unlike traditional task managers that force you to categorize while capturing thoughts, tickk lets you brain dump everything through voice, then organizes it later.
                 </p>
@@ -668,7 +668,7 @@ export default function Home() {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Speak Naturally
                 </h3>
-                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-base sm:text-lg">
                   Click the microphone and start talking. Say anything - tasks, ideas, appointments, or notes.
                 </p>
                 
@@ -693,7 +693,7 @@ export default function Home() {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Smart Processing
                 </h3>
-                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-base sm:text-lg">
                   Natural language processing analyzes your speech and automatically determines if it&apos;s a task or note.
                 </p>
                 
@@ -725,7 +725,7 @@ export default function Home() {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">
                   Auto-Organized
                 </h3>
-                <p className="text-gray-600 dark:text-slate-400 mb-6 text-sm sm:text-base">
+                <p className="text-gray-600 dark:text-slate-400 mb-6 text-base sm:text-lg">
                   Your voice is instantly organized into the right category, ready for action.
                 </p>
                 
@@ -784,10 +784,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   ADHD & Neurodivergent Minds
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   Finally, a productivity app that works with your brain, not against it. Capture racing thoughts instantly without getting stuck in organization paralysis.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• No overwhelming setup or categories</li>
                   <li>• Capture hyperfocus insights instantly</li>
                   <li>• Process later when you&apos;re in &quot;organize mode&quot;</li>
@@ -801,10 +801,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Busy Professionals
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   Capture meeting insights, action items, and brilliant shower thoughts without missing a beat.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• Record while walking between meetings</li>
                   <li>• Voice notes during commutes</li>
                   <li>• Quick braindumps during breaks</li>
@@ -818,10 +818,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Students & Researchers
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   From lecture insights to research ideas, capture knowledge without breaking your flow.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• Quick voice notes during lectures</li>
                   <li>• Capture research insights instantly</li>
                   <li>• Study session braindumps</li>
@@ -835,10 +835,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Accessibility Champions
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   Hands-free productivity for users with mobility challenges or typing difficulties.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• Voice-first interface design</li>
                   <li>• No complex navigation required</li>
                   <li>• Works with assistive technologies</li>
@@ -852,10 +852,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Creative Professionals
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   Don&apos;t let brilliant ideas slip away. Capture inspiration the moment it strikes.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• Preserve creative flow states</li>
                   <li>• Voice brainstorming sessions</li>
                   <li>• Client meeting insights</li>
@@ -869,10 +869,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
                   Parents & Multitaskers
                 </h3>
-                <p className="text-gray-700 dark:text-slate-300 text-sm mb-4">
+                <p className="text-gray-700 dark:text-slate-300 text-base mb-4">
                   Capture important thoughts while your hands are full with life&apos;s beautiful chaos.
                 </p>
-                <ul className="text-gray-600 dark:text-slate-400 text-sm space-y-1 flex-grow">
+                <ul className="text-gray-600 dark:text-slate-400 text-base space-y-1 flex-grow">
                   <li>• Voice notes while cooking</li>
                   <li>• Parenting insight capture</li>
                   <li>• Household task management</li>
@@ -926,7 +926,7 @@ export default function Home() {
                     </div>
                     <h3 className="font-semibold text-gray-900 dark:text-slate-50">Notion & Similar</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
+                  <ul className="text-base text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Text-heavy, overwhelming for quick thoughts</span>
@@ -959,7 +959,7 @@ export default function Home() {
                     </div>
                     <h3 className="font-semibold text-gray-900 dark:text-slate-50">Obsidian & PKM Tools</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
+                  <ul className="text-base text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>Steep learning curve, not intuitive</span>
@@ -992,7 +992,7 @@ export default function Home() {
                     </div>
                     <h3 className="font-semibold text-gray-900 dark:text-slate-50">Apple Notes & Simple Apps</h3>
                   </div>
-                  <ul className="text-sm text-gray-700 dark:text-slate-300 space-y-2">
+                  <ul className="text-base text-gray-700 dark:text-slate-300 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="text-gray-400 dark:text-slate-500 mt-0.5">✗</span>
                       <span>No smart organization or categorization</span>
@@ -1034,7 +1034,7 @@ export default function Home() {
                       <span className="text-2xl">🎤</span>
                     </div>
                     <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Voice-First Input</h4>
-                    <p className="text-sm text-gray-600 dark:text-slate-400">Natural speech, no typing required</p>
+                    <p className="text-base text-gray-600 dark:text-slate-400">Natural speech, no typing required</p>
                   </div>
                   
                   <div className="text-center">
@@ -1042,7 +1042,7 @@ export default function Home() {
                       <span className="text-2xl">⚡</span>
                     </div>
                     <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Instant Categorization</h4>
-                    <p className="text-sm text-gray-600 dark:text-slate-400">AI-free NLP sorts tasks from notes automatically</p>
+                    <p className="text-base text-gray-600 dark:text-slate-400">AI-free NLP sorts tasks from notes automatically</p>
                   </div>
                   
                   <div className="text-center">
@@ -1050,7 +1050,7 @@ export default function Home() {
                       <span className="text-2xl">🔒</span>
                     </div>
                     <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Complete Privacy</h4>
-                    <p className="text-sm text-gray-600 dark:text-slate-400">Everything stays in your browser, nothing uploaded</p>
+                    <p className="text-base text-gray-600 dark:text-slate-400">Everything stays in your browser, nothing uploaded</p>
                   </div>
                   
                   <div className="text-center">
@@ -1058,7 +1058,7 @@ export default function Home() {
                       <span className="text-2xl">🚀</span>
                     </div>
                     <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-2">Zero Setup</h4>
-                    <p className="text-sm text-gray-600 dark:text-slate-400">Works instantly, no accounts or configuration</p>
+                    <p className="text-base text-gray-600 dark:text-slate-400">Works instantly, no accounts or configuration</p>
                   </div>
                 </div>
               </div>

@@ -37,28 +37,28 @@ export default function Privacy() {
         <div className="space-y-8">
           {/* Privacy Summary */}
           <div className="grid md:grid-cols-2 gap-4 mb-8">
-            <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
+                        <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">🔒</div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Zero Data Collection</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-sm">We don't collect, store, or transmit your personal data</p>
+              <p className="text-gray-600 dark:text-slate-400 text-base">We don't collect, store, or transmit your personal data</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">💻</div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Local Processing</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-sm">All voice recognition happens in your browser</p>
+              <p className="text-gray-600 dark:text-slate-400 text-base">All voice recognition happens in your browser</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">🚫</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">No Accounts</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-sm">Use the app without creating an account</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">No Account Required</h3>
+              <p className="text-gray-600 dark:text-slate-400 text-base">Use the app without creating an account</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
-              <div className="text-2xl mb-2">👁️</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">No Tracking</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-sm">We don't use analytics or tracking scripts</p>
+              <div className="text-2xl mb-2">�</div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">No Analytics</h3>
+              <p className="text-gray-600 dark:text-slate-400 text-base">We don't use analytics or tracking scripts</p>
             </div>
           </div>
 
@@ -100,13 +100,13 @@ export default function Privacy() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4">
                   <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🇪🇺 GDPR Compliant</h4>
-                  <p className="text-gray-600 dark:text-slate-400 text-sm">
+                  <p className="text-gray-600 dark:text-slate-400 text-base">
                     No personal data processing means full GDPR compliance by design.
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4">
                   <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🇺🇸 CCPA Compliant</h4>
-                  <p className="text-gray-600 dark:text-slate-400 text-sm">
+                  <p className="text-gray-600 dark:text-slate-400 text-base">
                     Meets California Consumer Privacy Act requirements by not collecting personal information.
                   </p>
                 </div>

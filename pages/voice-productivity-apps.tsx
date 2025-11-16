@@ -317,11 +317,47 @@ export default function VoiceProductivityApps() {
                 href="/blog/adhd-voice-technology-perfect-match"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  ADHD & Voice Technology: Perfect Match →
+                                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Why Braindump-First Productivity Works →
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Discover why voice input is revolutionary for ADHD brains.
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Learn the cognitive science behind capturing thoughts before organizing them.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/adhd-voice-technology-perfect-match"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  ADHD & Voice Technology: The Perfect Match →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Discover why voice interfaces are ideal for ADHD minds and executive function support.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/privacy-focused-productivity-apps"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Privacy-Focused Productivity Apps: A Guide →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Compare privacy-first productivity tools and why local-first apps matter.
+                </p>
+              </Link>
+              
+              <Link 
+                href="/blog/voice-notes-vs-text-notes"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Voice Notes vs Text Notes: Which is Better? →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Explore the benefits and drawbacks of voice-first vs text-first note-taking.
                 </p>
               </Link>
               
