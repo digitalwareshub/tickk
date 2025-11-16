@@ -612,6 +612,25 @@ export default function Home() {
           </div>
         </section>
 
+        {/* About tickk Section */}
+        <section className="bg-white dark:bg-slate-900 py-12">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-slate-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4 text-center">
+                What is tickk?
+              </h2>
+              <div className="space-y-4 text-gray-700 dark:text-slate-300 text-base leading-relaxed">
+                <p>
+                  tickk is a revolutionary voice-first productivity application designed for ADHD minds and neurodivergent thinkers. Unlike traditional task managers that force you to categorize while capturing thoughts, tickk lets you brain dump everything through voice, then organizes it later.
+                </p>
+                <p>
+                  Using advanced natural language processing (compromise.js), it automatically classifies your spoken words into tasks, notes, and reminders. Perfect for racing thoughts, overwhelmed parents, busy students, and professionals seeking hands-free productivity. 100% free, no login required, works completely offline with local storage for maximum privacy. Features include Focus Mode for deep work, Command Palette (⌘K) for power users, and executive function support specifically designed for ADHD brains.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* How It Works Section */}
         <section ref={howItWorksSectionRef} id="how-it-works" className="bg-gray-50 dark:bg-slate-800 py-16">
           <div className="max-w-4xl mx-auto px-4">
@@ -1331,6 +1350,46 @@ export default function Home() {
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
                   tickk excels for multitaskers who need hands-free productivity. Capture meeting action items while walking between offices, record ideas during commutes, or voice-note reminders while cooking dinner. Parents love using tickk to organize household tasks and capture parenting insights when their hands are full. It&apos;s the perfect productivity app for busy people who can&apos;t always stop to type.
+                </p>
+              </div>
+
+              {/* FAQ 7 - Privacy Protection */}
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
+                  How is my privacy protected?
+                </h3>
+                <p className="text-gray-700 dark:text-slate-300">
+                  Privacy is our top priority. All voice processing happens locally in your browser using the Web Speech API. We don&apos;t use AI servers, don&apos;t collect voice recordings, and don&apos;t track your tasks or notes. Everything is stored on your device using IndexedDB. We don&apos;t even use cookies except for essential functionality. You can review our open-source code on GitHub to verify these claims.
+                </p>
+              </div>
+
+              {/* FAQ 8 - Offline Functionality */}
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
+                  Does tickk work offline?
+                </h3>
+                <p className="text-gray-700 dark:text-slate-300">
+                  Yes! tickk is a Progressive Web App (PWA) that works completely offline once loaded. You can capture voice notes, organize tasks, and access all features without an internet connection. Your data is stored locally on your device, so you never lose access to your productivity tools.
+                </p>
+              </div>
+
+              {/* FAQ 9 - No AI Explanation */}
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
+                  Does tickk use AI or ChatGPT?
+                </h3>
+                <p className="text-gray-700 dark:text-slate-300">
+                  No. tickk uses compromise.js, a deterministic natural language processing library that runs entirely in your browser. There&apos;s no AI, no machine learning models, no cloud processing, and no data sent to third-party AI services. This ensures your privacy and makes the app work offline.
+                </p>
+              </div>
+
+              {/* FAQ 10 - Account & Signup */}
+              <div className="bg-white dark:bg-slate-900 rounded-lg p-6 border border-gray-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-50 mb-3">
+                  Do I need to create an account?
+                </h3>
+                <p className="text-gray-700 dark:text-slate-300">
+                  No signup required. tickk works instantly in your browser without any account creation. Your data is stored locally on your device using browser storage, which means you have complete control and privacy. No emails, no passwords, no personal information needed.
                 </p>
               </div>
             </div>

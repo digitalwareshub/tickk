@@ -23,8 +23,6 @@ import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
-import FAQSection from '@/components/FAQSection'
-import { homepageFAQs } from '@/lib/faq-data'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
 
@@ -748,31 +746,6 @@ export default function App() {
             </ErrorBoundary>
           )}
         </div>
-
-        {/* SEO Content Section - Below the App */}
-        <section className="max-w-4xl mx-auto px-4 py-12 mt-8 border-t border-gray-200 dark:border-slate-700">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-            About tickk: Voice Productivity for ADHD
-          </h2>
-          <div className="prose dark:prose-invert max-w-none">
-            <p className="text-responsive text-gray-700 dark:text-slate-200 leading-relaxed mb-4">
-              tickk is a revolutionary voice-first productivity application designed for ADHD minds and 
-              neurodivergent thinkers. Unlike traditional task managers that force you to categorize while 
-              capturing thoughts, tickk lets you brain dump everything through voice, then organizes it later.
-            </p>
-            <p className="text-responsive text-gray-700 dark:text-slate-200 leading-relaxed">
-              Using advanced natural language processing (compromise.js), it automatically classifies your 
-              spoken words into tasks, notes, and reminders. Perfect for racing thoughts, overwhelmed parents, 
-              busy students, and professionals seeking hands-free productivity. 100% free, no login required, 
-              works completely offline with local storage for maximum privacy. Features include Focus Mode for 
-              deep work, Command Palette (⌘K) for power users, and executive function support specifically 
-              designed for ADHD brains.
-            </p>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <FAQSection faqs={homepageFAQs} showSchema={true} />
       </Layout>
       
       {/* Keyboard shortcuts help modal */}
