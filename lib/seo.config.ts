@@ -194,11 +194,7 @@ const defaultSEOConfig = {
       rel: 'dns-prefetch',
       href: 'https://compromise.cool',
     },
-    // Canonical and alternate links
-    {
-      rel: 'canonical',
-      href: 'https://tickk.app',
-    },
+    // Alternate links
     {
       rel: 'alternate',
       type: 'application/rss+xml',
