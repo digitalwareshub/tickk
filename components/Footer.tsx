@@ -33,10 +33,10 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   Product
                 </h3>
                 <Link href="/" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Voice Dashboard
+                  Home
                 </Link>
                 <Link href="/landing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  About
+                  Voice Dashboard
                 </Link>
                 <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Features
@@ -188,12 +188,12 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               <ul className="space-y-2 text-sm">
                 <li>
                   <Link href="/" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    Voice Dashboard
+                    Home
                   </Link>
                 </li>
                 <li>
                   <Link href="/landing" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    About
+                    Voice Dashboard
                   </Link>
                 </li>
                 <li>

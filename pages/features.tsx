@@ -415,7 +415,7 @@ export default function Features() {
                 </svg>
               </Link>
               <Link
-                href="/landing"
+                href="/"
                 className="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-900 dark:text-slate-50 font-semibold rounded-lg border-2 border-gray-300 dark:border-slate-600 transition-colors duration-200"
               >
                 Learn More About tickk

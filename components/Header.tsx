@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { FEATURES } from '@/lib/config/features'
 import { useDarkMode } from '@/hooks/useDarkMode'
 
 interface HeaderProps {
@@ -11,8 +10,8 @@ interface HeaderProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Header({ mode: _mode, onModeChange: _onModeChange }: HeaderProps) {
   const router = useRouter()
-  const isHomePage = router.pathname === '/'
-  const isPricingPage = router.pathname === '/pricing'
+  const isAppPage = router.pathname === '/landing' // App is now at /landing
+  const isMarketingHome = router.pathname === '/' // Marketing page is now at /
   const { isDark, toggleDark } = useDarkMode()
 
   return (
@@ -22,6 +21,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           {/* Left: Logo */}
           <div className="flex items-center justify-start w-1/3">
             <Link href="/" className="group flex items-center space-x-2">
+              <span className="text-xl sm:text-2xl">✅</span>
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
                 tickk
               </span>
@@ -33,7 +33,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
 
           {/* Center: Keyboard Shortcut Hint or Navigation */}
           <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
-            {isHomePage ? (
+            {isAppPage && (
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-slate-700">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -48,28 +48,24 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 </kbd>
                 <span>for shortcuts</span>
               </div>
-            ) : (
-              <>
-                <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Back to App
-                </Link>
-                {FEATURES.PRICING_PAGE.enabled && !isPricingPage && (
-                  <Link
-                    href="/pricing"
-                    className="text-sm font-medium text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors"
-                  >
-                    Pricing
-                  </Link>
-                )}
-              </>
             )}
           </div>
 
-          {/* Right: Dark Mode Toggle + Mobile Home Button */}
+          {/* Right: Open App Button + Dark Mode Toggle + Mobile Home Button */}
           <div className="flex items-center justify-end w-1/3 gap-2">
+            {/* Open App Button - Show everywhere except on the app page itself */}
+            {!isAppPage && (
+              <Link
+                href="/landing"
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span className="hidden sm:inline">Open App</span>
+                <span className="sm:hidden">App</span>
+              </Link>
+            )}
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDark}
@@ -87,7 +83,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
               )}
             </button>
 
-            {!isHomePage && (
+            {!isMarketingHome && (
               <div className="md:hidden">
                 <Link href="/" className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800" aria-label="Go to Home">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
