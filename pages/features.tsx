@@ -304,11 +304,11 @@ export default function Features() {
             <h2 className="heading-secondary text-gray-900 dark:text-slate-50 text-center mb-12">
               Technical Specifications
             </h2>
-            <div className="bg-gray-900 dark:bg-slate-800 text-white dark:text-slate-50 rounded-lg p-12">
+            <div className="bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-slate-50 rounded-lg p-12 border border-gray-200 dark:border-slate-700">
               <div className="grid md:grid-cols-3 gap-8">
                 <div>
-                  <h3 className="text-xl font-bold mb-4 text-orange-400 dark:text-orange-500">Technology Stack</h3>
-                  <ul className="space-y-2 text-gray-300 dark:text-slate-300">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-orange-400">Technology Stack</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-slate-300">
                     <li>• Next.js 15 (React)</li>
                     <li>• TypeScript</li>
                     <li>• Web Speech API</li>
@@ -318,8 +318,8 @@ export default function Features() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-4 text-orange-400 dark:text-orange-500">Browser Support</h3>
-                  <ul className="space-y-2 text-gray-300 dark:text-slate-300">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-orange-400">Browser Support</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-slate-300">
                     <li>• Chrome 25+</li>
                     <li>• Edge 79+</li>
                     <li>• Safari 14.1+</li>
@@ -328,8 +328,8 @@ export default function Features() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-4 text-orange-400 dark:text-orange-500">Platform</h3>
-                  <ul className="space-y-2 text-gray-300 dark:text-slate-300">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-orange-400">Platform</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-slate-300">
                     <li>• Web-based</li>
                     <li>• Cross-platform</li>
                     <li>• Mobile responsive</li>
