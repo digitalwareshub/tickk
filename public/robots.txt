@@ -1,61 +1,33 @@
-# tickk - Free Voice Productivity App - SEO Optimized robots.txt
-# https://www.robotstxt.org/robotstxt.html
+# https://tickk.app/robots.txt
+# Updated: 2025-11-17
 
-# Allow all search engines to crawl all content
 User-agent: *
 Allow: /
 
-# Disallow Next.js internal paths that shouldn't be crawled
+# Block Next.js internals
 Disallow: /_next/
 Disallow: /api/
-Disallow: /admin/
 
-# Disallow technical/config files from indexing (they can be crawled but not indexed)
+# Block technical files
 Disallow: /manifest.json
-Disallow: /robots.txt
 Disallow: /favicon.ico
-Disallow: /*.json$
 
-# Disallow old Spanish pages that no longer exist
-Disallow: /es/
-
-# Disallow URLs with tracking parameters to prevent duplicate content issues
-Disallow: /*?utm_source=*
-Disallow: /*?utm_medium=*
-Disallow: /*?utm_campaign=*
+# Prevent duplicate content from URL parameters
+Disallow: /*?utm_*
 Disallow: /*?ref=*
 Disallow: /*?gclid=*
 Disallow: /*?fbclid=*
-Disallow: /*?productunti*
 Disallow: /*?source=*
-Disallow: /*?twclid=*
-Disallow: /*?msclkid=*
 
-# Disallow known bad bots and scrapers
-User-agent: AhrefsBot
-Disallow: /
-
+# Block aggressive scrapers (NOT SEO tools)
 User-agent: MJ12bot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: SemrushBot
 Disallow: /
 
 User-agent: BLEXBot
 Disallow: /
 
-# Set crawl delay for aggressive bots
-Crawl-delay: 1
+User-agent: DotBot
+Disallow: /
 
-# Sitemap location for search engines
+# Sitemaps
 Sitemap: https://tickk.app/sitemap.xml
-
-# Additional SEO information
-# Site: tickk - Free Voice Productivity App
-# Description: Revolutionary voice-to-text productivity application with speech recognition and natural language processing
-# Keywords: voice productivity, speech recognition, voice to text, task management, voice assistant, productivity app, braindump method, voice notes
-# Blog: https://tickk.app/blog - Voice productivity insights and tips
-# Contact: write@digiwares.xyz
