@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
 import { 
@@ -16,6 +17,7 @@ import {
 import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analytics'
 
 export default function Home() {
+  const router = useRouter()
   const [demoText, setDemoText] = useState('')
   const [demoCategory, setDemoCategory] = useState<'tasks' | 'notes' | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -67,10 +69,19 @@ export default function Home() {
   ]
 
   useEffect(() => {
-    // Track page view
+    // Check if user has actually used the app before
+    const hasUsedApp = localStorage.getItem('tickk_has_used')
+    
+    // If they've used the app, redirect them directly to /landing
+    if (hasUsedApp === 'true') {
+      router.replace('/landing')
+      return
+    }
+    
+    // Track page view for first-time visitors
     trackPageView('landing_page');
     
-    // Mark as visited for returning user detection
+    // Mark that they've visited the homepage
     localStorage.setItem('tickk_has_visited', 'true');
 
     // Set up intersection observers for use case cards
@@ -158,7 +169,7 @@ export default function Home() {
       observeUseCaseCards();
       observeFAQItems();
     }, 100);
-  }, [adhdUseCase, professionalUseCase, studentUseCase, accessibilityUseCase, creativeUseCase, parentUseCase, adhdFAQ, hyperfocusFAQ, comparisonFAQ, studentsFAQ, accessibilityFAQ, professionalsFAQ])
+  }, [router, adhdUseCase, professionalUseCase, studentUseCase, accessibilityUseCase, creativeUseCase, parentUseCase, adhdFAQ, hyperfocusFAQ, comparisonFAQ, studentsFAQ, accessibilityFAQ, professionalsFAQ])
 
   const classifyText = (text: string): 'tasks' | 'notes' => {
     const originalText = text.trim()
