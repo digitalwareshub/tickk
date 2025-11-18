@@ -244,15 +244,15 @@ export default function Features() {
                 </div>
               </div>
 
-              {/* Data Export */}
+              {/* Data Import/Export */}
               <div className="bg-gray-50 dark:bg-slate-800 rounded-xl p-8">
                 <div className="flex items-start gap-4">
-                  <div className="text-3xl">💾</div>
+                  <div className="text-3xl">�</div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">Export Options</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">Import & Export</h3>
                     <p className="text-gray-600 dark:text-slate-400">
-                      Export your data in JSON or CSV format for backup, migration, 
-                      or analysis in other tools.
+                      Transfer data between devices with JSON import/export. Automatic backups 
+                      keep your data safe. Also export to CSV for analysis.
                     </p>
                   </div>
                 </div>
