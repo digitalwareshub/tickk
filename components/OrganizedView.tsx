@@ -10,6 +10,7 @@ import Analytics from './Analytics'
 import EditItemModal from './EditItemModal'
 import DeleteConfirmModal from './DeleteConfirmModal'
 import BulkDeleteModal from './BulkDeleteModal'
+import ImportModal from './ImportModal'
 import DateBadge from './DateBadge'
 import ContextMenu, { type ContextMenuAction } from './ContextMenu'
 import ActionButtons from './ActionButtons'
@@ -18,6 +19,7 @@ import TemplateLibrary from './TemplateLibrary'
 import ProjectGroupView from './ProjectGroupView'
 import { useContextMenu } from '@/hooks/useContextMenu'
 import { useTemplates } from '@/hooks/useTemplates'
+import { StorageService } from '@/lib/storage/storage-service'
 import type { AppData, UserPreferences, VoiceItem, TaskTemplate } from '@/types/braindump'
 import { parseEarliestDate } from '@/lib/utils/dateParser'
 import { exportToCalendar as exportICS, getExportableTasksCount } from '@/lib/utils/icsExport'
@@ -36,6 +38,7 @@ export default function OrganizedView({
   const [sortBy, setSortBy] = useState<'date' | 'created' | 'none'>('none')
   const [searchQuery, setSearchQuery] = useState('')
   const [showExportMenu, setShowExportMenu] = useState(false)
+  const [showImportModal, setShowImportModal] = useState(false)
   const [showSortMenu, setShowSortMenu] = useState(false)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const sortMenuRef = useRef<HTMLDivElement>(null)
@@ -621,6 +624,29 @@ export default function OrganizedView({
     }
   }
 
+  // Import handler
+  const handleImport = async (importedData: AppData): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const storageService = StorageService.getInstance()
+      const result = await storageService.importData(importedData)
+      
+      if (result.success) {
+        // Reload the page to show imported data
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500)
+      }
+      
+      return result
+    } catch (error) {
+      console.error('Import failed:', error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Import failed'
+      }
+    }
+  }
+
   // Bulk operations
   const toggleBulkMode = () => {
     setBulkMode(!bulkMode)
@@ -910,49 +936,66 @@ export default function OrganizedView({
             )}
           </div>
 
-          {/* Export Button */}
-          <div className="relative">
-            <button
-              onClick={() => setShowExportMenu(!showExportMenu)}
-              className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full sm:w-auto"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              {'Export'}
-            </button>
-            
-            {showExportMenu && (
-              <div className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-10">
-                <button
-                  onClick={() => {
-                    exportToCSV()
-                    setShowExportMenu(false)
-                  }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 first:rounded-t-lg min-h-[44px] flex items-center"
-                >
-                  Export as CSV
-                </button>
-                <button
-                  onClick={() => {
-                    exportToJSON()
-                    setShowExportMenu(false)
-                  }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 min-h-[44px] flex items-center"
-                >
-                  Export as JSON
-                </button>
-                <button
-                  onClick={() => {
-                    exportToCalendar()
-                    setShowExportMenu(false)
-                  }}
-                  className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 last:rounded-b-lg min-h-[44px] flex items-center"
-                >
-                  Export as Calendar (.ics)
-                </button>
-              </div>
-            )}
+          {/* Export & Import Buttons */}
+          <div className="flex gap-2 w-full sm:w-auto">
+            {/* Export Button */}
+            <div className="relative flex-1 sm:flex-initial">
+              <button
+                onClick={() => setShowExportMenu(!showExportMenu)}
+                className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {'Export'}
+              </button>
+              
+              {showExportMenu && (
+                <div className="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg z-10">
+                  <button
+                    onClick={() => {
+                      exportToCSV()
+                      setShowExportMenu(false)
+                    }}
+                    className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 first:rounded-t-lg min-h-[44px] flex items-center"
+                  >
+                    Export as CSV
+                  </button>
+                  <button
+                    onClick={() => {
+                      exportToJSON()
+                      setShowExportMenu(false)
+                    }}
+                    className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 min-h-[44px] flex items-center"
+                  >
+                    Export as JSON
+                  </button>
+                  <button
+                    onClick={() => {
+                      exportToCalendar()
+                      setShowExportMenu(false)
+                    }}
+                    className="w-full px-4 py-3 text-left text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 last:rounded-b-lg min-h-[44px] flex items-center"
+                  >
+                    Export as Calendar (.ics)
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Import Button */}
+            <div className="flex-1 sm:flex-initial">
+              <button
+                onClick={() => setShowImportModal(true)}
+                className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full"
+                title="Import data from JSON file"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                {'Import'}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1575,6 +1618,13 @@ export default function OrganizedView({
           onCancel={handleBulkDeleteCancel}
         />
       )}
+
+      {/* Import Modal */}
+      <ImportModal
+        isOpen={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImport={handleImport}
+      />
 
       {/* Context Menu */}
       {menuState && (

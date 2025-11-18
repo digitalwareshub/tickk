@@ -34,10 +34,44 @@ export default function Changelog() {
             <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-4">
               <span>🚀 Latest Release</span>
               <span>•</span>
-              <span>October 2025</span>
+              <span>November 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.10.2 - Major Feature Update</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.11.1 - Import Feature & Data Management</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🎯 New Feature</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
+                  <li>• <strong>Import Your Data</strong> - Finally! You can now import your exported JSON files back into tickk</li>
+                  <li>• <strong>Multi-Device Freedom</strong> - Easily move your tasks and notes between your phone, tablet, and computer</li>
+                  <li>• <strong>Safe Data Transfer</strong> - Your existing data is automatically backed up before importing, so nothing gets lost</li>
+                  <li>• <strong>Drag & Drop</strong> - Just drag your JSON file into the import window - super simple</li>
+                  <li>• <strong>Preview Before Import</strong> - See exactly what will be imported before you confirm</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">⚡ Improvements</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
+                  <li>• Works seamlessly with exports from any version of tickk</li>
+                  <li>• Better mobile experience for import and export buttons</li>
+                  <li>• File validation ensures you&apos;re importing the correct format</li>
+                  <li>• Clear error messages if something goes wrong</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Previous Versions */}
+          <div className="space-y-8">
+            {/* V1.10.2 */}
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
+                <span>📅 October 2025</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.10.2 - Major Feature Update</h2>
             
             <div className="space-y-4">
               <div>
@@ -68,8 +102,6 @@ export default function Changelog() {
             </div>
           </div>
 
-          {/* Previous Versions */}
-          <div className="space-y-8">
             {/* V1.10.1 */}
             <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">

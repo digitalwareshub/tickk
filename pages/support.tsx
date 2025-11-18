@@ -100,6 +100,70 @@ export default function Support() {
             </div>
           </section>
 
+          {/* Data Management & Import/Export */}
+          <section>
+            <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Data Management</h2>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Exporting Your Data</h3>
+                <div className="border-l-4 border-gray-200 dark:border-slate-700 pl-4">
+                  <p className="text-gray-600 dark:text-slate-400 mb-2">
+                    Go to the <strong className="text-gray-900 dark:text-slate-200">Organized</strong> tab and click the <strong className="text-gray-900 dark:text-slate-200">Export</strong> button to download your data:
+                  </p>
+                  <ul className="text-gray-600 dark:text-slate-400 space-y-1">
+                    <li>• <strong className="text-gray-900 dark:text-slate-200">JSON format:</strong> Full backup with all data (recommended for backups)</li>
+                    <li>• <strong className="text-gray-900 dark:text-slate-200">CSV format:</strong> Spreadsheet compatible for analysis</li>
+                    <li>• <strong className="text-gray-900 dark:text-slate-200">Calendar (.ics):</strong> Import tasks with dates into your calendar app</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Importing Data (Multi-Device)</h3>
+                <div className="border-l-4 border-gray-200 dark:border-slate-700 pl-4">
+                  <p className="text-gray-600 dark:text-slate-400 mb-2">
+                    Transfer your data between devices or restore from a backup:
+                  </p>
+                  <ol className="text-gray-600 dark:text-slate-400 space-y-1 ml-4">
+                    <li>1. Export your data as JSON from Device A</li>
+                    <li>2. Transfer the JSON file to Device B (email, USB, cloud, etc.)</li>
+                    <li>3. On Device B, go to <strong className="text-gray-900 dark:text-slate-200">Organized</strong> tab</li>
+                    <li>4. Click the blue <strong className="text-gray-900 dark:text-slate-200">Import</strong> button</li>
+                    <li>5. Upload your JSON file or drag it into the modal</li>
+                    <li>6. Review the preview and click <strong className="text-gray-900 dark:text-slate-200">Import Data</strong></li>
+                  </ol>
+                  <p className="text-gray-600 dark:text-slate-400 mt-2">
+                    ⚠️ <strong className="text-gray-900 dark:text-slate-200">Note:</strong> Import will replace your current data. A backup is automatically created before import.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Automatic Backup Protection</h3>
+                <div className="border-l-4 border-gray-200 dark:border-slate-700 pl-4">
+                  <p className="text-gray-600 dark:text-slate-400 mb-2">
+                    Every time you import data, your current data is automatically backed up to <code className="bg-gray-200 dark:bg-slate-700 px-1 rounded text-xs">tickk_import_backup</code> in browser storage.
+                  </p>
+                  <p className="text-gray-600 dark:text-slate-400 mb-2">
+                    <strong className="text-gray-900 dark:text-slate-200">To manually restore from backup:</strong>
+                  </p>
+                  <ol className="text-gray-600 dark:text-slate-400 space-y-1 ml-4">
+                    <li>1. Open browser console (Mac: Cmd+Option+J, Windows: Ctrl+Shift+J)</li>
+                    <li>2. Run this command:</li>
+                  </ol>
+                  <pre className="bg-gray-900 dark:bg-slate-950 text-green-400 p-3 rounded mt-2 text-xs overflow-x-auto">
+{`const backup = JSON.parse(localStorage.getItem('tickk_import_backup'))
+localStorage.setItem('tickk_app_data', JSON.stringify(backup.data))
+location.reload()`}
+                  </pre>
+                  <p className="text-gray-600 dark:text-slate-400 mt-2">
+                    💡 <strong className="text-gray-900 dark:text-slate-200">Pro tip:</strong> Regular exports are your best protection. Export before major changes!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Features Guide */}
           <section>
             <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Feature Guide</h2>

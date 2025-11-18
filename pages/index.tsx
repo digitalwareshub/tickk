@@ -560,9 +560,9 @@ export default function Home() {
                   <div className="text-sm text-gray-500 dark:text-slate-500">Pure browser technology</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
-                  <div className="text-2xl mb-2">🌐</div>
-                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">All Devices</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">Any browser</div>
+                  <div className="text-2xl mb-2">🔄</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">Multi-Device</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Import/Export data</div>
                 </div>
               </div>
 

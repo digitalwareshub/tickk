@@ -318,6 +318,183 @@ export class StorageService {
   }
   
   /**
+   * Import data from JSON backup
+   * Creates backup of existing data before import
+   */
+  async importData(importedData: AppData): Promise<{ success: boolean; error?: string }> {
+    try {
+      // Validate imported data structure
+      const validation = this.validateImportedData(importedData)
+      if (!validation.isValid) {
+        return { 
+          success: false, 
+          error: validation.error || 'Invalid data structure' 
+        }
+      }
+      
+      // Create backup of current data before importing
+      const currentData = await this.getAllData()
+      if (currentData) {
+        const backup = {
+          data: currentData,
+          timestamp: new Date().toISOString(),
+          reason: 'pre_import_backup'
+        }
+        localStorage.setItem('tickk_import_backup', JSON.stringify(backup))
+        console.log('✅ Backup created before import:', {
+          timestamp: backup.timestamp,
+          items: (currentData.tasks?.length || 0) + (currentData.notes?.length || 0) + (currentData.braindump?.length || 0)
+        })
+      }
+      
+      // Ensure backwards compatibility - add missing fields
+      const dataToImport: AppData = {
+        ...importedData,
+        sessions: importedData.sessions || [],
+        version: importedData.version || '2.0.0',
+        preferences: importedData.preferences
+      }
+      
+      // Import the new data
+      await this.saveAllData(dataToImport)
+      
+      toast.success('Data imported successfully!')
+      return { success: true }
+      
+    } catch (error) {
+      console.error('Failed to import data:', error)
+      
+      // Attempt to restore from backup if import failed
+      try {
+        const backup = localStorage.getItem('tickk_import_backup')
+        if (backup) {
+          const backupData = JSON.parse(backup)
+          await this.saveAllData(backupData.data)
+          toast.error('Import failed. Your previous data has been restored.')
+        }
+      } catch (restoreError) {
+        console.error('Failed to restore backup:', restoreError)
+      }
+      
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Import failed' 
+      }
+    }
+  }
+  
+  /**
+   * Validate imported data structure
+   */
+  private validateImportedData(data: unknown): { isValid: boolean; error?: string } {
+    if (!data || typeof data !== 'object') {
+      return { isValid: false, error: 'Invalid data format' }
+    }
+    
+    const importData = data as Partial<AppData>
+    
+    // Check required fields (with backwards compatibility)
+    if (!Array.isArray(importData.tasks)) {
+      return { isValid: false, error: 'Missing or invalid tasks array' }
+    }
+    
+    if (!Array.isArray(importData.notes)) {
+      return { isValid: false, error: 'Missing or invalid notes array' }
+    }
+    
+    if (!Array.isArray(importData.braindump)) {
+      return { isValid: false, error: 'Missing or invalid braindump array' }
+    }
+    
+    // Sessions is optional for backwards compatibility
+    if (importData.sessions !== undefined && !Array.isArray(importData.sessions)) {
+      return { isValid: false, error: 'Invalid sessions array' }
+    }
+    
+    // Validate each item has required fields
+    const allItems = [...importData.tasks, ...importData.notes, ...importData.braindump]
+    for (const item of allItems) {
+      if (!item.id || !item.text || !item.timestamp) {
+        return { 
+          isValid: false, 
+          error: 'Invalid item structure: missing required fields (id, text, timestamp)' 
+        }
+      }
+    }
+    
+    return { isValid: true }
+  }
+  
+  /**
+   * Manually restore from import backup
+   * Useful if user wants to undo an import
+   */
+  async restoreFromImportBackup(): Promise<{ success: boolean; error?: string }> {
+    try {
+      const backup = localStorage.getItem('tickk_import_backup')
+      
+      if (!backup) {
+        return {
+          success: false,
+          error: 'No backup found. Backup is only available after an import.'
+        }
+      }
+      
+      const backupData = JSON.parse(backup)
+      
+      // Validate backup data
+      if (!backupData.data || !backupData.timestamp) {
+        return {
+          success: false,
+          error: 'Backup data is corrupted'
+        }
+      }
+      
+      // Restore the backup
+      await this.saveAllData(backupData.data)
+      
+      console.log('✅ Restored from backup:', backupData.timestamp)
+      toast.success(`Data restored from backup (${new Date(backupData.timestamp).toLocaleString()})`)
+      
+      return { success: true }
+    } catch (error) {
+      console.error('Failed to restore from backup:', error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Restore failed'
+      }
+    }
+  }
+  
+  /**
+   * Check if import backup exists
+   */
+  hasImportBackup(): boolean {
+    return !!localStorage.getItem('tickk_import_backup')
+  }
+  
+  /**
+   * Get import backup info
+   */
+  getImportBackupInfo(): { timestamp: string; itemCount: number } | null {
+    try {
+      const backup = localStorage.getItem('tickk_import_backup')
+      if (!backup) return null
+      
+      const backupData = JSON.parse(backup)
+      const data = backupData.data as AppData
+      const itemCount = (data.tasks?.length || 0) + (data.notes?.length || 0) + (data.braindump?.length || 0)
+      
+      return {
+        timestamp: backupData.timestamp,
+        itemCount
+      }
+    } catch {
+      return null
+    }
+  }
+  
+  /**
    * Clear all data (for testing or reset)
    */
   async clearAllData(): Promise<void> {
@@ -393,7 +570,7 @@ export class StorageService {
       ...data.tasks.map(item => this.addToStore(tx, 'tasks', item)),
       ...data.notes.map(item => this.addToStore(tx, 'notes', item)),
       ...data.braindump.map(item => this.addToStore(tx, 'braindump', item)),
-      ...data.sessions.map(session => this.addToStore(tx, 'sessions', session))
+      ...(data.sessions || []).map(session => this.addToStore(tx, 'sessions', session))
     ])
     
     // Save preferences

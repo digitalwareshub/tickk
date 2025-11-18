@@ -22,12 +22,19 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           <div className="flex items-center justify-start w-1/3">
             <Link href="/" className="group flex items-center space-x-2">
               <span className="text-xl sm:text-2xl">✅</span>
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
-                tickk
-              </span>
-              <span className="text-orange-500 text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                🎙️
-              </span>
+              <div className="flex flex-col">
+                <div className="flex items-center space-x-2">
+                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
+                    tickk
+                  </span>
+                  <span className="text-orange-500 text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    🎙️
+                  </span>
+                </div>
+                <span className="text-[10px] sm:text-xs text-gray-500 dark:text-slate-400 -mt-1 opacity-60 group-hover:opacity-90 transition-opacity duration-200 whitespace-nowrap hidden sm:block">
+                  Your brain is faster than your hands
+                </span>
+              </div>
             </Link>
           </div>
 
