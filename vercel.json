@@ -59,6 +59,10 @@
           "value": "application/xml"
         },
         {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=86400, must-revalidate"
         }
@@ -70,6 +74,10 @@
         {
           "key": "Content-Type",
           "value": "application/rss+xml"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         },
         {
           "key": "Cache-Control",

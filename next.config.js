@@ -190,43 +190,8 @@ const nextConfig = {
   // to avoid redirect chains
   async redirects() {
     return [
-      // Redirect URLs with common parameters to clean versions
-      {
-        source: '/',
-        has: [
-          {
-            type: 'query',
-            key: 'ref'
-          }
-        ],
-        destination: '/',
-        permanent: false,
-        statusCode: 302,
-      },
-      {
-        source: '/',
-        has: [
-          {
-            type: 'query',
-            key: 'utm_source'
-          }
-        ],
-        destination: '/',
-        permanent: false,
-        statusCode: 302,
-      },
-      {
-        source: '/',
-        has: [
-          {
-            type: 'query',
-            key: 'gclid'
-          }
-        ],
-        destination: '/',
-        permanent: false,
-        statusCode: 302,
-      },
+      // NOTE: Query parameter redirects are now handled by middleware.ts
+      // with 301 permanent redirects for better SEO
       // Legacy redirects
       {
         source: '/home',

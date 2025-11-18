@@ -45,7 +45,8 @@ export function middleware(request: NextRequest) {
         cleanUrl.search = ''
       }
       
-      return NextResponse.redirect(cleanUrl, 302) // Temporary redirect
+      // Use 301 permanent redirect for SEO - tells Google these URLs are permanently moved
+      return NextResponse.redirect(cleanUrl, 301)
     }
   }
   
