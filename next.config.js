@@ -213,6 +213,12 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      // GSC 404 fixes
+      {
+        source: '/Free',
+        destination: '/',
+        permanent: true,
+      },
       // Remove old Spanish page redirects (they don't exist anymore)
       {
         source: '/es/:path*',
