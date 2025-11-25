@@ -44,12 +44,9 @@ export default function MicroLanding({
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
         <div className="mb-8">
-          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-2">
-            Think at <span className="text-orange-600 dark:text-orange-400">400 WPM</span>. Type at <span className="text-orange-600 dark:text-orange-400">40 WPM</span>.
+          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
+            <span className="text-orange-600 dark:text-orange-400">Speak.</span> Save. Sort it later.
           </h1>
-          <p className="text-xl text-gray-700 dark:text-slate-200 font-medium mb-4">
-            Speak. Save. Sort it later.
-          </p>
           <p className="text-responsive text-gray-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
             Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
           </p>

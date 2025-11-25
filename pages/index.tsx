@@ -519,12 +519,15 @@ export default function Home() {
               </div>
 
               {/* Main Headline */}
-              <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-6">
-                Best Free Productivity App for ADHD & Brain Dump
-                <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent block">
-                  Voice-First Task Manager 2025
-                </span>
+              <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
+                You think at <span className="text-orange-600 dark:text-orange-400">400 WPM</span>.{' '}
+                <span className="sm:inline block">You type at <span className="text-orange-600 dark:text-orange-400">40 WPM</span>.</span>
               </h1>
+              
+              {/* Subheading */}
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-slate-300 mb-6">
+                Voice-First Idea Capture and Task Manager 2025
+              </h2>
 
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
