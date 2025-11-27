@@ -27,6 +27,7 @@ export interface FeatureFlags {
   ADVANCED_EXPORTS: FeatureFlag
   ANALYTICS_DASHBOARD: FeatureFlag
   STRIPE_INTEGRATION: FeatureFlag
+  TRANSFORM_MODE: FeatureFlag
 }
 
 /**
@@ -80,6 +81,12 @@ export const FEATURES: FeatureFlags = {
     enabled: process.env.NEXT_PUBLIC_ENABLE_STRIPE === 'true',
     description: 'Stripe payment processing',
     envVar: 'NEXT_PUBLIC_ENABLE_STRIPE',
+  },
+
+  TRANSFORM_MODE: {
+    enabled: process.env.NEXT_PUBLIC_ENABLE_TRANSFORM !== 'false', // Enabled by default
+    description: 'Note transformation features (Summarize, Structure, Polish, Tasks)',
+    envVar: 'NEXT_PUBLIC_ENABLE_TRANSFORM',
   },
 }
 
