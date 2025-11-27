@@ -7,6 +7,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
+import { ProGate } from '@/components/ProGate'
 import { transformText, modeDescriptions } from '@/lib/transformers'
 import type { TransformMode, TransformedNote } from '@/types/transform'
 import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight } from 'lucide-react'
@@ -225,6 +226,9 @@ export default function TransformPage() {
               </p>
             </div>
 
+            {/* Pro Gate - Wraps the transformation tools */}
+            <ProGate feature="Note transformation">
+
             {/* Mode Selection */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               {(Object.keys(modeDescriptions) as TransformMode[]).map((m) => {
@@ -435,6 +439,8 @@ export default function TransformPage() {
                 )}
               </div>
             )}
+
+            </ProGate>
           </div>
         </section>
 
