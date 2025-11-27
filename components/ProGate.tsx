@@ -4,7 +4,6 @@
  */
 
 import { ReactNode, useState } from 'react';
-import Link from 'next/link';
 import { useProSubscription } from '@/hooks/useProSubscription';
 import { Sparkles, Lock, Zap, Check, X } from 'lucide-react';
 import { PRICING } from '@/lib/stripe/config';

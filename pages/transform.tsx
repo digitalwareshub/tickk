@@ -4,13 +4,13 @@
  * Ported from SharpNotes (shrp.app)
  */
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
 import { ProGate } from '@/components/ProGate'
 import { transformText, modeDescriptions } from '@/lib/transformers'
 import type { TransformMode, TransformedNote } from '@/types/transform'
-import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight } from 'lucide-react'
+import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight, Mic, MicOff } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 // Storage key for transformed notes
@@ -33,6 +33,12 @@ export default function TransformPage() {
   const [showHistory, setShowHistory] = useState(false)
   const [metadata, setMetadata] = useState<{ originalLength: number; transformedLength: number; compressionRatio?: number; tasksFound?: number } | null>(null)
 
+  // Voice input state
+  const [isRecording, setIsRecording] = useState(false)
+  const [isVoiceSupported, setIsVoiceSupported] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null)
+
   // Load notes from storage on mount
   useEffect(() => {
     try {
@@ -45,6 +51,89 @@ export default function TransformPage() {
     }
   }, [])
 
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition
+      const recognitionInstance = new SpeechRecognition()
+
+      recognitionInstance.continuous = true
+      recognitionInstance.interimResults = true
+      recognitionInstance.lang = 'en-US'
+      recognitionInstance.maxAlternatives = 1
+
+      let finalTranscript = ''
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognitionInstance.onresult = (event: any) => {
+        let interimTranscript = ''
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript + ' '
+          } else {
+            interimTranscript = transcript
+          }
+        }
+
+        // Update input with both final and interim results
+        setInput(prev => {
+          const baseText = prev.replace(/\[Listening...\]$/, '').trim()
+          if (interimTranscript) {
+            return baseText + (baseText ? ' ' : '') + finalTranscript + interimTranscript
+          }
+          return baseText + (baseText ? ' ' : '') + finalTranscript
+        })
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognitionInstance.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error)
+        if (event.error !== 'no-speech' && event.error !== 'aborted') {
+          setIsRecording(false)
+          if (event.error === 'not-allowed') {
+            toast.error('Microphone access denied')
+          } else {
+            toast.error('Voice input error')
+          }
+        }
+      }
+
+      recognitionInstance.onend = () => {
+        // Auto-restart if still supposed to be recording
+        if (isRecording) {
+          try {
+            recognitionInstance.start()
+          } catch (e) {
+            console.error('Failed to restart:', e)
+            setIsRecording(false)
+          }
+        }
+      }
+
+      recognitionInstance.onstart = () => {
+        finalTranscript = ''
+      }
+
+      recognitionRef.current = recognitionInstance
+      setIsVoiceSupported(true)
+    } else {
+      setIsVoiceSupported(false)
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop()
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (e) {
+          // Ignore errors on cleanup
+        }
+      }
+    }
+  }, [isRecording])
+
   // Save notes to storage
   const saveNotes = useCallback((updatedNotes: TransformedNote[]) => {
     try {
@@ -55,6 +144,29 @@ export default function TransformPage() {
       toast.error('Failed to save note')
     }
   }, [])
+
+  // Toggle voice recording
+  const toggleVoiceInput = useCallback(() => {
+    if (!recognitionRef.current) {
+      toast.error('Voice input not supported')
+      return
+    }
+
+    if (isRecording) {
+      recognitionRef.current.stop()
+      setIsRecording(false)
+      toast.success('Voice input stopped')
+    } else {
+      try {
+        recognitionRef.current.start()
+        setIsRecording(true)
+        toast.success('Listening... Speak now')
+      } catch (error) {
+        console.error('Failed to start recording:', error)
+        toast.error('Failed to start voice input')
+      }
+    }
+  }, [isRecording])
 
   // Transform text
   const handleTransform = useCallback(() => {
@@ -205,7 +317,7 @@ export default function TransformPage() {
   return (
     <>
       <Head>
-        <title>Transform Notes - Tickk Pro</title>
+        <title>Transform Notes - Tickk</title>
         <meta name="description" content="Transform messy notes into clean, organized text. Summarize, structure, polish grammar, and extract tasks." />
       </Head>
 
@@ -216,7 +328,7 @@ export default function TransformPage() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/30 px-4 py-2 text-sm text-orange-700 dark:text-orange-300 mb-4">
                 <Sparkles className="w-4 h-4" />
-                Tickk Pro Feature
+                Transform Your Notes
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2">
                 Transform Your Notes
@@ -262,13 +374,32 @@ export default function TransformPage() {
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               {/* Input */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                  Input Text
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300">
+                    Input Text
+                  </label>
+                  {isVoiceSupported && (
+                    <button
+                      onClick={toggleVoiceInput}
+                      className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
+                        isRecording
+                          ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
+                          : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50'
+                      }`}
+                      aria-label={isRecording ? 'Stop voice input' : 'Start voice input'}
+                    >
+                      {isRecording ? (
+                        <MicOff className="w-5 h-5" />
+                      ) : (
+                        <Mic className="w-5 h-5" />
+                      )}
+                    </button>
+                  )}
+                </div>
                 <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Paste or type your messy notes here..."
+                  placeholder="Paste or type your messy notes here... Or click Voice Input to speak"
                   className="w-full h-64 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
                 />
                 <div className="absolute bottom-3 right-3 text-xs text-gray-400">

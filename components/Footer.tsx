@@ -38,8 +38,13 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <Link href="/landing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Voice Dashboard
                 </Link>
-                <Link href="/transform" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Transform Notes
+                <Link href="/transform" className="flex items-center justify-center space-x-1">
+                  <span className="text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Transform Notes
+                  </span>
+                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1 py-0.5 rounded-full">
+                    NEW
+                  </span>
                 </Link>
                 <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Features
@@ -51,6 +56,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <h3 className="text-xs font-medium text-gray-900 dark:text-slate-100 mb-2">
                   Community
                 </h3>
+                <Link href="/blog" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  Blog
+                </Link>
                 <Link href="/reviews" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Reviews
                 </Link>
@@ -62,17 +70,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 >
                   Open Source
                 </a>
-                <Link href="/transform" className="flex items-center justify-center space-x-1">
-                  <span className="text-xs text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 flex items-center transition-colors">
-                    <svg className="w-2 h-2 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                    </svg>
-                    Tickk Pro
-                  </span>
-                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1 py-0.5 rounded-full">
-                    NEW
-                  </span>
-                </Link>
               </div>
             </div>
 
@@ -197,8 +194,13 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/transform" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    Transform Notes
+                  <Link href="/transform" className="flex items-center space-x-1 group">
+                    <span className="text-gray-600 dark:text-slate-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                      Transform Notes
+                    </span>
+                    <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1.5 py-0.5 rounded-full">
+                      NEW
+                    </span>
                   </Link>
                 </li>
                 <li>
@@ -216,6 +218,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
+                  <Link href="/blog" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
                   <Link href="/reviews" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     Reviews
                   </Link>
@@ -229,19 +236,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   >
                     Open Source
                   </a>
-                </li>
-                <li>
-                  <Link href="/transform" className="flex items-center space-x-1 group">
-                    <span className="text-orange-600 dark:text-orange-400 group-hover:text-orange-700 dark:group-hover:text-orange-300 flex items-center text-sm transition-colors">
-                      <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                      </svg>
-                      Tickk Pro
-                    </span>
-                    <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1.5 py-0.5 rounded-full">
-                      NEW
-                    </span>
-                  </Link>
                 </li>
               </ul>
             </div>
