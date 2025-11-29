@@ -507,6 +507,14 @@ export default function Home() {
                 Voice-First Idea Capture and Task Manager 2025
               </h2>
 
+              {/* Audience Positioning */}
+              <div className="mx-auto max-w-2xl mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 rounded-r">
+                <p className="text-sm text-blue-900 dark:text-blue-200">
+                  <strong>Built for privacy-conscious users</strong> who want nothing to do with AI, cloud storage, or account registrations. 
+                  If you value data sovereignty and local-first tools, this is for you.
+                </p>
+              </div>
+
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
                 Just speak your thoughts and watch them become organized tasks and notes. 
