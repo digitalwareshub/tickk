@@ -4,6 +4,7 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { StorageService } from '@/lib/storage/storage-service'
 import { VoiceClassifier } from '@/lib/classification/classifier'
@@ -895,6 +896,8 @@ export default function BraindumpInterface({
           <span>{appData.braindump.length} braindumps</span>
           <span>{appData.tasks.length} tasks</span>
           <span>{appData.notes.length} notes</span>
+          <span>•</span>
+          <Link href="/bug-report" className="text-orange-600 dark:text-orange-400 hover:underline">Report Bug</Link>
         </div>
       </div>
       

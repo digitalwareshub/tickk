@@ -5,9 +5,9 @@
 
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import MindMapView from '@/components/MindMapView'
-import BugReportModal from '@/components/BugReportModal'
 import type { AppData } from '@/types/braindump'
 import { StorageService } from '@/lib/storage/storage-service'
 
@@ -15,7 +15,6 @@ export default function MindMapPage() {
   const [appData, setAppData] = useState<AppData | null>(null)
   const [loading, setLoading] = useState(true)
   const [storageService] = useState(() => StorageService.getInstance())
-  const [isBugReportOpen, setIsBugReportOpen] = useState(false)
 
   useEffect(() => {
     const loadData = async () => {
@@ -101,8 +100,11 @@ export default function MindMapPage() {
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-6">
+              <p className="text-gray-600 dark:text-slate-400 mb-2">
                 Visualize your productivity journey over time. {appData.tasks.length} tasks • {appData.notes.length} notes
+              </p>
+              <p className="text-xs text-gray-500 dark:text-slate-500">
+                Found a bug? <Link href="/bug-report" className="text-orange-600 dark:text-orange-400 hover:underline">Report it here</Link>
               </p>
             </div>
 
@@ -111,13 +113,6 @@ export default function MindMapPage() {
           </div>
         </section>
       </Layout>
-
-      {/* Bug Report Modal */}
-      <BugReportModal
-        isOpen={isBugReportOpen}
-        onClose={() => setIsBugReportOpen(false)}
-        featureName="Mind Map"
-      />
     </>
   )
 }

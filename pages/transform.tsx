@@ -7,6 +7,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
 import { ProGate } from '@/components/ProGate'
 import BugReportModal from '@/components/BugReportModal'
@@ -39,6 +40,7 @@ export default function TransformPage() {
   // Voice input state
   const [isRecording, setIsRecording] = useState(false)
   const [isVoiceSupported, setIsVoiceSupported] = useState(false)
+  const [currentTranscript, setCurrentTranscript] = useState('') // Live transcript display
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null)
   const isStoppingRef = useRef(false) // Track manual stop
@@ -68,6 +70,49 @@ export default function TransformPage() {
       recognitionInstance.lang = 'en-US'
       recognitionInstance.maxAlternatives = 1
 
+      // Set up event handlers once
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognitionInstance.onresult = (event: any) => {
+        let transcript = ''
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript
+        }
+        transcriptRef.current = transcript
+        setCurrentTranscript(transcript) // Show live transcript
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      recognitionInstance.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error)
+        setIsRecording(false)
+        setCurrentTranscript('')
+        if (event.error === 'not-allowed') {
+          toast.error('Microphone access denied. Please enable microphone permissions.')
+        } else if (event.error === 'no-speech') {
+          toast.error('No speech detected. Please try again.')
+        } else if (event.error !== 'aborted') {
+          toast.error('Voice input error: ' + event.error)
+        }
+      }
+
+      recognitionInstance.onend = () => {
+        setIsRecording(false)
+        const finalTranscript = transcriptRef.current.trim()
+        
+        // Append the transcript to input when recording ends
+        if (finalTranscript) {
+          setInput(prev => {
+            const baseText = prev.trim()
+            return baseText + (baseText ? ' ' : '') + finalTranscript
+          })
+          toast.success(`Added: "${finalTranscript.slice(0, 50)}${finalTranscript.length > 50 ? '...' : ''}"`)
+        }
+        
+        // Clear transcript display
+        setCurrentTranscript('')
+        transcriptRef.current = ''
+      }
+
       recognitionRef.current = recognitionInstance
       setIsVoiceSupported(true)
     } else {
@@ -85,7 +130,7 @@ export default function TransformPage() {
         }
       }
     }
-  }, []) // Remove isRecording from dependencies
+  }, [])
 
   // Save notes to storage
   const saveNotes = useCallback((updatedNotes: TransformedNote[]) => {
@@ -106,55 +151,21 @@ export default function TransformPage() {
     }
 
     if (isRecording) {
+      // Stop recording
       isStoppingRef.current = true
       recognitionRef.current.stop()
       setIsRecording(false)
       toast.success('Voice input stopped')
     } else {
+      // Start recording
       try {
         isStoppingRef.current = false
-        transcriptRef.current = '' // Reset transcript
-        
-        // Set up event handlers fresh each time
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        recognitionRef.current.onresult = (event: any) => {
-          let transcript = ''
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            transcript += event.results[i][0].transcript
-          }
-          transcriptRef.current = transcript
-        }
-        
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        recognitionRef.current.onerror = (event: any) => {
-          console.error('Speech recognition error:', event.error)
-          setIsRecording(false)
-          if (event.error === 'not-allowed') {
-            toast.error('Microphone access denied. Please enable microphone permissions.')
-          } else if (event.error === 'no-speech') {
-            toast.error('No speech detected. Please try again.')
-          } else if (event.error !== 'aborted') {
-            toast.error('Voice input error: ' + event.error)
-          }
-        }
-        
-        recognitionRef.current.onend = () => {
-          setIsRecording(false)
-          isStoppingRef.current = false
-          
-          // Append the transcript to input when recording ends
-          const finalTranscript = transcriptRef.current.trim()
-          if (finalTranscript) {
-            setInput(prev => {
-              const baseText = prev.trim()
-              return baseText + (baseText ? ' ' : '') + finalTranscript
-            })
-          }
-        }
+        transcriptRef.current = ''
+        setCurrentTranscript('')
         
         recognitionRef.current.start()
         setIsRecording(true)
-        toast.success('Listening... Speak now')
+        toast.success('🎤 Listening... Speak now', { duration: 2000 })
       } catch (error) {
         console.error('Failed to start recording:', error)
         toast.error('Failed to start voice input')
@@ -374,29 +385,45 @@ export default function TransformPage() {
                   <label className="block text-sm font-medium text-gray-700 dark:text-slate-300">
                     Input Text
                   </label>
-                  {isVoiceSupported && (
-                    <button
-                      onClick={toggleVoiceInput}
-                      className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
-                        isRecording
-                          ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
-                          : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50'
-                      }`}
-                      aria-label={isRecording ? 'Stop voice input' : 'Start voice input'}
-                    >
-                      {isRecording ? (
-                        <MicOff className="w-5 h-5" />
-                      ) : (
-                        <Mic className="w-5 h-5" />
-                      )}
-                    </button>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {isRecording && (
+                      <div className="flex items-center gap-1.5" role="status" aria-live="polite">
+                        <div className="w-1 h-3 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '0ms' }}></div>
+                        <div className="w-1 h-4 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '150ms' }}></div>
+                        <div className="w-1 h-5 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: '300ms' }}></div>
+                        <span className="text-sm text-red-600 dark:text-red-400 font-medium ml-1">Recording...</span>
+                      </div>
+                    )}
+                    {isVoiceSupported && (
+                      <button
+                        onClick={toggleVoiceInput}
+                        className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
+                          isRecording
+                            ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
+                            : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50'
+                        }`}
+                        aria-label={isRecording ? 'Stop voice input' : 'Start voice input'}
+                      >
+                        {isRecording ? (
+                          <MicOff className="w-5 h-5" />
+                        ) : (
+                          <Mic className="w-5 h-5" />
+                        )}
+                      </button>
+                    )}
+                  </div>
                 </div>
+                
                 <textarea
-                  value={input}
+                  value={input + (currentTranscript && isRecording ? (input ? ' ' : '') + currentTranscript : '')}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Paste or type your messy notes here... Or click Voice Input to speak"
-                  className="w-full h-64 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                  className={`w-full h-64 p-4 rounded-xl border ${
+                    isRecording 
+                      ? 'border-orange-400 dark:border-orange-600 ring-2 ring-orange-200 dark:ring-orange-800' 
+                      : 'border-gray-200 dark:border-slate-700'
+                  } bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none transition-all`}
+                  readOnly={isRecording}
                 />
                 <div className="absolute bottom-3 right-3 text-xs text-gray-400">
                   {input.split(/\s+/).filter(Boolean).length} words
@@ -499,6 +526,24 @@ export default function TransformPage() {
                 <kbd className="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs">Cmd/Ctrl + S</kbd>
                 Save
               </span>
+            </div>
+            
+            {/* Disclaimer */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-start gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-left max-w-2xl">
+                <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="flex-1">
+                  <p className="text-sm text-blue-900 dark:text-blue-100">
+                    <span className="font-semibold">No AI Used:</span> We use traditional NLP (Natural Language Processing) for transformations. 
+                    Results are rule-based and deterministic, not AI-generated. Don&apos;t expect ChatGPT-level outputs.
+                  </p>
+                  <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                    Found an issue? <Link href="/bug-report" className="underline hover:text-blue-900 dark:hover:text-blue-100">Report a bug</Link>
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Saved Notes Toggle */}
