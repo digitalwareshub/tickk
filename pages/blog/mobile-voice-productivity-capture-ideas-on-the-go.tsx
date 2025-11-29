@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
 import RelatedArticles from '@/components/RelatedArticles'
@@ -81,10 +82,12 @@ export default function MobileVoiceProductivity() {
             
             {/* Author Section */}
             <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
-              <img 
+              <Image 
                 src="/kam.JPG" 
                 alt="Kam" 
-                className="w-12 h-12 rounded-full object-cover"
+                width={48}
+                height={48}
+                className="rounded-full object-cover"
               />
               <div>
                 <p className="font-medium text-gray-900 dark:text-slate-100">Kam</p>

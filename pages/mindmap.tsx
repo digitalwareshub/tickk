@@ -88,7 +88,9 @@ export default function MindMapPage() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <Layout className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
+      <Layout 
+        className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
+      >
         {/* Hero Section */}
         <section className="py-8 px-4">
           <div className="max-w-5xl mx-auto">
@@ -99,15 +101,9 @@ export default function MindMapPage() {
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-3">
+              <p className="text-gray-600 dark:text-slate-400 mb-6">
                 Visualize your productivity journey over time. {appData.tasks.length} tasks • {appData.notes.length} notes
               </p>
-              <button
-                onClick={() => setIsBugReportOpen(true)}
-                className="text-sm text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline transition-colors"
-              >
-                Report a Bug
-              </button>
             </div>
 
             {/* Mind Map Component */}

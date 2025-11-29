@@ -11,8 +11,6 @@ interface HeaderProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Header({ mode: _mode, onModeChange: _onModeChange }: HeaderProps) {
   const router = useRouter()
-  const isAppPage = router.pathname === '/landing' // App is now at /landing
-  const isMarketingHome = router.pathname === '/' // Marketing page is now at /
   const { isDark, toggleDark } = useDarkMode()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -40,7 +38,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
             </Link>
           </div>
 
-          {/* Center: Keyboard Shortcut Hint or Navigation */}
+          {/* Center: Navigation */}
           <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
             <nav className="flex items-center gap-3 relative z-10">
               <Link href="/landing" className={`inline-flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${

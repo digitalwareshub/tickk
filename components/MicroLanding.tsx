@@ -1,6 +1,11 @@
 /**
- * MicroLanding - Main landing interface that matches the screenshot
- * Shows the main headline, subtitle, examples, and record button
+ * MicroLanding - Main landing interface that matches the sc          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
+            <span className="text-orange-600 dark:text-orange-400">Speak.</span> Save. Sort it later.
+          </h1>
+          <p className="text-responsive text-gray-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
+            Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
+          </p>
+        </div>s the main headline, subtitle, examples, and record button
  */
 
 import { useState } from 'react'
@@ -44,10 +49,26 @@ export default function MicroLanding({
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
         <div className="mb-8">
+          {/* Keyboard Shortcut Hint */}
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+            <span className="font-medium">Press</span>
+            <kbd className="px-2 py-0.5 bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded text-xs font-semibold text-gray-700 dark:text-slate-300">
+              ⌘K
+            </kbd>
+            <span className="text-gray-400 dark:text-slate-500">/</span>
+            <kbd className="px-2 py-0.5 bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded text-xs font-semibold text-gray-700 dark:text-slate-300">
+              Ctrl+K
+            </kbd>
+            <span>for shortcuts</span>
+          </div>
+          
           <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
             <span className="text-orange-600 dark:text-orange-400">Speak.</span> Save. Sort it later.
           </h1>
-          <p className="text-responsive text-gray-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
+          <p className="text-responsive text-gray-600 dark:text-slate-300 mb-3 max-w-2xl mx-auto">
             Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
           </p>
         </div>

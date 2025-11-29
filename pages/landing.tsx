@@ -22,6 +22,7 @@ import KeyboardHint from '@/components/KeyboardHint'
 import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
+import BugReportModal from '@/components/BugReportModal'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -45,6 +46,7 @@ export default function App() {
   const [showHelpModal, setShowHelpModal] = useState(false)
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showTour, setShowTour] = useState(false)
+  const [isBugReportOpen, setIsBugReportOpen] = useState(false)
   
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
@@ -789,6 +791,13 @@ export default function App() {
 
       {/* ARIA Live Regions for screen readers */}
       <LiveRegions />
+
+      {/* Bug Report Modal */}
+      <BugReportModal
+        isOpen={isBugReportOpen}
+        onClose={() => setIsBugReportOpen(false)}
+        featureName="Braindump"
+      />
     </>
   )
 }

@@ -315,7 +315,9 @@ export default function TransformPage() {
         <meta name="description" content="Transform messy notes into clean, organized text. Summarize, structure, polish grammar, and extract tasks." />
       </Head>
 
-      <Layout className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
+      <Layout 
+        className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
+      >
         {/* Hero Section */}
         <section className="py-8 px-4">
           <div className="max-w-5xl mx-auto">
@@ -326,15 +328,9 @@ export default function TransformPage() {
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-3">
+              <p className="text-gray-600 dark:text-slate-400 mb-6">
                 Turn messy notes into clean, organized text. All processing happens locally.
               </p>
-              <button
-                onClick={() => setIsBugReportOpen(true)}
-                className="text-sm text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline transition-colors"
-              >
-                Report a Bug
-              </button>
             </div>
 
             {/* Pro Gate - Wraps the transformation tools */}
@@ -571,55 +567,6 @@ export default function TransformPage() {
             )}
 
             </ProGate>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-12 px-4 bg-gray-50 dark:bg-slate-800/50">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 text-center mb-8">
-              Why Transform Notes?
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sparkles className="w-6 h-6 text-orange-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">100% Private</h3>
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  All processing happens locally<br />in your browser. Your notes never<br />leave your device.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-6 h-6 text-orange-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Instant Results</h3>
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  No waiting for cloud APIs.<br />Get results in milliseconds<br />using local NLP.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckSquare className="w-6 h-6 text-orange-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">ADHD-Friendly</h3>
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  Turn brain dumps into organized<br />notes. Perfect for messy<br />thinkers.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">No Sign-Up</h3>
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  Start using immediately.<br />No account needed,<br />no email required.
-                </p>
-              </div>
-            </div>
           </div>
         </section>
       </Layout>
