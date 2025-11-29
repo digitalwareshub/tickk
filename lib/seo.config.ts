@@ -5,7 +5,7 @@ const defaultSEOConfig = {
   titleTemplate: '%s | tickk - Free Voice Productivity App',
   defaultTitle: 'tickk - Free Voice Productivity App with Speech Recognition',
   description: 'Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.',
-  canonical: 'https://tickk.app',
+  canonical: 'https://tickk.app/', // Fixed: Added trailing slash to match page-specific canonical
   openGraph: {
     type: 'website',
     locale: 'en_US',

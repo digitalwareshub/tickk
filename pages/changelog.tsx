@@ -34,10 +34,46 @@ export default function Changelog() {
             <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400 mb-4">
               <span>🚀 Latest Release</span>
               <span>•</span>
-              <span>November 2025</span>
+              <span>November 29, 2025</span>
             </div>
             
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.11.1 - Import Feature & Data Management</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.11.2 - Transform Notes & Mind Map (Beta)</h2>
+            
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🎯 New Features (Beta)</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
+                  <li>• <strong>Transform Notes Tool</strong> - Convert messy notes into clean, organized text with 4 transformation modes</li>
+                  <li>• <strong>NLP-Powered Transformations</strong> - Summarize, Structure, Polish Grammar, and Extract Tasks using compromise.js</li>
+                  <li>• <strong>Mind Map Visualization</strong> - Interactive time-based visualization of your productivity journey</li>
+                  <li>• <strong>Productivity Analytics</strong> - View completion rates, daily averages, and activity patterns over multiple timeframes</li>
+                  <li>• <strong>Voice Input for Transform</strong> - Record notes directly in the Transform tool using Web Speech API</li>
+                  <li>• <strong>100% Local Processing</strong> - All transformations happen on your device - no AI, no cloud, no server calls</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2"> Mind Map Features</h3>
+                <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
+                  <li>• <strong>Multiple Timeframes</strong> - View data from last week, month, 3 months, 6 months, or full year</li>
+                  <li>• <strong>Smart Insights</strong> - Pattern-based productivity insights from your local data</li>
+                  <li>• <strong>Tree & Stats Views</strong> - Toggle between hierarchical tree view and statistics dashboard</li>
+                  <li>• <strong>Completion Tracking</strong> - Visual representation of task completion rates over time</li>
+                  <li>• <strong>Activity Trends</strong> - Identify your most and least productive periods</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Previous Versions */}
+          <div className="space-y-8">
+            {/* V1.11.1 */}
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">
+                <span>📅 November 2025</span>
+              </div>
+              
+              <h2 className="text-xl font-bold text-gray-900 dark:text-slate-50 mb-4">V1.11.1 - Import Feature & Data Management</h2>
             
             <div className="space-y-4">
               <div>
@@ -62,9 +98,6 @@ export default function Changelog() {
               </div>
             </div>
           </div>
-
-          {/* Previous Versions */}
-          <div className="space-y-8">
             {/* V1.10.2 */}
             <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-6">
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400 mb-4">

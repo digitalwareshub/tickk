@@ -8,6 +8,7 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
 import { ProGate } from '@/components/ProGate'
+import BugReportModal from '@/components/BugReportModal'
 import { transformText, modeDescriptions } from '@/lib/transformers'
 import type { TransformMode, TransformedNote } from '@/types/transform'
 import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight, Mic, MicOff } from 'lucide-react'
@@ -32,6 +33,7 @@ export default function TransformPage() {
   const [notes, setNotes] = useState<TransformedNote[]>([])
   const [showHistory, setShowHistory] = useState(false)
   const [metadata, setMetadata] = useState<{ originalLength: number; transformedLength: number; compressionRatio?: number; tasksFound?: number } | null>(null)
+  const [isBugReportOpen, setIsBugReportOpen] = useState(false)
 
   // Voice input state
   const [isRecording, setIsRecording] = useState(false)
@@ -326,16 +328,21 @@ export default function TransformPage() {
         <section className="py-8 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/30 px-4 py-2 text-sm text-orange-700 dark:text-orange-300 mb-4">
-                <Sparkles className="w-4 h-4" />
-                Transform Your Notes
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2">
-                Transform Your Notes
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2 flex items-center justify-center gap-3">
+                <span><span className="text-orange-600 dark:text-orange-400">Transform</span> Your Notes</span>
+                <span className="text-sm bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-full font-medium">
+                  BETA
+                </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400">
+              <p className="text-gray-600 dark:text-slate-400 mb-3">
                 Turn messy notes into clean, organized text. All processing happens locally.
               </p>
+              <button
+                onClick={() => setIsBugReportOpen(true)}
+                className="text-sm text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline transition-colors"
+              >
+                Report a Bug
+              </button>
             </div>
 
             {/* Pro Gate - Wraps the transformation tools */}
@@ -613,6 +620,13 @@ export default function TransformPage() {
           </div>
         </section>
       </Layout>
+
+      {/* Bug Report Modal */}
+      <BugReportModal
+        isOpen={isBugReportOpen}
+        onClose={() => setIsBugReportOpen(false)}
+        featureName="Transform Notes"
+      />
     </>
   )
 }

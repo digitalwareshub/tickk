@@ -46,6 +46,14 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                     NEW
                   </span>
                 </Link>
+                <Link href="/mindmap" className="flex items-center justify-center space-x-1">
+                  <span className="text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Mind Map
+                  </span>
+                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1 py-0.5 rounded-full">
+                    NEW
+                  </span>
+                </Link>
                 <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Features
                 </Link>
@@ -197,6 +205,16 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   <Link href="/transform" className="flex items-center space-x-1 group">
                     <span className="text-gray-600 dark:text-slate-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                       Transform Notes
+                    </span>
+                    <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1.5 py-0.5 rounded-full">
+                      NEW
+                    </span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/mindmap" className="flex items-center space-x-1 group">
+                    <span className="text-gray-600 dark:text-slate-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                      Mind Map
                     </span>
                     <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1.5 py-0.5 rounded-full">
                       NEW
