@@ -51,7 +51,7 @@ next-env.d.ts
 .idea/
 
 # Personal files
-/public/kam.JPG
+# /public/kam.JPG - REMOVED from gitignore so profile photo appears on blog
 *.swp
 *.swo
 
