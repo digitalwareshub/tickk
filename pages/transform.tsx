@@ -2,6 +2,7 @@
  * Transform Page - Tickk Pro Feature
  * Text transformation tools: Summarize, Structure, Polish, Extract Tasks
  * Ported from SharpNotes (shrp.app)
+ * Updated: 2025-11-30
  */
 
 import { useState, useCallback, useEffect, useRef } from 'react'
