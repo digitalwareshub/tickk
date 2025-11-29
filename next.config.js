@@ -174,6 +174,10 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
+  // Turbopack configuration (Next.js 16+)
+  // Empty config tells Next.js we're aware of Turbopack and accept it as default
+  turbopack: {},
+
   // Bundle analyzer (uncomment for analysis)
   // webpack: (config, { isServer }) => {
   //   if (!isServer) {
