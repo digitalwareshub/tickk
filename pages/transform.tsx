@@ -40,6 +40,8 @@ export default function TransformPage() {
   const [isVoiceSupported, setIsVoiceSupported] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null)
+  const isStoppingRef = useRef(false) // Track manual stop
+  const transcriptRef = useRef('') // Track transcript to avoid closure issues
 
   // Load notes from storage on mount
   useEffect(() => {
@@ -55,73 +57,21 @@ export default function TransformPage() {
 
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition
+    if (typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition
       const recognitionInstance = new SpeechRecognition()
 
-      recognitionInstance.continuous = true
+      recognitionInstance.continuous = false
       recognitionInstance.interimResults = true
       recognitionInstance.lang = 'en-US'
       recognitionInstance.maxAlternatives = 1
-
-      let finalTranscript = ''
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      recognitionInstance.onresult = (event: any) => {
-        let interimTranscript = ''
-
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript = event.results[i][0].transcript
-          if (event.results[i].isFinal) {
-            finalTranscript += transcript + ' '
-          } else {
-            interimTranscript = transcript
-          }
-        }
-
-        // Update input with both final and interim results
-        setInput(prev => {
-          const baseText = prev.replace(/\[Listening...\]$/, '').trim()
-          if (interimTranscript) {
-            return baseText + (baseText ? ' ' : '') + finalTranscript + interimTranscript
-          }
-          return baseText + (baseText ? ' ' : '') + finalTranscript
-        })
-      }
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      recognitionInstance.onerror = (event: any) => {
-        console.error('Speech recognition error:', event.error)
-        if (event.error !== 'no-speech' && event.error !== 'aborted') {
-          setIsRecording(false)
-          if (event.error === 'not-allowed') {
-            toast.error('Microphone access denied')
-          } else {
-            toast.error('Voice input error')
-          }
-        }
-      }
-
-      recognitionInstance.onend = () => {
-        // Auto-restart if still supposed to be recording
-        if (isRecording) {
-          try {
-            recognitionInstance.start()
-          } catch (e) {
-            console.error('Failed to restart:', e)
-            setIsRecording(false)
-          }
-        }
-      }
-
-      recognitionInstance.onstart = () => {
-        finalTranscript = ''
-      }
 
       recognitionRef.current = recognitionInstance
       setIsVoiceSupported(true)
     } else {
       setIsVoiceSupported(false)
+      console.warn('Speech recognition not supported in this browser')
     }
 
     return () => {
@@ -134,7 +84,7 @@ export default function TransformPage() {
         }
       }
     }
-  }, [isRecording])
+  }, []) // Remove isRecording from dependencies
 
   // Save notes to storage
   const saveNotes = useCallback((updatedNotes: TransformedNote[]) => {
@@ -155,17 +105,59 @@ export default function TransformPage() {
     }
 
     if (isRecording) {
+      isStoppingRef.current = true
       recognitionRef.current.stop()
       setIsRecording(false)
       toast.success('Voice input stopped')
     } else {
       try {
+        isStoppingRef.current = false
+        transcriptRef.current = '' // Reset transcript
+        
+        // Set up event handlers fresh each time
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognitionRef.current.onresult = (event: any) => {
+          let transcript = ''
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript
+          }
+          transcriptRef.current = transcript
+        }
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognitionRef.current.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error)
+          setIsRecording(false)
+          if (event.error === 'not-allowed') {
+            toast.error('Microphone access denied. Please enable microphone permissions.')
+          } else if (event.error === 'no-speech') {
+            toast.error('No speech detected. Please try again.')
+          } else if (event.error !== 'aborted') {
+            toast.error('Voice input error: ' + event.error)
+          }
+        }
+        
+        recognitionRef.current.onend = () => {
+          setIsRecording(false)
+          isStoppingRef.current = false
+          
+          // Append the transcript to input when recording ends
+          const finalTranscript = transcriptRef.current.trim()
+          if (finalTranscript) {
+            setInput(prev => {
+              const baseText = prev.trim()
+              return baseText + (baseText ? ' ' : '') + finalTranscript
+            })
+          }
+        }
+        
         recognitionRef.current.start()
         setIsRecording(true)
         toast.success('Listening... Speak now')
       } catch (error) {
         console.error('Failed to start recording:', error)
         toast.error('Failed to start voice input')
+        isStoppingRef.current = false
       }
     }
   }, [isRecording])
@@ -588,14 +580,14 @@ export default function TransformPage() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 text-center mb-8">
               Why Transform Notes?
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Sparkles className="w-6 h-6 text-orange-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">100% Private</h3>
                 <p className="text-sm text-gray-600 dark:text-slate-400">
-                  All processing happens locally in your browser. Your notes never leave your device.
+                  All processing happens locally<br />in your browser. Your notes never<br />leave your device.
                 </p>
               </div>
               <div className="text-center">
@@ -604,7 +596,7 @@ export default function TransformPage() {
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Instant Results</h3>
                 <p className="text-sm text-gray-600 dark:text-slate-400">
-                  No waiting for cloud APIs. Get results in milliseconds using local NLP.
+                  No waiting for cloud APIs.<br />Get results in milliseconds<br />using local NLP.
                 </p>
               </div>
               <div className="text-center">
@@ -613,7 +605,18 @@ export default function TransformPage() {
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">ADHD-Friendly</h3>
                 <p className="text-sm text-gray-600 dark:text-slate-400">
-                  Turn brain dumps into organized notes. Perfect for messy thinkers.
+                  Turn brain dumps into organized<br />notes. Perfect for messy<br />thinkers.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">No Sign-Up</h3>
+                <p className="text-sm text-gray-600 dark:text-slate-400">
+                  Start using immediately.<br />No account needed,<br />no email required.
                 </p>
               </div>
             </div>

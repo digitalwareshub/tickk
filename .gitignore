@@ -49,6 +49,9 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+
+# Personal files
+/public/kam.JPG
 *.swp
 *.swo
 

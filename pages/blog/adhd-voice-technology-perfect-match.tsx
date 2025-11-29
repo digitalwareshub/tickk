@@ -78,6 +78,19 @@ export default function ADHDVoiceTechnology() {
               <span className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Neurodiversity</span>
               <span className="bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Focus Tools</span>
             </div>
+            
+            {/* Author Section */}
+            <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
+              <img 
+                src="/kam.JPG" 
+                alt="Kam" 
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <p className="font-medium text-gray-900 dark:text-slate-100">Kam</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400">Founder, Tickk</p>
+              </div>
+            </div>
           </header>
 
           {/* Article Content */}
