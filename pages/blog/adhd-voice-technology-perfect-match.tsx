@@ -83,15 +83,15 @@ export default function ADHDVoiceTechnology() {
             {/* Author Section */}
             <div className="flex items-center gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-slate-700">
               <Image 
-                src="/kam.JPG" 
-                alt="Kam" 
+                src="/digiwares_logo.jpg" 
+                alt="Digiwares" 
                 width={48}
                 height={48}
                 className="rounded-full object-cover"
               />
               <div>
-                <p className="font-medium text-gray-900 dark:text-slate-100">Kam</p>
-                <p className="text-sm text-gray-600 dark:text-slate-400">Founder, Tickk</p>
+                <p className="font-medium text-gray-900 dark:text-slate-100">Digiwares</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400">Team, Tickk</p>
               </div>
             </div>
           </header>
