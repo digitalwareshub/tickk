@@ -1,9 +1,9 @@
+/* Import accessibility styles - must be at the top */
+@import './accessibility.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import accessibility styles */
-@import './accessibility.css';
 
 /* SEO-friendly hidden elements - visible to crawlers but not to users */
 .seo-hidden {
