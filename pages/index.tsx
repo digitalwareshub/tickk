@@ -312,8 +312,8 @@ export default function Home() {
         }}
         twitter={{
           cardType: 'summary_large_image',
-          handle: '@TheTickkApp',
-          site: '@TheTickkApp',
+          handle: '@tickkdotapp',
+          site: '@tickkdotapp',
         }}
         additionalMetaTags={[
           {

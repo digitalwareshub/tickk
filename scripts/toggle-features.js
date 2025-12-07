@@ -8,6 +8,7 @@
  *   node scripts/toggle-features.js status  # Show current status
  */
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 

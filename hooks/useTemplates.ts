@@ -17,11 +17,6 @@ export function useTemplates() {
   const [error, setError] = useState<string | null>(null)
   const hasShownErrorRef = useRef(false)
 
-  // Initialize IndexedDB and load templates
-  useEffect(() => {
-    loadTemplates()
-  }, [])
-
   const getDB = useCallback(async (): Promise<IDBDatabase> => {
     return new Promise((resolve, reject) => {
       console.log('🔧 Opening IndexedDB:', DB_NAME)
@@ -109,6 +104,11 @@ export function useTemplates() {
       setLoading(false)
     }
   }, [getDB])
+
+  // Initialize IndexedDB and load templates
+  useEffect(() => {
+    loadTemplates()
+  }, [loadTemplates])
 
   const addTemplate = useCallback(async (template: Omit<TaskTemplate, 'id' | 'createdAt' | 'usageCount'>): Promise<void> => {
     try {

@@ -120,7 +120,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-4">
             <a 
-              href="https://x.com/TheTickkApp" 
+              href="https://x.com/tickkdotapp" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
@@ -386,7 +386,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
               {/* Social Links */}
               <div className="flex items-center justify-center space-x-3">
                 <a 
-                  href="https://x.com/TheTickkApp" 
+                  href="https://x.com/tickkdotapp" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-bold"

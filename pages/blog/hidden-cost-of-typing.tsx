@@ -35,8 +35,8 @@ export default function HiddenCostOfTyping() {
         <meta name="twitter:url" content="https://tickk.app/blog/hidden-cost-of-typing" />
         <meta name="twitter:title" content="The Hidden Cost of Typing: How Your Keyboard Slows Down Your Mind" />
         <meta name="twitter:description" content="The average person thinks at 400 WPM, speaks at 150 WPM, but types at just 40 WPM. Discover why voice-first capture transforms productivity." />
-        <meta name="twitter:creator" content="@TheTickkApp" />
-        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@tickkdotapp" />
+        <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#16a34a" />

@@ -36,8 +36,8 @@ export default function CompleteGuideTickkApp() {
         <meta name="twitter:url" content="https://tickk.app/blog/complete-guide-tickk-app-voice-productivity-2025" />
         <meta name="twitter:title" content="Complete Guide to tickk.app: Voice-to-Text Productivity in 2025" />
         <meta name="twitter:description" content="Master tickk.app's voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export." />
-        <meta name="twitter:creator" content="@TheTickkApp" />
-        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@tickkdotapp" />
+        <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#16a34a" />
@@ -592,7 +592,7 @@ export default function CompleteGuideTickkApp() {
 
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">What&apos;s Next?</h3>
             <p className="mb-6">
-              Stay tuned for upcoming features including team collaboration, advanced export formats, and even more ADHD-friendly productivity tools. Follow <a href="https://x.com/TheTickkApp" className="text-blue-600 hover:text-blue-700">@TheTickkApp</a> for updates.
+              Stay tuned for upcoming features including team collaboration, advanced export formats, and even more ADHD-friendly productivity tools. Follow <a href="https://x.com/tickkdotapp" className="text-blue-600 hover:text-blue-700">@tickkdotapp</a> for updates.
             </p>
 
             {/* Related Articles */}

@@ -37,8 +37,8 @@ export default function ADHDVoiceTechnology() {
         <meta name="twitter:url" content="https://tickk.app/blog/adhd-voice-technology-perfect-match" />
         <meta name="twitter:title" content="ADHD and Voice Technology: A Perfect Match for Scattered Minds" />
         <meta name="twitter:description" content="Voice technology transforms ADHD productivity by bypassing typing barriers and capturing racing thoughts naturally." />
-        <meta name="twitter:creator" content="@TheTickkApp" />
-        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@tickkdotapp" />
+        <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#16a34a" />

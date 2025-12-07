@@ -37,8 +37,8 @@ export default function MobileVoiceProductivity() {
         <meta name="twitter:url" content="https://tickk.app/blog/mobile-voice-productivity-capture-ideas-on-the-go" />
         <meta name="twitter:title" content="Mobile Voice Productivity: Capture Ideas on the Go" />
         <meta name="twitter:description" content="Master mobile voice productivity for hands-free idea capture anywhere. Transform commuting time into productive brainstorming sessions." />
-        <meta name="twitter:creator" content="@TheTickkApp" />
-        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@tickkdotapp" />
+        <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#16a34a" />

@@ -24,8 +24,8 @@ const defaultSEOConfig = {
     ],
   },
   twitter: {
-    handle: '@TheTickkApp',
-    site: '@TheTickkApp',
+    handle: '@tickkdotapp',
+    site: '@tickkdotapp',
     cardType: 'summary_large_image',
     images: [`https://tickk.app/twitter-image.webp?${IMAGE_VERSION}`],
   },

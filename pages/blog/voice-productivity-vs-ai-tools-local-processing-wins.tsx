@@ -37,8 +37,8 @@ export default function VoiceProductivityVsAITools() {
         <meta name="twitter:url" content="https://tickk.app/blog/voice-productivity-vs-ai-tools-local-processing-wins" />
         <meta name="twitter:title" content="Voice Productivity vs AI Tools: Why Local Processing Wins" />
         <meta name="twitter:description" content="Local voice processing beats AI-dependent productivity tools in privacy, speed, and reliability." />
-        <meta name="twitter:creator" content="@TheTickkApp" />
-        <meta name="twitter:site" content="@TheTickkApp" />
+        <meta name="twitter:creator" content="@tickkdotapp" />
+        <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#16a34a" />

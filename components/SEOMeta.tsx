@@ -85,8 +85,8 @@ export default function SEOMeta({
           ],
         }}
         twitter={{
-          handle: '@TheTickkApp',
-          site: '@TheTickkApp',
+          handle: '@tickkdotapp',
+          site: '@tickkdotapp',
           cardType: 'summary_large_image',
         }}
         additionalMetaTags={[

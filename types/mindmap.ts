@@ -78,7 +78,7 @@ export interface MindMapInsight {
   title: string
   description: string
   confidence: number  // 0-1
-  data?: any
+  data?: Record<string, unknown>
 }
 
 /**

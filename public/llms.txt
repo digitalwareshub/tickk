@@ -36,4 +36,4 @@ Support: https://tickk.app/support
 Email: write@digiwares.xyz
 Website: https://tickk.app
 GitHub: https://github.com/digitalwareshub/tickk
-Twitter: https://x.com/TheTickkApp
+Twitter: https://x.com/tickkdotapp
