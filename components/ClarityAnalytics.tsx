@@ -1,33 +1,12 @@
-"use client";
-
 import Script from 'next/script';
-import { useEffect } from 'react';
+
+const CLARITY_ID = 'u7ajuzfsvx';
 
 export default function ClarityAnalytics() {
-  const CLARITY_ID = 'u7ajuzfsvx';
-
-  useEffect(() => {
-    // Debug: Check if Clarity loaded
-    const checkClarity = setInterval(() => {
-      if (typeof window !== 'undefined' && (window as Window & { clarity?: unknown }).clarity) {
-        console.log('✅ Microsoft Clarity loaded successfully');
-        console.log('Clarity ID:', CLARITY_ID);
-        clearInterval(checkClarity);
-      }
-    }, 1000);
-
-    // Cleanup after 10 seconds
-    setTimeout(() => clearInterval(checkClarity), 10000);
-
-    return () => clearInterval(checkClarity);
-  }, [CLARITY_ID]);
-
   return (
-    <Script 
-      id="microsoft-clarity" 
+    <Script
+      id="microsoft-clarity"
       strategy="afterInteractive"
-      onLoad={() => console.log('Clarity script loaded')}
-      onError={() => console.error('Clarity script failed to load')}
     >
       {`
         (function(c,l,a,r,i,t,y){
