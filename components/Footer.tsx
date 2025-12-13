@@ -35,8 +35,8 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <Link href="/" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Home
                 </Link>
-                <Link href="/landing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Voice Dashboard
+                <Link href="/about" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  About
                 </Link>
                 <Link href="/transform" className="flex items-center justify-center space-x-1">
                   <span className="text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
@@ -197,8 +197,8 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/landing" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    Voice Dashboard
+                  <Link href="/about" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    About
                   </Link>
                 </li>
                 <li>

@@ -41,9 +41,9 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           {/* Center: Navigation */}
           <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
             <nav className="flex items-center gap-3 relative z-10">
-              <Link href="/landing" className={`inline-flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
-                router.pathname === '/landing' 
-                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20' 
+              <Link href="/" className={`inline-flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
+                router.pathname === '/'
+                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
                   : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
               }`}>
                 <svg className="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,16 +68,6 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
               }`}>
                 <span className="pointer-events-none">🧠</span>
                 <span className="pointer-events-none">Mind Map</span>
-              </Link>
-              <Link href="/features" className={`flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
-                router.pathname === '/features'
-                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                  : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
-              }`}>
-                <svg className="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-                <span className="pointer-events-none">Features</span>
               </Link>
             </nav>
           </div>
@@ -133,10 +123,10 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           {/* Menu panel */}
           <div className="md:hidden absolute top-full left-0 right-0 z-[55] border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
             <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
-              <Link 
-                href="/landing" 
+              <Link
+                href="/"
                 className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
-                  router.pathname === '/landing'
+                  router.pathname === '/'
                     ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
                     : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
                 }`}
@@ -161,8 +151,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 </svg>
                 <span>Transform</span>
               </Link>
-              <Link 
-                href="/mindmap" 
+              <Link
+                href="/mindmap"
                 className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
                   router.pathname === '/mindmap'
                     ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
@@ -172,20 +162,6 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
               >
                 <span className="text-xl">🧠</span>
                 <span>Mind Map</span>
-              </Link>
-              <Link 
-                href="/features" 
-                className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
-                  router.pathname === '/features'
-                    ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                    : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-                Features
               </Link>
             </div>
           </div>

@@ -7,10 +7,22 @@
         <lastmod>2025-10-29T00:00:00+00:00</lastmod>
     </url>
     <url>
-        <loc>https://tickk.app/landing</loc>
+        <loc>https://tickk.app/about</loc>
         <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-        <lastmod>2025-10-29T00:00:00+00:00</lastmod>
+        <priority>0.8</priority>
+        <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://tickk.app/transform</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>https://tickk.app/mindmap</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <lastmod>2025-12-13T00:00:00+00:00</lastmod>
     </url>
     <url>
         <loc>https://tickk.app/features</loc>

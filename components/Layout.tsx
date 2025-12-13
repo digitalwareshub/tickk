@@ -34,10 +34,10 @@ export default function Layout({
   const router = useRouter()
   
   // Auto-determine if we should show home link based on current page
-  // App page is now at /landing (after homepage swap)
-  const isHomePage = router.pathname === '/' || router.pathname === '/es'
-  const isAppPage = router.pathname === '/landing'
-  const shouldShowHomeLink = showHomeLink !== undefined ? showHomeLink : !isHomePage && !isAppPage
+  // App (Braindump) is now at / (homepage)
+  const isHomePage = router.pathname === '/'
+  const isAppPage = router.pathname === '/'
+  const shouldShowHomeLink = showHomeLink !== undefined ? showHomeLink : !isHomePage
   const shouldShowModeNavigation = isAppPage && mode && onModeChange
 
   return (

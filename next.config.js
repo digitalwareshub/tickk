@@ -230,6 +230,12 @@ const nextConfig = {
         permanent: true,
         statusCode: 301,
       },
+      // Redirect old /landing to homepage (app moved to /)
+      {
+        source: '/landing',
+        destination: '/',
+        permanent: true,
+      },
     ]
   },
 

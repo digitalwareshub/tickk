@@ -120,7 +120,7 @@ function generateAutoBreadcrumbs(pathname: string): BreadcrumbItem[] {
     '/terms': 'Terms of Service',
     '/changelog': 'Changelog',
     '/reviews': 'Reviews',
-    '/landing': 'About',
+    '/about': 'About',
     '/blog': 'Blog',
     '/bug-report': 'Bug Reports'
   }
