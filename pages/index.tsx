@@ -23,6 +23,7 @@ import LiveRegions from '@/components/LiveRegions'
 import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import BugReportModal from '@/components/BugReportModal'
+import AISurveyModal from '@/components/AISurveyModal'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -47,6 +48,7 @@ export default function App() {
   const [showCommandPalette, setShowCommandPalette] = useState(false)
   const [showTour, setShowTour] = useState(false)
   const [isBugReportOpen, setIsBugReportOpen] = useState(false)
+  const [showAISurvey, setShowAISurvey] = useState(false)
   
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
@@ -189,20 +191,35 @@ export default function App() {
   const handleDataUpdate = async (updatedData: AppData) => {
     const previousUnprocessedCount = appData?.braindump.filter(item => !item.processed).length || 0
     const newUnprocessedCount = updatedData.braindump.filter(item => !item.processed).length || 0
-    
+    const previousTasksCount = appData?.tasks.length || 0
+    const previousNotesCount = appData?.notes.length || 0
+
     setAppData(updatedData)
     await storageService.saveAllData(updatedData)
-    
+
     // Track user engagement for smart context
     const totalItems = updatedData.braindump.length + updatedData.tasks.length + updatedData.notes.length
     setTotalItemCount(totalItems)
-    
+
     // Mark as having recorded if any items exist
     if (totalItems > 0 && !hasEverRecorded) {
       setHasEverRecorded(true)
       localStorage.setItem('tickk_has_used', 'true')
     }
-    
+
+    // Check if this is a braindump processing completion (items moved to tasks/notes)
+    const itemsProcessed = (updatedData.tasks.length > previousTasksCount) ||
+                           (updatedData.notes.length > previousNotesCount)
+
+    // Show AI survey after first braindump processing if enabled
+    if (itemsProcessed && process.env.NEXT_PUBLIC_SURVEY_AI === 'true') {
+      const surveyCompleted = localStorage.getItem('tickk_ai_survey_completed')
+      if (!surveyCompleted) {
+        // Small delay to let the mode switch happen first
+        setTimeout(() => setShowAISurvey(true), 1000)
+      }
+    }
+
     // Auto-switch to braindump mode if new unprocessed items were added and we're not already there
     if (newUnprocessedCount > previousUnprocessedCount && mode === 'organized') {
       setMode('braindump')
@@ -402,7 +419,7 @@ export default function App() {
     {
       id: 'welcome',
       title: 'Welcome to Tickk! 🎉',
-      description: 'Your voice-first productivity companion. Let\'s take a quick tour of the key features.',
+      description: 'Your voice-first productivity companion. Zero AI hype. Zero cloud. Zero sign-up. Just speak, and your thoughts get organized — all processed using NLP and stored locally. Let\'s take a quick tour!',
       placement: 'center'
     },
     {
@@ -797,6 +814,12 @@ export default function App() {
         isOpen={isBugReportOpen}
         onClose={() => setIsBugReportOpen(false)}
         featureName="Braindump"
+      />
+
+      {/* AI Interest Survey Modal */}
+      <AISurveyModal
+        isOpen={showAISurvey}
+        onClose={() => setShowAISurvey(false)}
       />
     </>
   )

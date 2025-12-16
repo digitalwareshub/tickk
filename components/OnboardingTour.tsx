@@ -242,7 +242,7 @@ export default function OnboardingTour({
       {/* Tooltip */}
       <div
         style={getTooltipStyle()}
-        className="bg-white rounded-lg shadow-2xl border-2 border-blue-500 max-w-md w-full mx-4 sm:mx-auto"
+        className="bg-white rounded-lg shadow-2xl border-2 border-blue-500 max-w-md w-[calc(100%-2rem)] sm:w-full mx-auto"
       >
         <div className="p-4 sm:p-6">
           {/* Header */}
