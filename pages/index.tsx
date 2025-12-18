@@ -574,8 +574,8 @@ export default function App() {
   })
   
   /**
-   * Loading state - minimal
-   * CRITICAL: Use proper SEO title even in loading state for crawlers
+   * Loading state - includes full SEO for crawlers
+   * CRITICAL: Crawlers see this state, so it MUST have H1, H2, links, and Schema.org
    */
   if (!mounted || isLoading) {
     return (
@@ -583,17 +583,67 @@ export default function App() {
         <Head>
           <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
           <meta name="description" content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support." />
+          <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
           <meta name="robots" content="index, follow" />
           <link rel="canonical" href="https://tickk.app/" />
+
+          {/* Schema.org Structured Data for SEO - Must be in loading state for crawlers */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "tickk",
+                "alternateName": "tickk Voice Productivity App",
+                "description": "Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy.",
+                "url": "https://tickk.app",
+                "applicationCategory": "ProductivityApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "ratingCount": "79",
+                  "bestRating": "5"
+                }
+              })
+            }}
+          />
         </Head>
-        <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
+        <main className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
+          {/* SEO H1 - Always visible to crawlers */}
+          <h1 className="sr-only">
+            tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+          </h1>
+
+          {/* SEO H2 */}
+          <h2 className="sr-only">
+            Voice Recording Interface - Capture Your Thoughts Instantly
+          </h2>
+
+          {/* Internal links for SEO */}
+          <nav className="sr-only" aria-label="Site navigation">
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
+            <Link href="/support">Support</Link>
+            <Link href="/contact">Contact Us</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/features">Features</Link>
+            <Link href="/about">About</Link>
+          </nav>
+
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-gray-600 dark:border-t-violet-400 rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-600 dark:text-slate-300 text-sm">
               {needsMigration ? 'Upgrading data...' : 'Loading...'}
             </p>
           </div>
-        </div>
+        </main>
       </>
     )
   }
@@ -696,6 +746,30 @@ export default function App() {
         className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
       >
         <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
+          {/* SEO elements - Always render for crawlers (outside conditional) */}
+          <main>
+            {/* SEO H1 - Hidden but accessible to search engines */}
+            <h1 className="sr-only">
+              tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+            </h1>
+
+            {/* SEO H2 - Hidden but accessible to search engines */}
+            <h2 className="sr-only">
+              Voice Recording Interface - Capture Your Thoughts Instantly
+            </h2>
+
+            {/* Hidden internal links for SEO - invisible to users */}
+            <nav className="sr-only" aria-label="Footer navigation">
+              <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/terms">Terms of Service</Link>
+              <Link href="/support">Support</Link>
+              <Link href="/contact">Contact Us</Link>
+              <Link href="/blog">Blog</Link>
+              <Link href="/features">Features</Link>
+              <Link href="/about">About</Link>
+            </nav>
+          </main>
+
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (
             <>
@@ -713,33 +787,11 @@ export default function App() {
               />
             </>
           )}
-          
+
           {/* Main content area */}
           {appData && (
             <ErrorBoundary>
-              <main>
-                {/* SEO H1 - Hidden but accessible to search engines */}
-                <h1 className="sr-only">
-                  tickk - Free Voice Productivity App: Speak, Save, Sort it Later
-                </h1>
-                
-                {/* SEO H2 - Hidden but accessible to search engines */}
-                <h2 className="sr-only">
-                  {mode === 'braindump' 
-                    ? 'Voice Recording Interface - Capture Your Thoughts Instantly'
-                    : 'Organized Tasks and Notes Dashboard'
-                  }
-                </h2>
-                
-                {/* Hidden internal links for SEO - invisible to users */}
-                <div className="sr-only">
-                  <Link href="/privacy">Privacy Policy</Link>
-                  <Link href="/terms">Terms of Service</Link>
-                  <Link href="/support">Support</Link>
-                  <Link href="/contact">Contact Us</Link>
-                  <Link href="/blog">Blog</Link>
-                </div>
-                
+              <div>
                 {mode === 'braindump' ? (
                   <>
                     <BraindumpInterface
@@ -765,7 +817,7 @@ export default function App() {
                     onDataUpdate={handleDataUpdate}
                   />
                 )}
-              </main>
+              </div>
             </ErrorBoundary>
           )}
         </div>
