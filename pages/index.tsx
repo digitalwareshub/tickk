@@ -583,7 +583,7 @@ export default function App() {
         <Head>
           <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
           <meta name="description" content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support." />
-          <meta name="robots" content="noindex, nofollow" />
+          <meta name="robots" content="index, follow" />
           <link rel="canonical" href="https://tickk.app/" />
         </Head>
         <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
@@ -610,7 +610,7 @@ export default function App() {
           content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support."
         />
         <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/" />
 
         {/* Schema.org Structured Data for SEO */}

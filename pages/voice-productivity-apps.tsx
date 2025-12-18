@@ -313,19 +313,7 @@ export default function VoiceProductivityApps() {
                 </p>
               </Link>
               
-              <Link 
-                href="/blog/adhd-voice-technology-perfect-match"
-                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
-              >
-                                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Why Braindump-First Productivity Works →
-                </h3>
-                <p className="text-base text-gray-600 dark:text-gray-400">
-                  Learn the cognitive science behind capturing thoughts before organizing them.
-                </p>
-              </Link>
-              
-              <Link 
+              <Link
                 href="/blog/adhd-voice-technology-perfect-match"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
@@ -336,28 +324,40 @@ export default function VoiceProductivityApps() {
                   Discover why voice interfaces are ideal for ADHD minds and executive function support.
                 </p>
               </Link>
-              
-              <Link 
-                href="/blog/privacy-focused-productivity-apps"
+
+              <Link
+                href="/blog/hidden-cost-of-typing"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Privacy-Focused Productivity Apps: A Guide →
+                  The Hidden Cost of Typing →
                 </h3>
                 <p className="text-base text-gray-600 dark:text-gray-400">
-                  Compare privacy-first productivity tools and why local-first apps matter.
+                  Explore why voice input beats typing for capturing thoughts quickly.
                 </p>
               </Link>
-              
-              <Link 
-                href="/blog/voice-notes-vs-text-notes"
+
+              <Link
+                href="/adhd-productivity-tools"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Voice Notes vs Text Notes: Which is Better? →
+                  ADHD Productivity Tools Guide →
                 </h3>
                 <p className="text-base text-gray-600 dark:text-gray-400">
-                  Explore the benefits and drawbacks of voice-first vs text-first note-taking.
+                  Best productivity tools designed for neurodivergent minds.
+                </p>
+              </Link>
+
+              <Link
+                href="/blog/complete-guide-tickk-app-voice-productivity-2025"
+                className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Complete Guide to Tickk App →
+                </h3>
+                <p className="text-base text-gray-600 dark:text-gray-400">
+                  Master voice productivity with our comprehensive 2025 guide.
                 </p>
               </Link>
               

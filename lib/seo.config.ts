@@ -2,9 +2,9 @@
 const IMAGE_VERSION = 'v2';
 
 const defaultSEOConfig = {
-  titleTemplate: '%s | tickk - Free Voice Productivity App',
+  // Note: titleTemplate removed - pages set their own complete titles to avoid duplication
+  // Note: description removed - pages set their own descriptions to avoid duplicate meta tags
   defaultTitle: 'tickk - Free Voice Productivity App with Speech Recognition',
-  description: 'Speak it. Save it. Sort it later. Voice-first brain dump → auto-organized into tasks & notes. Free, open-source, local storage.',
   canonical: 'https://tickk.app/', // Fixed: Added trailing slash to match page-specific canonical
   openGraph: {
     type: 'website',

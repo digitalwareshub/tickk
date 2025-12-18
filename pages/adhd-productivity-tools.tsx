@@ -491,27 +491,27 @@ export default function ADHDProductivityTools() {
                 </p>
               </Link>
               
-              <Link 
-                href="/blog/privacy-focused-adhd-apps"
+              <Link
+                href="/blog/voice-productivity-vs-ai-tools-local-processing-wins"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Privacy-First ADHD Tools Guide →
+                  Privacy-First Productivity: Local vs Cloud →
                 </h3>
                 <p className="text-base text-gray-600 dark:text-gray-400">
-                  ADHD-friendly apps that respect your privacy and work offline.
+                  Why local processing wins for ADHD-friendly privacy protection.
                 </p>
               </Link>
-              
-              <Link 
-                href="/blog/executive-function-support-tools"
+
+              <Link
+                href="/blog/mobile-voice-productivity-capture-ideas-on-the-go"
                 className="block p-4 bg-white dark:bg-slate-700 rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Executive Function Support Tools →
+                  Mobile Voice Productivity Guide →
                 </h3>
                 <p className="text-base text-gray-600 dark:text-gray-400">
-                  Apps and techniques to support working memory and task initiation.
+                  Capture ideas on the go with mobile voice productivity.
                 </p>
               </Link>
               
