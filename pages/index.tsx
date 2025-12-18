@@ -582,7 +582,7 @@ export default function App() {
       <>
         <Head>
           <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
-          <meta name="description" content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support." />
+          <meta name="description" content="Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private." />
           <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
           <meta name="robots" content="index, follow" />
           <link rel="canonical" href="https://tickk.app/" />
@@ -638,9 +638,13 @@ export default function App() {
             <Link href="/about" className="hover:text-gray-600 dark:hover:text-slate-300">About</Link>
             <Link href="/features" className="hover:text-gray-600 dark:hover:text-slate-300">Features</Link>
             <Link href="/blog" className="hover:text-gray-600 dark:hover:text-slate-300">Blog</Link>
+            <Link href="/adhd-productivity-tools" className="hover:text-gray-600 dark:hover:text-slate-300">ADHD Tools</Link>
+            <Link href="/voice-productivity-apps" className="hover:text-gray-600 dark:hover:text-slate-300">Voice Apps</Link>
             <Link href="/support" className="hover:text-gray-600 dark:hover:text-slate-300">Support</Link>
             <Link href="/privacy" className="hover:text-gray-600 dark:hover:text-slate-300">Privacy</Link>
             <Link href="/terms" className="hover:text-gray-600 dark:hover:text-slate-300">Terms</Link>
+            <Link href="/contact" className="hover:text-gray-600 dark:hover:text-slate-300">Contact</Link>
+            <Link href="/changelog" className="hover:text-gray-600 dark:hover:text-slate-300">Changelog</Link>
           </nav>
         </main>
       </>
@@ -654,10 +658,7 @@ export default function App() {
     <>
       <Head>
         <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
-        <meta 
-          name="description" 
-          content="Free voice-first productivity app for ADHD & neurodivergent minds. Brain dump through speech, auto-organize into tasks & notes. No signup, works offline, complete privacy. Features Focus Mode, Command Palette (⌘K), and executive function support."
-        />
+        <meta name="description" content="Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private." />
         <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/" />
