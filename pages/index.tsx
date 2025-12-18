@@ -615,27 +615,16 @@ export default function App() {
             }}
           />
         </Head>
-        <main className="min-h-screen flex items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
-          {/* SEO H1 - Always visible to crawlers */}
-          <h1 className="sr-only">
-            tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+        <main className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900 px-4">
+          {/* Visible H1 for SEO - styled to blend with loading screen */}
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center">
+            tickk
           </h1>
 
-          {/* SEO H2 */}
-          <h2 className="sr-only">
-            Voice Recording Interface - Capture Your Thoughts Instantly
+          {/* Visible H2 for SEO - styled as tagline */}
+          <h2 className="text-sm md:text-base text-gray-500 dark:text-slate-400 mb-8 text-center max-w-md">
+            Free Voice Productivity App — Speak, Save, Sort it Later
           </h2>
-
-          {/* Internal links for SEO */}
-          <nav className="sr-only" aria-label="Site navigation">
-            <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/terms">Terms of Service</Link>
-            <Link href="/support">Support</Link>
-            <Link href="/contact">Contact Us</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/features">Features</Link>
-            <Link href="/about">About</Link>
-          </nav>
 
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-gray-600 dark:border-t-violet-400 rounded-full animate-spin mx-auto mb-4"></div>
@@ -643,6 +632,16 @@ export default function App() {
               {needsMigration ? 'Upgrading data...' : 'Loading...'}
             </p>
           </div>
+
+          {/* Internal links for SEO - visible as subtle footer */}
+          <nav className="mt-12 flex flex-wrap justify-center gap-4 text-xs text-gray-400 dark:text-slate-500" aria-label="Site navigation">
+            <Link href="/about" className="hover:text-gray-600 dark:hover:text-slate-300">About</Link>
+            <Link href="/features" className="hover:text-gray-600 dark:hover:text-slate-300">Features</Link>
+            <Link href="/blog" className="hover:text-gray-600 dark:hover:text-slate-300">Blog</Link>
+            <Link href="/support" className="hover:text-gray-600 dark:hover:text-slate-300">Support</Link>
+            <Link href="/privacy" className="hover:text-gray-600 dark:hover:text-slate-300">Privacy</Link>
+            <Link href="/terms" className="hover:text-gray-600 dark:hover:text-slate-300">Terms</Link>
+          </nav>
         </main>
       </>
     )
