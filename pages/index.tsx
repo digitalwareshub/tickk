@@ -24,6 +24,7 @@ import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import BugReportModal from '@/components/BugReportModal'
 import AISurveyModal from '@/components/AISurveyModal'
+import ShutdownBanner from '@/components/ShutdownBanner'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -740,11 +741,12 @@ export default function App() {
         />
       </Head>
 
-      <Layout 
-        mode={mode} 
+      <Layout
+        mode={mode}
         onModeChange={handleModeSwitch}
         className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
       >
+        <ShutdownBanner />
         <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           {/* SEO elements - Always render for crawlers (outside conditional) */}
           <main>
