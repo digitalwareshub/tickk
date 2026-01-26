@@ -1,6 +1,6 @@
 /**
- * Shutdown Banner Component
- * Shows a dismissable banner asking users for feedback about keeping tickk alive
+ * Feedback Banner Component
+ * Shows a dismissable banner asking users for suggestions to improve tickk
  * Submits responses to Formspree
  */
 
@@ -25,8 +25,10 @@ export default function ShutdownBanner() {
     }
   }, [])
 
-  const handleDismiss = () => {
-    localStorage.setItem(STORAGE_KEY, 'true')
+  const handleDismiss = (permanent = false) => {
+    if (permanent) {
+      localStorage.setItem(STORAGE_KEY, 'true')
+    }
     setIsVisible(false)
   }
 
@@ -39,7 +41,7 @@ export default function ShutdownBanner() {
     try {
       const payload: Record<string, string> = {
         feedback: feedback.trim(),
-        _subject: 'tickk Shutdown Feedback',
+        _subject: 'tickk Improvement Suggestions',
       }
 
       // Only include email if provided (Formspree validates email format)
@@ -58,7 +60,7 @@ export default function ShutdownBanner() {
       if (response.ok) {
         setSubmitted(true)
         setTimeout(() => {
-          handleDismiss()
+          handleDismiss(true)
         }, 3000)
       } else {
         console.error('Formspree error:', response.status)
@@ -80,17 +82,16 @@ export default function ShutdownBanner() {
         {!showFeedbackForm && !submitted && (
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-amber-800 dark:text-amber-200 flex-1">
-              <span className="font-medium">Real talk:</span> tickk isn&apos;t growing — despite being free, open-source, private, offline, no AI, no signup.
-              We&apos;re deciding whether to shut it down. If you&apos;d miss this →{' '}
+              Based on your feedback, we&apos;ve decided to keep tickk alive! Help us make it better →{' '}
               <button
                 onClick={() => setShowFeedbackForm(true)}
                 className="font-semibold underline hover:no-underline"
               >
-                Give Feedback
+                Give Suggestions
               </button>
             </p>
             <button
-              onClick={handleDismiss}
+              onClick={() => handleDismiss(false)}
               className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
               aria-label="Dismiss banner"
             >
@@ -103,11 +104,11 @@ export default function ShutdownBanner() {
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="flex items-start justify-between gap-4">
               <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-                Why would you miss tickk? What makes it valuable to you?
+                What features or improvements would you like to see in tickk?
               </p>
               <button
                 type="button"
-                onClick={handleDismiss}
+                onClick={() => handleDismiss(false)}
                 className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
                 aria-label="Dismiss banner"
               >
@@ -117,7 +118,7 @@ export default function ShutdownBanner() {
             <textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              placeholder="I use tickk because..."
+              placeholder="I'd like to see..."
               className="w-full px-3 py-2 text-sm border border-amber-300 dark:border-amber-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none"
               rows={2}
               required
@@ -153,10 +154,10 @@ export default function ShutdownBanner() {
         {submitted && (
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              <span className="font-medium">Thank you!</span> Your feedback means a lot. We&apos;ll take it into consideration.
+              <span className="font-medium">Thank you!</span> Your suggestions mean a lot. We&apos;ll take them into consideration.
             </p>
             <button
-              onClick={handleDismiss}
+              onClick={() => handleDismiss(true)}
               className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
               aria-label="Dismiss banner"
             >
