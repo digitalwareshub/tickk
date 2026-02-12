@@ -72,8 +72,10 @@ docs/roadmap.md
 docs/ChatGPT-Classifier.md
 docs/ChatGPT-Classifier 2.md
 
-# Exclude entire docs folder
-/docs/
+# Exclude docs folder contents except important files
+/docs/*
+!/docs/BING.md
+!/docs/PROJECT_STRUCTURE.md
 
 # Claude documentation folder
 /ClaudeDocs/
