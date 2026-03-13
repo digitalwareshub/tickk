@@ -1,13 +1,13 @@
 /**
- * Feedback Banner Component
- * Shows a dismissable banner asking users for suggestions to improve tickk
- * Submits responses to Formspree
+ * Transition Banner Component
+ * Nudges users to try VoiceBrainDump while tickk goes mobile
+ * Collects feedback on what matters for the mobile app
  */
 
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
-const STORAGE_KEY = 'tickk_shutdown_banner_dismissed'
+const STORAGE_KEY = 'tickk_transition_banner_dismissed'
 
 export default function ShutdownBanner() {
   const [isVisible, setIsVisible] = useState(false)
@@ -18,7 +18,6 @@ export default function ShutdownBanner() {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    // Check if banner was previously dismissed
     const dismissed = localStorage.getItem(STORAGE_KEY)
     if (!dismissed) {
       setIsVisible(true)
@@ -41,10 +40,9 @@ export default function ShutdownBanner() {
     try {
       const payload: Record<string, string> = {
         feedback: feedback.trim(),
-        _subject: 'tickk Improvement Suggestions',
+        _subject: 'tickk Mobile App Feedback',
       }
 
-      // Only include email if provided (Formspree validates email format)
       if (email.trim()) {
         payload.email = email.trim()
       }
@@ -61,7 +59,7 @@ export default function ShutdownBanner() {
         setSubmitted(true)
         setTimeout(() => {
           handleDismiss(true)
-        }, 3000)
+        }, 4000)
       } else {
         console.error('Formspree error:', response.status)
         alert('Failed to submit feedback. Please try again.')
@@ -77,22 +75,31 @@ export default function ShutdownBanner() {
   if (!isVisible) return null
 
   return (
-    <div className="bg-amber-50 dark:bg-amber-900/30 border-b border-amber-200 dark:border-amber-700">
+    <div className="bg-blue-50 dark:bg-blue-900/30 border-b border-blue-200 dark:border-blue-700">
       <div className="max-w-4xl mx-auto px-4 py-3">
         {!showFeedbackForm && !submitted && (
           <div className="flex items-center justify-between gap-4">
-            <p className="text-sm text-amber-800 dark:text-amber-200 flex-1">
-              Based on your feedback, we&apos;ve decided to keep tickk alive! Help us make it better →{' '}
+            <p className="text-sm text-blue-800 dark:text-blue-200 flex-1">
+              tickk is going mobile! While we build the app, try{' '}
+              <a
+                href="https://voicebraindump.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline hover:no-underline"
+              >
+                VoiceBrainDump
+              </a>
+              {' '}— same voice capture, plus idea connections.{' '}
               <button
                 onClick={() => setShowFeedbackForm(true)}
                 className="font-semibold underline hover:no-underline"
               >
-                Give Suggestions
+                Send feedback
               </button>
             </p>
             <button
               onClick={() => handleDismiss(false)}
-              className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
+              className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-1"
               aria-label="Dismiss banner"
             >
               <X className="w-4 h-4" />
@@ -103,13 +110,13 @@ export default function ShutdownBanner() {
         {showFeedbackForm && !submitted && (
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="flex items-start justify-between gap-4">
-              <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
-                What features or improvements would you like to see in tickk?
+              <p className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                What features matter most for the tickk mobile app?
               </p>
               <button
                 type="button"
                 onClick={() => handleDismiss(false)}
-                className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-1"
                 aria-label="Dismiss banner"
               >
                 <X className="w-4 h-4" />
@@ -118,8 +125,8 @@ export default function ShutdownBanner() {
             <textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              placeholder="I'd like to see..."
-              className="w-full px-3 py-2 text-sm border border-amber-300 dark:border-amber-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none"
+              placeholder="I'd love to see..."
+              className="w-full px-3 py-2 text-sm border border-blue-300 dark:border-blue-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               rows={2}
               required
             />
@@ -128,21 +135,21 @@ export default function ShutdownBanner() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email (optional - for updates)"
-                className="flex-1 px-3 py-2 text-sm border border-amber-300 dark:border-amber-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                placeholder="Email (optional — we'll notify you when the app launches)"
+                className="flex-1 px-3 py-2 text-sm border border-blue-300 dark:border-blue-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => setShowFeedbackForm(false)}
-                  className="px-4 py-2 text-sm text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100"
+                  className="px-4 py-2 text-sm text-blue-700 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting || !feedback.trim()}
-                  className="px-4 py-2 text-sm font-medium bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-white rounded-md transition-colors"
+                  className="px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-md transition-colors"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Feedback'}
                 </button>
@@ -153,12 +160,21 @@ export default function ShutdownBanner() {
 
         {submitted && (
           <div className="flex items-center justify-between gap-4">
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              <span className="font-medium">Thank you!</span> Your suggestions mean a lot. We&apos;ll take them into consideration.
+            <p className="text-sm text-blue-800 dark:text-blue-200">
+              <span className="font-medium">Thanks!</span> We&apos;ll use your feedback to shape the mobile app. In the meantime, give{' '}
+              <a
+                href="https://voicebraindump.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold underline hover:no-underline"
+              >
+                VoiceBrainDump
+              </a>
+              {' '}a spin.
             </p>
             <button
               onClick={() => handleDismiss(true)}
-              className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-200 p-1"
+              className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 p-1"
               aria-label="Dismiss banner"
             >
               <X className="w-4 h-4" />
