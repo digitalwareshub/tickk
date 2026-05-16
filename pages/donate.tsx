@@ -161,11 +161,11 @@ export default function DonatePage() {
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-              No subscription required
+              One-time support
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
-              Secure payments via Stripe
+              Secure payments
             </div>
           </div>
         </div>

@@ -210,8 +210,8 @@ export default function VoiceProductivityApps() {
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               <div className="text-center">
                 <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">100%</div>
-                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Free Forever</div>
-                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">No premium tiers</div>
+                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Free Core</div>
+                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Unlimited brain dumps</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>

@@ -389,7 +389,7 @@ export default function Features() {
                   <tr>
                     <td className="px-6 py-4 text-gray-900 dark:text-slate-100">Price</td>
                     <td className="px-6 py-4 text-center text-green-600 dark:text-green-400 font-bold">FREE Forever</td>
-                    <td className="px-6 py-4 text-center text-gray-600 dark:text-slate-400">$5-15/month</td>
+                    <td className="px-6 py-4 text-center text-gray-600 dark:text-slate-400">Recurring fees</td>
                   </tr>
                 </tbody>
               </table>

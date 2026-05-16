@@ -307,12 +307,12 @@ export default function BraindumpFirstBlogPost() {
               </div>
               
               <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">💰 Free Forever</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">💰 Free Core</h4>
                 <ul className="text-gray-700 dark:text-slate-300 space-y-1">
-                  <li>• No trial periods</li>
-                  <li>• No premium tiers</li>
+                  <li>• Unlimited voice brain dumps</li>
+                  <li>• Local storage</li>
                   <li>• No ads</li>
-                  <li>• Actually free (because it costs us $0 per user)</li>
+                  <li>• Basic export included</li>
                 </ul>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function BraindumpFirstBlogPost() {
 
 
             <p className="mb-8">
-              No email required. No credit card. No &quot;free trial that&apos;s actually paid.&quot;
+              No email required. No credit card. Start with the free core workflow.
             </p>
 
             <p className="mb-8">

@@ -15,7 +15,7 @@ export interface FAQItem {
 export const homepageFAQs: FAQItem[] = [
   {
     question: "Is Tickk really free?",
-    answer: "Yes, Tickk is 100% free forever. There are no hidden costs, no premium tiers, no subscription fees. We built Tickk as a public good for productivity and mental health. All features including voice recognition, task organization, and offline functionality are completely free."
+    answer: "Tickk is free for unlimited voice brain dumps, task and note organization, local storage, PWA install, and basic export. Tickk Pro lifetime access is planned for mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features."
   },
   {
     question: "Do I need to create an account?",

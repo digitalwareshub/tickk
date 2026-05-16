@@ -10,7 +10,7 @@ import Layout from '@/components/Layout'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { DataMigrator } from '@/lib/migration/migrator'
 import { StorageService } from '@/lib/storage/storage-service'
-import { enhancedAnalytics, trackPageView } from '@/lib/analytics/enhanced-analytics'
+import { enhancedAnalytics, trackPageView, trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 import type { AppData, UserPreferences, VoiceItem } from '@/types/braindump'
 
 import BraindumpInterface from '@/components/BraindumpInterface'
@@ -24,7 +24,7 @@ import CommandPalette, { type Command } from '@/components/CommandPalette'
 import OnboardingTour, { type TourStep } from '@/components/OnboardingTour'
 import BugReportModal from '@/components/BugReportModal'
 import AISurveyModal from '@/components/AISurveyModal'
-import ShutdownBanner from '@/components/ShutdownBanner'
+import ProInterestModal from '@/components/ProInterestModal'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 type AppMode = 'braindump' | 'organized' | 'focus'
@@ -50,6 +50,7 @@ export default function App() {
   const [showTour, setShowTour] = useState(false)
   const [isBugReportOpen, setIsBugReportOpen] = useState(false)
   const [showAISurvey, setShowAISurvey] = useState(false)
+  const [showProModal, setShowProModal] = useState(false)
   
   const [isRecording, setIsRecording] = useState(false)
   const [currentTranscript, setCurrentTranscript] = useState('')
@@ -245,6 +246,23 @@ export default function App() {
     if (status.transcript !== undefined) setCurrentTranscript(status.transcript)
     if (status.error !== undefined) setRecordingError(status.error)
     if (status.isSupported !== undefined) setIsSupported(status.isSupported)
+  }, [])
+
+  const handleStartBrainDumpClick = useCallback(() => {
+    trackProductEvent('cta_click', 'homepage_start_brain_dump')
+    if (recordingControls?.startRecording && isSupported) {
+      recordingControls.startRecording()
+      return
+    }
+
+    document.getElementById('text-input')?.focus()
+    document.getElementById('recording-button')?.focus()
+  }, [recordingControls, isSupported])
+
+  const handleGetLifetimeProClick = useCallback(() => {
+    trackProductEvent('pricing_clicked', 'homepage_cta')
+    trackProductEvent('pro_clicked', 'homepage_cta')
+    setShowProModal(true)
   }, [])
   
   /**
@@ -630,7 +648,7 @@ export default function App() {
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-gray-600 dark:border-t-violet-400 rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-600 dark:text-slate-300 text-sm">
-              {needsMigration ? 'Upgrading data...' : 'Loading...'}
+              {needsMigration ? 'Preparing data...' : 'Loading...'}
             </p>
           </div>
 
@@ -746,7 +764,6 @@ export default function App() {
         onModeChange={handleModeSwitch}
         className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
       >
-        <ShutdownBanner />
         <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
           {/* SEO elements - Always render for crawlers (outside conditional) */}
           <main>
@@ -787,6 +804,32 @@ export default function App() {
                 recordingError={recordingError}
                 onTextSubmit={handleTextSubmit}
               />
+              <section className="px-4 pb-12">
+                <div className="mx-auto max-w-4xl rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/70 px-6 py-8 text-center">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-50 mb-3">
+                    Speak your thoughts. Tickk organizes them instantly.
+                  </h2>
+                  <p className="mx-auto max-w-2xl text-gray-600 dark:text-slate-300 mb-6">
+                    Private voice brain dump app for people who think faster than they type.
+                  </p>
+                  <div className="flex flex-col sm:flex-row justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={handleStartBrainDumpClick}
+                      className="inline-flex items-center justify-center rounded-lg bg-gray-900 dark:bg-slate-700 px-6 py-3 font-semibold text-white hover:bg-gray-800 dark:hover:bg-slate-600"
+                    >
+                      Start Brain Dump
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleGetLifetimeProClick}
+                      className="inline-flex items-center justify-center rounded-lg bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700"
+                    >
+                      Get Lifetime Pro
+                    </button>
+                  </div>
+                </div>
+              </section>
             </>
           )}
 
@@ -874,6 +917,12 @@ export default function App() {
       <AISurveyModal
         isOpen={showAISurvey}
         onClose={() => setShowAISurvey(false)}
+      />
+
+      <ProInterestModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        source="homepage"
       />
     </>
   )

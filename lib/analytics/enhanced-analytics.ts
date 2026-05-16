@@ -523,6 +523,19 @@ export const trackSectionTime = (sectionId: string, timeSpent: number) => {
   enhancedAnalytics.trackSectionTime(sectionId, timeSpent);
 };
 
+export const trackProductEvent = (
+  action: string,
+  label?: string,
+  customParameters?: Record<string, string | number | boolean | null | undefined>
+) => {
+  enhancedAnalytics.trackEvent({
+    action,
+    category: 'product',
+    label,
+    custom_parameters: customParameters,
+  });
+};
+
 // Initialize scroll tracking on page load
 if (typeof window !== 'undefined') {
   window.addEventListener('load', () => {

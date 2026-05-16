@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import { StorageService } from '@/lib/storage/storage-service'
 import { VoiceClassifier } from '@/lib/classification/classifier'
 import { trackPageInteraction } from '@/lib/analytics'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 import { AccessibilityAnnouncer } from '@/lib/services/announcer.service'
 import { ErrorMessages, SuccessMessages } from '@/lib/utils/error-messages'
 import ProcessBraindumpModal from './ProcessBraindumpModal'
@@ -189,6 +190,7 @@ export default function BraindumpInterface({
     try {
       recognition.start()
       announcer.announceRecordingStatus('started')
+      trackProductEvent('recording_started', 'voice')
       trackPageInteraction('voice_recording_started', 'braindump')
     } catch (error) {
       console.error('Failed to start recording:', error)
@@ -304,6 +306,7 @@ export default function BraindumpInterface({
       announcer.announce(`Added ${itemCount} ${itemWord}. Click Organize to categorize your thoughts.`, 'polite')
 
       // Track success
+      trackProductEvent('recording_completed', 'braindump', { item_count: itemCount })
       trackPageInteraction('braindump_items_added', `count_${itemCount}`)
 
       setCurrentTranscript('')
@@ -382,6 +385,10 @@ export default function BraindumpInterface({
       }
       
       toast.success(SuccessMessages.PROCESSING_COMPLETE)
+      trackProductEvent('brain_dump_completed', 'organize', {
+        tasks: organizedData.tasks.length,
+        notes: organizedData.notes.length,
+      })
       trackPageInteraction('braindump_session_completed', `${organizedData.tasks.length}_tasks_${organizedData.notes.length}_notes`)
       
     } catch (error) {

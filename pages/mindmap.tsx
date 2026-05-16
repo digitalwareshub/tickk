@@ -10,6 +10,7 @@ import Layout from '@/components/Layout'
 import MindMapView from '@/components/MindMapView'
 import type { AppData } from '@/types/braindump'
 import { StorageService } from '@/lib/storage/storage-service'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 export default function MindMapPage() {
   const [appData, setAppData] = useState<AppData | null>(null)
@@ -17,6 +18,8 @@ export default function MindMapPage() {
   const [storageService] = useState(() => StorageService.getInstance())
 
   useEffect(() => {
+    trackProductEvent('mindmap_opened', 'mindmap_page')
+
     const loadData = async () => {
       try {
         const data = await storageService.getAllData()

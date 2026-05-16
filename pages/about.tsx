@@ -324,7 +324,7 @@ export default function About() {
           { name: 'keywords-adhd-core', content: 'best free productivity apps for ADHD, voice note app for ADHD brain, ADHD friendly task management tools, brain dump apps for ADHD and neurodivergent people, simple productivity apps for ADHD students, capture thoughts app for ADHD adults, ADHD focus tool free online, free productivity app for ADHD adults, best productivity apps for ADHD and neurodivergent thinkers, brain dump app for ADHD racing thoughts, voice note app for ADHD hyperfocus, ADHD friendly task management app free, capture thoughts instantly ADHD tool, organize later productivity app for ADHD' },
           { name: 'keywords-voice-braindump', content: 'brain dump app online free, voice to notes productivity app, capture ideas with voice app, free brain dump organizer app, instant voice transcription productivity tool, note taking app that organizes later, quick voice capture app for ideas' },
           { name: 'keywords-startup', content: 'new productivity startup 2025, featured indie app, trending startup tools, best new productivity apps, innovative voice startup, ADHD startup tools, neurodivergent tech startup, bootstrapped productivity app, indie maker productivity tool, startup discovery, new app launch 2025, featured on Product Hunt, trending on Hacker News' },
-          { name: 'keywords-affordability', content: 'free alternative to ADHD productivity apps, free alternative to TickTick Notion for ADHD, free ADHD organization apps 2025, free task manager app for busy minds, productivity tools for ADHD without subscription, free alternative to expensive ADHD productivity apps, free productivity app with no subscription' },
+          { name: 'keywords-affordability', content: 'free alternative to ADHD productivity apps, free alternative to TickTick Notion for ADHD, free ADHD organization apps 2025, free task manager app for busy minds, productivity tools without recurring fees, free alternative to expensive ADHD productivity apps, free productivity app with no recurring fees' },
           { name: 'keywords-students-makers', content: 'productivity apps for college students ADHD, note taking app for exams ADHD friendly, best productivity app for makers 2025, quick capture tools for creators and entrepreneurs, free idea capture app for startups, best free brain dump app for students 2025, productivity app for researchers and PhD students, note taking app for ADHD students free, lecture capture voice note app for students, study session brain dump app, assignment idea capture tool free' },
           { name: 'keywords-pain-points', content: 'overwhelmed by productivity apps ADHD, simple alternative to complex task managers, stop forgetting ideas ADHD tool, best app to avoid context switching ADHD, minimal productivity app for busy people, brain dump productivity tool 2025 free, minimal productivity app for overwhelmed people, quick capture and organize later app, one tap voice productivity tool' },
           { name: 'keywords-professionals', content: 'productivity app for busy professionals free, best voice note app for meetings and action items, one tap brain dump app for professionals, capture ideas during commutes productivity app, productivity tool for executives on the go, free productivity app for entrepreneurs and founders' },
@@ -390,7 +390,7 @@ export default function About() {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "USD",
-                "description": "Free forever - no subscription, no hidden costs, no account required",
+                "description": "Free core plan with no hidden costs and no account required",
                 "availability": "https://schema.org/InStock"
               },
               "aggregateRating": {
@@ -518,7 +518,7 @@ export default function About() {
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
                 Just speak your thoughts and watch them become organized tasks and notes. 
-                No complex setup, no subscriptions, no data collection. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link> - everything stays on your device.
+                No complex setup, no recurring fees for the core workflow, no data collection. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link> - everything stays on your device.
               </p>
 
               {/* Trust Indicators */}
@@ -536,7 +536,7 @@ export default function About() {
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🆓</div>
                   <div className="text-base font-medium text-gray-700 dark:text-slate-300">Free Forever</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">No subscription required</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">No recurring fee required</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">📱</div>
@@ -782,7 +782,7 @@ export default function About() {
                   <li>• No overwhelming setup or categories</li>
                   <li>• Capture hyperfocus insights instantly</li>
                   <li>• Process later when you&apos;re in &quot;organize mode&quot;</li>
-                  <li>• <strong className="text-orange-600 dark:text-orange-400">Free forever</strong> - no expensive subscriptions</li>
+                  <li>• <strong className="text-orange-600 dark:text-orange-400">Free core workflow</strong> - no recurring fees</li>
                 </ul>
               </div>
 
@@ -1303,7 +1303,7 @@ export default function About() {
                   Is tickk a free productivity app for ADHD?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Yes! tickk is completely free forever and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps that cost $10-20/month, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
+                  Yes! tickk is free to start and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps with recurring fees, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
                 </p>
               </div>
 
@@ -1323,7 +1323,7 @@ export default function About() {
                   What makes tickk different from task managers like Notion or TickTick?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no subscription fees. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
+                  Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no recurring fees for the core workflow. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
                 </p>
               </div>
 

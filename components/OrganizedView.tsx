@@ -23,6 +23,7 @@ import { StorageService } from '@/lib/storage/storage-service'
 import type { AppData, UserPreferences, VoiceItem, TaskTemplate } from '@/types/braindump'
 import { parseEarliestDate } from '@/lib/utils/dateParser'
 import { exportToCalendar as exportICS, getExportableTasksCount } from '@/lib/utils/icsExport'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 interface OrganizedViewProps {
   appData: AppData
@@ -538,6 +539,7 @@ export default function OrganizedView({
 
   // Export functionality
   const exportToCSV = () => {
+    trackProductEvent('export_clicked', 'csv')
     const allItems = [
       ...organizedTasks.map(task => ({
         type: 'Task',
@@ -576,6 +578,7 @@ export default function OrganizedView({
   }
 
   const exportToJSON = () => {
+    trackProductEvent('export_clicked', 'json')
     const exportData = {
       exportDate: new Date().toISOString(),
       tasks: organizedTasks,
@@ -597,6 +600,7 @@ export default function OrganizedView({
 
   const exportToCalendar = () => {
     try {
+      trackProductEvent('export_clicked', 'calendar')
       const totalTasks = organizedTasks.length
       const exportableCount = getExportableTasksCount(organizedTasks)
       
@@ -941,7 +945,10 @@ export default function OrganizedView({
             {/* Export Button */}
             <div className="relative flex-1 sm:flex-initial">
               <button
-                onClick={() => setShowExportMenu(!showExportMenu)}
+                onClick={() => {
+                  trackProductEvent('export_clicked', 'menu')
+                  setShowExportMenu(!showExportMenu)
+                }}
                 className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
