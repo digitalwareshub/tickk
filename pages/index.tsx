@@ -600,8 +600,8 @@ export default function App() {
     return (
       <>
         <Head>
-          <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
-          <meta name="description" content="Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private." />
+          <title>Tickk - Private Voice Brain Dump App</title>
+          <meta name="description" content="Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser." />
           <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
           <meta name="robots" content="index, follow" />
           <link rel="canonical" href="https://tickk.app/" />
@@ -614,8 +614,8 @@ export default function App() {
                 "@context": "https://schema.org",
                 "@type": "WebApplication",
                 "name": "tickk",
-                "alternateName": "tickk Voice Productivity App",
-                "description": "Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private.",
+                "alternateName": "tickk Voice Brain Dump App",
+                "description": "Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser.",
                 "url": "https://tickk.app",
                 "applicationCategory": "ProductivityApplication",
                 "operatingSystem": "Web Browser",
@@ -634,7 +634,7 @@ export default function App() {
             }}
           />
         </Head>
-        <main className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900 px-4">
+        <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-orange-50/70 via-white to-amber-50/60 dark:from-slate-950 dark:via-slate-900 dark:to-orange-950 px-4">
           {/* Visible H1 for SEO - styled to blend with loading screen */}
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center">
             tickk
@@ -642,11 +642,11 @@ export default function App() {
 
           {/* Visible H2 for SEO - styled as tagline */}
           <h2 className="text-sm md:text-base text-gray-500 dark:text-slate-400 mb-8 text-center max-w-md">
-            Free Voice Productivity App — Speak, Save, Sort it Later
+            Private voice brain dump app for fast-moving thoughts
           </h2>
 
           <div className="text-center">
-            <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-gray-600 dark:border-t-violet-400 rounded-full animate-spin mx-auto mb-4"></div>
+            <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-orange-600 dark:border-t-orange-400 rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-gray-600 dark:text-slate-300 text-sm">
               {needsMigration ? 'Preparing data...' : 'Loading...'}
             </p>
@@ -676,8 +676,8 @@ export default function App() {
   return (
     <>
       <Head>
-        <title>Free Voice Productivity App for ADHD | Tickk - Brain Dump & Auto-Organize</title>
-        <meta name="description" content="Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private." />
+        <title>Tickk - Private Voice Brain Dump App</title>
+        <meta name="description" content="Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser." />
         <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/" />
@@ -690,8 +690,8 @@ export default function App() {
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "tickk",
-              "alternateName": "tickk Voice Productivity App",
-              "description": "Free voice productivity app for ADHD. Speak your thoughts, auto-organize into tasks & notes. No signup, works offline, 100% private.",
+              "alternateName": "tickk Voice Brain Dump App",
+              "description": "Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser.",
               "url": "https://tickk.app",
               "applicationCategory": "ProductivityApplication",
               "operatingSystem": "Web Browser",
@@ -762,14 +762,14 @@ export default function App() {
       <Layout
         mode={mode}
         onModeChange={handleModeSwitch}
-        className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900"
+        className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-orange-950"
       >
-        <div className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-violet-900">
+        <div className="min-h-screen bg-gradient-to-b from-orange-50/60 via-white to-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-orange-950">
           {/* SEO elements - Always render for crawlers (outside conditional) */}
           <main>
             {/* SEO H1 - Hidden but accessible to search engines */}
             <h1 className="sr-only">
-              tickk - Free Voice Productivity App: Speak, Save, Sort it Later
+              Speak your thoughts. Tickk organizes them instantly.
             </h1>
 
             {/* SEO H2 - Hidden but accessible to search engines */}
@@ -805,12 +805,12 @@ export default function App() {
                 onTextSubmit={handleTextSubmit}
               />
               <section className="px-4 pb-12">
-                <div className="mx-auto max-w-4xl rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/70 px-6 py-8 text-center">
+                <div className="mx-auto max-w-4xl rounded-lg border border-orange-100 dark:border-orange-900/30 bg-gradient-to-br from-white via-orange-50/60 to-amber-50/60 dark:from-slate-900/90 dark:via-slate-900/80 dark:to-orange-950/30 px-6 py-8 text-center shadow-sm">
                   <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-50 mb-3">
                     Speak your thoughts. Tickk organizes them instantly.
                   </h2>
                   <p className="mx-auto max-w-2xl text-gray-600 dark:text-slate-300 mb-6">
-                    Private voice brain dump app for people who think faster than they type.
+                    Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser.
                   </p>
                   <div className="flex flex-col sm:flex-row justify-center gap-3">
                     <button
@@ -823,7 +823,7 @@ export default function App() {
                     <button
                       type="button"
                       onClick={handleGetLifetimeProClick}
-                      className="inline-flex items-center justify-center rounded-lg bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700"
+                      className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-700 px-6 py-3 font-semibold text-white shadow-sm hover:from-orange-600 hover:to-orange-800"
                     >
                       Get Lifetime Pro
                     </button>

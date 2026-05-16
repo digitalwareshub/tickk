@@ -406,7 +406,7 @@ export default function About() {
                 "Automatic categorization of tasks, notes, and reminders",
                 "Real-time speech transcription",
                 "Complete offline functionality",
-                "Zero data collection - privacy focused",
+                "Local browser storage - privacy focused",
                 "Progressive Web App (PWA) installation",
                 "Cross-platform browser compatibility",
                 "Voice-controlled task management",
@@ -518,7 +518,7 @@ export default function About() {
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
                 Just speak your thoughts and watch them become organized tasks and notes. 
-                No complex setup, no recurring fees for the core workflow, no data collection. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link> - everything stays on your device.
+                No complex setup and no recurring fees for the core workflow. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link>.
               </p>
 
               {/* Trust Indicators */}
@@ -526,7 +526,7 @@ export default function About() {
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🔒</div>
                   <div className="text-base font-medium text-gray-700 dark:text-slate-300">Complete Privacy</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">No data collection</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Local browser storage</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">⚡</div>

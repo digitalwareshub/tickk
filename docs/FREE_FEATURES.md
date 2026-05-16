@@ -320,7 +320,7 @@ tickk is a **100% free, open-source voice-first productivity app** with **no pre
 
 ### 5. Privacy & Security
 
-#### 🔒 Zero Data Collection
+#### 🔒 Local Browser Storage
 - **Description:** We never collect, store, or transmit your data
 - **What we DON'T collect:**
   - Voice recordings
@@ -335,7 +335,7 @@ tickk is a **100% free, open-source voice-first productivity app** with **no pre
 
 #### 🏠 Local Processing Only
 - **Description:** All speech recognition happens in your browser
-- **No cloud servers:** Voice never leaves your device
+- **No Tickk upload:** Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
 - **Technology:** Web Speech API (browser-native)
 - **Privacy benefit:** No third-party access
 - **On /features page:** ✅ Yes
@@ -639,7 +639,7 @@ A: No. Any feature currently listed as free will remain free forever. If we ever
 ### Privacy & Data
 
 **Q: Where is my data stored?**  
-A: Locally in your browser's IndexedDB. It never leaves your device unless you manually export it.
+A: Locally in your browser's IndexedDB. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
 
 **Q: Can you see my voice recordings or transcripts?**  
 A: No. All processing happens in your browser. We never collect or transmit your data.

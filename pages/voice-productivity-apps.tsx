@@ -24,7 +24,7 @@ export default function VoiceProductivityApps() {
         <title>Best Voice Productivity Apps 2025 - Free Speech Recognition Software | Tickk</title>
         <meta 
           name="description" 
-          content="Discover the best voice productivity apps for hands-free task management. Compare features, privacy, and pricing. Tickk offers free speech recognition with offline functionality and zero data collection."
+          content="Discover the best voice productivity apps for hands-free task management. Compare features, privacy, and pricing. Tickk offers free speech recognition, offline functionality, and local browser storage."
         />
         <meta 
           name="keywords" 
@@ -396,7 +396,7 @@ export default function VoiceProductivityApps() {
               Ready to Try the Best Free Voice Productivity App?
             </h2>
             <p className="text-responsive mb-8 text-gray-700 dark:text-slate-200">
-              No signup. No credit card. No data collection. Just pure productivity.
+              No signup. No credit card. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
             </p>
             <Link
               href="/"

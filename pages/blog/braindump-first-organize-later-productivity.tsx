@@ -39,7 +39,7 @@ export default function BraindumpFirstBlogPost() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
         
         {/* Article Schema */}
@@ -302,7 +302,7 @@ export default function BraindumpFirstBlogPost() {
                 <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• Runs entirely in your browser</li>
                   <li>• No servers, no cloud, no accounts</li>
-                  <li>• Your thoughts never leave your device</li>
+                  <li>• Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
                 </ul>
               </div>
               

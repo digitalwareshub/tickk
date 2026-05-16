@@ -19,7 +19,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Left: Logo */}
-          <div className="flex items-center justify-start w-1/3">
+          <div className="flex items-center justify-start w-1/4">
             <Link href="/" className="group flex items-center space-x-2">
               <span className="text-xl sm:text-2xl">✅</span>
               <div className="flex flex-col">
@@ -39,7 +39,7 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
           </div>
 
           {/* Center: Navigation */}
-          <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
+          <div className="hidden md:flex items-center justify-center w-1/2 gap-6">
             <nav className="flex items-center gap-3 relative z-10">
               <Link href="/" className={`inline-flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
                 router.pathname === '/'
@@ -69,11 +69,18 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 <span className="pointer-events-none">🧠</span>
                 <span className="pointer-events-none">Mind Map</span>
               </Link>
+              <Link href="/pricing" className={`flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
+                router.pathname === '/pricing'
+                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
+                  : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
+              }`}>
+                <span className="pointer-events-none">Pricing</span>
+              </Link>
             </nav>
           </div>
 
           {/* Right: Dark Mode Toggle + Mobile Menu */}
-          <div className="flex items-center justify-end w-1/3 gap-2 relative z-0">
+          <div className="flex items-center justify-end w-1/4 gap-2 relative z-0">
             {/* Mobile Menu Button - Show on all pages */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -162,6 +169,17 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
               >
                 <span className="text-xl">🧠</span>
                 <span>Mind Map</span>
+              </Link>
+              <Link
+                href="/pricing"
+                className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
+                  router.pathname === '/pricing'
+                    ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
+                    : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Pricing</span>
               </Link>
             </div>
           </div>

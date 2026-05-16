@@ -1,11 +1,5 @@
 /**
- * MicroLanding - Main landing interface that matches the sc          <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
-            <span className="text-orange-600 dark:text-orange-400">Speak.</span> Save. Sort it later.
-          </h1>
-          <p className="text-responsive text-gray-600 dark:text-slate-300 mb-6 max-w-2xl mx-auto">
-            Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
-          </p>
-        </div>s the main headline, subtitle, examples, and record button
+ * MicroLanding - Main landing interface with the headline, examples, and record button.
  */
 
 import { useState } from 'react'
@@ -44,7 +38,7 @@ export default function MicroLanding({
   }
 
   return (
-    <div className="micro-landing" data-tour="braindump-section">
+    <div className="micro-landing relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.12),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(251,146,60,0.10),_transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.18),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(194,65,12,0.18),_transparent_30%)]" data-tour="braindump-section">
       {/* Main Content Area */}
       <div className="max-w-4xl mx-auto w-full px-6 py-12 text-center">
         {/* Main Headline */}
@@ -66,15 +60,15 @@ export default function MicroLanding({
           </div>
           
           <h1 className="heading-primary text-gray-900 dark:text-slate-50 mb-4">
-            <span className="text-orange-600 dark:text-orange-400">Speak.</span> Save. Sort it later.
+            <span className="text-orange-600 dark:text-orange-400">Speak your thoughts.</span> Tickk organizes them instantly.
           </h1>
           <p className="text-responsive text-gray-600 dark:text-slate-300 mb-3 max-w-2xl mx-auto">
-            Speak your thoughts. We&apos;ll organize them into tasks and notes. No login, 100% private.
+            Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser.
           </p>
         </div>
 
         {/* How It Works - Simple 3 Steps */}
-        <div className="mb-10 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900/50 dark:to-slate-900/30 rounded-2xl p-6 sm:p-8">
+        <div className="mb-10 bg-gradient-to-b from-orange-50/70 via-white to-white dark:from-orange-950/20 dark:via-slate-900/60 dark:to-slate-900/30 rounded-2xl p-6 sm:p-8 border border-orange-100/70 dark:border-orange-900/30">
           <div className="flex items-center justify-center gap-2 sm:gap-4">
             {/* Step 1 */}
             <div className="text-center flex-1">
@@ -166,7 +160,7 @@ export default function MicroLanding({
                     transition-all duration-200 transform hover:scale-105 shadow-lg relative z-10
                     ${isRecording
                       ? 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700'
-                      : 'bg-gray-900 hover:bg-gray-800 dark:bg-violet-600 dark:hover:bg-violet-700'
+                      : 'bg-gradient-to-br from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800 dark:from-orange-500 dark:to-orange-700 dark:hover:from-orange-400 dark:hover:to-orange-600'
                     }
                   `}
                 >

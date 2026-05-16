@@ -373,8 +373,8 @@ input[type="checkbox"]:checked::after {
 
 /* Green checkboxes for tasks */
 input[type="checkbox"].text-green-600:checked {
-  background-color: #16a34a;
-  border-color: #16a34a;
+  background-color: #f97316;
+  border-color: #f97316;
 }
 
 /* Purple checkboxes for notes */

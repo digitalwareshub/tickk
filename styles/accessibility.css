@@ -29,7 +29,7 @@
 
 /* Focus indicators */
 *:focus {
-  outline: 3px solid #16a34a;
+  outline: 3px solid #f97316;
   outline-offset: 2px;
 }
 

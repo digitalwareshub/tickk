@@ -252,7 +252,6 @@ tickk/
 | `ErrorBoundary.tsx` | React error boundary with fallback UI |
 | `LiveRegions.tsx` | ARIA live regions for screen readers |
 | `ActionButtons.tsx` | Reusable action button group |
-| `ClarityAnalytics.tsx` | Microsoft Clarity analytics integration |
 
 ---
 
@@ -614,7 +613,6 @@ Located in `/lib/config/features.ts`:
 ```env
 # Analytics
 NEXT_PUBLIC_GA_ID=                    # Google Analytics ID
-NEXT_PUBLIC_CLARITY_ID=               # Microsoft Clarity ID
 
 # Stripe (Pro features)
 STRIPE_SECRET_KEY=                    # Stripe secret key

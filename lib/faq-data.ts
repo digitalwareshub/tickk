@@ -125,7 +125,7 @@ export const privacyFAQs: FAQItem[] = [
   },
   {
     question: "Can you see my voice recordings?",
-    answer: "No. We don't record, store, or transmit voice audio. The Web Speech API processes your voice locally in your browser and only outputs text. The audio never leaves your device. We never have access to what you say."
+    answer: "Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. Voice recognition is handled by your browser's Web Speech API, so availability and processing behavior depend on your browser."
   },
   {
     question: "Do you use cookies or tracking?",

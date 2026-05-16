@@ -9,8 +9,8 @@ export default function Privacy() {
     <Layout className="min-h-screen bg-white dark:bg-slate-900">
       <Head>
         <title>Privacy Policy | tickk - Complete Privacy Protection for Voice Productivity App</title>
-        <meta name="description" content="tickk Privacy Policy: Learn how we protect your privacy with zero data collection. All voice processing happens locally in your browser. GDPR, CCPA compliant voice productivity app." />
-        <meta name="keywords" content="privacy policy, voice app privacy, speech recognition privacy, data protection, GDPR compliance, CCPA compliance, zero data collection, browser-based privacy, voice data security" />
+        <meta name="description" content="tickk Privacy Policy: Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers." />
+        <meta name="keywords" content="privacy policy, voice app privacy, speech recognition privacy, data protection, GDPR compliance, CCPA compliance, browser-based privacy, voice data security" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/privacy" />
       </Head>
@@ -39,8 +39,8 @@ export default function Privacy() {
           <div className="grid md:grid-cols-2 gap-4 mb-8">
                         <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">🔒</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Zero Data Collection</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-base">We don't collect, store, or transmit your personal data</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Local Browser Storage</h3>
+              <p className="text-gray-600 dark:text-slate-400 text-base">Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
@@ -57,8 +57,8 @@ export default function Privacy() {
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">�</div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">No Analytics</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-base">We don't use analytics or tracking scripts</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Aggregate Analytics</h3>
+              <p className="text-gray-600 dark:text-slate-400 text-base">We do not send your notes, tasks, or brain dump content to analytics.</p>
             </div>
           </div>
 
@@ -68,13 +68,13 @@ export default function Privacy() {
               <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Data Collection</h2>
               <div className="prose max-w-none">
                 <p className="text-gray-600 dark:text-slate-400 mb-4">
-                  tickk is designed with privacy as a core principle. We do not collect, store, or transmit any personal data or voice recordings.
+                  tickk is designed with privacy as a core principle. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
                 </p>
                 <ul className="text-gray-600 dark:text-slate-400 space-y-2">
-                  <li>• No voice data is sent to our servers</li>
-                  <li>• No personal information is collected</li>
+                  <li>• Your notes and brain dumps are not uploaded to Tickk servers</li>
+                  <li>• Pro waitlist emails are only collected when you submit the Pro interest form</li>
                   <li>• No user accounts or registration required</li>
-                  <li>• No cookies or tracking scripts</li>
+                  <li>• Analytics events must not include transcript, task, or note content</li>
                 </ul>
               </div>
             </section>
@@ -82,8 +82,7 @@ export default function Privacy() {
             <section>
               <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">How It Works</h2>
               <p className="text-gray-600 dark:text-slate-400 mb-4">
-                All speech recognition and processing happens entirely within your web browser using the Web Speech API. 
-                Your voice data never leaves your device.
+                Tickk uses your browser's Web Speech API for voice recognition. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
               </p>
             </section>
 

@@ -12,7 +12,6 @@ import { trackPageView } from '@/lib/analytics/enhanced-analytics'
 import { initPWATracking } from '@/lib/analytics'
 import { Toaster } from 'react-hot-toast'
 import PWAInstallPrompt from '@/components/PWAInstallPrompt'
-import ClarityAnalytics from '@/components/ClarityAnalytics'
 
 // Get GA tracking ID from environment
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
@@ -44,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         
         {/* Prevent dark mode flash - inline script runs before paint */}
         <script
@@ -100,23 +99,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </Script>
         </>
       )}
-
-      {/* Hotjar Tracking Code for https://tickk.app */}
-      <Script id="hotjar-init" strategy="afterInteractive">
-        {`
-          (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:6534546,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-        `}
-      </Script>
-
-      {/* Microsoft Clarity - Client Component */}
-      <ClarityAnalytics />
 
       <Component {...pageProps} />
 

@@ -16,7 +16,7 @@ Disallow: /local/
 # Site Information
 # tickk is a free, privacy-focused voice productivity app
 # Voice-first task manager with automatic categorization
-# No login, works offline, zero data collection
+# No login, works offline, local browser storage
 # Target audience: ADHD individuals, professionals, students
 
 # Key Pages

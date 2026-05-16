@@ -41,7 +41,7 @@ export default function VoiceProductivityVsAITools() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 
@@ -159,7 +159,7 @@ export default function VoiceProductivityVsAITools() {
             </h2>
 
             <p className="text-lg leading-relaxed mb-6 text-gray-700 dark:text-slate-300">
-              Local voice processing takes a completely different approach. Instead of sending your voice to AI servers, everything happens directly in your browser using the Web Speech API. Your voice never leaves your device. Your thoughts stay private. And the results are often better than what AI can provide.
+              Local voice processing takes a completely different approach. Instead of sending your thoughts to AI servers for organization, Tickk stores your notes locally in your browser. Tickk does not upload your brain dumps to our servers. And the results are often better than what AI can provide.
             </p>
 
             <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mt-10 mb-4">
@@ -171,7 +171,7 @@ export default function VoiceProductivityVsAITools() {
             </h4>
 
             <p className="text-lg leading-relaxed mb-6 text-gray-700 dark:text-slate-300">
-              With local processing, your voice recordings and transcripts never leave your device. There&apos;s no cloud storage, no data mining, no &quot;improved services&quot; that require analyzing your personal thoughts. Privacy isn&apos;t a policy promise—it&apos;s technically guaranteed because the data simply never goes anywhere.
+              With local organization, your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. There&apos;s no Tickk cloud storage for your thoughts and no &quot;improved services&quot; that require analyzing your personal notes.
             </p>
 
             <p className="text-lg leading-relaxed mb-6 text-gray-700 dark:text-slate-300">
@@ -255,7 +255,7 @@ export default function VoiceProductivityVsAITools() {
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800 dark:text-slate-200 mb-2">Local Processing</h4>
-                  <p className="text-sm text-gray-600 dark:text-slate-400">Complete privacy, data never leaves device</p>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">Local browser storage for notes and brain dumps</p>
                 </div>
               </div>
             </div>
@@ -379,7 +379,7 @@ export default function VoiceProductivityVsAITools() {
                 Experience local voice processing in action
               </p>
               <p className="text-green-800 dark:text-green-400 mb-4">
-                Try tickk.app&apos;s privacy-first voice productivity platform. All processing happens in your browser, your data never leaves your device, and it works instantly without any AI dependencies.
+                Try tickk.app&apos;s privacy-first voice productivity platform. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
               </p>
               <Link 
                 href="/" 
@@ -440,7 +440,7 @@ export default function VoiceProductivityVsAITools() {
             {
               title: "Privacy Policy - Complete Protection",
               href: "/privacy",
-              description: "How Tickk protects your privacy with local processing and zero data collection."
+              description: "How Tickk protects your privacy with local browser storage."
             },
             {
               title: "ADHD & Voice Technology",

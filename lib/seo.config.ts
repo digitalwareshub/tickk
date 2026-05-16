@@ -52,7 +52,7 @@ const defaultSEOConfig = {
     },
     {
       name: 'msapplication-TileColor',
-      content: '#16a34a',
+      content: '#f97316',
     },
     {
       name: 'msapplication-config',
@@ -60,7 +60,7 @@ const defaultSEOConfig = {
     },
     {
       name: 'theme-color',
-      content: '#16a34a',
+      content: '#f97316',
     },
     {
       name: 'color-scheme',

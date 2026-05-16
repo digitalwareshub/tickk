@@ -40,7 +40,7 @@ export default function CompleteGuideTickkApp() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
         
         {/* Article Schema */}
@@ -127,7 +127,7 @@ export default function CompleteGuideTickkApp() {
             </h2>
 
             <p className="mb-6">
-              tickk.app is a <strong>completely free</strong>, privacy-first voice productivity app that requires no account or sign-up. Everything runs locally in your browser, meaning your data never leaves your device. As of V1.10.2, tickk.app focuses exclusively on English to provide the best possible voice recognition and user experience.
+              tickk.app is a privacy-first voice productivity app that requires no account or sign-up for the core workflow. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. As of V1.10.2, tickk.app focuses exclusively on English to provide the best possible voice recognition and user experience.
             </p>
 
             {/* Visual Guide Box */}

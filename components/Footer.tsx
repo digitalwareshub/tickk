@@ -57,6 +57,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Features
                 </Link>
+                <Link href="/pricing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  Pricing
+                </Link>
               </div>
 
               {/* Community Column */}
@@ -224,6 +227,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/features" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Pricing
                   </Link>
                 </li>
               </ul>
@@ -445,7 +453,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
         <ul>
           <li>Advanced Voice Recognition: 99% accuracy rate using your browser&apos;s native Web Speech API</li>
           <li>Smart Text Classification: Automatically categorizes speech into tasks, notes, and calendar events</li>
-          <li>Complete Privacy Protection: Zero data collection, all processing happens locally in your browser</li>
+          <li>Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
           <li>Cross-Platform Compatibility: Works seamlessly on desktop, mobile, and tablet devices</li>
           <li>Offline Functionality: Continue working even without an internet connection</li>
           <li>No Account Required: Start using immediately without any registration or sign-up process</li>
@@ -466,7 +474,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           <li>Quick voice memos and thought capture</li>
         </ul>
         <p>
-          Our commitment to user privacy means that tickk never collects, stores, or transmits your voice data or personal information. All speech processing happens directly in your browser, ensuring your sensitive information remains completely private and secure.
+          Our commitment to user privacy means your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
         </p>
       </div>
     </footer>
