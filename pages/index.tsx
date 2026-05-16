@@ -634,36 +634,36 @@ export default function App() {
             }}
           />
         </Head>
-        <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-orange-50/70 via-white to-amber-50/60 dark:from-slate-950 dark:via-slate-900 dark:to-orange-950 px-4">
+        <main className="min-h-screen flex flex-col items-center justify-center bg-[#1a1b26] px-4">
           {/* Visible H1 for SEO - styled to blend with loading screen */}
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 text-center">
+          <h1 className="font-mono text-2xl md:text-3xl font-semibold text-orange-500 mb-2 text-center">
             tickk
           </h1>
 
           {/* Visible H2 for SEO - styled as tagline */}
-          <h2 className="text-sm md:text-base text-gray-500 dark:text-slate-400 mb-8 text-center max-w-md">
+          <h2 className="text-sm md:text-base text-[#a0a0a0] mb-8 text-center max-w-md">
             Private voice brain dump app for fast-moving thoughts
           </h2>
 
           <div className="text-center">
             <div className="w-8 h-8 border-2 border-gray-300 dark:border-slate-600 border-t-orange-600 dark:border-t-orange-400 rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-slate-300 text-sm">
+            <p className="text-[#a0a0a0] text-sm">
               {needsMigration ? 'Preparing data...' : 'Loading...'}
             </p>
           </div>
 
           {/* Internal links for SEO - visible as subtle footer */}
-          <nav className="mt-12 flex flex-wrap justify-center gap-4 text-xs text-gray-400 dark:text-slate-500" aria-label="Site navigation">
-            <Link href="/about" className="hover:text-gray-600 dark:hover:text-slate-300">About</Link>
-            <Link href="/features" className="hover:text-gray-600 dark:hover:text-slate-300">Features</Link>
-            <Link href="/blog" className="hover:text-gray-600 dark:hover:text-slate-300">Blog</Link>
-            <Link href="/adhd-productivity-tools" className="hover:text-gray-600 dark:hover:text-slate-300">ADHD Tools</Link>
-            <Link href="/voice-productivity-apps" className="hover:text-gray-600 dark:hover:text-slate-300">Voice Apps</Link>
-            <Link href="/support" className="hover:text-gray-600 dark:hover:text-slate-300">Support</Link>
-            <Link href="/privacy" className="hover:text-gray-600 dark:hover:text-slate-300">Privacy</Link>
-            <Link href="/terms" className="hover:text-gray-600 dark:hover:text-slate-300">Terms</Link>
-            <Link href="/contact" className="hover:text-gray-600 dark:hover:text-slate-300">Contact</Link>
-            <Link href="/changelog" className="hover:text-gray-600 dark:hover:text-slate-300">Changelog</Link>
+          <nav className="mt-12 flex flex-wrap justify-center gap-4 font-mono text-xs text-[#a0a0a0]" aria-label="Site navigation">
+            <Link href="/about" className="hover:text-white">about</Link>
+            <Link href="/features" className="hover:text-white">features</Link>
+            <Link href="/blog" className="hover:text-white">blog</Link>
+            <Link href="/adhd-productivity-tools" className="hover:text-white">adhd tools</Link>
+            <Link href="/voice-productivity-apps" className="hover:text-white">voice apps</Link>
+            <Link href="/support" className="hover:text-white">support</Link>
+            <Link href="/privacy" className="hover:text-white">privacy</Link>
+            <Link href="/terms" className="hover:text-white">terms</Link>
+            <Link href="/contact" className="hover:text-white">contact</Link>
+            <Link href="/changelog" className="hover:text-white">changelog</Link>
           </nav>
         </main>
       </>
@@ -762,9 +762,9 @@ export default function App() {
       <Layout
         mode={mode}
         onModeChange={handleModeSwitch}
-        className="min-h-screen bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-orange-950"
+        className="min-h-screen bg-[#1a1b26] text-white"
       >
-        <div className="min-h-screen bg-gradient-to-b from-orange-50/60 via-white to-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-orange-950">
+        <div className="min-h-screen bg-[#1a1b26] text-white">
           {/* SEO elements - Always render for crawlers (outside conditional) */}
           <main>
             {/* SEO H1 - Hidden but accessible to search engines */}
@@ -804,28 +804,28 @@ export default function App() {
                 recordingError={recordingError}
                 onTextSubmit={handleTextSubmit}
               />
-              <section className="px-4 pb-12">
-                <div className="mx-auto max-w-4xl rounded-lg border border-orange-100 dark:border-orange-900/30 bg-gradient-to-br from-white via-orange-50/60 to-amber-50/60 dark:from-slate-900/90 dark:via-slate-900/80 dark:to-orange-950/30 px-6 py-8 text-center shadow-sm">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-50 mb-3">
-                    Speak your thoughts. Tickk organizes them instantly.
+              <section className="px-6 pb-12 bg-[#1a1b26]">
+                <div className="mx-auto max-w-[900px] rounded-md border border-[#333333] bg-white/[0.02] px-6 py-8 text-center">
+                  <h2 className="font-mono text-2xl md:text-3xl font-semibold text-white mb-3">
+                    <span className="text-orange-500">speak your thoughts.</span> tickk organizes them instantly.
                   </h2>
-                  <p className="mx-auto max-w-2xl text-gray-600 dark:text-slate-300 mb-6">
-                    Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser.
+                  <p className="mx-auto max-w-2xl text-sm leading-7 text-[#a0a0a0] mb-6">
+                    private voice brain dump app for people who think faster than they type. capture messy thoughts and turn them into tasks and notes in your browser.
                   </p>
                   <div className="flex flex-col sm:flex-row justify-center gap-3">
                     <button
                       type="button"
                       onClick={handleStartBrainDumpClick}
-                      className="inline-flex items-center justify-center rounded-lg bg-gray-900 dark:bg-slate-700 px-6 py-3 font-semibold text-white hover:bg-gray-800 dark:hover:bg-slate-600"
+                      className="inline-flex items-center justify-center rounded bg-orange-500 px-6 py-3 font-mono text-sm font-semibold text-white hover:bg-orange-600"
                     >
-                      Start Brain Dump
+                      start brain dump
                     </button>
                     <button
                       type="button"
                       onClick={handleGetLifetimeProClick}
-                      className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-700 px-6 py-3 font-semibold text-white shadow-sm hover:from-orange-600 hover:to-orange-800"
+                      className="inline-flex items-center justify-center rounded border border-[#333333] bg-transparent px-6 py-3 font-mono text-sm font-semibold text-[#a0a0a0] hover:border-orange-500 hover:text-white"
                     >
-                      Get Lifetime Pro
+                      get lifetime pro
                     </button>
                   </div>
                 </div>

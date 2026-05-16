@@ -10,7 +10,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 -mt-8">
+    <footer className="tickk-shrp-footer bg-[#1a1b26] border-t border-[#333333]">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Mobile Simple Layout */}

@@ -377,6 +377,29 @@ input[type="checkbox"].text-green-600:checked {
   border-color: #f97316;
 }
 
+.tickk-shrp-footer {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-footer h3 {
+  color: #ffffff !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.tickk-shrp-footer a,
+.tickk-shrp-footer p,
+.tickk-shrp-footer span,
+.tickk-shrp-footer div {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-footer a:hover {
+  color: #ffffff !important;
+}
+
 /* Purple checkboxes for notes */
 input[type="checkbox"].text-purple-600:checked {
   background-color: #9333ea;
