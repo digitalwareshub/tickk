@@ -10,7 +10,6 @@ export default function BugReport() {
       <Head>
         <title>Report a Bug | tickk - Voice Productivity App Bug Reporting</title>
         <meta name="description" content="Report bugs and technical issues with tickk voice productivity app. Help us improve by sharing your experience and technical problems." />
-        <meta name="keywords" content="bug report, voice app bugs, speech recognition issues, technical problems, app feedback, error reporting" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/bug-report" />
       </Head>

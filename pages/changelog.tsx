@@ -9,7 +9,6 @@ export default function Changelog() {
       <Head>
         <title>Changelog | tickk - Version History and Updates</title>
         <meta name="description" content="Track tickk updates, new features, and improvements. See what's new in each version of our voice productivity app." />
-        <meta name="keywords" content="tickk changelog, version history, updates, new features, voice app updates, productivity app changelog" />
         <link rel="canonical" href="https://tickk.app/changelog" />
       </Head>
 

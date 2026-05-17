@@ -190,6 +190,7 @@ export default function TestErrorHandling() {
     <>
       <Head>
         <title>Error Handling Test - Tickk</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
 
       <div className="min-h-screen bg-gray-50 py-8 px-4">

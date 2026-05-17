@@ -10,7 +10,6 @@ export default function Terms() {
       <Head>
         <title>Terms of Service | tickk - Voice Productivity App Terms & Conditions</title>
         <meta name="description" content="tickk Terms of Service: Simple, fair terms for using our voice productivity app. No hidden clauses, clear language, user-friendly policies." />
-        <meta name="keywords" content="terms of service, voice app terms, speech recognition terms, app usage policy, user agreement, productivity app terms" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/terms" />
       </Head>

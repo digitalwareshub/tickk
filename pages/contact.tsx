@@ -10,7 +10,6 @@ export default function Contact() {
       <Head>
         <title>Contact Us | tickk - Get in Touch with Voice Productivity App Support</title>
         <meta name="description" content="Contact tickk support team. Get help with voice productivity app, report bugs, suggest features, or ask questions about our speech recognition tool." />
-        <meta name="keywords" content="contact support, voice app contact, speech recognition help, productivity app support, customer service, technical support" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/contact" />
       </Head>

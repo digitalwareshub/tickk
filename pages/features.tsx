@@ -18,12 +18,35 @@ export default function Features() {
   return (
     <>
       <Head>
-        <title>Features | tickk - Voice Productivity Tool</title>
+        <title>Tickk Features - Voice Brain Dumps, Tasks, Notes, and Exports</title>
         <meta 
           name="description" 
-          content="Discover tickk's powerful features: voice-to-text transcription, smart NLP classification, ADHD-friendly Focus Mode, analytics, offline support, and more. No signup required." 
+          content="Explore Tickk features for voice brain dumps, browser-based task capture, local notes, focus mode, exports, templates, and installable PWA workflows."
         />
         <link rel="canonical" href="https://tickk.app/features" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Tickk Features",
+              "description": "Voice brain dumps, browser-based task capture, local notes, focus mode, exports, templates, and installable PWA workflows.",
+              "url": "https://tickk.app/features",
+              "about": [
+                "voice brain dump features",
+                "browser task capture app",
+                "local notes productivity app",
+                "PWA brain dump app"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
       <Layout showHomeLink={true}>

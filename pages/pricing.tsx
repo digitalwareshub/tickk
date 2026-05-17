@@ -35,14 +35,36 @@ export default function Pricing() {
   return (
     <>
       <Head>
-        <title>Pricing - Tickk Pro Lifetime Access</title>
+        <title>Tickk Pricing - Free Brain Dumps and Lifetime Pro</title>
         <meta
           name="description"
-          content="Tickk is free for unlimited voice brain dumps. Tickk Pro lifetime access unlocks mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features."
+          content="Use Tickk free for unlimited voice brain dumps. Tickk Pro Lifetime unlocks mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features."
         />
-        <meta property="og:title" content="Pricing - Tickk Pro Lifetime Access" />
-        <meta property="og:description" content="Free voice brain dumps. Tickk Pro lifetime access for advanced productivity features." />
+        <meta property="og:title" content="Tickk Pricing - Free Brain Dumps and Lifetime Pro" />
+        <meta property="og:description" content="Free voice brain dumps. Tickk Pro Lifetime access for advanced productivity features." />
         <link rel="canonical" href="https://tickk.app/pricing" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Tickk Pricing",
+              "description": "Free voice brain dumps with optional Tickk Pro Lifetime access for mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features.",
+              "url": "https://tickk.app/pricing",
+              "about": [
+                "free voice brain dump app",
+                "lifetime pro productivity app",
+                "voice notes to tasks pricing"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
       <Layout className="min-h-screen bg-[#1a1b26] text-white">
@@ -51,7 +73,7 @@ export default function Pricing() {
             <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-2 font-mono text-xs lowercase text-[#a0a0a0]">
               early adopter lifetime pricing
             </div>
-            <h1 className="mb-4 font-mono text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-none tracking-normal text-white">
+            <h1 className="mb-4 font-mono text-[clamp(1.75rem,4vw,2.4rem)] font-semibold leading-tight tracking-normal text-white">
               Simple pricing for a browser-first voice brain dump app.
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-8 text-[#a0a0a0]">

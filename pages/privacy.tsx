@@ -10,7 +10,6 @@ export default function Privacy() {
       <Head>
         <title>Privacy Policy | tickk - Complete Privacy Protection for Voice Productivity App</title>
         <meta name="description" content="tickk Privacy Policy: Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers." />
-        <meta name="keywords" content="privacy policy, voice app privacy, speech recognition privacy, data protection, GDPR compliance, CCPA compliance, browser-based privacy, voice data security" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/privacy" />
       </Head>

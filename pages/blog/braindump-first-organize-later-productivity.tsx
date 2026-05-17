@@ -12,7 +12,6 @@ export default function BraindumpFirstBlogPost() {
         <title>Why Your Best Ideas Die in Your Productivity App | tickk Blog</title>
         <meta name="title" content="Why Your Best Ideas Die in Your Productivity App | tickk Blog" />
         <meta name="description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
-        <meta name="keywords" content="voice note organization app, braindump productivity method, organize thoughts after capture, free voice to task app, productivity without AI, voice brainstorming tool, capture thoughts without categorizing, productivity app without AI, free voice to task converter, organize thoughts after capture" />
         <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/braindump-first-organize-later-productivity" />

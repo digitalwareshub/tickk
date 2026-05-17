@@ -12,7 +12,6 @@ export default function CompleteGuideTickkApp() {
         <title>Complete Guide to tickk.app: Voice-to-Text Productivity in 2025 | tickk Blog</title>
         <meta name="title" content="Complete Guide to tickk.app: Voice-to-Text Productivity in 2025 | tickk Blog" />
         <meta name="description" content="Master tickk.app's voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export. Free voice productivity app guide." />
-        <meta name="keywords" content="tickk.app tutorial, voice to text productivity app 2025, ADHD productivity app guide, command palette keyboard shortcuts, voice braindump productivity method, free voice task manager tutorial, speech to text organization app, hands-free productivity workflow, voice notes analytics dashboard, productivity streak tracking app" />
         <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/complete-guide-tickk-app-voice-productivity-2025" />

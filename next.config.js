@@ -145,7 +145,6 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1 year
     // Exclude social media images from optimization to prevent flickering
     unoptimized: false,
-    domains: ['peerpush.net', 'api.producthunt.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -194,7 +193,7 @@ const nextConfig = {
   // to avoid redirect chains
   async redirects() {
     return [
-      // NOTE: Query parameter redirects are now handled by middleware.ts
+      // NOTE: Query parameter redirects are now handled by proxy.ts
       // with 301 permanent redirects for better SEO
       // Legacy redirects
       {
@@ -245,7 +244,7 @@ const nextConfig = {
   // Environment variables for build-time optimization
   env: {
     NEXT_PUBLIC_APP_NAME: 'tickk',
-    NEXT_PUBLIC_APP_DESCRIPTION: 'Free Voice Productivity App',
+    NEXT_PUBLIC_APP_DESCRIPTION: 'Private voice brain dump app',
     NEXT_PUBLIC_APP_URL: 'https://tickk.app',
   },
 };

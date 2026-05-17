@@ -12,7 +12,6 @@ export default function HiddenCostOfTyping() {
         <title>The Hidden Cost of Typing: How Your Keyboard Slows Down Your Mind | Tickk Blog</title>
         <meta name="title" content="The Hidden Cost of Typing: How Your Keyboard Slows Down Your Mind | Tickk Blog" />
         <meta name="description" content="Typing introduces friction between thought and capture. Discover why voice-first productivity aligns with natural cognition and how it transforms the way you capture ideas." />
-        <meta name="keywords" content="voice vs typing productivity, cognitive cost of typing, voice-first productivity app, speech-to-task productivity tools, offline voice note organizer, productivity without AI or cloud, capture thoughts faster with voice, how typing slows down creative thinking, working memory load, voice note to task converter" />
         <meta name="author" content="Tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/hidden-cost-of-typing" />

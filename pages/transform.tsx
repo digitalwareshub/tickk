@@ -323,8 +323,32 @@ export default function TransformPage() {
   return (
     <>
       <Head>
-        <title>Transform Notes - Tickk</title>
-        <meta name="description" content="Transform messy notes into clean, organized text. Summarize, structure, polish grammar, and extract tasks." />
+        <title>Transform Notes - Smart Voice Note Cleanup | Tickk</title>
+        <meta name="description" content="Transform messy voice notes into clean summaries, task lists, outlines, and polished text in your browser." />
+        <link rel="canonical" href="https://tickk.app/transform" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Transform Notes",
+              "description": "Transform messy voice notes into clean summaries, task lists, outlines, and polished text in your browser.",
+              "url": "https://tickk.app/transform",
+              "about": [
+                "voice note cleanup",
+                "messy notes to task list",
+                "smart note transforms",
+                "browser note organizer"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
       <Layout className="min-h-screen bg-[#1a1b26] text-white">

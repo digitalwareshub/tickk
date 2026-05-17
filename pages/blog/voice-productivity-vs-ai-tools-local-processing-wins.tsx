@@ -13,7 +13,6 @@ export default function VoiceProductivityVsAITools() {
         <title>Voice Productivity vs AI Tools: Why Local Processing Wins | Tickk Blog</title>
         <meta name="title" content="Voice Productivity vs AI Tools: Why Local Processing Wins | Tickk Blog" />
         <meta name="description" content="Discover why local voice processing beats AI-dependent productivity tools. Compare privacy, speed, and reliability of voice-first vs AI-powered productivity solutions." />
-        <meta name="keywords" content="voice productivity vs AI tools, local voice processing vs cloud, AI-free productivity tools, privacy-first voice apps, secure voice notes, local speech recognition, voice productivity without AI, private voice processing, offline voice productivity, browser-based voice recognition" />
         <meta name="author" content="Tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/voice-productivity-vs-ai-tools-local-processing-wins" />

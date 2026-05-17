@@ -602,7 +602,6 @@ export default function App() {
         <Head>
           <title>Tickk - Private Voice Brain Dump App</title>
           <meta name="description" content="Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser." />
-          <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
           <meta name="robots" content="index, follow" />
           <link rel="canonical" href="https://tickk.app/" />
 
@@ -619,17 +618,19 @@ export default function App() {
                 "url": "https://tickk.app",
                 "applicationCategory": "ProductivityApplication",
                 "operatingSystem": "Web Browser",
+                "keywords": [
+                  "private voice brain dump app",
+                  "voice notes to tasks",
+                  "browser voice notes app",
+                  "speak your tasks",
+                  "local storage productivity app"
+                ],
                 "offers": {
                   "@type": "Offer",
                   "price": "0",
                   "priceCurrency": "USD"
                 },
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.8",
-                  "ratingCount": "79",
-                  "bestRating": "5"
-                }
+                "isAccessibleForFree": true
               })
             }}
           />
@@ -678,7 +679,6 @@ export default function App() {
       <Head>
         <title>Tickk - Private Voice Brain Dump App</title>
         <meta name="description" content="Private voice brain dump app for people who think faster than they type. Capture messy thoughts and turn them into tasks and notes in your browser." />
-        <meta name="keywords" content="ADHD productivity app, voice productivity software, neurodivergent task manager, free speech recognition, brain dump app, executive function support, focus mode productivity, offline productivity app, privacy-first voice app, ADHD voice assistant" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/" />
 
@@ -697,6 +697,13 @@ export default function App() {
               "operatingSystem": "Web Browser",
               "browserRequirements": "Modern browsers with Web Speech API support",
               "applicationSubCategory": "Voice Productivity Tool",
+              "keywords": [
+                "private voice brain dump app",
+                "voice notes to tasks",
+                "browser voice notes app",
+                "speak your tasks",
+                "local storage productivity app"
+              ],
               "offers": {
                 "@type": "Offer",
                 "price": "0",
@@ -713,12 +720,6 @@ export default function App() {
                 "@type": "Organization", 
                 "name": "digitalwareshub",
                 "url": "https://github.com/digitalwareshub"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "ratingCount": "79",
-                "bestRating": "5"
               },
               "featureList": [
                 "Voice-to-text transcription",
@@ -765,30 +766,6 @@ export default function App() {
         className="min-h-screen bg-[#1a1b26] text-white"
       >
         <div className="min-h-screen bg-[#1a1b26] text-white">
-          {/* SEO elements - Always render for crawlers (outside conditional) */}
-          <main>
-            {/* SEO H1 - Hidden but accessible to search engines */}
-            <h1 className="sr-only">
-              Speak your thoughts. Tickk organizes them instantly.
-            </h1>
-
-            {/* SEO H2 - Hidden but accessible to search engines */}
-            <h2 className="sr-only">
-              Voice Recording Interface - Capture Your Thoughts Instantly
-            </h2>
-
-            {/* Hidden internal links for SEO - invisible to users */}
-            <nav className="sr-only" aria-label="Footer navigation">
-              <Link href="/privacy">Privacy Policy</Link>
-              <Link href="/terms">Terms of Service</Link>
-              <Link href="/support">Support</Link>
-              <Link href="/contact">Contact Us</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/features">Features</Link>
-              <Link href="/about">About</Link>
-            </nav>
-          </main>
-
           {/* Smart interface for braindump mode */}
           {mode === 'braindump' && !isLoading && (
             <>

@@ -33,6 +33,7 @@ export default function Layout({
 }: LayoutProps) {
   const router = useRouter()
   const rootClassName = `tickk-shrp-page ${className}`
+  const shouldRenderSeo = !disableNextSeo && Boolean(seoTitle || seoDescription || title || seoImage)
   
   // Auto-determine if we should show home link based on current page
   // App (Braindump) is now at / (homepage)
@@ -43,7 +44,7 @@ export default function Layout({
 
   return (
     <>
-      {!disableNextSeo && (
+      {shouldRenderSeo && (
         <SEOMeta 
           title={seoTitle || title}
           description={seoDescription}

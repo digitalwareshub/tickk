@@ -26,10 +26,6 @@ export default function VoiceProductivityApps() {
           name="description" 
           content="Discover the best voice productivity apps for hands-free task management. Compare features, privacy, and pricing. Tickk offers free speech recognition, offline functionality, and local browser storage."
         />
-        <meta 
-          name="keywords" 
-          content="voice productivity apps, speech recognition software, hands-free task manager, voice to text apps, voice note taking, voice assistant productivity, free voice apps, offline speech recognition" 
-        />
         <link rel="canonical" href="https://tickk.app/voice-productivity-apps" />
         
         {/* Open Graph */}
@@ -54,6 +50,13 @@ export default function VoiceProductivityApps() {
               "description": "Comprehensive guide to voice productivity applications for hands-free task management and note-taking",
               "url": "https://tickk.app/voice-productivity-apps",
               "inLanguage": "en-US",
+              "keywords": [
+                "voice productivity apps",
+                "hands-free task manager",
+                "voice notes to tasks",
+                "offline speech recognition app",
+                "browser voice productivity app"
+              ],
               "about": {
                 "@type": "Thing",
                 "name": "Voice Productivity Software"

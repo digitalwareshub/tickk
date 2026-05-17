@@ -1,7 +1,5 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { DefaultSeo } from 'next-seo'
-import defaultSEOConfig from '@/lib/seo.config'
 import Head from 'next/head'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
@@ -38,25 +36,13 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router.events])
   return (
     <>
-      <DefaultSeo {...defaultSEOConfig} />
-      
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#f97316" />
-        
-        {/* Prevent dark mode flash - inline script runs before paint */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  document.documentElement.classList.add('dark');
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
         
         {/* Preload social media images to prevent flickering */}
         <link rel="preload" as="image" href="/og-image.webp" />
@@ -74,6 +60,16 @@ export default function App({ Component, pageProps }: AppProps) {
 
         {/* Google Analytics - moved to next/script */}
       </Head>
+
+      <Script id="force-dark-mode" strategy="beforeInteractive">
+        {`
+          (function() {
+            try {
+              document.documentElement.classList.add('dark');
+            } catch (e) {}
+          })();
+        `}
+      </Script>
       
       {/* Google Analytics with next/script */}
       {GA_TRACKING_ID && (
