@@ -1,13 +1,68 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 interface FooterProps {
   showHomeLink?: boolean
 }
 
+interface MobileFooterLink {
+  label: string
+  href: string
+  badge?: string
+  external?: boolean
+}
+
+interface MobileFooterSection {
+  id: string
+  title: string
+  links: MobileFooterLink[]
+}
+
 export default function Footer({ showHomeLink = false }: FooterProps) {
   const router = useRouter()
   const currentYear = new Date().getFullYear()
+  const [openMobileSection, setOpenMobileSection] = useState('product')
+
+  const mobileFooterSections: MobileFooterSection[] = [
+    {
+      id: 'product',
+      title: 'Product',
+      links: [
+        { label: 'Home', href: '/' },
+        { label: 'Transform Notes', href: '/transform', badge: 'new' },
+        { label: 'Mind Map', href: '/mindmap', badge: 'new' },
+        { label: 'Pricing', href: '/pricing' },
+      ],
+    },
+    {
+      id: 'support',
+      title: 'Support',
+      links: [
+        { label: 'Support & Help', href: '/support' },
+        { label: 'Contact', href: '/contact' },
+        { label: 'Bug Reports', href: '/bug-report' },
+      ],
+    },
+    {
+      id: 'legal',
+      title: 'Legal',
+      links: [
+        { label: 'Privacy Policy', href: '/privacy' },
+        { label: 'Terms of Service', href: '/terms' },
+        { label: 'Changelog', href: '/changelog' },
+      ],
+    },
+    {
+      id: 'community',
+      title: 'Community',
+      links: [
+        { label: 'Blog', href: '/blog' },
+        { label: 'Reviews', href: '/reviews' },
+        { label: 'Open Source', href: 'https://github.com/digitalwareshub/tickk', external: true },
+      ],
+    },
+  ]
 
   return (
     <footer className="tickk-shrp-footer bg-[#1a1b26] border-t border-[#333333]">
@@ -15,113 +70,92 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Mobile Simple Layout */}
         <div className="block md:hidden">
-          <div className="pt-4">
-              {/* Brand Section */}
-              <div className="text-center mb-4">
-                <p className="text-responsive text-gray-500 dark:text-slate-400">
-                  Part of the <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors font-medium">Digiwares</a> ecosystem.
-                </p>
-              </div>
-
-          {/* Mobile: 2x2 Grid Layout (2 rows, 2 columns each) */}
-          <div className="space-y-4 mb-6">
-            {/* Top Row - 2 Columns */}
-            <div className="grid grid-cols-2 gap-4">
-              {/* Product Column */}
-              <div className="space-y-2 text-center">
-                <h3 className="text-xs font-medium text-gray-900 dark:text-slate-100 mb-2">
-                  Product
-                </h3>
-                <Link href="/" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Home
-                </Link>
-                <Link href="/about" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  About
-                </Link>
-                <Link href="/transform" className="flex items-center justify-center space-x-1">
-                  <span className="text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    Transform Notes
-                  </span>
-                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1 py-0.5 rounded-full">
-                    NEW
-                  </span>
-                </Link>
-                <Link href="/mindmap" className="flex items-center justify-center space-x-1">
-                  <span className="text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                    Mind Map
-                  </span>
-                  <span className="text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 px-1 py-0.5 rounded-full">
-                    NEW
-                  </span>
-                </Link>
-                <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Features
-                </Link>
-                <Link href="/pricing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Pricing
-                </Link>
-              </div>
-
-              {/* Community Column */}
-              <div className="space-y-2 text-center">
-                <h3 className="text-xs font-medium text-gray-900 dark:text-slate-100 mb-2">
-                  Community
-                </h3>
-                <Link href="/blog" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Blog
-                </Link>
-                <Link href="/reviews" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Reviews
-                </Link>
-                <a
-                  href="https://github.com/digitalwareshub/tickk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                >
-                  Open Source
-                </a>
-              </div>
-            </div>
-
-            {/* Bottom Row - 2 Columns */}
-            <div className="grid grid-cols-2 gap-4">
-              {/* Support Column */}
-              <div className="space-y-2 text-center">
-                <h3 className="text-xs font-medium text-gray-900 dark:text-slate-100 mb-2">
-                  Support
-                </h3>
-                <Link href="/support" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Support & Help
-                </Link>
-                <Link href="/contact" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Contact
-                </Link>
-                <Link href="/bug-report" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Bug Reports
-                </Link>
-              </div>
-
-              {/* Legal & Info Column */}
-              <div className="space-y-2 text-center">
-                <h3 className="text-xs font-medium text-gray-900 dark:text-slate-100 mb-2">
-                  Legal & Info
-                </h3>
-                <Link href="/privacy" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Privacy Policy
-                </Link>
-                <Link href="/terms" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Terms of Service
-                </Link>
-                <Link href="/changelog" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
-                  Changelog
-                </Link>
-              </div>
-            </div>
+          <div className="py-3">
+          {/* Brand Section */}
+          <div className="mb-6 rounded-md border border-[#333333] bg-white/[0.02] p-5 text-center">
+            <Link href="/" className="mb-2 inline-flex font-mono text-xl font-semibold text-orange-500 no-underline">
+              ~/tickk
+            </Link>
+            <p className="mx-auto mb-4 max-w-xs text-sm leading-6 text-[#a0a0a0]">
+              Private voice brain dump app for fast thinkers.
+            </p>
+            <Link
+              href="/"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-md bg-orange-600 px-5 py-3 font-mono text-sm font-semibold lowercase text-white no-underline transition-colors hover:bg-orange-500"
+            >
+              start brain dump
+            </Link>
           </div>
 
+          {/* Mobile Accordion Navigation */}
+          <div className="mb-6 overflow-hidden rounded-md border border-[#333333] bg-white/[0.02]">
+            {mobileFooterSections.map((section) => {
+              const isOpen = openMobileSection === section.id
+
+              return (
+                <div key={section.id} className="border-b border-[#333333] last:border-b-0">
+                  <button
+                    type="button"
+                    onClick={() => setOpenMobileSection(isOpen ? '' : section.id)}
+                    className="flex min-h-[48px] w-full items-center justify-between px-4 py-3 text-left"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-white">
+                      {section.title}
+                    </span>
+                    <span className={`text-lg text-orange-400 transition-transform ${isOpen ? 'rotate-45' : ''}`}>
+                      +
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="space-y-2 px-3 pb-3">
+                      {section.links.map((link) => {
+                        const content = (
+                          <>
+                            <span>{link.label}</span>
+                            <span className="flex items-center gap-2">
+                              {link.badge && (
+                                <span className="rounded-full border border-orange-500/40 bg-orange-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange-300">
+                                  {link.badge}
+                                </span>
+                              )}
+                              <span className="text-[#737373]">&gt;</span>
+                            </span>
+                          </>
+                        )
+
+                        const className = "flex min-h-[44px] items-center justify-between rounded-md bg-[#101116] px-3 py-2 text-sm text-[#d4d4d4] no-underline transition-colors hover:bg-[#151722] hover:text-white"
+
+                        return link.external ? (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={className}
+                          >
+                            {content}
+                          </a>
+                        ) : (
+                          <Link key={link.href} href={link.href} className={className}>
+                            {content}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          <p className="mb-4 text-center text-sm text-[#a0a0a0]">
+            Part of the <a href="https://digiwares.xyz" target="_blank" rel="noopener noreferrer" className="font-medium text-orange-400 transition-colors hover:text-orange-300">Digiwares</a> ecosystem.
+          </p>
+
           {/* Social Links */}
-          <div className="flex justify-center space-x-6 mb-4">
+          <div className="flex justify-center space-x-6 mb-5">
             <a 
               href="https://x.com/tickkdotapp" 
               target="_blank" 
@@ -147,11 +181,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           </div>
 
           {/* Mobile Tech Stack Credits */}
-          <div className="text-center pt-4 space-y-2">
-            <div className="text-xs text-gray-600 dark:text-slate-400">
+          <div className="border-t border-[#333333] pt-5 text-center space-y-2">
+            <div className="text-xs text-[#a0a0a0]">
               © {currentYear} tickk. Built with ❤️ for daily productivity.
             </div>
-            <div className="text-xs text-gray-500 dark:text-slate-500 space-x-2">
+            <div className="text-xs text-[#737373] space-x-2">
               <span>Next.js</span>
               <span>•</span>
               <span>Web Speech API</span>
@@ -177,7 +211,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           <div className="grid grid-cols-5 gap-4 mb-1 max-w-6xl mx-auto">
             {/* Product Column */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+              <h3 className="text-xs font-semibold text-orange-300 uppercase tracking-[0.18em] mb-3 border-l-2 border-orange-500 pl-3">
                 Product
               </h3>
               <ul className="space-y-2 text-sm">
@@ -226,7 +260,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
             {/* Community Column */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+              <h3 className="text-xs font-semibold text-orange-300 uppercase tracking-[0.18em] mb-3 border-l-2 border-orange-500 pl-3">
                 Community
               </h3>
               <ul className="space-y-2 text-sm">
@@ -255,7 +289,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
             {/* Support Column */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+              <h3 className="text-xs font-semibold text-orange-300 uppercase tracking-[0.18em] mb-3 border-l-2 border-orange-500 pl-3">
                 Support
               </h3>
               <ul className="space-y-2 text-sm">
@@ -279,7 +313,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
             {/* Collections Column */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+              <h3 className="text-xs font-semibold text-orange-300 uppercase tracking-[0.18em] mb-3 border-l-2 border-orange-500 pl-3">
                 Collections
               </h3>
               <ul className="space-y-2 text-sm">
@@ -308,7 +342,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
 
             {/* Legal & Info Column */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100 uppercase tracking-wider mb-2">
+              <h3 className="text-xs font-semibold text-orange-300 uppercase tracking-[0.18em] mb-3 border-l-2 border-orange-500 pl-3">
                 Legal & Info
               </h3>
               <ul className="space-y-2 text-sm">
