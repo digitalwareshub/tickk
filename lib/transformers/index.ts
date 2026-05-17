@@ -54,8 +54,8 @@ export const modeDescriptions: Record<TransformMode, { title: string; descriptio
     icon: 'List'
   },
   polish: {
-    title: 'Polish',
-    description: 'Fix grammar, typos, and formatting. Makes text professional.',
+    title: 'Clean up text',
+    description: 'Fix rough wording, typos, and formatting.',
     icon: 'Sparkles'
   },
   tasks: {

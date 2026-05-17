@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import ProInterestModal from '@/components/ProInterestModal'
-import { PRICING } from '@/lib/stripe/config'
 import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 const freeFeatures = [
@@ -11,14 +10,20 @@ const freeFeatures = [
   'Organize into tasks and notes',
   'Local storage',
   'PWA install',
-  'Basic export',
+  'JSON backup/import',
+  'Basic CSV export',
+  'Experience transforms',
+  'Starter templates',
+  'Mind map preview',
 ]
 
 const proFeatures = [
-  'Mind maps',
-  'Advanced exports (Markdown, CSV, DOCX)',
-  'Smart transforms',
-  'Productivity templates',
+  'Unlimited smart transforms',
+  'Full mind maps',
+  'Advanced exports: Markdown, DOCX',
+  'More export formats coming',
+  'Saved transform workflows',
+  'Unlimited templates',
   'Bulk actions',
   'Future premium features included',
 ]
@@ -28,6 +33,7 @@ export default function Pricing() {
 
   const openProModal = (source: string) => {
     trackProductEvent('pricing_clicked', source, { source })
+    trackProductEvent('feature_triggered', 'pro_interest', { source, feature: 'pro_interest' })
     trackProductEvent('pro_clicked', source, { source, feature: 'lifetime_pro' })
     setShowProModal(true)
   }
@@ -35,13 +41,13 @@ export default function Pricing() {
   return (
     <>
       <Head>
-        <title>Tickk Pricing - Free Brain Dumps and Lifetime Pro</title>
+        <title>Tickk Pricing - Free Brain Dumps and Pro Early Access</title>
         <meta
           name="description"
-          content="Use Tickk free for unlimited voice brain dumps. Tickk Pro Lifetime unlocks mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features."
+          content="Use Tickk free forever for unlimited private brain dumps. Join early access for planned smart transforms, full mind maps, advanced exports, templates, and saved workflows."
         />
-        <meta property="og:title" content="Tickk Pricing - Free Brain Dumps and Lifetime Pro" />
-        <meta property="og:description" content="Free voice brain dumps. Tickk Pro Lifetime access for advanced productivity features." />
+        <meta property="og:title" content="Tickk Pricing - Free Brain Dumps and Pro Early Access" />
+        <meta property="og:description" content="Free private voice brain dumps. Join Tickk Pro early access for planned power workflows and advanced exports." />
         <link rel="canonical" href="https://tickk.app/pricing" />
         <script
           type="application/ld+json"
@@ -50,11 +56,11 @@ export default function Pricing() {
               "@context": "https://schema.org",
               "@type": "WebPage",
               "name": "Tickk Pricing",
-              "description": "Free voice brain dumps with optional Tickk Pro Lifetime access for mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features.",
+              "description": "Free private voice brain dumps with optional Tickk Pro early access for smart transforms, full mind maps, advanced exports, templates, saved workflows, and future premium features.",
               "url": "https://tickk.app/pricing",
               "about": [
                 "free voice brain dump app",
-                "lifetime pro productivity app",
+                "pro early access productivity app",
                 "voice notes to tasks pricing"
               ],
               "isPartOf": {
@@ -71,13 +77,13 @@ export default function Pricing() {
         <section className="border-b border-[#333333] px-6 py-12">
           <div className="mx-auto max-w-[900px] text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-2 font-mono text-xs lowercase text-[#a0a0a0]">
-              early adopter lifetime pricing
+              pro early access
             </div>
             <h1 className="mb-4 font-mono text-[clamp(1.75rem,4vw,2.4rem)] font-semibold leading-tight tracking-normal text-white">
-              Simple pricing for a browser-first voice brain dump app.
+              Tickk Pricing
             </h1>
             <p className="mx-auto max-w-2xl text-lg leading-8 text-[#a0a0a0]">
-              Start free. Upgrade once when you want the deeper organization and export tools.
+              Use Tickk free forever for unlimited private brain dumps. Join early access for planned power features.
             </p>
           </div>
         </section>
@@ -112,14 +118,11 @@ export default function Pricing() {
                 LIFETIME
               </div>
               <h2 className="mb-2 font-mono text-2xl font-bold text-white">
-                Tickk Pro - Lifetime Access
+                Tickk Pro Early Access
               </h2>
-              <div className="mb-6 flex items-baseline">
-                <span className="font-mono text-4xl font-bold text-white">
-                  ${PRICING.PRO.lifetimePrice}
-                </span>
-                <span className="ml-2 text-[#a0a0a0]">one-time</span>
-              </div>
+              <p className="mb-6 text-[#a0a0a0]">
+                Planned power features. Pricing is not live yet.
+              </p>
               <ul className="mb-8 space-y-3">
                 {proFeatures.map((feature) => (
                   <li key={feature} className="flex gap-3 text-[#a0a0a0]">
@@ -133,7 +136,7 @@ export default function Pricing() {
                 onClick={() => openProModal('pricing_card')}
                 className="block w-full rounded-md bg-orange-600 px-6 py-3 text-center font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500"
               >
-                Get Lifetime Pro
+                Join early access
               </button>
             </div>
           </div>
@@ -145,14 +148,14 @@ export default function Pricing() {
               Built for private capture first.
             </h2>
             <p className="mb-8 text-[#a0a0a0]">
-              Tickk keeps the core voice brain dump workflow free and local. Pro is for users who want richer organization, exports, templates, and future premium tools.
+              Tickk keeps the core voice brain dump workflow free and local. Pro is for users who want faster workflows, full mind maps, advanced exports, unlimited templates, and future premium tools.
             </p>
             <button
               type="button"
               onClick={() => openProModal('pricing_bottom_cta')}
               className="inline-flex rounded-md bg-orange-600 px-8 py-4 font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500"
             >
-              Get Lifetime Pro
+              Join early access
             </button>
           </div>
         </section>

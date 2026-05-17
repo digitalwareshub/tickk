@@ -261,6 +261,10 @@ export default function App() {
 
   const handleGetLifetimeProClick = useCallback(() => {
     trackProductEvent('pricing_clicked', 'homepage_cta', { source: 'homepage_cta' })
+    trackProductEvent('feature_triggered', 'pro_interest', {
+      source: 'homepage_cta',
+      feature: 'pro_interest',
+    })
     trackProductEvent('pro_clicked', 'homepage_cta', {
       source: 'homepage_cta',
       feature: 'lifetime_pro',
@@ -810,7 +814,7 @@ export default function App() {
                       onClick={handleGetLifetimeProClick}
                       className="inline-flex items-center justify-center rounded border border-[#333333] bg-transparent px-6 py-3 font-mono text-sm font-semibold text-[#a0a0a0] hover:border-orange-500 hover:text-white"
                     >
-                      get lifetime pro
+                      join pro early access
                     </button>
                   </div>
                 </div>

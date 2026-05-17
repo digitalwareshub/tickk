@@ -198,7 +198,7 @@ export default function VoiceProductivityApps() {
                   </svg>
                   <div>
                     <strong className="text-gray-900 dark:text-white">Export Options:</strong>
-                    <span className="text-gray-700 dark:text-slate-200"> JSON, CSV, or PDF exports to integrate with other productivity systems.</span>
+                    <span className="text-gray-700 dark:text-slate-200"> JSON and CSV exports to integrate with other productivity systems, with advanced formats planned for Pro.</span>
                   </div>
                 </li>
               </ul>

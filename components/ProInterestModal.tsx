@@ -16,6 +16,8 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
   useEffect(() => {
     if (!isOpen) return
 
+    trackProductEvent('pro_modal_opened', source, { source })
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose()
@@ -34,7 +36,7 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
       document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = previousOverflow
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose, source])
 
   if (!isOpen) return null
 
@@ -59,15 +61,19 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to save email')
+        const message = data.error === 'Supabase not configured'
+          ? 'Email capture is not configured in this environment.'
+          : data.error || 'Could not save your email. Please try again.'
+
+        toast.error(message)
+        return
       }
 
-      trackProductEvent('pro_notify_requested', source, { email_domain: trimmedEmail.split('@')[1] || 'unknown' })
-      toast.success('You are on the early access list.')
+      trackProductEvent('notify_submitted', source, { source, email_domain: trimmedEmail.split('@')[1] || 'unknown' })
+      toast.success('Thanks. You are on the Tickk Pro early access list.')
       setEmail('')
       onClose()
-    } catch (error) {
-      console.error('Failed to submit Pro interest:', error)
+    } catch {
       toast.error('Could not save your email. Please try again.')
     } finally {
       setIsSubmitting(false)
@@ -95,7 +101,7 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
                 Tickk Pro
               </p>
               <h2 id="pro-modal-title" className="font-mono text-2xl font-semibold leading-tight text-white">
-                Tickk Pro is coming back.
+                Tickk Pro coming soon.
               </h2>
             </div>
             <button
@@ -111,8 +117,17 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
           </div>
 
           <p id="pro-modal-description" className="mb-6 text-sm leading-6 text-[#d4d4d4]">
-            Early users will receive lifetime access pricing.
+            Join early access and help shape the power features before pricing is introduced.
           </p>
+
+          <ul className="mb-6 space-y-2 text-sm text-[#d4d4d4]">
+            {['Advanced exports', 'Saved workflows', 'Mind maps', 'Templates', 'Future features'].map((feature) => (
+              <li key={feature} className="flex gap-2">
+                <span className="text-orange-400">✓</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
 
           <label htmlFor="pro-notify-email" className="mb-2 block text-sm font-medium text-[#d4d4d4]">
             Email
@@ -133,7 +148,7 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
               onClick={onClose}
               className="inline-flex justify-center rounded-md border border-[#333333] px-4 py-2.5 font-mono text-sm font-semibold lowercase text-white transition-colors hover:border-orange-300 hover:text-orange-200"
             >
-              Maybe later
+              Continue using Tickk
             </button>
             <button
               type="button"

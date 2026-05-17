@@ -1,12 +1,11 @@
 /**
  * Pro Gate Component
- * Gates features behind Tickk Pro access
+ * Soft-prompts features for Tickk Pro interest without blocking usage
  */
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useProSubscription } from '@/hooks/useProSubscription';
-import { Sparkles, Lock, Zap } from 'lucide-react';
-import { PRICING } from '@/lib/stripe/config';
+import { Sparkles } from 'lucide-react';
 import ProInterestModal from './ProInterestModal';
 import { trackProductEvent } from '@/lib/analytics/enhanced-analytics';
 
@@ -18,82 +17,24 @@ interface ProGateProps {
 }
 
 /**
- * ProGate - Wraps content that requires Pro access
+ * ProGate - Legacy wrapper kept non-blocking while Tickk validates demand
  */
 export function ProGate({
   children,
   feature = 'this feature',
-  fallback,
-  showUpgradePrompt = true,
 }: ProGateProps) {
   const { isPro, isLoading } = useProSubscription();
 
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!isLoading && !isPro) {
+      trackProductEvent('feature_triggered', feature, {
+        source: 'pro_gate',
+        feature,
+      });
+    }
+  }, [feature, isLoading, isPro]);
 
-  // User has Pro access
-  if (isPro) {
-    return <>{children}</>;
-  }
-
-  // Show fallback if provided
-  if (fallback) {
-    return <>{fallback}</>;
-  }
-
-  // Show upgrade prompt
-  if (showUpgradePrompt) {
-    return <UpgradePrompt feature={feature} />;
-  }
-
-  return null;
-}
-
-/**
- * Upgrade Prompt Component
- */
-function UpgradePrompt({ feature }: { feature: string }) {
-  const [showModal, setShowModal] = useState(false);
-
-  return (
-    <>
-      <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl border-2 border-dashed border-orange-200 dark:border-orange-800">
-        <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mb-4">
-          <Lock className="w-8 h-8 text-orange-600 dark:text-orange-400" />
-        </div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">
-          Upgrade to Tickk Pro
-        </h3>
-        <p className="text-gray-600 dark:text-slate-400 text-center mb-6 max-w-md">
-          {feature} is a Pro feature. Upgrade to unlock all transformation tools and more.
-        </p>
-        <button
-          onClick={() => {
-            trackProductEvent('pro_clicked', 'pro_gate', {
-              source: 'pro_gate',
-              feature,
-            })
-            setShowModal(true)
-          }}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
-        >
-          <Zap className="w-4 h-4" />
-          Upgrade to Pro
-        </button>
-        <p className="text-sm text-gray-500 dark:text-slate-500 mt-4">
-          Lifetime access for ${PRICING.PRO.lifetimePrice}
-        </p>
-      </div>
-
-      <ProInterestModal isOpen={showModal} onClose={() => setShowModal(false)} source="pro_gate" />
-    </>
-  );
+  return <>{children}</>;
 }
 
 /**
@@ -122,24 +63,11 @@ export function ProBadge({ className = '' }: { className?: string }) {
 /**
  * Hook to check if a feature is available
  */
-export function useFeatureAccess(feature: string): { hasAccess: boolean; isLoading: boolean } {
-  const { isPro, isLoading } = useProSubscription();
-
-  // Define which features require Pro
-  const proFeatures = [
-    'transform',
-    'summarize',
-    'structure',
-    'polish',
-    'extract-tasks',
-    'docx-export',
-    'advanced-analytics',
-  ];
-
-  const requiresPro = proFeatures.includes(feature.toLowerCase());
+export function useFeatureAccess(): { hasAccess: boolean; isLoading: boolean } {
+  const { isLoading } = useProSubscription();
 
   return {
-    hasAccess: !requiresPro || isPro,
+    hasAccess: true,
     isLoading,
   };
 }

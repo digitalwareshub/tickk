@@ -22,33 +22,34 @@ export default async function handler(
     return res.status(400).json({ error: 'Valid email required' })
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const formspreeEndpoint =
+    process.env.FORMSPREE_PRO_NOTIFY_ENDPOINT ||
+    process.env.NEXT_PUBLIC_FORMSPREE_SURVEY_URL ||
+    'https://formspree.io/f/xvgjjanv'
 
-  if (!supabaseUrl || !serviceRoleKey) {
-    return res.status(500).json({ error: 'Supabase not configured' })
+  if (!formspreeEndpoint) {
+    return res.status(503).json({ error: 'Email capture is not configured' })
   }
 
   try {
-    const response = await fetch(`${supabaseUrl}/rest/v1/pro_waitlist?on_conflict=email`, {
+    const response = await fetch(formspreeEndpoint, {
       method: 'POST',
       headers: {
-        apikey: serviceRoleKey,
-        Authorization: `Bearer ${serviceRoleKey}`,
         'Content-Type': 'application/json',
-        Prefer: 'resolution=merge-duplicates,return=minimal',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         email,
         source,
         product: 'tickk',
-        created_at: new Date().toISOString(),
+        form_name: 'Tickk Pro early access',
+        submitted_at: new Date().toISOString(),
       }),
     })
 
     if (!response.ok) {
       const message = await response.text()
-      console.error('Supabase Pro waitlist insert failed:', message)
+      console.error('Formspree Pro waitlist submit failed:', message)
       return res.status(500).json({ error: 'Failed to save email' })
     }
 

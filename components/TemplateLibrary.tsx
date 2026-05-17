@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react'
 import type { TaskTemplate } from '@/types/braindump'
+import { isStarterTemplate } from '@/lib/templates/starter-templates'
 
 interface TemplateLibraryProps {
   isOpen: boolean
@@ -149,15 +150,15 @@ export default function TemplateLibrary({
             <div className="text-center py-12">
               {templates.length === 0 ? (
                 <>
-                  <div className="text-4xl mb-3">📝</div>
+                  <div className="text-4xl mb-3">...</div>
                   <p className="text-sm text-gray-600 dark:text-slate-400 mb-1">No templates saved yet</p>
                   <p className="text-xs text-gray-500 dark:text-slate-500">
-                    Right-click any task/note and select &quot;Save as Template&quot;
+                    Pro users can save custom templates from tasks and notes.
                   </p>
                 </>
               ) : (
                 <>
-                  <div className="text-4xl mb-3">🔍</div>
+                  <div className="text-4xl mb-3">...</div>
                   <p className="text-sm text-gray-600 dark:text-slate-400">No templates match your search</p>
                 </>
               )}
@@ -230,16 +231,18 @@ export default function TemplateLibrary({
                       >
                         Use
                       </button>
-                      <button
-                        onClick={() => {
-                          if (confirm('Delete this template?')) {
-                            onDeleteTemplate(template.id)
-                          }
-                        }}
-                        className="px-3 py-1.5 text-xs font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                      >
-                        Delete
-                      </button>
+                      {!isStarterTemplate(template.id) && (
+                        <button
+                          onClick={() => {
+                            if (confirm('Delete this template?')) {
+                              onDeleteTemplate(template.id)
+                            }
+                          }}
+                          className="px-3 py-1.5 text-xs font-medium text-red-600 dark:text-red-400 bg-white dark:bg-slate-800 border border-red-300 dark:border-red-700/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -252,7 +255,7 @@ export default function TemplateLibrary({
         <div className="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50">
           <div className="flex items-center justify-between text-xs text-gray-500 dark:text-slate-400">
             <p>
-              💡 Tip: Right-click any task/note and select &quot;Save as Template&quot;
+              Starter templates are free. Custom templates are included with Tickk Pro.
             </p>
             <p className="flex items-center gap-1">
               Press <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded text-xs">Esc</kbd> to close

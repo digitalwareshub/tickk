@@ -15,7 +15,7 @@ export interface FAQItem {
 export const homepageFAQs: FAQItem[] = [
   {
     question: "Is Tickk really free?",
-    answer: "Tickk is free for unlimited voice brain dumps, task and note organization, local storage, PWA install, and basic export. Tickk Pro lifetime access is planned for mind maps, advanced exports, smart transforms, templates, bulk actions, and future premium features."
+    answer: "Tickk is free for unlimited voice brain dumps, task and note organization, local storage, PWA install, JSON import/export, basic CSV export, starter templates, mind map preview, and transform previews. Tickk Pro lifetime access is planned for unlimited smart transforms, full mind maps, advanced exports, saved workflows, unlimited templates, bulk actions, and future premium features."
   },
   {
     question: "Do I need to create an account?",
@@ -43,7 +43,7 @@ export const homepageFAQs: FAQItem[] = [
   },
   {
     question: "Can I export my data?",
-    answer: "Yes, you can export all your tasks, notes, and braindump items as JSON at any time using the keyboard shortcut Ctrl+E (or Cmd+E on Mac). The export includes timestamps and categories. We're also adding CSV and PDF export options soon. You own your data completely."
+    answer: "Yes, you can export your tasks, notes, and braindump items as JSON at any time and import that file on another computer. CSV export is also free. Markdown and DOCX are planned as Tickk Pro advanced exports, with more export formats coming later. You own your data completely."
   },
   {
     question: "How accurate is the speech recognition?",

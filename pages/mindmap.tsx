@@ -8,14 +8,42 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import MindMapView from '@/components/MindMapView'
+import ProInterestModal from '@/components/ProInterestModal'
 import type { AppData } from '@/types/braindump'
 import { StorageService } from '@/lib/storage/storage-service'
 import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
+import { useProSubscription } from '@/hooks/useProSubscription'
 
 export default function MindMapPage() {
+  const { isPro } = useProSubscription()
   const [appData, setAppData] = useState<AppData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [showProModal, setShowProModal] = useState(false)
   const [storageService] = useState(() => StorageService.getInstance())
+
+  const handleProFeatureClick = (feature: string) => {
+    trackProductEvent('feature_triggered', 'mindmap', {
+      source: 'mindmap_page',
+      feature,
+    })
+    trackProductEvent('pro_clicked', 'mindmap', {
+      source: 'mindmap_page',
+      feature,
+    })
+    setShowProModal(true)
+  }
+
+  const handleMindMapUsed = (action: string) => {
+    trackProductEvent('mindmap_used', action, {
+      source: 'mindmap_page',
+      is_pro: isPro,
+    })
+    trackProductEvent('feature_triggered', 'mindmap', {
+      source: 'mindmap_page',
+      feature: 'mindmap',
+      action,
+    })
+  }
 
   useEffect(() => {
     const loadData = async () => {
@@ -116,10 +144,21 @@ export default function MindMapPage() {
             </div>
 
             {/* Mind Map Component */}
-            <MindMapView appData={appData} />
+            <MindMapView
+              appData={appData}
+              isPro={isPro}
+              onProFeatureClick={handleProFeatureClick}
+              onMindMapUsed={handleMindMapUsed}
+            />
           </div>
         </section>
       </Layout>
+
+      <ProInterestModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        source="mindmap_page"
+      />
     </>
   )
 }

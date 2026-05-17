@@ -10,9 +10,12 @@ import MindMapService from '@/lib/services/mindmap.service'
 
 interface MindMapViewProps {
   appData: AppData
+  isPro?: boolean
+  onProFeatureClick?: (feature: string) => void
+  onMindMapUsed?: (action: string) => void
 }
 
-export default function MindMapView({ appData }: MindMapViewProps) {
+export default function MindMapView({ appData, isPro = false, onProFeatureClick, onMindMapUsed }: MindMapViewProps) {
   const [timeframe, setTimeframe] = useState<TimeframePeriod>('1month')
   const [selectedNode, setSelectedNode] = useState<MindMapNode | null>(null)
   const [viewMode, setViewMode] = useState<'tree' | 'stats'>('tree')
@@ -36,7 +39,10 @@ export default function MindMapView({ appData }: MindMapViewProps) {
     return (
       <div key={node.id} className="mb-2">
         <button
-          onClick={() => setSelectedNode(node)}
+          onClick={() => {
+            setSelectedNode(node)
+            onMindMapUsed?.('node_selected')
+          }}
           className={`
             w-full text-left px-4 py-3 rounded-lg transition-all
             hover:scale-[1.02] hover:shadow-md
@@ -106,7 +112,10 @@ export default function MindMapView({ appData }: MindMapViewProps) {
               {(['1week', '1month', '3months', '6months', '1year'] as TimeframePeriod[]).map((period) => (
                 <button
                   key={period}
-                  onClick={() => setTimeframe(period)}
+                  onClick={() => {
+                    setTimeframe(period)
+                    onMindMapUsed?.('timeframe_changed')
+                  }}
                   className={`
                     px-4 py-2 rounded-lg text-sm font-medium transition-all
                     ${timeframe === period
@@ -132,7 +141,10 @@ export default function MindMapView({ appData }: MindMapViewProps) {
             </label>
             <div className="flex gap-2">
               <button
-                onClick={() => setViewMode('tree')}
+                onClick={() => {
+                  setViewMode('tree')
+                  onMindMapUsed?.('tree_view')
+                }}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all
                   ${viewMode === 'tree'
@@ -144,7 +156,10 @@ export default function MindMapView({ appData }: MindMapViewProps) {
                 🌳 Tree
               </button>
               <button
-                onClick={() => setViewMode('stats')}
+                onClick={() => {
+                  setViewMode('stats')
+                  onMindMapUsed?.('stats_view')
+                }}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all
                   ${viewMode === 'stats'
@@ -155,6 +170,37 @@ export default function MindMapView({ appData }: MindMapViewProps) {
               >
                 📊 Stats
               </button>
+            </div>
+          </div>
+
+          <div className="w-full border-t border-gray-200 pt-4 dark:border-slate-700">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => onProFeatureClick?.('mindmap_export')}
+                className="rounded-lg border border-orange-500/50 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:text-orange-300 dark:hover:bg-orange-500/10"
+              >
+                Export image/PDF
+              </button>
+              <button
+                type="button"
+                onClick={() => onProFeatureClick?.('multiple_mindmaps')}
+                className="rounded-lg border border-orange-500/50 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:text-orange-300 dark:hover:bg-orange-500/10"
+              >
+                Save multiple maps
+              </button>
+              <button
+                type="button"
+                onClick={() => onProFeatureClick?.('advanced_mindmap_layouts')}
+                className="rounded-lg border border-orange-500/50 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:text-orange-300 dark:hover:bg-orange-500/10"
+              >
+                Advanced layouts
+              </button>
+              {!isPro && (
+                <span className="text-xs text-gray-500 dark:text-slate-400">
+                  Pro tools. The interactive preview stays free.
+                </span>
+              )}
             </div>
           </div>
         </div>

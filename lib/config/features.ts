@@ -67,7 +67,7 @@ export const FEATURES: FeatureFlags = {
 
   ADVANCED_EXPORTS: {
     enabled: process.env.NEXT_PUBLIC_ENABLE_ADVANCED_EXPORTS === 'true',
-    description: 'Markdown, CSV, PDF export formats (Pro feature)',
+    description: 'Markdown and DOCX export formats (Pro feature)',
     envVar: 'NEXT_PUBLIC_ENABLE_ADVANCED_EXPORTS',
   },
 

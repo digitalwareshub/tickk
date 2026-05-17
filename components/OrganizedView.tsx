@@ -24,6 +24,7 @@ import type { AppData, UserPreferences, VoiceItem, TaskTemplate } from '@/types/
 import { parseEarliestDate } from '@/lib/utils/dateParser'
 import { exportToCalendar as exportICS, getExportableTasksCount } from '@/lib/utils/icsExport'
 import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
+import { isStarterTemplate, starterTemplates } from '@/lib/templates/starter-templates'
 
 interface OrganizedViewProps {
   appData: AppData
@@ -83,6 +84,7 @@ export default function OrganizedView({
   const [showTemplateLibrary, setShowTemplateLibrary] = useState(false)
   const [itemToTemplate, setItemToTemplate] = useState<VoiceItem | null>(null)
   const [itemToTemplateType, setItemToTemplateType] = useState<'task' | 'note'>('task')
+  const visibleTemplates = [...starterTemplates, ...templates]
   
   // Get organized items (tasks and notes)
   const organizedTasks = appData.tasks || []
@@ -381,6 +383,12 @@ export default function OrganizedView({
    * Open save template modal for an item
    */
   const handleSaveAsTemplate = (item: VoiceItem, type: 'task' | 'note') => {
+    trackProductEvent('feature_triggered', 'template', {
+      source: 'organized_view',
+      feature: 'template',
+      action: 'save_template_opened',
+    })
+
     setItemToTemplate(item)
     setItemToTemplateType(type)
     setShowSaveTemplateModal(true)
@@ -391,6 +399,11 @@ export default function OrganizedView({
    * Use a template to create a new item
    */
   const handleUseTemplate = async (template: TaskTemplate) => {
+    trackProductEvent('template_selected', template.category, {
+      source: 'organized_view',
+      template_type: isStarterTemplate(template.id) ? 'starter' : 'custom',
+    })
+
     const newItem: VoiceItem = {
       id: crypto.randomUUID(),
       text: template.text,
@@ -422,11 +435,21 @@ export default function OrganizedView({
       })
     }
 
-    // Increment usage count
-    await incrementUsage(template.id)
+    // Increment usage count for user-saved templates only.
+    if (!isStarterTemplate(template.id)) {
+      await incrementUsage(template.id)
+    }
 
     // Close library
     setShowTemplateLibrary(false)
+  }
+
+  const handleCreateTemplate = async (template: Omit<TaskTemplate, 'id' | 'createdAt' | 'usageCount'>) => {
+    await addTemplate(template)
+    trackProductEvent('template_created', template.category, {
+      source: 'organized_view',
+      template_category: template.category,
+    })
   }
 
   /**
@@ -539,6 +562,11 @@ export default function OrganizedView({
 
   // Export functionality
   const exportToCSV = () => {
+    trackProductEvent('feature_triggered', 'export', {
+      source: 'organized_view',
+      feature: 'export',
+      export_type: 'csv',
+    })
     trackProductEvent('export_clicked', 'csv', {
       export_type: 'csv',
       source: 'organized_view',
@@ -581,6 +609,11 @@ export default function OrganizedView({
   }
 
   const exportToJSON = () => {
+    trackProductEvent('feature_triggered', 'export', {
+      source: 'organized_view',
+      feature: 'export',
+      export_type: 'json',
+    })
     trackProductEvent('export_clicked', 'json', {
       export_type: 'json',
       source: 'organized_view',
@@ -609,6 +642,11 @@ export default function OrganizedView({
       trackProductEvent('export_clicked', 'calendar', {
         export_type: 'calendar',
         source: 'organized_view',
+      })
+      trackProductEvent('feature_triggered', 'export', {
+        source: 'organized_view',
+        feature: 'export',
+        export_type: 'calendar',
       })
       const totalTasks = organizedTasks.length
       const exportableCount = getExportableTasksCount(organizedTasks)
@@ -1041,9 +1079,9 @@ export default function OrganizedView({
                   >
                     <span>📝</span>
                     Templates
-                    {templates.length > 0 && (
+                    {visibleTemplates.length > 0 && (
                       <span className="px-1.5 py-0.5 text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">
-                        {templates.length}
+                        {visibleTemplates.length}
                       </span>
                     )}
                   </button>
@@ -1663,7 +1701,7 @@ export default function OrganizedView({
         isOpen={showSaveTemplateModal}
         item={itemToTemplate}
         itemType={itemToTemplateType}
-        onSave={addTemplate}
+        onSave={handleCreateTemplate}
         onClose={() => {
           setShowSaveTemplateModal(false)
           setItemToTemplate(null)
@@ -1673,7 +1711,7 @@ export default function OrganizedView({
       {/* Template Library Modal */}
       <TemplateLibrary
         isOpen={showTemplateLibrary}
-        templates={templates}
+        templates={visibleTemplates}
         onUseTemplate={handleUseTemplate}
         onDeleteTemplate={deleteTemplate}
         onClose={() => setShowTemplateLibrary(false)}

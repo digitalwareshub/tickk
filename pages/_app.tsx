@@ -61,16 +61,6 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* Google Analytics - moved to next/script */}
       </Head>
 
-      <Script id="force-dark-mode" strategy="beforeInteractive">
-        {`
-          (function() {
-            try {
-              document.documentElement.classList.add('dark');
-            } catch (e) {}
-          })();
-        `}
-      </Script>
-      
       {/* Google Analytics with next/script */}
       {GA_TRACKING_ID && (
         <>

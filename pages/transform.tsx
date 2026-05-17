@@ -9,9 +9,11 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
-import { ProGate } from '@/components/ProGate'
+import ProInterestModal from '@/components/ProInterestModal'
 import BugReportModal from '@/components/BugReportModal'
+import { useProSubscription } from '@/hooks/useProSubscription'
 import { transformText, modeDescriptions } from '@/lib/transformers'
+import { exportNoteAsDocx } from '@/lib/export/docx'
 import type { TransformMode, TransformedNote } from '@/types/transform'
 import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight, Mic, MicOff } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -19,6 +21,18 @@ import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 // Storage key for transformed notes
 const STORAGE_KEY = 'tickk_transformed_notes'
+
+const transformWorkflows: Array<{
+  id: string
+  label: string
+  mode: TransformMode
+  helper: string
+}> = [
+  { id: 'clean-up', label: 'Clean this up', mode: 'polish', helper: 'Fix rough wording and formatting.' },
+  { id: 'extract-tasks', label: 'Extract tasks', mode: 'tasks', helper: 'Turn messy notes into action items.' },
+  { id: 'meeting-notes', label: 'Meeting notes', mode: 'structure', helper: 'Structure notes into sections.' },
+  { id: 'weekly-review', label: 'Weekly review', mode: 'summarize', helper: 'Summarize themes and progress.' },
+]
 
 // Icon mapping
 const iconMap = {
@@ -29,6 +43,7 @@ const iconMap = {
 }
 
 export default function TransformPage() {
+  const { isPro } = useProSubscription()
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [mode, setMode] = useState<TransformMode>('summarize')
@@ -37,6 +52,7 @@ export default function TransformPage() {
   const [showHistory, setShowHistory] = useState(false)
   const [metadata, setMetadata] = useState<{ originalLength: number; transformedLength: number; compressionRatio?: number; tasksFound?: number } | null>(null)
   const [isBugReportOpen, setIsBugReportOpen] = useState(false)
+  const [showProModal, setShowProModal] = useState(false)
 
   // Voice input state
   const [isRecording, setIsRecording] = useState(false)
@@ -58,6 +74,22 @@ export default function TransformPage() {
       console.error('Failed to load notes:', e)
     }
   }, [])
+
+  const openProModal = useCallback((source: string, feature: string, showModal = true) => {
+    trackProductEvent('feature_triggered', feature, { source, feature })
+    trackProductEvent('pro_clicked', source, { source, feature })
+    if (!showModal) return
+    setShowProModal(true)
+  }, [])
+
+  const applyWorkflow = useCallback((workflow: typeof transformWorkflows[number]) => {
+    if (!isPro) {
+      openProModal('transform_workflow', workflow.id)
+    }
+
+    setMode(workflow.mode)
+    toast.success(`${workflow.label} workflow selected`)
+  }, [isPro, openProModal])
 
   // Initialize speech recognition
   useEffect(() => {
@@ -193,6 +225,13 @@ export default function TransformPage() {
         trackProductEvent('transform_used', mode, {
           transform_type: mode,
           input_length: input.length,
+          source: 'transform_page',
+          is_pro: isPro,
+        })
+        trackProductEvent('feature_triggered', 'transform', {
+          source: 'transform_page',
+          feature: 'transform',
+          transform_type: mode,
         })
         toast.success(`Text ${mode === 'tasks' ? 'analyzed' : 'transformed'}!`)
       } catch (e) {
@@ -202,7 +241,7 @@ export default function TransformPage() {
         setIsProcessing(false)
       }
     }, 100)
-  }, [input, mode])
+  }, [input, mode, isPro])
 
   // Copy to clipboard
   const handleCopy = useCallback(async () => {
@@ -290,6 +329,10 @@ export default function TransformPage() {
       return
     }
 
+    if (!isPro) {
+      openProModal('markdown_export', 'export', false)
+    }
+
     const content = `# ${mode.charAt(0).toUpperCase() + mode.slice(1)} Result\n\n## Original\n\n${input}\n\n## Transformed\n\n${output}`
     const blob = new Blob([content], { type: 'text/markdown' })
     const url = URL.createObjectURL(blob)
@@ -303,7 +346,39 @@ export default function TransformPage() {
       source: 'transform_page',
     })
     toast.success('Downloaded!')
-  }, [input, output, mode])
+  }, [input, output, mode, isPro, openProModal])
+
+  const handleDocxDownload = useCallback(async () => {
+    if (!output) {
+      toast.error('Nothing to download')
+      return
+    }
+
+    if (!isPro) {
+      openProModal('docx_export', 'export')
+    }
+
+    const note: TransformedNote = {
+      id: `export_${Date.now()}`,
+      title: input.slice(0, 50).trim() + (input.length > 50 ? '...' : ''),
+      input,
+      output,
+      mode,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      wordCount: input.split(/\s+/).filter(Boolean).length,
+      isFavorite: false,
+      isPinned: false,
+    }
+
+    const success = await exportNoteAsDocx(note)
+    if (success) {
+      trackProductEvent('export_clicked', 'docx', {
+        export_type: 'docx',
+        source: 'transform_page',
+      })
+    }
+  }, [input, output, mode, isPro, openProModal])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -376,8 +451,31 @@ export default function TransformPage() {
               </p>
             </div>
 
-            {/* Pro Gate - Wraps the transformation tools */}
-            <ProGate feature="Note transformation">
+            {/* Saved Workflow Presets */}
+            <div className="mb-6 rounded-md border border-[#333333] bg-white/[0.02] p-4">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <h2 className="font-mono text-sm font-semibold text-white">saved workflows</h2>
+                  <p className="text-xs text-[#a0a0a0]">Quick transform presets for repeated note cleanup.</p>
+                </div>
+                <span className="rounded-md border border-orange-500/50 px-2 py-1 font-mono text-xs text-orange-300">
+                  early access
+                </span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {transformWorkflows.map((workflow) => (
+                  <button
+                    key={workflow.id}
+                    type="button"
+                    onClick={() => applyWorkflow(workflow)}
+                    className="rounded-md border border-[#333333] bg-[#11131c] p-3 text-left transition-colors hover:border-orange-500"
+                  >
+                    <span className="block text-sm font-semibold text-white">{workflow.label}</span>
+                    <span className="mt-1 block text-xs text-[#a0a0a0]">{workflow.helper}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Mode Selection */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
@@ -387,7 +485,14 @@ export default function TransformPage() {
                 return (
                   <button
                     key={m}
-                    onClick={() => setMode(m)}
+                    onClick={() => {
+                      setMode(m)
+                      trackProductEvent('feature_triggered', 'transform', {
+                        source: 'transform_mode_card',
+                        feature: 'transform',
+                        transform_type: m,
+                      })
+                    }}
                     className={`rounded-md border p-4 text-left transition-colors ${
                       mode === m
                         ? 'border-orange-500 bg-orange-500/10'
@@ -538,6 +643,15 @@ export default function TransformPage() {
               </button>
 
               <button
+                onClick={handleDocxDownload}
+                disabled={!output}
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
+              >
+                <Download className="w-4 h-4" />
+                DOCX
+              </button>
+
+              <button
                 onClick={handleClear}
                 className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500"
               >
@@ -642,8 +756,6 @@ export default function TransformPage() {
                 )}
               </div>
             )}
-
-            </ProGate>
           </div>
         </section>
       </Layout>
@@ -653,6 +765,11 @@ export default function TransformPage() {
         isOpen={isBugReportOpen}
         onClose={() => setIsBugReportOpen(false)}
         featureName="Transform Notes"
+      />
+      <ProInterestModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        source="transform_page"
       />
     </>
   )
