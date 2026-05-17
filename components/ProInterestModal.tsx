@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
@@ -11,6 +11,30 @@ interface ProInterestModalProps {
 export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }: ProInterestModalProps) {
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const emailInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    window.setTimeout(() => {
+      emailInputRef.current?.focus()
+    }, 0)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 
@@ -51,22 +75,33 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4" role="dialog" aria-modal="true" aria-labelledby="pro-modal-title">
-      <div className="w-full max-w-md rounded-lg bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 shadow-xl">
-        <div className="p-6">
-          <div className="flex items-start justify-between gap-4 mb-4">
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-sm"
+      role="presentation"
+      onMouseDown={onClose}
+    >
+      <div
+        className="w-full max-w-md rounded-md border border-[#333333] bg-[#101116] shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pro-modal-title"
+        aria-describedby="pro-modal-description"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <div className="p-6 sm:p-7">
+          <div className="mb-5 flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-orange-600 dark:text-orange-400 mb-2">
+              <p className="mb-2 font-mono text-xs font-semibold lowercase text-orange-400">
                 Tickk Pro
               </p>
-              <h2 id="pro-modal-title" className="text-2xl font-bold text-gray-900 dark:text-slate-50">
+              <h2 id="pro-modal-title" className="font-mono text-2xl font-semibold leading-tight text-white">
                 Tickk Pro is coming back.
               </h2>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md p-2 text-gray-400 hover:text-gray-700 dark:text-slate-500 dark:hover:text-slate-200"
+              className="rounded-md p-2 text-[#a0a0a0] transition-colors hover:text-white"
               aria-label="Close Pro modal"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,27 +110,28 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
             </button>
           </div>
 
-          <p className="text-gray-600 dark:text-slate-300 mb-5">
+          <p id="pro-modal-description" className="mb-6 text-sm leading-6 text-[#d4d4d4]">
             Early users will receive lifetime access pricing.
           </p>
 
-          <label htmlFor="pro-notify-email" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
+          <label htmlFor="pro-notify-email" className="mb-2 block text-sm font-medium text-[#d4d4d4]">
             Email
           </label>
           <input
+            ref={emailInputRef}
             id="pro-notify-email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder="you@example.com"
-            className="w-full rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-3 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full rounded-md border border-[#333333] bg-[#15161f] px-3 py-3 text-white placeholder-[#737373] focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30"
           />
 
-          <div className="mt-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+          <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex justify-center rounded-lg border border-gray-300 dark:border-slate-700 px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800"
+              className="inline-flex justify-center rounded-md border border-[#333333] px-4 py-2.5 font-mono text-sm font-semibold lowercase text-white transition-colors hover:border-orange-300 hover:text-orange-200"
             >
               Maybe later
             </button>
@@ -103,7 +139,7 @@ export default function ProInterestModal({ isOpen, onClose, source = 'unknown' }
               type="button"
               onClick={handleNotify}
               disabled={isSubmitting}
-              className="inline-flex justify-center rounded-lg bg-orange-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:bg-orange-400"
+              className="inline-flex justify-center rounded-md bg-orange-600 px-4 py-2.5 font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:bg-orange-900 disabled:text-[#a0a0a0]"
             >
               {isSubmitting ? 'Saving...' : 'Notify me'}
             </button>
