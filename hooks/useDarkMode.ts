@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 
 export function useDarkMode() {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
-    // Check localStorage for saved preference - default to light mode
-    const saved = localStorage.getItem('tickk_dark_mode')
-    const shouldBeDark = saved ? JSON.parse(saved) : false // Default to light mode
+    // Tickk now defaults to the SHRP-style dark theme across the app.
+    const shouldBeDark = true
     
     setIsDark(shouldBeDark)
     

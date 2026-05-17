@@ -23,7 +23,7 @@ export default function Layout({
   children, 
   showHomeLink, 
   title,
-  className = "min-h-screen bg-white",
+  className = "min-h-screen bg-[#1a1b26] text-white",
   seoTitle,
   seoDescription,
   seoImage,
@@ -65,7 +65,7 @@ export default function Layout({
         {/* Page Title for non-home pages */}
         {title && (
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+            <h1 className="text-3xl font-bold text-white">{title}</h1>
           </div>
         )}
 

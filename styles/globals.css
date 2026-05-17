@@ -28,8 +28,8 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1a1b26;
+  --foreground: #ffffff;
 }
 
 body {
@@ -39,6 +39,12 @@ body {
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
+}
+
+html.dark,
+html.dark body {
+  background: #1a1b26;
+  color: #ffffff;
 }
 
 /* Emoji font support for better flag rendering */

@@ -51,10 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('tickk_dark_mode');
-                  if (saved && JSON.parse(saved) === true) {
-                    document.documentElement.classList.add('dark');
-                  }
+                  document.documentElement.classList.add('dark');
                 } catch (e) {}
               })();
             `,
