@@ -260,8 +260,11 @@ export default function App() {
   }, [recordingControls, isSupported])
 
   const handleGetLifetimeProClick = useCallback(() => {
-    trackProductEvent('pricing_clicked', 'homepage_cta')
-    trackProductEvent('pro_clicked', 'homepage_cta')
+    trackProductEvent('pricing_clicked', 'homepage_cta', { source: 'homepage_cta' })
+    trackProductEvent('pro_clicked', 'homepage_cta', {
+      source: 'homepage_cta',
+      feature: 'lifetime_pro',
+    })
     setShowProModal(true)
   }, [])
   
@@ -395,6 +398,10 @@ export default function App() {
         source: 'text_fallback'
       }
     })
+    trackProductEvent('braindump_items_added', 'text', {
+      item_count: newItems.length,
+      input_type: 'text',
+    })
   }
   
   /**
@@ -423,11 +430,12 @@ export default function App() {
     
     // Track data export
     enhancedAnalytics.trackEvent({
-      action: 'data_exported',
-      category: 'feature_usage',
-      label: 'keyboard_shortcut',
+      action: 'export_clicked',
+      category: 'product',
+      label: 'json',
       custom_parameters: {
-        export_trigger: 'keyboard_shortcut',
+        export_type: 'json',
+        source: 'keyboard_shortcut',
         items_exported: (appData?.braindump.length || 0) + (appData?.tasks.length || 0) + (appData?.notes.length || 0)
       }
     })

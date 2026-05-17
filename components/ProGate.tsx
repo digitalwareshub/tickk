@@ -75,7 +75,10 @@ function UpgradePrompt({ feature }: { feature: string }) {
         </p>
         <button
           onClick={() => {
-            trackProductEvent('pro_clicked', 'pro_gate')
+            trackProductEvent('pro_clicked', 'pro_gate', {
+              source: 'pro_gate',
+              feature,
+            })
             setShowModal(true)
           }}
           className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"

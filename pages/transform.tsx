@@ -15,6 +15,7 @@ import { transformText, modeDescriptions } from '@/lib/transformers'
 import type { TransformMode, TransformedNote } from '@/types/transform'
 import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight, Mic, MicOff } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 // Storage key for transformed notes
 const STORAGE_KEY = 'tickk_transformed_notes'
@@ -189,6 +190,10 @@ export default function TransformPage() {
         const result = transformText(input, mode)
         setOutput(result.output)
         setMetadata(result.metadata || null)
+        trackProductEvent('transform_used', mode, {
+          transform_type: mode,
+          input_length: input.length,
+        })
         toast.success(`Text ${mode === 'tasks' ? 'analyzed' : 'transformed'}!`)
       } catch (e) {
         console.error('Transform error:', e)
@@ -293,6 +298,10 @@ export default function TransformPage() {
     a.download = `tickk-${mode}-${Date.now()}.md`
     a.click()
     URL.revokeObjectURL(url)
+    trackProductEvent('export_clicked', 'markdown', {
+      export_type: 'markdown',
+      source: 'transform_page',
+    })
     toast.success('Downloaded!')
   }, [input, output, mode])
 

@@ -59,6 +59,7 @@ export default function BraindumpInterface({
   
   // Use ref to store transcript for immediate access in callbacks
   const transcriptRef = useRef('')
+  const recordingStartedAtRef = useRef<number | null>(null)
   
   // Session state
   const [currentSession, setCurrentSession] = useState<BraindumpSession | null>(null)
@@ -189,8 +190,16 @@ export default function BraindumpInterface({
     // Start recording
     try {
       recognition.start()
+      recordingStartedAtRef.current = Date.now()
       announcer.announceRecordingStatus('started')
-      trackProductEvent('recording_started', 'voice')
+      trackProductEvent('recording_started', 'voice', {
+        source: 'braindump',
+        is_pwa: typeof window !== 'undefined' && (
+          window.matchMedia('(display-mode: standalone)').matches ||
+          (window.navigator as Navigator & { standalone?: boolean }).standalone === true
+        ),
+        speech_supported: isSupported,
+      })
       trackPageInteraction('voice_recording_started', 'braindump')
     } catch (error) {
       console.error('Failed to start recording:', error)
@@ -306,7 +315,15 @@ export default function BraindumpInterface({
       announcer.announce(`Added ${itemCount} ${itemWord}. Click Organize to categorize your thoughts.`, 'polite')
 
       // Track success
-      trackProductEvent('recording_completed', 'braindump', { item_count: itemCount })
+      trackProductEvent('recording_completed', 'braindump', {
+        duration_ms: recordingStartedAtRef.current ? Date.now() - recordingStartedAtRef.current : undefined,
+        character_count: transcript.length,
+        source: 'braindump',
+      })
+      trackProductEvent('braindump_items_added', 'voice', {
+        item_count: itemCount,
+        input_type: 'voice',
+      })
       trackPageInteraction('braindump_items_added', `count_${itemCount}`)
 
       setCurrentTranscript('')
@@ -386,8 +403,18 @@ export default function BraindumpInterface({
       
       toast.success(SuccessMessages.PROCESSING_COMPLETE)
       trackProductEvent('brain_dump_completed', 'organize', {
-        tasks: organizedData.tasks.length,
-        notes: organizedData.notes.length,
+        task_count: organizedData.tasks.length,
+        note_count: organizedData.notes.length,
+        item_count: organizedData.tasks.length + organizedData.notes.length,
+      })
+      trackProductEvent('braindump_processing_complete', 'organize', {
+        task_count: organizedData.tasks.length,
+        note_count: organizedData.notes.length,
+        item_count: organizedData.tasks.length + organizedData.notes.length,
+      })
+      trackProductEvent('braindump_session_completed', 'organize', {
+        task_count: organizedData.tasks.length,
+        note_count: organizedData.notes.length,
       })
       trackPageInteraction('braindump_session_completed', `${organizedData.tasks.length}_tasks_${organizedData.notes.length}_notes`)
       

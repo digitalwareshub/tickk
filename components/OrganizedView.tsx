@@ -539,7 +539,10 @@ export default function OrganizedView({
 
   // Export functionality
   const exportToCSV = () => {
-    trackProductEvent('export_clicked', 'csv')
+    trackProductEvent('export_clicked', 'csv', {
+      export_type: 'csv',
+      source: 'organized_view',
+    })
     const allItems = [
       ...organizedTasks.map(task => ({
         type: 'Task',
@@ -578,7 +581,10 @@ export default function OrganizedView({
   }
 
   const exportToJSON = () => {
-    trackProductEvent('export_clicked', 'json')
+    trackProductEvent('export_clicked', 'json', {
+      export_type: 'json',
+      source: 'organized_view',
+    })
     const exportData = {
       exportDate: new Date().toISOString(),
       tasks: organizedTasks,
@@ -600,7 +606,10 @@ export default function OrganizedView({
 
   const exportToCalendar = () => {
     try {
-      trackProductEvent('export_clicked', 'calendar')
+      trackProductEvent('export_clicked', 'calendar', {
+        export_type: 'calendar',
+        source: 'organized_view',
+      })
       const totalTasks = organizedTasks.length
       const exportableCount = getExportableTasksCount(organizedTasks)
       
@@ -946,7 +955,10 @@ export default function OrganizedView({
             <div className="relative flex-1 sm:flex-initial">
               <button
                 onClick={() => {
-                  trackProductEvent('export_clicked', 'menu')
+                  trackProductEvent('export_clicked', 'menu', {
+                    export_type: 'menu',
+                    source: 'organized_view',
+                  })
                   setShowExportMenu(!showExportMenu)
                 }}
                 className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 focus:ring-2 focus:ring-orange-500 focus:border-transparent min-h-[44px] w-full"

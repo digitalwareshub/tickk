@@ -18,8 +18,6 @@ export default function MindMapPage() {
   const [storageService] = useState(() => StorageService.getInstance())
 
   useEffect(() => {
-    trackProductEvent('mindmap_opened', 'mindmap_page')
-
     const loadData = async () => {
       try {
         const data = await storageService.getAllData()
@@ -27,6 +25,10 @@ export default function MindMapPage() {
         
         if (!data) {
           console.log('No data found, using fallback')
+          trackProductEvent('mindmap_opened', 'mindmap_page', {
+            source: 'mindmap_page',
+            has_items: false,
+          })
           setAppData({
             version: '1.0.0',
             tasks: [],
@@ -35,6 +37,10 @@ export default function MindMapPage() {
             sessions: []
           })
         } else {
+          trackProductEvent('mindmap_opened', 'mindmap_page', {
+            source: 'mindmap_page',
+            has_items: data.tasks.length + data.notes.length + data.braindump.length > 0,
+          })
           setAppData(data)
         }
       } catch (error) {

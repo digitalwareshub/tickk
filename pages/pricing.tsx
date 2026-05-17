@@ -27,8 +27,8 @@ export default function Pricing() {
   const [showProModal, setShowProModal] = useState(false)
 
   const openProModal = (source: string) => {
-    trackProductEvent('pricing_clicked', source)
-    trackProductEvent('pro_clicked', source)
+    trackProductEvent('pricing_clicked', source, { source })
+    trackProductEvent('pro_clicked', source, { source, feature: 'lifetime_pro' })
     setShowProModal(true)
   }
 
