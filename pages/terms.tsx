@@ -10,7 +10,6 @@ export default function Terms() {
       <Head>
         <title>Terms of Service | tickk - Voice Productivity App Terms & Conditions</title>
         <meta name="description" content="tickk Terms of Service: Simple, fair terms for using our voice productivity app. No hidden clauses, clear language, user-friendly policies." />
-        <meta name="keywords" content="terms of service, voice app terms, speech recognition terms, app usage policy, user agreement, productivity app terms" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/terms" />
       </Head>
@@ -40,7 +39,7 @@ export default function Terms() {
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">
               <div className="text-2xl mb-2">✅</div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Free to Use</h3>
-              <p className="text-gray-600 dark:text-slate-400 text-sm">No subscription fees or hidden costs</p>
+              <p className="text-gray-600 dark:text-slate-400 text-sm">No recurring fees for the core workflow</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4 text-center">

@@ -523,6 +523,44 @@ export const trackSectionTime = (sectionId: string, timeSpent: number) => {
   enhancedAnalytics.trackSectionTime(sectionId, timeSpent);
 };
 
+export const trackProductEvent = (
+  action: string,
+  label?: string,
+  customParameters?: Record<string, string | number | boolean | null | undefined>
+) => {
+  const sessionParameters: Record<string, string | number | boolean | null | undefined> = {};
+
+  if (typeof window !== 'undefined') {
+    const lastSession = sessionStorage.getItem('tickk_session_previous_seen_at')
+      || localStorage.getItem('tickk_last_product_session');
+    const now = Date.now();
+    const daysSinceLastSession = lastSession
+      ? Math.max(0, Math.floor((now - Number(lastSession)) / 86400000))
+      : null;
+
+    sessionParameters.returning_user = localStorage.getItem('tickk_has_visited') === 'true';
+    sessionParameters.days_since_last_session = daysSinceLastSession;
+    sessionParameters.is_pwa = window.matchMedia?.('(display-mode: standalone)').matches || false;
+
+    if (!sessionStorage.getItem('tickk_session_previous_seen_at')) {
+      sessionStorage.setItem('tickk_session_previous_seen_at', lastSession || String(now));
+    }
+
+    localStorage.setItem('tickk_has_visited', 'true');
+    localStorage.setItem('tickk_last_product_session', String(now));
+  }
+
+  enhancedAnalytics.trackEvent({
+    action,
+    category: 'product',
+    label,
+    custom_parameters: {
+      ...sessionParameters,
+      ...customParameters,
+    },
+  });
+};
+
 // Initialize scroll tracking on page load
 if (typeof window !== 'undefined') {
   window.addEventListener('load', () => {

@@ -92,10 +92,17 @@ export const initPWATracking = () => {
     trackPWAInstallPrompt()
   })
 
-  // Track when PWA is installed
-  window.addEventListener('appinstalled', () => {
-    trackPWAInstalled()
-  })
+    // Track when PWA is installed
+    window.addEventListener('appinstalled', () => {
+      trackPWAInstalled()
+      if (window.gtag && GA_TRACKING_ID) {
+        window.gtag('event', 'pwa_installed', {
+          event_category: 'product',
+          event_label: 'browser_install',
+          source: 'browser_install',
+        })
+      }
+    })
 
   // Track if user is currently in PWA mode
   const isPWA = window.matchMedia('(display-mode: standalone)').matches ||

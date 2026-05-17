@@ -9,7 +9,6 @@ export default function Changelog() {
       <Head>
         <title>Changelog | tickk - Version History and Updates</title>
         <meta name="description" content="Track tickk updates, new features, and improvements. See what's new in each version of our voice productivity app." />
-        <meta name="keywords" content="tickk changelog, version history, updates, new features, voice app updates, productivity app changelog" />
         <link rel="canonical" href="https://tickk.app/changelog" />
       </Head>
 
@@ -284,7 +283,7 @@ export default function Changelog() {
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🔒 Privacy & Security</h3>
                   <ul className="text-gray-700 dark:text-slate-300 space-y-1 ml-4">
-                    <li>• Zero data collection - everything stays on your device</li>
+                    <li>• Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
                     <li>• No account required - start using immediately</li>
                     <li>• Offline functionality for voice transcription</li>
                     <li>• Open source codebase for transparency</li>

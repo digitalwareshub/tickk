@@ -13,7 +13,6 @@ export default function MobileVoiceProductivity() {
         <title>Mobile Voice Productivity: Capture Ideas on the Go | Tickk Blog</title>
         <meta name="title" content="Mobile Voice Productivity: Capture Ideas on the Go | Tickk Blog" />
         <meta name="description" content="Master mobile voice productivity for hands-free idea capture anywhere. Learn best practices for voice notes on phones, commuting workflows, and on-the-go brainstorming." />
-        <meta name="keywords" content="mobile voice productivity, voice notes on phone, hands-free mobile productivity, voice capture mobile apps, commuting productivity, mobile brainstorming, phone voice notes, mobile speech to text, on-the-go productivity, mobile voice workflow" />
         <meta name="author" content="Tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/mobile-voice-productivity-capture-ideas-on-the-go" />
@@ -41,7 +40,7 @@ export default function MobileVoiceProductivity() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 

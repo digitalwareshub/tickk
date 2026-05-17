@@ -24,11 +24,7 @@ export default function VoiceProductivityApps() {
         <title>Best Voice Productivity Apps 2025 - Free Speech Recognition Software | Tickk</title>
         <meta 
           name="description" 
-          content="Discover the best voice productivity apps for hands-free task management. Compare features, privacy, and pricing. Tickk offers free speech recognition with offline functionality and zero data collection."
-        />
-        <meta 
-          name="keywords" 
-          content="voice productivity apps, speech recognition software, hands-free task manager, voice to text apps, voice note taking, voice assistant productivity, free voice apps, offline speech recognition" 
+          content="Discover the best voice productivity apps for hands-free task management. Compare features, privacy, and pricing. Tickk offers free speech recognition, offline functionality, and local browser storage."
         />
         <link rel="canonical" href="https://tickk.app/voice-productivity-apps" />
         
@@ -54,6 +50,13 @@ export default function VoiceProductivityApps() {
               "description": "Comprehensive guide to voice productivity applications for hands-free task management and note-taking",
               "url": "https://tickk.app/voice-productivity-apps",
               "inLanguage": "en-US",
+              "keywords": [
+                "voice productivity apps",
+                "hands-free task manager",
+                "voice notes to tasks",
+                "offline speech recognition app",
+                "browser voice productivity app"
+              ],
               "about": {
                 "@type": "Thing",
                 "name": "Voice Productivity Software"
@@ -195,7 +198,7 @@ export default function VoiceProductivityApps() {
                   </svg>
                   <div>
                     <strong className="text-gray-900 dark:text-white">Export Options:</strong>
-                    <span className="text-gray-700 dark:text-slate-200"> JSON, CSV, or PDF exports to integrate with other productivity systems.</span>
+                    <span className="text-gray-700 dark:text-slate-200"> JSON and CSV exports to integrate with other productivity systems, with advanced formats planned for Pro.</span>
                   </div>
                 </li>
               </ul>
@@ -210,8 +213,8 @@ export default function VoiceProductivityApps() {
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               <div className="text-center">
                 <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">100%</div>
-                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Free Forever</div>
-                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">No premium tiers</div>
+                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Free Core</div>
+                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Unlimited brain dumps</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
@@ -396,7 +399,7 @@ export default function VoiceProductivityApps() {
               Ready to Try the Best Free Voice Productivity App?
             </h2>
             <p className="text-responsive mb-8 text-gray-700 dark:text-slate-200">
-              No signup. No credit card. No data collection. Just pure productivity.
+              No signup. No credit card. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
             </p>
             <Link
               href="/"

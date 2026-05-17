@@ -28,8 +28,8 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1a1b26;
+  --foreground: #ffffff;
 }
 
 body {
@@ -39,6 +39,12 @@ body {
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
+}
+
+html.dark,
+html.dark body {
+  background: #1a1b26;
+  color: #ffffff;
 }
 
 /* Emoji font support for better flag rendering */
@@ -373,8 +379,156 @@ input[type="checkbox"]:checked::after {
 
 /* Green checkboxes for tasks */
 input[type="checkbox"].text-green-600:checked {
-  background-color: #16a34a;
-  border-color: #16a34a;
+  background-color: #f97316;
+  border-color: #f97316;
+}
+
+.tickk-shrp-footer {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-footer h3 {
+  color: #ffffff !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.tickk-shrp-footer a,
+.tickk-shrp-footer p,
+.tickk-shrp-footer span,
+.tickk-shrp-footer div {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-footer a,
+.tickk-shrp-footer a span {
+  color: #ffffff !important;
+}
+
+.tickk-shrp-footer a:hover {
+  color: #fdba74 !important;
+}
+
+.tickk-shrp-footer a:hover span {
+  color: #fdba74 !important;
+}
+
+.tickk-shrp-page {
+  background: #1a1b26;
+  color: #ffffff;
+}
+
+[class*="tickk-shrp-page"][class*="bg-white"],
+[class*="tickk-shrp-page"][class*="bg-gray"],
+[class*="tickk-shrp-page"][class*="dark:bg-slate"],
+[class*="tickk-shrp-page"][class*="dark:bg-gradient-to"],
+[class*="tickk-shrp-page"][class*="dark:from-slate"],
+[class*="tickk-shrp-page"][class*="dark:to-violet"] {
+  background: #1a1b26 !important;
+  background-image: none !important;
+}
+
+.tickk-shrp-page main,
+.tickk-shrp-page section[class*="bg-white"],
+.tickk-shrp-page section[class*="bg-gray-50"],
+.tickk-shrp-page section[class*="dark:bg-slate"],
+.tickk-shrp-page [class*="dark:bg-gradient-to"],
+.tickk-shrp-page [class*="dark:from-slate"],
+.tickk-shrp-page [class*="dark:to-slate"],
+.tickk-shrp-page [class*="dark:to-violet"],
+.tickk-shrp-page [class*="dark:via-slate"] {
+  background: #1a1b26 !important;
+  background-image: none !important;
+}
+
+.tickk-shrp-page [class*="dark:bg-slate-900"],
+.tickk-shrp-page [class*="dark:bg-slate-800"],
+.tickk-shrp-page [class*="dark:bg-slate-700"],
+.tickk-shrp-page [class*="bg-gray-50"],
+.tickk-shrp-page [class*="bg-gray-100"],
+.tickk-shrp-page [class*="bg-white"] {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  background-image: none !important;
+}
+
+.tickk-shrp-page section[class*="bg-gray-50"],
+.tickk-shrp-page section[class*="bg-white"],
+.tickk-shrp-page div[class*="min-h-screen"],
+.tickk-shrp-page main > div[class*="bg-white"],
+.tickk-shrp-page main > div[class*="dark:bg-slate"] {
+  background-color: #1a1b26 !important;
+}
+
+.tickk-shrp-page [class*="border-gray-"],
+.tickk-shrp-page [class*="border-slate-"],
+.tickk-shrp-page [class*="dark:border-slate"] {
+  border-color: #333333 !important;
+}
+
+.tickk-shrp-page [class*="shadow"] {
+  box-shadow: none !important;
+}
+
+.tickk-shrp-page h1,
+.tickk-shrp-page h2,
+.tickk-shrp-page h3,
+.tickk-shrp-page h4,
+.tickk-shrp-page h5,
+.tickk-shrp-page h6 {
+  color: #ffffff;
+}
+
+.tickk-shrp-page p,
+.tickk-shrp-page li,
+.tickk-shrp-page td,
+.tickk-shrp-page th,
+.tickk-shrp-page label,
+.tickk-shrp-page small {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-page main a:not([class*="bg-"]):not([class*="text-"]) {
+  color: #f97316;
+}
+
+.tickk-shrp-page main a:not([class*="bg-"]):not([class*="text-"]):hover {
+  color: #fb923c;
+}
+
+.tickk-shrp-page code,
+.tickk-shrp-page kbd,
+.tickk-shrp-page pre {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: #333333 !important;
+  color: #e5e7eb !important;
+}
+
+.tickk-shrp-page input,
+.tickk-shrp-page textarea,
+.tickk-shrp-page select {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+.tickk-shrp-page input::placeholder,
+.tickk-shrp-page textarea::placeholder {
+  color: #737373 !important;
+}
+
+.tickk-shrp-page .prose,
+.tickk-shrp-page .prose p,
+.tickk-shrp-page .prose li {
+  color: #a0a0a0;
+}
+
+.tickk-shrp-page .prose strong,
+.tickk-shrp-page .prose h1,
+.tickk-shrp-page .prose h2,
+.tickk-shrp-page .prose h3 {
+  color: #ffffff;
 }
 
 /* Purple checkboxes for notes */

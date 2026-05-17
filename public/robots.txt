@@ -1,5 +1,5 @@
 # https://tickk.app/robots.txt
-# Updated: 2025-11-17
+# Updated: 2026-05-17
 
 User-agent: *
 Allow: /
@@ -8,9 +8,9 @@ Allow: /
 Disallow: /_next/
 Disallow: /api/
 
-# Block technical files
-Disallow: /manifest.json
-Disallow: /favicon.ico
+# Block internal utility pages
+Disallow: /admin/
+Disallow: /test-error-handling
 
 # Prevent duplicate content from URL parameters
 Disallow: /*?utm_*

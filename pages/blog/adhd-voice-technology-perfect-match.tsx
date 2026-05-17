@@ -13,7 +13,6 @@ export default function ADHDVoiceTechnology() {
         <title>ADHD and Voice Technology: A Perfect Match for Scattered Minds | Tickk Blog</title>
         <meta name="title" content="ADHD and Voice Technology: A Perfect Match for Scattered Minds | Tickk Blog" />
         <meta name="description" content="Discover why voice technology is revolutionary for ADHD brains. Bypass typing barriers, reduce cognitive load, and capture racing thoughts naturally with voice-first productivity." />
-        <meta name="keywords" content="ADHD productivity tools, voice technology for ADHD, ADHD voice notes app, attention deficit voice capture, ADHD brain dump voice, voice notes for scattered thoughts, ADHD-friendly productivity without AI, ADHD focus voice technology, hyperactive mind voice capture, ADHD thought organization voice" />
         <meta name="author" content="Tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/adhd-voice-technology-perfect-match" />
@@ -41,7 +40,7 @@ export default function ADHDVoiceTechnology() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
       </Head>
 

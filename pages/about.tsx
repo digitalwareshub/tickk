@@ -297,16 +297,16 @@ export default function About() {
 
   return (
     <>
-      {/* NextSeo will override DefaultSeo from _app.tsx - prevents duplicates */}
+      {/* Page-level SEO is kept here because this route has custom social metadata. */}
       <NextSeo
-        title="About tickk - Voice-First Productivity for ADHD Minds"
-        description="Learn about tickk, the free voice productivity app designed for ADHD and neurodivergent minds. Brain dump first, organize later with speech-to-text technology."
+        title="About Tickk - Private Voice Brain Dump App"
+        description="Learn about Tickk, a private voice brain dump app that helps fast thinkers capture messy thoughts and turn them into tasks and notes in the browser."
         canonical="https://tickk.app/about"
         openGraph={{
           type: 'website',
           url: 'https://tickk.app/about',
-          title: 'About tickk - Voice-First Productivity App',
-          description: 'Learn about tickk, the free productivity app for ADHD & neurodivergent minds. Brain dump first, organize later with voice-to-text technology.',
+          title: 'About Tickk - Private Voice Brain Dump App',
+          description: 'Learn about Tickk, a browser-first voice brain dump app for capturing messy thoughts and organizing them into tasks and notes.',
           site_name: 'tickk',
           locale: 'en_US',
         }}
@@ -316,23 +316,7 @@ export default function About() {
           site: '@tickkdotapp',
         }}
         additionalMetaTags={[
-          {
-            name: 'keywords',
-            content: 'progressive web app productivity, PWA voice recognition, offline voice app, no AI voice assistant, free voice to text app, voice productivity software, speech recognition task manager, PWA offline capabilities, browser-based voice technology, hands-free productivity app, voice controlled todo list, natural language processing productivity, speech to text organizer, offline PWA voice app, privacy focused voice app, voice note taking app, PWA speech recognition, offline voice productivity, progressive web app voice assistant, no AI voice technology, browser voice recognition PWA, voice productivity dashboard, offline speech to action converter, PWA task management, progressive web app voice tools, voice memo organization app, dictation software for tasks, speech to text for productivity, voice recording productivity tool, voice note taking for meetings, mobile voice productivity app, voice notes on mobile browser, voice controlled task management, speech recognition for project management, hands-free note taking app, voice dictation task organizer, browser speech recognition app, offline voice memo app, privacy voice productivity tool, no login voice app, voice braindump organizer, speech to organized tasks, voice thought capture app, hands-free brainstorming tool'
-          },
           { name: 'author', content: 'tickk' },
-          { name: 'keywords-adhd-core', content: 'best free productivity apps for ADHD, voice note app for ADHD brain, ADHD friendly task management tools, brain dump apps for ADHD and neurodivergent people, simple productivity apps for ADHD students, capture thoughts app for ADHD adults, ADHD focus tool free online, free productivity app for ADHD adults, best productivity apps for ADHD and neurodivergent thinkers, brain dump app for ADHD racing thoughts, voice note app for ADHD hyperfocus, ADHD friendly task management app free, capture thoughts instantly ADHD tool, organize later productivity app for ADHD' },
-          { name: 'keywords-voice-braindump', content: 'brain dump app online free, voice to notes productivity app, capture ideas with voice app, free brain dump organizer app, instant voice transcription productivity tool, note taking app that organizes later, quick voice capture app for ideas' },
-          { name: 'keywords-startup', content: 'new productivity startup 2025, featured indie app, trending startup tools, best new productivity apps, innovative voice startup, ADHD startup tools, neurodivergent tech startup, bootstrapped productivity app, indie maker productivity tool, startup discovery, new app launch 2025, featured on Product Hunt, trending on Hacker News' },
-          { name: 'keywords-affordability', content: 'free alternative to ADHD productivity apps, free alternative to TickTick Notion for ADHD, free ADHD organization apps 2025, free task manager app for busy minds, productivity tools for ADHD without subscription, free alternative to expensive ADHD productivity apps, free productivity app with no subscription' },
-          { name: 'keywords-students-makers', content: 'productivity apps for college students ADHD, note taking app for exams ADHD friendly, best productivity app for makers 2025, quick capture tools for creators and entrepreneurs, free idea capture app for startups, best free brain dump app for students 2025, productivity app for researchers and PhD students, note taking app for ADHD students free, lecture capture voice note app for students, study session brain dump app, assignment idea capture tool free' },
-          { name: 'keywords-pain-points', content: 'overwhelmed by productivity apps ADHD, simple alternative to complex task managers, stop forgetting ideas ADHD tool, best app to avoid context switching ADHD, minimal productivity app for busy people, brain dump productivity tool 2025 free, minimal productivity app for overwhelmed people, quick capture and organize later app, one tap voice productivity tool' },
-          { name: 'keywords-professionals', content: 'productivity app for busy professionals free, best voice note app for meetings and action items, one tap brain dump app for professionals, capture ideas during commutes productivity app, productivity tool for executives on the go, free productivity app for entrepreneurs and founders' },
-          { name: 'keywords-accessibility', content: 'accessible productivity app for mobility challenges, voice-first productivity app for accessibility, best productivity apps for people with typing difficulties, hands-free productivity app free, inclusive productivity apps 2025, productivity tools compatible with assistive technologies' },
-          { name: 'keywords-creatives', content: 'brain dump app for creative professionals, idea capture app for artists and designers, best productivity apps for writers free, voice brainstorming app for creatives, project idea collection tool free, productivity app for creative flow states' },
-          { name: 'keywords-parents', content: 'hands-free productivity app for parents, free productivity app for moms and dads, best app for multitaskers to capture thoughts, productivity app while cooking or parenting, quick reminder voice app for families, organize household tasks with voice app' },
-          { name: 'keywords-branding', content: 'tickk app ADHD productivity, digiwares productivity apps family, new productivity tool 2025 ADHD friendly, one tap voice brain dump app, productivity without overwhelm free app, tickk app ADHD productivity tool' },
-          { name: 'keywords-usecases', content: 'voice productivity for students, voice notes for professionals, voice memo for parents, voice app for creatives, voice productivity for accessibility, voice notes for busy professionals, voice memo for multitaskers, voice app for researchers, voice productivity for entrepreneurs, voice notes for consultants, voice memo for writers, voice app for designers, voice productivity for coaches, voice notes for therapists, voice memo for project managers, voice app for executives, voice productivity for freelancers, voice notes for remote workers, voice memo for content creators, voice app for podcasters, voice productivity for journalists, voice notes for bloggers, voice memo for marketers, voice app for sales professionals, voice productivity for customer service, voice notes for HR professionals, voice memo for trainers, voice app for educators, voice productivity for librarians, voice notes for researchers, voice memo for analysts, voice app for consultants, voice productivity for advisors, voice notes for mentors, voice memo for coaches, voice app for facilitators, voice productivity for workshop leaders, voice notes for meeting facilitators, voice memo for team leaders, voice app for managers, voice productivity for supervisors, voice notes for directors, voice memo for executives, voice app for CEOs, voice productivity for founders, voice notes for entrepreneurs, voice memo for startup teams, voice app for small business owners, voice productivity for solopreneurs, voice notes for independent contractors, voice memo for gig workers, voice app for freelance professionals' },
           { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
           { name: 'googlebot', content: 'index, follow' },
           { name: 'bingbot', content: 'index, follow' },
@@ -364,10 +348,10 @@ export default function About() {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "tickk",
-              "alternateName": ["Voice Productivity App", "Speech Recognition Software", "Voice to Text Organizer"],
-              "description": "Revolutionary free voice productivity application that transforms speech into organized tasks, notes, and reminders using natural language processing with compromise.js. Perfect for hands-free productivity, task management, and note-taking without requiring any login or account creation.",
-              "applicationCategory": ["ProductivityApplication", "UtilitiesApplication", "BusinessApplication"],
-              "applicationSubCategory": "Task Management",
+              "alternateName": ["Voice Brain Dump App", "Voice Notes to Tasks App", "Browser Voice Notes App"],
+              "description": "Private voice brain dump app that helps fast thinkers capture messy thoughts and turn them into tasks and notes in the browser.",
+              "applicationCategory": "ProductivityApplication",
+              "applicationSubCategory": "Voice notes and task capture",
               "operatingSystem": ["Web Browser", "Chrome", "Firefox", "Safari", "Edge"],
               "url": "https://tickk.app",
               "downloadUrl": "https://tickk.app",
@@ -375,7 +359,7 @@ export default function About() {
               "screenshot": "https://tickk.app/preview-image.png",
               "softwareVersion": "1.0",
               "datePublished": "2024-01-01",
-              "dateModified": "2024-11-17",
+              "dateModified": "2026-05-17",
               "author": {
                 "@type": "Organization",
                 "name": "tickk",
@@ -390,43 +374,28 @@ export default function About() {
                 "@type": "Offer",
                 "price": "0",
                 "priceCurrency": "USD",
-                "description": "Free forever - no subscription, no hidden costs, no account required",
+                "description": "Free core plan for unlimited voice brain dumps, with optional lifetime Pro features planned",
                 "availability": "https://schema.org/InStock"
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "79",
-                "bestRating": "5",
-                "worstRating": "1"
-              },
               "featureList": [
-                "Advanced voice recognition with 99% accuracy",
-                "Natural language processing and text classification",
-                "Automatic categorization of tasks, notes, and reminders",
-                "Real-time speech transcription",
-                "Complete offline functionality",
-                "Zero data collection - privacy focused",
+                "Browser speech recognition",
+                "Rule-based text classification",
+                "Automatic categorization of tasks and notes",
+                "Real-time speech transcript capture",
+                "Local browser storage",
                 "Progressive Web App (PWA) installation",
                 "Cross-platform browser compatibility",
-                "Voice-controlled task management",
-                "Speech-to-text productivity tools",
-                "Hands-free note taking",
-                "Voice braindump organization",
-                "No account or login required",
-                "Progressive Web App support",
-                "Cross-platform compatibility",
-                "Dark mode support",
-                "Keyboard shortcuts for accessibility",
-                "Mobile responsive design",
-                "Instant voice command processing",
-                "Smart context understanding",
-                "Multi-language support",
-                "Export capabilities",
-                "Hands-free operation",
-                "Voice-controlled workflow management"
+                "Voice brain dump organization",
+                "No account required",
+                "Export capabilities"
               ],
-              "keywords": "free voice to text, speech recognition, voice productivity, hands-free task management, speech to text organizer, voice note taking, natural language processing, voice commands, voice assistant, productivity software",
+              "keywords": [
+                "private voice brain dump app",
+                "voice notes to tasks",
+                "browser voice notes app",
+                "brain dump app for fast thinkers",
+                "local storage productivity app"
+              ],
               "inLanguage": "en-US",
               "isAccessibleForFree": true,
               "isFamilyFriendly": true,
@@ -453,26 +422,26 @@ export default function About() {
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "What is the best free voice to text productivity app?",
+                  "name": "What is a private voice brain dump app?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "tickk is a revolutionary free voice productivity app that uses natural language processing with compromise.js to convert speech into organized tasks, notes, and reminders. It requires no login, works offline, and maintains complete privacy while offering 99% accurate speech recognition using your browser's Web Speech API."
+                    "text": "Tickk is a browser-first voice brain dump app for capturing messy spoken thoughts and organizing them into tasks and notes. Your notes are stored locally in your browser, and Tickk does not upload your brain dumps to its servers."
                   }
                 },
                 {
                   "@type": "Question", 
-                  "name": "How does smart speech recognition work for task management?",
+                  "name": "How does Tickk organize spoken thoughts into tasks and notes?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "tickk uses advanced natural language processing with compromise.js to analyze your speech patterns, identify action words, time references, and context clues to automatically categorize your voice input into tasks, notes, or reminders without any manual sorting required."
+                    "text": "Tickk uses rule-based language processing to look for action words, time references, and note-like phrases, then separates a brain dump into reviewable tasks and notes."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Can I use voice commands for productivity without creating an account?",
+                  "name": "Can I use Tickk without creating an account?",
                   "acceptedAnswer": {
                     "@type": "Answer", 
-                    "text": "Yes! tickk works completely without any account creation, login, or personal data collection. Simply visit the website and start speaking - your voice commands are processed locally in your browser for maximum privacy."
+                    "text": "Yes. Tickk's core brain dump workflow works without an account. Notes and tasks are stored in browser storage on your device."
                   }
                 }
               ]
@@ -518,7 +487,7 @@ export default function About() {
               {/* Subheadline */}
               <p className="mx-auto max-w-2xl text-responsive text-gray-600 dark:text-slate-400 mb-8 text-center">
                 Just speak your thoughts and watch them become organized tasks and notes. 
-                No complex setup, no subscriptions, no data collection. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link> - everything stays on your device.
+                No complex setup and no recurring fees for the core workflow. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. <Link href="/privacy" className="text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 underline">Your privacy is protected</Link>.
               </p>
 
               {/* Trust Indicators */}
@@ -526,7 +495,7 @@ export default function About() {
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🔒</div>
                   <div className="text-base font-medium text-gray-700 dark:text-slate-300">Complete Privacy</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">No data collection</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Local browser storage</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">⚡</div>
@@ -536,7 +505,7 @@ export default function About() {
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🆓</div>
                   <div className="text-base font-medium text-gray-700 dark:text-slate-300">Free Forever</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">No subscription required</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">No recurring fee required</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">📱</div>
@@ -782,7 +751,7 @@ export default function About() {
                   <li>• No overwhelming setup or categories</li>
                   <li>• Capture hyperfocus insights instantly</li>
                   <li>• Process later when you&apos;re in &quot;organize mode&quot;</li>
-                  <li>• <strong className="text-orange-600 dark:text-orange-400">Free forever</strong> - no expensive subscriptions</li>
+                  <li>• <strong className="text-orange-600 dark:text-orange-400">Free core workflow</strong> - no recurring fees</li>
                 </ul>
               </div>
 
@@ -1303,7 +1272,7 @@ export default function About() {
                   Is tickk a free productivity app for ADHD?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Yes! tickk is completely free forever and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps that cost $10-20/month, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
+                  Yes! tickk is free to start and specifically designed for ADHD and neurodivergent minds. Unlike expensive ADHD productivity apps with recurring fees, tickk removes the &quot;organize while capturing&quot; friction that overwhelms ADHD brains. Just brain dump your racing thoughts instantly, then organize later when you&apos;re in the right headspace.
                 </p>
               </div>
 
@@ -1323,7 +1292,7 @@ export default function About() {
                   What makes tickk different from task managers like Notion or TickTick?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no subscription fees. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
+                  Traditional task managers force you to organize while capturing ideas, which kills creativity and overwhelms ADHD minds. tickk flips this: <strong>capture first, organize later</strong>. No complex setup, no overwhelming categories, no recurring fees for the core workflow. Just voice-to-text brain dumping that works with how your mind actually thinks. It&apos;s the simple alternative to complex task managers.
                 </p>
               </div>
 

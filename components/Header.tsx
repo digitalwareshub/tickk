@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useDarkMode } from '@/hooks/useDarkMode'
 import { useState } from 'react'
 
 interface HeaderProps {
@@ -11,73 +10,68 @@ interface HeaderProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Header({ mode: _mode, onModeChange: _onModeChange }: HeaderProps) {
   const router = useRouter()
-  const { isDark, toggleDark } = useDarkMode()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-700 shadow-sm transition-colors">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 bg-[#1a1b26] border-b border-[#333333] transition-colors">
+      <div className="mx-auto max-w-[900px] px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Left: Logo */}
-          <div className="flex items-center justify-start w-1/3">
-            <Link href="/" className="group flex items-center space-x-2">
-              <span className="text-xl sm:text-2xl">✅</span>
+          <div className="flex items-center justify-start w-1/4">
+            <Link href="/" className="group flex items-center space-x-2 no-underline">
               <div className="flex flex-col">
                 <div className="flex items-center space-x-2">
-                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-orange-700 hover:to-orange-600 transition-all duration-200">
-                    tickk
-                  </span>
-                  <span className="text-orange-500 text-base sm:text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    🎙️
+                  <span className="font-mono text-xl font-medium text-orange-500 transition-opacity group-hover:opacity-85">
+                    ~/tickk
                   </span>
                 </div>
-                <span className="text-[10px] sm:text-xs text-gray-500 dark:text-slate-400 -mt-1 opacity-60 group-hover:opacity-90 transition-opacity duration-200 whitespace-nowrap hidden sm:block">
-                  Your brain is faster than your hands
+                <span className="font-mono text-[11px] text-[#a0a0a0] mt-0.5 whitespace-nowrap hidden sm:block">
+                  voice brain dump
                 </span>
               </div>
             </Link>
           </div>
 
           {/* Center: Navigation */}
-          <div className="hidden md:flex items-center justify-center w-1/3 gap-6">
-            <nav className="flex items-center gap-3 relative z-10">
-              <Link href="/" className={`inline-flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
+          <div className="hidden md:flex items-center justify-center w-1/2 gap-6">
+            <nav className="flex items-center gap-5 relative z-10" aria-label="Main navigation">
+              <Link href="/" className={`font-mono text-[13px] transition-colors no-underline ${
                 router.pathname === '/'
-                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                  : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
-                <svg className="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-                <span className="pointer-events-none">Braindump</span>
+                braindump
               </Link>
-              <Link href="/transform" className={`flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors ${
+              <Link href="/transform" className={`font-mono text-[13px] transition-colors no-underline ${
                 router.pathname === '/transform'
-                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                  : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
-                <svg className="w-4 h-4 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span className="pointer-events-none">Transform</span>
+                transform
               </Link>
-              <Link href="/mindmap" className={`flex items-center gap-1.5 px-3 py-1.5 border-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
+              <Link href="/mindmap" className={`font-mono text-[13px] transition-colors no-underline whitespace-nowrap ${
                 router.pathname === '/mindmap'
-                  ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                  : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:border-orange-200 dark:hover:border-orange-800'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
-                <span className="pointer-events-none">🧠</span>
-                <span className="pointer-events-none">Mind Map</span>
+                mind map
+              </Link>
+              <Link href="/pricing" className={`font-mono text-[13px] font-medium transition-colors no-underline whitespace-nowrap ${
+                router.pathname === '/pricing'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
+              }`}>
+                pricing
               </Link>
             </nav>
           </div>
 
-          {/* Right: Dark Mode Toggle + Mobile Menu */}
-          <div className="flex items-center justify-end w-1/3 gap-2 relative z-0">
+          {/* Right: Mobile Menu */}
+          <div className="flex items-center justify-end w-1/4 gap-2 relative z-0">
             {/* Mobile Menu Button - Show on all pages */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
+              className="md:hidden p-2 text-[#a0a0a0] hover:text-white transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -90,23 +84,6 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 </svg>
               )}
             </button>
-            
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDark}
-              className="p-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
           </div>
         </div>
       </div>
@@ -115,53 +92,57 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
       {mobileMenuOpen && (
         <>
           {/* Backdrop overlay */}
-          <div 
-            className="md:hidden fixed inset-0 bg-black/20 dark:bg-black/40 z-[45]"
+          <div
+            className="md:hidden fixed inset-0 bg-black/60 z-[45]"
             onClick={() => setMobileMenuOpen(false)}
           />
           
           {/* Menu panel */}
-          <div className="md:hidden absolute top-full left-0 right-0 z-[55] border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg">
-            <div className="mx-auto max-w-6xl px-4 py-3 space-y-2">
+          <div className="md:hidden absolute top-full left-0 right-0 z-[55] border-b border-[#333333] bg-[#1a1b26] shadow-lg">
+            <div className="mx-auto max-w-[900px] px-6 py-5 space-y-4">
               <Link
                 href="/"
-                className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
+                className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/'
-                    ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                    : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                </svg>
-                Braindump
+                braindump
               </Link>
               <Link 
                 href="/transform" 
-                className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
+                className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/transform'
-                    ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                    : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                <span>Transform</span>
+                transform
               </Link>
               <Link
                 href="/mindmap"
-                className={`flex items-center gap-2 px-3 py-2 text-base font-medium border-2 rounded-lg transition-colors ${
+                className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/mindmap'
-                    ? 'border-orange-600 dark:border-orange-500 text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20'
-                    : 'border-transparent text-gray-700 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-gray-50 dark:hover:bg-slate-800'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span className="text-xl">🧠</span>
-                <span>Mind Map</span>
+                mind map
+              </Link>
+              <Link
+                href="/pricing"
+                className={`block font-mono text-lg transition-colors no-underline ${
+                  router.pathname === '/pricing'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                pricing
               </Link>
             </div>
           </div>

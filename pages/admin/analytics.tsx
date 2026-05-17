@@ -15,7 +15,7 @@ export default function AdminAnalytics() {
     <>
       <Head>
         <title>Analytics Dashboard - tickk Admin</title>
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex, nofollow, noarchive" />
       </Head>
 
       <Layout className="min-h-screen bg-gray-50">

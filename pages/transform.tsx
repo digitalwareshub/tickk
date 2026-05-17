@@ -9,15 +9,30 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
-import { ProGate } from '@/components/ProGate'
+import ProInterestModal from '@/components/ProInterestModal'
 import BugReportModal from '@/components/BugReportModal'
+import { useProSubscription } from '@/hooks/useProSubscription'
 import { transformText, modeDescriptions } from '@/lib/transformers'
+import { exportNoteAsDocx } from '@/lib/export/docx'
 import type { TransformMode, TransformedNote } from '@/types/transform'
 import { FileText, List, Sparkles, CheckSquare, Copy, Download, Trash2, Star, Pin, Clock, ChevronRight, Mic, MicOff } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
 
 // Storage key for transformed notes
 const STORAGE_KEY = 'tickk_transformed_notes'
+
+const transformWorkflows: Array<{
+  id: string
+  label: string
+  mode: TransformMode
+  helper: string
+}> = [
+  { id: 'clean-up', label: 'Clean this up', mode: 'polish', helper: 'Fix rough wording and formatting.' },
+  { id: 'extract-tasks', label: 'Extract tasks', mode: 'tasks', helper: 'Turn messy notes into action items.' },
+  { id: 'meeting-notes', label: 'Meeting notes', mode: 'structure', helper: 'Structure notes into sections.' },
+  { id: 'weekly-review', label: 'Weekly review', mode: 'summarize', helper: 'Summarize themes and progress.' },
+]
 
 // Icon mapping
 const iconMap = {
@@ -28,6 +43,7 @@ const iconMap = {
 }
 
 export default function TransformPage() {
+  const { isPro } = useProSubscription()
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [mode, setMode] = useState<TransformMode>('summarize')
@@ -36,6 +52,7 @@ export default function TransformPage() {
   const [showHistory, setShowHistory] = useState(false)
   const [metadata, setMetadata] = useState<{ originalLength: number; transformedLength: number; compressionRatio?: number; tasksFound?: number } | null>(null)
   const [isBugReportOpen, setIsBugReportOpen] = useState(false)
+  const [showProModal, setShowProModal] = useState(false)
 
   // Voice input state
   const [isRecording, setIsRecording] = useState(false)
@@ -57,6 +74,22 @@ export default function TransformPage() {
       console.error('Failed to load notes:', e)
     }
   }, [])
+
+  const openProModal = useCallback((source: string, feature: string, showModal = true) => {
+    trackProductEvent('feature_triggered', feature, { source, feature })
+    trackProductEvent('pro_clicked', source, { source, feature })
+    if (!showModal) return
+    setShowProModal(true)
+  }, [])
+
+  const applyWorkflow = useCallback((workflow: typeof transformWorkflows[number]) => {
+    if (!isPro) {
+      openProModal('transform_workflow', workflow.id)
+    }
+
+    setMode(workflow.mode)
+    toast.success(`${workflow.label} workflow selected`)
+  }, [isPro, openProModal])
 
   // Initialize speech recognition
   useEffect(() => {
@@ -189,6 +222,17 @@ export default function TransformPage() {
         const result = transformText(input, mode)
         setOutput(result.output)
         setMetadata(result.metadata || null)
+        trackProductEvent('transform_used', mode, {
+          transform_type: mode,
+          input_length: input.length,
+          source: 'transform_page',
+          is_pro: isPro,
+        })
+        trackProductEvent('feature_triggered', 'transform', {
+          source: 'transform_page',
+          feature: 'transform',
+          transform_type: mode,
+        })
         toast.success(`Text ${mode === 'tasks' ? 'analyzed' : 'transformed'}!`)
       } catch (e) {
         console.error('Transform error:', e)
@@ -197,7 +241,7 @@ export default function TransformPage() {
         setIsProcessing(false)
       }
     }, 100)
-  }, [input, mode])
+  }, [input, mode, isPro])
 
   // Copy to clipboard
   const handleCopy = useCallback(async () => {
@@ -285,6 +329,10 @@ export default function TransformPage() {
       return
     }
 
+    if (!isPro) {
+      openProModal('markdown_export', 'export', false)
+    }
+
     const content = `# ${mode.charAt(0).toUpperCase() + mode.slice(1)} Result\n\n## Original\n\n${input}\n\n## Transformed\n\n${output}`
     const blob = new Blob([content], { type: 'text/markdown' })
     const url = URL.createObjectURL(blob)
@@ -293,8 +341,44 @@ export default function TransformPage() {
     a.download = `tickk-${mode}-${Date.now()}.md`
     a.click()
     URL.revokeObjectURL(url)
+    trackProductEvent('export_clicked', 'markdown', {
+      export_type: 'markdown',
+      source: 'transform_page',
+    })
     toast.success('Downloaded!')
-  }, [input, output, mode])
+  }, [input, output, mode, isPro, openProModal])
+
+  const handleDocxDownload = useCallback(async () => {
+    if (!output) {
+      toast.error('Nothing to download')
+      return
+    }
+
+    if (!isPro) {
+      openProModal('docx_export', 'export')
+    }
+
+    const note: TransformedNote = {
+      id: `export_${Date.now()}`,
+      title: input.slice(0, 50).trim() + (input.length > 50 ? '...' : ''),
+      input,
+      output,
+      mode,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      wordCount: input.split(/\s+/).filter(Boolean).length,
+      isFavorite: false,
+      isPinned: false,
+    }
+
+    const success = await exportNoteAsDocx(note)
+    if (success) {
+      trackProductEvent('export_clicked', 'docx', {
+        export_type: 'docx',
+        source: 'transform_page',
+      })
+    }
+  }, [input, output, mode, isPro, openProModal])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -323,30 +407,75 @@ export default function TransformPage() {
   return (
     <>
       <Head>
-        <title>Transform Notes - Tickk</title>
-        <meta name="description" content="Transform messy notes into clean, organized text. Summarize, structure, polish grammar, and extract tasks." />
+        <title>Transform Notes - Smart Voice Note Cleanup | Tickk</title>
+        <meta name="description" content="Transform messy voice notes into clean summaries, task lists, outlines, and polished text in your browser." />
+        <link rel="canonical" href="https://tickk.app/transform" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Transform Notes",
+              "description": "Transform messy voice notes into clean summaries, task lists, outlines, and polished text in your browser.",
+              "url": "https://tickk.app/transform",
+              "about": [
+                "voice note cleanup",
+                "messy notes to task list",
+                "smart note transforms",
+                "browser note organizer"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
-      <Layout 
-        className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
-      >
+      <Layout className="min-h-screen bg-[#1a1b26] text-white">
         {/* Hero Section */}
-        <section className="py-8 px-4">
-          <div className="max-w-5xl mx-auto">
+        <section className="px-6 py-10">
+          <div className="mx-auto max-w-[900px]">
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2 flex items-center justify-center gap-3">
-                <span><span className="text-orange-600 dark:text-orange-400">Transform</span> Your Notes</span>
-                <span className="text-sm bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-full font-medium">
+              <h1 className="mb-3 flex items-center justify-center gap-3 font-mono text-3xl font-bold text-white md:text-4xl">
+                <span><span className="text-orange-500">Transform</span> Your Notes</span>
+                <span className="rounded-md border border-[#333333] bg-white/[0.02] px-3 py-1 font-mono text-xs font-medium text-[#a0a0a0]">
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-6">
+              <p className="mb-6 text-[#a0a0a0]">
                 Turn messy notes into clean, organized text. All processing happens locally.
               </p>
             </div>
 
-            {/* Pro Gate - Wraps the transformation tools */}
-            <ProGate feature="Note transformation">
+            {/* Saved Workflow Presets */}
+            <div className="mb-6 rounded-md border border-[#333333] bg-white/[0.02] p-4">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <h2 className="font-mono text-sm font-semibold text-white">saved workflows</h2>
+                  <p className="text-xs text-[#a0a0a0]">Quick transform presets for repeated note cleanup.</p>
+                </div>
+                <span className="rounded-md border border-orange-500/50 px-2 py-1 font-mono text-xs text-orange-300">
+                  early access
+                </span>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {transformWorkflows.map((workflow) => (
+                  <button
+                    key={workflow.id}
+                    type="button"
+                    onClick={() => applyWorkflow(workflow)}
+                    className="rounded-md border border-[#333333] bg-[#11131c] p-3 text-left transition-colors hover:border-orange-500"
+                  >
+                    <span className="block text-sm font-semibold text-white">{workflow.label}</span>
+                    <span className="mt-1 block text-xs text-[#a0a0a0]">{workflow.helper}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Mode Selection */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
@@ -356,20 +485,27 @@ export default function TransformPage() {
                 return (
                   <button
                     key={m}
-                    onClick={() => setMode(m)}
-                    className={`p-4 rounded-xl border-2 transition-all text-left ${
+                    onClick={() => {
+                      setMode(m)
+                      trackProductEvent('feature_triggered', 'transform', {
+                        source: 'transform_mode_card',
+                        feature: 'transform',
+                        transform_type: m,
+                      })
+                    }}
+                    className={`rounded-md border p-4 text-left transition-colors ${
                       mode === m
-                        ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30'
-                        : 'border-gray-200 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-700'
+                        ? 'border-orange-500 bg-orange-500/10'
+                        : 'border-[#333333] bg-white/[0.02] hover:border-orange-500/70'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
-                      <IconComponent className={`w-5 h-5 ${mode === m ? 'text-orange-600' : 'text-gray-500 dark:text-slate-400'}`} />
-                      <span className={`font-semibold ${mode === m ? 'text-orange-700 dark:text-orange-300' : 'text-gray-700 dark:text-slate-200'}`}>
+                      <IconComponent className={`h-5 w-5 ${mode === m ? 'text-orange-400' : 'text-[#a0a0a0]'}`} />
+                      <span className={`font-semibold ${mode === m ? 'text-orange-300' : 'text-white'}`}>
                         {desc.title}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-slate-400 line-clamp-2">
+                    <p className="line-clamp-2 text-xs text-[#a0a0a0]">
                       {desc.description}
                     </p>
                   </button>
@@ -382,7 +518,7 @@ export default function TransformPage() {
               {/* Input */}
               <div className="relative">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300">
+                  <label className="block text-sm font-medium text-[#a0a0a0]">
                     Input Text
                   </label>
                   <div className="flex items-center gap-2">
@@ -399,8 +535,8 @@ export default function TransformPage() {
                         onClick={toggleVoiceInput}
                         className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
                           isRecording
-                            ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
-                            : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50'
+                            ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+                            : 'bg-orange-500/10 text-orange-400 hover:bg-orange-500/20'
                         }`}
                         aria-label={isRecording ? 'Stop voice input' : 'Start voice input'}
                       >
@@ -420,9 +556,9 @@ export default function TransformPage() {
                   placeholder="Paste or type your messy notes here... Or click Voice Input to speak"
                   className={`w-full h-64 p-4 rounded-xl border ${
                     isRecording 
-                      ? 'border-orange-400 dark:border-orange-600 ring-2 ring-orange-200 dark:ring-orange-800' 
-                      : 'border-gray-200 dark:border-slate-700'
-                  } bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none transition-all`}
+                      ? 'border-orange-500 ring-2 ring-orange-500/20'
+                      : 'border-[#333333]'
+                  } resize-none bg-white/[0.02] text-white placeholder-[#737373] transition-all focus:border-transparent focus:ring-2 focus:ring-orange-500`}
                   readOnly={isRecording}
                 />
                 <div className="absolute bottom-3 right-3 text-xs text-gray-400">
@@ -432,16 +568,16 @@ export default function TransformPage() {
 
               {/* Output */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
+                <label className="mb-2 block text-sm font-medium text-[#a0a0a0]">
                   Transformed Output
                 </label>
-                <div className="w-full h-64 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 overflow-auto">
+                <div className="h-64 w-full overflow-auto rounded-md border border-[#333333] bg-white/[0.02] p-4">
                   {output ? (
-                    <pre className="whitespace-pre-wrap text-sm text-gray-800 dark:text-slate-200 font-sans">
+                    <pre className="whitespace-pre-wrap font-sans text-sm text-white">
                       {output}
                     </pre>
                   ) : (
-                    <p className="text-gray-400 dark:text-slate-500 text-sm">
+                    <p className="text-sm text-[#737373]">
                       Transformed text will appear here...
                     </p>
                   )}
@@ -464,7 +600,7 @@ export default function TransformPage() {
               <button
                 onClick={handleTransform}
                 disabled={isProcessing || !input.trim()}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 dark:disabled:bg-slate-700 text-white font-semibold rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md bg-orange-600 px-6 py-3 font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500 disabled:bg-white/10 disabled:text-[#737373]"
               >
                 {isProcessing ? (
                   <>
@@ -482,7 +618,7 @@ export default function TransformPage() {
               <button
                 onClick={handleCopy}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Copy className="w-4 h-4" />
                 Copy
@@ -491,7 +627,7 @@ export default function TransformPage() {
               <button
                 onClick={handleSave}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Star className="w-4 h-4" />
                 Save
@@ -500,15 +636,24 @@ export default function TransformPage() {
               <button
                 onClick={handleDownload}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Download className="w-4 h-4" />
                 Download
               </button>
 
               <button
+                onClick={handleDocxDownload}
+                disabled={!output}
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
+              >
+                <Download className="w-4 h-4" />
+                DOCX
+              </button>
+
+              <button
                 onClick={handleClear}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500"
               >
                 <Trash2 className="w-4 h-4" />
                 Clear
@@ -516,31 +661,31 @@ export default function TransformPage() {
             </div>
 
             {/* Keyboard Shortcuts */}
-            <div className="text-center text-sm text-gray-500 dark:text-slate-400 mb-8">
+            <div className="mb-8 text-center text-sm text-[#a0a0a0]">
               <span className="inline-flex items-center gap-2">
-                <kbd className="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs">Cmd/Ctrl + Enter</kbd>
+                <kbd className="rounded border border-[#333333] bg-white/[0.02] px-2 py-1 text-xs">Cmd/Ctrl + Enter</kbd>
                 Transform
               </span>
               <span className="mx-4">|</span>
               <span className="inline-flex items-center gap-2">
-                <kbd className="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs">Cmd/Ctrl + S</kbd>
+                <kbd className="rounded border border-[#333333] bg-white/[0.02] px-2 py-1 text-xs">Cmd/Ctrl + S</kbd>
                 Save
               </span>
             </div>
             
             {/* Disclaimer */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-start gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-left max-w-2xl">
-                <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex max-w-2xl items-start gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 text-left">
+                <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div className="flex-1">
-                  <p className="text-sm text-blue-900 dark:text-blue-100">
+                  <p className="text-sm text-[#d4d4d4]">
                     <span className="font-semibold">No AI Used:</span> We use traditional NLP (Natural Language Processing) for transformations. 
                     Results are rule-based and deterministic, not AI-generated. Don&apos;t expect ChatGPT-level outputs.
                   </p>
-                  <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-                    Found an issue? <Link href="/bug-report" className="underline hover:text-blue-900 dark:hover:text-blue-100">Report a bug</Link>
+                  <p className="mt-1 text-xs text-[#a0a0a0]">
+                    Found an issue? <Link href="/bug-report" className="text-orange-500 hover:text-orange-400">Report a bug</Link>
                   </p>
                 </div>
               </div>
@@ -611,8 +756,6 @@ export default function TransformPage() {
                 )}
               </div>
             )}
-
-            </ProGate>
           </div>
         </section>
       </Layout>
@@ -622,6 +765,11 @@ export default function TransformPage() {
         isOpen={isBugReportOpen}
         onClose={() => setIsBugReportOpen(false)}
         featureName="Transform Notes"
+      />
+      <ProInterestModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        source="transform_page"
       />
     </>
   )

@@ -10,7 +10,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 -mt-8">
+    <footer className="tickk-shrp-footer bg-[#1a1b26] border-t border-[#333333]">
       {/* Main Footer Content */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 md:py-12">
         {/* Mobile Simple Layout */}
@@ -56,6 +56,9 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 </Link>
                 <Link href="/features" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                   Features
+                </Link>
+                <Link href="/pricing" className="block text-xs text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                  Pricing
                 </Link>
               </div>
 
@@ -143,19 +146,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </a>
           </div>
 
-          {/* Support the Project Button */}
-          <div className="flex justify-center py-4">
-            <Link
-              href="/donate"
-              className="inline-flex items-center px-4 py-2 bg-orange-600 dark:bg-orange-700 hover:bg-orange-700 dark:hover:bg-orange-600 text-white text-sm font-medium rounded-md transition-colors duration-200"
-            >
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-              Support the Project
-            </Link>
-          </div>
-
           {/* Mobile Tech Stack Credits */}
           <div className="text-center pt-4 space-y-2">
             <div className="text-xs text-gray-600 dark:text-slate-400">
@@ -224,6 +214,11 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/features" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pricing" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
+                    Pricing
                   </Link>
                 </li>
               </ul>
@@ -363,19 +358,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
             </div>
           </div>
 
-          {/* Desktop Support Button */}
-          <div className="hidden md:flex justify-center py-4">
-            <Link
-              href="/donate"
-              className="inline-flex items-center px-4 py-2 bg-orange-600 dark:bg-orange-700 hover:bg-orange-700 dark:hover:bg-orange-600 text-white text-sm font-medium rounded-md transition-colors duration-200"
-            >
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-              Support the Project
-            </Link>
-          </div>
-
           {/* Desktop Bottom */}
           <div className="hidden md:flex flex-col md:flex-row justify-between items-center py-6">
             <div className="flex items-center space-x-4">
@@ -445,7 +427,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
         <ul>
           <li>Advanced Voice Recognition: 99% accuracy rate using your browser&apos;s native Web Speech API</li>
           <li>Smart Text Classification: Automatically categorizes speech into tasks, notes, and calendar events</li>
-          <li>Complete Privacy Protection: Zero data collection, all processing happens locally in your browser</li>
+          <li>Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
           <li>Cross-Platform Compatibility: Works seamlessly on desktop, mobile, and tablet devices</li>
           <li>Offline Functionality: Continue working even without an internet connection</li>
           <li>No Account Required: Start using immediately without any registration or sign-up process</li>
@@ -466,7 +448,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
           <li>Quick voice memos and thought capture</li>
         </ul>
         <p>
-          Our commitment to user privacy means that tickk never collects, stores, or transmits your voice data or personal information. All speech processing happens directly in your browser, ensuring your sensitive information remains completely private and secure.
+          Our commitment to user privacy means your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
         </p>
       </div>
     </footer>

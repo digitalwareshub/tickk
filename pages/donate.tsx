@@ -133,10 +133,9 @@ export default function DonatePage() {
   return (
     <Layout className="min-h-screen bg-gray-50">
       <Head>
-        <title>Support Tickk Development | Donate to Keep Tickk Free</title>
-        <meta name="description" content="Support Tickk development with a donation. Help us build new features, maintain servers, and keep the productivity app free for everyone." />
-        <meta name="keywords" content="donate, support tickk, productivity app funding, open source donation, developer support" />
-        <meta name="robots" content="index, follow" />
+        <title>Support Tickk Development</title>
+        <meta name="description" content="Support ongoing development of Tickk, the browser-first voice brain dump app." />
+        <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href="https://tickk.app/donate" />
       </Head>
 
@@ -161,11 +160,11 @@ export default function DonatePage() {
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-              No subscription required
+              One-time support
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
-              Secure payments via Stripe
+              Secure payments
             </div>
           </div>
         </div>

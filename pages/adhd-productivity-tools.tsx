@@ -26,10 +26,6 @@ export default function ADHDProductivityTools() {
           name="description" 
           content="Discover ADHD-friendly productivity tools designed for neurodivergent minds. Voice-first apps, executive function support, and brain dump methods that actually work for ADHD."
         />
-        <meta 
-          name="keywords" 
-          content="ADHD productivity tools, neurodivergent task manager, ADHD apps, executive function support, ADHD voice app, brain dump for ADHD, focus mode app, ADHD-friendly software, productivity for racing thoughts" 
-        />
         <link rel="canonical" href="https://tickk.app/adhd-productivity-tools" />
         
         {/* Open Graph */}
@@ -54,6 +50,13 @@ export default function ADHDProductivityTools() {
               "description": "Comprehensive guide to productivity tools specifically designed for ADHD and neurodivergent individuals",
               "url": "https://tickk.app/adhd-productivity-tools",
               "inLanguage": "en-US",
+              "keywords": [
+                "ADHD productivity tools",
+                "brain dump app for ADHD",
+                "voice notes for racing thoughts",
+                "executive function support app",
+                "neurodivergent productivity app"
+              ],
               "about": {
                 "@type": "Thing",
                 "name": "ADHD Productivity Software"

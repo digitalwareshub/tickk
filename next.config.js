@@ -85,11 +85,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://compromise.cool https://www.googletagmanager.com https://www.google-analytics.com https://vitals.vercel-analytics.com https://www.clarity.ms https://*.clarity.ms https://static.hotjar.com https://*.hotjar.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://compromise.cool https://www.googletagmanager.com https://www.google-analytics.com https://vitals.vercel-analytics.com",
               "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
               "font-src 'self' https://cdnjs.cloudflare.com",
-              "img-src 'self' data: https: https://*.clarity.ms https://*.hotjar.com",
-              "connect-src 'self' https: https://www.google-analytics.com https://analytics.google.com https://vitals.vercel-analytics.com https://*.clarity.ms https://www.clarity.ms https://*.hotjar.com https://*.hotjar.io",
+              "img-src 'self' data: https:",
+              "connect-src 'self' https: https://www.google-analytics.com https://analytics.google.com https://vitals.vercel-analytics.com",
               "media-src 'self'",
               "frame-src 'none'",
               "base-uri 'self'",
@@ -145,7 +145,6 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1 year
     // Exclude social media images from optimization to prevent flickering
     unoptimized: false,
-    domains: ['peerpush.net', 'api.producthunt.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -194,7 +193,7 @@ const nextConfig = {
   // to avoid redirect chains
   async redirects() {
     return [
-      // NOTE: Query parameter redirects are now handled by middleware.ts
+      // NOTE: Query parameter redirects are now handled by proxy.ts
       // with 301 permanent redirects for better SEO
       // Legacy redirects
       {
@@ -245,7 +244,7 @@ const nextConfig = {
   // Environment variables for build-time optimization
   env: {
     NEXT_PUBLIC_APP_NAME: 'tickk',
-    NEXT_PUBLIC_APP_DESCRIPTION: 'Free Voice Productivity App',
+    NEXT_PUBLIC_APP_DESCRIPTION: 'Private voice brain dump app',
     NEXT_PUBLIC_APP_URL: 'https://tickk.app',
   },
 };

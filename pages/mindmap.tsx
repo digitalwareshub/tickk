@@ -8,13 +8,42 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import MindMapView from '@/components/MindMapView'
+import ProInterestModal from '@/components/ProInterestModal'
 import type { AppData } from '@/types/braindump'
 import { StorageService } from '@/lib/storage/storage-service'
+import { trackProductEvent } from '@/lib/analytics/enhanced-analytics'
+import { useProSubscription } from '@/hooks/useProSubscription'
 
 export default function MindMapPage() {
+  const { isPro } = useProSubscription()
   const [appData, setAppData] = useState<AppData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [showProModal, setShowProModal] = useState(false)
   const [storageService] = useState(() => StorageService.getInstance())
+
+  const handleProFeatureClick = (feature: string) => {
+    trackProductEvent('feature_triggered', 'mindmap', {
+      source: 'mindmap_page',
+      feature,
+    })
+    trackProductEvent('pro_clicked', 'mindmap', {
+      source: 'mindmap_page',
+      feature,
+    })
+    setShowProModal(true)
+  }
+
+  const handleMindMapUsed = (action: string) => {
+    trackProductEvent('mindmap_used', action, {
+      source: 'mindmap_page',
+      is_pro: isPro,
+    })
+    trackProductEvent('feature_triggered', 'mindmap', {
+      source: 'mindmap_page',
+      feature: 'mindmap',
+      action,
+    })
+  }
 
   useEffect(() => {
     const loadData = async () => {
@@ -24,6 +53,10 @@ export default function MindMapPage() {
         
         if (!data) {
           console.log('No data found, using fallback')
+          trackProductEvent('mindmap_opened', 'mindmap_page', {
+            source: 'mindmap_page',
+            has_items: false,
+          })
           setAppData({
             version: '1.0.0',
             tasks: [],
@@ -32,6 +65,10 @@ export default function MindMapPage() {
             sessions: []
           })
         } else {
+          trackProductEvent('mindmap_opened', 'mindmap_page', {
+            source: 'mindmap_page',
+            has_items: data.tasks.length + data.notes.length + data.braindump.length > 0,
+          })
           setAppData(data)
         }
       } catch (error) {
@@ -53,10 +90,10 @@ export default function MindMapPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-[#1a1b26] text-white">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-slate-400">Loading your data...</p>
+          <p className="text-[#a0a0a0]">Loading your data...</p>
         </div>
       </div>
     )
@@ -64,10 +101,10 @@ export default function MindMapPage() {
 
   if (!appData) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-[#1a1b26] text-white">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 text-xl mb-4">Failed to load data</p>
-          <p className="text-gray-600 dark:text-slate-400">Check the browser console for details</p>
+          <p className="text-[#a0a0a0]">Check the browser console for details</p>
           <button 
             onClick={() => window.location.reload()} 
             className="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
@@ -87,32 +124,41 @@ export default function MindMapPage() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <Layout 
-        className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
-      >
+      <Layout className="min-h-screen bg-[#1a1b26] text-white">
         {/* Hero Section */}
-        <section className="py-8 px-4">
-          <div className="max-w-5xl mx-auto">
+        <section className="px-6 py-10">
+          <div className="mx-auto max-w-[900px]">
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2 flex items-center justify-center gap-3">
-                <span>🧠 <span className="text-orange-600 dark:text-orange-400">Mind</span> Map</span>
-                <span className="text-sm bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-full font-medium">
+              <h1 className="mb-3 flex items-center justify-center gap-3 font-mono text-3xl font-bold text-white md:text-4xl">
+                <span><span className="text-orange-500">Mind</span> Map</span>
+                <span className="rounded-md border border-[#333333] bg-white/[0.02] px-3 py-1 font-mono text-xs font-medium text-[#a0a0a0]">
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-2">
+              <p className="mb-2 text-[#a0a0a0]">
                 Visualize your productivity journey over time. {appData.tasks.length} tasks • {appData.notes.length} notes
               </p>
-              <p className="text-xs text-gray-500 dark:text-slate-500">
-                Found a bug? <Link href="/bug-report" className="text-orange-600 dark:text-orange-400 hover:underline">Report it here</Link>
+              <p className="text-xs text-[#737373]">
+                Found a bug? <Link href="/bug-report" className="text-orange-500 hover:text-orange-400">Report it here</Link>
               </p>
             </div>
 
             {/* Mind Map Component */}
-            <MindMapView appData={appData} />
+            <MindMapView
+              appData={appData}
+              isPro={isPro}
+              onProFeatureClick={handleProFeatureClick}
+              onMindMapUsed={handleMindMapUsed}
+            />
           </div>
         </section>
       </Layout>
+
+      <ProInterestModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        source="mindmap_page"
+      />
     </>
   )
 }

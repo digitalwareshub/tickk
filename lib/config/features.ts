@@ -43,7 +43,7 @@ export const FEATURES: FeatureFlags = {
 
   PRO_TIER: {
     enabled: process.env.NEXT_PUBLIC_ENABLE_PRO_TIER === 'true',
-    description: 'Enable Pro tier subscription option',
+    description: 'Enable Pro tier lifetime access option',
     envVar: 'NEXT_PUBLIC_ENABLE_PRO_TIER',
   },
 
@@ -67,7 +67,7 @@ export const FEATURES: FeatureFlags = {
 
   ADVANCED_EXPORTS: {
     enabled: process.env.NEXT_PUBLIC_ENABLE_ADVANCED_EXPORTS === 'true',
-    description: 'Markdown, CSV, PDF export formats (Pro feature)',
+    description: 'Markdown and DOCX export formats (Pro feature)',
     envVar: 'NEXT_PUBLIC_ENABLE_ADVANCED_EXPORTS',
   },
 
@@ -79,7 +79,7 @@ export const FEATURES: FeatureFlags = {
 
   STRIPE_INTEGRATION: {
     enabled: process.env.NEXT_PUBLIC_ENABLE_STRIPE === 'true',
-    description: 'Stripe payment processing',
+    description: 'Payment checkout placeholder',
     envVar: 'NEXT_PUBLIC_ENABLE_STRIPE',
   },
 

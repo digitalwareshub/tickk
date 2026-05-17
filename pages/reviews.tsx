@@ -10,7 +10,6 @@ export default function Reviews() {
       <Head>
         <title>Reviews | tickk - User Feedback and Testimonials</title>
         <meta name="description" content="Read reviews and testimonials from tickk users. See how our voice productivity app is helping people capture thoughts, organize tasks, and boost productivity." />
-        <meta name="keywords" content="tickk reviews, voice app testimonials, productivity app feedback, user reviews, speech recognition reviews, voice productivity testimonials" />
         <link rel="canonical" href="https://tickk.app/reviews" />
       </Head>
 

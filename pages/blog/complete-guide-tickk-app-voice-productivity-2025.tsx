@@ -12,7 +12,6 @@ export default function CompleteGuideTickkApp() {
         <title>Complete Guide to tickk.app: Voice-to-Text Productivity in 2025 | tickk Blog</title>
         <meta name="title" content="Complete Guide to tickk.app: Voice-to-Text Productivity in 2025 | tickk Blog" />
         <meta name="description" content="Master tickk.app's voice-to-text productivity features: Command Palette, Focus Mode for ADHD, Analytics Dashboard, Streak Tracking & Calendar Export. Free voice productivity app guide." />
-        <meta name="keywords" content="tickk.app tutorial, voice to text productivity app 2025, ADHD productivity app guide, command palette keyboard shortcuts, voice braindump productivity method, free voice task manager tutorial, speech to text organization app, hands-free productivity workflow, voice notes analytics dashboard, productivity streak tracking app" />
         <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/complete-guide-tickk-app-voice-productivity-2025" />
@@ -40,7 +39,7 @@ export default function CompleteGuideTickkApp() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
         
         {/* Article Schema */}
@@ -127,7 +126,7 @@ export default function CompleteGuideTickkApp() {
             </h2>
 
             <p className="mb-6">
-              tickk.app is a <strong>completely free</strong>, privacy-first voice productivity app that requires no account or sign-up. Everything runs locally in your browser, meaning your data never leaves your device. As of V1.10.2, tickk.app focuses exclusively on English to provide the best possible voice recognition and user experience.
+              tickk.app is a privacy-first voice productivity app that requires no account or sign-up for the core workflow. Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers. As of V1.10.2, tickk.app focuses exclusively on English to provide the best possible voice recognition and user experience.
             </p>
 
             {/* Visual Guide Box */}

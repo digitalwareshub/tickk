@@ -7,10 +7,32 @@ export default function Blog() {
   return (
     <>
       <Head>
-        <title>Blog | tickk - Voice Productivity Insights</title>
-        <meta name="description" content="Learn about voice productivity, braindump methods, and thought organization. Expert insights on improving productivity without AI dependencies." />
-        <meta name="keywords" content="voice productivity blog, braindump method, productivity insights, voice note taking tips, thought organization, productivity without AI, voice to text productivity" />
+        <title>Tickk Blog - Voice Brain Dump and Productivity Guides</title>
+        <meta name="description" content="Guides on voice brain dumps, voice notes to tasks, private browser productivity, ADHD-friendly capture workflows, and organizing thoughts after capture." />
         <link rel="canonical" href="https://tickk.app/blog" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "name": "Tickk Blog",
+              "description": "Guides on voice brain dumps, voice notes to tasks, private browser productivity, ADHD-friendly capture workflows, and organizing thoughts after capture.",
+              "url": "https://tickk.app/blog",
+              "keywords": [
+                "voice brain dump guides",
+                "voice notes to tasks",
+                "private browser productivity",
+                "ADHD-friendly capture workflow"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
       <Layout className="min-h-screen bg-white dark:bg-slate-900">

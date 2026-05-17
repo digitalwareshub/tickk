@@ -18,12 +18,35 @@ export default function Features() {
   return (
     <>
       <Head>
-        <title>Features | tickk - Voice Productivity Tool</title>
+        <title>Tickk Features - Voice Brain Dumps, Tasks, Notes, and Exports</title>
         <meta 
           name="description" 
-          content="Discover tickk's powerful features: voice-to-text transcription, smart NLP classification, ADHD-friendly Focus Mode, analytics, offline support, and more. No signup required." 
+          content="Explore Tickk features for voice brain dumps, browser-based task capture, local notes, focus mode, exports, templates, and installable PWA workflows."
         />
         <link rel="canonical" href="https://tickk.app/features" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Tickk Features",
+              "description": "Voice brain dumps, browser-based task capture, local notes, focus mode, exports, templates, and installable PWA workflows.",
+              "url": "https://tickk.app/features",
+              "about": [
+                "voice brain dump features",
+                "browser task capture app",
+                "local notes productivity app",
+                "PWA brain dump app"
+              ],
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Tickk",
+                "url": "https://tickk.app"
+              }
+            })
+          }}
+        />
       </Head>
 
       <Layout showHomeLink={true}>
@@ -146,7 +169,7 @@ export default function Features() {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="text-5xl mb-4">🔒</div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">Zero Data Collection</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">Local Browser Storage</h3>
                 <p className="text-gray-600 dark:text-slate-400">
                   We never collect, store, or transmit your voice data or personal information.
                 </p>
@@ -155,7 +178,7 @@ export default function Features() {
                 <div className="text-5xl mb-4">🏠</div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100 mb-3">Local Processing</h3>
                 <p className="text-gray-600 dark:text-slate-400">
-                  All speech processing happens in your browser. Your data never leaves your device.
+                  Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
                 </p>
               </div>
               <div className="text-center">
@@ -389,7 +412,7 @@ export default function Features() {
                   <tr>
                     <td className="px-6 py-4 text-gray-900 dark:text-slate-100">Price</td>
                     <td className="px-6 py-4 text-center text-green-600 dark:text-green-400 font-bold">FREE Forever</td>
-                    <td className="px-6 py-4 text-center text-gray-600 dark:text-slate-400">$5-15/month</td>
+                    <td className="px-6 py-4 text-center text-gray-600 dark:text-slate-400">Recurring fees</td>
                   </tr>
                 </tbody>
               </table>

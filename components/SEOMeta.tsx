@@ -13,10 +13,20 @@ interface SEOMetaProps {
 
 // Cache-busting version for images
 const IMAGE_VERSION = 'v2';
+const SITE_URL = 'https://tickk.app'
+
+function absoluteUrl(pathOrUrl: string, baseUrl = SITE_URL): string {
+  if (/^https?:\/\//i.test(pathOrUrl)) {
+    return pathOrUrl
+  }
+
+  const normalizedPath = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`
+  return `${baseUrl}${normalizedPath}`
+}
 
 export default function SEOMeta({ 
-  title = 'Free Voice Productivity App | tickk - Speech Recognition Task Manager',
-  description = 'Free voice productivity app for ADHD minds. Brain dump first, organize later. Capture racing thoughts instantly. Works offline, no signup required.',
+  title = 'Tickk - Private Voice Brain Dump App',
+  description = 'Tickk turns messy spoken thoughts into tasks and notes in your browser. No account required, local storage, and installable as a PWA.',
   image = '/og-image.webp',
   url,
   noIndex = false
@@ -26,6 +36,8 @@ export default function SEOMeta({
   
   // Generate canonical URL - clean parameters and ensure consistency
   const canonicalUrl = url || getCleanUrl(router.asPath)
+  const imageUrl = absoluteUrl(image)
+  const twitterImageUrl = absoluteUrl('/twitter-image.webp')
   
   return (
     <>
@@ -76,10 +88,10 @@ export default function SEOMeta({
           description: description,
           images: [
             {
-              url: `${canonicalUrl}${image}?${IMAGE_VERSION}`,
+              url: `${imageUrl}?${IMAGE_VERSION}`,
               width: 1200,
               height: 630,
-              alt: 'tickk - Voice to Productivity App',
+              alt: 'Tickk - private voice brain dump app',
               type: 'image/webp',
             },
           ],
@@ -90,10 +102,6 @@ export default function SEOMeta({
           cardType: 'summary_large_image',
         }}
         additionalMetaTags={[
-          {
-            name: 'keywords',
-            content: 'free voice to text app, voice productivity software, speech recognition task manager, ADHD productivity app, neurodivergent productivity tools, ADHD voice assistant, executive function support app, ADHD task management, focus mode productivity, command palette app, voice controlled todo list, hands-free note taking, natural language processing productivity, speech to text organizer, voice command app, voice powered task management, free productivity tools, offline voice recognition, privacy focused voice app, voice note taking app, speech recognition productivity suite, voice driven workflow, hands-free productivity, voice activated organizer, voice task categorization, smart voice assistant, voice productivity dashboard, speech to action converter, voice based project management, voice transcription software, PWA voice app, progressive web app productivity, offline speech recognition, browser voice technology, no AI voice assistant, voice workflow automation, productivity analytics dashboard, streak tracking app, calendar export productivity, keyboard shortcuts productivity, ADHD friendly interface, executive function tools, focus productivity app, voice braindump method',
-          },
           {
             name: 'author',
             content: 'tickk Team',
@@ -108,7 +116,9 @@ export default function SEOMeta({
           },
           {
             name: 'robots',
-            content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+            content: noIndex
+              ? 'noindex, nofollow'
+              : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
           },
           {
             name: 'googlebot',
@@ -161,7 +171,7 @@ export default function SEOMeta({
           // Twitter Card Image
           {
             name: 'twitter:image',
-            content: `${url}/twitter-image.webp?${IMAGE_VERSION}`,
+            content: `${twitterImageUrl}?${IMAGE_VERSION}`,
           },
         ]}
       />

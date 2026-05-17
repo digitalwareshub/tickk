@@ -12,7 +12,6 @@ export default function BraindumpFirstBlogPost() {
         <title>Why Your Best Ideas Die in Your Productivity App | tickk Blog</title>
         <meta name="title" content="Why Your Best Ideas Die in Your Productivity App | tickk Blog" />
         <meta name="description" content="Discover why forcing thoughts into categories while having them kills creativity. Learn the braindump-first approach that captures everything, then organizes later." />
-        <meta name="keywords" content="voice note organization app, braindump productivity method, organize thoughts after capture, free voice to task app, productivity without AI, voice brainstorming tool, capture thoughts without categorizing, productivity app without AI, free voice to task converter, organize thoughts after capture" />
         <meta name="author" content="tickk" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/blog/braindump-first-organize-later-productivity" />
@@ -39,7 +38,7 @@ export default function BraindumpFirstBlogPost() {
         <meta name="twitter:site" content="@tickkdotapp" />
 
         {/* Additional SEO */}
-        <meta name="theme-color" content="#16a34a" />
+        <meta name="theme-color" content="#f97316" />
         <link rel="alternate" type="application/rss+xml" title="Tickk Blog RSS Feed" href="https://tickk.app/blog/rss.xml" />
         
         {/* Article Schema */}
@@ -302,17 +301,17 @@ export default function BraindumpFirstBlogPost() {
                 <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• Runs entirely in your browser</li>
                   <li>• No servers, no cloud, no accounts</li>
-                  <li>• Your thoughts never leave your device</li>
+                  <li>• Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
                 </ul>
               </div>
               
               <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-lg">
-                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">💰 Free Forever</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">💰 Free Core</h4>
                 <ul className="text-gray-700 dark:text-slate-300 space-y-1">
-                  <li>• No trial periods</li>
-                  <li>• No premium tiers</li>
+                  <li>• Unlimited voice brain dumps</li>
+                  <li>• Local storage</li>
                   <li>• No ads</li>
-                  <li>• Actually free (because it costs us $0 per user)</li>
+                  <li>• Basic export included</li>
                 </ul>
               </div>
             </div>
@@ -343,7 +342,7 @@ export default function BraindumpFirstBlogPost() {
 
 
             <p className="mb-8">
-              No email required. No credit card. No &quot;free trial that&apos;s actually paid.&quot;
+              No email required. No credit card. Start with the free core workflow.
             </p>
 
             <p className="mb-8">

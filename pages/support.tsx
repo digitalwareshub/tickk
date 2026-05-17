@@ -10,7 +10,6 @@ export default function Support() {
       <Head>
         <title>Support & Help | tickk - Voice Productivity App Help Center</title>
         <meta name="description" content="tickk Support Center: Get help with voice recognition, task organization, troubleshooting, and frequently asked questions for our productivity app." />
-        <meta name="keywords" content="support, help center, voice app help, speech recognition troubleshooting, productivity app support, FAQ, user guide" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://tickk.app/support" />
       </Head>
