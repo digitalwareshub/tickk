@@ -39,29 +39,29 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
             <nav className="flex items-center gap-5 relative z-10" aria-label="Main navigation">
               <Link href="/" className={`font-mono text-[13px] transition-colors no-underline ${
                 router.pathname === '/'
-                  ? 'text-orange-500'
-                  : 'text-[#a0a0a0] hover:text-white'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
                 braindump
               </Link>
               <Link href="/transform" className={`font-mono text-[13px] transition-colors no-underline ${
                 router.pathname === '/transform'
-                  ? 'text-orange-500'
-                  : 'text-[#a0a0a0] hover:text-white'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
                 transform
               </Link>
               <Link href="/mindmap" className={`font-mono text-[13px] transition-colors no-underline whitespace-nowrap ${
                 router.pathname === '/mindmap'
-                  ? 'text-orange-500'
-                  : 'text-[#a0a0a0] hover:text-white'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
                 mind map
               </Link>
               <Link href="/pricing" className={`font-mono text-[13px] font-medium transition-colors no-underline whitespace-nowrap ${
                 router.pathname === '/pricing'
-                  ? 'text-orange-500'
-                  : 'text-[#a0a0a0] hover:text-orange-500'
+                  ? 'border-b border-orange-400/60 pb-1 text-white'
+                  : 'text-white/90 hover:text-orange-300'
               }`}>
                 pricing
               </Link>
@@ -123,8 +123,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 href="/"
                 className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/'
-                    ? 'text-orange-500'
-                    : 'text-[#a0a0a0] hover:text-white'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -134,8 +134,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 href="/transform" 
                 className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/transform'
-                    ? 'text-orange-500'
-                    : 'text-[#a0a0a0] hover:text-white'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -145,8 +145,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 href="/mindmap"
                 className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/mindmap'
-                    ? 'text-orange-500'
-                    : 'text-[#a0a0a0] hover:text-white'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -156,8 +156,8 @@ export default function Header({ mode: _mode, onModeChange: _onModeChange }: Hea
                 href="/pricing"
                 className={`block font-mono text-lg transition-colors no-underline ${
                   router.pathname === '/pricing'
-                    ? 'text-orange-500'
-                    : 'text-[#a0a0a0] hover:text-orange-500'
+                    ? 'text-white'
+                    : 'text-white/90 hover:text-orange-300'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >

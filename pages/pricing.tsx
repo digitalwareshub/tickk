@@ -45,63 +45,63 @@ export default function Pricing() {
         <link rel="canonical" href="https://tickk.app/pricing" />
       </Head>
 
-      <Layout className="min-h-screen bg-white dark:bg-slate-900">
-        <section className="px-4 py-16">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 px-4 py-2 text-sm font-medium text-orange-700 dark:text-orange-300">
-              Early adopter lifetime pricing
+      <Layout className="min-h-screen bg-[#1a1b26] text-white">
+        <section className="border-b border-[#333333] px-6 py-12">
+          <div className="mx-auto max-w-[900px] text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-2 font-mono text-xs lowercase text-[#a0a0a0]">
+              early adopter lifetime pricing
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-50 mb-4">
+            <h1 className="mb-4 font-mono text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-none tracking-normal text-white">
               Simple pricing for a browser-first voice brain dump app.
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-slate-300">
+            <p className="mx-auto max-w-2xl text-lg leading-8 text-[#a0a0a0]">
               Start free. Upgrade once when you want the deeper organization and export tools.
             </p>
           </div>
         </section>
 
-        <section className="px-4 pb-16">
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-            <div className="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-2">
+        <section className="px-6 py-12">
+          <div className="mx-auto grid max-w-[900px] gap-4 md:grid-cols-2">
+            <div className="rounded-md border border-[#333333] bg-white/[0.02] p-6">
+              <h2 className="mb-2 font-mono text-2xl font-bold text-white">
                 Free
               </h2>
               <div className="mb-6 flex items-baseline">
-                <span className="text-4xl font-bold text-gray-900 dark:text-slate-50">$0</span>
+                <span className="font-mono text-4xl font-bold text-white">$0</span>
               </div>
               <ul className="mb-8 space-y-3">
                 {freeFeatures.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-gray-700 dark:text-slate-300">
-                    <span className="text-green-600 dark:text-green-400">✓</span>
+                  <li key={feature} className="flex gap-3 text-[#a0a0a0]">
+                    <span className="text-orange-500">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href="/"
-                className="block w-full rounded-lg bg-gray-900 dark:bg-slate-700 px-6 py-3 text-center font-semibold text-white hover:bg-gray-800 dark:hover:bg-slate-600"
+                className="block w-full rounded-md border border-[#333333] bg-white/[0.03] px-6 py-3 text-center font-mono text-sm font-semibold lowercase text-white transition-colors hover:border-orange-500 hover:text-orange-300"
               >
                 Start Brain Dump
               </Link>
             </div>
 
-            <div className="relative rounded-lg border-2 border-orange-500 bg-white dark:bg-slate-800 p-8 shadow-xl shadow-orange-100 dark:shadow-orange-950/20">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-orange-600 px-3 py-1 text-xs font-bold text-white">
+            <div className="relative rounded-md border border-orange-500 bg-white/[0.02] p-6">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-md bg-orange-600 px-3 py-1 font-mono text-xs font-bold lowercase text-white">
                 LIFETIME
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-50 mb-2">
+              <h2 className="mb-2 font-mono text-2xl font-bold text-white">
                 Tickk Pro - Lifetime Access
               </h2>
               <div className="mb-6 flex items-baseline">
-                <span className="text-4xl font-bold text-gray-900 dark:text-slate-50">
+                <span className="font-mono text-4xl font-bold text-white">
                   ${PRICING.PRO.lifetimePrice}
                 </span>
-                <span className="ml-2 text-gray-600 dark:text-slate-400">one-time</span>
+                <span className="ml-2 text-[#a0a0a0]">one-time</span>
               </div>
               <ul className="mb-8 space-y-3">
                 {proFeatures.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-gray-700 dark:text-slate-300">
-                    <span className="text-green-600 dark:text-green-400">✓</span>
+                  <li key={feature} className="flex gap-3 text-[#a0a0a0]">
+                    <span className="text-orange-500">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -109,7 +109,7 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={() => openProModal('pricing_card')}
-                className="block w-full rounded-lg bg-orange-600 px-6 py-3 text-center font-semibold text-white hover:bg-orange-700"
+                className="block w-full rounded-md bg-orange-600 px-6 py-3 text-center font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500"
               >
                 Get Lifetime Pro
               </button>
@@ -117,18 +117,18 @@ export default function Pricing() {
           </div>
         </section>
 
-        <section className="px-4 py-16 bg-gray-50 dark:bg-slate-800/50">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-50 mb-4">
+        <section className="border-t border-[#333333] px-6 py-12">
+          <div className="mx-auto max-w-[900px] text-center">
+            <h2 className="mb-4 font-mono text-3xl font-bold text-white">
               Built for private capture first.
             </h2>
-            <p className="text-gray-600 dark:text-slate-300 mb-8">
+            <p className="mb-8 text-[#a0a0a0]">
               Tickk keeps the core voice brain dump workflow free and local. Pro is for users who want richer organization, exports, templates, and future premium tools.
             </p>
             <button
               type="button"
               onClick={() => openProModal('pricing_bottom_cta')}
-              className="inline-flex rounded-lg bg-orange-600 px-8 py-4 font-semibold text-white hover:bg-orange-700"
+              className="inline-flex rounded-md bg-orange-600 px-8 py-4 font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500"
             >
               Get Lifetime Pro
             </button>

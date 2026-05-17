@@ -32,6 +32,7 @@ export default function Layout({
   disableNextSeo = false
 }: LayoutProps) {
   const router = useRouter()
+  const rootClassName = `tickk-shrp-page ${className}`
   
   // Auto-determine if we should show home link based on current page
   // App (Braindump) is now at / (homepage)
@@ -53,7 +54,7 @@ export default function Layout({
       {/* Firefox Warning Banner - shows at top if Firefox detected */}
       <FirefoxWarningBanner />
       
-      <div className={className}>
+      <div className={rootClassName}>
         {/* Header */}
         <Header mode={mode} onModeChange={onModeChange} />
 

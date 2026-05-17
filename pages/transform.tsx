@@ -327,20 +327,18 @@ export default function TransformPage() {
         <meta name="description" content="Transform messy notes into clean, organized text. Summarize, structure, polish grammar, and extract tasks." />
       </Head>
 
-      <Layout 
-        className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
-      >
+      <Layout className="min-h-screen bg-[#1a1b26] text-white">
         {/* Hero Section */}
-        <section className="py-8 px-4">
-          <div className="max-w-5xl mx-auto">
+        <section className="px-6 py-10">
+          <div className="mx-auto max-w-[900px]">
             <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-50 mb-2 flex items-center justify-center gap-3">
-                <span><span className="text-orange-600 dark:text-orange-400">Transform</span> Your Notes</span>
-                <span className="text-sm bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-full font-medium">
+              <h1 className="mb-3 flex items-center justify-center gap-3 font-mono text-3xl font-bold text-white md:text-4xl">
+                <span><span className="text-orange-500">Transform</span> Your Notes</span>
+                <span className="rounded-md border border-[#333333] bg-white/[0.02] px-3 py-1 font-mono text-xs font-medium text-[#a0a0a0]">
                   BETA
                 </span>
               </h1>
-              <p className="text-gray-600 dark:text-slate-400 mb-6">
+              <p className="mb-6 text-[#a0a0a0]">
                 Turn messy notes into clean, organized text. All processing happens locally.
               </p>
             </div>
@@ -357,19 +355,19 @@ export default function TransformPage() {
                   <button
                     key={m}
                     onClick={() => setMode(m)}
-                    className={`p-4 rounded-xl border-2 transition-all text-left ${
+                    className={`rounded-md border p-4 text-left transition-colors ${
                       mode === m
-                        ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30'
-                        : 'border-gray-200 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-700'
+                        ? 'border-orange-500 bg-orange-500/10'
+                        : 'border-[#333333] bg-white/[0.02] hover:border-orange-500/70'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
-                      <IconComponent className={`w-5 h-5 ${mode === m ? 'text-orange-600' : 'text-gray-500 dark:text-slate-400'}`} />
-                      <span className={`font-semibold ${mode === m ? 'text-orange-700 dark:text-orange-300' : 'text-gray-700 dark:text-slate-200'}`}>
+                      <IconComponent className={`h-5 w-5 ${mode === m ? 'text-orange-400' : 'text-[#a0a0a0]'}`} />
+                      <span className={`font-semibold ${mode === m ? 'text-orange-300' : 'text-white'}`}>
                         {desc.title}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-slate-400 line-clamp-2">
+                    <p className="line-clamp-2 text-xs text-[#a0a0a0]">
                       {desc.description}
                     </p>
                   </button>
@@ -382,7 +380,7 @@ export default function TransformPage() {
               {/* Input */}
               <div className="relative">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-slate-300">
+                  <label className="block text-sm font-medium text-[#a0a0a0]">
                     Input Text
                   </label>
                   <div className="flex items-center gap-2">
@@ -399,8 +397,8 @@ export default function TransformPage() {
                         onClick={toggleVoiceInput}
                         className={`inline-flex items-center justify-center p-2 rounded-lg transition-colors ${
                           isRecording
-                            ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
-                            : 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50'
+                            ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+                            : 'bg-orange-500/10 text-orange-400 hover:bg-orange-500/20'
                         }`}
                         aria-label={isRecording ? 'Stop voice input' : 'Start voice input'}
                       >
@@ -420,9 +418,9 @@ export default function TransformPage() {
                   placeholder="Paste or type your messy notes here... Or click Voice Input to speak"
                   className={`w-full h-64 p-4 rounded-xl border ${
                     isRecording 
-                      ? 'border-orange-400 dark:border-orange-600 ring-2 ring-orange-200 dark:ring-orange-800' 
-                      : 'border-gray-200 dark:border-slate-700'
-                  } bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none transition-all`}
+                      ? 'border-orange-500 ring-2 ring-orange-500/20'
+                      : 'border-[#333333]'
+                  } resize-none bg-white/[0.02] text-white placeholder-[#737373] transition-all focus:border-transparent focus:ring-2 focus:ring-orange-500`}
                   readOnly={isRecording}
                 />
                 <div className="absolute bottom-3 right-3 text-xs text-gray-400">
@@ -432,16 +430,16 @@ export default function TransformPage() {
 
               {/* Output */}
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
+                <label className="mb-2 block text-sm font-medium text-[#a0a0a0]">
                   Transformed Output
                 </label>
-                <div className="w-full h-64 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900 overflow-auto">
+                <div className="h-64 w-full overflow-auto rounded-md border border-[#333333] bg-white/[0.02] p-4">
                   {output ? (
-                    <pre className="whitespace-pre-wrap text-sm text-gray-800 dark:text-slate-200 font-sans">
+                    <pre className="whitespace-pre-wrap font-sans text-sm text-white">
                       {output}
                     </pre>
                   ) : (
-                    <p className="text-gray-400 dark:text-slate-500 text-sm">
+                    <p className="text-sm text-[#737373]">
                       Transformed text will appear here...
                     </p>
                   )}
@@ -464,7 +462,7 @@ export default function TransformPage() {
               <button
                 onClick={handleTransform}
                 disabled={isProcessing || !input.trim()}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 dark:disabled:bg-slate-700 text-white font-semibold rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md bg-orange-600 px-6 py-3 font-mono text-sm font-semibold lowercase text-white transition-colors hover:bg-orange-500 disabled:bg-white/10 disabled:text-[#737373]"
               >
                 {isProcessing ? (
                   <>
@@ -482,7 +480,7 @@ export default function TransformPage() {
               <button
                 onClick={handleCopy}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Copy className="w-4 h-4" />
                 Copy
@@ -491,7 +489,7 @@ export default function TransformPage() {
               <button
                 onClick={handleSave}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Star className="w-4 h-4" />
                 Save
@@ -500,7 +498,7 @@ export default function TransformPage() {
               <button
                 onClick={handleDownload}
                 disabled={!output}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 disabled:opacity-50 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500 disabled:opacity-50"
               >
                 <Download className="w-4 h-4" />
                 Download
@@ -508,7 +506,7 @@ export default function TransformPage() {
 
               <button
                 onClick={handleClear}
-                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-200 font-medium rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 font-mono text-sm font-medium lowercase text-white transition-colors hover:border-orange-500"
               >
                 <Trash2 className="w-4 h-4" />
                 Clear
@@ -516,31 +514,31 @@ export default function TransformPage() {
             </div>
 
             {/* Keyboard Shortcuts */}
-            <div className="text-center text-sm text-gray-500 dark:text-slate-400 mb-8">
+            <div className="mb-8 text-center text-sm text-[#a0a0a0]">
               <span className="inline-flex items-center gap-2">
-                <kbd className="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs">Cmd/Ctrl + Enter</kbd>
+                <kbd className="rounded border border-[#333333] bg-white/[0.02] px-2 py-1 text-xs">Cmd/Ctrl + Enter</kbd>
                 Transform
               </span>
               <span className="mx-4">|</span>
               <span className="inline-flex items-center gap-2">
-                <kbd className="px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded text-xs">Cmd/Ctrl + S</kbd>
+                <kbd className="rounded border border-[#333333] bg-white/[0.02] px-2 py-1 text-xs">Cmd/Ctrl + S</kbd>
                 Save
               </span>
             </div>
             
             {/* Disclaimer */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-start gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-left max-w-2xl">
-                <svg className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex max-w-2xl items-start gap-2 rounded-md border border-[#333333] bg-white/[0.02] px-4 py-3 text-left">
+                <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div className="flex-1">
-                  <p className="text-sm text-blue-900 dark:text-blue-100">
+                  <p className="text-sm text-[#d4d4d4]">
                     <span className="font-semibold">No AI Used:</span> We use traditional NLP (Natural Language Processing) for transformations. 
                     Results are rule-based and deterministic, not AI-generated. Don&apos;t expect ChatGPT-level outputs.
                   </p>
-                  <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-                    Found an issue? <Link href="/bug-report" className="underline hover:text-blue-900 dark:hover:text-blue-100">Report a bug</Link>
+                  <p className="mt-1 text-xs text-[#a0a0a0]">
+                    Found an issue? <Link href="/bug-report" className="text-orange-500 hover:text-orange-400">Report a bug</Link>
                   </p>
                 </div>
               </div>
