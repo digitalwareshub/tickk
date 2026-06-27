@@ -460,40 +460,6 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
       </div>
       </div>
 
-      {/* SEO Rich Content for Footer */}
-      <div className="sr-only">
-        <h2>About tickk Voice Productivity Application</h2>
-        <p>
-          tickk is the world&apos;s most advanced free voice-to-text productivity application, designed specifically for busy professionals, students, entrepreneurs, and anyone seeking to maximize their productivity through hands-free voice interaction. Our revolutionary platform combines cutting-edge browser-based speech recognition technology with sophisticated natural language processing using compromise.js to deliver an unparalleled voice productivity experience.
-        </p>
-        <h3>Key Features and Benefits:</h3>
-        <ul>
-          <li>Advanced Voice Recognition: 99% accuracy rate using your browser&apos;s native Web Speech API</li>
-          <li>Smart Text Classification: Automatically categorizes speech into tasks, notes, and calendar events</li>
-          <li>Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
-          <li>Cross-Platform Compatibility: Works seamlessly on desktop, mobile, and tablet devices</li>
-          <li>Offline Functionality: Continue working even without an internet connection</li>
-          <li>No Account Required: Start using immediately without any registration or sign-up process</li>
-          <li>Progressive Web App: Install directly on your device for native app-like experience</li>
-          <li>Dark Mode Support: Comfortable viewing in any lighting condition</li>
-          <li>Accessibility Features: Designed for users with different abilities and needs</li>
-          <li>Export Capabilities: Share and backup your voice-generated content</li>
-        </ul>
-        <h3>Perfect for These Use Cases:</h3>
-        <ul>
-          <li>Meeting note-taking and action item capture</li>
-          <li>Brainstorming sessions and idea generation</li>
-          <li>Task and project management</li>
-          <li>Voice-controlled reminders and scheduling</li>
-          <li>Hands-free content creation</li>
-          <li>Accessibility-focused productivity workflows</li>
-          <li>Mobile productivity while commuting or traveling</li>
-          <li>Quick voice memos and thought capture</li>
-        </ul>
-        <p>
-          Our commitment to user privacy means your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.
-        </p>
-      </div>
     </footer>
   )
 }

@@ -37,14 +37,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
       errorInfo
     })
 
-    // Track error in analytics if available
-    if (typeof window !== 'undefined' && (window as Window & { gtag?: (...args: unknown[]) => void }).gtag) {
-      const w = window as Window & { gtag: (...args: unknown[]) => void }
-      w.gtag('event', 'exception', {
-        description: error.message,
-        fatal: false
-      })
-    }
+    // Error is captured by React and logged to console in development
   }
 
   handleReset = () => {

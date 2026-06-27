@@ -268,7 +268,7 @@ export default function VoiceProductivityVsAITools() {
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-800 dark:text-slate-200 mb-2">Local Processing</h4>
-                  <p className="text-sm text-gray-600 dark:text-slate-400">99%+ accuracy with Web Speech API</p>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">Real-time transcription via your browser&apos;s Web Speech API</p>
                 </div>
               </div>
             </div>

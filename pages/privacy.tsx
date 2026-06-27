@@ -94,21 +94,13 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Compliance</h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🇪🇺 GDPR Compliant</h4>
-                  <p className="text-gray-600 dark:text-slate-400 text-base">
-                    No personal data processing means full GDPR compliance by design.
-                  </p>
-                </div>
-                <div className="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">🇺🇸 CCPA Compliant</h4>
-                  <p className="text-gray-600 dark:text-slate-400 text-base">
-                    Meets California Consumer Privacy Act requirements by not collecting personal information.
-                  </p>
-                </div>
-              </div>
+              <h2 className="heading-secondary text-gray-900 dark:text-slate-50 mb-4">Analytics</h2>
+              <p className="text-gray-600 dark:text-slate-400 mb-3">
+                Tickk uses no cookies and collects no personal data. We use <strong>Vercel Analytics</strong> — a cookieless, privacy-preserving analytics service — to understand aggregate usage. No content from your brain dumps, notes, tasks, or recordings is ever collected.
+              </p>
+              <p className="text-gray-600 dark:text-slate-400">
+                Anonymous aggregate events we measure include things like page views, feature usage counts, and PWA installs. We never measure what you record, write, search for, or organise.
+              </p>
             </section>
           </div>
 

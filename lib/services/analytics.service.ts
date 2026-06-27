@@ -53,11 +53,7 @@ export class AnalyticsService {
    */
   static trackBraindumpUsage(appData: AppData) {
     const stats = this.calculateStats(appData);
-    
-    // Track user segment based on usage patterns
-    const userSegment = this.identifyUserSegment(stats);
-    enhancedAnalytics.identifyUserSegment(userSegment, 0.8);
-    
+
     // Track productivity patterns
     enhancedAnalytics.trackEvent({
       action: 'productivity_analysis',

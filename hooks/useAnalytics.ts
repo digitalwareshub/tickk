@@ -4,13 +4,12 @@
  */
 
 import { useEffect, useRef, useCallback } from 'react';
-import { 
-  enhancedAnalytics, 
-  trackCTAClick, 
-  trackFAQInteraction, 
+import {
+  enhancedAnalytics,
+  trackCTAClick,
+  trackFAQInteraction,
   trackUseCaseInteraction,
   trackSectionTime,
-  identifyUserSegment
 } from '@/lib/analytics/enhanced-analytics';
 
 /**
@@ -159,7 +158,6 @@ export const useFormTracking = (formId: string) => {
       label: formId,
       funnel_step: 'form_submission',
       conversion_type: 'landing_to_app',
-      user_segment: 'general',
       custom_parameters: {
         form_fields: Object.keys(fields).length,
         completion_time: Date.now()
@@ -202,7 +200,6 @@ export const useLinkTracking = () => {
       label: url,
       funnel_step: 'link_click',
       conversion_type: conversionType,
-      user_segment: 'general',
       custom_parameters: {
         link_text: linkText,
         link_context: context,
@@ -214,29 +211,6 @@ export const useLinkTracking = () => {
   }, []);
 
   return { trackLinkClick };
-};
-
-/**
- * Hook to track user segment identification
- */
-export const useUserSegmentation = () => {
-  const identifySegment = useCallback((segment: string, confidence: number = 1.0, reason: string) => {
-    identifyUserSegment(segment, confidence);
-    
-    enhancedAnalytics.trackEvent({
-      action: 'segment_identified',
-      category: 'user_behavior',
-      label: segment,
-      value: Math.round(confidence * 100),
-      custom_parameters: {
-        identification_reason: reason,
-        confidence_score: confidence,
-        timestamp: Date.now()
-      }
-    });
-  }, []);
-
-  return { identifySegment };
 };
 
 /**
@@ -326,13 +300,12 @@ export const useSearchTracking = () => {
     enhancedAnalytics.trackEvent({
       action: 'search',
       category: 'engagement',
-      label: query,
+      label: context,
       value: results,
       custom_parameters: {
-        search_query: query,
         results_count: results,
         search_context: context,
-        query_length: query.length
+        query_length: query.length,
       }
     });
   }, []);

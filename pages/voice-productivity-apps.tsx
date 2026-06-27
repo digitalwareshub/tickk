@@ -32,7 +32,7 @@ export default function VoiceProductivityApps() {
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://tickk.app/voice-productivity-apps" />
         <meta property="og:title" content="Best Voice Productivity Apps 2025 - Free Speech Recognition" />
-        <meta property="og:description" content="Compare the best voice productivity apps. Tickk offers free speech recognition, offline functionality, and complete privacy protection." />
+        <meta property="og:description" content="Compare the best voice productivity apps. Tickk is a free, privacy-conscious, local-first voice brain dump app — no account required." />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -218,13 +218,13 @@ export default function VoiceProductivityApps() {
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
-                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Data Collection</div>
-                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Complete privacy</div>
+                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Content Uploaded</div>
+                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Stays in your browser</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">99%</div>
-                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Accuracy</div>
-                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Web Speech API</div>
+                <div className="text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2">0</div>
+                <div className="text-responsive text-gray-700 dark:text-slate-200 font-medium">Account Required</div>
+                <div className="text-sm text-gray-600 dark:text-slate-400 mt-1">Start instantly</div>
               </div>
             </div>
             <div className="text-center">

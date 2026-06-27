@@ -300,7 +300,7 @@ export default function BraindumpFirstBlogPost() {
                 <h4 className="font-semibold text-gray-900 dark:text-slate-50 mb-3">🔒 Absolutely Private</h4>
                 <ul className="text-gray-700 dark:text-slate-300 space-y-1">
                   <li>• Runs entirely in your browser</li>
-                  <li>• No servers, no cloud, no accounts</li>
+                  <li>• No accounts, no sign-up required</li>
                   <li>• Your notes are stored locally in your browser. Tickk does not upload your brain dumps to our servers.</li>
                 </ul>
               </div>

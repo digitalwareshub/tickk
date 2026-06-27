@@ -6,13 +6,12 @@ import { NextSeo } from 'next-seo' // Added: Import NextSeo
 import Layout from '@/components/Layout'
 import Breadcrumb from '@/components/Breadcrumb'
 import { 
-  useSectionTracking, 
-  useCTATracking, 
-  useFAQTracking, 
+  useSectionTracking,
+  useCTATracking,
+  useFAQTracking,
   useUseCaseTracking,
   usePerformanceTracking,
-  useUserSegmentation,
-  useLinkTracking 
+  useLinkTracking
 } from '@/hooks/useAnalytics'
 import { trackPageView, enhancedAnalytics } from '@/lib/analytics/enhanced-analytics'
 
@@ -36,8 +35,6 @@ export default function About() {
   const { trackClick: trackComparisonCTA } = useCTATracking('comparison_cta', 'comparison');
   const { trackClick: trackFinalCTA } = useCTATracking('final_cta', 'final_cta');
 
-  // User segmentation
-  const { identifySegment } = useUserSegmentation();
   const { trackLinkClick } = useLinkTracking();
 
   // Performance tracking
@@ -499,8 +496,8 @@ export default function About() {
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">⚡</div>
-                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">99% Accuracy</div>
-                  <div className="text-sm text-gray-500 dark:text-slate-500">Advanced speech recognition</div>
+                  <div className="text-base font-medium text-gray-700 dark:text-slate-300">Instant Capture</div>
+                  <div className="text-sm text-gray-500 dark:text-slate-500">Browser speech recognition</div>
                 </div>
                 <div className="flex flex-col items-center text-center p-3">
                   <div className="text-2xl mb-2">🆓</div>
@@ -597,7 +594,7 @@ export default function About() {
                   tickk is a revolutionary voice-first productivity application designed for ADHD minds and neurodivergent thinkers. Unlike traditional task managers that force you to categorize while capturing thoughts, tickk lets you brain dump everything through voice, then organizes it later.
                 </p>
                 <p>
-                  Using advanced natural language processing (compromise.js), it automatically classifies your spoken words into tasks, notes, and reminders. Perfect for racing thoughts, overwhelmed parents, busy students, and professionals seeking hands-free productivity. 100% free, no login required, works completely offline with local storage for maximum privacy. Features include Focus Mode for deep work, Command Palette (⌘K) for power users, and executive function support specifically designed for ADHD brains.
+                  Using natural language processing (compromise.js), it automatically classifies your spoken words into tasks, notes, and reminders. Perfect for racing thoughts, overwhelmed parents, busy students, and professionals seeking hands-free productivity. Free to use, no login required, with local browser storage so your brain dumps stay on your device. Features include Focus Mode for deep work, Command Palette (⌘K) for power users, and executive function support specifically designed for ADHD brains.
                 </p>
               </div>
             </div>
@@ -732,7 +729,6 @@ export default function About() {
                 className="bg-gray-50 dark:bg-slate-800 rounded-lg p-6 border-2 border-orange-500 dark:border-orange-600 relative flex flex-col h-full cursor-pointer transition-all hover:scale-105 hover:shadow-lg"
                 onClick={() => {
                   adhdUseCase.trackClick();
-                  identifySegment('adhd_focused', 0.9, 'clicked_adhd_use_case');
                   trackLinkClick('/', 'Try tickk Now', 'adhd_use_case');
                 }}
                 onMouseEnter={() => adhdUseCase.trackHover()}
@@ -1332,7 +1328,7 @@ export default function About() {
                   How is my privacy protected?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Privacy is our top priority. All voice processing happens locally in your browser using the Web Speech API. We don&apos;t use AI servers, don&apos;t collect voice recordings, and don&apos;t track your tasks or notes. Everything is stored on your device using IndexedDB. We don&apos;t even use cookies except for essential functionality. You can review our open-source code on GitHub to verify these claims.
+                  Your brain dumps, tasks, and notes are stored locally in your browser using IndexedDB — Tickk does not upload your content to its servers. Voice recognition is provided by your browser; how it processes audio may vary by browser and settings. We collect anonymous product events using cookieless Vercel Analytics, but never the content of your recordings, notes, or tasks.
                 </p>
               </div>
 
@@ -1342,7 +1338,7 @@ export default function About() {
                   Does tickk work offline?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  Yes! tickk is a Progressive Web App (PWA) that works completely offline once loaded. You can capture voice notes, organize tasks, and access all features without an internet connection. Your data is stored locally on your device, so you never lose access to your productivity tools.
+                  Tickk is a Progressive Web App (PWA). Your saved tasks, notes, and brain dumps are available offline after the app has loaded. Voice capture availability depends on your browser and recognition mode — some browsers require a connection for speech recognition.
                 </p>
               </div>
 
@@ -1352,7 +1348,7 @@ export default function About() {
                   Does tickk use AI or ChatGPT?
                 </h3>
                 <p className="text-gray-700 dark:text-slate-300">
-                  No. tickk uses compromise.js, a deterministic natural language processing library that runs entirely in your browser. There&apos;s no AI, no machine learning models, no cloud processing, and no data sent to third-party AI services. This ensures your privacy and makes the app work offline.
+                  No. Tickk&apos;s organisation uses compromise.js, a deterministic NLP library that runs entirely in your browser — not a cloud AI model. No brain dump or note content is sent to AI services. Your content stays in your browser.
                 </p>
               </div>
 

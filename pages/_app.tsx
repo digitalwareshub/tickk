@@ -1,7 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
@@ -11,24 +10,19 @@ import { initPWATracking } from '@/lib/analytics'
 import { Toaster } from 'react-hot-toast'
 import PWAInstallPrompt from '@/components/PWAInstallPrompt'
 
-// Get GA tracking ID from environment
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
-
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // Enhanced analytics will auto-initialize
     const handleRouteChange = (url: string) => {
       trackPageView(url)
     }
-    
+
     router.events.on('routeChangeComplete', handleRouteChange)
     router.events.on('hashChangeComplete', handleRouteChange)
-    
-    // Initialize PWA tracking
+
     initPWATracking()
-    
+
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
       router.events.off('hashChangeComplete', handleRouteChange)
@@ -43,45 +37,21 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#f97316" />
-        
+
         {/* Preload social media images to prevent flickering */}
         <link rel="preload" as="image" href="/og-image.webp" />
         <link rel="preload" as="image" href="/twitter-image.webp" />
-        
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://compromise.cool" />
-        
+
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://compromise.cool" />
-
-        {/* Google Analytics - moved to next/script */}
       </Head>
-
-      {/* Google Analytics with next/script */}
-      {GA_TRACKING_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script id="gtag-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_TRACKING_ID}', {
-                page_path: window.location.pathname,
-                anonymize_ip: true,
-                cookie_flags: 'SameSite=None;Secure'
-              });
-            `}
-          </Script>
-        </>
-      )}
 
       <Component {...pageProps} />
 
