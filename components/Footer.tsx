@@ -40,6 +40,7 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
       title: 'Support',
       links: [
         { label: 'Support & Help', href: '/support' },
+        { label: 'Donate', href: '/donate' },
         { label: 'Contact', href: '/contact' },
         { label: 'Bug Reports', href: '/bug-report' },
       ],
@@ -296,6 +297,14 @@ export default function Footer({ showHomeLink = false }: FooterProps) {
                 <li>
                   <Link href="/support" className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors">
                     Support & Help
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/donate"
+                    className="text-gray-600 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                  >
+                    Donate
                   </Link>
                 </li>
                 <li>
